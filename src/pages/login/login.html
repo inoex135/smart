@@ -1,0 +1,34 @@
+<!--
+  Generated template for the LoginPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Login</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding class="form-login">
+   <ion-img width="80" height="80" src="https://smart.javan.co.id/images/logo_keuangan.png"></ion-img> 
+  <form #loginForm="ngForm">
+    <ion-item>
+      <ion-label color="primary" floating>Email</ion-label>
+      <ion-input required type="email"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="primary" floating>Password</ion-label>
+      <ion-input required type="password"></ion-input>
+    </ion-item>
+
+    <div padding>
+      <button ion-button secondary block (click)="login()">Login</button>
+    </div>
+
+  </form>
+</ion-content>
