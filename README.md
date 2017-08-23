@@ -1,27 +1,28 @@
 # SMART Mobile with Ionic 3
-This is a starter template for [Ionic](http://ionicframework.com/docs/) projects.
 
-## How to use this template
+## Getting Started
+### Installation
 
-*This template does not work on its own*. The shared files for each starter are found in the [ionic2-app-base repo](https://github.com/ionic-team/ionic2-app-base).
+*Ionic memerlukan nodejs dan npm/yarn. jika belum install, bisa instal terlebih dahulu*
 
-To use this template, either create a new ionic project using the ionic node.js utility, or copy the files from this repository into the [Starter App Base](https://github.com/ionic-team/ionic2-app-base).
+Untuk menjalankan project, pertama clone repo, lalu jalankan perintah: 
+```
+yarn
 
-### With the Ionic CLI:
+or
 
-Take the name after `ionic2-starter-`, and that is the name of the template to be used when using the `ionic start` command below:
-
-```bash
-$ sudo npm install -g ionic cordova
-$ ionic start myBlank blank
+npm install
 ```
 
-Then, to run it, cd into `myBlank` and run:
+Untuk lebih jelasnya bisa lihat disini [https://ionicframework.com/docs/intro/installation/](https://ionicframework.com/docs/intro/installation/)
 
-```bash
-$ ionic cordova platform add ios
-$ ionic cordova run ios
-```
+Jika sudah selesai install semua package, untuk dev menggunakan `ionic serve`
 
-Substitute ios for android if not on a Mac.
+### Development
+Untuk development, biasakan menggunakan generate bawaan ionic. lebih lengkapnya disini [https://ionicframework.com/docs/cli/generate/](https://ionicframework.com/docs/cli/generate/)
 
+## Debugging Tips
+* Untuk debug network di device android, bisa mengikuti cara ini:
+https://stackoverflow.com/questions/32832135/how-to-use-chrome-remote-debugging-with-ionic-framework
+
+## FAQ
