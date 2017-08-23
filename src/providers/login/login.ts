@@ -32,7 +32,6 @@ export class LoginProvider {
   /**
    * Call api logout
    */
-
   logout() {}
   
 }

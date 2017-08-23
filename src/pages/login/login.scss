@@ -5,6 +5,19 @@
         margin: auto;
         display: block;
     }
+
+    .login-warning{
+        width: auto;
+        margin-left: 2vh;
+    }
+
+    .login-warning-icon{
+        float: right;
+    }
+
+    .btn-login{
+        background: #F26422;
+    }
 }
 
 $img-placeholder-background: white;

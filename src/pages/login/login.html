@@ -14,20 +14,24 @@
 
 
 <ion-content padding class="form-login">
-   <ion-img width="80" height="80" src="https://smart.javan.co.id/images/logo_keuangan.png"></ion-img> 
+  <ion-img width="80" height="80" src="https://smart.javan.co.id/images/logo_keuangan.png"></ion-img> 
   <form #loginForm="ngForm">
     <ion-item>
       <ion-label color="primary" floating>Email</ion-label>
-      <ion-input required type="email"></ion-input>
+      <ion-input name="email" required type="email" [(ngModel)]="user.email"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label color="primary" floating>Password</ion-label>
-      <ion-input required type="password"></ion-input>
+      <ion-input name="password" required type="password" [(ngModel)]="user.password"></ion-input>
     </ion-item>
+    
+    <div text-justify *ngIf="error" class="login-warning">
+      {{error}} <ion-icon name="warning" class="login-warning-icon"></ion-icon>
+    </div>
 
     <div padding>
-      <button ion-button secondary block (click)="login()">Login</button>
+      <button ion-button secondary block (click)="login(user)" class="btn-login">Login</button>
     </div>
 
   </form>
