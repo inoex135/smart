@@ -25,4 +25,8 @@ Untuk development, biasakan menggunakan generate bawaan ionic. lebih lengkapnya 
 * Untuk debug network di device android, bisa mengikuti cara ini:
 https://stackoverflow.com/questions/32832135/how-to-use-chrome-remote-debugging-with-ionic-framework
 
-## FAQ
+## Common Error
+* Jika run command `ionic serve` muncul module not found, bisa install ulang ionic-cli dengan command:
+```
+npm install -g ionic
+```
