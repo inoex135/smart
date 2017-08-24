@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import 'rxjs/add/operator/map';
 import { Storage } from "@ionic/storage";
 
 @Injectable()
 export class TokenProvider {
-  constructor(public storage: Storage) { }
   public latestToken: String;
+
+  constructor(public storage: Storage) { }
 
   getToken(): Promise<String> {
     return this.storage.ready().then(

@@ -10,7 +10,6 @@ import { IonicStorageModule } from "@ionic/storage";
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
-import { LoginProvider } from '../providers/login/login';
 import { UserProvider } from '../providers/user/user';
 import { ApiProvider } from '../providers/api/api';
 import { TokenProvider } from '../providers/token/token';
@@ -30,7 +29,6 @@ import { TokenProvider } from '../providers/token/token';
     StatusBar,
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    LoginProvider,
     UserProvider,
     ApiProvider,
     TokenProvider

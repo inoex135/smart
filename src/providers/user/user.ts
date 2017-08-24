@@ -30,7 +30,7 @@ export class UserProvider {
     })
   }
   
-  setAuth(user: any) { 
+  setAuth(user: any) {
     this.tokenProvider.saveToken(user.token).then(() => {})
   }
   
