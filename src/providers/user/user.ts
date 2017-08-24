@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { ApiProvider } from '../api/api';
+import { TokenProvider } from '../token/token';
 
 /*
   Generated class for the UserProvider provider.
@@ -12,20 +13,37 @@ import { ApiProvider } from '../api/api';
 @Injectable()
 export class UserProvider {
 
-  constructor(public http: Http, public apiProvider: ApiProvider) {}
-
-  populate() { }
+  constructor(public http: Http, public apiProvider: ApiProvider, public tokenProvider: TokenProvider) {}
   
-  setAuth() { }
+  // verify token yang ada di storage
+  populate() {
+    this.tokenProvider.getToken().then(token => {
+      // if token available/verify, set user info
+      if (token) {
+        this.apiProvider.get('/user').subscribe(
+          data => this.setAuth(data.user),
+          err => this.purgeAuth
+        )
+      } else {
+        this.purgeAuth();
+      }
+    })
+  }
   
-  purgeAuth() { }
+  setAuth(user: any) { 
+    this.tokenProvider.saveToken(user.token).then(() => {})
+  }
+  
+  purgeAuth() {
+    this.tokenProvider.destoryToken()
+  }
   
 
   attemptAuth(credentials) {
     return this.apiProvider.post('/users/login', credentials)
-      .map(data => {        
-        this.setAuth()
-        return data
+      .map(data => {
+        this.setAuth(data.user);
+        return data;
       })
   }
 }
