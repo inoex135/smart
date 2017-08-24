@@ -1,27 +1,22 @@
-<p align="center">SMART Mobile with Ionic 3</p>
+<h1 align="center">SMART Mobile with Ionic 3</h1>
 
 ## Getting Started
 ### Installation
 
 *Ionic memerlukan nodejs dan npm/yarn. jika belum install, bisa instal terlebih dahulu*
 
-Untuk menjalankan project, pertama clone repo, lalu jalankan perintah: 
-```
-yarn
-
-or
-
-npm install
-```
-
-Untuk lebih jelasnya bisa lihat disini [https://ionicframework.com/docs/intro/installation/](https://ionicframework.com/docs/intro/installation/)
-
-Jika sudah selesai install semua package, untuk dev menggunakan `ionic serve`
+Untuk menjalankan project : 
+1. Clone repo.
+2. Run command for install packages with `yarn` or `npm install`. you must install yarn first if use yarn. 
+3. Setup your `API URL` in `src/config/environtment.ts`.
+4. run `ionic serve` for development in browser.
+5. Or development with emulator, install android studio in your local pc.
+6. then, run command `ionic cordova emulate android`. 
 
 ### Development
 Untuk development, biasakan menggunakan generate bawaan ionic. lebih lengkapnya disini [https://ionicframework.com/docs/cli/generate/](https://ionicframework.com/docs/cli/generate/)
 
-### Production
+## Production
 
 ## Debugging Tips
 * Untuk debug network di device android, bisa mengikuti cara ini:
