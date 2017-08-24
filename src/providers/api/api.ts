@@ -5,6 +5,7 @@ import { Observable } from "rxjs/Rx";
 import 'rxjs/add/operator/map';
 import "rxjs/add/operator/catch";
 import { ENV } from '../../config/environtment';
+import { TokenProvider } from '../token/token';
 
 /*
   Generated class for the ApiProvider provider.
@@ -14,15 +15,19 @@ import { ENV } from '../../config/environtment';
 */
 @Injectable()
 export class ApiProvider {
-  constructor(public http: Http) {}
+  constructor(public http: Http, public tokenProvider: TokenProvider) {}
 
-  private setHeaders() {
+  public setHeaders() {
     const headerConfig = {
       "Content-Type": "application/json",
       "Accept": "application/json"
     };
 
-    return new RequestOptions({ headers: new Headers(headerConfig) });
+    if (this.tokenProvider.latestToken) {
+      headerConfig['Authorization'] = `Token ${this.tokenProvider.latestToken}`;
+    }
+
+    return new Headers(headerConfig);
   }
 
   private formatErrors(error: any) {
@@ -31,28 +36,28 @@ export class ApiProvider {
 
   get(path: string) {
     return this.http
-      .get(`${ENV.API_URL}${path}`, this.setHeaders)
+      .get(`${ENV.API_URL}${path}`, {headers: this.setHeaders()})
       .catch(this.formatErrors)
       .map(res => res.json());
   }
 
   put(path: string, body: Object = {}) {
     return this.http
-      .put(`${ENV.API_URL}${path}`, JSON.stringify(body), this.setHeaders)
+      .put(`${ENV.API_URL}${path}`, JSON.stringify(body), {headers: this.setHeaders()})
       .catch(this.formatErrors)
       .map(res => res.json());
   }
 
   post(path: string, body: Object = {}) {    
     return this.http
-      .post(`${ENV.API_URL}${path}`, body, this.setHeaders)
+      .post(`${ENV.API_URL}${path}`, body, {headers: this.setHeaders()})
       .catch(this.formatErrors)
       .map(res => res.json());
   }
 
   delete(path: string) {
     return this.http
-      .delete(`${ENV.API_URL}${path}`, this.setHeaders)
+      .delete(`${ENV.API_URL}${path}`, {headers: this.setHeaders()})
       .catch(this.formatErrors)
       .map(res => res.json());
   }
