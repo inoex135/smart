@@ -3,14 +3,13 @@ import {
   IonicPage,
   NavController,
   NavParams,
-  LoadingController
+  ToastController
 } from "ionic-angular";
 
 import { User } from "../../models/users";
 import { UserProvider } from '../../providers/user/user';
 import { HomePage } from '../home/home';
 import { TokenProvider } from '../../providers/token/token';
-import { ApiProvider } from '../../providers/api/api';
 
 /**
 * Generated class for the LoginPage page.
@@ -22,44 +21,43 @@ import { ApiProvider } from '../../providers/api/api';
 @IonicPage()
 @Component({
   selector: "page-login",
-  templateUrl: "login.html",
-  providers: [UserProvider]
+  templateUrl: "login.html"
+  // providers: [UserProvider]
 })
 export class LoginPage {
   user = {} as User;
   error: any = false;
-  
+  isLoading: boolean = false;
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public userProvider: UserProvider,
-    public loadingCtrl: LoadingController,
     public tokenProvider: TokenProvider,
-    public apiProvider: ApiProvider
+    public toastController: ToastController
   ) {}
-  
+
   ionViewDidLoad() {
     console.log("ionViewDidLoad LoginPage");
   }
-  
+
   login(user: User) {
-    let loader = this.loadingCtrl.create({ content: "loading....." });
-    // mapping credential data
-    let credentials = { user: user };
-    
-    loader.present().then(() => { 
-      this.userProvider.attemptAuth(credentials).subscribe(
-        data => {
-          loader.dismiss()
-          this.navCtrl.setRoot(HomePage)
-        },
-        err => {
-          loader.dismiss();
-        }
-      );
-    })
-    .catch(e => {
-      loader.dismiss();
-    });
+    this.isLoading = true;
+
+    this.userProvider.attemptAuth(user).subscribe(
+      data => {
+        this.navCtrl.setRoot(HomePage);
+      },
+      err => {
+        this.isLoading = false;
+        // toast error
+        this.toastController
+          .create({
+            message: "username atau password anda tidak cocok!",
+            duration: 3000,
+            position: "bottom"
+          }).present();
+      }
+    );
   }
 }

@@ -19,13 +19,13 @@ export class ApiProvider {
 
   public setHeaders() {
     const headerConfig = {
-      "Content-Type": "application/json",
-      "Accept": "application/json"
+      "Content-Type": "application/x-www-form-urlencoded",
+      "Accept": "application/x-www-form-urlencoded"
     };
 
     if (this.tokenProvider.latestToken) {
-      headerConfig['Authorization'] = `Token ${this.tokenProvider.latestToken}`;
-      // headerConfig["Authorization"] = "smartdjkn2017mobile";
+      // headerConfig['Authorization'] = `Token ${this.tokenProvider.latestToken}`;
+      headerConfig["Authorization"] = "smartdjkn2017mobile";
     }
 
     return new Headers(headerConfig);
