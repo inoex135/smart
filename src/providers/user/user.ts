@@ -43,9 +43,9 @@ export class UserProvider {
     });
   }
 
-  setAuth(user: User) {
-    this.tokenProvider.saveToken(user.token).then(() => {
-      this.currentUserSubject.next(user);
+  setAuth(data: any) {
+    this.tokenProvider.saveToken(data.token).then(() => {
+      this.currentUserSubject.next(data.user);
       this.isAuthenticatedSubject.next(true);
     });
   }
@@ -55,8 +55,8 @@ export class UserProvider {
   }
 
   attemptAuth(credentials) {
-    return this.apiProvider.post("/users/login", credentials).map(data => {
-      this.setAuth(data.user);
+    return this.apiProvider.post("/auth/login", credentials).map(data => {
+      this.setAuth(data);
       return data;
     });
   }
