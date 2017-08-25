@@ -25,6 +25,7 @@ export class ApiProvider {
 
     if (this.tokenProvider.latestToken) {
       headerConfig['Authorization'] = `Token ${this.tokenProvider.latestToken}`;
+      // headerConfig["Authorization"] = "smartdjkn2017mobile";
     }
 
     return new Headers(headerConfig);
