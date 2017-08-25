@@ -9,7 +9,7 @@ import { LoginPage } from '../login/login';
 })
 export class HomePage {
   constructor(public navCtrl: NavController, public userProvider: UserProvider) { }
-
+  
   logout() {
     this.userProvider.purgeAuth();
     this.navCtrl.setRoot(LoginPage);
