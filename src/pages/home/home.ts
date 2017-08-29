@@ -14,5 +14,4 @@ export class HomePage {
     this.userProvider.purgeAuth();
     this.navCtrl.setRoot(LoginPage);
   }
-
 }
