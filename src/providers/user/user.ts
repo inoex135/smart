@@ -55,7 +55,12 @@ export class UserProvider {
   }
 
   attemptAuth(credentials) {
-    return this.apiProvider.post("/auth/login", credentials).map(data => {
+    let formData = new FormData();
+    
+    formData.append("username", credentials.username);
+    formData.append("password", credentials.password);
+
+    return this.apiProvider.postForm("/auth/login", formData).map(data => {
       this.setAuth(data);
       return data;
     });

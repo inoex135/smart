@@ -17,15 +17,24 @@ import { TokenProvider } from '../token/token';
 export class ApiProvider {
   constructor(public http: Http, public tokenProvider: TokenProvider) {}
 
-  public setHeaders() {
+  private setHeaders() {
     const headerConfig = {
-      "Content-Type": "application/x-www-form-urlencoded",
-      "Accept": "application/x-www-form-urlencoded"
+      "Content-Type": "application/json",
+      "Authorization": "smartdjkn2017mobile"
     };
 
     if (this.tokenProvider.latestToken) {
-      // headerConfig['Authorization'] = `Token ${this.tokenProvider.latestToken}`;
-      headerConfig["Authorization"] = "smartdjkn2017mobile";
+      headerConfig["token"] = this.tokenProvider.latestToken;
+    }
+
+    return new Headers(headerConfig);
+  }
+  
+  private setHeadersForm() {
+    const headerConfig = { "Authorization": "smartdjkn2017mobile" };
+    
+    if (this.tokenProvider.latestToken) {
+      headerConfig["token"] = this.tokenProvider.latestToken;
     }
 
     return new Headers(headerConfig);
@@ -49,7 +58,7 @@ export class ApiProvider {
       .map(res => res.json());
   }
 
-  post(path: string, body: Object = {}) {    
+  post(path: string, body: Object = {}) {   
     return this.http
       .post(`${ENV.API_URL}${path}`, body, {headers: this.setHeaders()})
       .catch(this.formatErrors)
@@ -59,6 +68,14 @@ export class ApiProvider {
   delete(path: string) {
     return this.http
       .delete(`${ENV.API_URL}${path}`, {headers: this.setHeaders()})
+      .catch(this.formatErrors)
+      .map(res => res.json());
+  }
+
+  // POST data as FormData
+  postForm(path: string, body: Object = {}) {
+    return this.http
+      .post(`${ENV.API_URL}${path}`, body, { headers: this.setHeadersForm() })
       .catch(this.formatErrors)
       .map(res => res.json());
   }

@@ -35,11 +35,12 @@ export class LoginPage {
     public userProvider: UserProvider,
     public tokenProvider: TokenProvider,
     public toastController: ToastController
-  ) {}
-
-  ionViewDidLoad() {
-    console.log("ionViewDidLoad LoginPage");
+  ) {
+    // this.user.username = "198604122007101001";
+    // this.user.password = "sm4rt@DJKN";
   }
+
+  ionViewDidLoad() { }
 
   login(user: User) {
     this.isLoading = true;
@@ -51,12 +52,11 @@ export class LoginPage {
       err => {
         this.isLoading = false;
         // toast error
-        this.toastController
-          .create({
-            message: "username atau password anda tidak cocok!",
-            duration: 3000,
-            position: "bottom"
-          }).present();
+        this.toastController.create({
+          message: err.message,
+          duration: 3000,
+          position: "bottom"
+        }).present();
       }
     );
   }
