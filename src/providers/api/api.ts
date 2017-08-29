@@ -29,7 +29,7 @@ export class ApiProvider {
 
     return new Headers(headerConfig);
   }
-  
+  // set header for FormData in login
   private setHeadersForm() {
     const headerConfig = { "Authorization": "smartdjkn2017mobile" };
     

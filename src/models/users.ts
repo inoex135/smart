@@ -5,4 +5,6 @@ export class User {
   username: string;
   bio: string;
   image: string;
+  id: number;
+  name: string;
 }

@@ -17,7 +17,7 @@ export class MyApp {
     platform: Platform,
     statusBar: StatusBar,
     splashScreen: SplashScreen,
-    userProvider: UserProvider,
+    public userProvider: UserProvider,
     public token: TokenProvider
   ) {
     platform.ready().then(() => {
@@ -29,6 +29,7 @@ export class MyApp {
       this.token.getToken().then(token => {
         if (token) {
           this.rootPage = HomePage;
+          this.userProvider.populate();
         } else {
           this.rootPage = LoginPage
         }
