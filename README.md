@@ -1,6 +1,4 @@
-<h1 align="center">SMART Mobile with Ionic 3</h1>
-
-## Getting Started
+## SMART Mobile with Ionic 3
 ### Installation
 
 *Ionic memerlukan nodejs dan npm/yarn. jika belum install, bisa instal terlebih dahulu*
