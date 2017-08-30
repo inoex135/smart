@@ -14,9 +14,13 @@ Untuk menjalankan project :
 6. then, run command `ionic cordova emulate android`. 
 
 ### Development
-Untuk development, biasakan menggunakan generate bawaan ionic. lebih lengkapnya disini [https://ionicframework.com/docs/cli/generate/](https://ionicframework.com/docs/cli/generate/)
+* Untuk development, biasakan menggunakan generate bawaan ionic. lebih lengkapnya disini [https://ionicframework.com/docs/cli/generate/](https://ionicframework.com/docs/cli/generate/)
 
 ## Production
+1. Pertama, tambahkan target platform yang diinginkan dengan command `cordova platform add android`
+2. Jika platform sudah pernah ditambahkan, bisa langsung jalankan command `ionic cordova build android --prod`.
+3. Atau juga ketika akan sudah rilis bisa tambahkan ` --release` di step nomor 2.
+
 
 ## Debugging Tips
 * Untuk debug network di device android, bisa mengikuti cara ini:
@@ -27,7 +31,6 @@ https://stackoverflow.com/questions/32832135/how-to-use-chrome-remote-debugging-
 ```
 npm install -g ionic
 ```
-
 
 ## Reference
 * [https://ionicframework.com/docs](https://ionicframework.com/docs)

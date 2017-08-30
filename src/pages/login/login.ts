@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import {
-  IonicPage,
   NavController,
   NavParams,
   ToastController
@@ -11,18 +10,9 @@ import { UserProvider } from '../../providers/user/user';
 import { HomePage } from '../home/home';
 import { TokenProvider } from '../../providers/token/token';
 
-/**
-* Generated class for the LoginPage page.
-*
-* See http://ionicframework.com/docs/components/#navigation for more info
-* on Ionic pages and navigation.
-*/
-
-@IonicPage()
 @Component({
   selector: "page-login",
   templateUrl: "login.html"
-  // providers: [UserProvider]
 })
 export class LoginPage {
   user = {} as User;

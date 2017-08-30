@@ -7,12 +7,6 @@ import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import { ReplaySubject } from "rxjs/ReplaySubject";
 import { User } from '../../models/users';
 
-/*
-  Generated class for the UserProvider provider.
-
-  See https://angular.io/docs/ts/latest/guide/dependency-injection.html
-  for more info on providers and Angular DI.
-*/
 @Injectable()
 export class UserProvider {
   private currentUserSubject = new BehaviorSubject<User>(new User());
