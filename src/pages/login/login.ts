@@ -26,8 +26,8 @@ export class LoginPage {
     public tokenProvider: TokenProvider,
     public toastController: ToastController
   ) {
-    // this.user.username = "198604122007101001";
-    // this.user.password = "sm4rt@DJKN";
+    this.user.username = "198604122007101001";
+    this.user.password = "sm4rt@DJKN";
   }
 
   ionViewDidLoad() { }

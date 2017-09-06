@@ -6,10 +6,46 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  The world is your oyster.
-  <button ion-button primary (click)="logout()">Logout</button>
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+<ion-content padding class="home">
+  <!-- <!-- The world is your oyster. -->
+    <button ion-button primary (click)="logout()">Logout</button>
+    <p>
+      If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
+    </p>
+    
+    
+  <ion-grid>
+    <ion-row>
+      <ion-col width-25>
+        <ion-list>
+          <button ion-button class="text-on-bottom" (click)="goToSurat()">
+            <ion-icon name="mail" class="larger"></ion-icon>
+            Surat Masuk
+          </button>
+        </ion-list>    
+      </ion-col>
+
+      <ion-col width-25>
+        <button ion-button class="text-on-bottom">
+          <ion-icon name="call"></ion-icon>
+          Surat Masuk
+        </button>
+      </ion-col>
+      
+      <ion-col width-25>
+        <button ion-button class="text-on-bottom">
+          <ion-icon name="call"></ion-icon>
+          Surat Masuk
+        </button>
+      </ion-col>
+      <ion-col width-25>
+        <button ion-button class="text-on-bottom">
+          <ion-icon name="call"></ion-icon>
+          Surat Masuk
+        </button>
+      </ion-col>
+      
+    </ion-row>
+  </ion-grid>
 </ion-content>
+  

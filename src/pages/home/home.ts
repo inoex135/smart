@@ -23,5 +23,9 @@ export class HomePage {
     this.navCtrl.setRoot(LoginPage);
   }
 
-  goToSurat() { }
+  goToSurat() {
+    const data = this.suratProvider.getSumasTemplateExcel();
+    // console.log(data);
+    
+  }
 }

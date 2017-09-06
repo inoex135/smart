@@ -1,3 +1,34 @@
-page-home {
+.home {
 
+    .larger {
+        font-size: 18px;
+    }
+    
+    scroll-content {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    ion-grid {
+        padding: 0;
+        height: 100%;
+    }
+    
+    // ion-row {
+    //     // flex: 1;
+    //     // display: -webkit-flex;
+    //     // display: flex;
+    //     -webkit-flex-direction: row;
+    // }
+    
+    ion-col {
+        flex-direction: row;
+    }
+
+    .text-on-bottom > .button-inner {
+        flex-direction: column;
+        line-height: 10px;
+        font-size:11px; 
+    }
+    
 }

@@ -31,9 +31,14 @@ export class SuratProvider {
 
     let fileDirectory: string = this.file.dataDirectory + "1504670828948.xlsx";
 
-    return await this.fileTransfer.download(url, fileDirectory, true, this.getHeaders())
-      .then(entry => console.log(entry))
-      .catch(err => console.log(err));
+    const response = await this.fileTransfer.download(url, fileDirectory, true, this.getHeaders());
+    console.log(response);
+    
+    return response.toURL();
+      // .then(entry => console.log(entry));
+    
+    // const data = await entry;
+    // return data;
   }
 
   getHeaders() {
