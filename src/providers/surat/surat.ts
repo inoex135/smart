@@ -1,13 +1,12 @@
-import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import 'rxjs/add/operator/map';
-import { ApiProvider } from '../api/api';
+import { Injectable } from "@angular/core";
+import { Http } from "@angular/http";
+import "rxjs/add/operator/map";
+import { ApiProvider } from "../api/api";
 
 import { FileTransfer, FileTransferObject } from "@ionic-native/file-transfer";
-import { FileOpener } from "@ionic-native/file-opener";
 import { File } from "@ionic-native/file";
-import { TokenProvider } from '../token/token';
-import { ENV } from '../../config/environtment';
+import { TokenProvider } from "../token/token";
+import { ENV } from "../../config/environtment";
 
 @Injectable()
 export class SuratProvider {
@@ -15,7 +14,6 @@ export class SuratProvider {
     public http: Http,
     public api: ApiProvider,
     public transfer: FileTransfer,
-    public fileOpener: FileOpener,
     public file: File,
     public token: TokenProvider
   ) {}
@@ -25,18 +23,22 @@ export class SuratProvider {
   async getSumasTemplateExcel() {
     const url = `${ENV.API_URL}/surat/sumas/excel/template`;
     // const url = "http://www.gajotres.net/wp-content/uploads/2015/04/logo_radni.png";
-    
+
     // File name only
-    var filename = url.split("/").pop();
+    // var filename = url.split("/").pop();
 
     let fileDirectory: string = this.file.dataDirectory + "1504670828948.xlsx";
 
-    const response = await this.fileTransfer.download(url, fileDirectory, true, this.getHeaders());
-    console.log(response);
-    
+    const response = await this.fileTransfer.download(
+      url,
+      fileDirectory,
+      true,
+      this.getHeaders()
+    );
+
     return response.toURL();
-      // .then(entry => console.log(entry));
-    
+    // .then(entry => console.log(entry));
+
     // const data = await entry;
     // return data;
   }
@@ -44,11 +46,11 @@ export class SuratProvider {
   getHeaders() {
     const options: Object = {};
     let headers = {};
-    
+
     headers["Authorization"] = "smartdjkn2017mobile";
     headers["token"] = this.token.latestToken;
     options["headers"] = headers;
-    
+
     return options;
   }
 }
