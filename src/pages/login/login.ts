@@ -1,14 +1,10 @@
-import { Component } from '@angular/core';
-import {
-  NavController,
-  NavParams,
-  ToastController
-} from "ionic-angular";
+import { Component } from "@angular/core";
+import { NavController, NavParams, ToastController } from "ionic-angular";
 
 import { User } from "../../models/users";
-import { UserProvider } from '../../providers/user/user';
-import { HomePage } from '../home/home';
-import { TokenProvider } from '../../providers/token/token';
+import { UserProvider } from "../../providers/user/user";
+import { HomePage } from "../home/home";
+import { TokenProvider } from "../../providers/token/token";
 
 @Component({
   selector: "page-login",
@@ -30,7 +26,7 @@ export class LoginPage {
     this.user.password = "sm4rt@DJKN";
   }
 
-  ionViewDidLoad() { }
+  ionViewDidLoad() {}
 
   login(user: User) {
     this.isLoading = true;
@@ -42,11 +38,13 @@ export class LoginPage {
       err => {
         this.isLoading = false;
         // toast error
-        this.toastController.create({
-          message: err.message,
-          duration: 3000,
-          position: "bottom"
-        }).present();
+        this.toastController
+          .create({
+            message: err.error_message,
+            duration: 3000,
+            position: "bottom"
+          })
+          .present();
       }
     );
   }

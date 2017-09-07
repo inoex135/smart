@@ -1,23 +1,12 @@
-.form-login {
-    ion-img{
-        height: 70vh;
-        width: auto;
-        margin: auto;
-        display: block;
-    }
+page-login {
+  .logo {
+    padding: 20px 0;
+    min-height: 200px;
+    text-align: center;
 
-    .login-warning{
-        width: auto;
-        margin-left: 2vh;
+    img {
+      max-width: 150px;
     }
-
-    .login-warning-icon{
-        float: right;
-    }
-
-    .btn-login{
-        background: #F26422;
-    }
+  }
 }
-
 $img-placeholder-background: white;
