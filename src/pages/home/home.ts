@@ -1,9 +1,7 @@
 import { Component } from "@angular/core";
 import { NavController } from "ionic-angular";
-import { UserProvider } from "../../providers/user/user";
+// import { UserProvider } from "../../providers/user/user";
 import { LoginPage } from "../login/login";
-import { TokenProvider } from "../../providers/token/token";
-import { SuratProvider } from "../../providers/surat/surat";
 
 @Component({
   selector: "page-home",
@@ -11,13 +9,11 @@ import { SuratProvider } from "../../providers/surat/surat";
 })
 export class HomePage {
   constructor(
-    public navCtrl: NavController,
-    public userProvider: UserProvider,
-    public suratProvider: SuratProvider
+    public navCtrl: NavController // public userProvider: UserProvider
   ) {}
 
   logout() {
-    this.userProvider.purgeAuth();
+    // this.userProvider.purgeAuth();
     this.navCtrl.setRoot(LoginPage);
   }
 }

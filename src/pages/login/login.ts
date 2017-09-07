@@ -29,11 +29,10 @@ export class LoginPage {
     this.isLoading = true;
 
     this.userProvider.attemptAuth(user).subscribe(
-      data => {
-        this.navCtrl.setRoot(HomePage);
-      },
+      data => this.navCtrl.setRoot(HomePage),
       err => {
         this.isLoading = false;
+
         // toast error
         this.toastController
           .create({
