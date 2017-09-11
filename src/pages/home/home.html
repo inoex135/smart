@@ -13,27 +13,35 @@
   <ion-grid>
 
     <ion-row text-center>
-      <ion-col center text-center>
+      <ion-col>
         <h1>Menu</h1>
       </ion-col>
     </ion-row>
 
     <ion-row>
       <ion-col>
-        <ion-card>
-          <img src="http://ionicframework.com/dist/preview-app/www/assets/img/card-saopaolo.png" />
-          <!-- <div class="card-title">São Paulo</div> -->
+        <ion-card (click)="goToPersuratan()">
+          <ion-icon name="mail" class="icon-menu"></ion-icon>
           <div class="card-subtitle">Persuratan</div>
         </ion-card>
       </ion-col>
 
       <ion-col>
         <ion-card>
-          <img src="http://ionicframework.com/dist/preview-app/www/assets/img/card-saopaolo.png" />
-          <div class="card-subtitle">APT</div>
+          <ion-icon name="person" class="icon-menu"></ion-icon>
+          <div class="card-subtitle">Personil</div>
         </ion-card>
       </ion-col>
 
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-card>
+          <ion-icon name="person" class="icon-menu"></ion-icon>
+          <div class="card-subtitle">Personil</div>
+        </ion-card>
+      </ion-col>
     </ion-row>
   </ion-grid>
 </ion-content>

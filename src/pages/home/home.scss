@@ -1,7 +1,12 @@
 .card-background-page {
+  .icon-menu {
+    font-size: 10rem;
+  }
   ion-card {
+    height: 100%;
     position: relative;
     text-align: center;
+    background-color: #fff;
   }
 
   .card-title {
@@ -14,10 +19,11 @@
   }
 
   .card-subtitle {
-    font-size: 1em;
+    color: silver;
+    font-size: 1.4em;
     position: absolute;
-    top: 52%;
+    top: 75%;
     width: 100%;
-    color: #fff;
+    color: #60646d;
   }
 }
