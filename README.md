@@ -3,20 +3,20 @@
 
 *Ionic memerlukan nodejs dan npm/yarn. jika belum install, bisa instal terlebih dahulu*
 
-Untuk menjalankan project : 
+Untuk menjalankan project :
 1. Clone repo.
-2. Run command for install packages with `yarn` or `npm install`. you must install yarn first if use yarn. 
+2. Run command for install packages with `yarn` or `npm install`. you must install yarn first if use yarn.
 3. Setup your `API URL` in `src/config/environtment.ts`.
 4. run `ionic serve` for development in browser.
 5. Or development with emulator, install android studio in your local pc.
-6. then, run command `ionic cordova emulate android`. 
+6. then, run command `ionic cordova emulate android`.
 
 ### Development
 * Untuk development, biasakan menggunakan generate bawaan ionic. lebih lengkapnya disini [https://ionicframework.com/docs/cli/generate/](https://ionicframework.com/docs/cli/generate/)
 
 ## Production
-1. Pertama, tambahkan target platform yang diinginkan dengan command `cordova platform add android`
-2. Jika platform sudah pernah ditambahkan, bisa langsung jalankan command `ionic cordova build android --prod`.
+1. Pertama, tambahkan target platform yang diinginkan dengan command `ionic cordova platform add android`
+2. Jika platform sudah pernah ditambahkan, bisa langsung jalankan command ini untuk build menjadi APK `ionic cordova build android --prod`.
 3. Atau juga ketika akan sudah rilis bisa tambahkan ` --release` di step nomor 2.
 
 
