@@ -30,6 +30,9 @@ https://stackoverflow.com/questions/32832135/how-to-use-chrome-remote-debugging-
 npm install -g ionic
 ```
 
+* Jika muncul `Failed to find ANDROID_HOME environment variable` coba baca2 disini :
+ [https://stackoverflow.com/questions/26356359/error-android-home-is-not-set-and-android-command-not-in-your-path-you-must](https://stackoverflow.com/questions/26356359/error-android-home-is-not-set-and-android-command-not-in-your-path-you-must)
+
 ## Reference
 * [https://ionicframework.com/docs](https://ionicframework.com/docs)
 * [https://github.com/shumbo/ionic-realworld-example-app](https://github.com/shumbo/ionic-realworld-example-app)
