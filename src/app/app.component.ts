@@ -7,9 +7,6 @@ import { LoginPage } from "../pages/login/login";
 import { UserProvider } from "../providers/user/user";
 import { TokenProvider } from "../providers/token/token";
 import { HomePage } from "../pages/home/home";
-import { SuratPage } from "../pages/surat/surat";
-import { AptPage } from "../pages/apt/apt";
-import { PersonalPage } from "../pages/personal/personal";
 @Component({
   templateUrl: "app.html"
 })
