@@ -44,6 +44,10 @@
   dependencies:
     tsickle "^0.21.0"
 
+"@ionic-native/calendar@^4.2.1":
+  version "4.2.1"
+  resolved "https://registry.yarnpkg.com/@ionic-native/calendar/-/calendar-4.2.1.tgz#457165ee7e66ef5c2ad883117b20b1f5cb1f0a86"
+
 "@ionic-native/core@3.12.1":
   version "3.12.1"
   resolved "https://registry.yarnpkg.com/@ionic-native/core/-/core-3.12.1.tgz#5b7c7a4f5adfc8da0b9197e1843e5893acf66021"
@@ -1194,6 +1198,14 @@ cordova-common@^2.0.1:
     shelljs "^0.5.3"
     underscore "^1.8.3"
     unorm "^1.3.3"
+
+cordova-plugin-calendar@^4.6.0:
+  version "4.6.0"
+  resolved "https://registry.yarnpkg.com/cordova-plugin-calendar/-/cordova-plugin-calendar-4.6.0.tgz#487352ec9f995d21c7ab0976efd8e65e8e5fba3c"
+
+cordova-plugin-compat@^1.0.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/cordova-plugin-compat/-/cordova-plugin-compat-1.1.0.tgz#92bdf169feb61205323dcc96a3ff8348e37e87fc"
 
 cordova-plugin-console@^1.0.5:
   version "1.0.7"
