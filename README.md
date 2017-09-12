@@ -14,6 +14,8 @@ Untuk menjalankan project :
 ### Development
 * Untuk development, biasakan menggunakan generate bawaan ionic. lebih lengkapnya disini [https://ionicframework.com/docs/cli/generate/](https://ionicframework.com/docs/cli/generate/)
 
+* Install Android Studio, Java JDK ketika akan build ke android.
+
 ## Production
 1. Pertama, tambahkan target platform yang diinginkan dengan command `ionic cordova platform add android`
 2. Jika platform sudah pernah ditambahkan, bisa langsung jalankan command ini untuk build menjadi APK `ionic cordova build android --prod`.
@@ -31,7 +33,7 @@ npm install -g ionic
 ```
 
 * Jika muncul `Failed to find ANDROID_HOME environment variable` coba baca2 disini :
- [https://stackoverflow.com/questions/26356359/error-android-home-is-not-set-and-android-command-not-in-your-path-you-must](https://stackoverflow.com/questions/26356359/error-android-home-is-not-set-and-android-command-not-in-your-path-you-must)
+ [https://stackoverflow.com/questions/26356360/error-android-home-is-not-set-and-android-command-not-in-your-path-you-must](https://stackoverflow.com/questions/26356359/error-android-home-is-not-set-and-android-command-not-in-your-path-you-must)
 
 ## Reference
 * [https://ionicframework.com/docs](https://ionicframework.com/docs)
