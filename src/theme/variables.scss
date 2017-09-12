@@ -38,7 +38,8 @@ $colors: (
   dark: #222,
   djkn-blue: #0d5ead,
   djkn-yellow: #ffc10d,
-  djkn-green: #80c641
+  djkn-green: #80c641,
+  djkn-higlight: #1b6df9
 );
 
 $toolbar-background: map-get($colors, djkn-blue);
@@ -48,6 +49,7 @@ $toolbar-background: map-get($colors, djkn-blue);
 // App Material Design Variables
 // --------------------------------------------------
 // Material Design only Sass variables can go here
+
 // App Windows Variables
 // --------------------------------------------------
 // Windows only Sass variables can go here
