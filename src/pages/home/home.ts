@@ -12,24 +12,33 @@ import { AptPage } from "../apt/apt";
   templateUrl: "home.html"
 })
 export class HomePage {
+  public menus: Array<any> = [];
+
   constructor(
     public navCtrl: NavController,
     public userProvider: UserProvider
   ) {}
 
-  aptPage() {
-    this.navCtrl.push(AptPage);
+  ionViewDidLoad() {
+    this.listMenu();
   }
+
+  listMenu() {
+    this.menus = [
+      { title: "Persuratan", icon: "mail", component: SuratPage },
+      { title: "Personal", icon: "person", component: PersonalPage },
+      { title: "APT", icon: "laptop", component: AptPage }
+    ];
+
+    return this.menus;
+  }
+
+  pagesTo(component: any) {
+    this.navCtrl.push(component);
+  }
+
   logout() {
     this.userProvider.purgeAuth();
     this.navCtrl.setRoot(LoginPage);
-  }
-
-  persuratanPage() {
-    this.navCtrl.push(SuratPage);
-  }
-
-  personalPage() {
-    this.navCtrl.push(PersonalPage);
   }
 }

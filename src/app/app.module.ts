@@ -10,7 +10,7 @@ import { IonicStorageModule } from "@ionic/storage";
 import { FileTransfer } from "@ionic-native/file-transfer";
 import { File } from "@ionic-native/file";
 import { FileOpener } from "@ionic-native/file-opener";
-
+import { Calendar } from "@ionic-native/calendar";
 import { ChartsModule } from "ng2-charts/charts/charts";
 import "../../node_modules/chart.js/dist/Chart.bundle.min.js";
 
@@ -50,6 +50,7 @@ import { PersonalPageModule } from "../pages/personal/personal.module";
     TokenProvider,
     FileTransfer,
     File,
+    Calendar,
     SuratProvider,
     FileOpener
   ]

@@ -14,35 +14,14 @@
 <ion-content class="card-background-page">
   <ion-grid>
     <ion-row>
-      <ion-col>
-        <ion-card (click)="persuratanPage()">
-          <ion-icon name="mail" class="icon-menu"></ion-icon>
-          <div class="card-subtitle">Persuratan</div>
+
+      <ion-col *ngFor="let menu of menus" col-6>
+        <ion-card (click)="pagesTo(menu.component)">
+          <ion-icon name="{{menu.icon}}" class="icon-menu"></ion-icon>
+          <div class="card-subtitle">{{menu.title}}</div>
         </ion-card>
       </ion-col>
 
-      <ion-col>
-        <ion-card (click)="personalPage()">
-          <ion-icon name="person" class="icon-menu"></ion-icon>
-          <div class="card-subtitle">Personil</div>
-        </ion-card>
-      </ion-col>
-
-    </ion-row>
-
-    <ion-row>
-      <ion-col col-6>
-        <ion-card (click)="aptPage()">
-          <ion-icon name="laptop" class="icon-menu"></ion-icon>
-          <div class="card-subtitle">APT</div>
-        </ion-card>
-      </ion-col>
-      <ion-col col-6>
-        <ion-card (click)="logout()">
-          <ion-icon name="power" class="icon-menu"></ion-icon>
-          <div class="card-subtitle">Keluar</div>
-        </ion-card>
-      </ion-col>
     </ion-row>
   </ion-grid>
 </ion-content>
