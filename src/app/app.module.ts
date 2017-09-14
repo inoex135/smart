@@ -16,7 +16,7 @@ import "../../node_modules/chart.js/dist/Chart.bundle.min.js";
 
 import { MyApp } from "./app.component";
 import { HomePage } from "../pages/home/home";
-import { LoginPageModule } from "../pages/login/login.module";
+import { LoginPage } from "../pages/login/login";
 import { UserProvider } from "../providers/user/user";
 import { ApiProvider } from "../providers/api/api";
 import { TokenProvider } from "../providers/token/token";
@@ -24,23 +24,24 @@ import { SuratProvider } from "../providers/surat/surat";
 import { SuratPageModule } from "../pages/surat/surat.module";
 import { AptPageModule } from "../pages/apt/apt.module";
 import { PersonalPageModule } from "../pages/personal/personal.module";
+import { ComponentsModule } from "../components/components.module";
 
 @NgModule({
-  declarations: [MyApp, HomePage],
+  declarations: [MyApp, HomePage, LoginPage],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
-    LoginPageModule,
     SuratPageModule,
     AptPageModule,
     PersonalPageModule,
-    ChartsModule
+    ChartsModule,
+    ComponentsModule
   ],
   bootstrap: [IonicApp],
-  entryComponents: [MyApp, HomePage],
+  entryComponents: [MyApp, HomePage, LoginPage],
   providers: [
     StatusBar,
     SplashScreen,

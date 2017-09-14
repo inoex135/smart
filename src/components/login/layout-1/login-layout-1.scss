@@ -1,7 +1,6 @@
 /*  #Style Login + logo
 ================================================*/
 login-layout-1 {
-
   ion-col {
     position: relative;
 
@@ -20,7 +19,7 @@ login-layout-1 {
   }
 
   .item-inner {
-    border-bottom-color: theme-colors('mainColors', 'primary') !important;
+    border-bottom-color: theme-colors("mainColors", "primary") !important;
     box-shadow: none !important;
   }
 
@@ -28,7 +27,7 @@ login-layout-1 {
     margin-top: 10%;
     width: 48.5%;
     display: block;
-    float: left;
+    float: right;
   }
 
   [social] {
