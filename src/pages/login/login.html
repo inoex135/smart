@@ -1,23 +1,2 @@
-<ion-content padding class="form-login" page-login>
-  <div class="logo">
-    <img src="assets/logo_keuangan.png">
-  </div>
-
-
-  <ion-list scroll="false">
-    <form #loginForm="ngForm">
-      <ion-item>
-        <ion-input name="username" required type="number" [(ngModel)]="user.username" placeholder="Username"></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-input name="password" required type="password" [(ngModel)]="user.password" placeholder="Password"></ion-input>
-      </ion-item>
-
-      <div padding style="width: 100%;text-align:right;" (click)="login(user)">
-        <button ion-button [disabled]="loginForm.invalid || isLoading">LOGIN</button>
-      </div>
-
-    </form>
-  </ion-list>
-</ion-content>
+<login-layout-1 [data]="params.data" [events]="params.events" (login)="login($event)">
+</login-layout-1>
