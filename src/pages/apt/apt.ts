@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component } from "@angular/core";
+import { IonicPage, NavController, NavParams } from "ionic-angular";
+import { AptProvider } from "../../providers/apt/apt";
 
 /**
  * Generated class for the AptPage page.
@@ -10,16 +11,25 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 @IonicPage()
 @Component({
-  selector: 'page-apt',
-  templateUrl: 'apt.html',
+  selector: "page-apt",
+  templateUrl: "apt.html"
 })
 export class AptPage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  params: any = {};
+  coba: any = "ntak";
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private aptProvider: AptProvider
+  ) {
+    const self: AptPage = this;
+    this.params.data = {
+      items: this.aptProvider.getPermohonanList()
+    };
+    this.params.events = {
+      onItemClick: function(item: any) {}
+    };
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad AptPage');
-  }
-
+  ionViewDidLoad() {}
 }
