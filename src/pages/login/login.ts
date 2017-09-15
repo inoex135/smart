@@ -36,29 +36,7 @@ export class LoginPage {
       iconLock: "assets/images/background/loginlight.jpg"
     };
 
-    this.params.events = {
-      onLogin: function(params) {
-        this.login(params);
-      },
-      onRegister: function(params) {
-        console.log("onRegister:" + JSON.stringify(params));
-      },
-      onSkip: function(params) {
-        console.log("onSkip:" + JSON.stringify(params));
-      },
-      onFacebook: function(params) {
-        console.log("onFacebook:" + JSON.stringify(params));
-      },
-      onTwitter: function(params) {
-        console.log("onTwitter:" + JSON.stringify(params));
-      },
-      onGoogle: function(params) {
-        console.log("onGoogle:" + JSON.stringify(params));
-      },
-      onPinterest: function(params) {
-        console.log("onPinterest:" + JSON.stringify(params));
-      }
-    };
+    this.params.events = {};
   }
 
   ionViewDidLoad() {}
