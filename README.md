@@ -21,6 +21,10 @@ Untuk menjalankan project :
 2. Jika platform sudah pernah ditambahkan, bisa langsung jalankan command ini untuk build menjadi APK `ionic cordova build android --prod`.
 3. Atau juga ketika akan sudah rilis bisa tambahkan ` --release` di step nomor 2.
 
+## Template
+* For documentation about template, [here](http://csform.com/documentation-for-ionic-3-ui-template-app-blue-light/#login-page)
+
+* [Versi Video] (https://www.youtube.com/watch?v=FMR1BgGYbIE&list=PLQUKcFIakdPZ6cETZo3NRCvikLxZENH9G)
 
 ## Debugging Tips
 * Untuk debug network di device android, bisa mengikuti cara ini:

@@ -29,6 +29,7 @@ import { ComponentsModule } from "../components/components.module";
 // 3rd package
 import { NgCalendarModule } from "ionic2-calendar";
 import { PersonalPage } from "../pages/personal/personal";
+import { PersonalProvider } from '../providers/personal/personal';
 
 @NgModule({
   declarations: [MyApp, HomePage, LoginPage, PersonalPage],
@@ -57,7 +58,8 @@ import { PersonalPage } from "../pages/personal/personal";
     File,
     Calendar,
     SuratProvider,
-    FileOpener
+    FileOpener,
+    PersonalProvider
   ]
 })
 export class AppModule {}
