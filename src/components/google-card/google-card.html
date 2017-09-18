@@ -7,16 +7,30 @@
         <ion-card padding text-left class="card" (click)="onEvent('onItemClick', item.title, $event)">
           <!--Card-content-->
           <ion-card-content>
-
             <ion-card-title no-padding>
-              <h2 card-title><b>No Tiket:</b> {{item.title}}</h2>
+              <ion-row margin-bottom>
+                <ion-col no-padding>
+                  <ion-badge color="secondary" text-left no-margin danger>{{item.status}}</ion-badge>
+                </ion-col>
+                <ion-col no-padding>
+                  <h3 card-subtitle ion-text text-right>{{item.date}}</h3>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <h2 card-title class="item-tiket">{{item.title}}</h2>
+              </ion-row>
             </ion-card-title>
-            <h3 card-subtitle><b>Pelayanan:</b>{{item.description}}</h3>
-            <h3 card-subtitle><b>Sub Pelayanan: </b>{{item.shortDescription}}</h3>
-            <h3 card-subtitle><b>Nama Pemohon</b>Arief Muhammad</h3>
-            <h3 card-subtitle><b>Perihal: </b>{{item.longDescription}}</h3>
-            <h3 card-subtitle><b>Tanggal Naskah :</b>12 September 2017
-            </h3>
+
+            <hr>
+
+            <div margin-vertical>
+              <h2 ion-text>{{item.description}}</h2>
+            </div>
+
+            <h2 card-subtitle>Nama Pemohon</h2>
+
+            <h2 card-title> Arief Muhammad </h2>
+
           </ion-card-content>
         </ion-card>
       </ion-col>
