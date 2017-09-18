@@ -23,7 +23,6 @@ import { ApiProvider } from "../providers/api/api";
 import { TokenProvider } from "../providers/token/token";
 import { SuratProvider } from "../providers/surat/surat";
 
-import { SuratPageModule } from "../pages/surat/surat.module";
 import { ComponentsModule } from "../components/components.module";
 // 3rd package
 import { NgCalendarModule } from "ionic2-calendar";
@@ -32,6 +31,8 @@ import { PersonalProvider } from "../providers/personal/personal";
 import { AptPage } from "../pages/apt/apt";
 import { AptProvider } from "../providers/apt/apt";
 import { AptDetailPage } from "../pages/apt-detail/apt-detail";
+import { SuratPage } from "../pages/surat/surat";
+import { GrafikPersuratanPage } from "../pages/grafik-persuratan/grafik-persuratan";
 
 @NgModule({
   declarations: [
@@ -40,7 +41,9 @@ import { AptDetailPage } from "../pages/apt-detail/apt-detail";
     LoginPage,
     PersonalPage,
     AptPage,
-    AptDetailPage
+    AptDetailPage,
+    SuratPage,
+    GrafikPersuratanPage
   ],
   imports: [
     BrowserModule,
@@ -48,7 +51,6 @@ import { AptDetailPage } from "../pages/apt-detail/apt-detail";
     HttpModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
-    SuratPageModule,
     ChartsModule,
     ComponentsModule,
     NgCalendarModule
@@ -60,7 +62,9 @@ import { AptDetailPage } from "../pages/apt-detail/apt-detail";
     LoginPage,
     PersonalPage,
     AptPage,
-    AptDetailPage
+    AptDetailPage,
+    SuratPage,
+    GrafikPersuratanPage
   ],
   providers: [
     StatusBar,
@@ -75,7 +79,8 @@ import { AptDetailPage } from "../pages/apt-detail/apt-detail";
     SuratProvider,
     FileOpener,
     PersonalProvider,
-    AptProvider
+    AptProvider,
+    GrafikPersuratanPage
   ]
 })
 export class AppModule {}
