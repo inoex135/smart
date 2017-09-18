@@ -49,6 +49,7 @@ export class AptProvider {
       shortDescription: "Country: Germany",
       longDescription:
         "Penetapan Status Penggunaan Barang Milik Negara Selain Tanah Dan/Atau Bangunan",
+      perihal: "-",
       status: "BELUM VERIFIKASI",
       date: "12 September 2017",
       iconLike: "icon-thumb-up",

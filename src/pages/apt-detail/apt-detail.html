@@ -27,7 +27,7 @@
             <h3 ion-text>Sub Pelayanan: </h3>
           </div>
           <div padding>
-            <h4 ion-text padding-left>Pelayana sub sistem </h4>
+            <h4 ion-text padding-left> {{detail?.longDescription}} </h4>
           </div>
 
           <div card-subtitle>
@@ -41,7 +41,7 @@
             <h3 ion-text>Perihal: </h3>
           </div>
           <div padding>
-            <h4 ion-text padding-left> {{ detail?.longDescription }} </h4>
+            <h4 ion-text padding-left> {{ detail?.perihal }} </h4>
           </div>
 
           <div card-subtitle>
@@ -51,6 +51,11 @@
             <h4 ion-text padding-left> {{detail?.date}} </h4>
           </div>
         </ion-card>
+
+        <ion-buttons text-center margin>
+          <button ion-button color="favorite">Agendakan</button>
+          <button ion-button color="danger">Tidak Agendakan</button>
+        </ion-buttons>
 
       </ion-col>
     </ion-row>
