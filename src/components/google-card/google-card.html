@@ -2,7 +2,10 @@
 <ion-content has-header>
   <ion-grid no-padding>
     <ion-row>
-      <!-- <h2 class="center">Informasi Daftar Pemohon</h2> -->
+      <ion-col>
+        <h2 ion-text text-center>Informasi Daftar Pemohon</h2>
+      </ion-col>
+
       <ion-col col-12 col-md-12 col-lg-6 *ngFor="let item of data.items;let i = index">
         <ion-card padding text-left class="card" (click)="onEvent('onItemClick', item.title, $event)">
           <!--Card-content-->
@@ -34,6 +37,8 @@
           </ion-card-content>
         </ion-card>
       </ion-col>
+
+
     </ion-row>
   </ion-grid>
 </ion-content>

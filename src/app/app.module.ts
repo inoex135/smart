@@ -30,10 +30,18 @@ import { NgCalendarModule } from "ionic2-calendar";
 import { PersonalPage } from "../pages/personal/personal";
 import { PersonalProvider } from "../providers/personal/personal";
 import { AptPage } from "../pages/apt/apt";
-import { AptProvider } from '../providers/apt/apt';
+import { AptProvider } from "../providers/apt/apt";
+import { AptDetailPage } from "../pages/apt-detail/apt-detail";
 
 @NgModule({
-  declarations: [MyApp, HomePage, LoginPage, PersonalPage, AptPage],
+  declarations: [
+    MyApp,
+    HomePage,
+    LoginPage,
+    PersonalPage,
+    AptPage,
+    AptDetailPage
+  ],
   imports: [
     BrowserModule,
     FormsModule,
@@ -46,7 +54,14 @@ import { AptProvider } from '../providers/apt/apt';
     NgCalendarModule
   ],
   bootstrap: [IonicApp],
-  entryComponents: [MyApp, HomePage, LoginPage, PersonalPage, AptPage],
+  entryComponents: [
+    MyApp,
+    HomePage,
+    LoginPage,
+    PersonalPage,
+    AptPage,
+    AptDetailPage
+  ],
   providers: [
     StatusBar,
     SplashScreen,

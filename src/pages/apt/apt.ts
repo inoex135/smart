@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
 import { IonicPage, NavController, NavParams } from "ionic-angular";
 import { AptProvider } from "../../providers/apt/apt";
+import { AptDetailPage } from "../apt-detail/apt-detail";
 
 /**
  * Generated class for the AptPage page.
@@ -27,7 +28,9 @@ export class AptPage {
       items: this.aptProvider.getPermohonanList()
     };
     this.params.events = {
-      onItemClick: function(item: any) {}
+      onItemClick: function(item: any) {
+        self.navCtrl.push(AptDetailPage);
+      }
     };
   }
 
