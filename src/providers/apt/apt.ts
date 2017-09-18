@@ -39,4 +39,23 @@ export class AptProvider {
     ];
     return data;
   }
+
+  getDetail() {
+    const detail = {
+      id: 1,
+      title: "PKN00000000000000",
+      image: "assets/images/avatar-small/0.jpg",
+      description: "Pengelolaan Kekayaan Negara",
+      shortDescription: "Country: Germany",
+      longDescription:
+        "Penetapan Status Penggunaan Barang Milik Negara Selain Tanah Dan/Atau Bangunan",
+      status: "BELUM VERIFIKASI",
+      date: "12 September 2017",
+      iconLike: "icon-thumb-up",
+      iconFavorite: "icon-heart",
+      iconShare: "icon-share-variant"
+    };
+
+    return detail;
+  }
 }

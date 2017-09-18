@@ -30,6 +30,9 @@ export class AptPage {
     this.params.events = {
       onItemClick: function(item: any) {
         self.navCtrl.push(AptDetailPage);
+      },
+      onDownload: function(item: any) {
+        self.aptProvider.getDetail();
       }
     };
   }

@@ -7,7 +7,7 @@
       </ion-col>
 
       <ion-col col-12 col-md-12 col-lg-6 *ngFor="let item of data.items;let i = index">
-        <ion-card padding text-left class="card" (click)="onEvent('onItemClick', item.title, $event)">
+        <ion-card padding text-left class="card">
           <!--Card-content-->
           <ion-card-content>
             <ion-card-title no-padding>
@@ -33,6 +33,13 @@
             <h2 card-subtitle>Nama Pemohon</h2>
 
             <h2 card-title> Arief Muhammad </h2>
+
+            <hr>
+            <ion-buttons end>
+              <button ion-button end color="light" (click)="onEvent('onItemClick', item, $event)">Detail</button>
+              <button ion-button end color="favorite" (click)="onEvent('onDownload', item, $event)">download</button>
+            </ion-buttons>
+
 
           </ion-card-content>
         </ion-card>

@@ -1,18 +1,58 @@
-<!--
-  Generated template for the AptDetailPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
   <ion-navbar>
-    <ion-title>apt-detail</ion-title>
+    <ion-title>Detail</ion-title>
   </ion-navbar>
-
 </ion-header>
 
+<ion-content>
+  <ion-grid no-padding>
+    <ion-row>
+      <ion-col col-12 col-md-12 col-lg-6>
+        <ion-card padding text-left class="card">
+          <div card-subtitle>
+            <h3 ion-text>No Tiket</h3>
+          </div>
+          <div padding>
+            <h4 ion-text padding-left> {{detail?.title}} </h4>
+          </div>
 
-<ion-content padding>
+          <div card-subtitle>
+            <h3 ion-text>Pelayanan</h3>
+          </div>
+          <div padding>
+            <h4 ion-text padding-left> {{detail?.description}} </h4>
+          </div>
 
+          <div card-subtitle>
+            <h3 ion-text>Sub Pelayanan: </h3>
+          </div>
+          <div padding>
+            <h4 ion-text padding-left>Pelayana sub sistem </h4>
+          </div>
+
+          <div card-subtitle>
+            <h3 ion-text>Nama Pemohon: </h3>
+          </div>
+          <div padding>
+            <h4 ion-text padding-left> Arief Muhammad </h4>
+          </div>
+
+          <div card-subtitle>
+            <h3 ion-text>Perihal: </h3>
+          </div>
+          <div padding>
+            <h4 ion-text padding-left> {{ detail?.longDescription }} </h4>
+          </div>
+
+          <div card-subtitle>
+            <h3 ion-text>Tanggal Naskah: </h3>
+          </div>
+          <div padding>
+            <h4 ion-text padding-left> {{detail?.date}} </h4>
+          </div>
+        </ion-card>
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
