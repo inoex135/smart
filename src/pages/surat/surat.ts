@@ -1,25 +1,23 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component } from "@angular/core";
+import { NavController, NavParams } from "ionic-angular";
+import { GrafikPersuratanPage } from "../grafik-persuratan/grafik-persuratan";
+import { NaskahMasukPage } from "../naskah-masuk/naskah-masuk";
 
-/**
- * Generated class for the SuratPage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
-
-@IonicPage()
 @Component({
-  selector: 'page-surat',
-  templateUrl: 'surat.html',
+  selector: "page-surat",
+  templateUrl: "surat.html"
 })
 export class SuratPage {
-
+  params: any = {};
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.params.data = [
+      { page: GrafikPersuratanPage, title: "Grafik" },
+      { page: NaskahMasukPage, title: "Naskah Masuk" },
+      { page: GrafikPersuratanPage, title: "Notifikasi" }
+    ];
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad SuratPage');
+    console.log("ionViewDidLoad SuratPage");
   }
-
 }
