@@ -13,6 +13,34 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+  <ion-grid no-padding>
+    <ion-row>
+      <ion-col col-12 col-md-12 col-lg-12 *ngFor="let naskah of listNaskah">
+        <ion-card padding (click)="detailNaskah(item)">
+          <ion-card-content>
+            <ion-card-title no-padding>
+              <ion-row margin-bottom>
+                <ion-col no-padding>
+                  <h2 ion-text text-left>{{naskah?.status}}</h2>
+                </ion-col>
+                <ion-col no-padding>
+                  <h2 ion-text text-right>{{naskah?.tanggal}}</h2>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <h2 card-title class="item-tiket">{{naskah?.noNaskah}}</h2>
+              </ion-row>
+            </ion-card-title>
 
+            <hr>
+
+            <h2>{{naskah?.unit}}</h2>
+            <h2>{{naskah?.perihal}}</h2>
+
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

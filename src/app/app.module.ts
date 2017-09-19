@@ -34,6 +34,8 @@ import { AptDetailPage } from "../pages/apt-detail/apt-detail";
 import { SuratPage } from "../pages/surat/surat";
 import { GrafikPersuratanPage } from "../pages/grafik-persuratan/grafik-persuratan";
 import { NaskahMasukPage } from "../pages/naskah-masuk/naskah-masuk";
+import { NaskahMasukProvider } from "../providers/naskah-masuk/naskah-masuk";
+import { NaskahMasukDetailPage } from "../pages/naskah-masuk-detail/naskah-masuk-detail";
 
 @NgModule({
   declarations: [
@@ -45,7 +47,8 @@ import { NaskahMasukPage } from "../pages/naskah-masuk/naskah-masuk";
     AptDetailPage,
     SuratPage,
     GrafikPersuratanPage,
-    NaskahMasukPage
+    NaskahMasukPage,
+    NaskahMasukDetailPage
   ],
   imports: [
     BrowserModule,
@@ -67,7 +70,8 @@ import { NaskahMasukPage } from "../pages/naskah-masuk/naskah-masuk";
     AptDetailPage,
     SuratPage,
     GrafikPersuratanPage,
-    NaskahMasukPage
+    NaskahMasukPage,
+    NaskahMasukDetailPage
   ],
   providers: [
     StatusBar,
@@ -83,7 +87,8 @@ import { NaskahMasukPage } from "../pages/naskah-masuk/naskah-masuk";
     FileOpener,
     PersonalProvider,
     AptProvider,
-    GrafikPersuratanPage
+    GrafikPersuratanPage,
+    NaskahMasukProvider
   ]
 })
 export class AppModule {}
