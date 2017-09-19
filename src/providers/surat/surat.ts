@@ -6,7 +6,7 @@ import { ApiProvider } from "../api/api";
 import { FileTransfer, FileTransferObject } from "@ionic-native/file-transfer";
 import { File } from "@ionic-native/file";
 import { TokenProvider } from "../token/token";
-import { ENV } from "../../config/environtment";
+import { ENV } from "../../config/environment";
 
 @Injectable()
 export class SuratProvider {

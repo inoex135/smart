@@ -7,9 +7,10 @@ Untuk menjalankan project :
 1. Clone repo.
 2. Run command for install packages with `yarn` or `npm install`. you must install yarn first if use yarn.
 3. Setup your `API URL` in `src/config/environtment.ts`.
-4. run `ionic serve` for development in browser.
-5. Or development with emulator, install android studio in your local pc.
-6. then, run command `ionic cordova emulate android`.
+4. Run `npm install -g ionic cordova` to install ionic command and cordova.
+5. Then, run `ionic serve` for development in browser.
+6. Or development with emulator, install android studio in your local pc.
+7. run command `ionic cordova emulate android`.
 
 ### Development
 * Untuk development, biasakan menggunakan generate bawaan ionic. lebih lengkapnya disini [https://ionicframework.com/docs/cli/generate/](https://ionicframework.com/docs/cli/generate/)
