@@ -33,6 +33,7 @@ import { AptProvider } from "../providers/apt/apt";
 import { AptDetailPage } from "../pages/apt-detail/apt-detail";
 import { SuratPage } from "../pages/surat/surat";
 import { GrafikPersuratanPage } from "../pages/grafik-persuratan/grafik-persuratan";
+import { NaskahMasukPage } from "../pages/naskah-masuk/naskah-masuk";
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { GrafikPersuratanPage } from "../pages/grafik-persuratan/grafik-persurat
     AptPage,
     AptDetailPage,
     SuratPage,
-    GrafikPersuratanPage
+    GrafikPersuratanPage,
+    NaskahMasukPage
   ],
   imports: [
     BrowserModule,
@@ -64,7 +66,8 @@ import { GrafikPersuratanPage } from "../pages/grafik-persuratan/grafik-persurat
     AptPage,
     AptDetailPage,
     SuratPage,
-    GrafikPersuratanPage
+    GrafikPersuratanPage,
+    NaskahMasukPage
   ],
   providers: [
     StatusBar,

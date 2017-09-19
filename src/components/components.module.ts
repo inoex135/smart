@@ -16,7 +16,7 @@ import { GoogleCardLayout1 } from "./google-card/google-card-layout-1";
     GoogleCardLayout1
   ],
   imports: [IonicModule],
-  exports: [LoginLayout1, GoogleCardLayout1],
+  exports: [LoginLayout1, GoogleCardLayout1, TabsLayout1],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class ComponentsModule {}
