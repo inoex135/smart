@@ -17,15 +17,15 @@
   <ion-card text-left margin *ngFor="let notif of notifications">
     <button ion-item>
 
-      <div float-left card-subtitle>
-        <h3>{{notif?.sender}}</h3>
+      <div float-left>
+        <h3><b>{{notif?.sender}}</b></h3>
       </div>
 
       <div float-right>
-        <h4>{{ notif?.date}}</h4>
+        <h4 ion-text color="favorite">{{ notif?.date}}</h4>
       </div>
 
-      <p float-start>{{notif?.message}}</p>
+      <p float-start ion-text color="silver">{{notif?.message}}</p>
     </button>
   </ion-card>
 </ion-content>
