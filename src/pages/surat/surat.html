@@ -17,7 +17,7 @@
     <button ion-item item-title paddinge-left submenu *ngFor="let menu of menus" (click)="openPage(menu)">
       <ion-icon name="{{menu.icon}}" item-start></ion-icon>
       {{menu.name}}
-      <ion-badge item-end *ngIf="menu.name == 'Notifikasi'" color="danger" round>6</ion-badge>
+      <ion-badge item-end *ngIf="showBadge(menu.name)" color="danger" round>6</ion-badge>
     </button>
   </ion-list>
 </ion-content>

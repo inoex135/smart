@@ -2,6 +2,7 @@ import { Component } from "@angular/core";
 import { NavController, NavParams } from "ionic-angular";
 import { GrafikPersuratanPage } from "../grafik-persuratan/grafik-persuratan";
 import { NaskahMasukPage } from "../naskah-masuk/naskah-masuk";
+import { NaskahNotifikasiPage } from "../naskah-notifikasi/naskah-notifikasi";
 
 @Component({
   selector: "page-surat",
@@ -14,7 +15,7 @@ export class SuratPage {
     this.menus = [
       { name: "Grafik", icon: "stats", component: GrafikPersuratanPage },
       { name: "Naskah Masuk", icon: "folder", component: NaskahMasukPage },
-      { name: "Notifikasi", icon: "mail", component: NaskahMasukPage }
+      { name: "Notifikasi", icon: "mail", component: NaskahNotifikasiPage }
     ];
   }
 
@@ -22,5 +23,10 @@ export class SuratPage {
 
   openPage(page: any) {
     this.navCtrl.push(page.component);
+  }
+
+  showBadge(menu: String) {
+    const notification = "Notifikasi";
+    return menu == notification ? true : false;
   }
 }
