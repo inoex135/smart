@@ -36,7 +36,9 @@ import { GrafikPersuratanPage } from "../pages/grafik-persuratan/grafik-persurat
 import { NaskahMasukPage } from "../pages/naskah-masuk/naskah-masuk";
 import { NaskahMasukProvider } from "../providers/naskah-masuk/naskah-masuk";
 import { NaskahMasukDetailPage } from "../pages/naskah-masuk-detail/naskah-masuk-detail";
-import { NaskahDetailProvider } from '../providers/naskah-detail/naskah-detail';
+import { NaskahDetailProvider } from "../providers/naskah-detail/naskah-detail";
+import { NaskahNotifikasiPage } from "../pages/naskah-notifikasi/naskah-notifikasi";
+import { NaskahNotifikasiProvider } from '../providers/naskah-notifikasi/naskah-notifikasi';
 
 @NgModule({
   declarations: [
@@ -49,7 +51,8 @@ import { NaskahDetailProvider } from '../providers/naskah-detail/naskah-detail';
     SuratPage,
     GrafikPersuratanPage,
     NaskahMasukPage,
-    NaskahMasukDetailPage
+    NaskahMasukDetailPage,
+    NaskahNotifikasiPage
   ],
   imports: [
     BrowserModule,
@@ -72,7 +75,8 @@ import { NaskahDetailProvider } from '../providers/naskah-detail/naskah-detail';
     SuratPage,
     GrafikPersuratanPage,
     NaskahMasukPage,
-    NaskahMasukDetailPage
+    NaskahMasukDetailPage,
+    NaskahNotifikasiPage
   ],
   providers: [
     StatusBar,
@@ -90,7 +94,8 @@ import { NaskahDetailProvider } from '../providers/naskah-detail/naskah-detail';
     AptProvider,
     GrafikPersuratanPage,
     NaskahMasukProvider,
-    NaskahDetailProvider
+    NaskahDetailProvider,
+    NaskahNotifikasiProvider
   ]
 })
 export class AppModule {}
