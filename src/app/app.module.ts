@@ -36,6 +36,7 @@ import { GrafikPersuratanPage } from "../pages/grafik-persuratan/grafik-persurat
 import { NaskahMasukPage } from "../pages/naskah-masuk/naskah-masuk";
 import { NaskahMasukProvider } from "../providers/naskah-masuk/naskah-masuk";
 import { NaskahMasukDetailPage } from "../pages/naskah-masuk-detail/naskah-masuk-detail";
+import { NaskahDetailProvider } from '../providers/naskah-detail/naskah-detail';
 
 @NgModule({
   declarations: [
@@ -88,7 +89,8 @@ import { NaskahMasukDetailPage } from "../pages/naskah-masuk-detail/naskah-masuk
     PersonalProvider,
     AptProvider,
     GrafikPersuratanPage,
-    NaskahMasukProvider
+    NaskahMasukProvider,
+    NaskahDetailProvider
   ]
 })
 export class AppModule {}
