@@ -13,8 +13,8 @@ export class SuratPage {
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.menus = [
       { name: "Grafik", icon: "stats", component: GrafikPersuratanPage },
-      { name: "Naskah Masuk", icon: "mail", component: NaskahMasukPage },
-      { name: "Notifikasi", icon: "notifications", component: NaskahMasukPage }
+      { name: "Naskah Masuk", icon: "folder", component: NaskahMasukPage },
+      { name: "Notifikasi", icon: "mail", component: NaskahMasukPage }
     ];
   }
 
