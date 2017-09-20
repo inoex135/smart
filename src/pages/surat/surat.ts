@@ -8,16 +8,19 @@ import { NaskahMasukPage } from "../naskah-masuk/naskah-masuk";
   templateUrl: "surat.html"
 })
 export class SuratPage {
-  params: any = {};
+  menus: Array<Object> = [];
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.params.data = [
-      { page: GrafikPersuratanPage, title: "Grafik" },
-      { page: NaskahMasukPage, title: "Naskah Masuk" },
-      { page: GrafikPersuratanPage, title: "Notifikasi" }
+    this.menus = [
+      { name: "Grafik", icon: "stats", component: GrafikPersuratanPage },
+      { name: "Naskah Masuk", icon: "mail", component: NaskahMasukPage },
+      { name: "Notifikasi", icon: "notifications", component: NaskahMasukPage }
     ];
   }
 
-  ionViewDidLoad() {
-    console.log("ionViewDidLoad SuratPage");
+  ionViewDidLoad() {}
+
+  openPage(page: any) {
+    this.navCtrl.push(page.component);
   }
 }

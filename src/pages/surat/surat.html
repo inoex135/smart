@@ -12,6 +12,11 @@
 
 </ion-header>
 
-
-<tabs-layout-1 [data]="params.data" [events]="params.events">
-</tabs-layout-1>
+<ion-content no-padding>
+  <ion-list no-padding no-margin>
+    <button ion-item item-title paddinge-left submenu *ngFor="let menu of menus" (click)="openPage(menu)">
+      <ion-icon name="{{menu.icon}}" item-start></ion-icon>
+      {{menu.name}}
+    </button>
+  </ion-list>
+</ion-content>
