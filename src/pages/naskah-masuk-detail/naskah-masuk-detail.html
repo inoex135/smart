@@ -15,7 +15,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content no-padding>
   <div [ngSwitch]="type">
     <!-- Detail segment -->
     <ion-card padding text-left *ngSwitchCase="'detail'">
@@ -72,13 +72,21 @@
 
     <!-- riwayat segment -->
     <div *ngSwitchCase="'riwayat'">
-      <ion-list>
-        <ion-item>lorem</ion-item>
-        <ion-item>lorem</ion-item>
-        <ion-item>lorem</ion-item>
-        <ion-item>lorem</ion-item>
-        <ion-item>lorem</ion-item>
-      </ion-list>
+      <ion-card>
+        <ion-row>
+          <ion-col padding>
+            <p text-left ion-text color="accent">AM-1731/KN.54/2017</p>
+          </ion-col>
+
+          <ion-col padding>
+            <p ion-text text-right color="favorite">24 Agustus 2017</p>
+          </ion-col>
+        </ion-row>
+        <hr>
+        <p float-left text-wrap>Kepala Subdirektorat Perencanaan dan Pengembangan Sistem Aplikasi</p>
+        <p float-text>24 Agustus 2017</p>
+        <p float-text> Disposisi </p>
+      </ion-card>
     </div>
   </div>
 </ion-content>
