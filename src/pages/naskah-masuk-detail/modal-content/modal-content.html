@@ -51,8 +51,55 @@
 
                     <!-- form selesai -->
 
-                    <div *ngSwitchCase="'selesai'">
-                        selesai
+                    <div *ngSwitchCase="'selesai'" class="form" padding>
+                        <!--Form Title-->
+                        <h1 title text-right>Selesai</h1>
+                        <!---Input field username-->
+                        <ion-item no-padding>
+                            <ion-label floating>Target Selesai <span class="required">*</span></ion-label>
+                            <ion-input required type="text" [(ngModel)]="username"></ion-input>
+                        </ion-item>
+
+                        <!---Input field username-->
+                        <ion-item no-padding>
+                            <ion-label floating>Tanggal Selesai <span class="required">*</span></ion-label>
+                            <ion-input required type="text" [(ngModel)]="username"></ion-input>
+                        </ion-item>
+
+                        <!---Input field email-->
+                        <ion-item no-padding>
+                            <ion-label floating>Catatan Selesai <span class="required">*</span></ion-label>
+                            <ion-textarea required type="email" pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" required [(ngModel)]="email"></ion-textarea>
+                        </ion-item>
+
+                        <!---Input field email-->
+                        <ion-item no-padding>
+                            <ion-label floating>Lokasi Arsip</ion-label>
+                            <ion-textarea required type="email" pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" required [(ngModel)]="email"></ion-textarea>
+                        </ion-item>
+
+                        <!---Input field klasifikasi arsip-->
+                        <ion-item no-padding>
+                            <ion-label floating>Klasifikasi Arsip</ion-label>
+                            <ion-select [(ngModel)]="alasan">
+                                <ion-option value="1">Cuti</ion-option>
+                                <ion-option value="2">Lainnya</ion-option>
+                                <ion-option value="3">Tidak Sesuai Tugas dan Fungsinya</ion-option>
+                            </ion-select>
+                        </ion-item>
+
+                        <!---Input field JRA unit-->
+                        <ion-item no-padding>
+                            <ion-label floating>JRA Unit</ion-label>
+                            <ion-select [(ngModel)]="alasan">
+                                <ion-option value="1">Cuti</ion-option>
+                                <ion-option value="2">Lainnya</ion-option>
+                                <ion-option value="3">Tidak Sesuai Tugas dan Fungsinya</ion-option>
+                            </ion-select>
+                        </ion-item>
+
+                        <!---Register button-->
+                        <button ion-button right (click)="selesai()" margin-top>Simpan</button>
                     </div>
 
                 </ion-col>
