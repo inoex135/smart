@@ -15,8 +15,10 @@ export class NaskahMasukDetailPage {
     private modalCtrl: ModalController
   ) {}
 
-  modalAction(button: String) {
-    const modal = this.modalCtrl.create(ModalContentPage);
+  modalAction(actionType: String) {
+    const modal = this.modalCtrl.create(ModalContentPage, {
+      actionType: actionType
+    });
 
     modal.present();
   }
