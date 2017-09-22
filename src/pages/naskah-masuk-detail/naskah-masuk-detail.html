@@ -1,59 +1,84 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>detail</ion-title>
+    <ion-title>Naskah</ion-title>
   </ion-navbar>
+
+  <ion-toolbar no-border-top>
+    <ion-segment [(ngModel)]="type">
+      <ion-segment-button value="detail">
+        Detail
+      </ion-segment-button>
+      <ion-segment-button value="riwayat">
+        Riwayat
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-  <ion-card padding text-left>
-    <div card-subtitle>
-      <h3 ion-text>Nomor Agenda</h3>
-    </div>
-    <div padding>
-      <h4 ion-text padding-left>{{detail.noAgenda}}</h4>
-    </div>
-    <div card-subtitle>
-      <h3 ion-text>Nomor Naskah</h3>
-    </div>
-    <div padding>
-      <h4 ion-text padding-left>{{detail.noNaskah}}</h4>
-    </div>
-    <div card-subtitle>
-      <h3 ion-text>Tanggal Naskah</h3>
-    </div>
-    <div padding>
-      <h4 ion-text padding-left>{{detail.tanggalNaskah}}</h4>
-    </div>
-    <div card-subtitle>
-      <h3 ion-text>Perihal Naskah</h3>
-    </div>
-    <div padding>
-      <h4 ion-text padding-left>{{detail.perihal}}</h4>
-    </div>
-    <div card-subtitle>
-      <h3 ion-text>Unit Pengirim</h3>
-    </div>
-    <div padding>
-      <h4 ion-text padding-left>{{detail.unitPengirim}}</h4>
-    </div>
-    <div card-subtitle>
-      <h3 ion-text>Status Surat</h3>
-    </div>
-    <div padding>
-      <h4 ion-text padding-left>{{detail.statusSurat}}</h4>
-    </div>
+  <div [ngSwitch]="type">
+    <!-- Detail segment -->
+    <ion-card padding text-left *ngSwitchCase="'detail'">
+      <div card-subtitle>
+        <h3 ion-text>Nomor Agenda</h3>
+      </div>
+      <div padding>
+        <h4 ion-text padding-left>{{detail.noAgenda}}</h4>
+      </div>
+      <div card-subtitle>
+        <h3 ion-text>Nomor Naskah</h3>
+      </div>
+      <div padding>
+        <h4 ion-text padding-left>{{detail.noNaskah}}</h4>
+      </div>
+      <div card-subtitle>
+        <h3 ion-text>Tanggal Naskah</h3>
+      </div>
+      <div padding>
+        <h4 ion-text padding-left>{{detail.tanggalNaskah}}</h4>
+      </div>
+      <div card-subtitle>
+        <h3 ion-text>Perihal Naskah</h3>
+      </div>
+      <div padding>
+        <h4 ion-text padding-left>{{detail.perihal}}</h4>
+      </div>
+      <div card-subtitle>
+        <h3 ion-text>Unit Pengirim</h3>
+      </div>
+      <div padding>
+        <h4 ion-text padding-left>{{detail.unitPengirim}}</h4>
+      </div>
+      <div card-subtitle>
+        <h3 ion-text>Status Surat</h3>
+      </div>
+      <div padding>
+        <h4 ion-text padding-left>{{detail.statusSurat}}</h4>
+      </div>
 
-    <div card-subtitle>
-      <h3 ion-text>Naskah Diterima</h3>
-    </div>
-    <div padding>
-      <h4 ion-text padding-left>{{detail.naskahDiterima}}</h4>
-    </div>
-  </ion-card>
+      <div card-subtitle>
+        <h3 ion-text>Naskah Diterima</h3>
+      </div>
+      <div padding>
+        <h4 ion-text padding-left>{{detail.naskahDiterima}}</h4>
+      </div>
+    </ion-card>
 
-  <ion-buttons margin text-center>
-    <button ion-button color="secondary">Disposisi</button>
-    <button ion-button color="primary">Selesai</button>
-    <button ion-button color="light">Teruskan</button>
-  </ion-buttons>
+    <ion-buttons margin text-center *ngSwitchCase="'detail'">
+      <button ion-button color="secondary" (click)="modalAction('disposisi')">Disposisi</button>
+      <button ion-button color="primary" (click)="modalAction('selesai')">Selesai</button>
+      <button ion-button color="light" (click)="modalAction('teruskan')">Teruskan</button>
+    </ion-buttons>
+
+    <!-- riwayat segment -->
+    <div *ngSwitchCase="'riwayat'">
+      <ion-list>
+        <ion-item>lorem</ion-item>
+        <ion-item>lorem</ion-item>
+        <ion-item>lorem</ion-item>
+        <ion-item>lorem</ion-item>
+        <ion-item>lorem</ion-item>
+      </ion-list>
+    </div>
+  </div>
 </ion-content>
