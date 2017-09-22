@@ -32,7 +32,9 @@ $colors: (
   facebook:(base: #3949ab, contrast: #fff),
   google:(base: #bf360c, contrast: #fff),
   pinterest:(base: #ff3d00, contrast: #fff),
-  silver: #bdc3c7
+  silver: #bdc3c7,
+  light-white: #fff,
+  light-blue: #6cb3e6
 );
 // App iOS Variables
 // --------------------------------------------------
@@ -40,6 +42,9 @@ $colors: (
 // App Material Design Variables
 // --------------------------------------------------
 // Material Design only Sass variables can go here
+$segment-button-md-text-color-activated: map-get($colors, "light-white");
+$segment-button-md-padding-botto: map-get($colors, "light-white");
+
 // App Windows Variables
 // --------------------------------------------------
 // Windows only Sass variables can go here

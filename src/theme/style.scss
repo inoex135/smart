@@ -9,3 +9,9 @@
     background: map-get($colors, "light");
   }
 }
+[card-title] {
+  color: #3c4551 !important;
+}
+[card-content] {
+  color: #7f8a96 !important;
+}
