@@ -8,27 +8,31 @@
 <ion-content>
   <ion-grid no-padding>
     <ion-row>
-      <ion-col col-12 col-md-12 col-lg-12 *ngFor="let naskah of listNaskah">
-        <ion-card padding (click)="detailNaskah(item)">
+      <ion-col col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4 *ngFor="let naskah of listNaskah">
+        <ion-card (click)="detailNaskah(item)">
           <ion-card-content>
-            <ion-card-title no-padding>
-              <ion-row margin-bottom>
-                <ion-col no-padding>
-                  <h2 ion-text text-left>{{naskah?.status}}</h2>
-                </ion-col>
-                <ion-col no-padding>
-                  <h2 ion-text text-right>{{naskah?.tanggal}}</h2>
-                </ion-col>
-              </ion-row>
-              <ion-row>
-                <h2 card-title class="item-tiket">{{naskah?.noNaskah}}</h2>
-              </ion-row>
-            </ion-card-title>
+            <ion-row no-padding>
+              <ion-col>
+                <ion-badge color="secondary" text-left>{{naskah?.status}}</ion-badge>
+              </ion-col>
 
-            <hr>
+              <ion-col>
+                <h2 ion-text card-content text-right>{{naskah.tanggal}}</h2>
+              </ion-col>
+            </ion-row>
 
-            <h2>{{naskah?.unit}}</h2>
-            <h2>{{naskah?.perihal}}</h2>
+            <ion-row>
+              <ion-col>
+                <h2 ion-text card-title>Unit Pengirim</h2>
+                <h2 ion-text card-content text-wrap>{{naskah?.unit}}</h2>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <h2 ion-text card-title>Perihal</h2>
+                <h2 ion-text card-content>{{naskah?.perihal}}</h2>
+              </ion-col>
+            </ion-row>
 
           </ion-card-content>
         </ion-card>

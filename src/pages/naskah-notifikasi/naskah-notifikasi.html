@@ -13,19 +13,25 @@
 </ion-header>
 
 
-<ion-content padding>
-  <ion-card text-left margin *ngFor="let notif of notifications">
-    <button ion-item>
+<ion-content>
+  <ion-grid no-padding>
+    <ion-row>
+      <ion-col col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4>
+        <ion-card margin-bottom *ngFor="let notif of notifications">
+          <ion-card-content>
+            <button ion-item>
+              <div float-left>
+                <h3><b>{{notif?.sender}}</b></h3>
+              </div>
+              <div float-right>
+                <h4 ion-text color="favorite">{{ notif?.date}}</h4>
+              </div>
 
-      <div float-left>
-        <h3><b>{{notif?.sender}}</b></h3>
-      </div>
-
-      <div float-right>
-        <h4 ion-text color="favorite">{{ notif?.date}}</h4>
-      </div>
-
-      <p float-start ion-text color="silver">{{notif?.message}}</p>
-    </button>
-  </ion-card>
+              <p float-start ion-text color="silver">{{notif?.message}}</p>
+            </button>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
