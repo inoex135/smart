@@ -7,7 +7,7 @@ export class NaskahDetailProvider {
   constructor(public http: Http) {}
   getDetailNaskah() {
     const data = {
-      noAgenda: "-",
+      noAgenda: "AHA-1231-MMT",
       noNaskah: "UND-137/KN.5/2017",
       tanggalNaskah: "06 Juli 2017",
       perihal: "Undangan Rapat Dialog Kinerja Organisasi Direktorat PKNSI",

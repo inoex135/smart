@@ -18,7 +18,7 @@
 <ion-content no-padding>
   <div [ngSwitch]="type">
     <!-- Detail segment -->
-    <ion-card padding text-left *ngSwitchCase="'detail'">
+    <!-- <ion-card padding text-left *ngSwitchCase="'detail'">
       <div card-subtitle>
         <h3 ion-text>Nomor Agenda</h3>
       </div>
@@ -62,51 +62,102 @@
       <div padding>
         <h4 ion-text padding-left>{{detail.naskahDiterima}}</h4>
       </div>
+    </ion-card> -->
+    <ion-card text-left *ngSwitchCase="'detail'">
+      <ion-row margin-left margin-right>
+        <ion-col padding-right padding-left padding-top>
+          <p ion-text card-title text-left>No Agenda</p>
+          <p text-left ion-text card-content>{{detail.noAgenda}}</p>
+
+          <p text-left ion-text card-content>
+            {{detail.tanggalNaskah}}
+          </p>
+        </ion-col>
+
+        <ion-col padding-left padding-right padding-top>
+          <p ion-text card-title text-left>No Naskah</p>
+          <p ion-text card-content text-left>{{detail.noNaskah}}</p>
+        </ion-col>
+      </ion-row>
+
+      <ion-row margin-left margin-right>
+        <ion-col padding>
+          <p ion-text card-title>Status Surat</p>
+          <p ion-text card-content>{{detail.statusSurat}}</p>
+        </ion-col>
+        <ion-col padding>
+          <p ion-text card-title text-left>Naskah Diterima</p>
+          <p ion-text text-left card-content>{{detail.naskahDiterima}}</p>
+        </ion-col>
+      </ion-row>
+
+      <ion-row margin-left margin-right>
+        <ion-col padding>
+          <p ion-text card-title>Unit Pengirim</p>
+          <p ion-text text-wrap card-content>{{detail.unitPengirim}}</p>
+        </ion-col>
+      </ion-row>
+
+      <ion-row margin-left margin-right>
+        <ion-col padding>
+          <p ion-text card-title>Perihal</p>
+          <p ion-text text-wrap card-content>{{detail.perihal}}</p>
+        </ion-col>
+      </ion-row>
+
+      <ion-row *ngSwitchCase="'detail'" margin-left margin-right>
+        <ion-col padding col-4>
+          <button ion-button start padding color="danger" (click)="modalAction('disposisi')">Disposisi</button>
+        </ion-col>
+        <ion-col padding col-4>
+          <button ion-button padding color="blue-donker" (click)="modalAction('selesai')">Selesai</button>
+        </ion-col>
+
+        <ion-col padding col-4>
+          <button ion-button padding color="light" (click)="modalAction('teruskan')">Teruskan</button>
+        </ion-col>
+
+      </ion-row>
     </ion-card>
 
-    <ion-buttons margin text-center *ngSwitchCase="'detail'">
-      <button ion-button color="danger" (click)="modalAction('disposisi')">Disposisi</button>
-      <button ion-button color="blue-donker" (click)="modalAction('selesai')">Selesai</button>
-      <button ion-button color="light" (click)="modalAction('teruskan')">Teruskan</button>
-    </ion-buttons>
 
     <!-- riwayat segment -->
     <div *ngSwitchCase="'riwayat'">
       <ion-card>
-        <ion-row>
-          <ion-col padding>
+        <ion-row margin-left margin-right>
+          <ion-col padding float-left>
             <p ion-text card-title>No Agenda</p>
-            <p text-left ion-text card-content>AM-1731/KN.54/2017</p>
+            <p ion-text card-content>AM-1731/KN.54/2017</p>
           </ion-col>
         </ion-row>
 
-        <ion-row>
-          <ion-col padding>
+        <ion-row margin-left margin-right>
+          <ion-col padding-left padding-right float-left>
             <p ion-text card-title>Pihak</p>
             <p ion-text text-wrap card-content>Kepala Subdirektorat Perencanaan dan Pengembangan Sistem Aplikasi</p>
           </ion-col>
         </ion-row>
 
-        <ion-row no-margin>
-          <ion-col padding>
+        <ion-row margin-left margin-right>
+          <ion-col padding float-left>
             <p ion-text card-title>Tanggal Proses</p>
             <p ion-text card-content> 24 Agustus 2017</p>
           </ion-col>
-          <ion-col padding>
-            <p ion-text card-title text-right>Tanggal Agenda</p>
-            <p ion-text text-right card-content>24 Agustus 2017</p>
+          <ion-col padding float-left>
+            <p ion-text card-title>Tanggal Agenda</p>
+            <p ion-text card-content>24 Agustus 2017</p>
           </ion-col>
         </ion-row>
 
-        <ion-row>
-          <ion-col padding>
-            <p ion-text card-title>(Petunjuk) Catatan</p>
+        <ion-row margin-left margin-right>
+          <ion-col padding float-left>
+            <p ion-text card-title text-wrap>(Petunjuk) Catatan</p>
             <p ion-text text-wrap card-content>-</p>
           </ion-col>
 
-          <ion-col padding>
-            <p ion-text card-title text-right>Proses Naskah</p>
-            <p ion-text text-right card-content> Disposisi </p>
+          <ion-col padding float-left>
+            <p ion-text card-title>Proses Naskah</p>
+            <p ion-text card-content> Disposisi </p>
           </ion-col>
         </ion-row>
       </ion-card>
