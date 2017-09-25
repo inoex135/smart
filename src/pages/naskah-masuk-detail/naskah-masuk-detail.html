@@ -18,57 +18,16 @@
 <ion-content no-padding>
   <div [ngSwitch]="type">
     <!-- Detail segment -->
-    <!-- <ion-card padding text-left *ngSwitchCase="'detail'">
-      <div card-subtitle>
-        <h3 ion-text>Nomor Agenda</h3>
-      </div>
-      <div padding>
-        <h4 ion-text padding-left>{{detail.noAgenda}}</h4>
-      </div>
-      <div card-subtitle>
-        <h3 ion-text>Nomor Naskah</h3>
-      </div>
-      <div padding>
-        <h4 ion-text padding-left>{{detail.noNaskah}}</h4>
-      </div>
-      <div card-subtitle>
-        <h3 ion-text>Tanggal Naskah</h3>
-      </div>
-      <div padding>
-        <h4 ion-text padding-left>{{detail.tanggalNaskah}}</h4>
-      </div>
-      <div card-subtitle>
-        <h3 ion-text>Perihal Naskah</h3>
-      </div>
-      <div padding>
-        <h4 ion-text padding-left>{{detail.perihal}}</h4>
-      </div>
-      <div card-subtitle>
-        <h3 ion-text>Unit Pengirim</h3>
-      </div>
-      <div padding>
-        <h4 ion-text padding-left>{{detail.unitPengirim}}</h4>
-      </div>
-      <div card-subtitle>
-        <h3 ion-text>Status Surat</h3>
-      </div>
-      <div padding>
-        <h4 ion-text padding-left>{{detail.statusSurat}}</h4>
-      </div>
 
-      <div card-subtitle>
-        <h3 ion-text>Naskah Diterima</h3>
-      </div>
-      <div padding>
-        <h4 ion-text padding-left>{{detail.naskahDiterima}}</h4>
-      </div>
-    </ion-card> -->
     <ion-card text-left *ngSwitchCase="'detail'">
       <ion-row margin-left margin-right>
+        <ion-col padding>
+          <h1 text-center ion-text text-lg>{{detail.noAgenda}}</h1>
+        </ion-col>
+      </ion-row>
+      <ion-row margin-left margin-right>
         <ion-col padding-right padding-left padding-top>
-          <p ion-text card-title text-left>No Agenda</p>
-          <p text-left ion-text card-content>{{detail.noAgenda}}</p>
-
+          <p ion-text card-title text-left>Tanggal Naskah</p>
           <p text-left ion-text card-content>
             {{detail.tanggalNaskah}}
           </p>
@@ -92,14 +51,14 @@
       </ion-row>
 
       <ion-row margin-left margin-right>
-        <ion-col padding>
+        <ion-col padding-left padding-right>
           <p ion-text card-title>Unit Pengirim</p>
           <p ion-text text-wrap card-content>{{detail.unitPengirim}}</p>
         </ion-col>
       </ion-row>
 
       <ion-row margin-left margin-right>
-        <ion-col padding>
+        <ion-col padding-left padding-right>
           <p ion-text card-title>Perihal</p>
           <p ion-text text-wrap card-content>{{detail.perihal}}</p>
         </ion-col>
