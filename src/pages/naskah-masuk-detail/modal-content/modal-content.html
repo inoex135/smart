@@ -19,34 +19,12 @@
                 <ion-col col-12 col-sm-12 col-md-12 offset-lg-3 col-lg-6 offset-xl-3 col-xl-6>
                     <!--Form teruskan-->
                     <div class="form" padding *ngSwitchCase="'teruskan'">
-                        <!--Form Title-->
-                        <h1 title text-right>Teruskan</h1>
-                        <!---Input field username-->
-                        <ion-item no-padding>
-                            <ion-label floating>Tujuan <span class="required">*</span></ion-label>
-                            <ion-input required type="text" [(ngModel)]="username"></ion-input>
-                        </ion-item>
-                        <!---Input field password-->
-                        <ion-item no-padding>
-                            <ion-label floating>Alasan <span class="required">*</span></ion-label>
-                            <ion-select [(ngModel)]="alasan">
-                                <ion-option value="1">Cuti</ion-option>
-                                <ion-option value="2">Lainnya</ion-option>
-                                <ion-option value="3">Tidak Sesuai Tugas dan Fungsinya</ion-option>
-                            </ion-select>
-                        </ion-item>
-                        <!---Input field email-->
-                        <ion-item no-padding>
-                            <ion-label floating>Catatan <span class="required">*</span></ion-label>
-                            <ion-textarea required type="email" pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" required [(ngModel)]="email"></ion-textarea>
-                        </ion-item>
-                        <!---Register button-->
-                        <button ion-button right (click)="teruskan()" margin-top>Simpan</button>
+                        <teruskan></teruskan>
                     </div>
 
                     <!-- form disposisi -->
                     <div *ngSwitchCase="'disposisi'">
-                        disposisi
+                        <disposisi></disposisi>
                     </div>
 
                     <!-- form selesai -->
