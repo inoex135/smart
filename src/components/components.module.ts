@@ -8,6 +8,7 @@ import { TabsLayout3 } from "./tabs/layout-3/tabs-layout-3";
 import { GoogleCardLayout1 } from "./google-card/google-card-layout-1";
 import { Disposisi } from "./persuratan/disposisi/disposisi";
 import { Teruskan } from "./persuratan/teruskan/teruskan";
+import { Selesai } from "./persuratan/selesai/selesai";
 
 @NgModule({
   declarations: [
@@ -17,10 +18,18 @@ import { Teruskan } from "./persuratan/teruskan/teruskan";
     TabsLayout3,
     GoogleCardLayout1,
     Disposisi,
-    Teruskan
+    Teruskan,
+    Selesai
   ],
   imports: [IonicModule],
-  exports: [LoginLayout1, GoogleCardLayout1, TabsLayout1, Disposisi, Teruskan],
+  exports: [
+    LoginLayout1,
+    GoogleCardLayout1,
+    TabsLayout1,
+    Disposisi,
+    Teruskan,
+    Selesai
+  ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class ComponentsModule {}
