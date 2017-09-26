@@ -1,14 +1,14 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-navbar>
     <ion-title text-center>
-      <img src="https://smart.javan.co.id/images/wellcome/logo_smart.png" center alt="SMARt Logo" class="toolbar-logo">
+      <img src="https://smart.javan.co.id/smart/themes/porto/assets/images/logo.png" left alt="SMARt Logo" class="toolbar-logo">
     </ion-title>
-    <!-- <ion-buttons end>
-      <button ion-button icon-only>
-          <ion-icon name="more"></ion-icon>
-       </button>
-    </ion-buttons> -->
-  </ion-toolbar>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="presentPopover($event)">
+        <ion-icon name="more"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
 </ion-header>
 
 <ion-content class="card-background-page">

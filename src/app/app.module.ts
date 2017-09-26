@@ -40,6 +40,7 @@ import { NaskahDetailProvider } from "../providers/naskah-detail/naskah-detail";
 import { NaskahNotifikasiPage } from "../pages/naskah-notifikasi/naskah-notifikasi";
 import { NaskahNotifikasiProvider } from "../providers/naskah-notifikasi/naskah-notifikasi";
 import { ModalContentPage } from "../pages/naskah-masuk-detail/modal-content/modal-content";
+import { HomePopoverPage } from "../pages/home-popover/home-popover";
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { ModalContentPage } from "../pages/naskah-masuk-detail/modal-content/mod
     NaskahMasukPage,
     NaskahMasukDetailPage,
     NaskahNotifikasiPage,
-    ModalContentPage
+    ModalContentPage,
+    HomePopoverPage
   ],
   imports: [
     BrowserModule,
@@ -79,7 +81,8 @@ import { ModalContentPage } from "../pages/naskah-masuk-detail/modal-content/mod
     NaskahMasukPage,
     NaskahMasukDetailPage,
     NaskahNotifikasiPage,
-    ModalContentPage
+    ModalContentPage,
+    HomePopoverPage
   ],
   providers: [
     StatusBar,

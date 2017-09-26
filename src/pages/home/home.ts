@@ -1,10 +1,11 @@
 import { Component } from "@angular/core";
-import { NavController } from "ionic-angular";
+import { NavController, PopoverController } from "ionic-angular";
 import { UserProvider } from "../../providers/user/user";
 import { LoginPage } from "../login/login";
 import { SuratPage } from "../surat/surat";
 import { PersonalPage } from "../personal/personal";
 import { AptPage } from "../apt/apt";
+import { HomePopoverPage } from "../home-popover/home-popover";
 
 @Component({
   selector: "page-home",
@@ -15,7 +16,8 @@ export class HomePage {
 
   constructor(
     public navCtrl: NavController,
-    public userProvider: UserProvider
+    public userProvider: UserProvider,
+    public popover: PopoverController
   ) {}
 
   ionViewDidLoad() {
@@ -34,6 +36,11 @@ export class HomePage {
 
   pagesTo(component: any) {
     this.navCtrl.push(component);
+  }
+
+  presentPopover(event: Event) {
+    let popover = this.popover.create(HomePopoverPage);
+    popover.present({ ev: event });
   }
 
   logout() {
