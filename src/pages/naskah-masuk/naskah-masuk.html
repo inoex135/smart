@@ -6,37 +6,31 @@
 
 
 <ion-content>
-  <ion-grid no-padding>
-    <ion-row>
-      <ion-col col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4 *ngFor="let naskah of listNaskah">
-        <ion-card (click)="detailNaskah(item)">
-          <ion-card-content>
-            <ion-row no-padding>
-              <ion-col>
-                <ion-badge color="secondary" text-left>{{naskah?.status}}</ion-badge>
-              </ion-col>
+  <ion-card (click)="detailNaskah(item)" *ngFor="let naskah of listNaskah">
+    <ion-card-content>
+      <ion-row no-padding>
+        <ion-col>
+          <ion-badge color="secondary" text-left>{{naskah?.status}}</ion-badge>
+        </ion-col>
 
-              <ion-col>
-                <h2 ion-text card-content text-right>{{naskah.tanggal}}</h2>
-              </ion-col>
-            </ion-row>
+        <ion-col>
+          <h2 ion-text card-content text-right>{{naskah.tanggal}}</h2>
+        </ion-col>
+      </ion-row>
 
-            <ion-row>
-              <ion-col>
-                <h2 ion-text card-title>Unit Pengirim</h2>
-                <h2 ion-text card-content text-wrap>{{naskah?.unit}}</h2>
-              </ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col>
-                <h2 ion-text card-title>Perihal</h2>
-                <h2 ion-text card-content>{{naskah?.perihal}}</h2>
-              </ion-col>
-            </ion-row>
+      <ion-row>
+        <ion-col>
+          <h2 ion-text card-title>Unit Pengirim</h2>
+          <h2 ion-text card-content text-wrap>{{naskah?.unit}}</h2>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <h2 ion-text card-title>Perihal</h2>
+          <h2 ion-text card-content>{{naskah?.perihal}}</h2>
+        </ion-col>
+      </ion-row>
 
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
