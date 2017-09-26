@@ -26,9 +26,19 @@ export class HomePage {
 
   listMenu() {
     this.menus = [
-      { title: "Persuratan", icon: "mail", component: SuratPage },
-      { title: "Personal", icon: "person", component: PersonalPage },
-      { title: "APT", icon: "laptop", component: AptPage }
+      {
+        title: "Persuratan",
+        icon: "mail",
+        component: SuratPage,
+        color: "blue"
+      },
+      {
+        title: "Personal",
+        icon: "person",
+        component: PersonalPage,
+        color: "orange"
+      },
+      { title: "APT", icon: "laptop", component: AptPage, color: "green" }
     ];
 
     return this.menus;

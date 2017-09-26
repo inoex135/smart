@@ -12,16 +12,24 @@
 </ion-header>
 
 <ion-content class="card-background-page">
-  <ion-grid>
-    <ion-row>
+  <ion-list>
+    <ion-grid fixed>
+      <ion-row>
 
-      <ion-col *ngFor="let menu of menus" col-6>
-        <ion-card (click)="pagesTo(menu.component)">
-          <ion-icon name="{{menu.icon}}" class="icon-menu"></ion-icon>
-          <div class="card-subtitle">{{menu.title}}</div>
-        </ion-card>
-      </ion-col>
+        <ion-col *ngFor="let menu of menus" col-lg-4 col-md-6 col-sm-6 no-margin>
 
-    </ion-row>
-  </ion-grid>
+          <ion-card (click)="pagesTo(menu.component)" class="home-card">
+            <ion-card-content>
+              <ion-icon name="{{menu.icon}}" class="icon-menu" [ngClass]="menu.color"></ion-icon>
+              <p ion-text text-center>{{menu.title}}</p>
+            </ion-card-content>
+
+          </ion-card>
+
+        </ion-col>
+
+      </ion-row>
+    </ion-grid>
+  </ion-list>
+
 </ion-content>

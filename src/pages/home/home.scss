@@ -3,14 +3,28 @@
   // height: 10%;
 }
 .card-background-page {
-  .icon-menu {
-    font-size: 10rem;
+  .icon-menu,
+  .blue,
+  .orange,
+  .dark {
+    font-size: 36px;
+    border-radius: 25px;
+  }
+  .orange {
+    color: orange;
+  }
+  .blue {
+    color: #1c97da;
+  }
+  .green {
+    color: #00a651;
   }
   ion-card {
     height: 100%;
     position: relative;
     text-align: center;
     background-color: #fff;
+    border-radius: 5%;
   }
 
   .card-title {
@@ -22,9 +36,9 @@
     color: #fff;
   }
 
-  .card-subtitle {
+  .home-subtitle {
     color: silver;
-    font-size: 1.4em;
+    font-size: 12px;
     position: absolute;
     top: 75%;
     width: 100%;
