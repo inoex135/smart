@@ -1,4 +1,4 @@
-import { Component, Input, EventEmitter, Output } from "@angular/core";
+import { Component } from "@angular/core";
 import { PetunjukDisposisi } from "../../../constant/petunjuk-disposisi";
 import { Jabatan } from "../../../constant/jabatan";
 
