@@ -29,7 +29,7 @@ export class LoginPage {
       register: "Register",
       login: "Login",
       skip: "Skip",
-      logo: "assets/logo_keuangan.png",
+      logo: "assets/logo/logo.png",
       backgroundImage: "icon-account",
       iconAccount: "icon-key",
       iconKey: "",
