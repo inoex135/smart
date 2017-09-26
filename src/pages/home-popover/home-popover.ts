@@ -6,24 +6,17 @@ import { UserProvider } from "../../providers/user/user";
 @Component({
   selector: "page-home",
   template: `
-    <ion-list>
-      <button ion-item (click)="logout()">
-        <ion-icon name="power"></ion-icon>
-        Logout
-      </button>
-      <button ion-item (click)="logout()">
+  <ion-list>
+    <button ion-item (click)="logout()">
       <ion-icon name="power"></ion-icon>
       Logout
     </button>
+
     <button ion-item (click)="logout()">
-    <ion-icon name="power"></ion-icon>
-    Logout
-  </button>
-  <button ion-item (click)="logout()">
-  <ion-icon name="power"></ion-icon>
-  Logout
-</button>
-    </ion-list>
+      <ion-icon name="power"></ion-icon>
+      Logout
+    </button>
+  </ion-list>
   `
 })
 export class HomePopoverPage {
