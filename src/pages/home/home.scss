@@ -9,15 +9,16 @@
   .dark {
     font-size: 36px;
     border-radius: 25px;
-  }
-  .orange {
-    color: orange;
+    color: white;
   }
   .blue {
-    color: #1c97da;
+    background: #2a61a1;
   }
-  .green {
-    color: #00a651;
+  .bluesky {
+    background: #1ba0e2;
+  }
+  .orange {
+    background: #fa8429;
   }
   ion-card {
     height: 100%;
@@ -44,4 +45,26 @@
     width: 100%;
     color: #60646d;
   }
+}
+ion-slides {
+  height: 45%;
+}
+.swiper-container {
+  height: 40vh;
+  width: auto;
+}
+.swiper-slide {
+  background-size: cover !important;
+  background-position: center !important;
+}
+
+ion-slide img {
+  height: 30vh !important;
+  width: auto !important;
+}
+
+// icon rounded
+.rounded {
+  margin-top: 1rem;
+  border-radius: 50%;
 }

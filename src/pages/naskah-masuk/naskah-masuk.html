@@ -6,9 +6,9 @@
 
 
 <ion-content>
-  <ion-card (click)="detailNaskah(item)" *ngFor="let naskah of listNaskah">
+  <ion-card (click)="detailNaskah(item)" *ngFor="let naskah of listNaskah" margin-right margin-bottom>
     <ion-card-content>
-      <ion-row no-padding>
+      <ion-row>
         <ion-col>
           <ion-badge color="secondary" text-left>{{naskah?.status}}</ion-badge>
         </ion-col>
