@@ -12,16 +12,16 @@
       </ion-avatar>
 
       <ion-row>
-        <ion-col col-9>
-          <h2 ion-text text-left sender>{{notif?.sender}}</h2>
+        <ion-col>
+          <p ion-text text-left sender text-wrap>{{notif?.sender}}</p>
         </ion-col>
-        <ion-col col-3>
+        <ion-col>
           <p ion-text text-right color="light-blue">{{ notif?.date}}</p>
         </ion-col>
       </ion-row>
 
       <ion-row>
-        <ion-col col-9>
+        <ion-col>
           <p ion-text text-wrap>{{notif?.message}}</p>
         </ion-col>
       </ion-row>
