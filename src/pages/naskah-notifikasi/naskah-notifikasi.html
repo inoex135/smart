@@ -14,15 +14,38 @@
 
 
 <ion-content>
-  <ion-grid no-padding>
+  <ion-list>
+    <ion-item *ngFor="let notif of notifications">
+      <ion-avatar item-start>
+        <img src="https://ionicframework.com/dist/preview-app/www/assets/img/marty-avatar.png">
+      </ion-avatar>
+      <ion-row>
+        <ion-col col-9>
+          <h2 ion-text text-left sender>{{notif?.sender}}</h2>
+        </ion-col>
+        <ion-col col-3>
+          <p ion-text text-right color="light-blue">{{ notif?.date}}</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-9>
+          <p ion-text text-wrap>{{notif?.message}}</p>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+  </ion-list>
+
+  <!-- <ion-grid no-padding>
     <ion-row>
       <ion-col col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4>
         <ion-card margin-bottom *ngFor="let notif of notifications">
+          <ion-card-header>
+            <div>
+              {{notif?.sender}}
+            </div>
+          </ion-card-header>
           <ion-card-content>
             <button ion-item>
-              <div float-left>
-                <h3><b>{{notif?.sender}}</b></h3>
-              </div>
               <div float-right>
                 <h4 ion-text color="favorite">{{ notif?.date}}</h4>
               </div>
@@ -33,5 +56,5 @@
         </ion-card>
       </ion-col>
     </ion-row>
-  </ion-grid>
+  </ion-grid> -->
 </ion-content>
