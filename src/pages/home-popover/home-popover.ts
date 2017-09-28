@@ -11,11 +11,6 @@ import { UserProvider } from "../../providers/user/user";
       <ion-icon name="power"></ion-icon>
       Logout
     </button>
-
-    <button ion-item (click)="logout()">
-      <ion-icon name="power"></ion-icon>
-      Logout
-    </button>
   </ion-list>
   `
 })

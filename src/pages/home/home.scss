@@ -1,5 +1,7 @@
 .toolbar-logo {
-  width: 80%;
+  width: auto;
+  max-width: 13em;
+  margin: 10px 15px;
   // height: 10%;
 }
 .card-background-page {
@@ -7,7 +9,7 @@
   .blue,
   .orange,
   .dark {
-    font-size: 36px;
+    font-size: 28px;
     border-radius: 25px;
     color: white;
   }
@@ -22,10 +24,14 @@
   }
   ion-card {
     height: 100%;
-    position: relative;
+    align-content: center;
     text-align: center;
     background-color: #fff;
     border-radius: 5%;
+    ion-card-content {
+      margin-top: 5px;
+      margin-bottom: 5px;
+    }
   }
 
   .card-title {
@@ -37,34 +43,9 @@
     color: #fff;
   }
 
-  .home-subtitle {
-    color: silver;
-    font-size: 12px;
-    position: absolute;
-    top: 75%;
-    width: 100%;
-    color: #60646d;
+  // // icon rounded
+  .rounded {
+    margin-top: 1rem;
+    border-radius: 70%;
   }
-}
-ion-slides {
-  height: 45%;
-}
-.swiper-container {
-  height: 40vh;
-  width: auto;
-}
-.swiper-slide {
-  background-size: cover !important;
-  background-position: center !important;
-}
-
-ion-slide img {
-  height: 30vh !important;
-  width: auto !important;
-}
-
-// icon rounded
-.rounded {
-  margin-top: 1rem;
-  border-radius: 50%;
 }
