@@ -4,8 +4,8 @@
     <ion-navbar></ion-navbar>
   </ion-header>
 
-  <div padding>
-    <ion-row>
+  <div>
+    <ion-row margin-top padding-top style="margin-top:10rem;">
       <ion-col>
         <img src="assets/logo/logo.png" alt="SMARt Mobile" class="logo">
       </ion-col>
@@ -15,7 +15,7 @@
       <ion-col no-padding>
         <ion-list inset class="no-border">
           <ion-item>
-            <ion-label>Username</ion-label>
+            <ion-label no-margin>Username</ion-label>
             <ion-input type="number" [(ngModel)]="username"></ion-input>
           </ion-item>
 
@@ -26,11 +26,9 @@
         </ion-list>
       </ion-col>
     </ion-row>
-    <!-- <ion-row> -->
-    <ion-buttons padding-right end>
+    <ion-row style="margin: 0 14px;" align-items-center>
       <button ion-button class="login-button" (click)="callParent()">{{data.login}}</button>
-    </ion-buttons>
-    <!-- </ion-row> -->
+    </ion-row>
 
   </div>
 

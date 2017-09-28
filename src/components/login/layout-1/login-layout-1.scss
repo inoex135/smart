@@ -7,6 +7,7 @@ login-layout-1 {
     background-repeat: no-repeat;
     border-color: transparent;
   }
+
   .scroll-content {
     background-image: radial-gradient(
       center center,
@@ -16,11 +17,11 @@ login-layout-1 {
     );
   }
   .logo {
-    width: 100%;
+    width: 70%;
     height: auto;
-    max-width: 12em;
+    max-width: 10em;
+    max-height: 8em;
     margin: 0 auto;
-    padding-bottom: 50px;
   }
   .no-border {
     border-bottom: 0 !important;
@@ -40,12 +41,18 @@ login-layout-1 {
   span {
     color: white;
   }
+  ion-label {
+    font-size: 0.9em;
+  }
   ion-item {
     padding-left: 10px !important;
-    margin-bottom: 10px;
     background-color: #f6f6f6;
     opacity: 0.8;
-    font-size: 0.9em;
+    // class bawaan untuk ion-item di input
+    .input-wrapper {
+      height: 4rem;
+    }
+    // font-size: 0.9em !important;
   }
   ion-list {
     margin: 0;
@@ -54,7 +61,7 @@ login-layout-1 {
     padding-top: 10px !important;
   }
   .login-button {
-    width: 50%;
+    width: 100%;
     font-size: 0.9em;
     background-color: map-get($colors, "light-blue");
   }
