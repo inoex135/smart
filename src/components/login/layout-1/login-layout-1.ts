@@ -11,6 +11,7 @@ export class LoginLayout1 {
 
   public username: string;
   public password: string;
+  public backgroundImage = "http://aptonline.javan.co.id/img/site/header-bg.png";
 
   constructor() {
     this.username = "198604122007101001";

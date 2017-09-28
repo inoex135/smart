@@ -1,26 +1,37 @@
 <!-- Themes Login + logo -->
-<ion-content has-header white-background>
-  <ion-grid>
-    <ion-row wrap padding>
-      <ion-col col-12 col-sm-12 col-md-12 offset-lg-3 col-lg-6 offset-xl-3 col-xl-6>
-        <!-- <button ion-button button-clear clear (click)="onEvent('onSkip')">{{data.skip}}</button> -->
-        <!---Logo-->
-        <img [src]="data.logo">
-        <!---Input field username-->
-        <ion-item no-padding transparent>
-          <ion-label floating>{{data.username}}</ion-label>
-          <ion-input required type="text" [(ngModel)]="username"></ion-input>
-        </ion-item>
-        <!---Input field password-->
-        <ion-item no-padding transparent>
-          <ion-label floating>{{data.password}}</ion-label>
-          <ion-input required type="password" [(ngModel)]="password"></ion-input>
-        </ion-item>
-        <!---Login button-->
-        <button style="text-align:right;" ion-button button-clear-outline round outline (click)="callParent()">{{data.login}}</button>
-        <!---Register button-->
-        <!-- <button ion-button right button-clear-outline round outline (click)="onEvent('onRegister')">{{data.register}}</button> -->
+<ion-content padding default-background class="transparent-header" [ngStyle]="{'background-image': 'url(' + backgroundImage +')'}">
+  <ion-header>
+    <ion-navbar></ion-navbar>
+  </ion-header>
+
+  <div padding>
+    <ion-row>
+      <ion-col>
+        <img src="assets/logo/logo.png" alt="SMARt Mobile" class="logo">
       </ion-col>
     </ion-row>
-  </ion-grid>
+
+    <ion-row>
+      <ion-col no-padding>
+        <ion-list inset class="no-border">
+          <ion-item>
+            <ion-label>Username</ion-label>
+            <ion-input type="number" [(ngModel)]="username"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Password</ion-label>
+            <ion-input type="password" [(ngModel)]="password"></ion-input>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+    <!-- <ion-row> -->
+    <ion-buttons padding-right end>
+      <button ion-button class="login-button" (click)="callParent()">{{data.login}}</button>
+    </ion-buttons>
+    <!-- </ion-row> -->
+
+  </div>
+
 </ion-content>

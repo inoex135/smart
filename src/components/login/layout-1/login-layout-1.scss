@@ -1,52 +1,84 @@
 /*  #Style Login + logo
 ================================================*/
 login-layout-1 {
-  // [default-background] {
-  //   background-image: url("../assets/images/background/29.jpg");
-  //   @include darkening-blend-mode;
-  // }
-  ion-col {
-    position: relative;
-
-    [button-clear] {
-      position: absolute;
-      right: 0;
-      top: 0;
-    }
+  ion-content {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-color: transparent;
   }
-
-  img {
-    max-width: 100px;
-    max-height: 100px;
-    display: block;
-    margin: 35px auto 20px;
+  .scroll-content {
+    background-image: radial-gradient(
+      center center,
+      ellipse cover,
+      #ffeda3,
+      #ffc800
+    );
   }
-
-  .item-inner {
-    border-bottom-color: theme-colors("mainColors", "primary") !important;
+  .logo {
+    width: 100%;
+    height: auto;
+    max-width: 12em;
+    margin: 0 auto;
+    padding-bottom: 50px;
+  }
+  .no-border {
+    border-bottom: 0 !important;
     box-shadow: none !important;
   }
-
-  [button-clear-outline] {
-    margin-top: 10%;
-    width: 48.5%;
-    display: block;
-    float: right;
+  ion-row {
+    align-items: center;
+    text-align: center;
   }
-
-  [social] {
-    margin: 20px auto 0;
-    overflow: hidden;
-
-    button {
-      margin: 1%;
-      width: 48.5%;
-      display: block;
-      float: left;
+  @media only screen and(min-width: 768px) {
+    ion-col.col,
+    .login-button {
+      margin: 0 auto;
+      max-width: 60%;
     }
-
-    > button:nth-child(2n) {
-      margin-right: 0;
+  }
+  span {
+    color: white;
+  }
+  ion-item {
+    padding-left: 10px !important;
+    margin-bottom: 10px;
+    background-color: #f6f6f6;
+    opacity: 0.8;
+    font-size: 0.9em;
+  }
+  ion-list {
+    margin: 0;
+  }
+  ion-buttons {
+    padding-top: 10px !important;
+  }
+  .login-button {
+    width: 50%;
+    font-size: 0.9em;
+    background-color: map-get($colors, "light-blue");
+  }
+  .transparent-header {
+    // This is just to make the header transparent and button/icon with white color
+    .toolbar-content,
+    .back-button {
+      color: white;
     }
+    .toolbar-background,
+    ion-navbar,
+    ion-header {
+      background: transparent !important;
+      background-color: transparent !important;
+    }
+    .header-md::after,
+    .toolbar-background-ios {
+      background-image: none;
+      border-bottom: 0;
+    }
+    .header-ios .toolbar-background-ios,
+    .footer-ios .toolbar-background-ios {
+      border: 0;
+    }
+    // ---
   }
 }
