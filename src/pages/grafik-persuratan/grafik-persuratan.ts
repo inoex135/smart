@@ -9,13 +9,9 @@ export class GrafikPersuratanPage {
 
   ionViewDidLoad() {}
   // Doughnut
-  public doughnutChartLabels: string[] = [
-    "Download Sales",
-    "In-Store Sales",
-    "Mail-Order Sales"
-  ];
-  public doughnutChartData: number[] = [350, 450, 100];
-  public doughnutChartType: string = "doughnut";
+  public naskahKeluarLabels: string[] = ["Antrian", "Terikirim"];
+  public naskahKeluarData: number[] = [350, 450];
+  public naskahKeluarChartType: string = "doughnut";
 
   // barchart
   public barChartOptions: any = {
@@ -45,8 +41,8 @@ export class GrafikPersuratanPage {
 
   // events
   public chartClicked(e: any): void {
-    console.log(e);
-    console.log(this.barChartData);
+    // console.log(e);
+    // console.log(this.barChartData);
   }
 
   public chartHovered(e: any): void {
