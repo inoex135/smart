@@ -8,6 +8,10 @@ login-layout-1 {
     border-color: transparent;
   }
 
+  .middle-content {
+    vertical-align: middle;
+  }
+
   .scroll-content {
     background-image: radial-gradient(
       center center,
@@ -17,7 +21,7 @@ login-layout-1 {
     );
   }
   .logo {
-    width: 70%;
+    width: 100%;
     height: auto;
     max-width: 10em;
     max-height: 8em;
@@ -42,17 +46,20 @@ login-layout-1 {
     color: white;
   }
   ion-label {
-    font-size: 0.9em;
+    font-size: 0.9em !important;
   }
   ion-item {
-    padding-left: 10px !important;
+    padding: 4px 0 0 10px !important;
     background-color: #f6f6f6;
     opacity: 0.8;
-    // class bawaan untuk ion-item di input
+    border-width: 0.5px; // class bawaan untuk ion-item di input
     .input-wrapper {
-      height: 4rem;
+      height: 4.5rem;
     }
-    // font-size: 0.9em !important;
+    .item-inner {
+      border-width: 1px !important;
+      border-bottom-color: #e9ecf3 !important;
+    }
   }
   ion-list {
     margin: 0;
@@ -63,7 +70,8 @@ login-layout-1 {
   .login-button {
     width: 100%;
     font-size: 0.9em;
-    background-color: map-get($colors, "light-blue");
+    background-color: #0090d0;
+    box-shadow: 0;
   }
   .transparent-header {
     // This is just to make the header transparent and button/icon with white color

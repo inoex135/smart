@@ -11,7 +11,7 @@ export class LoginLayout1 {
 
   public username: string;
   public password: string;
-  public backgroundImage = "assets/background/1.jpg";
+  public backgroundImage = "assets/background/4.png";
 
   constructor() {
     this.username = "198604122007101001";
