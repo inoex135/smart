@@ -9,25 +9,19 @@ import { AptDetailPage } from "../apt-detail/apt-detail";
 })
 export class AptPage {
   params: any = {};
-  coba: any = "ntak";
+  items: any = [];
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     private aptProvider: AptProvider
   ) {
-    const self: AptPage = this;
-    this.params.data = {
-      items: this.aptProvider.getPermohonanList()
-    };
-    this.params.events = {
-      onItemClick: function(item: any) {
-        self.navCtrl.push(AptDetailPage);
-      },
-      onDownload: function(item: any) {
-        self.aptProvider.getDetail();
-      }
-    };
+    this.items = this.aptProvider.getPermohonanList();
   }
 
   ionViewDidLoad() {}
+
+  detailApt() {
+    this.navCtrl.push(AptDetailPage);
+  }
+  download() {}
 }

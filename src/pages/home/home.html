@@ -21,7 +21,7 @@
 
   <ion-row>
     <ion-col col-4 *ngFor="let menu of menus">
-      <ion-card (click)="pagesTo(menu.component)">
+      <ion-card (click)="pagesTo(menu.component)" no-margin style="width: 100%">
         <ion-icon name="{{menu.icon}}" class="icon-menu rounded" [ngClass]="menu.color"></ion-icon>
         <ion-card-content no-padding>
           <p ion-text text-center>{{menu.title}}</p>

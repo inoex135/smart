@@ -4,5 +4,47 @@
   </ion-navbar>
 </ion-header>
 
-<google-card-layout-1 [data]="params.data" [events]="params.events">
-</google-card-layout-1>
+<ion-content>
+
+  <ion-card *ngFor="let item of items;let i = index" margin-bottom>
+    <ion-card-content>
+      <ion-row>
+        <ion-col>
+          <h4 ion-text card-title>Indikator</h4>
+          <ion-badge item-start color="secondary">{{item.status}}</ion-badge>
+        </ion-col>
+        <ion-col>
+          <!-- <h4 ion-text card-title>Tanggal</h4> -->
+          <h6 ion-text item-end card-content text-wrap>{{item.date}}</h6>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <h4 ion-text card-title>No Tiket</h4>
+          <h4 card-title ion-text card-content>{{item.title}}</h4>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <h4 ion-text card-title>Pelayanan</h4>
+          <h4 card-title ion-text card-content>{{item.title}}</h4>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <h4 ion-text card-title>Pemohon</h4>
+          <p ion-text card-content>Napitupulu</p>
+        </ion-col>
+      </ion-row>
+
+      <ion-item>
+        <button item-end ion-button end color="light" (click)="detailApt()">Detail</button>
+        <button item-end ion-button end color="favorite" (click)="download()">Download</button>
+      </ion-item>
+
+    </ion-card-content>
+  </ion-card>
+</ion-content>

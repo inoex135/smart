@@ -5,7 +5,45 @@
 </ion-header>
 
 <ion-content>
-  <ion-grid no-padding>
+  <ion-card>
+    <ion-card-content>
+      <ion-row>
+        <ion-col>
+          <h4 ion-text card-title>No Tiket</h4>
+          <h4 ion-text card-content text-wrap>{{detail?.title}}</h4>
+        </ion-col>
+
+        <ion-col>
+          <h4 ion-text card-title>Tanggal</h4>
+          <h4 ion-text card-content text-wrap>{{detail?.date}}</h4>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <h4 ion-text card-title>Pelayanan</h4>
+          <h4 ion-text card-content text-wrap>{{detail?.description}}</h4>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <h4 ion-text card-title>Sub Pelayanan</h4>
+          <h4 ion-text card-content text-wrap>{{detail?.longDescription}}</h4>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <h4 ion-text card-title>Pemohon</h4>
+          <h4 ion-text card-content text-wrap>Napitupulu</h4>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+
+
+  <!-- <ion-grid no-padding>
     <ion-row>
       <ion-col col-12 col-md-12 col-lg-6>
         <ion-card padding text-left class="card">
@@ -59,5 +97,5 @@
 
       </ion-col>
     </ion-row>
-  </ion-grid>
+  </ion-grid> -->
 </ion-content>
