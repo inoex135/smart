@@ -12,21 +12,22 @@
 </ion-header>
 
 <ion-content class="card-background-page">
-  <!-- <ion-slides pager="true" parallax="true">
+  <ion-slides pager="true" parallax="true">
     <ion-slide *ngFor="let slide of slides" [ngStyle]="{'background' : 'url(' + slide.imageUrl + ')'}">
       <h2>{{slide.title}}</h2>
     </ion-slide>
   </ion-slides>
- -->
 
-  <ion-row>
-    <ion-col col-4 *ngFor="let menu of menus">
-      <ion-card (click)="pagesTo(menu.component)">
-        <ion-icon name="{{menu.icon}}" class="icon-menu rounded" [ngClass]="menu.color"></ion-icon>
-        <ion-card-content no-padding>
-          <p ion-text text-center>{{menu.title}}</p>
-        </ion-card-content>
-      </ion-card>
-    </ion-col>
-  </ion-row>
+  <ion-grid class="grid">
+    <ion-row class="row">
+      <ion-col col-4 col-lg-4 col-md-6 col-sm-4 col-xl-2 text-center *ngFor="let menu of menus" class="col" (click)="pagesTo(menu.component)">
+        <button>
+              <ion-icon color="primary" name="{{menu.icon}}" role="img" class="" aria-label="apps" [ngClass]="menu.color"></ion-icon>
+              <br>
+              {{menu.title}}
+          </button>
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
 </ion-content>
