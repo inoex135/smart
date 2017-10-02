@@ -1,51 +1,40 @@
-.toolbar-logo {
-  width: auto;
-  max-width: 18em;
-  // margin: 10px 15px;
-  // height: 10%;
-}
-.card-background-page {
-  .icon-menu,
-  .blue,
-  .orange,
-  .dark {
-    font-size: 28px;
-    border-radius: 25px;
-    color: white;
+page-home {
+  .toolbar-logo {
+    width: auto;
+    max-width: 18em;
+    // margin: 10px 15px;
+    // height: 10%;
+  }
+  // grid list menu
+  button {
+    background: #ffffff;
+    height: 110px;
+    font-weight: bold;
+    font-size: 11px;
+  }
+  ion-col {
+    background: #fff;
+  }
+  .col {
+    border-right: 2px solid #f2f2f2;
+    border-bottom: 2px solid #f2f2f2;
+  }
+  ion-icon {
+    font-size: 30px;
+    padding-bottom: 10px;
   }
   .blue {
-    background: #2a61a1;
+    color: #2a61a1;
   }
   .bluesky {
-    background: #1ba0e2;
+    color: #1ba0e2;
   }
   .orange {
-    background: #fa8429;
-  }
-  ion-card {
-    height: 100%;
-    align-content: center;
-    text-align: center;
-    background-color: #fff;
-    // border-radius: 5%;
-    ion-card-content {
-      margin-top: 5px;
-      margin-bottom: 5px;
-    }
+    color: #fa8429;
   }
 
-  .card-title {
-    position: absolute;
-    top: 36%;
-    font-size: 2em;
-    width: 100%;
-    font-weight: bold;
-    color: #fff;
-  }
-
-  // // icon rounded
-  .rounded {
-    margin-top: 1rem;
-    border-radius: 70%;
+  // ion-slider
+  ion-slides {
+    height: 25vh;
   }
 }
