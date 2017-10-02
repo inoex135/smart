@@ -1,6 +1,11 @@
 /*  #Style Login + logo
 ================================================*/
 login-layout-1 {
+  ion-content {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
   ion-col {
     position: relative;
 

@@ -4,27 +4,16 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="list-avatar-page">
   <ion-list>
     <ion-item *ngFor="let notif of notifications">
       <ion-avatar item-start>
         <img src="https://ionicframework.com/dist/preview-app/www/assets/img/marty-avatar.png">
       </ion-avatar>
 
-      <ion-row>
-        <ion-col>
-          <p ion-text text-left sender text-wrap>{{notif?.sender}}</p>
-        </ion-col>
-        <ion-col>
-          <p ion-text text-right color="light-blue">{{ notif?.date}}</p>
-        </ion-col>
-      </ion-row>
-
-      <ion-row>
-        <ion-col>
-          <p ion-text text-wrap>{{notif?.message}}</p>
-        </ion-col>
-      </ion-row>
+      <h3 ion-text text-wrap>{{notif?.sender}}</h3>
+      <p>{{ notif?.message}}</p>
+      <ion-note item-end>{{notif?.date}}</ion-note>
     </ion-item>
   </ion-list>
 </ion-content>
