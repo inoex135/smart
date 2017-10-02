@@ -1,35 +1,28 @@
 <!-- Themes Login + logo -->
-<ion-content padding default-background class="transparent-header" [ngStyle]="{'background-image': 'url(' + backgroundImage +')'}">
-  <ion-header>
-    <ion-navbar></ion-navbar>
-  </ion-header>
+<ion-content has-header white-background [ngStyle]="{'background-image': 'url(' + backgroundImage +')'}">
+  <ion-grid>
+    <ion-row wrap padding>
+      <ion-col col-12 col-sm-12 col-md-12 offset-lg-3 col-lg-6 offset-xl-3 col-xl-6>
+        <!---Logo-->
+        <img [src]="data.logo">
 
-  <div class="middle-content">
-    <ion-row margin-top padding-top style="margin-top:10rem;">
-      <ion-col>
-        <img src="assets/logo/logo.png" alt="SMARt Mobile" class="logo">
+        <!---Input field username-->
+        <ion-item no-padding transparent>
+          <ion-label floating>{{data.username}}</ion-label>
+          <ion-input required type="text" [(ngModel)]="username"></ion-input>
+        </ion-item>
+
+        <!---Input field password-->
+        <ion-item no-padding transparent>
+          <ion-label floating>{{data.password}}</ion-label>
+          <ion-input required type="password" [(ngModel)]="password"></ion-input>
+        </ion-item>
+        <br>
+        <!---Login button-->
+        <div text-right>
+          <button ion-button color="blue-template" full block (click)="onEvent('onLogin')">{{data.login}}</button>
+        </div>
       </ion-col>
     </ion-row>
-
-    <ion-row>
-      <ion-col no-padding>
-        <ion-list inset class="no-border">
-          <ion-item class="no-border">
-            <ion-label no-margin>Username</ion-label>
-            <ion-input type="number" [(ngModel)]="username"></ion-input>
-          </ion-item>
-
-          <ion-item class="no-border">
-            <ion-label>Password</ion-label>
-            <ion-input type="password" [(ngModel)]="password"></ion-input>
-          </ion-item>
-        </ion-list>
-      </ion-col>
-    </ion-row>
-    <ion-row style="margin: 0 14px;" align-items-center>
-      <button ion-button class="login-button" (click)="callParent()">{{data.login}}</button>
-    </ion-row>
-
-  </div>
-
+  </ion-grid>
 </ion-content>

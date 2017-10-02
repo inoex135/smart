@@ -23,6 +23,7 @@ export class LoginPage {
     public tokenProvider: TokenProvider,
     public toastController: ToastController
   ) {
+    let self = this;
     this.params.data = {
       username: "Username",
       password: "Password",
@@ -36,7 +37,11 @@ export class LoginPage {
       iconLock: "assets/images/background/loginlight.jpg"
     };
 
-    this.params.events = {};
+    this.params.events = {
+      onLogin: function(params) {
+        self.login(params);
+      }
+    };
   }
 
   ionViewDidLoad() {}
