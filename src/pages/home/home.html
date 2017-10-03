@@ -18,13 +18,13 @@
     </ion-slide>
   </ion-slides>
 
-  <ion-grid class="grid">
+  <ion-grid class="grid" no-padding>
     <ion-row class="row">
       <ion-col col-4 col-lg-4 col-md-6 col-sm-4 col-xl-2 text-center *ngFor="let menu of menus" class="col" (click)="pagesTo(menu.component)">
         <button>
             <ion-icon color="primary" name="{{menu.icon}}" role="img" class="" aria-label="apps" [ngClass]="menu.color"></ion-icon>
-              <br>
-              {{menu.title}}
+            <br>
+            {{menu.title}}
           </button>
       </ion-col>
 
