@@ -1,3 +1,6 @@
 page-naskah-masuk-detail {
-
+  // hilangkan gap segment yang terlihat agak aneh di naskah detail
+  .segment-md .segment-button {
+    height: 5rem !important;
+  }
 }

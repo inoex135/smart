@@ -3,7 +3,7 @@
     <ion-title>Naskah</ion-title>
   </ion-navbar>
 
-  <ion-toolbar no-border-top>
+  <ion-toolbar no-border-top no-padding>
     <ion-segment [(ngModel)]="type">
       <ion-segment-button value="detail">
         Detail
@@ -21,61 +21,53 @@
 
     <ion-card text-left *ngSwitchCase="'detail'">
       <ion-row margin-left margin-right>
-        <ion-col padding>
+        <ion-col>
           <h1 text-center ion-text text-lg>{{detail.noAgenda}}</h1>
         </ion-col>
       </ion-row>
       <ion-row margin-left margin-right>
-        <ion-col padding-right padding-left padding-top>
+        <ion-col>
           <p ion-text card-title text-left>Tanggal Naskah</p>
           <p text-left ion-text card-content>
             {{detail.tanggalNaskah}}
           </p>
         </ion-col>
 
-        <ion-col padding-left padding-right padding-top>
+        <ion-col>
           <p ion-text card-title text-left>No Naskah</p>
           <p ion-text card-content text-left>{{detail.noNaskah}}</p>
         </ion-col>
       </ion-row>
 
       <ion-row margin-left margin-right>
-        <ion-col padding>
+        <ion-col>
           <p ion-text card-title>Status Surat</p>
           <p ion-text card-content>{{detail.statusSurat}}</p>
         </ion-col>
-        <ion-col padding>
+        <ion-col>
           <p ion-text card-title text-left>Naskah Diterima</p>
           <p ion-text text-left card-content>{{detail.naskahDiterima}}</p>
         </ion-col>
       </ion-row>
 
       <ion-row margin-left margin-right>
-        <ion-col padding-left padding-right>
+        <ion-col>
           <p ion-text card-title>Unit Pengirim</p>
           <p ion-text text-wrap card-content>{{detail.unitPengirim}}</p>
         </ion-col>
       </ion-row>
 
       <ion-row margin-left margin-right>
-        <ion-col padding-left padding-right>
+        <ion-col>
           <p ion-text card-title>Perihal</p>
           <p ion-text text-wrap card-content>{{detail.perihal}}</p>
         </ion-col>
       </ion-row>
 
-      <ion-row *ngSwitchCase="'detail'" margin-left margin-right>
-        <ion-col padding col-4>
-          <button ion-button start padding color="danger" (click)="modalAction('disposisi')">Disposisi</button>
-        </ion-col>
-        <ion-col padding col-4>
-          <button ion-button padding color="blue-donker" (click)="modalAction('selesai')">Selesai</button>
-        </ion-col>
-
-        <ion-col padding col-4>
-          <button ion-button padding color="light" (click)="modalAction('teruskan')">Teruskan</button>
-        </ion-col>
-
+      <ion-row *ngSwitchCase="'detail'" margin-left margin-right margin-bottom>
+        <button ion-button full start padding color="danger" (click)="modalAction('disposisi')">Disposisi</button>
+        <button ion-button full padding color="blue-donker" (click)="modalAction('selesai')">Selesai</button>
+        <button ion-button full padding color="light" (click)="modalAction('teruskan')">Teruskan</button>
       </ion-row>
     </ion-card>
 
