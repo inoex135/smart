@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-card>
+  <!-- <ion-card>
     <ion-card-content>
       <ion-row>
         <ion-col>
@@ -39,54 +39,59 @@
           <h4 ion-text card-content text-wrap>Napitupulu</h4>
         </ion-col>
       </ion-row>
+
+      <ion-buttons text-center margin>
+        <button ion-button color="favorite">Agendakan</button>
+        <button ion-button color="danger">Tidak Agendakan</button>
+      </ion-buttons>
     </ion-card-content>
-  </ion-card>
+  </ion-card> -->
 
 
-  <!-- <ion-grid no-padding>
+  <ion-grid no-padding>
     <ion-row>
       <ion-col col-12 col-md-12 col-lg-6>
         <ion-card padding text-left class="card">
           <div card-subtitle>
             <h3 ion-text>No Tiket</h3>
           </div>
-          <div padding>
-            <h4 ion-text padding-left> {{detail?.title}} </h4>
+          <div padding-top padding-bottom>
+            <h4 ion-text> {{detail?.title}} </h4>
           </div>
 
           <div card-subtitle>
             <h3 ion-text>Pelayanan</h3>
           </div>
-          <div padding>
-            <h4 ion-text padding-left> {{detail?.description}} </h4>
+          <div padding-top padding-bottom>
+            <h4 ion-text> {{detail?.description}} </h4>
           </div>
 
           <div card-subtitle>
             <h3 ion-text>Sub Pelayanan: </h3>
           </div>
-          <div padding>
-            <h4 ion-text padding-left> {{detail?.longDescription}} </h4>
+          <div padding-top padding-bottom>
+            <h4 ion-text> {{detail?.longDescription}} </h4>
           </div>
 
           <div card-subtitle>
             <h3 ion-text>Nama Pemohon: </h3>
           </div>
-          <div padding>
-            <h4 ion-text padding-left> Arief Muhammad </h4>
+          <div padding-top padding-bottom>
+            <h4 ion-text> Arief Muhammad </h4>
           </div>
 
           <div card-subtitle>
             <h3 ion-text>Perihal: </h3>
           </div>
-          <div padding>
-            <h4 ion-text padding-left> {{ detail?.perihal }} </h4>
+          <div padding-top padding-bottom>
+            <h4 ion-text> {{ detail?.perihal }} </h4>
           </div>
 
           <div card-subtitle>
             <h3 ion-text>Tanggal Naskah: </h3>
           </div>
-          <div padding>
-            <h4 ion-text padding-left> {{detail?.date}} </h4>
+          <div padding-top padding-bottom>
+            <h4 ion-text> {{detail?.date}} </h4>
           </div>
         </ion-card>
 
@@ -97,5 +102,5 @@
 
       </ion-col>
     </ion-row>
-  </ion-grid> -->
+  </ion-grid>
 </ion-content>
