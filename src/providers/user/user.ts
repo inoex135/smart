@@ -1,20 +1,22 @@
-import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import 'rxjs/add/operator/map';
-import { ApiProvider } from '../api/api';
-import { TokenProvider } from '../token/token';
+import { Injectable } from "@angular/core";
+import { Http } from "@angular/http";
+import "rxjs/add/operator/map";
+import { ApiProvider } from "../api/api";
+import { TokenProvider } from "../token/token";
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import { ReplaySubject } from "rxjs/ReplaySubject";
-import { User } from '../../models/users';
+import { User } from "../../models/users";
 
 @Injectable()
 export class UserProvider {
   private currentUserSubject = new BehaviorSubject<User>(new User());
-  public currentUser = this.currentUserSubject.asObservable().distinctUntilChanged();
+  public currentUser = this.currentUserSubject
+    .asObservable()
+    .distinctUntilChanged();
 
   private isAuthenticatedSubject = new ReplaySubject<boolean>(1);
   public isAuthenticated = this.isAuthenticatedSubject.asObservable();
-  
+
   constructor(
     public http: Http,
     public apiProvider: ApiProvider,
@@ -35,7 +37,7 @@ export class UserProvider {
     });
   }
 
-  setAuth(data: any) {    
+  setAuth(data: any) {
     this.tokenProvider.saveToken(data.token);
     this.currentUserSubject.next(data.user);
     this.isAuthenticatedSubject.next(true);
@@ -47,7 +49,7 @@ export class UserProvider {
 
   attemptAuth(credentials) {
     let formData = new FormData();
-    
+
     formData.append("username", credentials.username);
     formData.append("password", credentials.password);
 

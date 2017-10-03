@@ -1,10 +1,5 @@
 import { Component } from "@angular/core";
-import {
-  NavController,
-  NavParams,
-  AlertController,
-  ModalController
-} from "ionic-angular";
+import { NavController, NavParams, AlertController } from "ionic-angular";
 
 import * as moment from "moment";
 
@@ -24,7 +19,6 @@ export class PersonalPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    private modalCtrl: ModalController,
     private alertCtrl: AlertController
   ) {
     this.eventSource = [
