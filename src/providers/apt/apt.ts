@@ -1,10 +1,31 @@
 import { Injectable } from "@angular/core";
 import { Http } from "@angular/http";
 import "rxjs/add/operator/map";
+import { ApiProvider } from "../api/api";
+import {
+  FileTransfer,
+  FileUploadOptions,
+  FileTransferObject
+} from "@ionic-native/file-transfer";
+import { File } from "@ionic-native/file";
+import { ENV } from "../../config/environment";
+import { TokenProvider } from "../token/token";
+import { LoadingController } from "ionic-angular";
 
 @Injectable()
 export class AptProvider {
-  constructor(public http: Http) {}
+  fileTransfer: FileTransferObject;
+
+  constructor(
+    public http: Http,
+    public apiProvider: ApiProvider,
+    private transfer: FileTransfer,
+    private file: File,
+    private token: TokenProvider,
+    private loadingCtrl: LoadingController
+  ) {
+    this.fileTransfer = transfer.create();
+  }
 
   getPermohonanList() {
     const data = [
@@ -58,5 +79,20 @@ export class AptProvider {
     };
 
     return detail;
+  }
+
+  download() {
+    const url = `${ENV.API_URL}/surat/sumas/excel/template`;
+    const options = {
+      Authorization: "smartdjkn2017mobile",
+      token: this.token.latestToken
+    };
+
+    return this.fileTransfer.download(
+      url,
+      this.file.dataDirectory,
+      false,
+      options
+    );
   }
 }

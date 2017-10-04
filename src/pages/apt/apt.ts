@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { NavController, NavParams } from "ionic-angular";
+import { NavController, NavParams, LoadingController } from "ionic-angular";
 import { AptProvider } from "../../providers/apt/apt";
 import { AptDetailPage } from "../apt-detail/apt-detail";
 
@@ -13,7 +13,8 @@ export class AptPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    private aptProvider: AptProvider
+    private aptProvider: AptProvider,
+    private loadingCtrl: LoadingController
   ) {
     this.items = this.aptProvider.getPermohonanList();
   }
@@ -23,5 +24,23 @@ export class AptPage {
   detailApt() {
     this.navCtrl.push(AptDetailPage);
   }
-  download() {}
+
+  download() {
+    const loader = this.loadingCtrl.create({
+      content: "Wait download....",
+      spinner: "dots"
+    });
+    loader.present();
+
+    this.aptProvider
+      .download()
+      .then(res => {
+        // alert("success");
+        loader.dismiss();
+      })
+      .catch(err => {
+        // alert("error");
+        loader.dismiss();
+      });
+  }
 }
