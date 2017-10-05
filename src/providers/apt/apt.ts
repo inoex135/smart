@@ -84,8 +84,11 @@ export class AptProvider {
   download() {
     const url = `${ENV.API_URL}/surat/sumas/excel/template`;
     const options = {
-      Authorization: "smartdjkn2017mobile",
-      token: this.token.latestToken
+      headers: {
+        Authorization: "smartdjkn2017mobile",
+        token: this.token.latestToken
+      },
+      httpMethod: "GET"
     };
 
     return this.fileTransfer.download(
