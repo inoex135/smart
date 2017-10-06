@@ -2,12 +2,7 @@ import { Injectable } from "@angular/core";
 import { Http } from "@angular/http";
 import "rxjs/add/operator/map";
 import { ApiProvider } from "../api/api";
-import {
-  FileTransfer,
-  FileUploadOptions,
-  FileTransferObject
-} from "@ionic-native/file-transfer";
-import { File } from "@ionic-native/file";
+import { FileTransfer, FileTransferObject } from "@ionic-native/file-transfer";
 import { ENV } from "../../config/environment";
 import { TokenProvider } from "../token/token";
 import { LoadingController } from "ionic-angular";
@@ -15,12 +10,12 @@ import { LoadingController } from "ionic-angular";
 @Injectable()
 export class AptProvider {
   fileTransfer: FileTransferObject;
+  fileDir: string;
 
   constructor(
     public http: Http,
     public apiProvider: ApiProvider,
-    private transfer: FileTransfer,
-    private file: File,
+    transfer: FileTransfer,
     private token: TokenProvider,
     private loadingCtrl: LoadingController
   ) {
@@ -81,11 +76,16 @@ export class AptProvider {
     return detail;
   }
 
-  download() {
-    const url = `http://www.lkpp.go.id/v3/files/attachments/5_fWwUnTrpMTbexDEmAMSCNDzObHttIcYl.pdf`;
+  download(fileDir) {
+    // @todo : dummy url, change when api already
+    // const url = `http://www.lkpp.go.id/v3/files/attachments/5_fWwUnTrpMTbexDEmAMSCNDzObHttIcYl.pdf`;
 
-    const filename = url.split("/").pop();
-    const fileDir = this.file.externalRootDirectory + filename;
+    const url = `${ENV.API_URL}/surat/sumas/excel/template`;
+
+    // const filename = url.split("/").pop();
+
+    // this.fileDir = this.file.externalRootDirectory + "Download" + 'smart.xlsx';
+    // console.log(filename);
 
     const options = {
       headers: {
@@ -96,7 +96,7 @@ export class AptProvider {
     };
 
     return this.fileTransfer
-      .download(url, fileDir, false)
+      .download(url, fileDir, false, options)
       .then(res => {
         return res;
       })

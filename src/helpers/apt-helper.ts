@@ -1,7 +1,5 @@
 import { Injectable } from "@angular/core";
-import { File } from "@ionic-native/file";
 import { FileOpener } from "@ionic-native/file-opener";
-import { FileTransfer, FileTransferObject } from "@ionic-native/file-transfer";
 import { AndroidPermissions } from "@ionic-native/android-permissions";
 
 @Injectable()
@@ -9,21 +7,15 @@ export class AptHelper {
   mime: string = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
 
   constructor(
-    private file: File,
     private fileOpener: FileOpener,
-    private fileTransfer: FileTransfer,
     private androidPermissions: AndroidPermissions
   ) {}
 
   openFile(directory, mime = this.mime) {
     return this.fileOpener
       .open(directory, mime)
-      .then(res => {
-        return res;
-      })
-      .catch(err => {
-        return err;
-      });
+      .then(res => this.respon(res))
+      .catch(err => this.error(err));
   }
 
   checkPermission() {
@@ -31,12 +23,8 @@ export class AptHelper {
       .checkPermission(
         this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE
       )
-      .then(res => {
-        return res;
-      })
-      .catch(err => {
-        return err;
-      });
+      .then(res => this.respon(res))
+      .catch(err => this.error(err));
   }
 
   requestPermission() {
@@ -44,11 +32,15 @@ export class AptHelper {
       .requestPermission(
         this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE
       )
-      .then(res => {
-        console.log(res);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+      .then(res => this.respon(res))
+      .catch(err => this.error(err));
+  }
+
+  error(err: any) {
+    return err;
+  }
+
+  respon(res: any) {
+    return res;
   }
 }

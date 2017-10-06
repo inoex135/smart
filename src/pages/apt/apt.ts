@@ -2,7 +2,6 @@ import { Component } from "@angular/core";
 import { NavController, NavParams, LoadingController } from "ionic-angular";
 import { AptProvider } from "../../providers/apt/apt";
 import { AptDetailPage } from "../apt-detail/apt-detail";
-import { FileTransfer, FileTransferObject } from "@ionic-native/file-transfer";
 import { File } from "@ionic-native/file";
 
 import { AptHelper } from "../../helpers/apt-helper";
@@ -14,7 +13,6 @@ import { AptHelper } from "../../helpers/apt-helper";
 export class AptPage {
   params: any = {};
   items: any = [];
-  fileTransfer: FileTransferObject;
   fileDirectory: any;
   loader: any;
 
@@ -23,13 +21,11 @@ export class AptPage {
     public navParams: NavParams,
     private aptProvider: AptProvider,
     private loadingCtrl: LoadingController,
-    private transfer: FileTransfer,
-    private file: File,
+    file: File,
     private aptHelper: AptHelper
   ) {
-    this.fileTransfer = transfer.create();
     this.items = this.aptProvider.getPermohonanList();
-    this.fileDirectory = this.file.externalRootDirectory + "Download";
+    this.fileDirectory = file.externalRootDirectory + "Download";
 
     this.loader = this.loadingCtrl.create({
       content: "Wait download....",
@@ -44,16 +40,22 @@ export class AptPage {
   }
 
   async download() {
+    const targetPath = this.fileDirectory + "smart.xlsx";
+
     this.loader.present();
 
     const checkPermission = await this.aptHelper.checkPermission();
-    alert(checkPermission.hasPermission);
 
-    const downloadFile = await this.aptProvider.download();
-    alert(downloadFile.exception);
+    // check if apps has permission to write storage
+    if (!checkPermission.hasPermission) {
+      await this.aptHelper.requestPermission();
+    }
 
-    const fileOpen = await this.aptHelper.openFile(this.fileDirectory);
-    console.log(fileOpen);
+    const download = await this.aptProvider.download(targetPath);
+    console.log(download);
+
+    const openFile = await this.aptHelper.openFile(targetPath);
+    alert(openFile.message);
 
     this.loader.dismiss();
   }
