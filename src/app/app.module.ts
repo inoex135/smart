@@ -41,6 +41,8 @@ import { NaskahNotifikasiPage } from "../pages/naskah-notifikasi/naskah-notifika
 import { NaskahNotifikasiProvider } from "../providers/naskah-notifikasi/naskah-notifikasi";
 import { ModalContentPage } from "../pages/naskah-masuk-detail/modal-content/modal-content";
 import { HomePopoverPage } from "../pages/home-popover/home-popover";
+import { AndroidPermissions } from "@ionic-native/android-permissions";
+import { AptHelper } from "../helpers/apt-helper";
 
 @NgModule({
   declarations: [
@@ -101,7 +103,9 @@ import { HomePopoverPage } from "../pages/home-popover/home-popover";
     GrafikPersuratanPage,
     NaskahMasukProvider,
     NaskahDetailProvider,
-    NaskahNotifikasiProvider
+    NaskahNotifikasiProvider,
+    AndroidPermissions,
+    AptHelper
   ]
 })
 export class AppModule {}

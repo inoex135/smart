@@ -2,10 +2,11 @@ import { Component } from "@angular/core";
 import { NavController, NavParams, LoadingController } from "ionic-angular";
 import { AptProvider } from "../../providers/apt/apt";
 import { AptDetailPage } from "../apt-detail/apt-detail";
-import { ENV } from "../../config/environment";
-import { TokenProvider } from "../../providers/token/token";
 import { FileTransfer, FileTransferObject } from "@ionic-native/file-transfer";
 import { File } from "@ionic-native/file";
+
+import { AptHelper } from "../../helpers/apt-helper";
+
 @Component({
   selector: "page-apt",
   templateUrl: "apt.html"
@@ -14,6 +15,9 @@ export class AptPage {
   params: any = {};
   items: any = [];
   fileTransfer: FileTransferObject;
+  fileDirectory: any;
+  loader: any;
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -21,10 +25,16 @@ export class AptPage {
     private loadingCtrl: LoadingController,
     private transfer: FileTransfer,
     private file: File,
-    private token: TokenProvider
+    private aptHelper: AptHelper
   ) {
     this.fileTransfer = transfer.create();
     this.items = this.aptProvider.getPermohonanList();
+    this.fileDirectory = this.file.externalRootDirectory + "Download";
+
+    this.loader = this.loadingCtrl.create({
+      content: "Wait download....",
+      spinner: "dots"
+    });
   }
 
   ionViewDidLoad() {}
@@ -33,26 +43,18 @@ export class AptPage {
     this.navCtrl.push(AptDetailPage);
   }
 
-  download() {
-    const loader = this.loadingCtrl.create({
-      content: "Wait download....",
-      spinner: "dots"
-    });
+  async download() {
+    this.loader.present();
 
-    loader.present();
-    const url = `${ENV.API_URL}/surat/sumas/excel/template`;
+    const checkPermission = await this.aptHelper.checkPermission();
+    alert(checkPermission.hasPermission);
 
-    this.aptProvider
-      .download()
-      .then(res => {
-        console.log(res);
-        alert("success");
-        loader.dismiss();
-      })
-      .catch(err => {
-        alert("error");
-        console.log(err, this.token.latestToken);
-        loader.dismiss();
-      });
+    const downloadFile = await this.aptProvider.download();
+    alert(downloadFile.exception);
+
+    const fileOpen = await this.aptHelper.openFile(this.fileDirectory);
+    console.log(fileOpen);
+
+    this.loader.dismiss();
   }
 }

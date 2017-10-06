@@ -82,7 +82,11 @@ export class AptProvider {
   }
 
   download() {
-    const url = `${ENV.API_URL}/surat/sumas/excel/template`;
+    const url = `http://www.lkpp.go.id/v3/files/attachments/5_fWwUnTrpMTbexDEmAMSCNDzObHttIcYl.pdf`;
+
+    const filename = url.split("/").pop();
+    const fileDir = this.file.externalRootDirectory + filename;
+
     const options = {
       headers: {
         Authorization: "smartdjkn2017mobile",
@@ -91,11 +95,13 @@ export class AptProvider {
       httpMethod: "GET"
     };
 
-    return this.fileTransfer.download(
-      url,
-      this.file.dataDirectory,
-      false,
-      options
-    );
+    return this.fileTransfer
+      .download(url, fileDir, false)
+      .then(res => {
+        return res;
+      })
+      .catch(err => {
+        return err;
+      });
   }
 }
