@@ -21,6 +21,7 @@
         "@angular/http": "4.4.3",
         "@angular/platform-browser": "4.4.3",
         "@angular/platform-browser-dynamic": "4.4.3",
+        "@ionic-native/android-permissions": "^4.3.0",
         "@ionic-native/calendar": "^4.2.1",
         "@ionic-native/core": "3.12.1",
         "@ionic-native/file": "^4.2.1",
@@ -31,6 +32,7 @@
         "@ionic/storage": "2.0.1",
         "chart.js": "^2.6.0",
         "cordova-android": "^6.2.3",
+        "cordova-plugin-android-permissions": "^1.0.0",
         "cordova-plugin-calendar": "^4.6.0",
         "cordova-plugin-compat": "^1.0.0",
         "cordova-plugin-console": "^1.0.5",
@@ -69,7 +71,8 @@
             "cordova-plugin-file-transfer": {},
             "cordova-plugin-file": {},
             "cordova-plugin-file-opener2": {},
-            "cordova-plugin-calendar": {}
+            "cordova-plugin-calendar": {},
+            "cordova-plugin-android-permissions": {}
         },
         "platforms": [
             "android"
