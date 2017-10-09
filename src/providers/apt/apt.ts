@@ -33,7 +33,7 @@ export class AptProvider {
         longDescription:
           "Penetapan Status Penggunaan Barang Milik Negara Selain Tanah Dan/Atau Bangunan",
         status: "BELUM VERIFIKASI",
-        date: "12 September 2017",
+        date: "2017-10-09T02:33:50+00:00",
         iconLike: "icon-thumb-up",
         iconFavorite: "icon-heart",
         iconShare: "icon-share-variant"
@@ -47,7 +47,7 @@ export class AptProvider {
         longDescription:
           "Penetapan Status Penggunaan Barang Milik Negara Selain Tanah Dan/Atau Bangunan",
         status: "BELUM VERIFIKASI",
-        date: "12 September 2017",
+        date: "2017-10-09T02:33:50+00:00",
         iconLike: "icon-thumb-up",
         iconFavorite: "icon-heart",
         iconShare: "icon-share-variant"

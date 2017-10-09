@@ -6,6 +6,7 @@ import { StatusBar } from "@ionic-native/status-bar";
 import { FormsModule } from "@angular/forms";
 import { HttpModule } from "@angular/http";
 import { IonicStorageModule } from "@ionic/storage";
+import { PipesModule } from "../pipes/pipes.module";
 
 import { FileTransfer } from "@ionic-native/file-transfer";
 import { File } from "@ionic-native/file";
@@ -68,7 +69,8 @@ import { AptHelper } from "../helpers/apt-helper";
     IonicStorageModule.forRoot(),
     ChartsModule,
     ComponentsModule,
-    NgCalendarModule
+    NgCalendarModule,
+    PipesModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
