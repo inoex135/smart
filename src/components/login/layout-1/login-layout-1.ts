@@ -12,10 +12,7 @@ export class LoginLayout1 {
   public password: string;
   public backgroundImage = "assets/background/4.png";
 
-  constructor() {
-    this.username = "198604122007101001";
-    this.password = "sm4rt@DJKN";
-  }
+  constructor() {}
 
   onEvent = (event: string): void => {
     if (this.events[event]) {
