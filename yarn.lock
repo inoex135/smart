@@ -67,9 +67,9 @@
   dependencies:
     tsickle "^0.21.0"
 
-"@ionic-native/android-permissions@^4.3.0":
-  version "4.3.0"
-  resolved "https://registry.yarnpkg.com/@ionic-native/android-permissions/-/android-permissions-4.3.0.tgz#41c88c264fb50cf81c44b7cf74bcd5109db4d05d"
+"@ionic-native/android-permissions@^4.3.1":
+  version "4.3.1"
+  resolved "https://registry.yarnpkg.com/@ionic-native/android-permissions/-/android-permissions-4.3.1.tgz#528c158b39afa2e106dba05af4ece4f0b8a4bc28"
 
 "@ionic-native/calendar@^4.2.1":
   version "4.2.1"

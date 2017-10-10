@@ -13,7 +13,7 @@
 
       <h3 ion-text text-wrap>{{notif?.sender}}</h3>
       <p>{{ notif?.message}}</p>
-      <ion-note item-end>{{notif?.date}}</ion-note>
+      <ion-note item-end>{{notif?.date | humanizeTime}}</ion-note>
     </ion-item>
   </ion-list>
 </ion-content>

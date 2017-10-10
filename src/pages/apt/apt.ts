@@ -5,7 +5,6 @@ import { AptDetailPage } from "../apt-detail/apt-detail";
 import { File } from "@ionic-native/file";
 
 import { AptHelper } from "../../helpers/apt-helper";
-import { HumanizeTimePipe } from "../../pipes/humanize-time/humanize-time";
 
 @Component({
   selector: "page-apt",

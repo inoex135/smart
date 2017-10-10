@@ -6,9 +6,14 @@ import * as moment from "moment";
 })
 export class HumanizeTimePipe implements PipeTransform {
   /**
-   * Takes a value and makes it lowercase.
+   * Takes a value and makes it human readable times
    */
   transform(value: string, ...args) {
-    return moment.duration(value, "days").humanize();
+    const start = moment(value);
+    const end = moment(); //now
+
+    let differentTime = end.diff(start, "days");
+
+    return moment.duration(differentTime, "days").humanize();
   }
 }
