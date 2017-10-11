@@ -1,9 +1,13 @@
 ## SMART Mobile with Ionic 3
+
+### Required
+* Ionic memerlukan nodejs dan npm/yarn. jika belum install, bisa instal terlebih dahulu
+* requires at least node v.8.5.* or support async await.
+* Usahakan android studio sudah terinstall dan bisa digunakan untuk build untuk development.
+
 ### Installation
-
-*Ionic memerlukan nodejs dan npm/yarn. jika belum install, bisa instal terlebih dahulu*
-
 Untuk menjalankan project :
+
 1. Clone repo.
 2. Run command for install packages with `yarn` or `npm install`. you must install yarn first if use yarn.
 3. Setup your `API URL` in `src/config/environtment.ts`.
@@ -44,3 +48,5 @@ npm install -g ionic
 * [https://ionicframework.com/docs](https://ionicframework.com/docs)
 * [https://github.com/shumbo/ionic-realworld-example-app](https://github.com/shumbo/ionic-realworld-example-app)
 * [https://www.joshmorony.com/adding-responsive-charts-graphs-to-ionic-2-applications/](https://www.joshmorony.com/adding-responsive-charts-graphs-to-ionic-2-applications/)
+* [https://github.com/mumairofficial/text-avatar#how-to-use] (https://github.com/mumairofficial/text-avatar#how-to-use)
+* [http://www.chartjs.org/](http://www.chartjs.org/)
