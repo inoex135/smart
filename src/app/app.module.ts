@@ -44,6 +44,7 @@ import { ModalContentPage } from "../pages/naskah-masuk-detail/modal-content/mod
 import { HomePopoverPage } from "../pages/home-popover/home-popover";
 import { AndroidPermissions } from "@ionic-native/android-permissions";
 import { AptHelper } from "../helpers/apt-helper";
+import { TextAvatarDirective } from "../directives/text-avatar/text-avatar";
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { AptHelper } from "../helpers/apt-helper";
     NaskahMasukDetailPage,
     NaskahNotifikasiPage,
     ModalContentPage,
-    HomePopoverPage
+    HomePopoverPage,
+    TextAvatarDirective
   ],
   imports: [
     BrowserModule,

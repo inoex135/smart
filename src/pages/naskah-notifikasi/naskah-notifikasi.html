@@ -7,10 +7,12 @@
 <ion-content class="list-avatar-page">
   <ion-list>
     <ion-item *ngFor="let notif of notifications">
-      <ion-avatar item-start>
+      <!-- <ion-avatar item-start>
         <img src="https://ionicframework.com/dist/preview-app/www/assets/img/marty-avatar.png">
-      </ion-avatar>
+      </ion-avatar> -->
 
+      {{notif.sender}}
+      <text-avatar [text]="notif.sender" item-left></text-avatar>
       <h3 ion-text text-wrap>{{notif?.sender}}</h3>
       <p>{{ notif?.message}}</p>
       <ion-note item-end>{{notif?.date | humanizeTime}}</ion-note>

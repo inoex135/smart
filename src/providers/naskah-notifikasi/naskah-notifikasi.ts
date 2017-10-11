@@ -19,12 +19,14 @@ export class NaskahNotifikasiProvider {
       {
         date: "2017-10-09T23:20:10+00:00",
         message: "Pesan Naskah Keluar dengan nomor BA-34/KN.5.4/2017",
-        sender: "NUGROHO DWI MURIAWAN"
+        sender: "NUGROHO DWI MURIAWAN",
+        color: "red"
       },
       {
         date: "2017-10-01T23:20:10+00:00",
         message: "Pesan Naskah Keluar dengan nomor BA-34/KN.5.4/2017",
-        sender: "NUGROHI DWI MURIAWAN"
+        sender: "NUGROHI DWI MURIAWAN",
+        color: "red"
       }
     ];
 
