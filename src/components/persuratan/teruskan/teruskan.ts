@@ -1,19 +1,24 @@
 import { Component } from "@angular/core";
 import { SuratTeruskan } from "../../../models/surat-teruskan";
 import { LoadingController, NavController } from "ionic-angular";
+import { NaskahMasukProvider } from "../../../providers/naskah-masuk/naskah-masuk";
 
 @Component({
   selector: "teruskan",
   templateUrl: "teruskan.html"
 })
 export class Teruskan {
-  surat: SuratTeruskan = {
+  naskah: SuratTeruskan = {
     tujuan: "",
     alasan: "",
     catatan: ""
   };
 
-  constructor(public loading: LoadingController, public nav: NavController) {}
+  constructor(
+    public loading: LoadingController,
+    public nav: NavController,
+    public naskahProvider: NaskahMasukProvider
+  ) {}
 
   teruskan() {
     const loading = this.loading.create({
@@ -21,7 +26,17 @@ export class Teruskan {
     });
 
     loading.present();
-    console.log(this.surat);
-    loading.dismiss();
+
+    // save data naskah untuk diteruskan
+    this.naskahProvider.teruskan(this.naskah).subscribe(
+      res => {
+        console.log(res);
+        loading.dismiss();
+      },
+      err => {
+        console.log(err);
+        loading.dismiss();
+      }
+    );
   }
 }

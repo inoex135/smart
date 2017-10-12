@@ -1,23 +1,22 @@
-<!--Form Title-->
 <h1 title text-right>Teruskan</h1>
-<!---Input field username-->
+
 <ion-item no-padding>
     <ion-label floating>Tujuan <span class="required">*</span></ion-label>
-    <ion-input required type="text" [(ngModel)]="surat.tujuan" name="tujuan"></ion-input>
+    <ion-input required type="text" [(ngModel)]="naskah.tujuan" name="tujuan"></ion-input>
 </ion-item>
-<!---Input field password-->
+
 <ion-item no-padding>
     <ion-label floating>Alasan <span class="required">*</span></ion-label>
-    <ion-select [(ngModel)]="surat.alasan" name="alasan">
+    <ion-select [(ngModel)]="naskah.alasan" name="alasan">
         <ion-option value="1">Cuti</ion-option>
         <ion-option value="2">Lainnya</ion-option>
         <ion-option value="3">Tidak Sesuai Tugas dan Fungsinya</ion-option>
     </ion-select>
 </ion-item>
-<!---Input field email-->
+
 <ion-item no-padding>
     <ion-label floating>Catatan <span class="required">*</span></ion-label>
-    <ion-textarea required name="catatan" type="text" required [(ngModel)]="surat.catatan"></ion-textarea>
+    <ion-textarea required name="catatan" type="text" required [(ngModel)]="naskah.catatan"></ion-textarea>
 </ion-item>
-<!---Register button-->
+
 <button ion-button right (click)="teruskan()" margin-top>Simpan</button>
