@@ -3,6 +3,7 @@ import { NavController, NavParams } from "ionic-angular";
 import { GrafikPersuratanPage } from "../grafik-persuratan/grafik-persuratan";
 import { NaskahMasukPage } from "../naskah-masuk/naskah-masuk";
 import { NaskahNotifikasiPage } from "../naskah-notifikasi/naskah-notifikasi";
+import { GrafikPersuratanKeluarPage } from "../grafik-persuratan-keluar/grafik-persuratan-keluar";
 
 @Component({
   selector: "page-surat",
@@ -13,7 +14,16 @@ export class SuratPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.menus = [
-      { name: "Grafik", icon: "stats", component: GrafikPersuratanPage },
+      {
+        name: "Grafik Surat Masuk",
+        icon: "stats",
+        component: GrafikPersuratanPage
+      },
+      {
+        name: "Grafik Surat Keluar",
+        icon: "stats",
+        component: GrafikPersuratanKeluarPage
+      },
       { name: "Naskah Masuk", icon: "folder", component: NaskahMasukPage },
       { name: "Notifikasi", icon: "mail", component: NaskahNotifikasiPage }
     ];

@@ -8,10 +8,10 @@ export class GrafikPersuratanPage {
   constructor(public navCtrl: NavController, public navParams: NavParams) {}
 
   ionViewDidLoad() {}
-  // Doughnut
-  public naskahKeluarLabels: string[] = ["Antrian", "Terikirim"];
-  public naskahKeluarData: number[] = [350, 450];
-  public naskahKeluarChartType: string = "doughnut";
+  // // Doughnut
+  // public naskahKeluarLabels: string[] = ["Antrian", "Terikirim"];
+  // public naskahKeluarData: number[] = [350, 450];
+  // public naskahKeluarChartType: string = "doughnut";
 
   // barchart
   public barChartOptions: any = {

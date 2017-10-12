@@ -19,14 +19,14 @@ import { MyApp } from "./app.component";
 import { HomePage } from "../pages/home/home";
 import { LoginPage } from "../pages/login/login";
 
-import { UserProvider } from "../providers/user/user";
-import { ApiProvider } from "../providers/api/api";
-import { TokenProvider } from "../providers/token/token";
-import { SuratProvider } from "../providers/surat/surat";
-
 import { ComponentsModule } from "../components/components.module";
+
 // 3rd package
+import { AndroidPermissions } from "@ionic-native/android-permissions";
 import { NgCalendarModule } from "ionic2-calendar";
+import { TextAvatarDirective } from "../directives/text-avatar/text-avatar";
+
+// pages
 import { PersonalPage } from "../pages/personal/personal";
 import { PersonalProvider } from "../providers/personal/personal";
 import { AptPage } from "../pages/apt/apt";
@@ -42,9 +42,14 @@ import { NaskahNotifikasiPage } from "../pages/naskah-notifikasi/naskah-notifika
 import { NaskahNotifikasiProvider } from "../providers/naskah-notifikasi/naskah-notifikasi";
 import { ModalContentPage } from "../pages/naskah-masuk-detail/modal-content/modal-content";
 import { HomePopoverPage } from "../pages/home-popover/home-popover";
-import { AndroidPermissions } from "@ionic-native/android-permissions";
 import { AptHelper } from "../helpers/apt-helper";
-import { TextAvatarDirective } from "../directives/text-avatar/text-avatar";
+
+// provider
+import { UserProvider } from "../providers/user/user";
+import { ApiProvider } from "../providers/api/api";
+import { TokenProvider } from "../providers/token/token";
+import { SuratProvider } from "../providers/surat/surat";
+import { GrafikPersuratanKeluarPage } from "../pages/grafik-persuratan-keluar/grafik-persuratan-keluar";
 
 @NgModule({
   declarations: [
@@ -61,7 +66,8 @@ import { TextAvatarDirective } from "../directives/text-avatar/text-avatar";
     NaskahNotifikasiPage,
     ModalContentPage,
     HomePopoverPage,
-    TextAvatarDirective
+    TextAvatarDirective,
+    GrafikPersuratanKeluarPage
   ],
   imports: [
     BrowserModule,
@@ -88,7 +94,8 @@ import { TextAvatarDirective } from "../directives/text-avatar/text-avatar";
     NaskahMasukDetailPage,
     NaskahNotifikasiPage,
     ModalContentPage,
-    HomePopoverPage
+    HomePopoverPage,
+    GrafikPersuratanKeluarPage
   ],
   providers: [
     StatusBar,
