@@ -32,18 +32,24 @@ export class NaskahMasukProvider {
   getNaskahMasuk() {
     const data = [
       {
+        noAgenda: "AM-1730/KN.54/2017",
         noNaskah: "UND-137/KN.5/2017",
-        tanggal: "06 Juli 2017",
+        tanggalNaskah: "06 Juli 2017",
         perihal: "Undangan Rapat Dialog Kinerja Organisasi ",
         status: "Selesai",
-        unit: "Direktorat Pengelolaan Kekayaan Negara Dan Sistem Informasi"
+        unit: "Direktorat Pengelolaan Kekayaan Negara Dan Sistem Informasi",
+        statusSurat: "Selesai",
+        naskahDiterima: "Belum Diterima"
       },
       {
+        noAgenda: "AM-1730/KN.54/2017",
         noNaskah: "UND-137/KN.5/2017",
-        tanggal: "06 Juli 2017",
+        tanggalNaskah: "06 Juli 2017",
         perihal: "Undangan Rapat Dialog Kinerja Organisasi ",
         status: "Selesai",
-        unit: "Direktorat Pengelolaan Kekayaan Negara Dan Sistem Informasi"
+        unit: "Direktorat Pengelolaan Kekayaan Negara Dan Sistem Informasi",
+        statusSurat: "Selesai",
+        naskahDiterima: "Belum Diterima"
       }
     ];
     return data;
