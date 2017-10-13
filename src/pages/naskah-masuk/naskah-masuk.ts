@@ -2,6 +2,7 @@ import { Component } from "@angular/core";
 import { NavController, NavParams } from "ionic-angular";
 import { NaskahMasukProvider } from "../../providers/naskah-masuk/naskah-masuk";
 import { NaskahMasukDetailPage } from "../naskah-masuk-detail/naskah-masuk-detail";
+import { LoaderHelper } from "../../helpers/loader-helper";
 
 @Component({
   selector: "page-naskah-masuk",
@@ -13,7 +14,8 @@ export class NaskahMasukPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    private naskahProvider: NaskahMasukProvider
+    private naskahProvider: NaskahMasukProvider,
+    private loaderHelper: LoaderHelper
   ) {}
 
   ionViewDidLoad() {
@@ -24,9 +26,18 @@ export class NaskahMasukPage {
     this.navCtrl.push(NaskahMasukDetailPage, { naskahId: naskah.id });
   }
 
-  getNaskahMasuk() {
+  async getNaskahMasuk() {
+    // create loader
+    this.loaderHelper.createLoader();
+
+    // show loader
+    await this.loaderHelper.present();
+
     this.naskahProvider
       .getNaskahMasuk()
-      .subscribe(res => (this.listNaskah = res));
+      .finally(() => this.loaderHelper.dismiss())
+      .subscribe(res => {
+        this.listNaskah = res;
+      });
   }
 }
