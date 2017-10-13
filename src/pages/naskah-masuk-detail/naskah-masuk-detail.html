@@ -22,45 +22,47 @@
     <ion-card text-left *ngSwitchCase="'detail'">
       <ion-row margin-left margin-right>
         <ion-col>
-          <h1 text-center ion-text text-lg>{{detail.noAgenda}}</h1>
+          <h1 text-center ion-text text-lg>{{detail?.noAgenda}}</h1>
         </ion-col>
       </ion-row>
+
+
       <ion-row margin-left margin-right>
         <ion-col>
           <p ion-text card-title text-left>Tanggal Naskah</p>
           <p text-left ion-text card-content>
-            {{detail.tanggalNaskah}}
+            {{detail?.tanggalSurat | date}}
           </p>
         </ion-col>
 
         <ion-col>
           <p ion-text card-title text-left>No Naskah</p>
-          <p ion-text card-content text-left>{{detail.noNaskah}}</p>
+          <p ion-text card-content text-left>{{detail?.no}}</p>
         </ion-col>
       </ion-row>
 
       <ion-row margin-left margin-right>
         <ion-col>
           <p ion-text card-title>Status Surat</p>
-          <p ion-text card-content>{{detail.statusSurat}}</p>
+          <p ion-text card-content>{{detail?.statusSurat}}</p>
         </ion-col>
         <ion-col>
           <p ion-text card-title text-left>Naskah Diterima</p>
-          <p ion-text text-left card-content>{{detail.naskahDiterima}}</p>
+          <p ion-text text-left card-content>{{detail?.naskahDiterima}}</p>
         </ion-col>
       </ion-row>
 
       <ion-row margin-left margin-right>
         <ion-col>
           <p ion-text card-title>Unit Pengirim</p>
-          <p ion-text text-wrap card-content>{{detail.unitPengirim}}</p>
+          <p ion-text text-wrap card-content>{{detail?.unitPengirim || "-"}}</p>
         </ion-col>
       </ion-row>
 
       <ion-row margin-left margin-right>
         <ion-col>
           <p ion-text card-title>Perihal</p>
-          <p ion-text text-wrap card-content>{{detail.perihal}}</p>
+          <p ion-text text-wrap card-content>{{detail?.perihal}}</p>
         </ion-col>
       </ion-row>
 

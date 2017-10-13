@@ -1,7 +1,8 @@
 import { Component } from "@angular/core";
-import { NavController, ModalController } from "ionic-angular";
-import { NaskahDetailProvider } from "../../providers/naskah-detail/naskah-detail";
+import { NavController, ModalController, NavParams } from "ionic-angular";
 import { ModalContentPage } from "./modal-content/modal-content";
+import { NaskahMasukProvider } from "../../providers/naskah-masuk/naskah-masuk";
+
 @Component({
   selector: "page-naskah-masuk-detail",
   templateUrl: "naskah-masuk-detail.html"
@@ -9,11 +10,16 @@ import { ModalContentPage } from "./modal-content/modal-content";
 export class NaskahMasukDetailPage {
   private detail: any = {};
   private type: String = "detail"; //switch case for riwayat and detail segment
+  private naskahId: string = "";
+
   constructor(
     public navCtrl: NavController,
-    private naskahProvider: NaskahDetailProvider,
+    public navParams: NavParams,
+    private naskahProvider: NaskahMasukProvider,
     private modalCtrl: ModalController
-  ) {}
+  ) {
+    this.naskahId = this.navParams.get("naskahId");
+  }
 
   modalAction(actionType: String) {
     const modal = this.modalCtrl.create(ModalContentPage, {
@@ -28,6 +34,8 @@ export class NaskahMasukDetailPage {
   }
 
   getDetailNaskah() {
-    this.detail = this.naskahProvider.getDetailNaskah();
+    this.naskahProvider.getDetailNaskah(this.naskahId).subscribe(res => {
+      return (this.detail = res);
+    });
   }
 }
