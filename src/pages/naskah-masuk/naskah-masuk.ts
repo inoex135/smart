@@ -18,15 +18,15 @@ export class NaskahMasukPage {
 
   ionViewDidLoad() {
     this.getNaskahMasuk();
-    console.log(this.listNaskah);
   }
 
-  detailNaskah() {
-    this.navCtrl.push(NaskahMasukDetailPage);
+  detailNaskah(naskah: any) {
+    this.navCtrl.push(NaskahMasukDetailPage, { naskahId: naskah.id });
   }
 
   getNaskahMasuk() {
-    this.listNaskah = this.naskahProvider.getNaskahMasuk();
-    return this.listNaskah;
+    this.naskahProvider
+      .getNaskahMasuk()
+      .subscribe(res => (this.listNaskah = res));
   }
 }

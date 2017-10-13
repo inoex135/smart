@@ -7,52 +7,17 @@ import { ApiProvider } from "../api/api";
 export class NaskahMasukProvider {
   constructor(public http: Http, public api: ApiProvider) {}
 
-  getDetailNaskah(item: any) {
-    const detail = {
-      identitasNaskah: {
-        noAgendaPemberiDisposisi: "-",
-        amplopTertutup: "Tidak",
-        naskahPermohonan: "tidak",
-        jenisPengiriman: "Langsung",
-        tanggalTerima: "06 Juli 2017",
-        jenisNaskah: "Undangan",
-        nomor: "UND-137/KN.5/2017",
-        tanggalNaskah: "06 Juli 2017",
-        perihal: "Undangan Rapat Dialog Kinerja Organisasi Direktorat PKNSI",
-        sifatNaskah: "Sangat Segera",
-        sifatDisposisi: "-",
-        sifatBerkas: "Asli",
-        prosesNaskah: "Selesai"
-      },
-      pengirimNaskah: {}
-    };
-    return detail;
+  getDetailNaskah(naskahId: any) {
+    const url = `/surat/masuk/${naskahId}`;
+
+    return this.api.get(url).map(res => {
+      return res;
+    });
   }
 
   getNaskahMasuk() {
-    const data = [
-      {
-        noAgenda: "AM-1730/KN.54/2017",
-        noNaskah: "UND-137/KN.5/2017",
-        tanggalNaskah: "06 Juli 2017",
-        perihal: "Undangan Rapat Dialog Kinerja Organisasi ",
-        status: "Selesai",
-        unit: "Direktorat Pengelolaan Kekayaan Negara Dan Sistem Informasi",
-        statusSurat: "Selesai",
-        naskahDiterima: "Belum Diterima"
-      },
-      {
-        noAgenda: "AM-1730/KN.54/2017",
-        noNaskah: "UND-137/KN.5/2017",
-        tanggalNaskah: "06 Juli 2017",
-        perihal: "Undangan Rapat Dialog Kinerja Organisasi ",
-        status: "Selesai",
-        unit: "Direktorat Pengelolaan Kekayaan Negara Dan Sistem Informasi",
-        statusSurat: "Selesai",
-        naskahDiterima: "Belum Diterima"
-      }
-    ];
-    return data;
+    const url = "/surat/masuk";
+    return this.api.get(url).map(res => res.content);
   }
 
   disposisi(dataNaskah: any) {

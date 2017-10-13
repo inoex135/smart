@@ -6,28 +6,45 @@
 
 
 <ion-content>
-  <ion-card (click)="detailNaskah(item)" *ngFor="let naskah of listNaskah" margin-right margin-bottom>
+  <ion-card (click)="detailNaskah(naskah)" *ngFor="let naskah of listNaskah" margin-right margin-bottom>
     <ion-card-content>
       <ion-row>
         <ion-col>
-          <ion-badge color="secondary" text-left>{{naskah?.status}}</ion-badge>
+          <ion-badge color="secondary" text-left>{{naskah?.statusSurat}}</ion-badge>
         </ion-col>
 
         <ion-col>
-          <h4 ion-text card-content text-right>{{naskah.tanggal}}</h4>
+          <h4 ion-text card-content text-left>{{naskah.tanggal || "-"}}</h4>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-badge text-left>{{naskah?.noAgenda}}</ion-badge>
+        </ion-col>
+
+        <ion-col>
+          <h4 ion-text card-content text-left>{{naskah?.nomorSurat}}</h4>
         </ion-col>
       </ion-row>
 
       <ion-row>
         <ion-col>
           <h4 ion-text card-title>Unit Pengirim</h4>
-          <h4 ion-text card-content text-wrap>{{naskah?.unit}}</h4>
+          <h4 ion-text card-content text-wrap>{{naskah?.namaUnit || "-"}}</h4>
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col>
           <h4 ion-text card-title>Perihal</h4>
           <h4 ion-text card-content>{{naskah?.perihal}}</h4>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <h4 ion-text card-title>Naskah Diterima</h4>
+          <h4 ion-text card-title>{{naskah?.statusTerimaSurat || "-"}}</h4>
         </ion-col>
       </ion-row>
 
