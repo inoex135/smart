@@ -30,9 +30,6 @@ export class NaskahMasukPage {
     // create loader
     this.loaderHelper.createLoader();
 
-    // show loader
-    await this.loaderHelper.present();
-
     // show naskah from API
     this.naskahProvider
       .getNaskahMasuk()

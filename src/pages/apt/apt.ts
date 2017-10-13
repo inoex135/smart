@@ -5,6 +5,7 @@ import { AptDetailPage } from "../apt-detail/apt-detail";
 import { File } from "@ionic-native/file";
 
 import { AptHelper } from "../../helpers/apt-helper";
+import { LoaderHelper } from "../../helpers/loader-helper";
 
 @Component({
   selector: "page-apt",
@@ -22,9 +23,9 @@ export class AptPage {
     private aptProvider: AptProvider,
     private loadingCtrl: LoadingController,
     file: File,
-    private aptHelper: AptHelper
+    private aptHelper: AptHelper,
+    private loaderHelper: LoaderHelper
   ) {
-    this.items = this.aptProvider.getPermohonanList();
     this.fileDirectory = file.externalRootDirectory + "Download";
 
     this.loader = this.loadingCtrl.create({
@@ -33,16 +34,35 @@ export class AptPage {
     });
   }
 
-  ionViewDidLoad() {}
+  ionViewDidLoad() {
+    this.getAptList();
+  }
 
   detailApt() {
     this.navCtrl.push(AptDetailPage);
   }
 
+  async getAptList() {
+    await this.loaderHelper.createLoader();
+
+    this.aptProvider
+      .getPermohonanList()
+      // .finally(() => {})
+      .subscribe(
+        res => {
+          this.items = res;
+          this.loaderHelper.dismiss();
+        },
+        err => {
+          this.loaderHelper.errorHandleLoader(err.error_code, this.navCtrl);
+        }
+      );
+  }
+
   async download() {
     const targetPath = this.fileDirectory + "smart.xlsx";
 
-    this.loader.present();
+    await this.loaderHelper.createLoader();
 
     const checkPermission = await this.aptHelper.checkPermission();
 

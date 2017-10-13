@@ -36,9 +36,7 @@ export class NaskahMasukDetailPage {
   }
 
   async getDetailNaskah() {
-    this.loaderHelper.createLoader();
-
-    await this.loaderHelper.present();
+    await this.loaderHelper.createLoader();
 
     this.naskahProvider
       .getDetailNaskah(this.naskahId)
