@@ -41,7 +41,10 @@ import { NaskahNotifikasiPage } from "../pages/naskah-notifikasi/naskah-notifika
 import { NaskahNotifikasiProvider } from "../providers/naskah-notifikasi/naskah-notifikasi";
 import { ModalContentPage } from "../pages/naskah-masuk-detail/modal-content/modal-content";
 import { HomePopoverPage } from "../pages/home-popover/home-popover";
+
+// helper
 import { AptHelper } from "../helpers/apt-helper";
+import { LoaderHelper } from "../helpers/loader-helper";
 
 // provider
 import { UserProvider } from "../providers/user/user";
@@ -114,7 +117,8 @@ import { GrafikPersuratanKeluarPage } from "../pages/grafik-persuratan-keluar/gr
     NaskahMasukProvider,
     NaskahNotifikasiProvider,
     AndroidPermissions,
-    AptHelper
+    AptHelper,
+    LoaderHelper
   ]
 })
 export class AppModule {}
