@@ -1,21 +1,30 @@
 import { Injectable } from "@angular/core";
 import { LoadingController } from "ionic-angular";
+
 @Injectable()
 export class LoaderHelper {
   loading: any;
 
   constructor(private loadingCtrl: LoadingController) {}
 
-  createLoader() {
+  createLoader(message: string = "Loading....."): LoadingController {
     this.loading = this.loadingCtrl.create({
-      content: "Loading....."
+      content: message
     });
-  }
-  present() {
+
     return this.loading.present();
   }
 
+  errorHandleLoader(message: string = "Error", nav: any) {
+    this.loading.setContent(message);
+
+    setTimeout(() => {
+      this.dismiss();
+      nav.pop();
+    }, 1000);
+  }
+
   dismiss() {
-    return this.loading.dismiss().catch(() => {});
+    return this.loading.dismiss();
   }
 }
