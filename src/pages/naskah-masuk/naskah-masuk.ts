@@ -33,6 +33,7 @@ export class NaskahMasukPage {
     // show loader
     await this.loaderHelper.present();
 
+    // show naskah from API
     this.naskahProvider
       .getNaskahMasuk()
       .finally(() => this.loaderHelper.dismiss())

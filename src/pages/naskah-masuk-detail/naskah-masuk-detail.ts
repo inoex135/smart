@@ -2,6 +2,7 @@ import { Component } from "@angular/core";
 import { NavController, ModalController, NavParams } from "ionic-angular";
 import { ModalContentPage } from "./modal-content/modal-content";
 import { NaskahMasukProvider } from "../../providers/naskah-masuk/naskah-masuk";
+import { LoaderHelper } from "../../helpers/loader-helper";
 
 @Component({
   selector: "page-naskah-masuk-detail",
@@ -16,7 +17,8 @@ export class NaskahMasukDetailPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     private naskahProvider: NaskahMasukProvider,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    private loaderHelper: LoaderHelper
   ) {
     this.naskahId = this.navParams.get("naskahId");
   }
@@ -33,9 +35,16 @@ export class NaskahMasukDetailPage {
     this.getDetailNaskah();
   }
 
-  getDetailNaskah() {
-    this.naskahProvider.getDetailNaskah(this.naskahId).subscribe(res => {
-      return (this.detail = res);
-    });
+  async getDetailNaskah() {
+    this.loaderHelper.createLoader();
+
+    await this.loaderHelper.present();
+
+    this.naskahProvider
+      .getDetailNaskah(this.naskahId)
+      .finally(() => this.loaderHelper.dismiss())
+      .subscribe(res => {
+        return (this.detail = res);
+      });
   }
 }
