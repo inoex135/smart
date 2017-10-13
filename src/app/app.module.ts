@@ -37,7 +37,6 @@ import { GrafikPersuratanPage } from "../pages/grafik-persuratan/grafik-persurat
 import { NaskahMasukPage } from "../pages/naskah-masuk/naskah-masuk";
 import { NaskahMasukProvider } from "../providers/naskah-masuk/naskah-masuk";
 import { NaskahMasukDetailPage } from "../pages/naskah-masuk-detail/naskah-masuk-detail";
-import { NaskahDetailProvider } from "../providers/naskah-detail/naskah-detail";
 import { NaskahNotifikasiPage } from "../pages/naskah-notifikasi/naskah-notifikasi";
 import { NaskahNotifikasiProvider } from "../providers/naskah-notifikasi/naskah-notifikasi";
 import { ModalContentPage } from "../pages/naskah-masuk-detail/modal-content/modal-content";
@@ -113,7 +112,6 @@ import { GrafikPersuratanKeluarPage } from "../pages/grafik-persuratan-keluar/gr
     AptProvider,
     GrafikPersuratanPage,
     NaskahMasukProvider,
-    NaskahDetailProvider,
     NaskahNotifikasiProvider,
     AndroidPermissions,
     AptHelper
