@@ -24,27 +24,27 @@ export class UserProvider {
   ) {}
 
   // verify token yang ada di storage
-  populate() {
-    this.tokenProvider.getToken().then(token => {
-      // if token available/verify, set user info
-      if (token) {
-        this.apiProvider
-          .get("/user")
-          .subscribe(data => this.setAuth(data.user), err => this.purgeAuth);
-      } else {
-        this.purgeAuth();
-      }
-    });
-  }
+  // populate() {
+  //   this.tokenProvider.getToken().then(token => {
+  //     // if token available/verify, set user info
+  //     if (token) {
+  //       this.apiProvider
+  //         .get("/user")
+  //         .subscribe(data => this.setAuth(data.user), err => this.purgeAuth);
+  //     } else {
+  //       this.purgeAuth();
+  //     }
+  //   });
+  // }
 
   setAuth(data: any) {
     this.tokenProvider.saveToken(data.token);
-    this.currentUserSubject.next(data.user);
-    this.isAuthenticatedSubject.next(true);
+    this.tokenProvider.saveUser(data.user);
+    // this.isAuthenticatedSubject.next(true);
   }
 
   purgeAuth() {
-    this.tokenProvider.destoryToken();
+    this.tokenProvider.destroy();
   }
 
   attemptAuth(credentials) {
@@ -57,9 +57,5 @@ export class UserProvider {
       this.setAuth(data);
       return data;
     });
-  }
-
-  getCurrentUser(): User {
-    return this.currentUserSubject.value;
   }
 }
