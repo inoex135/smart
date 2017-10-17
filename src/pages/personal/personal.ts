@@ -56,12 +56,12 @@ export class PersonalPage {
   }
 
   onEventSelected(event) {
-    let start = moment(event.startTime).format("LLLL");
-    let end = moment(event.endTime).format("LLLL");
+    let start = moment(event.startTime).format("HH:mm");
+    let end = moment(event.endTime).format("HH:mm");
 
     let alert = this.alertCtrl.create({
-      title: "" + event.title,
-      subTitle: "From " + start + "<br>" + end,
+      title: `${start} - ${end}`,
+      subTitle: `<b>${event.title} <br> </b>`,
       buttons: ["OK"]
     });
     alert.present();
@@ -86,8 +86,6 @@ export class PersonalPage {
 
         let events = this.eventSource;
         events.push(eventData);
-        console.log(eventData);
-        console.log(this.eventSource);
 
         this.eventSource = [];
 
