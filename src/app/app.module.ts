@@ -52,6 +52,7 @@ import { ApiProvider } from "../providers/api/api";
 import { TokenProvider } from "../providers/token/token";
 import { SuratProvider } from "../providers/surat/surat";
 import { GrafikPersuratanKeluarPage } from "../pages/grafik-persuratan-keluar/grafik-persuratan-keluar";
+import { EventModalPage } from "../pages/personal/event-modal/event-modal";
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import { GrafikPersuratanKeluarPage } from "../pages/grafik-persuratan-keluar/gr
     ModalContentPage,
     HomePopoverPage,
     TextAvatarDirective,
-    GrafikPersuratanKeluarPage
+    GrafikPersuratanKeluarPage,
+    EventModalPage
   ],
   imports: [
     BrowserModule,
@@ -97,7 +99,8 @@ import { GrafikPersuratanKeluarPage } from "../pages/grafik-persuratan-keluar/gr
     NaskahNotifikasiPage,
     ModalContentPage,
     HomePopoverPage,
-    GrafikPersuratanKeluarPage
+    GrafikPersuratanKeluarPage,
+    EventModalPage
   ],
   providers: [
     StatusBar,
