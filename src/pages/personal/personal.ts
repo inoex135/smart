@@ -2,13 +2,15 @@ import { Component } from "@angular/core";
 import { NavController, NavParams, AlertController } from "ionic-angular";
 
 import * as moment from "moment";
+import { PersonalProvider } from "../../providers/personal/personal";
+import { LoaderHelper } from "../../helpers/loader-helper";
 
 @Component({
   selector: "page-personal",
   templateUrl: "personal.html"
 })
 export class PersonalPage {
-  eventSource = [];
+  eventSource: any;
   selectedDay = new Date();
   viewTitle: string;
 
@@ -19,28 +21,27 @@ export class PersonalPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    private alertCtrl: AlertController
-  ) {
-    this.eventSource = [
-      {
-        title: "ntak",
-        startTime: new Date(Date.UTC(2017, 8, 12)),
-        endTime: new Date(Date.UTC(2017, 8, 12))
-        // allDay: false
-      },
-      {
-        title: "ntak",
-        startTime: new Date(Date.UTC(2017, 8, 2)),
-        endTime: new Date(Date.UTC(2017, 8, 5))
-        // allDay: false
-      }
-    ];
+    private alertCtrl: AlertController,
+    private personalProvider: PersonalProvider,
+    private loaderHelper: LoaderHelper
+  ) {}
 
-    console.log(this.eventSource);
+  getListEvent() {
+    this.loaderHelper.createLoader();
+
+    this.personalProvider
+      .getListEvent()
+      .then(res => {
+        this.eventSource = res;
+        this.loaderHelper.dismiss();
+      })
+      .catch(err =>
+        this.loaderHelper.errorHandleLoader(err.error_message, this.navCtrl)
+      );
   }
 
   ionViewDidLoad() {
-    console.log("ionViewDidLoad PersonalPage");
+    this.getListEvent();
   }
 
   onViewTitleChanged(title) {
@@ -53,7 +54,7 @@ export class PersonalPage {
 
     let alert = this.alertCtrl.create({
       title: "" + event.title,
-      subTitle: "From" + start + "<br>" + end,
+      subTitle: "From " + start + "<br>" + end,
       buttons: ["OK"]
     });
     alert.present();

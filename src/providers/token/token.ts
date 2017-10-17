@@ -18,6 +18,16 @@ export class TokenProvider {
       });
   }
 
+  getUser(): Promise<Object> {
+    return this.storage
+      .ready()
+      .then(() => this.storage.get("user") as Promise<Object>)
+      .then(user => {
+        this.latestUser = user;
+        return user;
+      });
+  }
+
   saveToken(token: String): Promise<void> {
     this.latestToken = token;
     return this.storage
