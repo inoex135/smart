@@ -9,7 +9,6 @@ import { GoogleCardLayout1 } from "./google-card/google-card-layout-1";
 import { Disposisi } from "./persuratan/disposisi/disposisi";
 import { Teruskan } from "./persuratan/teruskan/teruskan";
 import { Selesai } from "./persuratan/selesai/selesai";
-import { FilterChartComponent } from "./filter-chart/filter-chart";
 import { ChartSuratComponent } from "./chart-surat/chart-surat";
 import { ChartsModule } from "ng2-charts/charts/charts";
 import "../../node_modules/chart.js/dist/Chart.bundle.min.js";
@@ -23,7 +22,6 @@ import "../../node_modules/chart.js/dist/Chart.bundle.min.js";
     Disposisi,
     Teruskan,
     Selesai,
-    FilterChartComponent,
     ChartSuratComponent
   ],
   imports: [IonicModule, ChartsModule],
@@ -34,7 +32,6 @@ import "../../node_modules/chart.js/dist/Chart.bundle.min.js";
     Disposisi,
     Teruskan,
     Selesai,
-    FilterChartComponent,
     ChartSuratComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

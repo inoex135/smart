@@ -1,14 +1,11 @@
 import { Component } from "@angular/core";
-import { NavController, NavParams } from "ionic-angular";
+import { NavController, NavParams, ModalController } from "ionic-angular";
+import { FilterChartPage } from "../filter-chart/filter-chart";
 @Component({
   selector: "page-grafik-persuratan",
   templateUrl: "grafik-persuratan.html"
 })
 export class GrafikPersuratanPage {
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
-
-  ionViewDidLoad() {}
-
   public barChartLabels: string[] = [
     "2006",
     "2007",
@@ -27,4 +24,29 @@ export class GrafikPersuratanPage {
     { data: [65, 59, 80, 81, 56, 55, 40], label: "Naskah Belum Terima" },
     { data: [65, 59, 80, 81, 56, 55, 40], label: "Naskah Diterima" }
   ];
+
+  constructor(private modalCtrl: ModalController) {}
+
+  ionViewDidLoad() {}
+
+  showModalFilter() {
+    const modal = this.modalCtrl.create(FilterChartPage);
+
+    modal.present();
+
+    // update data by filter
+    modal.onDidDismiss(data => {
+      // dummy data
+      this.barChartData = [
+        { data: [10, 10, 10, 10, 10, 10, 10], label: "Selesai" },
+        { data: [65, 59, 80, 81, 56, 55, 40], label: "Belum Proses" },
+        { data: [65, 59, 80, 81, 56, 55, 40], label: "Disposisi" },
+        { data: [65, 59, 80, 81, 56, 55, 40], label: "Teruskan" },
+        { data: [65, 59, 80, 81, 56, 55, 40], label: "Naskah Belum Terima" },
+        { data: [65, 59, 80, 81, 56, 55, 40], label: "Naskah Diterima" }
+      ];
+    });
+  }
+
+  submitFilter() {}
 }

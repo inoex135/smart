@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
-import { NavController, NavParams } from "ionic-angular";
+import { NavController, NavParams, ModalController } from "ionic-angular";
 import * as moment from "moment";
+import { FilterChartPage } from "../filter-chart/filter-chart";
 
 @Component({
   selector: "page-grafik-persuratan-keluar",
@@ -14,5 +15,26 @@ export class GrafikPersuratanKeluarPage {
     { data: [65, 59, 80, 81, 56, 55, 40], label: "Terkirim" }
   ];
 
-  constructor() {}
+  constructor(private modalCtrl: ModalController) {}
+
+  ionViewDidLoad() {}
+
+  getChartData() {}
+
+  showFilterModal() {
+    const modal = this.modalCtrl.create(FilterChartPage);
+
+    modal.present();
+
+    // update data with filter
+    modal.onDidDismiss(data => {
+      // dummy data
+      this.barChartData = [
+        { data: [100, 100, 100, 100, 100, 100, 100], label: "Antrian" },
+        { data: [65, 59, 80, 81, 56, 55, 40], label: "Terkirim" }
+      ];
+    });
+  }
+
+  submitFilter() {}
 }
