@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { NavController, NavParams, ModalController } from "ionic-angular";
+import { ModalController } from "ionic-angular";
 import { FilterChartPage } from "../filter-chart/filter-chart";
 @Component({
   selector: "page-grafik-persuratan",
