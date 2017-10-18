@@ -12,8 +12,6 @@ import { FileTransfer } from "@ionic-native/file-transfer";
 import { File } from "@ionic-native/file";
 import { FileOpener } from "@ionic-native/file-opener";
 import { Calendar } from "@ionic-native/calendar";
-import { ChartsModule } from "ng2-charts/charts/charts";
-import "../../node_modules/chart.js/dist/Chart.bundle.min.js";
 
 import { MyApp } from "./app.component";
 import { HomePage } from "../pages/home/home";
@@ -53,6 +51,7 @@ import { TokenProvider } from "../providers/token/token";
 import { SuratProvider } from "../providers/surat/surat";
 import { GrafikPersuratanKeluarPage } from "../pages/grafik-persuratan-keluar/grafik-persuratan-keluar";
 import { EventModalPage } from "../pages/personal/event-modal/event-modal";
+import { GrafikSuratProvider } from '../providers/grafik-surat/grafik-surat';
 
 @NgModule({
   declarations: [
@@ -79,7 +78,6 @@ import { EventModalPage } from "../pages/personal/event-modal/event-modal";
     HttpModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
-    ChartsModule,
     ComponentsModule,
     NgCalendarModule,
     PipesModule
@@ -121,7 +119,8 @@ import { EventModalPage } from "../pages/personal/event-modal/event-modal";
     NaskahNotifikasiProvider,
     AndroidPermissions,
     AptHelper,
-    LoaderHelper
+    LoaderHelper,
+    GrafikSuratProvider
   ]
 })
 export class AppModule {}
