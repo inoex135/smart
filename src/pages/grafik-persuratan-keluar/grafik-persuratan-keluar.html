@@ -2,6 +2,11 @@
 
   <ion-navbar>
     <ion-title>Grafik Surat Keluar</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="openModalFilter()">
+        <ion-icon name="funnel"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
@@ -9,7 +14,7 @@
 
 <ion-content>
   <ion-card>
-    <ion-card-header>
+    <ion-card-header text-center>
       Info Umum Naskah Keluar
     </ion-card-header>
     <ion-card-content>
