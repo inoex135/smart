@@ -1,0 +1,32 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>filter-chart</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="dismiss()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-label>Tanggal Mulai</ion-label>
+      <ion-datetime displayFormat="MM/DD/YYYY" pickerFormat="MMM D YYYY" [(ngModel)]="filter.startTime"></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Tanggal Selesai</ion-label>
+      <ion-datetime displayFormat="MM/DD/YYYY" pickerFormat="MMM D YYYY" [(ngModel)]="filter.endTime"></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <button ion-button full color="blue-template" (click)="submitFilter()">Filter</button>
+    </ion-item>
+  </ion-list>
+</ion-content>

@@ -51,7 +51,8 @@ import { TokenProvider } from "../providers/token/token";
 import { SuratProvider } from "../providers/surat/surat";
 import { GrafikPersuratanKeluarPage } from "../pages/grafik-persuratan-keluar/grafik-persuratan-keluar";
 import { EventModalPage } from "../pages/personal/event-modal/event-modal";
-import { GrafikSuratProvider } from '../providers/grafik-surat/grafik-surat';
+import { GrafikSuratProvider } from "../providers/grafik-surat/grafik-surat";
+import { FilterChartPage } from "../pages/filter-chart/filter-chart";
 
 @NgModule({
   declarations: [
@@ -70,7 +71,8 @@ import { GrafikSuratProvider } from '../providers/grafik-surat/grafik-surat';
     HomePopoverPage,
     TextAvatarDirective,
     GrafikPersuratanKeluarPage,
-    EventModalPage
+    EventModalPage,
+    FilterChartPage
   ],
   imports: [
     BrowserModule,
@@ -98,7 +100,8 @@ import { GrafikSuratProvider } from '../providers/grafik-surat/grafik-surat';
     ModalContentPage,
     HomePopoverPage,
     GrafikPersuratanKeluarPage,
-    EventModalPage
+    EventModalPage,
+    FilterChartPage
   ],
   providers: [
     StatusBar,
