@@ -8,21 +8,21 @@ import { HttpModule } from "@angular/http";
 import { IonicStorageModule } from "@ionic/storage";
 import { PipesModule } from "../pipes/pipes.module";
 
-import { FileTransfer } from "@ionic-native/file-transfer";
-import { File } from "@ionic-native/file";
-import { FileOpener } from "@ionic-native/file-opener";
-import { Calendar } from "@ionic-native/calendar";
-
 import { MyApp } from "./app.component";
 import { HomePage } from "../pages/home/home";
 import { LoginPage } from "../pages/login/login";
 
 import { ComponentsModule } from "../components/components.module";
 
-// 3rd package
+// 3rd package native
 import { AndroidPermissions } from "@ionic-native/android-permissions";
-import { NgCalendarModule } from "ionic2-calendar";
 import { TextAvatarDirective } from "../directives/text-avatar/text-avatar";
+import { FileTransfer } from "@ionic-native/file-transfer";
+import { FileOpener } from "@ionic-native/file-opener";
+import { File } from "@ionic-native/file";
+
+// 3rd package angular
+import { NgCalendarModule } from "ionic2-calendar";
 
 // pages
 import { PersonalPage } from "../pages/personal/personal";
@@ -112,7 +112,6 @@ import { FilterChartPage } from "../pages/filter-chart/filter-chart";
     TokenProvider,
     FileTransfer,
     File,
-    Calendar,
     SuratProvider,
     FileOpener,
     PersonalProvider,

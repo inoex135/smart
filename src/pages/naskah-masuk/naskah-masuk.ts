@@ -31,11 +31,12 @@ export class NaskahMasukPage {
     this.loaderHelper.createLoader();
 
     // show naskah from API
-    this.naskahProvider
-      .getNaskahMasuk()
-      .finally(() => this.loaderHelper.dismiss())
-      .subscribe(res => {
+    this.naskahProvider.getNaskahMasuk().subscribe(
+      res => {
         this.listNaskah = res;
-      });
+        this.loaderHelper.dismiss();
+      },
+      err => this.loaderHelper.errorHandleLoader(err, this.navCtrl)
+    );
   }
 }
