@@ -4,17 +4,13 @@
   </ion-navbar>
 </ion-header>
 
-
 <ion-content no-padding>
   <ion-card margin-bottom>
-    <ion-card-header>
+    <ion-card-header text-center>
       Info Umum Naskah Masuk
     </ion-card-header>
     <ion-card-content>
-      <div style="display: block">
-        <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend"
-          [chartType]="barChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
-      </div>
+      <chart-surat [barChartLabels]="barChartLabels" [barChartData]="barChartData"></chart-surat>
     </ion-card-content>
   </ion-card>
 </ion-content>

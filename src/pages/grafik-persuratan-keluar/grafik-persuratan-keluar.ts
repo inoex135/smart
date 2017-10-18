@@ -6,49 +6,22 @@ import { NavController, NavParams } from "ionic-angular";
   templateUrl: "grafik-persuratan-keluar.html"
 })
 export class GrafikPersuratanKeluarPage {
-  public barChartOptions: any = {
-    scaleShowVerticalLines: false,
-    responsive: true
-  };
   public barChartLabels: string[] = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec"
+    "2006",
+    "2007",
+    "2008",
+    "2009",
+    "2010",
+    "2011",
+    "2012"
   ];
-  public barChartType: string = "bar";
-  public barChartLegend: boolean = true;
 
   public barChartData: any[] = [
-    {
-      data: [10, 20, 30, 50, 50, 60, 70, 80, 90, 100, 110, 120],
-      label: "Antrian"
-    },
-    {
-      data: [10, 20, 30, 50, 50, 60, 70, 80, 90, 100, 110, 120],
-      label: "Terkirim"
-    }
+    { data: [1, 2, 3, 4, 5, 6, 7], label: "Selesai" },
+    { data: [65, 59, 80, 81, 56, 55, 40], label: "Belum Proses" },
+    { data: [65, 59, 80, 81, 56, 55, 40], label: "Disposisi" },
+    { data: [65, 59, 80, 81, 56, 55, 40], label: "Teruskan" },
+    { data: [65, 59, 80, 81, 56, 55, 40], label: "Naskah Belum Terima" },
+    { data: [65, 59, 80, 81, 56, 55, 40], label: "Naskah Diterima" }
   ];
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
-
-  ionViewDidLoad() {}
-
-  // events
-  public chartClicked(e: any): void {
-    // console.log(e);
-    // console.log(this.barChartData);
-  }
-
-  public chartHovered(e: any): void {
-    console.log("ntak");
-  }
 }
