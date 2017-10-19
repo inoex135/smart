@@ -1,47 +1,69 @@
-<!--Form Title-->
-<h1 title text-right>Teruskan</h1>
+<ion-item-group>
+    <ion-item-divider>
+        Jabatan(Unit)
+        <span class="required">*</span>
+    </ion-item-divider>
+    <ion-item *ngFor="let jabatan of datas.jabatan">
+        <ion-label>{{jabatan}}</ion-label>
+        <ion-checkbox color="blue" (ionChange)="selectedUnit($event)"></ion-checkbox>
+    </ion-item>
 
-<ion-item-divider>Jabatan(Unit) <span class="required">*</span></ion-item-divider>
-<ion-item *ngFor="let jabatan of datas.jabatan" item-start>
-    <ion-label>{{jabatan}}</ion-label>
-    <ion-checkbox color="blue"></ion-checkbox>
-</ion-item>
+    <ion-item>
+        <ion-label floating>Lead</ion-label>
+        <ion-select [(ngModel)]="alasan">
+            <ion-option value="1">Segera</ion-option>
+            <ion-option value="2">Sangat Segera</ion-option>
+            <ion-option value="3">Kilat</ion-option>
+        </ion-select>
+    </ion-item>
 
-<ion-item-divider>Personal</ion-item-divider>
+    <ion-item>
+        <span class="required">
+            * Jika Tujuan Disposisi Lebih dari 2, maka Lead Wajib dipilih
+        </span>
+    </ion-item>
+</ion-item-group>
 
-<!---Input field password-->
-<ion-item no-padding>
-    <ion-label floating>Sifat Disposisi</ion-label>
-    <ion-select [(ngModel)]="alasan">
-        <ion-option value="1">Segera</ion-option>
-        <ion-option value="2">Sangat Segera</ion-option>
-        <ion-option value="3">Kilat</ion-option>
-    </ion-select>
-</ion-item>
-<!---Input field email-->
-<ion-item no-padding>
-    <ion-label floating>Catatan</ion-label>
-    <ion-textarea required type="email" pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" required [(ngModel)]="email"></ion-textarea>
-</ion-item>
+<br>
 
-<ion-item no-padding>
-    <ion-label floating>Target Selesai <span class="required">*</span></ion-label>
-    <ion-input required type="text" [(ngModel)]="tujuan"></ion-input>
-</ion-item>
+<ion-item-group>
+    <ion-item>
+        <ion-label floating>Sifat Disposisi</ion-label>
+        <ion-select [(ngModel)]="alasan">
+            <ion-option value="1">Segera</ion-option>
+            <ion-option value="2">Sangat Segera</ion-option>
+            <ion-option value="3">Kilat</ion-option>
+        </ion-select>
+    </ion-item>
 
-<ion-item no-padding>
-    <ion-label floating>Tanggal Disposisi</ion-label>
-    <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="tanggalDisposisi"></ion-datetime>
-</ion-item>
+    <ion-item>
+        <ion-label floating>Catatan</ion-label>
+        <ion-textarea required type="email" pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" required [(ngModel)]="email"></ion-textarea>
+    </ion-item>
 
-<ion-item-divider>
-    Petunjuk
-</ion-item-divider>
+    <ion-item>
+        <ion-label floating>Target Selesai
+            <span class="required">*</span>
+        </ion-label>
+        <ion-datetime required type="text" [(ngModel)]="tujuan" displayFormat="MMM DD YYYY" [(ngModel)]="tanggalDisposisi"></ion-datetime>
+    </ion-item>
 
-<ion-item *ngFor="let petunjuk of datas.petunjuk" item-start>
-    <ion-label>{{petunjuk}}</ion-label>
-    <ion-checkbox color="blue"></ion-checkbox>
-</ion-item>
+    <ion-item>
+        <ion-label floating>Tanggal Disposisi</ion-label>
+        <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="tanggalDisposisi"></ion-datetime>
+    </ion-item>
+</ion-item-group>
 
-<!---Register button-->
-<button ion-button right (click)="teruskan()" margin-top>Simpan</button>
+<br>
+
+<ion-item-group>
+    <ion-item-divider>Petunjuk</ion-item-divider>
+    <ion-item *ngFor="let petunjuk of datas.petunjuk" item-start>
+        <ion-label>{{petunjuk}}</ion-label>
+        <ion-checkbox color="blue"></ion-checkbox>
+    </ion-item>
+
+    <ion-item>
+        <button ion-button (click)="teruskan()" large full>Simpan</button>
+    </ion-item>
+</ion-item-group>

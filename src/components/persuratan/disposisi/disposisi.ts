@@ -14,4 +14,8 @@ export class Disposisi {
     this.datas.jabatan = Jabatan.getJabatan();
     console.log(this.datas);
   }
+
+  selectedUnit(event: any) {
+    console.log(event);
+  }
 }
