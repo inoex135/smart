@@ -5,7 +5,6 @@ import { ApiProvider } from "../api/api";
 import { FileTransfer, FileTransferObject } from "@ionic-native/file-transfer";
 import { ENV } from "../../config/environment";
 import { TokenProvider } from "../token/token";
-import { LoadingController } from "ionic-angular";
 
 @Injectable()
 export class AptProvider {
@@ -16,8 +15,7 @@ export class AptProvider {
     public http: Http,
     public apiProvider: ApiProvider,
     transfer: FileTransfer,
-    private token: TokenProvider,
-    private loadingCtrl: LoadingController
+    private token: TokenProvider
   ) {
     this.fileTransfer = transfer.create();
   }
