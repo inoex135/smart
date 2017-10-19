@@ -42,7 +42,7 @@ export class PersonalProvider {
 
     return newDate;
   }
-
+  // get params for get list event
   async getParams(date: any) {
     const startDate = moment().startOf("year");
     const endDate = moment().endOf("year");
@@ -56,5 +56,13 @@ export class PersonalProvider {
     };
 
     return params;
+  }
+
+  getListUser(name: any) {
+    return this.api.get(`/master/pegawai/search?nama=${name}`).map(res => {
+      return res.content.map(data => {
+        return data.nama;
+      });
+    });
   }
 }

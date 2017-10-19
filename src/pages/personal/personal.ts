@@ -77,6 +77,7 @@ export class PersonalPage {
     });
     modal.present();
 
+    // processing data from event modal after dismiss modal
     modal.onDidDismiss(data => {
       if (data) {
         let eventData = data;

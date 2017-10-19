@@ -16,10 +16,13 @@ import { ComponentsModule } from "../components/components.module";
 
 // 3rd package native
 import { AndroidPermissions } from "@ionic-native/android-permissions";
-import { TextAvatarDirective } from "../directives/text-avatar/text-avatar";
 import { FileTransfer } from "@ionic-native/file-transfer";
 import { FileOpener } from "@ionic-native/file-opener";
 import { File } from "@ionic-native/file";
+
+// Custom Directive
+import { TextAvatarDirective } from "../directives/text-avatar/text-avatar";
+import { RlTagInputModule } from "../directives/angular2-tag-input/tag-input.module";
 
 // 3rd package angular
 import { NgCalendarModule } from "ionic2-calendar";
@@ -82,7 +85,8 @@ import { FilterChartPage } from "../pages/filter-chart/filter-chart";
     IonicStorageModule.forRoot(),
     ComponentsModule,
     NgCalendarModule,
-    PipesModule
+    PipesModule,
+    RlTagInputModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
