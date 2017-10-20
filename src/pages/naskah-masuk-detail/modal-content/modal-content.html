@@ -4,35 +4,31 @@
         <ion-title>{{actionType}}</ion-title>
         <ion-buttons end>
             <button ion-button (click)="dismiss()">
-                  <span ion-text color="primary" showWhen="ios">Cancel</span>
-                  <span ion-text color="light-white" showWhen="android">Cancel</span>
-                  <!-- <ion-icon name="md-close" showWhen="android,windows"></ion-icon> -->
-                </button>
+                <span ion-text color="primary" showWhen="ios">Cancel</span>
+                <span ion-text color="light-white" showWhen="android">Cancel</span>
+                <!-- <ion-icon name="md-close" showWhen="android,windows"></ion-icon> -->
+            </button>
         </ion-buttons>
     </ion-toolbar>
 </ion-header>
 
-<ion-content>
-    <ion-grid>
-        <ion-row>
-            <div [ngSwitch]="actionType" col-12>
-                <ion-col col-12 col-sm-12 col-md-12 offset-lg-3 col-lg-6 offset-xl-3 col-xl-6>
-                    <!--Form teruskan-->
-                    <div class="form" padding *ngSwitchCase="'teruskan'">
-                        <teruskan></teruskan>
-                    </div>
-
-                    <!-- form disposisi -->
-                    <div class="form" padding *ngSwitchCase="'disposisi'">
-                        <disposisi></disposisi>
-                    </div>
-
-                    <!-- form selesai -->
-                    <div *ngSwitchCase="'selesai'" class="form" padding>
-                        <selesai></selesai>
-                    </div>
-                </ion-col>
+<ion-content no-padding no-margin>
+    <div [ngSwitch]="actionType" col-12>
+        <ion-col>
+            <!--Form teruskan-->
+            <div class="form" *ngSwitchCase="'teruskan'" no-padding>
+                <teruskan></teruskan>
             </div>
-        </ion-row>
-    </ion-grid>
+
+            <!-- form disposisi -->
+            <div class="form" *ngSwitchCase="'disposisi'" no-padding>
+                <disposisi></disposisi>
+            </div>
+
+            <!-- form selesai -->
+            <div *ngSwitchCase="'selesai'" class="form" no-padding>
+                <selesai></selesai>
+            </div>
+        </ion-col>
+    </div>
 </ion-content>

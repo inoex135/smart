@@ -9,13 +9,19 @@ import { Jabatan } from "../../../constant/jabatan";
 export class Disposisi {
   datas: any = {};
   tanggalDisposisi: string = new Date().toISOString();
+  unit: Array<string> = [];
+  selectedUnit: any = "";
+  lead: Array<string> = [];
+
   constructor() {
     this.datas.petunjuk = PetunjukDisposisi.getPetunjuk();
     this.datas.jabatan = Jabatan.getJabatan();
-    console.log(this.datas);
   }
 
-  selectedUnit(event: any) {
-    console.log(event);
+  setLead(data) {
+    console.log(data);
+  }
+  simpan() {
+    alert(this.unit);
   }
 }

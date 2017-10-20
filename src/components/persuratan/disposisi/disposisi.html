@@ -5,7 +5,7 @@
     </ion-item-divider>
     <ion-item *ngFor="let jabatan of datas.jabatan">
         <ion-label>{{jabatan}}</ion-label>
-        <ion-checkbox color="blue" (ionChange)="selectedUnit($event)"></ion-checkbox>
+        <ion-checkbox color="blue" (ionChange)="setLead()" [(ngModel)]="unit"></ion-checkbox>
     </ion-item>
 
     <ion-item>
@@ -64,6 +64,6 @@
     </ion-item>
 
     <ion-item>
-        <button ion-button (click)="teruskan()" large full>Simpan</button>
+        <button ion-button (click)="simpan()" large full>Simpan</button>
     </ion-item>
 </ion-item-group>
