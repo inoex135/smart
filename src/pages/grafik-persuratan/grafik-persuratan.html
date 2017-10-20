@@ -15,7 +15,8 @@
       Info Umum Naskah Masuk
     </ion-card-header>
     <ion-card-content>
-      <chart-surat [barChartLabels]="barChartLabels" [barChartData]="barChartData"></chart-surat>
+
+      <chart-surat *ngIf="barChartData != null" [barChartLabels]="barChartLabels" [barChartData]="barChartData"></chart-surat>
     </ion-card-content>
   </ion-card>
 </ion-content>

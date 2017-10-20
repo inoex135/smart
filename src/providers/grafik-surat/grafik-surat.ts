@@ -1,18 +1,11 @@
-import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import 'rxjs/add/operator/map';
+import { Injectable } from "@angular/core";
+import { ApiProvider } from "../api/api";
 
-/*
-  Generated class for the GrafikSuratProvider provider.
-
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
 @Injectable()
 export class GrafikSuratProvider {
+  constructor(private api: ApiProvider) {}
 
-  constructor(public http: Http) {
-    console.log('Hello GrafikSuratProvider Provider');
+  getSumasData() {
+    return this.api.get("/surat/grafik-sumas/umum");
   }
-
 }
