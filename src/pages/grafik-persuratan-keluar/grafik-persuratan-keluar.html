@@ -3,7 +3,7 @@
   <ion-navbar>
     <ion-title>Grafik Surat Keluar</ion-title>
     <ion-buttons end>
-      <button ion-button icon-only (click)="showFilterModal()">
+      <button ion-button icon-only (click)="showModalFilter()">
         <ion-icon name="funnel"></ion-icon>
       </button>
     </ion-buttons>
@@ -13,11 +13,6 @@
 
 <ion-content>
   <ion-card>
-    <ion-card-header text-center>
-      Info Umum Naskah Keluar
-    </ion-card-header>
-    <ion-card-content>
-      <chart-surat [barChartLabels]="barChartLabels" [barChartData]="barChartData"></chart-surat>
-    </ion-card-content>
+    <div [ng2-highcharts]="chartData"></div>
   </ion-card>
 </ion-content>

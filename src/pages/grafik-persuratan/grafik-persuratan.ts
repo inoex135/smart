@@ -1,8 +1,11 @@
-import { Component } from "@angular/core";
+import { Component, ViewChildren } from "@angular/core";
+
 import { ModalController, NavController } from "ionic-angular";
 import { FilterChartPage } from "../filter-chart/filter-chart";
 import { GrafikSuratProvider } from "../../providers/grafik-surat/grafik-surat";
 import { LoaderHelper } from "../../helpers/loader-helper";
+import { Ng2Highcharts } from "ng2-highcharts";
+
 import * as moment from "moment";
 
 @Component({
@@ -10,33 +13,45 @@ import * as moment from "moment";
   templateUrl: "grafik-persuratan.html"
 })
 export class GrafikPersuratanPage {
-  public barChartLabels: string[] = moment.months();
+  @ViewChildren(Ng2Highcharts) allCharts;
 
-  public barChartData: any[] = null;
+  chartData = {
+    chart: {
+      type: "column"
+    },
+    title: {
+      text: "Info Umum Naskah Masuk"
+    },
+    xAxis: {
+      categories: moment.months()
+    },
+    series: []
+  };
 
   constructor(
     private modalCtrl: ModalController,
     private grafikSuratProvider: GrafikSuratProvider,
     private loaderHelper: LoaderHelper,
     private nav: NavController
-  ) {
+  ) {}
+
+  ionViewDidLoad() {
     this.getSumasData();
   }
-
-  ionViewDidLoad() {}
 
   getSumasData() {
     this.loaderHelper.createLoader();
     return this.grafikSuratProvider.getSumasData().subscribe(
       res => {
-        this.barChartData = res;
+        this.chartData.series = res;
         this.loaderHelper.dismiss();
       },
       err => {
-        this.loaderHelper.errorHandleLoader(err, this.nav);
+        this.loaderHelper.errorHandleLoader(err.error_code, this.nav);
       }
     );
   }
+
   showModalFilter() {
     const modal = this.modalCtrl.create(FilterChartPage);
 
@@ -45,14 +60,37 @@ export class GrafikPersuratanPage {
     // update data by filter
     modal.onDidDismiss(data => {
       // dummy data
-      this.barChartData = [
-        { data: [10, 10, 10, 10, 10, 10, 10], label: "Selesai" },
-        { data: [65, 59, 80, 81, 56, 55, 40], label: "Belum Proses" },
-        { data: [65, 59, 80, 81, 56, 55, 40], label: "Disposisi" },
-        { data: [65, 59, 80, 81, 56, 55, 40], label: "Teruskan" },
-        { data: [65, 59, 80, 81, 56, 55, 40], label: "Naskah Belum Terima" },
-        { data: [65, 59, 80, 81, 56, 55, 40], label: "Naskah Diterima" }
+      const newData = [
+        {
+          name: "NC",
+          data: [7057, 6858, 6643, 6570, 6115, 107, 31, 635, 203, 2, 2]
+        },
+        {
+          name: "OK",
+          data: [54047, 52484, 50591, 49479, 46677, 33, 156, 947, 408, 6, 2]
+        },
+        {
+          name: "KO",
+          data: [11388, 11115, 10742, 10757, 10290, 973, 914, 4054, 732, 34, 2]
+        },
+        {
+          name: "VALID",
+          data: [8836, 8509, 8255, 7760, 7621, 973, 914, 4054, 732, 34, 2]
+        },
+        {
+          name: "CHECK",
+          data: [115, 162, 150, 187, 172, 973, 914, 4054, 732, 34, 2]
+        },
+        {
+          name: "COR",
+          data: [12566, 12116, 11446, 10749, 10439, 973, 914, 4054, 732, 34, 2]
+        }
       ];
+      let chart = [];
+
+      chart = this.allCharts.forEach(chartRef => {
+        chartRef.options.series = newData;
+      });
     });
   }
 

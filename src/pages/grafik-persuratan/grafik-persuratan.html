@@ -9,14 +9,8 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content no-padding>
-  <ion-card margin-bottom>
-    <ion-card-header text-center>
-      Info Umum Naskah Masuk
-    </ion-card-header>
-    <ion-card-content>
-
-      <chart-surat *ngIf="barChartData != null" [barChartLabels]="barChartLabels" [barChartData]="barChartData"></chart-surat>
-    </ion-card-content>
+<ion-content no-padding no-margin>
+  <ion-card>
+    <div [ng2-highcharts]="chartData"></div>
   </ion-card>
 </ion-content>

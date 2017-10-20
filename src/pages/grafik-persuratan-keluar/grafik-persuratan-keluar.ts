@@ -1,38 +1,97 @@
-import { Component } from "@angular/core";
+import { Component, ViewChildren } from "@angular/core";
 import { ModalController } from "ionic-angular";
 import * as moment from "moment";
 import { FilterChartPage } from "../filter-chart/filter-chart";
+import { Ng2Highcharts } from "ng2-highcharts";
 
 @Component({
   selector: "page-grafik-persuratan-keluar",
   templateUrl: "grafik-persuratan-keluar.html"
 })
 export class GrafikPersuratanKeluarPage {
-  public barChartLabels: string[] = moment.months();
-
-  public barChartData: any[] = [
-    { data: [1, 2, 3, 4, 5, 6, 7], label: "Antrian" },
-    { data: [65, 59, 80, 81, 56, 55, 40], label: "Terkirim" }
-  ];
-
+  @ViewChildren(Ng2Highcharts) allCharts;
+  chartData = {
+    chart: {
+      type: "column"
+    },
+    title: {
+      text: "Info Umum Naskah Keluar"
+    },
+    xAxis: {
+      categories: moment.months()
+    },
+    series: [
+      {
+        name: "NC",
+        data: [7057, 6858, 6643, 6570, 6115, 107, 31, 635, 203, 2, 2]
+      },
+      {
+        name: "OK",
+        data: [54047, 52484, 50591, 49479, 46677, 33, 156, 947, 408, 6, 2]
+      },
+      {
+        name: "KO",
+        data: [11388, 11115, 10742, 10757, 10290, 973, 914, 4054, 732, 34, 2]
+      },
+      {
+        name: "VALID",
+        data: [8836, 8509, 8255, 7760, 7621, 973, 914, 4054, 732, 34, 2]
+      },
+      {
+        name: "CHECK",
+        data: [115, 162, 150, 187, 172, 973, 914, 4054, 732, 34, 2]
+      },
+      {
+        name: "COR",
+        data: [12566, 12116, 11446, 10749, 10439, 973, 914, 4054, 732, 34, 2]
+      }
+    ]
+  };
   constructor(private modalCtrl: ModalController) {}
 
   ionViewDidLoad() {}
 
-  getChartData() {}
+  getSukelData() {}
 
-  showFilterModal() {
+  showModalFilter() {
     const modal = this.modalCtrl.create(FilterChartPage);
 
     modal.present();
 
-    // update data with filter
+    // update data by filter
     modal.onDidDismiss(data => {
       // dummy data
-      this.barChartData = [
-        { data: [100, 100, 100, 100, 100, 100, 100], label: "Antrian" },
-        { data: [65, 59, 80, 81, 56, 55, 40], label: "Terkirim" }
+      const newData = [
+        {
+          name: "NC",
+          data: [7057, 6858, 6643, 6570, 6115, 107, 31, 635, 203, 2, 2]
+        },
+        {
+          name: "OK",
+          data: [54047, 52484, 50591, 49479, 46677, 33, 156, 947, 408, 6, 2]
+        },
+        {
+          name: "KO",
+          data: [11388, 11115, 10742, 10757, 10290, 973, 914, 4054, 732, 34, 2]
+        },
+        {
+          name: "VALID",
+          data: [8836, 8509, 8255, 7760, 7621, 973, 914, 4054, 732, 34, 2]
+        },
+        {
+          name: "CHECK",
+          data: [115, 162, 150, 187, 172, 973, 914, 4054, 732, 34, 2]
+        },
+        {
+          name: "COR",
+          data: [12566, 12116, 11446, 10749, 10439, 973, 914, 4054, 732, 34, 2]
+        }
       ];
+      let chart = [];
+
+      chart = this.allCharts.forEach(chartRef => {
+        chartRef.options.series = newData;
+      });
     });
   }
 
