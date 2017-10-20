@@ -26,6 +26,7 @@ import { RlTagInputModule } from "../directives/angular2-tag-input/tag-input.mod
 
 // 3rd package angular
 import { NgCalendarModule } from "ionic2-calendar";
+import { Ng2HighchartsModule } from "ng2-highcharts";
 
 // pages
 import { PersonalPage } from "../pages/personal/personal";
@@ -86,7 +87,8 @@ import { FilterChartPage } from "../pages/filter-chart/filter-chart";
     ComponentsModule,
     NgCalendarModule,
     PipesModule,
-    RlTagInputModule
+    RlTagInputModule,
+    Ng2HighchartsModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
