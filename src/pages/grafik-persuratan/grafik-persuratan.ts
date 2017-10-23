@@ -41,7 +41,10 @@ export class GrafikPersuratanPage {
 
   getSumasData() {
     this.loaderHelper.createLoader();
-    return this.grafikSuratProvider.getSumasData().subscribe(
+
+    const params = this.paramsStartAndEnd();
+
+    return this.grafikSuratProvider.getFilterSumasData(params).subscribe(
       res => {
         this.chartData.series = res;
         this.loaderHelper.dismiss();
@@ -59,40 +62,43 @@ export class GrafikPersuratanPage {
 
     // update data by filter
     modal.onDidDismiss(data => {
-      // dummy data
-      const newData = [
-        {
-          name: "NC",
-          data: [7057, 6858, 6643, 6570, 6115, 107, 31, 635, 203, 2, 2]
-        },
-        {
-          name: "OK",
-          data: [54047, 52484, 50591, 49479, 46677, 33, 156, 947, 408, 6, 2]
-        },
-        {
-          name: "KO",
-          data: [11388, 11115, 10742, 10757, 10290, 973, 914, 4054, 732, 34, 2]
-        },
-        {
-          name: "VALID",
-          data: [8836, 8509, 8255, 7760, 7621, 973, 914, 4054, 732, 34, 2]
-        },
-        {
-          name: "CHECK",
-          data: [115, 162, 150, 187, 172, 973, 914, 4054, 732, 34, 2]
-        },
-        {
-          name: "COR",
-          data: [12566, 12116, 11446, 10749, 10439, 973, 914, 4054, 732, 34, 2]
-        }
-      ];
-      let chart = [];
+      // cek if param is set
+      if (data) {
+        // convert params to specific format
+        const params = this.filterParams(data);
 
-      chart = this.allCharts.forEach(chartRef => {
-        chartRef.options.series = newData;
-      });
+        // get http data
+        this.grafikSuratProvider.getFilterSumasData(params).subscribe(res => {
+          // set new data from server
+          this.allCharts.forEach(chartRef => {
+            chartRef.options.series = res;
+          });
+        });
+      }
     });
   }
 
-  submitFilter() {}
+  paramsStartAndEnd() {
+    const date = {
+      startTime: moment()
+        .startOf("year")
+        .format("DD-MM-YYYY"),
+      endTime: moment()
+        .endOf("year")
+        .format("DD-MM-YYYY")
+    };
+
+    return date;
+  }
+
+  convertParam(param: any) {
+    return moment(param).format("DD-MM-YYYY");
+  }
+
+  filterParams(params: any) {
+    params.startTime = this.convertParam(params.startTime);
+    params.endTime = this.convertParam(params.endTime);
+
+    return params;
+  }
 }

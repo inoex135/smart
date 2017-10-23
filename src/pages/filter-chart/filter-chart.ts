@@ -13,10 +13,6 @@ export class FilterChartPage {
 
   constructor(private viewCtrl: ViewController) {}
 
-  ionViewDidLoad() {
-    console.log("ionViewDidLoad FilterChartPage");
-  }
-
   dismiss() {
     this.viewCtrl.dismiss();
   }
