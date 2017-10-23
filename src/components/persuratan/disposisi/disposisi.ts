@@ -10,7 +10,7 @@ export class Disposisi {
   datas: any = {};
   tanggalDisposisi: string = new Date().toISOString();
   unit: Array<string> = [];
-  selectedUnit: any = "";
+  selectedUnit: Array<any> = [];
   lead: Array<string> = [];
 
   constructor() {
@@ -18,8 +18,13 @@ export class Disposisi {
     this.datas.jabatan = Jabatan.getJabatan();
   }
 
-  setLead(data) {
-    console.log(data);
+  setLead(event: any, unit: any) {
+    // @TODO: selectedUnit msh duplikat
+    // jika checkbox di select setelah itu di uncheck,
+    // kemudian di cheklist lagi
+    if (event.checked) {
+      this.selectedUnit.push(unit);
+    }
   }
   simpan() {
     alert(this.unit);

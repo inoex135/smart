@@ -3,17 +3,17 @@
         Jabatan(Unit)
         <span class="required">*</span>
     </ion-item-divider>
-    <ion-item *ngFor="let jabatan of datas.jabatan">
-        <ion-label>{{jabatan}}</ion-label>
-        <ion-checkbox color="blue" (ionChange)="setLead()" [(ngModel)]="unit"></ion-checkbox>
+    <ion-item *ngFor="let unit of datas.jabatan; let i = index">
+        <ion-label>{{unit.jabatan}}</ion-label>
+        <ion-checkbox value="{{unit.id}}" color="blue" (ionChange)="setLead($event, unit)" [(ngModel)]="unit[i]"></ion-checkbox>
     </ion-item>
 
     <ion-item>
         <ion-label floating>Lead</ion-label>
-        <ion-select [(ngModel)]="alasan">
-            <ion-option value="1">Segera</ion-option>
-            <ion-option value="2">Sangat Segera</ion-option>
-            <ion-option value="3">Kilat</ion-option>
+        <ion-select [(ngModel)]="lead">
+            <ion-option *ngFor="let unitLead of selectedUnit" value="{{unitLead.id}}">
+                {{unitLead.jabatan}}
+            </ion-option>
         </ion-select>
     </ion-item>
 
