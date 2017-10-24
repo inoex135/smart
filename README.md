@@ -1,21 +1,21 @@
 ## SMART Mobile with Ionic 3
 
 ### Required
-* Ionic memerlukan nodejs dan npm/yarn. jika belum install, bisa instal terlebih dahulu
+* Ionic memerlukan nodejs 6.11.4(pada saat ini) dan npm/yarn. jika belum install, bisa instal terlebih dahulu
+* Install ionic dan cordova `npm i -g ionic cordova`.
 * Usahakan android studio sudah terinstall dan bisa digunakan untuk build untuk development.
 
-### Installation
+### Development
 Untuk menjalankan project :
 
 1. Clone repo.
-2. Run command for install packages with `yarn` or `npm install`. you must install yarn first if use yarn.
+2. Install packages with `yarn` or `npm install`.
 3. Setup your `API URL` in `src/config/environtment.ts`.
-4. Run `npm install -g ionic cordova` to install ionic command and cordova.
-5. Then, run `ionic serve` for development in browser.
-6. Atau jika ingin develop di android lewat emulator, run `ionic cordova build android --prod -l`.
-7. untuk build debug bisa jalankan command `ionic cordova platform add android` jika belum ada platform.
-9. jalankan command utk build menjadi apk `ionic cordova build android --prod`.
-10. lalu hasilnya bisa di lihat di folder `platform/android/build/outputs/apk`
+4. Then, run `ionic serve` for development in browser.
+5. Jika ingin jalankan di emulator atau build pastikan platform sudah tersedia atau jalankan command `ionic cordova platform add android`.
+5. Run in emulator `ionic cordova run android`
+6. jalankan command utk build menjadi apk `ionic cordova build android --prod`.
+7. lalu hasilnya bisa di lihat di folder `platform/android/build/outputs/apk`.
 
 ## Production
 1. Pertama, tambahkan target platform yang diinginkan dengan command `ionic cordova platform add android`
@@ -40,6 +40,7 @@ npm install -g ionic
 
 * Error ketika build menjadi apka` The Task.leftShift(Closure) method has been deprecated  [disini](https://stackoverflow.com/questions/31310182/error-could-not-find-gradle-wrapper-within-android-sdk-might-need-to-update-yo/41177145#41177145)
 
+* Jika error build setelah menambahkan plugin cordova, Cara fixnya hapus folder `/platform` dan `/plugin`, kemudian tambahkan platform lagi dengan command `ionic cordova platform add android`, baru jalankan ulang buildnya.
 
 ### Etc
 ```
