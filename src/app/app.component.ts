@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { Platform, NavController } from "ionic-angular";
+import { Platform, NavController, App } from "ionic-angular";
 import { StatusBar } from "@ionic-native/status-bar";
 import { SplashScreen } from "@ionic-native/splash-screen";
 
@@ -7,6 +7,9 @@ import { LoginPage } from "../pages/login/login";
 import { UserProvider } from "../providers/user/user";
 import { TokenProvider } from "../providers/token/token";
 import { HomePage } from "../pages/home/home";
+
+import { FCM } from "@ionic-native/fcm";
+
 @Component({
   templateUrl: "app.html"
 })
@@ -19,7 +22,9 @@ export class MyApp {
     public statusBar: StatusBar,
     public splashScreen: SplashScreen,
     public userProvider: UserProvider,
-    public token: TokenProvider
+    public token: TokenProvider,
+    public fcm: FCM,
+    public app: App
   ) {
     this.initializeApp();
   }
@@ -36,12 +41,22 @@ export class MyApp {
 
       // set backButton hardware android
       this.registerBackButton();
+
+      // this.fcmTesting();
     });
   }
-
+  // fcmTesting() {
+  //   this.fcm.onNotification().subscribe(data => {
+  //     if (data.wasTapped) {
+  //       alert("Received in background");
+  //     } else {
+  //       alert("Received in foreground");
+  //     }
+  //   });
+  // }
   registerBackButton(): void {
     document.addEventListener("backbutton", () => {
-      let nav = this.nav;
+      let nav: NavController = this.nav;
       if (nav.canGoBack()) {
         nav.pop();
       } else {

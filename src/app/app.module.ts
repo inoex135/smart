@@ -19,7 +19,7 @@ import { AndroidPermissions } from "@ionic-native/android-permissions";
 import { FileTransfer } from "@ionic-native/file-transfer";
 import { FileOpener } from "@ionic-native/file-opener";
 import { File } from "@ionic-native/file";
-
+import { FCM } from "@ionic-native/fcm";
 // Custom Directive
 import { TextAvatarDirective } from "../directives/text-avatar/text-avatar";
 import { RlTagInputModule } from "../directives/angular2-tag-input/tag-input.module";
@@ -120,6 +120,7 @@ import { FilterChartPage } from "../pages/filter-chart/filter-chart";
     File,
     SuratProvider,
     FileOpener,
+    FCM,
     PersonalProvider,
     AptProvider,
     GrafikPersuratanPage,
