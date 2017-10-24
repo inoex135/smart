@@ -56,42 +56,42 @@
             <h3 ion-text>No Tiket</h3>
           </div>
           <div padding-top padding-bottom>
-            <h4 ion-text> {{detail?.title}} </h4>
+            <h4 ion-text> {{detail?.nomor_tiket}} </h4>
           </div>
 
           <div card-subtitle>
             <h3 ion-text>Pelayanan</h3>
           </div>
           <div padding-top padding-bottom>
-            <h4 ion-text> {{detail?.description}} </h4>
+            <h4 ion-text> {{detail?.pelayanan}} </h4>
           </div>
 
           <div card-subtitle>
             <h3 ion-text>Sub Pelayanan: </h3>
           </div>
           <div padding-top padding-bottom>
-            <h4 ion-text> {{detail?.longDescription}} </h4>
+            <h4 ion-text> {{detail?.sub_pelayanan}} </h4>
           </div>
 
           <div card-subtitle>
             <h3 ion-text>Nama Pemohon: </h3>
           </div>
           <div padding-top padding-bottom>
-            <h4 ion-text> Arief Muhammad </h4>
+            <h4 ion-text> {{detail?.kontak_nama || "-"}} </h4>
           </div>
 
           <div card-subtitle>
             <h3 ion-text>Perihal: </h3>
           </div>
           <div padding-top padding-bottom>
-            <h4 ion-text> {{ detail?.perihal }} </h4>
+            <h4 ion-text> {{ detail?.perihal || "-" }} </h4>
           </div>
 
           <div card-subtitle>
             <h3 ion-text>Tanggal Naskah: </h3>
           </div>
           <div padding-top padding-bottom>
-            <h4 ion-text> {{detail?.date}} </h4>
+            <h4 ion-text> {{detail?.tanggal_naskah}} </h4>
           </div>
         </ion-card>
 

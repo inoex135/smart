@@ -11,34 +11,34 @@
       <ion-row>
         <ion-col>
           <h4 ion-text card-title>Indikator</h4>
-          <ion-badge item-start color="secondary">{{item.status}}</ion-badge>
+          <ion-badge item-start color="secondary">{{item?.status}}</ion-badge>
         </ion-col>
         <ion-col>
-          <!-- <h4 ion-text card-title>Tanggal</h4> -->
-          <h6 ion-text item-end card-content text-wrap>{{item.date | date: 'd MMMM, y'}}</h6>
+          <h4 ion-text card-title>Tanggal</h4>
+          <h6 ion-text item-end card-content text-wrap>{{item?.tanggal_naskah}}</h6>
         </ion-col>
       </ion-row>
 
       <ion-row>
-        <ion-col>
+        <ion-col col-6>
           <h4 ion-text card-title>No Tiket</h4>
-          <h4 card-title ion-text card-content>{{item.title}}</h4>
+          <h4 card-title ion-text card-content text-wrap>{{item?.nomor_tiket}}</h4>
         </ion-col>
-        <ion-col>
+        <ion-col col-6>
           <h4 ion-text card-title>Pelayanan</h4>
-          <h4 card-title ion-text card-content>{{item.title}}</h4>
+          <h4 card-title ion-text card-content text-wrap>{{item?.pelayanan}}</h4>
         </ion-col>
       </ion-row>
 
       <ion-row>
         <ion-col>
           <h4 ion-text card-title>Pemohon</h4>
-          <p ion-text card-content>Napitupulu</p>
+          <p ion-text card-content>{{item?.kontak_nama || "-"}}</p>
         </ion-col>
       </ion-row>
 
       <ion-item>
-        <button item-end full ion-button end color="light" (click)="detailApt()">Detail</button>
+        <button item-end full ion-button end color="light" (click)="detailApt(item)">Detail</button>
         <button item-end full ion-button end color="favorite" (click)="download()">Download</button>
       </ion-item>
 

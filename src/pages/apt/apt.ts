@@ -38,25 +38,23 @@ export class AptPage {
     this.getAptList();
   }
 
-  detailApt() {
-    this.navCtrl.push(AptDetailPage);
+  detailApt(item: any) {
+    this.navCtrl.push(AptDetailPage, { detail: item });
   }
 
   async getAptList() {
     await this.loaderHelper.createLoader();
 
-    this.aptProvider
-      .getPermohonanList()
-      // .finally(() => {})
-      .subscribe(
-        res => {
-          this.items = res;
-          this.loaderHelper.dismiss();
-        },
-        err => {
-          this.loaderHelper.errorHandleLoader(err.error_code, this.navCtrl);
-        }
-      );
+    this.aptProvider.getPermohonanList().subscribe(
+      res => {
+        this.items = res;
+
+        this.loaderHelper.dismiss();
+      },
+      err => {
+        this.loaderHelper.errorHandleLoader(err.error_code, this.navCtrl);
+      }
+    );
   }
 
   async download() {
