@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1053313807283",
+    "firebase_url": "https://smart-d1c9a.firebaseio.com",
+    "project_id": "smart-d1c9a",
+    "storage_bucket": "smart-d1c9a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1053313807283:android:15ea43d31d9e2c18",
+        "android_client_info": {
+          "package_name": "com.djkn.smart"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1053313807283-siuo4kfjpicut7a5aa1u845ljl57s5c3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA44GR7VMI4frB9tWgQQQGzdKx26dTm6nM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
