@@ -1,32 +1,31 @@
 <ion-header margin-bottom>
   <ion-navbar>
-    <ion-title text-left>
-      <img src="assets/logo/djkn-logo.png" left alt="SMARt Logo" class="toolbar-logo">
-    </ion-title>
     <ion-buttons end>
-      <button ion-button icon-only (click)="presentPopover($event)">
-        <ion-icon name="more"></ion-icon>
+      <button ion-button (click)="logout()">
+        Logout
       </button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
 
-<ion-content class="card-background-page">
-  <ion-slides pager="true" parallax="true">
-    <ion-slide *ngFor="let slide of slides" [ngStyle]="{'background' : 'url(' + slide.imageUrl + ')'}">
-      <h2>{{slide.title}}</h2>
-    </ion-slide>
-  </ion-slides>
-
-  <ion-grid class="grid" no-padding>
-    <ion-row class="row">
-      <ion-col col-4 col-lg-4 col-md-6 col-sm-4 col-xl-2 text-center *ngFor="let menu of menus" class="col" (click)="pagesTo(menu.component)">
-        <button>
-          <ion-icon color="primary" name="{{menu.icon}}" role="img" class="" aria-label="apps"></ion-icon>
-          <br> {{menu.title}}
-        </button>
-      </ion-col>
-
-    </ion-row>
-  </ion-grid>
+<ion-content [ngStyle]="{'background-image': 'url(' + backgroundImage +')'}">
+  <!-- <ion-avatar>
+    <img src="assets/logo/kemenkeu.png"> Fulan Fulanah
+  </ion-avatar> -->
+  <div class="content-home">
+    <div *ngFor="let menu of menus">
+      <ion-card (click)="pagesTo(menu.component)">
+        <ion-item color="{{menu?.color}}">
+          <ion-avatar item-start>
+            <img src="assets/logo/kemenkeu.png" name="{{menu?.icon}}">
+          </ion-avatar>
+          <h6 ion-text text-wrap color="light">{{menu?.subtitle}}</h6>
+          <ion-icon name="{{menu?.icon}}" item-end class="menu-logo"></ion-icon>
+        </ion-item>
+        <ion-item color="light">
+          <h1 ion-text item-end text-uppercase color="{{menu?.color}}">{{menu?.title}}</h1>
+        </ion-item>
+      </ion-card>
+    </div>
+  </div>
 </ion-content>

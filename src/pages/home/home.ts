@@ -1,5 +1,5 @@
-import { Component, ViewChild } from "@angular/core";
-import { NavController, PopoverController, Slides } from "ionic-angular";
+import { Component } from "@angular/core";
+import { NavController, PopoverController } from "ionic-angular";
 import { UserProvider } from "../../providers/user/user";
 import { LoginPage } from "../login/login";
 import { SuratPage } from "../surat/surat";
@@ -12,39 +12,9 @@ import { HomePopoverPage } from "../home-popover/home-popover";
   templateUrl: "home.html"
 })
 export class HomePage {
-  @ViewChild("slider") slider: Slides;
-
   public menus: Array<any> = [];
-  slides = [
-    {
-      title: "Dream's Adventure",
-      imageUrl:
-        "https://smart.javan.co.id/smart/themes/porto/assets/images/slide-bg.jpg",
-      songs: 2,
-      private: false
-    },
-    {
-      title: "For the Weekend",
-      imageUrl:
-        "https://smart.javan.co.id/smart/themes/porto/assets/images/slide-bg.jpg",
-      songs: 4,
-      private: false
-    },
-    {
-      title: "Family Time",
-      imageUrl:
-        "https://smart.javan.co.id/smart/themes/porto/assets/images/slide-bg.jpg",
-      songs: 5,
-      private: true
-    },
-    {
-      title: "My Trip",
-      imageUrl:
-        "https://smart.javan.co.id/smart/themes/porto/assets/images/slide-bg.jpg",
-      songs: 12,
-      private: true
-    }
-  ];
+
+  backgroundImage: string = "assets/images/bg_login.png";
 
   constructor(
     public navCtrl: NavController,
@@ -59,18 +29,26 @@ export class HomePage {
   listMenu() {
     this.menus = [
       {
-        title: "Persuratan",
+        title: "PERSURATAN",
+        subtitle: "Pemberitahuan Persuratan",
         icon: "mail",
         component: SuratPage,
-        color: "bluesky"
+        color: "blue-light"
       },
       {
-        title: "Personal",
-        icon: "person",
+        title: "PERSONAL",
+        subtitle: "Pemberitahuan Kalender Kegiatan",
+        icon: "calendar",
         component: PersonalPage,
-        color: "blue"
+        color: "orange"
       },
-      { title: "APT", icon: "laptop", component: AptPage, color: "orange" }
+      {
+        title: "APT",
+        subtitle: "Pemberitahuan Supervisi",
+        icon: "checkmark-circle-outline",
+        component: AptPage,
+        color: "green"
+      }
     ];
 
     return this.menus;
