@@ -25,16 +25,9 @@ export class LoginPage {
   ) {
     let self = this;
     this.params.data = {
-      username: "Username",
-      password: "Password",
-      register: "Register",
       login: "Login",
-      skip: "Skip",
-      logo: "assets/logo/logo.png",
-      backgroundImage: "icon-account",
-      iconAccount: "icon-key",
-      iconKey: "",
-      iconLock: "assets/images/background/loginlight.jpg"
+      logo: "assets/logo/kemenkeu.png",
+      backgroundImage: "assets/images/bg_login.png"
     };
 
     this.params.events = {
