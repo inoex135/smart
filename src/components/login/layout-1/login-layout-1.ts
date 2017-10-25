@@ -10,7 +10,6 @@ export class LoginLayout1 {
 
   public username: string;
   public password: string;
-  public backgroundImage = "assets/background/4.png";
 
   constructor() {}
 
