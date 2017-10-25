@@ -1,53 +1,100 @@
 /*  #Style Login + logo
 ================================================*/
 login-layout-1 {
+  $transparent-white: rgba(255, 255, 255, 0.6);
+  $blue-font: map-get($colors, "blue-template");
+  $gray: #c5c9ce;
+
+  // header
+  .toolbar-content,
+  span {
+    color: white;
+  }
+  .toolbar-background,
+  ion-navbar,
+  ion-header {
+    background: transparent !important;
+    background-color: transparent !important;
+  }
+  .header-md::after,
+  .toolbar-background-ios {
+    background-image: none;
+    border-bottom: 0;
+  }
+
   ion-content {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
   }
-  ion-col {
-    position: relative;
 
-    [button-clear] {
-      position: absolute;
-      right: 0;
-      top: 0;
+  // Content
+  .card {
+    background-color: white;
+    box-shadow: 1px 1px 5px $gray;
+    h1,
+    h6 {
+      color: $blue-font;
     }
   }
-
-  img {
-    max-width: 100px;
-    max-height: 100px;
-    display: block;
-    margin: 35px auto 20px;
+  .scroll-content {
+    display: flex;
+    flex-direction: column;
+    // overflow: hidden;
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
   }
-
+  .logo {
+    width: 25%;
+    height: auto;
+    margin: 0 auto;
+    padding-top: 30px;
+    padding-bottom: 20px;
+  }
+  // Input items
+  ion-item {
+    border-radius: 3px !important;
+    padding-left: 10px !important;
+    margin-bottom: 15px !important;
+    margin-bottom: 10px;
+    color: $blue-font !important;
+    background-color: rgba(255, 255, 255, 0.2) !important;
+    font-size: 0.9em;
+  }
+  ::-webkit-input-placeholder {
+    text-align: center;
+  }
   .item-inner {
-    border-bottom-color: theme-colors("mainColors", "primary") !important;
-    box-shadow: none !important;
+    border-bottom: 0.1px solid $gray !important;
   }
 
-  [button-clear-outline] {
-    margin-top: 10%;
-    width: 48.5%;
-    display: block;
-    float: left;
+  // footer
+  ion-footer {
+    height: 47px;
+  }
+  .footer {
+    text-align: center;
+    background: transparent;
+    min-height: 47px;
+  }
+  .footer-md::before {
+    border-top: none !important;
+    background-image: none;
   }
 
-  [social] {
-    margin: 20px auto 0;
-    overflow: hidden;
+  // etc
+  h6,
+  h1,
+  p {
+    color: $blue-font;
+  }
 
-    button {
-      margin: 1%;
-      width: 48.5%;
-      display: block;
-      float: left;
-    }
+  .smart-title {
+    margin-bottom: 0px !important;
+    font-weight: bold;
+  }
 
-    > button:nth-child(2n) {
-      margin-right: 0;
-    }
+  .smart-subtitle {
+    margin-top: 0px !important;
   }
 }
