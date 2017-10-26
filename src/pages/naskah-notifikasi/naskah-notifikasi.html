@@ -1,21 +1,17 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>notifikasi</ion-title>
+    <ion-title text-capitalize>Pemberitahuan Persuratan</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content class="list-avatar-page">
   <ion-list>
     <ion-item *ngFor="let notif of notifications">
-      <!-- <ion-avatar item-start>
-        <img src="https://ionicframework.com/dist/preview-app/www/assets/img/marty-avatar.png">
-      </ion-avatar> -->
-
-      {{notif.sender}}
+      <h6 ion-text>{{notif.sender}}</h6>
       <text-avatar [text]="notif.sender" item-left></text-avatar>
-      <h3 ion-text text-wrap>{{notif?.sender}}</h3>
-      <p>{{ notif?.message}}</p>
-      <ion-note item-end>{{notif?.date | humanizeTime}}</ion-note>
+      <p ion-text text-wrap>Pesan Disposisi Sangat Segera</p>
+      <p ion-text color="blue-template" text-wrap>{{ notif?.date | indonesianDate }}</p>
+      <ion-note item-end>Unread</ion-note>
     </ion-item>
   </ion-list>
 </ion-content>
