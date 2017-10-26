@@ -7,11 +7,11 @@ export class IndonesianDatePipe implements PipeTransform {
   /**
    * Takes a value timestamps and convert to locale indonesian date.
    */
-  transform(value: number, ...args) {
-    const newDate = moment
-      .unix(1318781876)
+  transform(value: number, args = "dddd, DD MMMM YYYY H:m:s") {
+    const newDate = moment(value)
       .locale("ID_id")
-      .format("dddd, DD MMMM YYYY H:m:s");
+      .format(args);
+
     return newDate;
   }
 }
