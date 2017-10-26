@@ -22,6 +22,42 @@ page-home {
     opacity: 0.5;
   }
   .content-home {
-    margin-top: 100px;
+    margin-top: 3vh;
+  }
+
+  .avatar-center {
+    display: flex;
+    flex-direction: column; /* align flex items vertically */
+    justify-content: center; /* center items vertically, in this case */
+    align-items: center; /* center single-line items horizontally, in this case */
+    align-content: center; /* center multi-line items horizontally, in this case */
+  }
+
+  // header
+  .toolbar-content,
+  span {
+    color: white;
+  }
+  .toolbar-background,
+  ion-navbar,
+  ion-header {
+    background: transparent !important;
+    background-color: transparent !important;
+  }
+  .header-md::after,
+  .toolbar-background-ios {
+    background-image: none;
+    border-bottom: 0;
+  }
+
+  // avatar
+  .avatar-item {
+    background-color: transparent !important;
+    background: transparent !important;
+    border-bottom: 0 !important;
+
+    .title {
+      font-weight: bold;
+    }
   }
 }

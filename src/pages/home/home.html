@@ -1,29 +1,33 @@
-<ion-header margin-bottom>
-  <ion-navbar>
-    <ion-buttons end>
-      <button ion-button (click)="logout()">
-        Logout
-      </button>
-    </ion-buttons>
-  </ion-navbar>
-</ion-header>
-
 <ion-content [ngStyle]="{'background-image': 'url(' + backgroundImage +')'}">
-  <!-- <ion-avatar>
-    <img src="assets/logo/kemenkeu.png"> Fulan Fulanah
-  </ion-avatar> -->
+  <ion-header>
+    <ion-navbar transparent>
+      <ion-buttons end>
+        <button ion-button (click)="logout()">
+          Logout
+        </button>
+      </ion-buttons>
+    </ion-navbar>
+  </ion-header>
+
+  <ion-item class="avatar-item" no-lines>
+    <ion-avatar class="avatar-center">
+      <img src="https://ionicframework.com/dist/preview-app/www/assets/img/marty-avatar.png">
+      <h4 ion-text color="light" class="title">Fulan Fulanah</h4>
+    </ion-avatar>
+  </ion-item>
+
   <div class="content-home">
     <div *ngFor="let menu of menus">
       <ion-card (click)="pagesTo(menu.component)">
-        <ion-item color="{{menu?.color}}">
+        <ion-item [color]="menu?.color">
           <ion-avatar item-start>
-            <img src="assets/logo/kemenkeu.png" name="{{menu?.icon}}">
+            <img src="assets/logo/kemenkeu.png" [name]="menu?.icon">
           </ion-avatar>
           <h6 ion-text text-wrap color="light">{{menu?.subtitle}}</h6>
-          <ion-icon name="{{menu?.icon}}" item-end class="menu-logo"></ion-icon>
+          <ion-icon [name]="menu?.icon" item-end class="menu-logo"></ion-icon>
         </ion-item>
         <ion-item color="light">
-          <h1 ion-text item-end text-uppercase color="{{menu?.color}}">{{menu?.title}}</h1>
+          <h2 ion-text item-end text-uppercase [color]="menu?.color">{{menu?.title}}</h2>
         </ion-item>
       </ion-card>
     </div>
