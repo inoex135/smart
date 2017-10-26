@@ -1,53 +1,35 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>naskah masuk</ion-title>
+    <ion-title>Daftar Naskah Unit</ion-title>
   </ion-navbar>
 </ion-header>
 
 
 <ion-content>
-  <ion-card (click)="detailNaskah(naskah)" *ngFor="let naskah of listNaskah" margin-right margin-bottom>
-    <ion-card-content>
+  <!-- <ion-item padding-left>
+    <ion-select [(ngModel)]="gender" placeholder="Naskah Unit / NaskahPribadi / Permohonan">
+      <ion-option value="f">Female</ion-option>
+      <ion-option value="m">Male</ion-option>
+    </ion-select>
+  </ion-item> -->
+
+
+  <ion-list padding-left>
+    <ion-item (click)="detailNaskah(naskah)" *ngFor="let naskah of listNaskah">
       <ion-row>
-        <ion-col>
-          <ion-badge color="secondary" text-left>{{naskah?.statusSurat?.keterangan}}</ion-badge>
+
+        <ion-col col-6>
+          <h6 ion-text card-title text-left text-wrap>{{naskah?.nomorSurat}}</h6>
         </ion-col>
 
-        <ion-col>
-          <h4 ion-text card-content text-left>{{naskah.tanggal || "-"}}</h4>
+        <ion-col col-6>
+          <h6 ion-text text-right>{{naskah?.dateCreated | indonesianDate: 'DD MMMM YYYY'}}</h6>
         </ion-col>
+
       </ion-row>
+      <p ion-text text-wrap>{{naskah?.perihal}}</p>
 
-      <ion-row>
-        <ion-col>
-          <ion-badge text-left>{{naskah?.noAgenda}}</ion-badge>
-        </ion-col>
-
-        <ion-col>
-          <h4 ion-text card-content text-left>{{naskah?.nomorSurat}}</h4>
-        </ion-col>
-      </ion-row>
-
-      <ion-row>
-        <ion-col>
-          <h4 ion-text card-title>Unit Pengirim</h4>
-          <h4 ion-text card-content text-wrap>{{naskah?.namaUnit || "-"}}</h4>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col>
-          <h4 ion-text card-title>Perihal</h4>
-          <h4 ion-text card-content>{{naskah?.perihal}}</h4>
-        </ion-col>
-      </ion-row>
-
-      <ion-row>
-        <ion-col>
-          <h4 ion-text card-title>Naskah Diterima</h4>
-          <h4 ion-text card-title>{{naskah?.statusTerimaSurat || "-"}}</h4>
-        </ion-col>
-      </ion-row>
-
-    </ion-card-content>
-  </ion-card>
+      <p ion-text class="unit-pemohon">{{naskah?.namaUnit || "-"}} / Pemohon</p>
+    </ion-item>
+  </ion-list>
 </ion-content>

@@ -1,2 +1,6 @@
 page-naskah-masuk {
+  $blue-font: map-get($colors, "blue-template");
+  .unit-pemohon {
+    color: $blue-font;
+  }
 }
