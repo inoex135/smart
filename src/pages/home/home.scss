@@ -1,4 +1,6 @@
 page-home {
+  $transparent: transparent;
+
   ion-content {
     background-position: center;
     background-repeat: no-repeat;
@@ -41,8 +43,8 @@ page-home {
   .toolbar-background,
   ion-navbar,
   ion-header {
-    background: transparent !important;
-    background-color: transparent !important;
+    background: $transparent !important;
+    background-color: $transparent !important;
   }
   .header-md::after,
   .toolbar-background-ios {
@@ -52,12 +54,35 @@ page-home {
 
   // avatar
   .avatar-item {
-    background-color: transparent !important;
-    background: transparent !important;
+    background-color: $transparent !important;
+    background: $transparent !important;
     border-bottom: 0 !important;
 
     .title {
       font-weight: bold;
     }
+  }
+
+  // left content item
+  .left-content {
+    height: 50px;
+    width: 50px;
+    background-color: red !important;
+    border-radius: 50%;
+    border: 1px solid white !important;
+
+    .img-content {
+      opacity: 0.3 !important;
+    }
+
+    .avatar-content {
+      position: absolute;
+      top: 3.6rem;
+      left: 2.2rem;
+      font-weight: bold;
+    }
+  }
+  .menu-bottom-text {
+    font-weight: bold;
   }
 }

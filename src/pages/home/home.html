@@ -20,14 +20,16 @@
     <div *ngFor="let menu of menus">
       <ion-card (click)="pagesTo(menu.component)">
         <ion-item [color]="menu?.color">
-          <ion-avatar item-start>
-            <img src="assets/logo/kemenkeu.png" [name]="menu?.icon">
-          </ion-avatar>
+          <div item-start class="left-content">
+            <img [src]="assets(menu?.icon)" [name]="menu?.icon" class="img-content">
+            <span class="avatar-content" text-center ion-text>1000</span>
+          </div>
           <h6 ion-text text-wrap color="light">{{menu?.subtitle}}</h6>
-          <ion-icon [name]="menu?.icon" item-end class="menu-logo"></ion-icon>
+          <ion-icon [name]="menu?.icon" item-end class="menu-logo" no-margin></ion-icon>
         </ion-item>
+
         <ion-item color="light">
-          <h2 ion-text item-end text-uppercase [color]="menu?.color">{{menu?.title}}</h2>
+          <h2 ion-text item-end text-uppercase [color]="menu?.color" class="menu-bottom-text">{{menu?.title}}</h2>
         </ion-item>
       </ion-card>
     </div>

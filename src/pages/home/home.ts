@@ -12,8 +12,7 @@ import { HomePopoverPage } from "../home-popover/home-popover";
   templateUrl: "home.html"
 })
 export class HomePage {
-  public menus: Array<any> = [];
-
+  menus: Array<any> = [];
   backgroundImage: string = "assets/images/bg_login.png";
 
   constructor(
@@ -60,5 +59,9 @@ export class HomePage {
   logout() {
     this.userProvider.purgeAuth();
     this.navCtrl.setRoot(LoginPage);
+  }
+
+  assets(name: string) {
+    return `assets/icon/${name}.png`;
   }
 }
