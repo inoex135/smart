@@ -2,10 +2,8 @@ import { Component } from "@angular/core";
 import { NavController } from "ionic-angular";
 import { UserProvider } from "../../providers/user/user";
 import { LoginPage } from "../login/login";
-import { SuratPage } from "../surat/surat";
-import { PersonalPage } from "../personal/personal";
-import { AptPage } from "../apt/apt";
-import { HomePopoverPage } from "../home-popover/home-popover";
+
+import { MenuHomeConstant } from "../../constant/menu-home";
 
 @Component({
   selector: "page-home",
@@ -25,30 +23,7 @@ export class HomePage {
   }
 
   listMenu() {
-    this.menus = [
-      {
-        title: "PERSURATAN",
-        subtitle: "Pemberitahuan Persuratan",
-        icon: "mail",
-        component: SuratPage,
-        color: "blue-light"
-      },
-      {
-        title: "PERSONAL",
-        subtitle: "Pemberitahuan Kalender Kegiatan",
-        icon: "calendar",
-        component: PersonalPage,
-        color: "orange"
-      },
-      {
-        title: "APT",
-        subtitle: "Pemberitahuan Supervisi",
-        icon: "checkmark-circle-outline",
-        component: AptPage,
-        color: "green"
-      }
-    ];
-
+    this.menus = MenuHomeConstant.getMenus();
     return this.menus;
   }
 
@@ -61,7 +36,7 @@ export class HomePage {
     this.navCtrl.setRoot(LoginPage);
   }
 
-  assets(name: string) {
+  private assets(name: string) {
     return `assets/icon/${name}.png`;
   }
 }

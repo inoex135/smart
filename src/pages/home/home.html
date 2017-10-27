@@ -21,11 +21,18 @@
       <ion-card (click)="pagesTo(menu.component)">
         <ion-item [color]="menu?.color">
           <div item-start class="left-content">
-            <img [src]="assets(menu?.icon)" [name]="menu?.icon" class="img-content">
+            <img [src]="assets(menu?.iconSmall)" [name]="menu?.iconSmall" class="img-content">
             <span class="avatar-content" text-center ion-text>1000</span>
           </div>
+
+
           <h6 ion-text text-wrap color="light">{{menu?.subtitle}}</h6>
-          <ion-icon [name]="menu?.icon" item-end class="menu-logo" no-margin></ion-icon>
+
+          <div item-end>
+            <img [src]="assets(menu?.iconLarge)" [alt]="menu?.iconLarge" class="menu-logo">
+          </div>
+          <!-- <ion-icon [name]="menu?.icon" item-end class="menu-logo" no-margin></ion-icon> -->
+
         </ion-item>
 
         <ion-item color="light">
