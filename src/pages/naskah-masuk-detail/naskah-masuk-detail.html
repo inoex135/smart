@@ -1,70 +1,173 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Naskah</ion-title>
+    <ion-title>Detail Naskah Disposisi</ion-title>
   </ion-navbar>
-
-  <ion-toolbar no-border-top no-padding>
-    <ion-segment [(ngModel)]="type">
-      <ion-segment-button value="detail">
-        Detail
-      </ion-segment-button>
-      <ion-segment-button value="riwayat">
-        Riwayat
-      </ion-segment-button>
-    </ion-segment>
-  </ion-toolbar>
 </ion-header>
 
 <ion-content no-padding>
+
+
   <div [ngSwitch]="type">
+    <ion-row padding>
+      <ion-col>
+        <button ion-button full icon-left color='danger' (click)="modalAction('disposisi')">
+          <ion-icon name="open"></ion-icon>
+          Disposisi
+        </button>
+
+        <button ion-button full icon-left color='orange' (click)="modalAction('teruskan')">
+          <ion-icon name="skip-forward"></ion-icon>
+          Teruskan
+        </button>
+      </ion-col>
+
+      <ion-col>
+        <button ion-button full icon-left color='dark' (click)="modalAction('selesai')">
+          <ion-icon name="flag"></ion-icon>
+          Selesai
+        </button>
+
+        <button ion-button full icon-left color='silver' (click)="modalAction('riwayat')">
+          <ion-icon name="refresh-circle"></ion-icon>
+          Riwayat
+        </button>
+      </ion-col>
+
+    </ion-row>
+
     <!-- Detail segment -->
+    <ion-list padding>
+      <h1 ion-text>Identitas Naskah</h1>
+
+      <ion-item>
+        <ion-row>
+          <ion-col col-6>
+            <p ion-text ion-col col-6 text-wrap>Nomor Agenda Pemberi Disposisi</p>
+          </ion-col>
+          <ion-col col-6>
+            <p ion-text ion-col col-6>{{detail?.noAgenda}}</p>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+
+      <ion-item>
+        <ion-row>
+          <ion-col col-6>
+            <p ion-text text-wrap>Amplop Tertutup</p>
+          </ion-col>
+          <ion-col col-6>
+            <p ion-text text-wrap>{{detail?.amplopTertutup}}</p>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+
+    </ion-list>
+
+
 
     <ion-card text-left *ngSwitchCase="'detail'">
-      <ion-row margin-left margin-right>
-        <ion-col>
-          <h1 text-center ion-text text-lg>{{detail?.noAgenda}}</h1>
-        </ion-col>
-      </ion-row>
+      <ion-card-header color="blue-template">
+        Identitas Naskah
+      </ion-card-header>
 
+      <ion-item>
+        <p ion-text item-start text-wrap>Nomor Agenda Pemberi Disposisi</p>
+        <p ion-text item-end text-wrap>{{detail?.noAgenda}}</p>
+      </ion-item>
+      <ion-item>
+        <p ion-text item-start text-wrap>Amplop Tertutup</p>
+        <p ion-text item-end text-wrap>{{detail?.amplopTertutup}}</p>
+      </ion-item>
 
-      <ion-row margin-left margin-right>
-        <ion-col>
-          <p ion-text card-title text-left>Tanggal Naskah</p>
-          <p text-left ion-text card-content>
-            {{detail?.tanggalSurat | date}}
-          </p>
+      <ion-item>
+        <ion-col col-6>
+          <p ion-text text-wrap>Naskah Permohonan</p>
         </ion-col>
+        <ion-col col-6>
+          <p ion-text text-wrap>{{detail?.noAgenda}}</p>
+        </ion-col>
+      </ion-item>
 
-        <ion-col>
-          <p ion-text card-title text-left>No Naskah</p>
-          <p ion-text card-content text-left>{{detail?.no}}</p>
-        </ion-col>
-      </ion-row>
+      <ion-item>
+        <p ion-text item-start text-wrap>Jenis Pengiriman</p>
+        <p ion-text item-end text-wrap>{{detail?.jenisPengiriman}}</p>
+      </ion-item>
 
-      <ion-row margin-left margin-right>
-        <ion-col>
-          <p ion-text card-title>Status Surat</p>
-          <p ion-text card-content>{{detail?.statusSurat?.keterangan}}</p>
-        </ion-col>
-        <ion-col>
-          <p ion-text card-title text-left>Naskah Diterima</p>
-          <p ion-text text-left card-content>{{detail?.statusTerimaSurat}}</p>
-        </ion-col>
-      </ion-row>
+      <ion-item>
+        <p ion-text item-start text-wrap>Tanggal Terima</p>
+        <p ion-text item-end text-wrap>{{detail?.fisikTerima}}</p>
+      </ion-item>
 
-      <ion-row margin-left margin-right>
-        <ion-col>
-          <p ion-text card-title>Unit Pengirim</p>
-          <p ion-text text-wrap card-content>{{detail?.unitPengirim || "-"}}</p>
-        </ion-col>
-      </ion-row>
+      <ion-item>
+        <p ion-text item-start text-wrap>Jenis Naskah</p>
+        <p ion-text item-end text-wrap>{{detail?.jenisSurat}}</p>
+      </ion-item>
 
-      <ion-row margin-left margin-right>
-        <ion-col>
-          <p ion-text card-title>Perihal</p>
-          <p ion-text text-wrap card-content>{{detail?.perihal}}</p>
-        </ion-col>
-      </ion-row>
+      <ion-item>
+        <p ion-text item-start text-wrap>Nomor Agenda Disposisi</p>
+        <p ion-text item-end text-wrap>{{detail?.noAgenda}}</p>
+      </ion-item>
+
+      <ion-item>
+        <p ion-text item-start text-wrap>Pemberi Disposisi</p>
+        <p ion-text item-end text-wrap>{{detail?.noAgenda}}</p>
+      </ion-item>
+
+      <ion-item>
+        <p ion-text item-start text-wrap>Nomor Naskah</p>
+        <p ion-text item-end text-wrap>{{detail?.nomorSurat}}</p>
+      </ion-item>
+
+      <ion-item>
+        <p ion-text text-left item-start text-wrap>Tanggal Naskah</p>
+        <p ion-text text-right item-end text-wrap>{{detail?.noAgenda}}</p>
+      </ion-item>
+
+      <ion-item>
+        <p ion-text item-start text-wrap>Perihal</p>
+        <p ion-text item-end text-wrap>{{detail?.perihal}}</p>
+      </ion-item>
+
+      <ion-item>
+        <p ion-text item-start text-wrap>Sifat Naskah</p>
+        <p ion-text item-end text-wrap>{{detail?.perihal}}</p>
+      </ion-item>
+
+      <ion-item>
+        <p ion-text text-wrap item-start>Sifat Disposisi</p>
+        <p ion-text text-wrap item-end>{{detail?.perihal}}</p>
+      </ion-item>
+
+      <ion-item>
+        <p ion-text text-wrap item-start>Sifat Berkas</p>
+        <p ion-text text-wrap item-end>{{detail?.perihal}}</p>
+      </ion-item>
+
+      <ion-item>
+        <p ion-text text-wrap item-start>Lampiran</p>
+        <p ion-text text-wrap item-end>{{detail?.perihal}}</p>
+      </ion-item>
+      <ion-item>
+        <p ion-text text-wrap item-start>File Digital</p>
+        <p ion-text text-wrap item-end>{{detail?.perihal}}</p>
+      </ion-item>
+      <ion-item>
+        <p ion-text text-wrap item-start>Target Selesai</p>
+        <p ion-text text-wrap item-end>{{detail?.perihal}}</p>
+      </ion-item>
+      <ion-item>
+        <p ion-text text-wrap item-start>Proses Naskah</p>
+        <p ion-text text-wrap item-end>{{detail?.perihal}}</p>
+      </ion-item>
+      <ion-item>
+        <p ion-text text-wrap item-start>File Digital Lengkap</p>
+        <p ion-text text-wrap item-end>{{detail?.perihal}}</p>
+      </ion-item>
+
+      <ion-item>
+        <p ion-text text-wrap item-start>Naskah Dinas Terkait</p>
+        <p ion-text text-wrap item-end>{{detail?.perihal}}</p>
+      </ion-item>
 
       <ion-row *ngSwitchCase="'detail'" margin-left margin-right margin-bottom>
         <button ion-button full start padding color="danger" (click)="modalAction('disposisi')">Disposisi</button>
