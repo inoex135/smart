@@ -1,48 +1,42 @@
 <!--Form Title-->
-<h1 title text-right>Selesai</h1>
-<!---Input field target selesai-->
-<ion-item no-padding>
-    <ion-label floating>Target Selesai <span class="required">*</span></ion-label>
-    <ion-input required type="text" [(ngModel)]="targetSelesai"></ion-input>
-</ion-item>
+<ion-card>
+    <ion-card-content>
+        <ion-item no-padding>
+            <ion-datetime placeholder="Tanggal Selesai" displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="coba"></ion-datetime>
+        </ion-item>
 
-<!---Input field tanggal selesai-->
-<ion-item no-padding>
-    <ion-label floating>Tanggal Selesai <span class="required">*</span></ion-label>
-    <ion-input required type="text" [(ngModel)]="tanggalSelesai"></ion-input>
-</ion-item>
+        <!---Input field catatan selesai-->
+        <ion-item no-padding margin-top>
+            <ion-textarea placeholder="Catatan Selesai" type="text" pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" [(ngModel)]="catatanSelesai"></ion-textarea>
+        </ion-item>
 
-<!---Input field catatan selesai-->
-<ion-item no-padding>
-    <ion-label floating>Catatan Selesai <span class="required">*</span></ion-label>
-    <ion-textarea required type="email" pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" required [(ngModel)]="email"></ion-textarea>
-</ion-item>
+        <!---Input field lokasi arsip-->
+        <ion-item no-padding margin-top>
+            <ion-textarea placeholder="Lokasi Arsip" type="text" pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" [(ngModel)]="lokasiArsip"></ion-textarea>
+        </ion-item>
 
-<!---Input field lokasi arsip-->
-<ion-item no-padding>
-    <ion-label floating>Lokasi Arsip</ion-label>
-    <ion-textarea required type="email" pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" required [(ngModel)]="email"></ion-textarea>
-</ion-item>
+        <!---Input field klasifikasi arsip-->
+        <ion-item no-padding>
+            <ion-label stacked>Klasifikasi Arsip</ion-label>
+            <ion-select [(ngModel)]="alasan" placeholder="Substantif / Fasilitatif">
+                <ion-option value="1">Cuti</ion-option>
+                <ion-option value="2">Lainnya</ion-option>
+                <ion-option value="3">Tidak Sesuai Tugas dan Fungsinya</ion-option>
+            </ion-select>
+        </ion-item>
 
-<!---Input field klasifikasi arsip-->
-<ion-item no-padding>
-    <ion-label floating>Klasifikasi Arsip</ion-label>
-    <ion-select [(ngModel)]="alasan">
-        <ion-option value="1">Cuti</ion-option>
-        <ion-option value="2">Lainnya</ion-option>
-        <ion-option value="3">Tidak Sesuai Tugas dan Fungsinya</ion-option>
-    </ion-select>
-</ion-item>
+        <!---Input field JRA unit-->
+        <ion-item no-padding>
+            <ion-label stacked color="primary">JRA Unit</ion-label>
+            <ion-select [(ngModel)]="alasan">
+                <ion-option value="1">Cuti</ion-option>
+                <ion-option value="2">Lainnya</ion-option>
+                <ion-option value="3">Tidak Sesuai Tugas dan Fungsinya</ion-option>
+            </ion-select>
+        </ion-item>
 
-<!---Input field JRA unit-->
-<ion-item no-padding>
-    <ion-label floating>JRA Unit</ion-label>
-    <ion-select [(ngModel)]="alasan">
-        <ion-option value="1">Cuti</ion-option>
-        <ion-option value="2">Lainnya</ion-option>
-        <ion-option value="3">Tidak Sesuai Tugas dan Fungsinya</ion-option>
-    </ion-select>
-</ion-item>
+        <button ion-button full (click)="selesai()" margin-top color="default-blue">Simpan</button>
+    </ion-card-content>
+</ion-card>
 
 <!---Register button-->
-<button ion-button right (click)="selesai()" margin-top>Simpan</button>
