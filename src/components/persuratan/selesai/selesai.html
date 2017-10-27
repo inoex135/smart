@@ -1,12 +1,30 @@
 <!--Form Title-->
 <ion-card>
+    <ion-card-header class="ion-card-header-bold">
+        Header
+    </ion-card-header>
     <ion-card-content>
         <ion-item no-padding>
-            <ion-datetime placeholder="Tanggal Selesai" displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="coba"></ion-datetime>
+            <ion-datetime placeholder="Tanggal Selesai" displayFormat="DD-MM-YYYY" pickerFormat="DD MM YYYY" [(ngModel)]="coba"></ion-datetime>
+        </ion-item>
+
+        <ion-item no-padding>
+            <ion-label stacked>Status Persetujuan</ion-label>
+            <ion-input type="radio"></ion-input>
+        </ion-item>
+
+        <ion-item no-padding>
+            <button ion-button full icon-start color="orange">
+                <ion-icon name="cloud-upload"></ion-icon>
+                Upload File
+                <!-- <label class="item item-input">
+                <input id="upload" type="file" id="upimgfile" name="uploadfile" ng-model="orderDetails.uploadfile">
+            </label> -->
+            </button>
         </ion-item>
 
         <!---Input field catatan selesai-->
-        <ion-item no-padding margin-top>
+        <ion-item no-padding>
             <ion-textarea placeholder="Catatan Selesai" type="text" pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" [(ngModel)]="catatanSelesai"></ion-textarea>
         </ion-item>
 
