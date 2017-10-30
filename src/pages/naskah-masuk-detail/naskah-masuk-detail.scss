@@ -13,5 +13,11 @@ page-naskah-masuk-detail {
     ion-row {
       border-bottom: 0.3px solid black !important;
     }
+
+    .list-action-button {
+      button {
+        border-radius: 30%;
+      }
+    }
   }
 }

@@ -5,18 +5,17 @@
 </ion-header>
 
 
-<ion-content>
-
-  <ion-list padding-left padding-right>
-    <ion-item>
-      <ion-label>
-        <ion-icon name="search"></ion-icon> Cari Naskah
+<ion-content padding>
+  <ion-list>
+    <ion-item class="item-search">
+      <ion-label class="label-search">
+        <ion-icon name="search"></ion-icon>
       </ion-label>
-      <ion-input placeholder="Text Input"></ion-input>
+      <ion-input placeholder="Text Input" placeholder="Cari Naskah"></ion-input>
     </ion-item>
   </ion-list>
 
-  <ion-list padding-left padding-right>
+  <ion-list class="naskah-select">
     <ion-item>
       <ion-select class="naskah-select" [(ngModel)]="gender" placeholder="Naskah Unit / Naskah Pribadi / Permohonan">
         <ion-option value="f">Naskah Unit</ion-option>
@@ -26,9 +25,9 @@
     </ion-item>
   </ion-list>
 
-  <ion-list padding>
+  <ion-list>
 
-    <ion-item (click)="detailNaskah(naskah)" *ngFor="let naskah of listNaskah">
+    <ion-item (click)="detailNaskah(naskah)" *ngFor="let naskah of listNaskah" class="naskah-list">
       <ion-row>
 
         <ion-col col-6>

@@ -8,7 +8,20 @@ page-naskah-masuk {
     max-width: 100% !important;
   }
 
-  .input-search {
-    border: 0.4px solid black;
+  .naskah-select {
+    ion-item {
+      background-color: transparent;
+    }
+    .button-inner {
+      border: 0.4px solid rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  .naskah-list {
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
+  }
+
+  .item-search {
+    background-color: #f7f7f7;
   }
 }
