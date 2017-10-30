@@ -3,4 +3,12 @@ page-naskah-masuk {
   .unit-pemohon {
     color: $blue-font;
   }
+
+  .naskah-select {
+    max-width: 100% !important;
+  }
+
+  .input-search {
+    border: 0.4px solid black;
+  }
 }

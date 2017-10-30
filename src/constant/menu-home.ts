@@ -24,8 +24,8 @@ export class MenuHomeConstant {
       {
         title: "APT",
         subtitle: "Pemberitahuan Supervisi",
-        iconSmall: "checkmark-circle-outline",
-        iconLarge: "checkmark-circle-outline",
+        iconSmall: "checkmark-circle-outline_sm",
+        iconLarge: "checkmark-circle-outline_lg",
         component: AptPage,
         color: "green"
       }
