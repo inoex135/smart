@@ -35,150 +35,314 @@
 
     </ion-row>
 
-    <!-- Detail segment -->
-    <ion-list padding>
-      <h1 ion-text>Identitas Naskah</h1>
-
-      <ion-item>
-        <ion-row>
-          <ion-col col-6>
-            <p ion-text ion-col col-6 text-wrap>Nomor Agenda Pemberi Disposisi</p>
-          </ion-col>
-          <ion-col col-6>
-            <p ion-text ion-col col-6>{{detail?.noAgenda}}</p>
-          </ion-col>
-        </ion-row>
-      </ion-item>
-
-      <ion-item>
-        <ion-row>
-          <ion-col col-6>
-            <p ion-text text-wrap>Amplop Tertutup</p>
-          </ion-col>
-          <ion-col col-6>
-            <p ion-text text-wrap>{{detail?.amplopTertutup}}</p>
-          </ion-col>
-        </ion-row>
-      </ion-item>
-
-    </ion-list>
 
 
-
-    <ion-card text-left *ngSwitchCase="'detail'">
+    <ion-card text-left *ngSwitchCase="'detail'" class="detail-naskah" padding-bottom>
       <ion-card-header color="blue-template">
         Identitas Naskah
       </ion-card-header>
 
       <ion-item>
-        <p ion-text item-start text-wrap>Nomor Agenda Pemberi Disposisi</p>
-        <p ion-text item-end text-wrap>{{detail?.noAgenda}}</p>
-      </ion-item>
-      <ion-item>
-        <p ion-text item-start text-wrap>Amplop Tertutup</p>
-        <p ion-text item-end text-wrap>{{detail?.amplopTertutup}}</p>
-      </ion-item>
-
-      <ion-item>
-        <ion-col col-6>
-          <p ion-text text-wrap>Naskah Permohonan</p>
-        </ion-col>
-        <ion-col col-6>
-          <p ion-text text-wrap>{{detail?.noAgenda}}</p>
-        </ion-col>
+        <ion-row>
+          <ion-col col-6>
+            <p ion-text item-start text-wrap card-title>Nomor Agenda Pemberi Disposisi</p>
+          </ion-col>
+          <ion-col>
+            <p ion-text item-start text-wrap>{{detail?.noAgenda}}</p>
+          </ion-col>
+        </ion-row>
       </ion-item>
 
       <ion-item>
-        <p ion-text item-start text-wrap>Jenis Pengiriman</p>
-        <p ion-text item-end text-wrap>{{detail?.jenisPengiriman}}</p>
+        <ion-row>
+          <ion-col>
+            <p ion-text item-start text-wrap card-title>Amplop Tertutup</p>
+          </ion-col>
+          <ion-col>
+            <p ion-text item-start text-wrap>{{detail?.amplopTertutup}}</p>
+          </ion-col>
+        </ion-row>
       </ion-item>
 
       <ion-item>
-        <p ion-text item-start text-wrap>Tanggal Terima</p>
-        <p ion-text item-end text-wrap>{{detail?.fisikTerima}}</p>
+        <ion-row>
+          <ion-col>
+            <p ion-text text-wrap item-start card-title>Naskah Permohonan</p>
+          </ion-col>
+          <ion-col>
+            <p ion-text text-wrap item-start>{{detail?.noAgenda}}</p>
+          </ion-col>
+        </ion-row>
       </ion-item>
 
       <ion-item>
-        <p ion-text item-start text-wrap>Jenis Naskah</p>
-        <p ion-text item-end text-wrap>{{detail?.jenisSurat}}</p>
+        <ion-row>
+          <ion-col>
+            <p ion-text item-start text-wrap card-title>Jenis Pengiriman</p>
+          </ion-col>
+          <ion-col>
+            <p ion-text item-start text-wrap>{{detail?.jenisPengiriman}}</p>
+          </ion-col>
+        </ion-row>
       </ion-item>
 
       <ion-item>
-        <p ion-text item-start text-wrap>Nomor Agenda Disposisi</p>
-        <p ion-text item-end text-wrap>{{detail?.noAgenda}}</p>
+        <ion-row>
+          <ion-col>
+            <p ion-text item-start text-wrap card-title>Tanggal Terima</p>
+          </ion-col>
+          <ion-col>
+            <p ion-text item-start text-wrap>{{detail?.fisikTerima}}</p>
+          </ion-col>
+        </ion-row>
       </ion-item>
 
       <ion-item>
-        <p ion-text item-start text-wrap>Pemberi Disposisi</p>
-        <p ion-text item-end text-wrap>{{detail?.noAgenda}}</p>
+        <ion-row>
+          <ion-col>
+            <p ion-text item-start text-wrap card-title>Jenis Naskah</p>
+          </ion-col>
+          <ion-col>
+            <p ion-text item-start text-wrap>{{detail?.jenisSurat}}</p>
+          </ion-col>
+        </ion-row>
+
       </ion-item>
 
       <ion-item>
-        <p ion-text item-start text-wrap>Nomor Naskah</p>
-        <p ion-text item-end text-wrap>{{detail?.nomorSurat}}</p>
+        <ion-row>
+          <ion-col>
+            <p ion-text item-start text-wrap card-title>Nomor Agenda Disposisi</p>
+          </ion-col>
+          <ion-col>
+            <p ion-text item-start text-wrap>{{detail?.noAgenda}}</p>
+          </ion-col>
+        </ion-row>
       </ion-item>
 
       <ion-item>
-        <p ion-text text-left item-start text-wrap>Tanggal Naskah</p>
-        <p ion-text text-right item-end text-wrap>{{detail?.noAgenda}}</p>
+        <ion-row>
+          <ion-col>
+            <p ion-text item-start text-wrap card-title>Pemberi Disposisi</p>
+          </ion-col>
+          <ion-col>
+            <p ion-text item-start text-wrap>{{detail?.noAgenda}}</p>
+          </ion-col>
+        </ion-row>
       </ion-item>
 
       <ion-item>
-        <p ion-text item-start text-wrap>Perihal</p>
-        <p ion-text item-end text-wrap>{{detail?.perihal}}</p>
+        <ion-row>
+          <ion-col>
+            <p ion-text item-start text-wrap card-title>Nomor Naskah</p>
+          </ion-col>
+          <ion-col>
+            <p ion-text item-start text-wrap>{{detail?.nomorSurat}}</p>
+          </ion-col>
+        </ion-row>
       </ion-item>
 
       <ion-item>
-        <p ion-text item-start text-wrap>Sifat Naskah</p>
-        <p ion-text item-end text-wrap>{{detail?.perihal}}</p>
+        <ion-row>
+          <ion-col>
+            <p ion-text item-start text-wrap card-title>Tanggal Naskah</p>
+          </ion-col>
+          <ion-col>
+            <p ion-text item-start text-wrap>{{detail?.noAgenda}}</p>
+          </ion-col>
+        </ion-row>
       </ion-item>
 
       <ion-item>
-        <p ion-text text-wrap item-start>Sifat Disposisi</p>
-        <p ion-text text-wrap item-end>{{detail?.perihal}}</p>
+        <ion-row>
+          <ion-col>
+            <p ion-text item-start text-wrap card-title>Perihal</p>
+          </ion-col>
+          <ion-col>
+            <p ion-text item-start text-wrap>{{detail?.perihal}}</p>
+          </ion-col>
+        </ion-row>
       </ion-item>
 
       <ion-item>
-        <p ion-text text-wrap item-start>Sifat Berkas</p>
-        <p ion-text text-wrap item-end>{{detail?.perihal}}</p>
+        <ion-row>
+          <ion-col>
+            <p ion-text item-start text-wrap card-title>Sifat Naskah</p>
+          </ion-col>
+          <ion-col>
+            <p ion-text item-start text-wrap>{{detail?.sifatSurat}}</p>
+          </ion-col>
+        </ion-row>
       </ion-item>
 
       <ion-item>
-        <p ion-text text-wrap item-start>Lampiran</p>
-        <p ion-text text-wrap item-end>{{detail?.perihal}}</p>
-      </ion-item>
-      <ion-item>
-        <p ion-text text-wrap item-start>File Digital</p>
-        <p ion-text text-wrap item-end>{{detail?.perihal}}</p>
-      </ion-item>
-      <ion-item>
-        <p ion-text text-wrap item-start>Target Selesai</p>
-        <p ion-text text-wrap item-end>{{detail?.perihal}}</p>
-      </ion-item>
-      <ion-item>
-        <p ion-text text-wrap item-start>Proses Naskah</p>
-        <p ion-text text-wrap item-end>{{detail?.perihal}}</p>
-      </ion-item>
-      <ion-item>
-        <p ion-text text-wrap item-start>File Digital Lengkap</p>
-        <p ion-text text-wrap item-end>{{detail?.perihal}}</p>
+        <ion-row>
+          <ion-col>
+            <p ion-text text-wrap item-start card-title>Sifat Disposisi</p>
+          </ion-col>
+          <ion-col>
+            <p ion-text text-wrap item-start>{{detail?.sifatDisposisi}}</p>
+          </ion-col>
+        </ion-row>
       </ion-item>
 
       <ion-item>
-        <p ion-text text-wrap item-start>Naskah Dinas Terkait</p>
-        <p ion-text text-wrap item-end>{{detail?.perihal}}</p>
+        <ion-row>
+          <ion-col>
+            <p ion-text text-wrap item-start card-title>Sifat Berkas</p>
+          </ion-col>
+          <ion-col>
+            <p ion-text text-wrap item-start>{{detail?.perihal}}</p>
+          </ion-col>
+        </ion-row>
       </ion-item>
 
-      <ion-row *ngSwitchCase="'detail'" margin-left margin-right margin-bottom>
+      <ion-item>
+        <ion-row>
+          <ion-col>
+            <p ion-text text-wrap item-start card-title>Lampiran</p>
+          </ion-col>
+          <ion-col>
+            <p ion-text text-wrap item-start>{{detail?.lampiran}}</p>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+
+      <ion-item>
+        <ion-row>
+          <ion-col>
+            <p ion-text text-wrap item-start card-title>File Digital</p>
+          </ion-col>
+          <ion-col>
+            <p ion-text text-wrap item-start>{{detail?.fileLengkap}}</p>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+
+      <ion-item>
+        <ion-row>
+          <ion-col>
+            <p ion-text text-wrap item-start card-title>Target Selesai</p>
+          </ion-col>
+          <ion-col>
+            <p ion-text text-wrap item-start>{{detail?.tanggalTargetSelesai}}</p>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+
+      <ion-item>
+        <ion-row>
+          <ion-col>
+            <p ion-text text-wrap item-start card-title>Proses Naskah</p>
+          </ion-col>
+          <ion-col>
+            <p ion-text text-wrap item-start>{{detail?.prosesNaskah || "-"}}</p>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+
+      <ion-item>
+        <ion-row>
+          <ion-col>
+            <p ion-text text-wrap item-start card-title>File Digital Lengkap</p>
+          </ion-col>
+          <ion-col>
+            <p ion-text text-wrap item-start>{{detail?.fileLengkap}}</p>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+
+      <ion-item>
+        <ion-row>
+          <ion-col>
+            <p ion-text text-wrap item-start card-title>Naskah Dinas Terkait</p>
+          </ion-col>
+          <ion-col>
+            <p ion-text text-wrap item-start>{{detail?.naskahDinasTerkait || '-'}}</p>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+
+      <!-- <ion-row *ngSwitchCase="'detail'" margin-left margin-right margin-bottom>
         <button ion-button full start padding color="danger" (click)="modalAction('disposisi')">Disposisi</button>
         <button ion-button full padding color="blue-donker" (click)="modalAction('selesai')">Selesai</button>
         <button ion-button full padding color="light" (click)="modalAction('teruskan')">Teruskan</button>
-      </ion-row>
+      </ion-row> -->
+    </ion-card>
+    <br>
+    <ion-card textleft class="detail-naskah" padding-bottom>
+      <ion-card-header color="blue-template">
+        Pengirim Naskah
+      </ion-card-header>
+
+      <ion-item>
+        <ion-row>
+          <ion-col col-6>
+            <p ion-text item-start text-wrap card-title>Asal Pengirim</p>
+          </ion-col>
+          <ion-col>
+            <p ion-text item-start text-wrap>{{detail?.noAgenda}}</p>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col col-6>
+            <p ion-text item-start text-wrap card-title>Unit Pengirim</p>
+          </ion-col>
+          <ion-col>
+            <p ion-text item-start text-wrap>{{detail?.noAgenda}}</p>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col col-6>
+            <p ion-text item-start text-wrap card-title>Nama Pengirim</p>
+          </ion-col>
+          <ion-col>
+            <p ion-text item-start text-wrap>{{detail?.noAgenda}}</p>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col col-6>
+            <p ion-text item-start text-wrap card-title>Jabatan / Selaku</p>
+          </ion-col>
+          <ion-col>
+            <p ion-text item-start text-wrap>{{detail?.noAgenda}}</p>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col col-6>
+            <p ion-text item-start text-wrap card-title>Alamat</p>
+          </ion-col>
+          <ion-col>
+            <p ion-text item-start text-wrap>{{detail?.noAgenda}}</p>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col col-6>
+            <p ion-text item-start text-wrap card-title>Telepon / Faksimile</p>
+          </ion-col>
+          <ion-col>
+            <p ion-text item-start text-wrap>{{detail?.noAgenda}}</p>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col col-6>
+            <p ion-text item-start text-wrap card-title>Email</p>
+          </ion-col>
+          <ion-col>
+            <p ion-text item-start text-wrap>{{detail?.noAgenda}}</p>
+          </ion-col>
+        </ion-row>
+      </ion-item>
     </ion-card>
 
-
     <!-- riwayat segment -->
-    <div *ngSwitchCase="'riwayat'">
+    <!-- <div *ngSwitchCase="'riwayat'">
       <ion-card>
         <ion-row margin-left margin-right>
           <ion-col float-left>
@@ -217,7 +381,7 @@
           </ion-col>
         </ion-row>
       </ion-card>
-    </div>
+    </div> -->
 
 
   </div>

@@ -3,4 +3,15 @@ page-naskah-masuk-detail {
   .segment-md .segment-button {
     height: 5rem !important;
   }
+  .detail-naskah {
+    ion-label {
+      margin: 0 !important;
+    }
+    [item-start] {
+      color: map-get($colors, primary) !important;
+    }
+    ion-row {
+      border-bottom: 0.3px solid black !important;
+    }
+  }
 }
