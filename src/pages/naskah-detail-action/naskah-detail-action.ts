@@ -8,13 +8,6 @@ import { NavController, NavParams } from "ionic-angular";
 export class NaskahDetailActionPage {
   type: string = "";
 
-  ACTION = {
-    DISPOSISI: "disposisi",
-    RIWAYAT: "riwayat",
-    SELESAI: "selesai",
-    TERUSKAN: "teruskan"
-  };
-
   constructor(public navCtrl: NavController, public navParams: NavParams) {}
 
   ionViewDidLoad() {

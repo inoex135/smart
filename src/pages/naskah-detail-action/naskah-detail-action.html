@@ -17,21 +17,21 @@
   <div [ngSwitch]="type" col-12>
     <ion-col>
       <!--Form teruskan-->
-      <div class="form" *ngSwitchCase="ACTION.TERUSKAN" no-padding>
+      <div class="form" *ngSwitchCase="'teruskan'" no-padding>
         <teruskan></teruskan>
       </div>
 
       <!-- form disposisi -->
-      <div class="form" *ngSwitchCase="ACTION.DISPOSISI" no-padding>
+      <div class="form" *ngSwitchCase="'disposisi'" no-padding>
         <disposisi></disposisi>
       </div>
 
       <!-- form selesai -->
-      <div *ngSwitchCase="ACTION.SELESAI" class="form" no-padding>
+      <div *ngSwitchCase="'selesai'" class="form" no-padding>
         <selesai [type]="type"></selesai>
       </div>
 
-      <div *ngSwitchCase="ACTION.RIWAYAT" class="form" no-padding>
+      <div *ngSwitchCase="'riwayat'" class="form" no-padding>
         <riwayat-component></riwayat-component>
       </div>
     </ion-col>
