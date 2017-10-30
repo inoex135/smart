@@ -1,8 +1,8 @@
 import { Component } from "@angular/core";
 import { NavController, ModalController, NavParams } from "ionic-angular";
-import { ModalContentPage } from "./modal-content/modal-content";
 import { NaskahMasukProvider } from "../../providers/naskah-masuk/naskah-masuk";
 import { LoaderHelper } from "../../helpers/loader-helper";
+import { NaskahDetailActionPage } from "../naskah-detail-action/naskah-detail-action";
 
 @Component({
   selector: "page-naskah-masuk-detail",
@@ -18,18 +18,13 @@ export class NaskahMasukDetailPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     private naskahProvider: NaskahMasukProvider,
-    private modalCtrl: ModalController,
     private loaderHelper: LoaderHelper
   ) {
     this.naskahId = this.navParams.get("naskahId");
   }
 
-  modalAction(actionType: String) {
-    const modal = this.modalCtrl.create(ModalContentPage, {
-      actionType: actionType
-    });
-
-    modal.present();
+  openPage(type: String) {
+    this.navCtrl.push(NaskahDetailActionPage, { type: type });
   }
 
   ionViewDidLoad() {

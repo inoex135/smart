@@ -10,24 +10,24 @@
   <div [ngSwitch]="type">
     <ion-row padding>
       <ion-col>
-        <button ion-button full icon-left color='danger' (click)="modalAction('disposisi')">
+        <button ion-button full icon-left color='danger' (click)="openPage('disposisi')">
           <ion-icon name="open"></ion-icon>
           Disposisi
         </button>
 
-        <button ion-button full icon-left color='orange' (click)="modalAction('teruskan')">
+        <button ion-button full icon-left color='orange' (click)="openPage('teruskan')">
           <ion-icon name="skip-forward"></ion-icon>
           Teruskan
         </button>
       </ion-col>
 
       <ion-col>
-        <button ion-button full icon-left color='dark' (click)="modalAction('selesai')">
+        <button ion-button full icon-left color='dark' (click)="openPage('selesai')">
           <ion-icon name="flag"></ion-icon>
           Selesai
         </button>
 
-        <button ion-button full icon-left color='silver' (click)="modalAction('riwayat')">
+        <button ion-button full icon-left color='silver' (click)="openPage('riwayat')">
           <ion-icon name="refresh-circle"></ion-icon>
           Riwayat
         </button>
@@ -264,9 +264,9 @@
       </ion-item>
 
       <!-- <ion-row *ngSwitchCase="'detail'" margin-left margin-right margin-bottom>
-        <button ion-button full start padding color="danger" (click)="modalAction('disposisi')">Disposisi</button>
-        <button ion-button full padding color="blue-donker" (click)="modalAction('selesai')">Selesai</button>
-        <button ion-button full padding color="light" (click)="modalAction('teruskan')">Teruskan</button>
+        <button ion-button full start padding color="danger" (click)="openPage('disposisi')">Disposisi</button>
+        <button ion-button full padding color="blue-donker" (click)="openPage('selesai')">Selesai</button>
+        <button ion-button full padding color="light" (click)="openPage('teruskan')">Teruskan</button>
       </ion-row> -->
     </ion-card>
     <br>
@@ -340,49 +340,5 @@
         </ion-row>
       </ion-item>
     </ion-card>
-
-    <!-- riwayat segment -->
-    <!-- <div *ngSwitchCase="'riwayat'">
-      <ion-card>
-        <ion-row margin-left margin-right>
-          <ion-col float-left>
-            <p ion-text card-title>No Agenda</p>
-            <p ion-text card-content>AM-1731/KN.54/2017</p>
-          </ion-col>
-        </ion-row>
-
-        <ion-row margin-left margin-right>
-          <ion-col float-left>
-            <p ion-text card-title>Pihak</p>
-            <p ion-text text-wrap card-content>Kepala Subdirektorat Perencanaan dan Pengembangan Sistem Aplikasi</p>
-          </ion-col>
-        </ion-row>
-
-        <ion-row margin-left margin-right>
-          <ion-col float-left>
-            <p ion-text card-title>Tanggal Proses</p>
-            <p ion-text card-content> 24 Agustus 2017</p>
-          </ion-col>
-          <ion-col float-left>
-            <p ion-text card-title>Tanggal Agenda</p>
-            <p ion-text card-content>24 Agustus 2017</p>
-          </ion-col>
-        </ion-row>
-
-        <ion-row margin-left margin-right>
-          <ion-col float-left>
-            <p ion-text card-title text-wrap>(Petunjuk) Catatan</p>
-            <p ion-text text-wrap card-content>-</p>
-          </ion-col>
-
-          <ion-col float-left>
-            <p ion-text card-title>Proses Naskah</p>
-            <p ion-text card-content> Disposisi </p>
-          </ion-col>
-        </ion-row>
-      </ion-card>
-    </div> -->
-
-
   </div>
 </ion-content>

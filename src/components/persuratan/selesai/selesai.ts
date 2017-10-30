@@ -1,11 +1,10 @@
-import { Component } from "@angular/core";
+import { Component, Input } from "@angular/core";
 
 @Component({
   selector: "selesai",
   templateUrl: "selesai.html"
 })
 export class Selesai {
-  constructor() {}
-
+  @Input() type: string;
   selesai() {}
 }
