@@ -4,7 +4,8 @@ import { GrafikPersuratanPage } from "../grafik-persuratan/grafik-persuratan";
 import { NaskahMasukPage } from "../naskah-masuk/naskah-masuk";
 import { NaskahNotifikasiPage } from "../naskah-notifikasi/naskah-notifikasi";
 import { GrafikPersuratanKeluarPage } from "../grafik-persuratan-keluar/grafik-persuratan-keluar";
-
+// import * as moment from "moment";
+import * as moment from "moment-timezone";
 @Component({
   selector: "page-surat",
   templateUrl: "surat.html"
@@ -29,10 +30,24 @@ export class SuratPage {
     ];
   }
 
-  ionViewDidLoad() {}
+  ionViewDidLoad() {
+    this.setIntervalDate();
+  }
+
+  setIntervalDate(): number {
+    return setInterval(() => this.dateNow(), 60);
+  }
 
   openPage(page: any) {
     this.navCtrl.push(page.component);
+  }
+
+  ionViewWillLeave() {
+    clearInterval(this.setIntervalDate());
+  }
+
+  dateNow() {
+    return moment.tz("Asia/Jakarta").format("H:m");
   }
 
   showBadge(menu: String) {

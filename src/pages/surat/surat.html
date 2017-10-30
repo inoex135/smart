@@ -4,7 +4,18 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content no-padding>
+<ion-content padding>
+  <ion-list>
+    <ion-item class="item-upper">
+      <div class="item-avatar" item-start>
+        <img src="assets/icon/mail_sm.png" alt="envelope">
+      </div>
+      <h5 ion-text text-wrap color="danger">Pemberitahuan</h5>
+      <h6 ion-text color="blue-template">Lihat Selengkapnya</h6>
+      <h6 ion-text item-end>Today, {{dateNow()}}</h6>
+    </ion-item>
+  </ion-list>
+
   <ion-list no-padding no-margin>
     <button ion-item item-title paddinge-left submenu *ngFor="let menu of menus" (click)="openPage(menu)">
       <ion-icon name="{{menu.icon}}" item-start></ion-icon>
