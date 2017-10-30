@@ -42,7 +42,7 @@ import { NaskahMasukDetailPage } from "../pages/naskah-masuk-detail/naskah-masuk
 import { NaskahNotifikasiPage } from "../pages/naskah-notifikasi/naskah-notifikasi";
 import { NaskahNotifikasiProvider } from "../providers/naskah-notifikasi/naskah-notifikasi";
 import { ModalContentPage } from "../pages/naskah-masuk-detail/modal-content/modal-content";
-import { HomePopoverPage } from "../pages/home-popover/home-popover";
+import { NaskahDetailActionPage } from "../pages/naskah-detail-action/naskah-detail-action";
 
 // helper
 import { AptHelper } from "../helpers/apt-helper";
@@ -70,9 +70,9 @@ import { FilterChartPage } from "../pages/filter-chart/filter-chart";
     GrafikPersuratanPage,
     NaskahMasukPage,
     NaskahMasukDetailPage,
+    NaskahDetailActionPage,
     NaskahNotifikasiPage,
     ModalContentPage,
-    HomePopoverPage,
     TextAvatarDirective,
     GrafikPersuratanKeluarPage,
     EventModalPage,
@@ -102,9 +102,9 @@ import { FilterChartPage } from "../pages/filter-chart/filter-chart";
     GrafikPersuratanPage,
     NaskahMasukPage,
     NaskahMasukDetailPage,
+    NaskahDetailActionPage,
     NaskahNotifikasiPage,
     ModalContentPage,
-    HomePopoverPage,
     GrafikPersuratanKeluarPage,
     EventModalPage,
     FilterChartPage
