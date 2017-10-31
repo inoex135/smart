@@ -34,20 +34,21 @@ export class SuratPage {
     this.setIntervalDate();
   }
 
-  setIntervalDate(): number {
-    return setInterval(() => this.dateNow(), 60);
-  }
-
-  openPage(page: any) {
-    this.navCtrl.push(page.component);
-  }
-
+  // when page leave, stop interval date
   ionViewWillLeave() {
     clearInterval(this.setIntervalDate());
   }
 
+  setIntervalDate(): number {
+    return setInterval(() => this.dateNow(), 60);
+  }
+
   dateNow() {
-    return moment.tz("Asia/Jakarta").format("H:m");
+    return moment.tz("Asia/Jakarta").format("HH:mm");
+  }
+
+  openPage(page: any) {
+    this.navCtrl.push(page.component);
   }
 
   showBadge(menu: String) {

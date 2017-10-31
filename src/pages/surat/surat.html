@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-list>
+  <ion-list no-lines>
     <ion-item class="item-upper">
       <div class="item-avatar" item-start>
         <img src="assets/icon/mail_sm.png" alt="envelope">
@@ -14,13 +14,42 @@
       <h6 ion-text color="blue-template">Lihat Selengkapnya</h6>
       <h6 ion-text item-end>Today, {{dateNow()}}</h6>
     </ion-item>
-  </ion-list>
 
-  <ion-list no-padding no-margin>
-    <button ion-item item-title paddinge-left submenu *ngFor="let menu of menus" (click)="openPage(menu)">
-      <ion-icon name="{{menu.icon}}" item-start></ion-icon>
-      {{menu.name}}
-      <ion-badge item-end *ngIf="showBadge(menu.name)" color="danger" round>6</ion-badge>
-    </button>
+    <ion-item class="item-surat-header" margin-top>
+      <h2 ion-text item-end class="item-surat-title">Daftar Naskah Unit</h2>
+    </ion-item>
+
+    <ion-item class="periode-awal" margin-top>
+      <ion-datetime no-padding displayFormat="h:mm A" pickerFormat="h mm A" placeholder="Periode Awal"></ion-datetime>
+    </ion-item>
+
+    <ion-item class="periode-akhir" margin-top margin-bottom>
+      <ion-datetime no-padding displayFormat="h:mm A" pickerFormat="h mm A" placeholder="Periode Akhir"></ion-datetime>
+    </ion-item>
+
+    <ion-item class="item-middle" no-padding>
+      <ion-row>
+        <ion-col col-6 class="item-content-left" no-margin>
+          <h1 ion-text text-center padding> 10</h1>
+          <h3 ion-text text-center>Total Hari ini</h3>
+        </ion-col>
+        <ion-col col-6 class="item-content-right" no-margin>
+          <h1 ion-text text-center padding> 10</h1>
+          <h3 ion-text text-center>Total Hari ini</h3>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+
+    <br>
+
+    <ion-card no-margin class="item-card-bottom">
+      <ion-item color="red-default">
+        <h1 ion-text text-center color="light">100</h1>
+      </ion-item>
+      <ion-item color="brown-red" class="item-sub">
+        <h3 ion-text text-center color="light"> Keseluruhan</h3>
+      </ion-item>
+    </ion-card>
+
   </ion-list>
 </ion-content>

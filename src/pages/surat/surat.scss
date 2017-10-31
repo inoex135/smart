@@ -1,4 +1,5 @@
 page-surat {
+  $brown-red: map-get($colors, brown-red);
   .item-upper {
     box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
 
@@ -16,6 +17,55 @@ page-surat {
       background-color: red !important;
       border: 0.4px solid #fff;
       border-radius: 50%;
+    }
+  }
+
+  .item-surat-header {
+    background-color: map-get($colors, default-blue);
+
+    .item-surat-title {
+      font-weight: bold;
+      color: white;
+    }
+  }
+
+  // ion-date-time item
+  .periode-awal,
+  .periode-akhir {
+    border: 0.1px solid black !important;
+  }
+
+  // item middle
+  .item-middle {
+    h1 {
+      background-color: red;
+    }
+    h3 {
+      background-color: $brown-red;
+    }
+    h1,
+    h3 {
+      color: white;
+      margin: 0;
+    }
+    .label-md {
+      margin: 0;
+    }
+    .item-inner {
+      padding-right: 0 !important;
+    }
+  }
+
+  //
+  .item-middle,
+  .item-card-bottom {
+    width: 100% !important;
+  }
+
+  // item bottom
+  .item-card-bottom {
+    .label-md {
+      margin: 0;
     }
   }
 }
