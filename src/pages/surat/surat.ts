@@ -5,6 +5,8 @@ import { Ng2Highcharts } from "ng2-highcharts";
 import * as moment from "moment-timezone";
 import { LoaderHelper } from "../../helpers/loader-helper";
 import { GrafikSuratProvider } from "../../providers/grafik-surat/grafik-surat";
+import { NaskahNotifikasiPage } from "../naskah-notifikasi/naskah-notifikasi";
+import { NaskahMasukPage } from "../naskah-masuk/naskah-masuk";
 
 @Component({
   selector: "page-surat",
@@ -16,7 +18,10 @@ export class SuratPage {
     startTime: new Date().toISOString(),
     endTime: new Date().toISOString()
   };
-
+  PAGE: any = {
+    NOTIFIKASI: "notifikasi",
+    NASKAH: "naskah"
+  };
   @ViewChildren(Ng2Highcharts) allCharts;
 
   chartData: any = "";
@@ -93,8 +98,17 @@ export class SuratPage {
     return moment.tz("Asia/Jakarta").format("HH:mm");
   }
 
-  openPage(page: any) {
-    this.navCtrl.push(page.component);
+  openPage(component: any) {
+    switch (component) {
+      case this.PAGE.NOTIFIKASI:
+        this.navCtrl.push(NaskahNotifikasiPage);
+        break;
+      case this.PAGE.NASKAH:
+        this.navCtrl.push(NaskahMasukPage);
+        break;
+      default:
+        break;
+    }
   }
 
   showBadge(menu: String) {

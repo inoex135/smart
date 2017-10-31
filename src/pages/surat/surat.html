@@ -6,7 +6,7 @@
 
 <ion-content padding>
   <ion-list no-lines>
-    <ion-item class="item-upper">
+    <ion-item class="item-upper" (click)="openPage('notifikasi')">
       <div class="item-avatar" item-start>
         <img src="assets/icon/mail_sm.png" alt="envelope">
       </div>
@@ -15,7 +15,7 @@
       <h6 ion-text item-end>Today, {{dateNow()}}</h6>
     </ion-item>
 
-    <ion-item class="item-surat-header" margin-top>
+    <ion-item class="item-surat-header" margin-top (click)="openPage('naskah')">
       <h2 ion-text item-end class="item-surat-title">Daftar Naskah Unit</h2>
     </ion-item>
 
