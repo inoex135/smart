@@ -20,12 +20,17 @@
     </ion-item>
 
     <ion-item class="periode-awal" margin-top>
-      <ion-datetime no-padding displayFormat="h:mm A" pickerFormat="h mm A" placeholder="Periode Awal"></ion-datetime>
+      <ion-datetime (ionChange)="changeDate()" no-padding displayFormat="DD-MM-YYYY" pickerFormat="DD MMM YYYY" placeholder="Periode Awal"
+        [(ngModel)]="filter.startTime"></ion-datetime>
     </ion-item>
 
     <ion-item class="periode-akhir" margin-top margin-bottom>
-      <ion-datetime no-padding displayFormat="h:mm A" pickerFormat="h mm A" placeholder="Periode Akhir"></ion-datetime>
+      <ion-datetime (ionChange)="changeDate()" no-padding displayFormat="DD-MM-YYYY" pickerFormat="DD MMM YYYY" [(ngModel)]="filter.endTime"></ion-datetime>
     </ion-item>
+
+    <div>
+      <div [ng2-highcharts]="chartData"></div>
+    </div>
 
     <ion-item class="item-middle" no-padding>
       <ion-row>
