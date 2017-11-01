@@ -11,7 +11,7 @@
         <img src="assets/icon/mail_sm.png" alt="envelope">
       </div>
       <h5 ion-text text-wrap color="danger">Pemberitahuan</h5>
-      <h6 ion-text color="blue-template">Lihat Selengkapnya</h6>
+      <h6 ion-text color="blue-template" text-wrap>Lihat Selengkapnya</h6>
       <h6 ion-text item-end>Today, {{dateNow()}}</h6>
     </ion-item>
 
@@ -25,7 +25,8 @@
     </ion-item>
 
     <ion-item class="periode-akhir" margin-top margin-bottom>
-      <ion-datetime (ionChange)="changeDate()" no-padding displayFormat="DD-MM-YYYY" pickerFormat="DD MMM YYYY" [(ngModel)]="filter.endTime"></ion-datetime>
+      <ion-datetime [min]="filter.startTime" (ionChange)="changeDate()" no-padding displayFormat="DD-MM-YYYY" pickerFormat="DD MMM YYYY"
+        [(ngModel)]="filter.endTime" placeholder="Periode Akhir"></ion-datetime>
     </ion-item>
 
     <div>

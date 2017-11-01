@@ -15,8 +15,8 @@ import { NaskahMasukPage } from "../naskah-masuk/naskah-masuk";
 export class SuratPage {
   menus: Array<Object> = [];
   filter: any = {
-    startTime: new Date().toISOString(),
-    endTime: new Date().toISOString()
+    startTime: '',
+    endTime: ''
   };
   PAGE: any = {
     NOTIFIKASI: "notifikasi",

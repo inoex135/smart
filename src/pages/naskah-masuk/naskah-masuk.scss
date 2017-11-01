@@ -4,24 +4,35 @@ page-naskah-masuk {
     color: $blue-font;
   }
 
-  .naskah-select {
-    max-width: 100% !important;
-  }
-
-  .naskah-select {
-    ion-item {
-      background-color: transparent;
-    }
-    .button-inner {
-      border: 0.4px solid rgba(0, 0, 0, 0.2);
-    }
-  }
-
   .naskah-list {
     box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
   }
 
-  .item-search {
-    background-color: #f7f7f7;
+  .item-search-select {
+    .item-search {
+      background-color: #f7f7f7;
+      line-height: 10px;
+
+      .text-input-md,
+      .label-md {
+        margin: 0 !important;
+      }
+    }
+
+    .select-md .select-icon {
+      width: 16px !important;
+    }
+
+    .naskah-select {
+      max-width: 95% !important;
+      padding: 0 !important;
+
+      ion-item {
+        background-color: transparent;
+      }
+      .button-inner {
+        border: 0.4px solid rgba(0, 0, 0, 0.2);
+      }
+    }
   }
 }

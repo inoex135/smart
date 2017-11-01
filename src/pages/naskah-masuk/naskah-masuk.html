@@ -6,24 +6,26 @@
 
 
 <ion-content padding>
-  <ion-list>
-    <ion-item class="item-search">
-      <ion-label class="label-search">
-        <ion-icon name="search"></ion-icon>
-      </ion-label>
-      <ion-input placeholder="Text Input" placeholder="Cari Naskah"></ion-input>
-    </ion-item>
-  </ion-list>
+  <div class="item-search-select">
+    <ion-list>
+      <ion-item class="item-search">
+        <ion-label class="label-search">
+          <ion-icon name="search"></ion-icon>
+        </ion-label>
+        <ion-input placeholder="Text Input" placeholder="Cari Naskah" class="item-search-input"></ion-input>
+      </ion-item>
+    </ion-list>
 
-  <ion-list class="naskah-select">
-    <ion-item>
-      <ion-select class="naskah-select" [(ngModel)]="gender" placeholder="Naskah Unit / Naskah Pribadi / Permohonan">
-        <ion-option value="f">Naskah Unit</ion-option>
-        <ion-option value="m">Naskah Pribadi</ion-option>
-        <ion-option value="m">Naskah Permohonan</ion-option>
-      </ion-select>
-    </ion-item>
-  </ion-list>
+    <ion-list>
+      <ion-item>
+        <ion-select class="naskah-select" [(ngModel)]="gender" placeholder="Naskah Unit / Naskah Pribadi / Permohonan">
+          <ion-option value="f">Naskah Unit</ion-option>
+          <ion-option value="m">Naskah Pribadi</ion-option>
+          <ion-option value="m">Naskah Permohonan</ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+  </div>
 
   <ion-list>
 
