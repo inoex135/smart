@@ -31,6 +31,10 @@ export class NaskahMasukPage {
     this.navCtrl.push(NaskahMasukDetailPage, { naskahId: naskah.id });
   }
 
+  searchNaskah() {
+    alert(this.filter.naskahUnit);
+  }
+
   async getNaskahMasuk() {
     // create loader
     this.loaderHelper.createLoader();

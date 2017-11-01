@@ -13,27 +13,25 @@
 </ion-header>
 
 
-<ion-content no-padding no-margin>
-  <div [ngSwitch]="type" col-12>
-    <ion-col>
-      <!--Form teruskan-->
-      <div class="form" *ngSwitchCase="'teruskan'" no-padding>
-        <teruskan></teruskan>
-      </div>
+<ion-content padding>
+  <div [ngSwitch]="type">
+    <!--Form teruskan-->
+    <div *ngSwitchCase="'teruskan'">
+      <teruskan></teruskan>
+    </div>
 
-      <!-- form disposisi -->
-      <div class="form" *ngSwitchCase="'disposisi'" no-padding>
-        <disposisi></disposisi>
-      </div>
+    <!-- form disposisi -->
+    <div *ngSwitchCase="'disposisi'">
+      <disposisi></disposisi>
+    </div>
 
-      <!-- form selesai -->
-      <div *ngSwitchCase="'selesai'" class="form" no-padding>
-        <selesai [type]="type"></selesai>
-      </div>
+    <!-- form selesai -->
+    <div *ngSwitchCase="'selesai'">
+      <selesai [type]="type"></selesai>
+    </div>
 
-      <div *ngSwitchCase="'riwayat'" class="form" no-padding>
-        <riwayat-component></riwayat-component>
-      </div>
-    </ion-col>
+    <div *ngSwitchCase="'riwayat'">
+      <riwayat-component></riwayat-component>
+    </div>
   </div>
 </ion-content>

@@ -18,7 +18,8 @@
 
     <ion-list>
       <ion-item>
-        <ion-select class="naskah-select" [(ngModel)]="filter.naskahUnit" placeholder="Naskah Unit / Naskah Pribadi / Permohonan">
+
+        <ion-select (ionChange)="searchNaskah()" class="naskah-select" [(ngModel)]="filter.naskahUnit" placeholder="Naskah Unit / Naskah Pribadi / Permohonan">
           <ion-option value="f">Naskah Unit</ion-option>
           <ion-option value="m">Naskah Pribadi</ion-option>
           <ion-option value="m">Naskah Permohonan</ion-option>
