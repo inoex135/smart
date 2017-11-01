@@ -13,6 +13,12 @@ export class Disposisi {
   selectedUnit: Array<any> = [];
   lead: Array<string> = [];
 
+  disposisi: any = {
+    catatan: "",
+    targetSelesai: "",
+    tanggal: ""
+  };
+
   constructor() {
     this.datas.petunjuk = PetunjukDisposisi.getPetunjuk();
     this.datas.jabatan = Jabatan.getJabatan();
