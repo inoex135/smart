@@ -55,7 +55,6 @@ import { SuratProvider } from "../providers/surat/surat";
 import { GrafikPersuratanKeluarPage } from "../pages/grafik-persuratan-keluar/grafik-persuratan-keluar";
 import { EventModalPage } from "../pages/personal/event-modal/event-modal";
 import { GrafikSuratProvider } from "../providers/grafik-surat/grafik-surat";
-import { FilterChartPage } from "../pages/filter-chart/filter-chart";
 
 @NgModule({
   declarations: [
@@ -73,8 +72,7 @@ import { FilterChartPage } from "../pages/filter-chart/filter-chart";
     NaskahNotifikasiPage,
     TextAvatarDirective,
     GrafikPersuratanKeluarPage,
-    EventModalPage,
-    FilterChartPage
+    EventModalPage
   ],
   imports: [
     BrowserModule,
@@ -103,8 +101,7 @@ import { FilterChartPage } from "../pages/filter-chart/filter-chart";
     NaskahDetailActionPage,
     NaskahNotifikasiPage,
     GrafikPersuratanKeluarPage,
-    EventModalPage,
-    FilterChartPage
+    EventModalPage
   ],
   providers: [
     StatusBar,
