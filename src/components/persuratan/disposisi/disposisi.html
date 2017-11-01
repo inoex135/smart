@@ -1,109 +1,58 @@
-<ion-list no-lines>
-    <ion-item no-margin>
-        <ion-label>Sifat Disposisi</ion-label>
-    </ion-item>
-    <ion-item>
-        <ion-select class="ion-select-custom" placeholder="Segera / Sangat Segera / Kilat">
-            <ion-option value="0">Segera</ion-option>
-            <ion-option value="1">Sangat Segera</ion-option>
-            <ion-option value="2">Kilat</ion-option>
-        </ion-select>
-    </ion-item>
+<ion-card>
+    <ion-list no-lines>
+        <ion-item>
+            <ion-label>Disposisi Kepada</ion-label>
+        </ion-item>
 
-    <ion-item margin-top>
-        <ion-textarea class="ion-textarea-custom" type="text" [(ngModel)]="disposisi.catatan"></ion-textarea>
-    </ion-item>
+        <ion-item margin-top>
+            <ion-input type="text" placeholder="Nama Personal"></ion-input>
+        </ion-item>
 
-    <ion-item-group>
-        <h6 ion-text item-start text-bold>Petunjuk</h6>
-        <!-- <ion-item *ngFor="let petunjuk of datas.petunjuk" item-start>
-            <ion-label>{{petunjuk}}</ion-label>
-            <ion-checkbox color="blue"></ion-checkbox>
-        </ion-item> -->
-    </ion-item-group>
+        <ion-item margin-top>
+            <ion-input type="text" placeholder="Selaku"></ion-input>
+        </ion-item>
+    </ion-list>
 
-    <ion-item>
-        <ion-label stacked>Target Selesai</ion-label>
-        <ion-datetime class="ion-datetime-custom" type="text" [(ngModel)]="tujuan" displayFormat="MMM DD YYYY" [(ngModel)]="disposisi.targetSelesai"></ion-datetime>
-    </ion-item>
+    <ion-list no-lines class="card">
 
-    <ion-item>
-        <ion-label stacked>Tanggal Disposisi</ion-label>
-        <ion-datetime class="ion-datetime-custom" displayFormat="MMM DD YYYY" [(ngModel)]="disposisi.tanggal"></ion-datetime>
-    </ion-item>
+        <ion-item no-margin>
+            <ion-label>Sifat Disposisi</ion-label>
+        </ion-item>
+        <ion-item>
+            <ion-select margin class="ion-select-custom" placeholder="Segera / Sangat Segera / Kilat">
+                <ion-option value="0">Segera</ion-option>
+                <ion-option value="1">Sangat Segera</ion-option>
+                <ion-option value="2">Kilat</ion-option>
+            </ion-select>
+        </ion-item>
 
-    <ion-item>
-        <button ion-button (click)="simpan()" large full>Simpan</button>
-    </ion-item>
-</ion-list>
+        <ion-item margin-top padding-left>
+            <ion-textarea class="ion-textarea-custom" type="text" [(ngModel)]="disposisi.catatan"></ion-textarea>
+        </ion-item>
 
+        <ion-item-group>
+            <ion-label margin-left>Petunjuk</ion-label>
+            <ion-item *ngFor="let petunjuk of datas.petunjuk" class="petunjuk">
+                <ion-label text-wrap>{{petunjuk}}</ion-label>
+                <ion-checkbox color="primary"></ion-checkbox>
+            </ion-item>
+        </ion-item-group>
 
-<!-- <ion-item-group>
-    <ion-item-divider>
-        Jabatan(Unit)
-        <span class="required">*</span>
-    </ion-item-divider>
-    <ion-item *ngFor="let unit of datas.jabatan; let i = index">
-        <ion-label>{{unit.jabatan}}</ion-label>
-        <ion-checkbox value="{{unit.id}}" color="blue" (ionChange)="setLead($event, unit)" [(ngModel)]="unit[i]"></ion-checkbox>
-    </ion-item>
+        <ion-item>
+            <ion-label stacked>Target Selesai</ion-label>
+            <ion-datetime class="ion-datetime-custom" type="text" [(ngModel)]="tujuan" displayFormat="MMM DD YYYY" [(ngModel)]="disposisi.targetSelesai"></ion-datetime>
+        </ion-item>
 
-    <ion-item>
-        <ion-label floating>Lead</ion-label>
-        <ion-select [(ngModel)]="lead">
-            <ion-option *ngFor="let unitLead of selectedUnit" value="{{unitLead.id}}">
-                {{unitLead.jabatan}}
-            </ion-option>
-        </ion-select>
-    </ion-item>
+        <ion-item>
+            <ion-label stacked>Tanggal Disposisi</ion-label>
+            <ion-datetime class="ion-datetime-custom" displayFormat="MMM DD YYYY" [(ngModel)]="disposisi.tanggal"></ion-datetime>
+        </ion-item>
 
-    <ion-item>
-        <span class="required">
-            * Jika Tujuan Disposisi Lebih dari 2, maka Lead Wajib dipilih
-        </span>
-    </ion-item>
-</ion-item-group>
-
-<br>
-
-<ion-item-group>
-    <ion-item>
-        <ion-label floating>Sifat Disposisi</ion-label>
-        <ion-select [(ngModel)]="alasan">
-            <ion-option value="1">Segera</ion-option>
-            <ion-option value="2">Sangat Segera</ion-option>
-            <ion-option value="3">Kilat</ion-option>
-        </ion-select>
-    </ion-item>
-
-    <ion-item>
-        <ion-label floating>Catatan</ion-label>
-        <ion-textarea required type="email" pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" required [(ngModel)]="email"></ion-textarea>
-    </ion-item>
-
-    <ion-item>
-        <ion-label floating>Target Selesai
-            <span class="required">*</span>
-        </ion-label>
-        <ion-datetime required type="text" [(ngModel)]="tujuan" displayFormat="MMM DD YYYY" [(ngModel)]="tanggalDisposisi"></ion-datetime>
-    </ion-item>
-
-    <ion-item>
-        <ion-label floating>Tanggal Disposisi</ion-label>
-        <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="tanggalDisposisi"></ion-datetime>
-    </ion-item>
-</ion-item-group>
-
-<br>
-
-<ion-item-group>
-    <ion-item-divider>Petunjuk</ion-item-divider>
-    <ion-item *ngFor="let petunjuk of datas.petunjuk" item-start>
-        <ion-label>{{petunjuk}}</ion-label>
-        <ion-checkbox color="blue"></ion-checkbox>
-    </ion-item>
-
-    <ion-item>
-        <button ion-button (click)="simpan()" large full>Simpan</button>
-    </ion-item>
-</ion-item-group> -->
+        <ion-item>
+            <button ion-button (click)="simpan()" small full color="blue-default" icon-left>
+                <ion-icon name="add"></ion-icon>
+                Simpan
+            </button>
+        </ion-item>
+    </ion-list>
+</ion-card>

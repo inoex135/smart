@@ -1,0 +1,19 @@
+disposisi {
+  .petunjuk {
+    .label-md {
+      margin: 0;
+    }
+  }
+  .card {
+    background-color: #f0f4fd;
+    ion-item {
+      background-color: transparent;
+    }
+    ion-textarea,
+    ion-select,
+    ion-datetime,
+    ion-input {
+      background-color: #ffffff;
+    }
+  }
+}
