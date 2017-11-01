@@ -11,6 +11,11 @@ import { LoaderHelper } from "../../helpers/loader-helper";
 export class NaskahMasukPage {
   private listNaskah: any = [];
 
+  filter: any = {
+    naskahUnit: "",
+    keyword: ""
+  };
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,

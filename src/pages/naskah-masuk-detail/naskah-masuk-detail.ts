@@ -10,7 +10,6 @@ import { NaskahDetailActionPage } from "../naskah-detail-action/naskah-detail-ac
 })
 export class NaskahMasukDetailPage {
   private detail: any = {};
-  private type: String = "detail"; //switch case for riwayat and detail segment
   private naskahId: string = "";
   sizeDetail: number = 0;
 
@@ -38,8 +37,6 @@ export class NaskahMasukDetailPage {
       .getDetailNaskah(this.naskahId)
       .finally(() => this.loaderHelper.dismiss())
       .subscribe(res => {
-        console.log(res);
-
         return (this.detail = res);
       });
   }

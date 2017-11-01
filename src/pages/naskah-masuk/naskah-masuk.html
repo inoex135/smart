@@ -12,13 +12,13 @@
         <ion-label class="label-search">
           <ion-icon name="search"></ion-icon>
         </ion-label>
-        <ion-input placeholder="Text Input" placeholder="Cari Naskah" class="item-search-input"></ion-input>
+        <ion-input placeholder="Text Input" placeholder="Cari Naskah" class="item-search-input" [(ngModel)]="filter.keyword"></ion-input>
       </ion-item>
     </ion-list>
 
     <ion-list>
       <ion-item>
-        <ion-select class="naskah-select" [(ngModel)]="gender" placeholder="Naskah Unit / Naskah Pribadi / Permohonan">
+        <ion-select class="naskah-select" [(ngModel)]="filter.naskahUnit" placeholder="Naskah Unit / Naskah Pribadi / Permohonan">
           <ion-option value="f">Naskah Unit</ion-option>
           <ion-option value="m">Naskah Pribadi</ion-option>
           <ion-option value="m">Naskah Permohonan</ion-option>
