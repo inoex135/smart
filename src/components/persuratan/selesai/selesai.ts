@@ -1,4 +1,5 @@
 import { Component, Input } from "@angular/core";
+import { SelesaiModel } from "../../../models/selesai.model";
 
 @Component({
   selector: "selesai",
@@ -6,5 +7,17 @@ import { Component, Input } from "@angular/core";
 })
 export class Selesai {
   @Input() type: string;
-  selesai() {}
+
+  data: SelesaiModel = {
+    tanggalSelesai: "",
+    status: "any",
+    catatanSelesai: "",
+    lokasiArsip: "",
+    klasifikasiArsip: "",
+    unit: ""
+  };
+
+  selesai(data: SelesaiModel) {
+    console.log(data);
+  }
 }
