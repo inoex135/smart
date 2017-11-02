@@ -3,6 +3,7 @@ import { NavController, NavParams } from "ionic-angular";
 import { NaskahMasukProvider } from "../../providers/naskah-masuk/naskah-masuk";
 import { LoaderHelper } from "../../helpers/loader-helper";
 import { NaskahDetailActionPage } from "../naskah-detail-action/naskah-detail-action";
+import { NaskahAction } from "../../constant/naskah-action";
 
 @Component({
   selector: "page-naskah-masuk-detail",
@@ -12,6 +13,7 @@ export class NaskahMasukDetailPage {
   private detail: any = {};
   private naskahId: string = "";
   sizeDetail: number = 0;
+  actionList: Array<any> = [];
 
   constructor(
     public navCtrl: NavController,
@@ -20,10 +22,11 @@ export class NaskahMasukDetailPage {
     private loaderHelper: LoaderHelper
   ) {
     this.naskahId = this.navParams.get("naskahId");
+    this.actionList = NaskahAction.getAction();
   }
 
-  openPage(type: String) {
-    this.navCtrl.push(NaskahDetailActionPage, { type: type });
+  openPage(actionData: String) {
+    this.navCtrl.push(NaskahDetailActionPage, { actionData: actionData });
   }
 
   ionViewDidLoad() {

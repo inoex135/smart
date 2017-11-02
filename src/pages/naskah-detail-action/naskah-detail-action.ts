@@ -6,11 +6,11 @@ import { NavController, NavParams } from "ionic-angular";
   templateUrl: "naskah-detail-action.html"
 })
 export class NaskahDetailActionPage {
-  type: string = "";
+  actionData: object = {};
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {}
 
   ionViewDidLoad() {
-    this.type = this.navParams.get("type");
+    this.actionData = this.navParams.get("actionData");
   }
 }

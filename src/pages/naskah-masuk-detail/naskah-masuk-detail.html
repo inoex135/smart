@@ -7,30 +7,12 @@
 <ion-content padding>
   <ion-grid>
     <ion-row class="list-action-button">
-      <ion-col>
-        <button ion-button full icon-left color='danger' (click)="openPage('disposisi')">
-          <ion-icon name="open"></ion-icon>
-          Disposisi
-        </button>
-
-        <button ion-button full icon-left color='orange' (click)="openPage('teruskan')">
-          <ion-icon name="skip-forward"></ion-icon>
-          Teruskan
+      <ion-col *ngFor="let actions of actionList">
+        <button *ngFor="let action of actions" ion-button block icon-left [color]='action?.color' (click)="openPage(action)">
+          <ion-icon [name]="action?.icon"></ion-icon>
+          {{action?.type}}
         </button>
       </ion-col>
-
-      <ion-col>
-        <button ion-button full icon-left color='dark' (click)="openPage('selesai')">
-          <ion-icon name="flag"></ion-icon>
-          Selesai
-        </button>
-
-        <button ion-button full icon-left color='silver' (click)="openPage('riwayat')">
-          <ion-icon name="refresh-circle"></ion-icon>
-          Riwayat
-        </button>
-      </ion-col>
-
     </ion-row>
     <ion-row>
       <ion-card text-left class="detail-naskah" padding-bottom>
