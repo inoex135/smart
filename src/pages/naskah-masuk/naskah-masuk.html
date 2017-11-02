@@ -15,8 +15,7 @@
       <ion-col col-12 col-sm-12 col-md-12 offset-lg-3 col-lg-6 offset-xl-3 col-xl-6>
         <ion-list no-lines>
           <ion-item>
-
-            <ion-select (ionChange)="searchNaskah()" class="naskah-select" [(ngModel)]="filter.naskahUnit" placeholder="Naskah Unit / Naskah Pribadi / Permohonan">
+            <ion-select (ionChange)="searchNaskah()" class="ion-select-custom" [(ngModel)]="filter.naskahUnit" placeholder="Naskah Unit / Naskah Pribadi / Permohonan">
               <ion-option value="f">Naskah Unit</ion-option>
               <ion-option value="m">Naskah Pribadi</ion-option>
               <ion-option value="m">Naskah Permohonan</ion-option>

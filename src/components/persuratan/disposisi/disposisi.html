@@ -5,29 +5,30 @@
         </ion-item>
 
         <ion-item margin-top>
-            <ion-input type="text" placeholder="Nama Personal"></ion-input>
+            <ion-label floating></ion-label>
+            <ion-input class="ion-input-custom" type="text" placeholder="Nama Personal"></ion-input>
         </ion-item>
 
         <ion-item margin-top>
-            <ion-input type="text" placeholder="Selaku"></ion-input>
+            <ion-label floating></ion-label>
+            <ion-input class="ion-input-custom" type="text" placeholder="Selaku"></ion-input>
         </ion-item>
-    </ion-list>
-
-    <ion-list no-lines class="card">
 
         <ion-item no-margin>
             <ion-label>Sifat Disposisi</ion-label>
         </ion-item>
         <ion-item>
-            <ion-select margin class="ion-select-custom" placeholder="Segera / Sangat Segera / Kilat">
+            <ion-label floating>Sifat Surat</ion-label>
+            <ion-select>
                 <ion-option value="0">Segera</ion-option>
                 <ion-option value="1">Sangat Segera</ion-option>
                 <ion-option value="2">Kilat</ion-option>
             </ion-select>
         </ion-item>
 
-        <ion-item margin-top padding-left>
-            <ion-textarea class="ion-textarea-custom" type="text" [(ngModel)]="disposisi.catatan"></ion-textarea>
+        <ion-item>
+            <ion-label floating></ion-label>
+            <ion-textarea class="ion-textarea-custom" placeholder="Catatan" type="text" [(ngModel)]="disposisi.catatan"></ion-textarea>
         </ion-item>
 
         <ion-item-group>

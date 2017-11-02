@@ -22,7 +22,6 @@ export class NaskahMasukDetailPage {
     private loaderHelper: LoaderHelper
   ) {
     this.naskahId = this.navParams.get("naskahId");
-    this.actionList = NaskahAction.getAction();
   }
 
   openPage(actionData: String) {
@@ -30,6 +29,7 @@ export class NaskahMasukDetailPage {
   }
 
   ionViewDidLoad() {
+    this.actionList = NaskahAction.getAction();
     this.getDetailNaskah();
   }
 
