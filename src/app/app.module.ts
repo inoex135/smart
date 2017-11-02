@@ -35,7 +35,6 @@ import { AptPage } from "../pages/apt/apt";
 import { AptProvider } from "../providers/apt/apt";
 import { AptDetailPage } from "../pages/apt-detail/apt-detail";
 import { SuratPage } from "../pages/surat/surat";
-import { GrafikPersuratanPage } from "../pages/grafik-persuratan/grafik-persuratan";
 import { NaskahMasukPage } from "../pages/naskah-masuk/naskah-masuk";
 import { NaskahMasukProvider } from "../providers/naskah-masuk/naskah-masuk";
 import { NaskahMasukDetailPage } from "../pages/naskah-masuk-detail/naskah-masuk-detail";
@@ -52,7 +51,6 @@ import { UserProvider } from "../providers/user/user";
 import { ApiProvider } from "../providers/api/api";
 import { TokenProvider } from "../providers/token/token";
 import { SuratProvider } from "../providers/surat/surat";
-import { GrafikPersuratanKeluarPage } from "../pages/grafik-persuratan-keluar/grafik-persuratan-keluar";
 import { EventModalPage } from "../pages/personal/event-modal/event-modal";
 import { GrafikSuratProvider } from "../providers/grafik-surat/grafik-surat";
 
@@ -65,13 +63,11 @@ import { GrafikSuratProvider } from "../providers/grafik-surat/grafik-surat";
     AptPage,
     AptDetailPage,
     SuratPage,
-    GrafikPersuratanPage,
     NaskahMasukPage,
     NaskahMasukDetailPage,
     NaskahDetailActionPage,
     NaskahNotifikasiPage,
     TextAvatarDirective,
-    GrafikPersuratanKeluarPage,
     EventModalPage
   ],
   imports: [
@@ -95,12 +91,10 @@ import { GrafikSuratProvider } from "../providers/grafik-surat/grafik-surat";
     AptPage,
     AptDetailPage,
     SuratPage,
-    GrafikPersuratanPage,
     NaskahMasukPage,
     NaskahMasukDetailPage,
     NaskahDetailActionPage,
     NaskahNotifikasiPage,
-    GrafikPersuratanKeluarPage,
     EventModalPage
   ],
   providers: [
@@ -117,7 +111,6 @@ import { GrafikSuratProvider } from "../providers/grafik-surat/grafik-surat";
     FCM,
     PersonalProvider,
     AptProvider,
-    GrafikPersuratanPage,
     NaskahMasukProvider,
     NaskahNotifikasiProvider,
     AndroidPermissions,
