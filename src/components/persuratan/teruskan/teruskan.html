@@ -1,22 +1,31 @@
-<h1 title text-right>Teruskan</h1>
+<ion-grid>
+    <ion-row wrap>
+        <ion-col col-12 col-sm-12 col-md-12 offset-lg-3 col-lg-6 offset-xl-3 col-xl-6>
+            <div class="form">
+                <ion-item no-padding>
+                    <ion-label floating>Tujuan</ion-label>
+                    <ion-input type="text" [(ngModel)]="naskah.tujuan" name="tujuan"></ion-input>
+                </ion-item>
 
-<ion-item no-padding>
-    <ion-label floating>Tujuan <span class="required">*</span></ion-label>
-    <ion-input required type="text" [(ngModel)]="naskah.tujuan" name="tujuan"></ion-input>
-</ion-item>
+                <ion-item no-padding>
+                    <ion-label floating>Placeholder</ion-label>
+                    <ion-select [(ngModel)]="naskah.alasan" name="alasan">
+                        <ion-option value="1">Cuti</ion-option>
+                        <ion-option value="2">Lainnya</ion-option>
+                        <ion-option value="3">Tidak Sesuai Tugas dan Fungsinya</ion-option>
+                    </ion-select>
+                </ion-item>
 
-<ion-item no-padding>
-    <ion-label floating>Alasan <span class="required">*</span></ion-label>
-    <ion-select [(ngModel)]="naskah.alasan" name="alasan">
-        <ion-option value="1">Cuti</ion-option>
-        <ion-option value="2">Lainnya</ion-option>
-        <ion-option value="3">Tidak Sesuai Tugas dan Fungsinya</ion-option>
-    </ion-select>
-</ion-item>
+                <ion-item no-padding>
+                    <ion-label floating>Alasan</ion-label>
+                    <ion-textarea required name="catatan" type="text" [(ngModel)]="naskah.catatan"></ion-textarea>
+                </ion-item>
 
-<ion-item no-padding>
-    <ion-label floating>Catatan <span class="required">*</span></ion-label>
-    <ion-textarea required name="catatan" type="text" required [(ngModel)]="naskah.catatan"></ion-textarea>
-</ion-item>
-
-<button ion-button right (click)="teruskan()" margin-top>Simpan</button>
+                <button ion-button full block color="default-blue" icon-start (click)="teruskan()" margin-top>
+                    <ion-icon name="checkmark"></ion-icon>
+                    Simpan
+                </button>
+            </div>
+        </ion-col>
+    </ion-row>
+</ion-grid>
