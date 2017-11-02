@@ -6,45 +6,43 @@
 
 
 <ion-content padding>
-  <div class="item-search-select">
-    <ion-list>
-      <ion-item class="item-search">
-        <ion-label class="label-search">
-          <ion-icon name="search"></ion-icon>
-        </ion-label>
-        <ion-input placeholder="Text Input" placeholder="Cari Naskah" class="item-search-input" [(ngModel)]="filter.keyword"></ion-input>
-      </ion-item>
-    </ion-list>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-searchbar [(ngModel)]="filter.keyword" search-bar-bcg (ionInput)="onEvent('onTextChange', $event)"></ion-searchbar>
+      </ion-col>
 
-    <ion-list>
-      <ion-item>
+      <ion-col col-12 col-sm-12 col-md-12 offset-lg-3 col-lg-6 offset-xl-3 col-xl-6>
+        <ion-list no-lines>
+          <ion-item>
 
-        <ion-select (ionChange)="searchNaskah()" class="naskah-select" [(ngModel)]="filter.naskahUnit" placeholder="Naskah Unit / Naskah Pribadi / Permohonan">
-          <ion-option value="f">Naskah Unit</ion-option>
-          <ion-option value="m">Naskah Pribadi</ion-option>
-          <ion-option value="m">Naskah Permohonan</ion-option>
-        </ion-select>
-      </ion-item>
-    </ion-list>
-  </div>
+            <ion-select (ionChange)="searchNaskah()" class="naskah-select" [(ngModel)]="filter.naskahUnit" placeholder="Naskah Unit / Naskah Pribadi / Permohonan">
+              <ion-option value="f">Naskah Unit</ion-option>
+              <ion-option value="m">Naskah Pribadi</ion-option>
+              <ion-option value="m">Naskah Permohonan</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
 
-  <ion-list>
+        <ion-list>
+          <ion-item (click)="detailNaskah(naskah)" *ngFor="let naskah of listNaskah" class="naskah-list">
+            <ion-row>
 
-    <ion-item (click)="detailNaskah(naskah)" *ngFor="let naskah of listNaskah" class="naskah-list">
-      <ion-row>
+              <ion-col col-6>
+                <h6 ion-text card-title text-left text-wrap>{{naskah?.nomorSurat}}</h6>
+              </ion-col>
 
-        <ion-col col-6>
-          <h6 ion-text card-title text-left text-wrap>{{naskah?.nomorSurat}}</h6>
-        </ion-col>
+              <ion-col col-6>
+                <h6 ion-text text-right>{{naskah?.dateCreated | indonesianDate: 'DD MMMM YYYY'}}</h6>
+              </ion-col>
 
-        <ion-col col-6>
-          <h6 ion-text text-right>{{naskah?.dateCreated | indonesianDate: 'DD MMMM YYYY'}}</h6>
-        </ion-col>
+            </ion-row>
+            <p ion-text text-wrap>{{naskah?.perihal}}</p>
+            <p ion-text class="unit-pemohon">{{naskah?.namaUnit || "-"}} / Pemohon</p>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
-      </ion-row>
-      <p ion-text text-wrap>{{naskah?.perihal}}</p>
-
-      <p ion-text class="unit-pemohon">{{naskah?.namaUnit || "-"}} / Pemohon</p>
-    </ion-item>
-  </ion-list>
 </ion-content>

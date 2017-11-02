@@ -4,336 +4,339 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content no-padding>
+<ion-content padding>
+  <ion-grid>
+    <ion-row class="list-action-button">
+      <ion-col>
+        <button ion-button full icon-left color='danger' (click)="openPage('disposisi')">
+          <ion-icon name="open"></ion-icon>
+          Disposisi
+        </button>
 
-  <ion-row padding class="list-action-button">
-    <ion-col>
-      <button ion-button full icon-left color='danger' (click)="openPage('disposisi')">
-        <ion-icon name="open"></ion-icon>
-        Disposisi
-      </button>
+        <button ion-button full icon-left color='orange' (click)="openPage('teruskan')">
+          <ion-icon name="skip-forward"></ion-icon>
+          Teruskan
+        </button>
+      </ion-col>
 
-      <button ion-button full icon-left color='orange' (click)="openPage('teruskan')">
-        <ion-icon name="skip-forward"></ion-icon>
-        Teruskan
-      </button>
-    </ion-col>
+      <ion-col>
+        <button ion-button full icon-left color='dark' (click)="openPage('selesai')">
+          <ion-icon name="flag"></ion-icon>
+          Selesai
+        </button>
 
-    <ion-col>
-      <button ion-button full icon-left color='dark' (click)="openPage('selesai')">
-        <ion-icon name="flag"></ion-icon>
-        Selesai
-      </button>
+        <button ion-button full icon-left color='silver' (click)="openPage('riwayat')">
+          <ion-icon name="refresh-circle"></ion-icon>
+          Riwayat
+        </button>
+      </ion-col>
 
-      <button ion-button full icon-left color='silver' (click)="openPage('riwayat')">
-        <ion-icon name="refresh-circle"></ion-icon>
-        Riwayat
-      </button>
-    </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-card text-left class="detail-naskah" padding-bottom>
+        <ion-card-header color="blue-template">
+          Identitas Naskah
+        </ion-card-header>
 
-  </ion-row>
+        <ion-item>
+          <ion-row>
+            <ion-col col-6>
+              <p ion-text item-start text-wrap card-title>Nomor Agenda Pemberi Disposisi</p>
+            </ion-col>
+            <ion-col>
+              <p ion-text item-start text-wrap>{{detail?.noAgenda}}</p>
+            </ion-col>
+          </ion-row>
+        </ion-item>
 
-  <ion-card text-left class="detail-naskah" padding-bottom>
-    <ion-card-header color="blue-template">
-      Identitas Naskah
-    </ion-card-header>
+        <ion-item>
+          <ion-row>
+            <ion-col>
+              <p ion-text item-start text-wrap card-title>Amplop Tertutup</p>
+            </ion-col>
+            <ion-col>
+              <p ion-text item-start text-wrap>{{detail?.amplopTertutup}}</p>
+            </ion-col>
+          </ion-row>
+        </ion-item>
 
-    <ion-item>
-      <ion-row>
-        <ion-col col-6>
-          <p ion-text item-start text-wrap card-title>Nomor Agenda Pemberi Disposisi</p>
-        </ion-col>
-        <ion-col>
-          <p ion-text item-start text-wrap>{{detail?.noAgenda}}</p>
-        </ion-col>
-      </ion-row>
-    </ion-item>
+        <ion-item>
+          <ion-row>
+            <ion-col>
+              <p ion-text text-wrap item-start card-title>Naskah Permohonan</p>
+            </ion-col>
+            <ion-col>
+              <p ion-text text-wrap item-start>{{detail?.noAgenda}}</p>
+            </ion-col>
+          </ion-row>
+        </ion-item>
 
-    <ion-item>
-      <ion-row>
-        <ion-col>
-          <p ion-text item-start text-wrap card-title>Amplop Tertutup</p>
-        </ion-col>
-        <ion-col>
-          <p ion-text item-start text-wrap>{{detail?.amplopTertutup}}</p>
-        </ion-col>
-      </ion-row>
-    </ion-item>
+        <ion-item>
+          <ion-row>
+            <ion-col>
+              <p ion-text item-start text-wrap card-title>Jenis Pengiriman</p>
+            </ion-col>
+            <ion-col>
+              <p ion-text item-start text-wrap>{{detail?.jenisPengiriman}}</p>
+            </ion-col>
+          </ion-row>
+        </ion-item>
 
-    <ion-item>
-      <ion-row>
-        <ion-col>
-          <p ion-text text-wrap item-start card-title>Naskah Permohonan</p>
-        </ion-col>
-        <ion-col>
-          <p ion-text text-wrap item-start>{{detail?.noAgenda}}</p>
-        </ion-col>
-      </ion-row>
-    </ion-item>
+        <ion-item>
+          <ion-row>
+            <ion-col>
+              <p ion-text item-start text-wrap card-title>Tanggal Terima</p>
+            </ion-col>
+            <ion-col>
+              <p ion-text item-start text-wrap>{{detail?.fisikTerima}}</p>
+            </ion-col>
+          </ion-row>
+        </ion-item>
 
-    <ion-item>
-      <ion-row>
-        <ion-col>
-          <p ion-text item-start text-wrap card-title>Jenis Pengiriman</p>
-        </ion-col>
-        <ion-col>
-          <p ion-text item-start text-wrap>{{detail?.jenisPengiriman}}</p>
-        </ion-col>
-      </ion-row>
-    </ion-item>
+        <ion-item>
+          <ion-row>
+            <ion-col>
+              <p ion-text item-start text-wrap card-title>Jenis Naskah</p>
+            </ion-col>
+            <ion-col>
+              <p ion-text item-start text-wrap>{{detail?.jenisSurat}}</p>
+            </ion-col>
+          </ion-row>
 
-    <ion-item>
-      <ion-row>
-        <ion-col>
-          <p ion-text item-start text-wrap card-title>Tanggal Terima</p>
-        </ion-col>
-        <ion-col>
-          <p ion-text item-start text-wrap>{{detail?.fisikTerima}}</p>
-        </ion-col>
-      </ion-row>
-    </ion-item>
+        </ion-item>
 
-    <ion-item>
-      <ion-row>
-        <ion-col>
-          <p ion-text item-start text-wrap card-title>Jenis Naskah</p>
-        </ion-col>
-        <ion-col>
-          <p ion-text item-start text-wrap>{{detail?.jenisSurat}}</p>
-        </ion-col>
-      </ion-row>
+        <ion-item>
+          <ion-row>
+            <ion-col>
+              <p ion-text item-start text-wrap card-title>Nomor Agenda Disposisi</p>
+            </ion-col>
+            <ion-col>
+              <p ion-text item-start text-wrap>{{detail?.noAgenda}}</p>
+            </ion-col>
+          </ion-row>
+        </ion-item>
 
-    </ion-item>
+        <ion-item>
+          <ion-row>
+            <ion-col>
+              <p ion-text item-start text-wrap card-title>Pemberi Disposisi</p>
+            </ion-col>
+            <ion-col>
+              <p ion-text item-start text-wrap>{{detail?.noAgenda}}</p>
+            </ion-col>
+          </ion-row>
+        </ion-item>
 
-    <ion-item>
-      <ion-row>
-        <ion-col>
-          <p ion-text item-start text-wrap card-title>Nomor Agenda Disposisi</p>
-        </ion-col>
-        <ion-col>
-          <p ion-text item-start text-wrap>{{detail?.noAgenda}}</p>
-        </ion-col>
-      </ion-row>
-    </ion-item>
+        <ion-item>
+          <ion-row>
+            <ion-col>
+              <p ion-text item-start text-wrap card-title>Nomor Naskah</p>
+            </ion-col>
+            <ion-col>
+              <p ion-text item-start text-wrap>{{detail?.nomorSurat}}</p>
+            </ion-col>
+          </ion-row>
+        </ion-item>
 
-    <ion-item>
-      <ion-row>
-        <ion-col>
-          <p ion-text item-start text-wrap card-title>Pemberi Disposisi</p>
-        </ion-col>
-        <ion-col>
-          <p ion-text item-start text-wrap>{{detail?.noAgenda}}</p>
-        </ion-col>
-      </ion-row>
-    </ion-item>
+        <ion-item>
+          <ion-row>
+            <ion-col>
+              <p ion-text item-start text-wrap card-title>Tanggal Naskah</p>
+            </ion-col>
+            <ion-col>
+              <p ion-text item-start text-wrap>{{detail?.noAgenda}}</p>
+            </ion-col>
+          </ion-row>
+        </ion-item>
 
-    <ion-item>
-      <ion-row>
-        <ion-col>
-          <p ion-text item-start text-wrap card-title>Nomor Naskah</p>
-        </ion-col>
-        <ion-col>
-          <p ion-text item-start text-wrap>{{detail?.nomorSurat}}</p>
-        </ion-col>
-      </ion-row>
-    </ion-item>
+        <ion-item>
+          <ion-row>
+            <ion-col>
+              <p ion-text item-start text-wrap card-title>Perihal</p>
+            </ion-col>
+            <ion-col>
+              <p ion-text item-start text-wrap>{{detail?.perihal}}</p>
+            </ion-col>
+          </ion-row>
+        </ion-item>
 
-    <ion-item>
-      <ion-row>
-        <ion-col>
-          <p ion-text item-start text-wrap card-title>Tanggal Naskah</p>
-        </ion-col>
-        <ion-col>
-          <p ion-text item-start text-wrap>{{detail?.noAgenda}}</p>
-        </ion-col>
-      </ion-row>
-    </ion-item>
+        <ion-item>
+          <ion-row>
+            <ion-col>
+              <p ion-text item-start text-wrap card-title>Sifat Naskah</p>
+            </ion-col>
+            <ion-col>
+              <p ion-text item-start text-wrap>{{detail?.sifatSurat}}</p>
+            </ion-col>
+          </ion-row>
+        </ion-item>
 
-    <ion-item>
-      <ion-row>
-        <ion-col>
-          <p ion-text item-start text-wrap card-title>Perihal</p>
-        </ion-col>
-        <ion-col>
-          <p ion-text item-start text-wrap>{{detail?.perihal}}</p>
-        </ion-col>
-      </ion-row>
-    </ion-item>
+        <ion-item>
+          <ion-row>
+            <ion-col>
+              <p ion-text text-wrap item-start card-title>Sifat Disposisi</p>
+            </ion-col>
+            <ion-col>
+              <p ion-text text-wrap item-start>{{detail?.sifatDisposisi}}</p>
+            </ion-col>
+          </ion-row>
+        </ion-item>
 
-    <ion-item>
-      <ion-row>
-        <ion-col>
-          <p ion-text item-start text-wrap card-title>Sifat Naskah</p>
-        </ion-col>
-        <ion-col>
-          <p ion-text item-start text-wrap>{{detail?.sifatSurat}}</p>
-        </ion-col>
-      </ion-row>
-    </ion-item>
+        <ion-item>
+          <ion-row>
+            <ion-col>
+              <p ion-text text-wrap item-start card-title>Sifat Berkas</p>
+            </ion-col>
+            <ion-col>
+              <p ion-text text-wrap item-start>{{detail?.perihal}}</p>
+            </ion-col>
+          </ion-row>
+        </ion-item>
 
-    <ion-item>
-      <ion-row>
-        <ion-col>
-          <p ion-text text-wrap item-start card-title>Sifat Disposisi</p>
-        </ion-col>
-        <ion-col>
-          <p ion-text text-wrap item-start>{{detail?.sifatDisposisi}}</p>
-        </ion-col>
-      </ion-row>
-    </ion-item>
+        <ion-item>
+          <ion-row>
+            <ion-col>
+              <p ion-text text-wrap item-start card-title>Lampiran</p>
+            </ion-col>
+            <ion-col>
+              <p ion-text text-wrap item-start>{{detail?.lampiran}}</p>
+            </ion-col>
+          </ion-row>
+        </ion-item>
 
-    <ion-item>
-      <ion-row>
-        <ion-col>
-          <p ion-text text-wrap item-start card-title>Sifat Berkas</p>
-        </ion-col>
-        <ion-col>
-          <p ion-text text-wrap item-start>{{detail?.perihal}}</p>
-        </ion-col>
-      </ion-row>
-    </ion-item>
+        <ion-item>
+          <ion-row>
+            <ion-col>
+              <p ion-text text-wrap item-start card-title>File Digital</p>
+            </ion-col>
+            <ion-col>
+              <p ion-text text-wrap item-start>{{detail?.fileLengkap}}</p>
+            </ion-col>
+          </ion-row>
+        </ion-item>
 
-    <ion-item>
-      <ion-row>
-        <ion-col>
-          <p ion-text text-wrap item-start card-title>Lampiran</p>
-        </ion-col>
-        <ion-col>
-          <p ion-text text-wrap item-start>{{detail?.lampiran}}</p>
-        </ion-col>
-      </ion-row>
-    </ion-item>
+        <ion-item>
+          <ion-row>
+            <ion-col>
+              <p ion-text text-wrap item-start card-title>Target Selesai</p>
+            </ion-col>
+            <ion-col>
+              <p ion-text text-wrap item-start>{{detail?.tanggalTargetSelesai}}</p>
+            </ion-col>
+          </ion-row>
+        </ion-item>
 
-    <ion-item>
-      <ion-row>
-        <ion-col>
-          <p ion-text text-wrap item-start card-title>File Digital</p>
-        </ion-col>
-        <ion-col>
-          <p ion-text text-wrap item-start>{{detail?.fileLengkap}}</p>
-        </ion-col>
-      </ion-row>
-    </ion-item>
+        <ion-item>
+          <ion-row>
+            <ion-col>
+              <p ion-text text-wrap item-start card-title>Proses Naskah</p>
+            </ion-col>
+            <ion-col>
+              <p ion-text text-wrap item-start>{{detail?.prosesNaskah || "-"}}</p>
+            </ion-col>
+          </ion-row>
+        </ion-item>
 
-    <ion-item>
-      <ion-row>
-        <ion-col>
-          <p ion-text text-wrap item-start card-title>Target Selesai</p>
-        </ion-col>
-        <ion-col>
-          <p ion-text text-wrap item-start>{{detail?.tanggalTargetSelesai}}</p>
-        </ion-col>
-      </ion-row>
-    </ion-item>
+        <ion-item>
+          <ion-row>
+            <ion-col>
+              <p ion-text text-wrap item-start card-title>File Digital Lengkap</p>
+            </ion-col>
+            <ion-col>
+              <p ion-text text-wrap item-start>{{detail?.fileLengkap}}</p>
+            </ion-col>
+          </ion-row>
+        </ion-item>
 
-    <ion-item>
-      <ion-row>
-        <ion-col>
-          <p ion-text text-wrap item-start card-title>Proses Naskah</p>
-        </ion-col>
-        <ion-col>
-          <p ion-text text-wrap item-start>{{detail?.prosesNaskah || "-"}}</p>
-        </ion-col>
-      </ion-row>
-    </ion-item>
+        <ion-item>
+          <ion-row>
+            <ion-col>
+              <p ion-text text-wrap item-start card-title>Naskah Dinas Terkait</p>
+            </ion-col>
+            <ion-col>
+              <p ion-text text-wrap item-start>{{detail?.naskahDinasTerkait || '-'}}</p>
+            </ion-col>
+          </ion-row>
+        </ion-item>
 
-    <ion-item>
-      <ion-row>
-        <ion-col>
-          <p ion-text text-wrap item-start card-title>File Digital Lengkap</p>
-        </ion-col>
-        <ion-col>
-          <p ion-text text-wrap item-start>{{detail?.fileLengkap}}</p>
-        </ion-col>
-      </ion-row>
-    </ion-item>
+        <!-- <ion-row *ngSwitchCase="'detail'" margin-left margin-right margin-bottom>
+                    <button ion-button full start padding color="danger" (click)="openPage('disposisi')">Disposisi</button>
+                    <button ion-button full padding color="blue-donker" (click)="openPage('selesai')">Selesai</button>
+                    <button ion-button full padding color="light" (click)="openPage('teruskan')">Teruskan</button>
+                  </ion-row> -->
+      </ion-card>
+      <br>
+      <ion-card textleft class="detail-naskah" padding-bottom>
+        <ion-card-header color="blue-template">
+          Pengirim Naskah
+        </ion-card-header>
 
-    <ion-item>
-      <ion-row>
-        <ion-col>
-          <p ion-text text-wrap item-start card-title>Naskah Dinas Terkait</p>
-        </ion-col>
-        <ion-col>
-          <p ion-text text-wrap item-start>{{detail?.naskahDinasTerkait || '-'}}</p>
-        </ion-col>
-      </ion-row>
-    </ion-item>
+        <ion-item>
+          <ion-row>
+            <ion-col col-6>
+              <p ion-text item-start text-wrap card-title>Asal Pengirim</p>
+            </ion-col>
+            <ion-col>
+              <p ion-text item-start text-wrap>{{detail?.noAgenda}}</p>
+            </ion-col>
+          </ion-row>
 
-    <!-- <ion-row *ngSwitchCase="'detail'" margin-left margin-right margin-bottom>
-        <button ion-button full start padding color="danger" (click)="openPage('disposisi')">Disposisi</button>
-        <button ion-button full padding color="blue-donker" (click)="openPage('selesai')">Selesai</button>
-        <button ion-button full padding color="light" (click)="openPage('teruskan')">Teruskan</button>
-      </ion-row> -->
-  </ion-card>
-  <br>
-  <ion-card textleft class="detail-naskah" padding-bottom>
-    <ion-card-header color="blue-template">
-      Pengirim Naskah
-    </ion-card-header>
+          <ion-row>
+            <ion-col col-6>
+              <p ion-text item-start text-wrap card-title>Unit Pengirim</p>
+            </ion-col>
+            <ion-col>
+              <p ion-text item-start text-wrap>{{detail?.noAgenda}}</p>
+            </ion-col>
+          </ion-row>
 
-    <ion-item>
-      <ion-row>
-        <ion-col col-6>
-          <p ion-text item-start text-wrap card-title>Asal Pengirim</p>
-        </ion-col>
-        <ion-col>
-          <p ion-text item-start text-wrap>{{detail?.noAgenda}}</p>
-        </ion-col>
-      </ion-row>
+          <ion-row>
+            <ion-col col-6>
+              <p ion-text item-start text-wrap card-title>Nama Pengirim</p>
+            </ion-col>
+            <ion-col>
+              <p ion-text item-start text-wrap>{{detail?.noAgenda}}</p>
+            </ion-col>
+          </ion-row>
 
-      <ion-row>
-        <ion-col col-6>
-          <p ion-text item-start text-wrap card-title>Unit Pengirim</p>
-        </ion-col>
-        <ion-col>
-          <p ion-text item-start text-wrap>{{detail?.noAgenda}}</p>
-        </ion-col>
-      </ion-row>
+          <ion-row>
+            <ion-col col-6>
+              <p ion-text item-start text-wrap card-title>Jabatan / Selaku</p>
+            </ion-col>
+            <ion-col>
+              <p ion-text item-start text-wrap>{{detail?.noAgenda}}</p>
+            </ion-col>
+          </ion-row>
 
-      <ion-row>
-        <ion-col col-6>
-          <p ion-text item-start text-wrap card-title>Nama Pengirim</p>
-        </ion-col>
-        <ion-col>
-          <p ion-text item-start text-wrap>{{detail?.noAgenda}}</p>
-        </ion-col>
-      </ion-row>
+          <ion-row>
+            <ion-col col-6>
+              <p ion-text item-start text-wrap card-title>Alamat</p>
+            </ion-col>
+            <ion-col>
+              <p ion-text item-start text-wrap>{{detail?.noAgenda}}</p>
+            </ion-col>
+          </ion-row>
 
-      <ion-row>
-        <ion-col col-6>
-          <p ion-text item-start text-wrap card-title>Jabatan / Selaku</p>
-        </ion-col>
-        <ion-col>
-          <p ion-text item-start text-wrap>{{detail?.noAgenda}}</p>
-        </ion-col>
-      </ion-row>
+          <ion-row>
+            <ion-col col-6>
+              <p ion-text item-start text-wrap card-title>Telepon / Faksimile</p>
+            </ion-col>
+            <ion-col>
+              <p ion-text item-start text-wrap>{{detail?.noAgenda}}</p>
+            </ion-col>
+          </ion-row>
 
-      <ion-row>
-        <ion-col col-6>
-          <p ion-text item-start text-wrap card-title>Alamat</p>
-        </ion-col>
-        <ion-col>
-          <p ion-text item-start text-wrap>{{detail?.noAgenda}}</p>
-        </ion-col>
-      </ion-row>
+          <ion-row>
+            <ion-col col-6>
+              <p ion-text item-start text-wrap card-title>Email</p>
+            </ion-col>
+            <ion-col>
+              <p ion-text item-start text-wrap>{{detail?.noAgenda}}</p>
+            </ion-col>
+          </ion-row>
+        </ion-item>
+      </ion-card>
+    </ion-row>
+  </ion-grid>
 
-      <ion-row>
-        <ion-col col-6>
-          <p ion-text item-start text-wrap card-title>Telepon / Faksimile</p>
-        </ion-col>
-        <ion-col>
-          <p ion-text item-start text-wrap>{{detail?.noAgenda}}</p>
-        </ion-col>
-      </ion-row>
-
-      <ion-row>
-        <ion-col col-6>
-          <p ion-text item-start text-wrap card-title>Email</p>
-        </ion-col>
-        <ion-col>
-          <p ion-text item-start text-wrap>{{detail?.noAgenda}}</p>
-        </ion-col>
-      </ion-row>
-    </ion-item>
-  </ion-card>
 </ion-content>
