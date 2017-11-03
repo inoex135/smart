@@ -1,38 +1,50 @@
 <ion-card>
-    <ion-row margin-left margin-right>
+    <ion-card-header>
+        AM-1731/KN.54/2017
+    </ion-card-header>
+
+    <ion-row padding>
         <ion-col float-left>
-            <p ion-text card-title>No Agenda</p>
-            <p ion-text card-content>AM-1731/KN.54/2017</p>
+            <p ion-text card-content>Tanggal Naskah</p>
+        </ion-col>
+        <ion-col float-left>
+            <p ion-text card-content>{{data?.tanggal}}</p>
         </ion-col>
     </ion-row>
 
-    <ion-row margin-left margin-right>
+    <ion-row padding-left padding-right>
         <ion-col float-left>
-            <p ion-text card-title>Pihak</p>
-            <p ion-text text-wrap card-content>Kepala Subdirektorat Perencanaan dan Pengembangan Sistem Aplikasi</p>
+            <p ion-text card-content>Perihal</p>
+        </ion-col>
+        <ion-col float-left>
+            <p ion-text card-content text-wrap>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Adipisci, excepturi.</p>
         </ion-col>
     </ion-row>
 
-    <ion-row margin-left margin-right>
+    <ion-row padding-left padding-right>
         <ion-col float-left>
-            <p ion-text card-title>Tanggal Proses</p>
-            <p ion-text card-content> 24 Agustus 2017</p>
+            <p ion-text card-content>Jenis Naskah</p>
         </ion-col>
         <ion-col float-left>
-            <p ion-text card-title>Tanggal Agenda</p>
-            <p ion-text card-content>24 Agustus 2017</p>
+            <p ion-text card-content>{{data?.jenis}}</p>
         </ion-col>
     </ion-row>
 
-    <ion-row margin-left margin-right>
+    <ion-row padding-left padding-right>
         <ion-col float-left>
-            <p ion-text card-title text-wrap>(Petunjuk) Catatan</p>
-            <p ion-text text-wrap card-content>-</p>
+            <p ion-text card-content>Asal Pengiriman</p>
         </ion-col>
-
         <ion-col float-left>
-            <p ion-text card-title>Proses Naskah</p>
-            <p ion-text card-content> Disposisi </p>
+            <p ion-text card-content>{{data?.asalPengiriman}}</p>
+        </ion-col>
+    </ion-row>
+
+    <ion-row padding-left padding-right>
+        <ion-col float-left>
+            <p ion-text card-content>Sifat Naskah</p>
+        </ion-col>
+        <ion-col float-left>
+            <p ion-text card-content>{{data?.Sifat}}</p>
         </ion-col>
     </ion-row>
 </ion-card>
