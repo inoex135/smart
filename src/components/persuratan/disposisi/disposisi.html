@@ -1,13 +1,11 @@
-<ion-card paddingmargin-bottom>
-    <ion-list no-lines>
-        <ion-item no-padding>
-            <ion-label stacked>Mark</ion-label>
-            <ion-input type="text" placeholder="Selaku"></ion-input>
-        </ion-item>
-    </ion-list>
+<ion-card padding-right>
+    <ion-item>
+        <ion-label stacked>Username</ion-label>
+        <ion-input type="text" placeholder="Selaku" class="ion-input-custom"></ion-input>
+    </ion-item>
 </ion-card>
 
-<ion-card padding-bottom>
+<ion-card padding-right>
     <ion-item>
         <ion-label color="default-blue">Disposisi Kepada</ion-label>
     </ion-item>
@@ -32,13 +30,13 @@
 
 </ion-card>
 
-<ion-card class="card-etc" margin-top>
+<ion-card class="card-etc" padding-right>
     <ion-list no-lines>
         <ion-item no-margin>
             <ion-label>Sifat Disposisi</ion-label>
         </ion-item>
         <ion-item>
-            <ion-label floating>Sifat Surat</ion-label>
+            <ion-label stacked>Sifat Surat</ion-label>
             <ion-select>
                 <ion-option value="0">Segera</ion-option>
                 <ion-option value="1">Sangat Segera</ion-option>
@@ -61,12 +59,12 @@
 
         <ion-item>
             <ion-label stacked>Target Selesai</ion-label>
-            <ion-datetime class="ion-datetime-custom" type="text" [(ngModel)]="tujuan" displayFormat="MMM DD YYYY" [(ngModel)]="disposisi.targetSelesai"></ion-datetime>
+            <ion-datetime no-padding class="ion-datetime-custom" type="text" [(ngModel)]="tujuan" displayFormat="MMM DD YYYY" [(ngModel)]="disposisi.targetSelesai"></ion-datetime>
         </ion-item>
 
         <ion-item>
             <ion-label stacked>Tanggal Disposisi</ion-label>
-            <ion-datetime class="ion-datetime-custom" displayFormat="MMM DD YYYY" [(ngModel)]="disposisi.tanggal"></ion-datetime>
+            <ion-datetime no-padding class="ion-datetime-custom" displayFormat="MMM DD YYYY" [(ngModel)]="disposisi.tanggal"></ion-datetime>
         </ion-item>
 
         <ion-item>

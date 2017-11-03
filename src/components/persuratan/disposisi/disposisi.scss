@@ -16,4 +16,12 @@ disposisi {
       background-color: #ffffff;
     }
   }
+
+  .item-inner {
+    box-shadow: none !important;
+    padding-right: 0 !important;
+    .ion-wrapper {
+      border: 0 !important;
+    }
+  }
 }
