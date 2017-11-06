@@ -37,7 +37,7 @@
         </ion-item>
         <ion-item>
             <ion-label stacked>Sifat Surat</ion-label>
-            <ion-select>
+            <ion-select name="sifatSurat" [(ngModel)]="disposisi.sifatSurat">
                 <ion-option value="0">Segera</ion-option>
                 <ion-option value="1">Sangat Segera</ion-option>
                 <ion-option value="2">Kilat</ion-option>
@@ -51,9 +51,9 @@
 
         <ion-item-group>
             <ion-label margin-left>Petunjuk</ion-label>
-            <ion-item *ngFor="let petunjuk of datas.petunjuk" class="petunjuk">
+            <ion-item *ngFor="let petunjuk of datas.petunjuk; let i = index" class="petunjuk">
                 <ion-label text-wrap>{{petunjuk}}</ion-label>
-                <ion-checkbox color="primary"></ion-checkbox>
+                <ion-checkbox color="primary" name="petunjuk[i]" (ionChange)="onChange(petunjuk, $event.checked, i)"></ion-checkbox>
             </ion-item>
         </ion-item-group>
 
@@ -64,7 +64,7 @@
 
         <ion-item>
             <ion-label stacked>Tanggal Disposisi</ion-label>
-            <ion-datetime no-padding class="ion-datetime-custom" displayFormat="MMM DD YYYY" [(ngModel)]="disposisi.tanggal"></ion-datetime>
+            <ion-datetime no-padding class="ion-input-custom" displayFormat="MMM DD YYYY" [(ngModel)]="disposisi.tanggal"></ion-datetime>
         </ion-item>
 
         <ion-item>

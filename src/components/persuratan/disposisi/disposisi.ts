@@ -14,9 +14,11 @@ export class Disposisi {
   lead: Array<string> = [];
 
   disposisi: any = {
+    sifatSurat: "",
     catatan: "",
     targetSelesai: "",
-    tanggal: ""
+    tanggal: "",
+    petunjuk: []
   };
 
   constructor() {
@@ -24,6 +26,20 @@ export class Disposisi {
     this.datas.jabatan = Jabatan.getJabatan();
   }
 
+  onChange(petunjuk: string, checked: boolean, id: number) {
+    // console.log(petunjuk, checked, id);
+    if (checked) {
+      this.disposisi.petunjuk.push({
+        petunjuk: petunjuk,
+        id: id,
+        checked: checked
+      });
+    } else {
+      this.disposisi.petunjuk.splice(id);
+    }
+
+    console.log(this.disposisi);
+  }
   setLead(event: any, unit: any) {
     // @TODO: selectedUnit msh duplikat
     // jika checkbox di select setelah itu di uncheck,
@@ -33,6 +49,7 @@ export class Disposisi {
     }
   }
   simpan() {
-    alert(this.unit);
+    alert("sukses");
+    console.log(this.disposisi);
   }
 }
