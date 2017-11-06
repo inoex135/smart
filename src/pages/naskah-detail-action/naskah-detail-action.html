@@ -13,7 +13,7 @@
 </ion-header>
 
 
-<ion-content>
+<ion-content padding>
   <div [ngSwitch]="actionData.type">
     <!--Form teruskan-->
     <div *ngSwitchCase="'teruskan'">
@@ -32,6 +32,7 @@
 
     <div *ngSwitchCase="'riwayat'">
       <riwayat-component></riwayat-component>
+      <timeline [items]="items"></timeline>
     </div>
   </div>
 </ion-content>
