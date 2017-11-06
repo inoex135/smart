@@ -48,10 +48,20 @@ $solid-border: 0.4px solid rgba(0, 0, 0, 0.2);
 }
 
 .ion-textarea-custom,
+.ion-input-custom,
 .ion-datetime-custom {
+  padding-left: 5px;
   border: $solid-border !important;
 }
 
 .ion-datetime-custom {
-  padding: 1px 8px 15px 16px !important;
+  // padding: 1px 8px 15px 16px !important;
+  // border: 0.1px solid theme-color("mainColors", "accent") !important;
 }
+
+//https://stackoverflow.com/questions/42248573/ionic2-remove-blue-line-color-input-md
+// $text-input-md-highlight-color-invalid: transparent;
+// $text-input-md-highlight-color-valid: transparent;
+// $text-input-md-show-invalid-highlight: transparent;
+// $text-input-md-highlight-color: transparent;
+// $text-input-md-show-valid-highlight: transparent;

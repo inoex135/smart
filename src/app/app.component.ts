@@ -45,15 +45,17 @@ export class MyApp {
       // this.fcmTesting();
     });
   }
-  // fcmTesting() {
-  //   this.fcm.onNotification().subscribe(data => {
-  //     if (data.wasTapped) {
-  //       alert("Received in background");
-  //     } else {
-  //       alert("Received in foreground");
-  //     }
-  //   });
-  // }
+  fcmTesting() {
+    if (this.platform.is("android")) {
+      this.fcm.onNotification().subscribe(data => {
+        if (data.wasTapped) {
+          alert("Received in background");
+        } else {
+          alert("Received in foreground");
+        }
+      });
+    }
+  }
   registerBackButton(): void {
     document.addEventListener("backbutton", () => {
       let nav: NavController = this.nav;
