@@ -33,7 +33,7 @@ export class HomePage {
 
   logout() {
     this.userProvider.purgeAuth();
-    this.navCtrl.setRoot(LoginPage);
+    this.navCtrl.setRoot("LoginPage");
   }
 
   private assets(name: string) {

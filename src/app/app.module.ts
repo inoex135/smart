@@ -10,7 +10,6 @@ import { PipesModule } from "../pipes/pipes.module";
 
 import { MyApp } from "./app.component";
 import { HomePage } from "../pages/home/home";
-import { LoginPage } from "../pages/login/login";
 
 import { ComponentsModule } from "../components/components.module";
 
@@ -58,7 +57,6 @@ import { GrafikSuratProvider } from "../providers/grafik-surat/grafik-surat";
   declarations: [
     MyApp,
     HomePage,
-    LoginPage,
     PersonalPage,
     AptPage,
     AptDetailPage,
@@ -86,7 +84,6 @@ import { GrafikSuratProvider } from "../providers/grafik-surat/grafik-surat";
   entryComponents: [
     MyApp,
     HomePage,
-    LoginPage,
     PersonalPage,
     AptPage,
     AptDetailPage,

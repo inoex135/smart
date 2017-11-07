@@ -1,11 +1,16 @@
 import { Component } from "@angular/core";
-import { NavController, NavParams, ToastController } from "ionic-angular";
+import {
+  NavController,
+  NavParams,
+  ToastController,
+  IonicPage
+} from "ionic-angular";
 
 import { User } from "../../models/users";
 import { UserProvider } from "../../providers/user/user";
 import { HomePage } from "../home/home";
 import { TokenProvider } from "../../providers/token/token";
-
+@IonicPage()
 @Component({
   selector: "page-login",
   templateUrl: "login.html"
@@ -33,6 +38,9 @@ export class LoginPage {
     this.params.events = {
       onLogin: function(params) {
         self.login(params);
+      },
+      onLoginSSO: function(params) {
+        self.loginSSO(params);
       }
     };
   }
@@ -57,5 +65,9 @@ export class LoginPage {
           .present();
       }
     );
+  }
+
+  loginSSO(user: User) {
+    this.navCtrl.push("SsoPage");
   }
 }

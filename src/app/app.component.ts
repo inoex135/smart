@@ -73,7 +73,7 @@ export class MyApp {
         this.rootPage = HomePage;
         // this.userProvider.populate();
       } else {
-        this.rootPage = LoginPage;
+        this.rootPage = "LoginPage";
       }
     });
   }
