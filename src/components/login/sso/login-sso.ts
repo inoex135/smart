@@ -12,8 +12,8 @@ export class LoginSso {
   public password: string;
 
   constructor() {
-    this.username = "198208212003121002";
-    this.password = "sm4rt@DJKN";
+    this.username = "";
+    this.password = "";
   }
 
   onEvent = (event: string): void => {
