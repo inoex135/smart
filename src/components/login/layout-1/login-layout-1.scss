@@ -45,7 +45,7 @@ login-layout-1 {
     padding-bottom: 0 !important;
   }
   .logo {
-    width: 25%;
+    width: 30%;
     height: auto;
     margin: 0 auto;
     padding-top: 30px;
@@ -89,12 +89,21 @@ login-layout-1 {
     color: $blue-font;
   }
 
-  .smart-title {
-    margin-bottom: 0px !important;
-    font-weight: bold;
+  .smart-footer {
+    margin-top: 20% !important;
+
+    .smart-title {
+      margin-bottom: 0px !important;
+      font-weight: bold;
+    }
+
+    .smart-subtitle {
+      margin-top: 0 !important;
+      margin-bottom: 0;
+    }
   }
 
-  .smart-subtitle {
-    margin-top: 0px !important;
+  [ion-button] {
+    border-radius: 5px;
   }
 }
