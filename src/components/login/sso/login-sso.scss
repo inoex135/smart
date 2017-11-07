@@ -1,0 +1,107 @@
+login-sso {
+  $transparent-white: rgba(255, 255, 255, 0.6);
+  $blue-font: map-get($colors, "blue-template");
+  $gray: #c5c9ce;
+
+  // header
+  [top-title] {
+    h1 {
+      color: silver !important;
+    }
+    text-align: center;
+  }
+
+  [alert-success] {
+    background-color: #dff0d8;
+    border-radius: 5px;
+    text-align: center;
+    [ion-text] {
+      color: green !important;
+    }
+  }
+
+  ion-content {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  // Content
+  .card {
+    background-color: white;
+    box-shadow: 1px 1px 5px $gray;
+    h1,
+    h6 {
+      color: $blue-font;
+    }
+  }
+  .scroll-content {
+    display: flex;
+    flex-direction: column;
+    // overflow: hidden;
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+  }
+  .logo {
+    width: 30%;
+    height: auto;
+    margin: 0 auto;
+    padding-top: 30px;
+    padding-bottom: 20px;
+  }
+  // Input items
+  ion-item {
+    border-radius: 3px !important;
+    padding-left: 10px !important;
+    margin-bottom: 15px !important;
+    margin-bottom: 10px;
+    color: $blue-font !important;
+    background-color: rgba(255, 255, 255, 0.2) !important;
+    font-size: 0.9em;
+  }
+  ::-webkit-input-placeholder {
+    text-align: center;
+  }
+  .item-inner {
+    border-bottom: 0.1px solid $gray !important;
+  }
+
+  // footer
+  ion-footer {
+    height: 47px;
+  }
+  .footer {
+    text-align: center;
+    background: transparent;
+    min-height: 47px;
+  }
+  .footer-md::before {
+    border-top: none !important;
+    background-image: none;
+  }
+
+  // etc
+  h6,
+  h1,
+  p {
+    color: $blue-font;
+  }
+
+  .smart-footer {
+    margin-top: 20% !important;
+
+    .smart-title {
+      margin-bottom: 0px !important;
+      font-weight: bold;
+    }
+
+    .smart-subtitle {
+      margin-top: 0 !important;
+      margin-bottom: 0;
+    }
+  }
+
+  [ion-button] {
+    border-radius: 5px;
+  }
+}

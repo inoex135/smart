@@ -1,0 +1,28 @@
+<!-- Themes Login + logo -->
+<ion-header>
+    <ion-navbar>
+    </ion-navbar>
+</ion-header>
+<ion-content padding class="transparent-header">
+    <img [src]="data?.logo" class="logo">
+    <div top-title>
+        <h1 ion-text>Sign In</h1>
+    </div>
+
+    <div alert-success margin-top margin-bottom>
+        <p ion-text>Sign in via SSO DJKN untuk mengakses
+            <br>
+            <b>SMARt DJKN</b>
+        </p>
+    </div>
+
+    <div padding class="card">
+        <ion-item>
+            <ion-input required type="text" [(ngModel)]="username" placeholder="Username"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-input required type="password" [(ngModel)]="password" placeholder="Password"></ion-input>
+        </ion-item>
+        <button ion-button color="danger" full block (click)="onEvent('onLogin')">{{data?.login}}</button>
+    </div>
+</ion-content>

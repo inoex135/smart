@@ -7,10 +7,12 @@ import { Teruskan } from "./persuratan/teruskan/teruskan";
 import { Selesai } from "./persuratan/selesai/selesai";
 import { RiwayatComponent } from "./persuratan/riwayat/riwayat-component";
 import { TimelineComponent } from "./timeline/timeline";
+import { LoginSso } from "./login/sso/login-sso";
 
 @NgModule({
   declarations: [
     LoginLayout1,
+    LoginSso,
     Disposisi,
     Teruskan,
     Selesai,
@@ -20,6 +22,7 @@ import { TimelineComponent } from "./timeline/timeline";
   imports: [IonicModule],
   exports: [
     LoginLayout1,
+    LoginSso,
     Disposisi,
     Teruskan,
     Selesai,
