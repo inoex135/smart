@@ -66,6 +66,8 @@ System:
 Misc:
     backend : legacy
 ```
+## Note
+* You can downgrade to your old version by running: npm i --save -E ionic@3.16.0
 
 ## Reference
 * [https://ionicframework.com/docs](https://ionicframework.com/docs)
