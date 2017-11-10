@@ -18,7 +18,8 @@ export class SsoPage {
     this.params.data = {
       login: "Sign In",
       logo: "assets/logo/sso_lock.png",
-      backgroundImage: "assets/images/bg_login.png"
+      backgroundImage: "assets/images/bg_login.png",
+      logo2: "assets/logo/LE.png"
     };
 
     this.params.events = {

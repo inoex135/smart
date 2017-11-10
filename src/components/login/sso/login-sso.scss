@@ -12,11 +12,13 @@ login-sso {
   }
 
   [alert-success] {
-    background-color: #dff0d8;
-    border-radius: 5px;
-    text-align: center;
-    [ion-text] {
-      color: green !important;
+    ion-item {
+      background-color: #dff0d8 !important;
+      border-radius: 3px;
+      text-align: center;
+      [ion-text] {
+        color: green !important;
+      }
     }
   }
 
@@ -28,11 +30,15 @@ login-sso {
 
   // Content
   .card {
-    background-color: white;
-    box-shadow: 1px 1px 5px $gray;
-    h1,
-    h6 {
-      color: $blue-font;
+    ion-item {
+      border: 0.6px solid rgba(0, 0, 0, 0.2);
+      .label-input-hide {
+        display: none !important;
+      }
+      margin-bottom: 0 !important;
+    }
+    ion-item:last-child {
+      border: 0;
     }
   }
   .scroll-content {
@@ -62,22 +68,10 @@ login-sso {
   ::-webkit-input-placeholder {
     text-align: center;
   }
-  .item-inner {
-    border-bottom: 0.1px solid $gray !important;
-  }
 
-  // footer
-  ion-footer {
-    height: 47px;
-  }
-  .footer {
-    text-align: center;
-    background: transparent;
-    min-height: 47px;
-  }
-  .footer-md::before {
-    border-top: none !important;
-    background-image: none;
+  .item-inner {
+    border-bottom: 0 !important;
+    box-shadow: none !important;
   }
 
   // etc
@@ -102,6 +96,6 @@ login-sso {
   }
 
   [ion-button] {
-    border-radius: 5px;
+    border-radius: 3px;
   }
 }
