@@ -6,5 +6,17 @@
 
 
 <ion-content padding>
-
+  <div *ngFor="let detail of detailAgenda">
+    <ion-card>
+      <ion-card-header>{{detail?.title}}</ion-card-header>
+      <ion-card-content>
+        <p ion-text>{{detail?.content}}</p>
+        <p ion-text>{{detail?.location}}</p>
+      </ion-card-content>
+      <ion-item>
+        <p ion-text item-end>Edit</p>
+        <p ion-text item-end>Delete</p>
+      </ion-item>
+    </ion-card>
+  </div>
 </ion-content>
