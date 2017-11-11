@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
 import { IonicPage, NavController, NavParams } from "ionic-angular";
+import { TimelineDummy } from "../../dummy/timeline.dummy";
 
 @IonicPage()
 @Component({
@@ -9,11 +10,16 @@ import { IonicPage, NavController, NavParams } from "ionic-angular";
 export class PersonalAgendaPage {
   constructor(public navCtrl: NavController, public navParams: NavParams) {}
 
+  items: any = TimelineDummy.agenda();
+
   ionViewDidLoad() {
     console.log("ionViewDidLoad PersonalAgendaPage");
   }
-
-  detailAgenda() {
-    this.navCtrl.push("PersonalAgendaDetailPage");
+  test(msg) {
+    console.log(msg);
+  }
+  detailAgenda(event) {
+    // alert(event);
+    this.navCtrl.push("PersonalAgendaDetailPage", { agendaId: event });
   }
 }

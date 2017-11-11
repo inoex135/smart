@@ -6,5 +6,5 @@
 
 
 <ion-content padding>
-  <button ion-button full block (click)="detailAgenda()">Klik</button>
+  <timeline (childEvent)="detailAgenda($event)" [items]="items"></timeline>
 </ion-content>
