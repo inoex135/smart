@@ -52,6 +52,7 @@ import { TokenProvider } from "../providers/token/token";
 import { SuratProvider } from "../providers/surat/surat";
 import { EventModalPage } from "../pages/personal/event-modal/event-modal";
 import { GrafikSuratProvider } from "../providers/grafik-surat/grafik-surat";
+import { PersonalAgendaDetailProvider } from '../providers/personal-agenda-detail/personal-agenda-detail';
 
 @NgModule({
   declarations: [
@@ -113,7 +114,8 @@ import { GrafikSuratProvider } from "../providers/grafik-surat/grafik-surat";
     AndroidPermissions,
     AptHelper,
     LoaderHelper,
-    GrafikSuratProvider
+    GrafikSuratProvider,
+    PersonalAgendaDetailProvider
   ]
 })
 export class AppModule {}
