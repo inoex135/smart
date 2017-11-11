@@ -4,7 +4,6 @@ import { PersonalAgendaPage } from "./personal-agenda";
 
 @NgModule({
   declarations: [PersonalAgendaPage],
-  imports: [IonicPageModule.forChild(PersonalAgendaPage)],
-  exports: [PersonalAgendaPage]
+  imports: [IonicPageModule.forChild(PersonalAgendaPage)]
 })
 export class PersonalAgendaPageModule {}

@@ -1,25 +1,19 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the PersonalAgendaPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { Component } from "@angular/core";
+import { IonicPage, NavController, NavParams } from "ionic-angular";
 
 @IonicPage()
 @Component({
-  selector: 'page-personal-agenda',
-  templateUrl: 'personal-agenda.html',
+  selector: "page-personal-agenda",
+  templateUrl: "personal-agenda.html"
 })
 export class PersonalAgendaPage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
+  constructor(public navCtrl: NavController, public navParams: NavParams) {}
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad PersonalAgendaPage');
+    console.log("ionViewDidLoad PersonalAgendaPage");
   }
 
+  detailAgenda() {
+    this.navCtrl.push("PersonalAgendaDetailPage");
+  }
 }
