@@ -12,14 +12,9 @@ export class PersonalAgendaPage {
 
   items: any = TimelineDummy.agenda();
 
-  ionViewDidLoad() {
-    console.log("ionViewDidLoad PersonalAgendaPage");
-  }
-  test(msg) {
-    console.log(msg);
-  }
+  ionViewDidLoad() {}
+
   detailAgenda(event) {
-    // alert(event);
     this.navCtrl.push("PersonalAgendaDetailPage", { agendaId: event });
   }
 }
