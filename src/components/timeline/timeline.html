@@ -5,11 +5,17 @@
       <ion-card-header>
         {{item.title}}
       </ion-card-header>
-      <ion-card-content>
+      <!-- <ion-card-content>
         <p ion-text>{{item?.time?.title}}</p>
         <p ion-text>{{item?.time?.subtitle}}</p>
         <p ion-text>{{item?.time?.subtitle}}</p>
-      </ion-card-content>
+      </ion-card-content> -->
+      <ion-item>
+        <p ion-text>{{item?.title}}</p>
+        <p ion-text>{{item?.time?.subtitle}}</p>
+        <p ion-text>{{item?.time?.subtitle}}</p>
+        <ion-note item-end (click)="detailAgenda(item?.title)">View</ion-note>
+      </ion-item>
     </ion-card>
   </timeline-item>
 

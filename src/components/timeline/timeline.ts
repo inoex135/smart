@@ -1,4 +1,4 @@
-import { Component, Input } from "@angular/core";
+import { Component, Input, EventEmitter, Output } from "@angular/core";
 
 @Component({
   selector: "timeline",
@@ -7,5 +7,8 @@ import { Component, Input } from "@angular/core";
 export class TimelineComponent {
   @Input("items") items = [];
 
-  constructor() {}
+  @Output() childEvent = new EventEmitter();
+  detailAgenda() {
+    this.childEvent.emit("this is a test");
+  }
 }
