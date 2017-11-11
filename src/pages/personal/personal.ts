@@ -42,8 +42,13 @@ export class PersonalPage {
         this.eventSource = res;
         this.loaderHelper.dismiss();
       })
-      .catch(err =>
-        this.loaderHelper.errorHandleLoader(err.error_message, this.navCtrl)
+      .catch(
+        err => {
+          console.log(err);
+          this.loaderHelper.dismiss();
+        }
+
+        // this.loaderHelper.errorHandleLoader(err.error_message, this.navCtrl)
       );
   }
 
@@ -95,5 +100,9 @@ export class PersonalPage {
         });
       }
     });
+  }
+
+  showAllAgenda() {
+    this.navCtrl.push("PersonalAgendaPage");
   }
 }
