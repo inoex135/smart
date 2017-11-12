@@ -12,7 +12,9 @@ export class PersonalAgendaAddPage {
     tanggalMulai: "",
     waktuMulai: "",
     tanggalAkhir: "",
-    waktuAkhir: ""
+    waktuAkhir: "",
+    uraian: "",
+    lokasi: ""
   };
 
   readonly MODE = { DATE: "date", TIME: "time" };
@@ -25,10 +27,11 @@ export class PersonalAgendaAddPage {
 
   ionViewDidLoad() {}
 
-  tanggalMulai() {
-    this.agendaData.tanggalMulai = this.datePicker.datePickerData(
+  async tanggalMulai() {
+    this.agendaData.tanggalMulai = await this.datePicker.datePickerData(
       this.MODE.DATE
     );
+    alert(this.agendaData.tanggalMulai);
   }
 
   jamMulai() {

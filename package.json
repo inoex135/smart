@@ -80,6 +80,8 @@
       "cordova-plugin-fcm": {},
       "cordova-plugin-datepicker": {}
     },
-    "platforms": ["android"]
+    "platforms": [
+      "android"
+    ]
   }
 }

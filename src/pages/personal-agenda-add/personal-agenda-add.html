@@ -10,27 +10,27 @@
     <ion-card-header>Tambah Agenda</ion-card-header>
     <ion-item>
       <ion-label floating></ion-label>
-      <ion-input (click)="tanggalMulai()" type="text" class="ion-input-custom" placeholder="Tanggal Mulai Kegiatan"></ion-input>
+      <ion-input [value]="agendaData.tanggalMulai" (click)="tanggalMulai()" type="text" class="ion-input-custom" placeholder="Tanggal Mulai Kegiatan"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating></ion-label>
-      <ion-input (click)="jamMulai()" type="text" class="ion-input-custom" placeholder="Waktu Mulai Kegiatan"></ion-input>
+      <ion-input [value]="agendaData.jamMulai" (click)="jamMulai()" type="text" class="ion-input-custom" placeholder="Waktu Mulai Kegiatan"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating></ion-label>
-      <ion-input (click)="tanggalAkhir()" type="text" class="ion-input-custom" placeholder="Tanggal Akhir Kegiatan"></ion-input>
+      <ion-input [value]="agendaData.tanggalAkhir" (click)="tanggalAkhir()" type="text" class="ion-input-custom" placeholder="Tanggal Akhir Kegiatan"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating></ion-label>
-      <ion-input (click)="jamAkhir()" type="text" class="ion-input-custom" placeholder="Waktu Akhir Kegiatan"></ion-input>
+      <ion-input [value]="agendaData.jamAkhir" (click)="jamAkhir()" type="text" class="ion-input-custom" placeholder="Waktu Akhir Kegiatan"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating></ion-label>
-      <ion-textarea type="text" class="ion-textarea-custom" placeholder="Uraian Kegiatan"></ion-textarea>
+      <ion-textarea [(ngModel)]="agendaData.uraian" type="text" class="ion-textarea-custom" placeholder="Uraian Kegiatan"></ion-textarea>
     </ion-item>
     <ion-item>
       <ion-label floating></ion-label>
-      <ion-input type="text" class="ion-input-custom" placeholder="Lokasi"></ion-input>
+      <ion-input [(ngModel)]="agendaData.lokasi" type="text" class="ion-input-custom" placeholder="Lokasi"></ion-input>
     </ion-item>
     <div class="tambah-peserta">
       <ion-item>
