@@ -1,25 +1,47 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the PersonalAgendaAddPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { Component } from "@angular/core";
+import { IonicPage, NavController, NavParams } from "ionic-angular";
+import { DatepickerProvider } from "../../providers/datepicker/datepicker";
 
 @IonicPage()
 @Component({
-  selector: 'page-personal-agenda-add',
-  templateUrl: 'personal-agenda-add.html',
+  selector: "page-personal-agenda-add",
+  templateUrl: "personal-agenda-add.html"
 })
 export class PersonalAgendaAddPage {
+  private agendaData: any = {
+    tanggalMulai: "",
+    waktuMulai: "",
+    tanggalAkhir: "",
+    waktuAkhir: ""
+  };
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  readonly MODE = { DATE: "date", TIME: "time" };
+
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private datePicker: DatepickerProvider
+  ) {}
+
+  ionViewDidLoad() {}
+
+  tanggalMulai() {
+    this.agendaData.tanggalMulai = this.datePicker.datePickerData(
+      this.MODE.DATE
+    );
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad PersonalAgendaAddPage');
+  jamMulai() {
+    this.agendaData.waktuMulai = this.datePicker.datePickerData(this.MODE.TIME);
   }
 
+  tanggalAkhir() {
+    this.agendaData.tanggalAkhir = this.datePicker.datePickerData(
+      this.MODE.DATE
+    );
+  }
+
+  jamAkhir() {
+    this.agendaData.jamAkhir = this.datePicker.datePickerData(this.MODE.TIME);
+  }
 }

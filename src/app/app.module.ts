@@ -54,6 +54,7 @@ import { EventModalPage } from "../pages/personal/event-modal/event-modal";
 import { GrafikSuratProvider } from "../providers/grafik-surat/grafik-surat";
 import { PersonalAgendaDetailProvider } from "../providers/personal-agenda-detail/personal-agenda-detail";
 import { DatePicker } from "@ionic-native/date-picker";
+import { DatepickerProvider } from '../providers/datepicker/datepicker';
 
 @NgModule({
   declarations: [
@@ -117,7 +118,8 @@ import { DatePicker } from "@ionic-native/date-picker";
     LoaderHelper,
     GrafikSuratProvider,
     PersonalAgendaDetailProvider,
-    DatePicker
+    DatePicker,
+    DatepickerProvider
   ]
 })
 export class AppModule {}
