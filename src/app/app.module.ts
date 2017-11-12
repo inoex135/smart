@@ -52,7 +52,8 @@ import { TokenProvider } from "../providers/token/token";
 import { SuratProvider } from "../providers/surat/surat";
 import { EventModalPage } from "../pages/personal/event-modal/event-modal";
 import { GrafikSuratProvider } from "../providers/grafik-surat/grafik-surat";
-import { PersonalAgendaDetailProvider } from '../providers/personal-agenda-detail/personal-agenda-detail';
+import { PersonalAgendaDetailProvider } from "../providers/personal-agenda-detail/personal-agenda-detail";
+import { DatePicker } from "@ionic-native/date-picker";
 
 @NgModule({
   declarations: [
@@ -115,7 +116,8 @@ import { PersonalAgendaDetailProvider } from '../providers/personal-agenda-detai
     AptHelper,
     LoaderHelper,
     GrafikSuratProvider,
-    PersonalAgendaDetailProvider
+    PersonalAgendaDetailProvider,
+    DatePicker
   ]
 })
 export class AppModule {}

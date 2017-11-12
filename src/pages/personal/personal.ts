@@ -77,29 +77,25 @@ export class PersonalPage {
   }
 
   addEvent() {
-    const modal = this.modalCtrl.create(EventModalPage, {
-      selectedDay: this.selectedDay
-    });
-    modal.present();
-
-    // processing data from event modal after dismiss modal
-    modal.onDidDismiss(data => {
-      if (data) {
-        let eventData = data;
-
-        eventData.startTime = new Date(data.startTime);
-        eventData.endTime = new Date(data.endTime);
-
-        let events = this.eventSource;
-        events.push(eventData);
-
-        this.eventSource = [];
-
-        setTimeout(() => {
-          this.eventSource = events;
-        });
-      }
-    });
+    // const modal = this.modalCtrl.create(EventModalPage, {
+    //   selectedDay: this.selectedDay
+    // });
+    // modal.present();
+    // // processing data from event modal after dismiss modal
+    // modal.onDidDismiss(data => {
+    //   if (data) {
+    //     let eventData = data;
+    //     eventData.startTime = new Date(data.startTime);
+    //     eventData.endTime = new Date(data.endTime);
+    //     let events = this.eventSource;
+    //     events.push(eventData);
+    //     this.eventSource = [];
+    //     setTimeout(() => {
+    //       this.eventSource = events;
+    //     });
+    //   }
+    // });
+    this.navCtrl.push("PersonalAgendaAddPage");
   }
 
   showAllAgenda() {
