@@ -1,3 +1,18 @@
 page-personal-agenda-add {
+  .tambah-peserta {
+    .button-side {
+      margin-top: 45px !important;
+      height: 25px;
+    }
+    // remove border buttom color
+    .item-md.item-input.input-has-focus .item-inner {
+      border-bottom-color: transparent !important;
+      box-shadow: none !important;
+    }
 
+    // change color font
+    [stacked] {
+      color: map-get($colors, orange) !important;
+    }
+  }
 }
