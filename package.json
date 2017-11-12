@@ -22,6 +22,7 @@
     "@angular/platform-browser-dynamic": "4.4.3",
     "@ionic-native/android-permissions": "^4.3.1",
     "@ionic-native/core": "3.12.1",
+    "@ionic-native/date-picker": "^4.4.0",
     "@ionic-native/fcm": "^4.3.2",
     "@ionic-native/file": "^4.2.1",
     "@ionic-native/file-opener": "^4.2.1",
@@ -35,6 +36,7 @@
     "cordova-plugin-android-permissions": "^1.0.0",
     "cordova-plugin-compat": "^1.2.0",
     "cordova-plugin-console": "^1.1.0",
+    "cordova-plugin-datepicker": "^0.9.3",
     "cordova-plugin-device": "^1.1.6",
     "cordova-plugin-fcm": "^2.1.2",
     "cordova-plugin-file": "^4.3.3",
@@ -75,7 +77,8 @@
       "cordova-plugin-file": {},
       "cordova-plugin-file-opener2": {},
       "cordova-plugin-android-permissions": {},
-      "cordova-plugin-fcm": {}
+      "cordova-plugin-fcm": {},
+      "cordova-plugin-datepicker": {}
     },
     "platforms": [
       "android"

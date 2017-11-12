@@ -75,6 +75,10 @@
   version "3.12.1"
   resolved "https://registry.yarnpkg.com/@ionic-native/core/-/core-3.12.1.tgz#5b7c7a4f5adfc8da0b9197e1843e5893acf66021"
 
+"@ionic-native/date-picker@^4.4.0":
+  version "4.4.0"
+  resolved "https://registry.yarnpkg.com/@ionic-native/date-picker/-/date-picker-4.4.0.tgz#a3aa88adeb2b856aed9bc29939803814d7913055"
+
 "@ionic-native/fcm@^4.3.2":
   version "4.3.2"
   resolved "https://registry.yarnpkg.com/@ionic-native/fcm/-/fcm-4.3.2.tgz#3c61cc1d5f692a872c340327bfebc72e8018508a"
@@ -973,6 +977,10 @@ cordova-plugin-compat@^1.2.0:
 cordova-plugin-console@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/cordova-plugin-console/-/cordova-plugin-console-1.1.0.tgz#e2fbac10290179e44cb72c5fdbc410a531c1cd6d"
+
+cordova-plugin-datepicker@^0.9.3:
+  version "0.9.3"
+  resolved "https://registry.yarnpkg.com/cordova-plugin-datepicker/-/cordova-plugin-datepicker-0.9.3.tgz#2558a9ce5998f6d6dc06cf92fd8bbb9d0901f16a"
 
 cordova-plugin-device@^1.1.6:
   version "1.1.6"
