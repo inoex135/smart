@@ -32,11 +32,17 @@
       <ion-label floating></ion-label>
       <ion-input [(ngModel)]="agendaData.lokasi" type="text" class="ion-input-custom" placeholder="Lokasi"></ion-input>
     </ion-item>
+
     <div class="tambah-peserta">
       <ion-item>
-        <ion-label stacked>Tambah Peserta</ion-label>
-        <ion-input type="text" class="ion-input-custom" placeholder="Tambah Peserta"></ion-input>
-        <button ion-button color="danger" item-right margin-left margin-top class="button-side">+</button>
+        <div item-start>
+          <ion-label stacked>Tambah Peserta</ion-label>
+          <ion-input type="text" class="ion-input-custom" placeholder="Tambah Peserta"></ion-input>
+        </div>
+
+        <button class="button-side" block margin-top ion-button item-end color="danger" (click)="buttonClick()">
+          <ion-icon name="add"></ion-icon>
+        </button>
       </ion-item>
     </div>
 
