@@ -6,7 +6,10 @@ import { Disposisi } from "./persuratan/disposisi/disposisi";
 import { Teruskan } from "./persuratan/teruskan/teruskan";
 import { Selesai } from "./persuratan/selesai/selesai";
 import { RiwayatComponent } from "./persuratan/riwayat/riwayat-component";
-import { TimelineComponent } from "./timeline/timeline";
+import {
+  TimelineComponent,
+  TimelineAgendaComponent
+} from "./timeline/timeline";
 import { LoginSso } from "./login/sso/login-sso";
 
 @NgModule({
@@ -17,7 +20,8 @@ import { LoginSso } from "./login/sso/login-sso";
     Teruskan,
     Selesai,
     RiwayatComponent,
-    TimelineComponent
+    TimelineComponent,
+    TimelineAgendaComponent
   ],
   imports: [IonicModule],
   exports: [
@@ -27,7 +31,8 @@ import { LoginSso } from "./login/sso/login-sso";
     Teruskan,
     Selesai,
     RiwayatComponent,
-    TimelineComponent
+    TimelineComponent,
+    TimelineAgendaComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

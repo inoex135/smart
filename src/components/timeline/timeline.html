@@ -5,15 +5,13 @@
       <ion-card-header>
         {{item.title}}
       </ion-card-header>
-      <!-- <ion-card-content>
-        <p ion-text>{{item?.time?.title}}</p>
+      <ion-card-content *ngIf="type === CURRENT_TYPE.RIWAYAT">
+        <p ion-text>{{item?.content}}</p>
         <p ion-text>{{item?.time?.subtitle}}</p>
         <p ion-text>{{item?.time?.subtitle}}</p>
-      </ion-card-content> -->
-      <ion-item>
-        <p ion-text>{{item?.title}}</p>
-        <p ion-text>{{item?.time?.subtitle}}</p>
-        <p ion-text>{{item?.time?.subtitle}}</p>
+      </ion-card-content>
+      <ion-item *ngIf="type === CURRENT_TYPE.AGENDA">
+        <timeline-kegiatan [kegiatan]="kegiatan" *ngFor="let kegiatan of item.content"></timeline-kegiatan>
         <ion-note item-end (click)="detailAgenda(item?.title)">View</ion-note>
       </ion-item>
     </ion-card>
