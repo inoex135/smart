@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
 import { IonicPage, NavController, NavParams } from "ionic-angular";
 import { TimelineDummy } from "../../dummy/timeline.dummy";
+import { TimelineType } from "../../constant/TimelineType";
 
 @IonicPage()
 @Component({
@@ -8,9 +9,12 @@ import { TimelineDummy } from "../../dummy/timeline.dummy";
   templateUrl: "personal-agenda.html"
 })
 export class PersonalAgendaPage {
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  public items: any = TimelineDummy.agenda();
+  public type: string;
 
-  items: any = TimelineDummy.agenda();
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.type = TimelineType.AGENDA;
+  }
 
   ionViewDidLoad() {}
 
