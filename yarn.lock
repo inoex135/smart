@@ -1997,6 +1997,12 @@ invert-kv@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/invert-kv/-/invert-kv-1.0.0.tgz#104a8e4aaca6d3d8cd157a8ef8bfab2d7a3ffdb6"
 
+ion2-calendar@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/ion2-calendar/-/ion2-calendar-2.1.1.tgz#7abded165d5ecd71f241b3b448c15d2ea3693821"
+  dependencies:
+    moment "^2.19.1"
+
 ionic-angular@3.7.0:
   version "3.7.0"
   resolved "https://registry.yarnpkg.com/ionic-angular/-/ionic-angular-3.7.0.tgz#eafaeadddcb88adb6f04d37fda6b94cf9808b603"
@@ -2673,6 +2679,10 @@ moment-timezone@^0.5.13:
 moment@^2.10.6, moment@^2.18.1:
   version "2.18.1"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.18.1.tgz#c36193dd3ce1c2eed2adb7c802dbbc77a81b1c0f"
+
+moment@^2.19.1:
+  version "2.19.2"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.19.2.tgz#8a7f774c95a64550b4c7ebd496683908f9419dbe"
 
 ms@0.7.1:
   version "0.7.1"

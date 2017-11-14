@@ -11,12 +11,22 @@ import { PersonalProvider } from "../../providers/personal/personal";
 import { LoaderHelper } from "../../helpers/loader-helper";
 import { EventModalPage } from "./event-modal/event-modal";
 import { CalendarModalOptions } from "ion2-calendar";
-
 @Component({
   selector: "page-personal",
   templateUrl: "personal.html"
 })
 export class PersonalPage {
+  date: string;
+  type: "string"; // 'string' | 'js-date' | 'moment' | 'time' | 'object'
+
+  options: any = {
+    pickMode: "multi",
+    title: "RANGE",
+    canBackwardsSelected: true,
+    color: "dark",
+    defaultDates: [moment(), moment().add(1, "d"), moment().add(2, "d")]
+  };
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -46,6 +56,10 @@ export class PersonalPage {
 
   ionViewDidLoad() {
     this.getListEvent();
+  }
+
+  onChange($event) {
+    console.log($event);
   }
 
   addEvent() {

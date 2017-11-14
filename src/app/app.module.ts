@@ -26,6 +26,7 @@ import { RlTagInputModule } from "../directives/angular2-tag-input/tag-input.mod
 // 3rd package angular
 import { NgCalendarModule } from "ionic2-calendar";
 import { Ng2HighchartsModule } from "ng2-highcharts";
+import { CalendarModule } from "ion2-calendar";
 
 // pages
 import { PersonalPage } from "../pages/personal/personal";
@@ -54,7 +55,7 @@ import { EventModalPage } from "../pages/personal/event-modal/event-modal";
 import { GrafikSuratProvider } from "../providers/grafik-surat/grafik-surat";
 import { PersonalAgendaDetailProvider } from "../providers/personal-agenda-detail/personal-agenda-detail";
 import { DatePicker } from "@ionic-native/date-picker";
-import { DatepickerProvider } from '../providers/datepicker/datepicker';
+import { DatepickerProvider } from "../providers/datepicker/datepicker";
 
 @NgModule({
   declarations: [
@@ -81,7 +82,8 @@ import { DatepickerProvider } from '../providers/datepicker/datepicker';
     NgCalendarModule,
     PipesModule,
     RlTagInputModule,
-    Ng2HighchartsModule
+    Ng2HighchartsModule,
+    CalendarModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
