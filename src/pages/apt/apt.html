@@ -4,9 +4,12 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding>
+  <ion-list no-lines>
+    <pemberitahuan [redirectComponent]="redirectComponent"></pemberitahuan>
+  </ion-list>
 
-  <div *ngIf="!items">
+  <!-- <div *ngIf="!items">
     <ion-card *ngFor="let item of items;let i = index" margin-bottom>
       <ion-card-content>
         <ion-row>
@@ -50,5 +53,5 @@
   <div *ngIf="items" class="empty-stage" margin-top>
     <ion-icon name="document" item-end></ion-icon>
     <h3 ion-text text-center class="empty-stage-title">APT Tidak Ditemukan</h3>
-  </div>
+  </div> -->
 </ion-content>

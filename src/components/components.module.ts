@@ -11,6 +11,7 @@ import {
   TimelineAgendaComponent
 } from "./timeline/timeline";
 import { LoginSso } from "./login/sso/login-sso";
+import { PemberitahuanComponent } from './pemberitahuan/pemberitahuan';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { LoginSso } from "./login/sso/login-sso";
     Selesai,
     RiwayatComponent,
     TimelineComponent,
-    TimelineAgendaComponent
+    TimelineAgendaComponent,
+    PemberitahuanComponent
   ],
   imports: [IonicModule],
   exports: [
@@ -32,7 +34,8 @@ import { LoginSso } from "./login/sso/login-sso";
     Selesai,
     RiwayatComponent,
     TimelineComponent,
-    TimelineAgendaComponent
+    TimelineAgendaComponent,
+    PemberitahuanComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

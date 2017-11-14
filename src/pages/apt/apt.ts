@@ -16,6 +16,7 @@ export class AptPage {
   items: any = [];
   fileDirectory: any;
   loader: any;
+  redirectComponent: string = "AptNotifikasiPage";
 
   constructor(
     public navCtrl: NavController,
