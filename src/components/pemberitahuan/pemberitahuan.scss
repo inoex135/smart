@@ -1,0 +1,22 @@
+pemberitahuan {
+  .pemberitahuan {
+    max-height: 4em;
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
+
+    h5,
+    h6 {
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .item-avatar {
+      width: 100% !important;
+      height: 100% !important;
+      max-height: 50px !important;
+      max-width: 50px !important;
+      background-color: red !important;
+      border: 0.4px solid #fff;
+      border-radius: 50%;
+    }
+  }
+}
