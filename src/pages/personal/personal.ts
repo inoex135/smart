@@ -4,15 +4,17 @@ import { NavController, NavParams, AlertController } from "ionic-angular";
 import { PersonalProvider } from "../../providers/personal/personal";
 import { LoaderHelper } from "../../helpers/loader-helper";
 import { PersonalCalendarOptions } from "../../config/personal-calendar";
+import { CalendarComponentOptions } from "ion2-calendar";
 @Component({
   selector: "page-personal",
   templateUrl: "personal.html"
 })
 export class PersonalPage {
-  date: string;
+  date: string[] = ["2017-11-15", "2017-11-16"];
   type: "string"; // 'string' | 'js-date' | 'moment' | 'time' | 'object'
+  readonly: boolean = true;
 
-  options: any = PersonalCalendarOptions.options();
+  options: CalendarComponentOptions = PersonalCalendarOptions.options();
 
   constructor(
     public navCtrl: NavController,
@@ -21,27 +23,23 @@ export class PersonalPage {
     private personalProvider: PersonalProvider,
     private loaderHelper: LoaderHelper
   ) {}
-  // getListEvent() {
-  //   this.loaderHelper.createLoader();
+  getListEvent() {
+    this.loaderHelper.createLoader();
 
-  //   this.personalProvider
-  //     .getListEvent()
-  //     .then(res => {
-  //       this.date = res;
-  //       this.loaderHelper.dismiss();
-  //     })
-  //     .catch(
-  //       err => {
-  //         console.log(err);
-  //         this.loaderHelper.dismiss();
-  //       }
-
-  // this.loaderHelper.errorHandleLoader(err.error_message, this.navCtrl)
-  //     );
-  // }
+    this.personalProvider
+      .getListEvent()
+      .then(res => {
+        this.date = res;
+        this.loaderHelper.dismiss();
+      })
+      .catch(err => {
+        console.log(err);
+        this.loaderHelper.errorHandleLoader(err.error_message, this.navCtrl);
+      });
+  }
 
   ionViewDidLoad() {
-    // this.getListEvent();
+    this.getListEvent();
   }
 
   onChange($event) {
