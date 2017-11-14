@@ -1,18 +1,18 @@
-<!--
-  Generated template for the AptNotifikasiPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>apt-notifikasi</ion-title>
+  <ion-navbar color="green-light">
+    <ion-title>Pemberitahuan Permohonan</ion-title>
   </ion-navbar>
-
 </ion-header>
 
 
 <ion-content padding>
-
+  <ion-list>
+    <ion-item *ngFor="let notif of notifications">
+      <h6 ion-text>{{notif?.sender}}</h6>
+      <text-avatar [text]="notif?.sender" item-left></text-avatar>
+      <p ion-text text-wrap>{{notif?.message}}</p>
+      <p ion-text color="blue-template" text-wrap>{{ notif?.date | indonesianDate }}</p>
+      <ion-note item-end>Unread</ion-note>
+    </ion-item>
+  </ion-list>
 </ion-content>
