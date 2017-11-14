@@ -22,7 +22,6 @@ import { FileOpener } from "@ionic-native/file-opener";
 import { File } from "@ionic-native/file";
 
 // Custom Directive
-// import { TextAvatarDirective } from "../directives/text-avatar/text-avatar";
 import { RlTagInputModule } from "../directives/angular2-tag-input/tag-input.module";
 
 // 3rd package angular
