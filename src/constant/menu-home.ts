@@ -27,7 +27,7 @@ export class MenuHomeConstant {
         iconSmall: "checkmark-circle-outline_sm",
         iconLarge: "checkmark-circle-outline_lg",
         component: AptPage,
-        color: "green"
+        color: "green-light"
       }
     ];
 
