@@ -1,16 +1,9 @@
 import { Component } from "@angular/core";
-import {
-  NavController,
-  NavParams,
-  AlertController,
-  ModalController
-} from "ionic-angular";
+import { NavController, NavParams, AlertController } from "ionic-angular";
 
-import * as moment from "moment";
 import { PersonalProvider } from "../../providers/personal/personal";
 import { LoaderHelper } from "../../helpers/loader-helper";
-import { EventModalPage } from "./event-modal/event-modal";
-import { CalendarModalOptions } from "ion2-calendar";
+import { PersonalCalendarOptions } from "../../config/personal-calendar";
 @Component({
   selector: "page-personal",
   templateUrl: "personal.html"
@@ -19,43 +12,36 @@ export class PersonalPage {
   date: string;
   type: "string"; // 'string' | 'js-date' | 'moment' | 'time' | 'object'
 
-  options: any = {
-    pickMode: "multi",
-    title: "RANGE",
-    canBackwardsSelected: true,
-    color: "dark",
-    defaultDates: [moment(), moment().add(1, "d"), moment().add(2, "d")]
-  };
+  options: any = PersonalCalendarOptions.options();
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     private alertCtrl: AlertController,
     private personalProvider: PersonalProvider,
-    private loaderHelper: LoaderHelper,
-    private modalCtrl: ModalController
+    private loaderHelper: LoaderHelper
   ) {}
-  getListEvent() {
-    this.loaderHelper.createLoader();
+  // getListEvent() {
+  //   this.loaderHelper.createLoader();
 
-    this.personalProvider
-      .getListEvent()
-      .then(res => {
-        this.eventSource = res;
-        this.loaderHelper.dismiss();
-      })
-      .catch(
-        err => {
-          console.log(err);
-          this.loaderHelper.dismiss();
-        }
+  //   this.personalProvider
+  //     .getListEvent()
+  //     .then(res => {
+  //       this.date = res;
+  //       this.loaderHelper.dismiss();
+  //     })
+  //     .catch(
+  //       err => {
+  //         console.log(err);
+  //         this.loaderHelper.dismiss();
+  //       }
 
-        // this.loaderHelper.errorHandleLoader(err.error_message, this.navCtrl)
-      );
-  }
+  // this.loaderHelper.errorHandleLoader(err.error_message, this.navCtrl)
+  //     );
+  // }
 
   ionViewDidLoad() {
-    this.getListEvent();
+    // this.getListEvent();
   }
 
   onChange($event) {

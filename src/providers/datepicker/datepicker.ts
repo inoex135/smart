@@ -1,6 +1,4 @@
 import { Injectable } from "@angular/core";
-import { Http } from "@angular/http";
-import "rxjs/add/operator/map";
 import { DatePicker } from "@ionic-native/date-picker";
 
 @Injectable()

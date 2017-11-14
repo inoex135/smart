@@ -77,3 +77,11 @@ $card-md-box-shadow: 0 2px 2px 0 rgba(7, 7, 7, 0.14),
 // --------------------------------------------------
 @import "roboto";
 @import "noto-sans";
+
+// ion2-calendar
+// --------------------------------------------------
+@import "../../ion2-calendar/dist/components/calendar-week.component";
+@import "../../ion2-calendar/dist/components/calendar.component";
+@import "../../ion2-calendar/dist/components/month.component";
+@import "../../ion2-calendar/dist/components/calendar.modal";
+@import "../../ion2-calendar/dist/components/month-picker.component";
