@@ -11,31 +11,34 @@ import {
   TimelineAgendaComponent
 } from "./timeline/timeline";
 import { LoginSso } from "./login/sso/login-sso";
-import { PemberitahuanComponent } from './pemberitahuan/pemberitahuan';
+import { PemberitahuanComponent } from "./pemberitahuan/pemberitahuan";
+import { TextAvatarDirective } from "../directives/text-avatar/text-avatar";
 
 @NgModule({
   declarations: [
+    Disposisi,
     LoginLayout1,
     LoginSso,
-    Disposisi,
-    Teruskan,
-    Selesai,
+    PemberitahuanComponent,
     RiwayatComponent,
+    Selesai,
+    Teruskan,
     TimelineComponent,
     TimelineAgendaComponent,
-    PemberitahuanComponent
+    TextAvatarDirective
   ],
   imports: [IonicModule],
   exports: [
+    Disposisi,
     LoginLayout1,
     LoginSso,
-    Disposisi,
-    Teruskan,
-    Selesai,
+    PemberitahuanComponent,
     RiwayatComponent,
+    Selesai,
+    Teruskan,
     TimelineComponent,
     TimelineAgendaComponent,
-    PemberitahuanComponent
+    TextAvatarDirective
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

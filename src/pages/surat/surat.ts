@@ -5,7 +5,6 @@ import { Ng2Highcharts } from "ng2-highcharts";
 import * as moment from "moment-timezone";
 import { LoaderHelper } from "../../helpers/loader-helper";
 import { GrafikSuratProvider } from "../../providers/grafik-surat/grafik-surat";
-import { NaskahNotifikasiPage } from "../naskah-notifikasi/naskah-notifikasi";
 import { NaskahMasukPage } from "../naskah-masuk/naskah-masuk";
 
 @Component({
@@ -13,7 +12,6 @@ import { NaskahMasukPage } from "../naskah-masuk/naskah-masuk";
   templateUrl: "surat.html"
 })
 export class SuratPage {
-  menus: Array<Object> = [];
   filter: any = {
     startTime: "",
     endTime: ""
@@ -22,6 +20,9 @@ export class SuratPage {
     NOTIFIKASI: "notifikasi",
     NASKAH: "naskah"
   };
+
+  redirectComponent: string = "NaskahNotifikasiPage";
+
   @ViewChildren(Ng2Highcharts) allCharts;
 
   chartData: any = "";
@@ -32,20 +33,7 @@ export class SuratPage {
     public loaderHelper: LoaderHelper,
     public grafikSuratProvider: GrafikSuratProvider
   ) {
-    // this.menus = [
-    //   {
-    //     name: "Grafik Surat Masuk",
-    //     icon: "stats",
-    //     component: GrafikPersuratanPage
-    //   },
-    //   {
-    //     name: "Grafik Surat Keluar",
-    //     icon: "stats",
-    //     component: GrafikPersuratanKeluarPage
-    //   },
-    //   { name: "Naskah Masuk", icon: "folder", component: NaskahMasukPage },
-    //   { name: "Notifikasi", icon: "mail", component: NaskahNotifikasiPage }
-    // ];
+    this.redirectComponent = "NaskahNotifikasiPage";
   }
 
   ionViewDidLoad() {
@@ -101,7 +89,7 @@ export class SuratPage {
   openPage(component: any) {
     switch (component) {
       case this.PAGE.NOTIFIKASI:
-        this.navCtrl.push(NaskahNotifikasiPage);
+        this.navCtrl.push("NaskahNotifikasiPage");
         break;
       case this.PAGE.NASKAH:
         this.navCtrl.push(NaskahMasukPage);

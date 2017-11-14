@@ -15,12 +15,14 @@ import { ComponentsModule } from "../components/components.module";
 
 // 3rd package native
 import { AndroidPermissions } from "@ionic-native/android-permissions";
+import { DatePicker } from "@ionic-native/date-picker";
+import { FCM } from "@ionic-native/fcm";
 import { FileTransfer } from "@ionic-native/file-transfer";
 import { FileOpener } from "@ionic-native/file-opener";
 import { File } from "@ionic-native/file";
-import { FCM } from "@ionic-native/fcm";
+
 // Custom Directive
-import { TextAvatarDirective } from "../directives/text-avatar/text-avatar";
+// import { TextAvatarDirective } from "../directives/text-avatar/text-avatar";
 import { RlTagInputModule } from "../directives/angular2-tag-input/tag-input.module";
 
 // 3rd package angular
@@ -29,17 +31,12 @@ import { Ng2HighchartsModule } from "ng2-highcharts";
 import { CalendarModule } from "ion2-calendar";
 
 // pages
-import { PersonalPage } from "../pages/personal/personal";
-import { PersonalProvider } from "../providers/personal/personal";
 import { AptPage } from "../pages/apt/apt";
-import { AptProvider } from "../providers/apt/apt";
+import { PersonalPage } from "../pages/personal/personal";
 import { AptDetailPage } from "../pages/apt-detail/apt-detail";
 import { SuratPage } from "../pages/surat/surat";
 import { NaskahMasukPage } from "../pages/naskah-masuk/naskah-masuk";
-import { NaskahMasukProvider } from "../providers/naskah-masuk/naskah-masuk";
 import { NaskahMasukDetailPage } from "../pages/naskah-masuk-detail/naskah-masuk-detail";
-import { NaskahNotifikasiPage } from "../pages/naskah-notifikasi/naskah-notifikasi";
-import { NaskahNotifikasiProvider } from "../providers/naskah-notifikasi/naskah-notifikasi";
 import { NaskahDetailActionPage } from "../pages/naskah-detail-action/naskah-detail-action";
 
 // helper
@@ -47,15 +44,18 @@ import { AptHelper } from "../helpers/apt-helper";
 import { LoaderHelper } from "../helpers/loader-helper";
 
 // provider
-import { UserProvider } from "../providers/user/user";
 import { ApiProvider } from "../providers/api/api";
-import { TokenProvider } from "../providers/token/token";
-import { SuratProvider } from "../providers/surat/surat";
+import { AptProvider } from "../providers/apt/apt";
+import { DatepickerProvider } from "../providers/datepicker/datepicker";
 import { EventModalPage } from "../pages/personal/event-modal/event-modal";
 import { GrafikSuratProvider } from "../providers/grafik-surat/grafik-surat";
+import { NaskahNotifikasiProvider } from "../providers/naskah-notifikasi/naskah-notifikasi";
+import { NaskahMasukProvider } from "../providers/naskah-masuk/naskah-masuk";
 import { PersonalAgendaDetailProvider } from "../providers/personal-agenda-detail/personal-agenda-detail";
-import { DatePicker } from "@ionic-native/date-picker";
-import { DatepickerProvider } from "../providers/datepicker/datepicker";
+import { PersonalProvider } from "../providers/personal/personal";
+import { SuratProvider } from "../providers/surat/surat";
+import { TokenProvider } from "../providers/token/token";
+import { UserProvider } from "../providers/user/user";
 
 @NgModule({
   declarations: [
@@ -68,8 +68,6 @@ import { DatepickerProvider } from "../providers/datepicker/datepicker";
     NaskahMasukPage,
     NaskahMasukDetailPage,
     NaskahDetailActionPage,
-    NaskahNotifikasiPage,
-    TextAvatarDirective,
     EventModalPage
   ],
   imports: [
@@ -96,7 +94,6 @@ import { DatepickerProvider } from "../providers/datepicker/datepicker";
     NaskahMasukPage,
     NaskahMasukDetailPage,
     NaskahDetailActionPage,
-    NaskahNotifikasiPage,
     EventModalPage
   ],
   providers: [
