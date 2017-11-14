@@ -14,8 +14,11 @@ export class PersonalAgendaAddPage {
     tanggalAkhir: "",
     waktuAkhir: "",
     uraian: "",
-    lokasi: ""
+    lokasi: "",
+    peserta: []
   };
+
+  peserta: string = "";
 
   readonly MODE = { DATE: "date", TIME: "time" };
 
@@ -34,17 +37,30 @@ export class PersonalAgendaAddPage {
     alert(this.agendaData.tanggalMulai);
   }
 
-  jamMulai() {
-    this.agendaData.waktuMulai = this.datePicker.datePickerData(this.MODE.TIME);
+  async jamMulai() {
+    this.agendaData.waktuMulai = await this.datePicker.datePickerData(
+      this.MODE.TIME
+    );
   }
 
-  tanggalAkhir() {
-    this.agendaData.tanggalAkhir = this.datePicker.datePickerData(
+  async tanggalAkhir() {
+    this.agendaData.tanggalAkhir = await this.datePicker.datePickerData(
       this.MODE.DATE
     );
   }
 
-  jamAkhir() {
-    this.agendaData.jamAkhir = this.datePicker.datePickerData(this.MODE.TIME);
+  async jamAkhir() {
+    this.agendaData.jamAkhir = await this.datePicker.datePickerData(
+      this.MODE.TIME
+    );
+  }
+
+  addPeserta(peserta: string) {
+    this.agendaData.peserta.push({ nama: peserta });
+    console.log(this.agendaData.peserta);
+  }
+
+  removePeserta(index: number) {
+    this.agendaData.peserta.splice(index, 1);
   }
 }
