@@ -8,7 +8,9 @@ import { NavController } from "ionic-angular";
 })
 export class PemberitahuanComponent {
   constructor(private navCtrl: NavController) {}
-  @Input() redirectComponent: any = "";
+
+  @Input() redirectComponent: string = "";
+
   ionViewDidLoad() {
     this.now();
   }
