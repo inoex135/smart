@@ -34,7 +34,6 @@ export class PersonalAgendaAddPage {
     this.agendaData.tanggalMulai = await this.datePicker.datePickerData(
       this.MODE.DATE
     );
-    alert(this.agendaData.tanggalMulai);
   }
 
   async jamMulai() {
