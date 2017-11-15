@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
 import { IonicPage, NavController, NavParams } from "ionic-angular";
 import { NotificationDummy } from "../../dummy/notification.dummy";
+import { AptDetailPage } from "../apt-detail/apt-detail";
 
 @IonicPage()
 @Component({
@@ -13,5 +14,9 @@ export class AptNotifikasiPage {
 
   ionViewDidLoad() {
     this.notifications = NotificationDummy.lists();
+  }
+
+  goToAptDetail(aptId: number) {
+    this.navCtrl.push(AptDetailPage, { aptId: aptId });
   }
 }
