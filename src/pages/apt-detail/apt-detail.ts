@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
-import { NavParams } from "ionic-angular";
+import { NavParams, NavController } from "ionic-angular";
+import { AptDetailActionPage } from "../apt-detail-action/apt-detail-action";
 
 @Component({
   selector: "page-apt-detail",
@@ -7,9 +8,20 @@ import { NavParams } from "ionic-angular";
 })
 export class AptDetailPage {
   detail: any;
-  constructor(private navParams: NavParams) {}
+
+  readonly ACTION = {
+    PRATINJAU: "PRATINJAU",
+    VERIFIKASI: "VERIFIKASI",
+    CETAK: "CETAK"
+  };
+
+  constructor(private navParams: NavParams, private navCtrl: NavController) {}
 
   ionViewDidLoad() {
     this.detail = this.navParams.get("detail");
+  }
+
+  detailAction(action: string) {
+    this.navCtrl.push(AptDetailActionPage);
   }
 }
