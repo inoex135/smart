@@ -33,6 +33,8 @@ import { CalendarModule } from "ion2-calendar";
 import { AptPage } from "../pages/apt/apt";
 import { PersonalPage } from "../pages/personal/personal";
 import { AptDetailPage } from "../pages/apt-detail/apt-detail";
+import { AptDetailActionPage } from "../pages/apt-detail-action/apt-detail-action";
+
 import { SuratPage } from "../pages/surat/surat";
 import { NaskahMasukPage } from "../pages/naskah-masuk/naskah-masuk";
 import { NaskahMasukDetailPage } from "../pages/naskah-masuk-detail/naskah-masuk-detail";
@@ -67,7 +69,8 @@ import { UserProvider } from "../providers/user/user";
     NaskahMasukPage,
     NaskahMasukDetailPage,
     NaskahDetailActionPage,
-    EventModalPage
+    EventModalPage,
+    AptDetailActionPage
   ],
   imports: [
     BrowserModule,
@@ -93,7 +96,8 @@ import { UserProvider } from "../providers/user/user";
     NaskahMasukPage,
     NaskahMasukDetailPage,
     NaskahDetailActionPage,
-    EventModalPage
+    EventModalPage,
+    AptDetailActionPage
   ],
   providers: [
     StatusBar,
