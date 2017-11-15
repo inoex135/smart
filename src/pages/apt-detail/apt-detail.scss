@@ -1,2 +1,21 @@
 page-apt-detail {
+  p.background.green {
+    background-color: map-get($colors, green-bootstrap) !important;
+    border-radius: 0.25rem;
+    padding: 8px;
+  }
+
+  ion-col.label {
+    font-weight: bold !important;
+  }
+
+  .apt--action {
+    p {
+      margin-left: 10px !important;
+      margin-right: 10px !important;
+      display: inline;
+      text-align: center;
+      font-weight: bold;
+    }
+  }
 }

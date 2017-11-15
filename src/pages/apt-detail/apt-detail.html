@@ -1,106 +1,44 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="green-light">
     <ion-title>Detail</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
-  <!-- <ion-card>
-    <ion-card-content>
-      <ion-row>
-        <ion-col>
-          <h4 ion-text card-title>No Tiket</h4>
-          <h4 ion-text card-content text-wrap>{{detail?.title}}</h4>
-        </ion-col>
-
-        <ion-col>
-          <h4 ion-text card-title>Tanggal</h4>
-          <h4 ion-text card-content text-wrap>{{detail?.date}}</h4>
-        </ion-col>
-      </ion-row>
-
-      <ion-row>
-        <ion-col>
-          <h4 ion-text card-title>Pelayanan</h4>
-          <h4 ion-text card-content text-wrap>{{detail?.description}}</h4>
-        </ion-col>
-      </ion-row>
-
-      <ion-row>
-        <ion-col>
-          <h4 ion-text card-title>Sub Pelayanan</h4>
-          <h4 ion-text card-content text-wrap>{{detail?.longDescription}}</h4>
-        </ion-col>
-      </ion-row>
-
-      <ion-row>
-        <ion-col>
-          <h4 ion-text card-title>Pemohon</h4>
-          <h4 ion-text card-content text-wrap>Napitupulu</h4>
-        </ion-col>
-      </ion-row>
-
-      <ion-buttons text-center margin>
-        <button ion-button color="favorite">Agendakan</button>
-        <button ion-button color="danger">Tidak Agendakan</button>
-      </ion-buttons>
-    </ion-card-content>
-  </ion-card> -->
-
-
-  <ion-grid no-padding>
+  <ion-card padding>
     <ion-row>
-      <ion-col col-12 col-md-12 col-lg-6>
-        <ion-card padding text-left class="card">
-          <div card-subtitle>
-            <h3 ion-text>No Tiket</h3>
-          </div>
-          <div padding-top padding-bottom>
-            <h4 ion-text> {{detail?.nomor_tiket}} </h4>
-          </div>
-
-          <div card-subtitle>
-            <h3 ion-text>Pelayanan</h3>
-          </div>
-          <div padding-top padding-bottom>
-            <h4 ion-text> {{detail?.pelayanan}} </h4>
-          </div>
-
-          <div card-subtitle>
-            <h3 ion-text>Sub Pelayanan: </h3>
-          </div>
-          <div padding-top padding-bottom>
-            <h4 ion-text> {{detail?.sub_pelayanan}} </h4>
-          </div>
-
-          <div card-subtitle>
-            <h3 ion-text>Nama Pemohon: </h3>
-          </div>
-          <div padding-top padding-bottom>
-            <h4 ion-text> {{detail?.nama_pemohon || "-"}} </h4>
-          </div>
-
-          <div card-subtitle>
-            <h3 ion-text>Perihal: </h3>
-          </div>
-          <div padding-top padding-bottom>
-            <h4 ion-text> {{ detail?.perihal || "-" }} </h4>
-          </div>
-
-          <div card-subtitle>
-            <h3 ion-text>Tanggal Naskah: </h3>
-          </div>
-          <div padding-top padding-bottom>
-            <h4 ion-text> {{detail?.tanggal_naskah}} </h4>
-          </div>
-        </ion-card>
-
-        <ion-buttons text-center margin>
-          <button ion-button color="favorite">Agendakan</button>
-          <button ion-button color="danger">Tidak Agendakan</button>
-        </ion-buttons>
-
+      <ion-col>
+        <h1 ion-text>Pelayanan</h1>
+        <p padding ion-text class="background green">Sub Pelayanan</p>
       </ion-col>
     </ion-row>
-  </ion-grid>
+
+    <ion-row>
+      <ion-col col-6 class="label">Nama Pemohon</ion-col>
+      <ion-col col-6>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Explicabo asperiores ipsum distinctio, iure vel sit quibusdam
+        nihil ratione alias provident atque ea, excepturi adipisci debitis repellendus dolore. Vitae, sed quaerat!</ion-col>
+      <ion-col col-6 class="label">Telepon Pengirim</ion-col>
+      <ion-col col-6>Nama Pemohon</ion-col>
+      <ion-col col-6 class="label">Nomor Tiket</ion-col>
+      <ion-col col-6>Nama Pemohon</ion-col>
+      <ion-col col-6 class="label">Nomor Permohonan</ion-col>
+      <ion-col col-6>Nama Pemohon</ion-col>
+      <ion-col col-6 class="label">Tanggal Surat</ion-col>
+      <ion-col col-6>Nama Pemohon</ion-col>
+      <ion-col col-6 class="label">Indikator</ion-col>
+      <ion-col col-6>
+        <button ion-button full block>Disposisi</button>
+      </ion-col>
+    </ion-row>
+
+    <ion-row margin-top>
+      <ion-col class="apt--action" col-10 push-1>
+        <p ion-text color="default-blue">Pratinjau</p>
+        <p ion-text color="default-blue">Cetak</p>
+        <p ion-text color="danger"> Verifikasi</p>
+      </ion-col>
+    </ion-row>
+
+  </ion-card>
+
 </ion-content>
