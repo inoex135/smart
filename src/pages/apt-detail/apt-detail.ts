@@ -11,8 +11,7 @@ export class AptDetailPage {
 
   readonly ACTION = {
     PRATINJAU: "PRATINJAU",
-    VERIFIKASI: "VERIFIKASI",
-    CETAK: "CETAK"
+    VERIFIKASI: "VERIFIKASI"
   };
 
   constructor(private navParams: NavParams, private navCtrl: NavController) {}
