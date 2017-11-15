@@ -36,6 +36,14 @@ export class AptPage {
   }
 
   ionViewDidLoad() {
+    // this.items = [{ 1: 1 }, { 2: 2 }, { 3: 3 }];
+    if (this.items) {
+      console.log("kosong");
+    } else {
+      console.log("ada");
+    }
+    // console.log(this.items);
+
     this.getAptList();
   }
 

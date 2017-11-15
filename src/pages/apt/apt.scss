@@ -1,7 +1,35 @@
 page-apt {
+  $light-dark: map-get($colors, border_color);
+
   ion-item {
     max-height: 1em;
   }
+
+  .search--form {
+    border: 1px solid #e8e9eb !important;
+
+    .item-inner {
+      margin-left: 0 !important;
+    }
+  }
+
+  .border-round {
+    border-radius: 1px;
+  }
+
+  .search--form.item-md {
+    padding-right: 0;
+    padding-left: 0;
+  }
+
+  // list apt
+  .list--apt {
+    .card.card-md {
+      width: auto;
+    }
+  }
+
+  // empty data
   .empty-stage {
     color: #d8d9da;
     line-height: 50% !important;
