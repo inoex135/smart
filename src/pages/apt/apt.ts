@@ -6,6 +6,7 @@ import { File } from "@ionic-native/file";
 
 import { AptHelper } from "../../helpers/apt-helper";
 import { LoaderHelper } from "../../helpers/loader-helper";
+import { AptDummy } from "../../dummy/apt.dummy";
 
 @Component({
   selector: "page-apt",
@@ -33,6 +34,7 @@ export class AptPage {
       content: "Wait download....",
       spinner: "dots"
     });
+    this.items = AptDummy.getApt();
   }
 
   ionViewDidLoad() {
@@ -48,7 +50,8 @@ export class AptPage {
 
     this.aptProvider.getPermohonanList().subscribe(
       res => {
-        this.items = res;
+        // @TODO : uncomment if data already
+        // this.items = res;
 
         this.loaderHelper.dismiss();
       },

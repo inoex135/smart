@@ -21,7 +21,7 @@
   </ion-list>
 
   <ion-list class="list--apt">
-    <ion-card item no-margin padding *ngFor="let item of items;let i = index">
+    <ion-card (click)="detailApt(item)" item no-margin padding *ngFor="let item of items;let i = index">
       <ion-row>
         <ion-col>
           <b ion-text item-start text-wrap>{{item?.pelayanan}}</b>
