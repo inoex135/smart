@@ -6,5 +6,6 @@
 
 
 <ion-content>
-  <apt-verifikasi></apt-verifikasi>
+  <apt-pratinjau *ngIf="action === APT_ACTION.PRATINJAU"></apt-pratinjau>
+  <apt-verifikasi *ngIf="action === APT_ACTION.VERIFIKASI"></apt-verifikasi>
 </ion-content>
