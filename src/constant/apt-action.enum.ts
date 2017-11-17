@@ -1,4 +1,4 @@
-export enum AptAction {
-  PRATINJAU = "pratinjau",
-  VERIFIKASI = "verifikasi"
-}
+export const AptAction = {
+  PRATINJAU: "pratinjau",
+  VERIFIKASI: "verifikasi"
+};

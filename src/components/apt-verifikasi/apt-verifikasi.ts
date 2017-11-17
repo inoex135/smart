@@ -5,7 +5,7 @@ import { Component } from "@angular/core";
   templateUrl: "apt-verifikasi.html"
 })
 export class AptVerifikasiComponent {
-  text: string;
+  verifikasiStatus: string;
 
   constructor() {}
 }
