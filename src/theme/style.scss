@@ -59,6 +59,10 @@ $solid-border: 0.4px solid rgba(0, 0, 0, 0.2);
   // border: 0.1px solid theme-color("mainColors", "accent") !important;
 }
 
+.card-transparent {
+  box-shadow: none !important;
+}
+
 //https://stackoverflow.com/questions/42248573/ionic2-remove-blue-line-color-input-md
 // $text-input-md-highlight-color-invalid: transparent;
 // $text-input-md-highlight-color-valid: transparent;

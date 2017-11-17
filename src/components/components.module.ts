@@ -16,6 +16,8 @@ import { TextAvatarDirective } from "../directives/text-avatar/text-avatar";
 import { AptVerifikasiComponent } from './apt-verifikasi/apt-verifikasi';
 import { ChecklistDokumenPendukungComponent } from './checklist-dokumen-pendukung/checklist-dokumen-pendukung';
 import { AptStatusPermohonanComponent } from './apt-status-permohonan/apt-status-permohonan';
+import { AptPratinjauComponent } from './apt-pratinjau/apt-pratinjau';
+import { AptTopLabelComponent } from './apt-top-label/apt-top-label';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { AptStatusPermohonanComponent } from './apt-status-permohonan/apt-status
     TextAvatarDirective,
     AptVerifikasiComponent,
     ChecklistDokumenPendukungComponent,
-    AptStatusPermohonanComponent
+    AptStatusPermohonanComponent,
+    AptPratinjauComponent,
+    AptTopLabelComponent
   ],
   imports: [IonicModule],
   exports: [
@@ -47,7 +51,9 @@ import { AptStatusPermohonanComponent } from './apt-status-permohonan/apt-status
     TextAvatarDirective,
     AptVerifikasiComponent,
     ChecklistDokumenPendukungComponent,
-    AptStatusPermohonanComponent
+    AptStatusPermohonanComponent,
+    AptPratinjauComponent,
+    AptTopLabelComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
