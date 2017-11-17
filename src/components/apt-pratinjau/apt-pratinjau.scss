@@ -1,3 +1,6 @@
 apt-pratinjau {
-
+  ion-card.blue--background {
+    background-color: map-get($colors, primary-bootstrap);
+    border-radius: 5px;
+  }
 }
