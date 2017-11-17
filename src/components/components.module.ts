@@ -14,6 +14,7 @@ import { LoginSso } from "./login/sso/login-sso";
 import { PemberitahuanComponent } from "./pemberitahuan/pemberitahuan";
 import { TextAvatarDirective } from "../directives/text-avatar/text-avatar";
 import { AptVerifikasiComponent } from './apt-verifikasi/apt-verifikasi';
+import { ChecklistDokumenPendukungComponent } from './checklist-dokumen-pendukung/checklist-dokumen-pendukung';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { AptVerifikasiComponent } from './apt-verifikasi/apt-verifikasi';
     TimelineComponent,
     TimelineAgendaComponent,
     TextAvatarDirective,
-    AptVerifikasiComponent
+    AptVerifikasiComponent,
+    ChecklistDokumenPendukungComponent
   ],
   imports: [IonicModule],
   exports: [
@@ -41,7 +43,8 @@ import { AptVerifikasiComponent } from './apt-verifikasi/apt-verifikasi';
     TimelineComponent,
     TimelineAgendaComponent,
     TextAvatarDirective,
-    AptVerifikasiComponent
+    AptVerifikasiComponent,
+    ChecklistDokumenPendukungComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
