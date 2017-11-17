@@ -1,11 +1,2 @@
 apt-status-permohonan {
-  p {
-    font-weight: bold !important;
-    font-size: 1.3rem !important;
-    color: map-get($colors, blue-donker) !important;
-  }
-  .blue--background {
-    background-color: map-get($colors, primary-bootstrap);
-    border-radius: 5px;
-  }
 }
