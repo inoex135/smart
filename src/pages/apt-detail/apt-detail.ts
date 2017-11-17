@@ -1,7 +1,8 @@
 import { Component } from "@angular/core";
 import { NavParams, NavController } from "ionic-angular";
 import { AptDetailActionPage } from "../apt-detail-action/apt-detail-action";
-import { AptAction } from "../../constant/apt-action.enum";
+import { AptAction } from "../../constant/apt-action";
+
 @Component({
   selector: "page-apt-detail",
   templateUrl: "apt-detail.html"
