@@ -1,2 +1,14 @@
 apt-status-permohonan {
+  $green-light: map-get($colors, green-light);
+
+  ion-item {
+    border-left: 10px solid $green-light !important;
+  }
+
+  .label {
+    color: silver;
+  }
+  p[ion-text] {
+    font-weight: bold !important;
+  }
 }
