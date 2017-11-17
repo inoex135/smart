@@ -8,6 +8,17 @@
   <checklist-dokumen-pendukung></checklist-dokumen-pendukung>
 </ion-card>
 
+<ion-card padding margin-top margin-bottom>
+  <ion-slides #slider effect="fade" pager="true" (ionSlideWillChange)="onSlideChanged()">
+
+    <ion-slide *ngFor="let slide of slides" class="swiper-no-swiping">
+      <apt-status-permohonan></apt-status-permohonan>
+    </ion-slide>
+
+    <div *ngIf="currentIndex > 0" class="swiper-button-prev swiper-button-red" (click)="previousSlide()"></div>
+    <div *ngIf="currentIndex < slides.length-1" class="swiper-button-next swiper-button-red" (click)="nextSlide()"></div>
+  </ion-slides>
+</ion-card>
 <ion-card padding margin-top margin-bottom class="blue--background">
   <apt-identitas-petugas></apt-identitas-petugas>
 </ion-card>
