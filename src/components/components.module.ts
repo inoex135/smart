@@ -18,6 +18,7 @@ import { ChecklistDokumenPendukungComponent } from './checklist-dokumen-pendukun
 import { AptStatusPermohonanComponent } from './apt-status-permohonan/apt-status-permohonan';
 import { AptPratinjauComponent } from './apt-pratinjau/apt-pratinjau';
 import { AptTopLabelComponent } from './apt-top-label/apt-top-label';
+import { AptIdentitasPetugasComponent } from './apt-identitas-petugas/apt-identitas-petugas';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { AptTopLabelComponent } from './apt-top-label/apt-top-label';
     ChecklistDokumenPendukungComponent,
     AptStatusPermohonanComponent,
     AptPratinjauComponent,
-    AptTopLabelComponent
+    AptTopLabelComponent,
+    AptIdentitasPetugasComponent
   ],
   imports: [IonicModule],
   exports: [
@@ -53,7 +55,8 @@ import { AptTopLabelComponent } from './apt-top-label/apt-top-label';
     ChecklistDokumenPendukungComponent,
     AptStatusPermohonanComponent,
     AptPratinjauComponent,
-    AptTopLabelComponent
+    AptTopLabelComponent,
+    AptIdentitasPetugasComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
