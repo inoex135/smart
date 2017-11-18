@@ -10,9 +10,6 @@ import { User } from "../../models/users";
 @Injectable()
 export class UserProvider {
   private currentUserSubject = new BehaviorSubject<User>(new User());
-  public currentUser = this.currentUserSubject
-    .asObservable()
-    .distinctUntilChanged();
 
   private isAuthenticatedSubject = new ReplaySubject<boolean>(1);
   public isAuthenticated = this.isAuthenticatedSubject.asObservable();
