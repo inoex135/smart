@@ -19,6 +19,8 @@ export class AptPage {
   loader: any;
   redirectComponent: string = "AptNotifikasiPage";
 
+  isPress: boolean = false;
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -43,6 +45,10 @@ export class AptPage {
 
   detailApt(item: any) {
     this.navCtrl.push(AptDetailPage, { detail: item });
+  }
+
+  isItemPressed() {
+    this.isPress = !this.isPress;
   }
 
   async getAptList() {
