@@ -23,7 +23,7 @@
   <ion-list class="list--apt">
     <ion-card (press)="isItemPressed(item)" item no-margin padding *ngFor="let item of items;let i = index">
       <ion-row>
-        <ion-col col-1 margin-right *ngIf="isPress">
+        <ion-col col-1 margin-right *ngIf="isPress" class="checkbox-input">
           <ion-checkbox color="green-light"></ion-checkbox>
         </ion-col>
         <ion-col (tap)="detailApt(item)">

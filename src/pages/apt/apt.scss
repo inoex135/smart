@@ -42,6 +42,21 @@ page-apt {
       font-size: 72px;
     }
   }
+  .checkbox-input {
+    padding-top: 10% !important;
+  }
+
+  //checkbox
+  @media screen and (max-width: map-get($grid-breakpoints,"md")) {
+    .checkbox-input {
+      padding-top: 65% !important;
+    }
+  }
+  @media screen and (max-width: map-get($grid-breakpoints,"lg")) {
+    .checkbox-input {
+      padding-top: 10% !important;
+    }
+  }
 
   //footer
   ion-footer {
