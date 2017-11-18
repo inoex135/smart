@@ -21,17 +21,17 @@
   </ion-list>
 
   <ion-list class="list--apt">
-    <ion-card (press)="isItemPressed(item)" (click)="detailApt(item)" item no-margin padding *ngFor="let item of items;let i = index">
+    <ion-card (press)="isItemPressed(item)" item no-margin padding *ngFor="let item of items;let i = index">
       <ion-row>
         <ion-col col-1 margin-right *ngIf="isPress">
           <ion-checkbox color="green-light"></ion-checkbox>
         </ion-col>
-        <ion-col>
+        <ion-col (tap)="detailApt(item)">
           <b ion-text item-start text-wrap text-left>{{item?.pelayanan}}</b>
           <p ion-text> Sub Pelayanan</p>
           <p ion-text color="default-blue">Nomor Permohonan</p>
         </ion-col>
-        <ion-col>
+        <ion-col (tap)="detailApt(item)">
           <p ion-text text-right>{{item?.tanggal_naskah}}</p>
         </ion-col>
       </ion-row>

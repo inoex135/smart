@@ -1,8 +1,9 @@
 import { Component } from "@angular/core";
 import { NavController, NavParams, LoadingController } from "ionic-angular";
+import { File } from "@ionic-native/file";
+
 import { AptProvider } from "../../providers/apt/apt";
 import { AptDetailPage } from "../apt-detail/apt-detail";
-import { File } from "@ionic-native/file";
 
 import { AptHelper } from "../../helpers/apt-helper";
 import { LoaderHelper } from "../../helpers/loader-helper";
