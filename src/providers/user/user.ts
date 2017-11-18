@@ -3,14 +3,12 @@ import { Http } from "@angular/http";
 import "rxjs/add/operator/map";
 import { ApiProvider } from "../api/api";
 import { TokenProvider } from "../token/token";
-import { BehaviorSubject } from "rxjs/BehaviorSubject";
+
 import { ReplaySubject } from "rxjs/ReplaySubject";
 import { User } from "../../models/users";
 
 @Injectable()
 export class UserProvider {
-  private currentUserSubject = new BehaviorSubject<User>(new User());
-
   private isAuthenticatedSubject = new ReplaySubject<boolean>(1);
   public isAuthenticated = this.isAuthenticatedSubject.asObservable();
 
@@ -44,7 +42,7 @@ export class UserProvider {
     this.tokenProvider.destroy();
   }
 
-  attemptAuth(credentials) {
+  attemptAuth(credentials: User) {
     let formData = new FormData();
 
     formData.append("username", credentials.username);
