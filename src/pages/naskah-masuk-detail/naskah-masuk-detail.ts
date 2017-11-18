@@ -5,6 +5,8 @@ import { LoaderHelper } from "../../helpers/loader-helper";
 import { NaskahDetailActionPage } from "../naskah-detail-action/naskah-detail-action";
 import { NaskahAction } from "../../constant/naskah-action";
 
+import "rxjs/add/operator/finally";
+
 @Component({
   selector: "page-naskah-masuk-detail",
   templateUrl: "naskah-masuk-detail.html"
