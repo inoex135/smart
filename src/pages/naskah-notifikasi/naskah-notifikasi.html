@@ -7,11 +7,11 @@
 <ion-content class="list-avatar-page">
   <ion-list>
     <ion-item *ngFor="let notif of notifications">
-      <h6 ion-text>{{notif.sender}}</h6>
-      <text-avatar [text]="notif.sender" item-left></text-avatar>
-      <p ion-text text-wrap>Pesan Disposisi Sangat Segera</p>
-      <p ion-text color="blue-template" text-wrap>{{ notif?.date | indonesianDate }}</p>
-      <ion-note item-end>Unread</ion-note>
+      <h6 ion-text>{{notif?.nama}}</h6>
+      <text-avatar [text]="notif?.nama" item-left></text-avatar>
+      <p ion-text text-wrap>{{notif?.pesan}}</p>
+      <p ion-text color="blue-template" text-wrap>{{ notif?.tanggal | indonesianDate:'dddd, DD MMMM YYYY' }}</p>
+      <ion-note item-end>{{statusRead(notif?.is_read)}}</ion-note>
     </ion-item>
   </ion-list>
 </ion-content>
