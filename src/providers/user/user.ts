@@ -42,6 +42,10 @@ export class UserProvider {
     this.tokenProvider.destroy();
   }
 
+  logout() {
+    return this.apiProvider.get("/auth/logout/");
+  }
+
   attemptAuth(credentials: User) {
     let formData = new FormData();
 

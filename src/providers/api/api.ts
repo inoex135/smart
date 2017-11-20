@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Http, Headers } from "@angular/http";
+import { HttpHeaders, HttpClient } from "@angular/common/http";
 
 import { Observable } from "rxjs/Observable";
 
@@ -10,40 +10,39 @@ import { TokenProvider } from "../token/token";
 
 @Injectable()
 export class ApiProvider {
-  constructor(public http: Http, public tokenProvider: TokenProvider) {}
+  constructor(public http: HttpClient, public tokenProvider: TokenProvider) {}
 
   private setHeaders() {
-    const headerConfig = {
-      "Content-Type": "application/json",
-      Authorization: "smartdjkn2017mobile"
-    };
-
+    // set header
     if (this.tokenProvider.latestToken) {
-      headerConfig["token"] = this.tokenProvider.latestToken;
+      return new HttpHeaders()
+        .set("Content-Type", "application/json")
+        .set("Authorization", "smartdjkn2017mobile")
+        .set("token", this.tokenProvider.latestToken);
     }
 
-    return new Headers(headerConfig);
+    return new HttpHeaders()
+      .set("Content-Type", "application/json")
+      .set("Authorization", "smartdjkn2017mobile");
   }
+
   // set header for FormData in login
   private setHeadersForm() {
-    const headerConfig = { Authorization: "smartdjkn2017mobile" };
-
     if (this.tokenProvider.latestToken) {
-      headerConfig["token"] = this.tokenProvider.latestToken;
+      return new HttpHeaders().append("token", this.tokenProvider.latestToken);
     }
 
-    return new Headers(headerConfig);
+    return new HttpHeaders().set("Authorization", "smartdjkn2017mobile");
   }
 
   private formatErrors(error: any) {
-    return Observable.throw(error.json());
+    return Observable.throw(error);
   }
 
   get(path: string) {
     return this.http
       .get(`${ENV.API_URL}${path}`, { headers: this.setHeaders() })
-      .catch(this.formatErrors)
-      .map(res => res.json());
+      .catch(this.formatErrors);
   }
 
   put(path: string, body: Object = {}) {
@@ -51,29 +50,27 @@ export class ApiProvider {
       .put(`${ENV.API_URL}${path}`, JSON.stringify(body), {
         headers: this.setHeaders()
       })
-      .catch(this.formatErrors)
-      .map(res => res.json());
+      .catch(this.formatErrors);
   }
 
   post(path: string, body: Object = {}) {
     return this.http
       .post(`${ENV.API_URL}${path}`, body, { headers: this.setHeaders() })
-      .catch(this.formatErrors)
-      .map(res => res.json());
+      .catch(this.formatErrors);
   }
 
   delete(path: string) {
     return this.http
       .delete(`${ENV.API_URL}${path}`, { headers: this.setHeaders() })
-      .catch(this.formatErrors)
-      .map(res => res.json());
+      .catch(this.formatErrors);
   }
 
   // POST data as FormData
   postForm(path: string, body: Object = {}) {
     return this.http
-      .post(`${ENV.API_URL}${path}`, body, { headers: this.setHeadersForm() })
-      .catch(this.formatErrors)
-      .map(res => res.json());
+      .post(`${ENV.API_URL}${path}`, body, {
+        headers: this.setHeadersForm()
+      })
+      .catch(this.formatErrors);
   }
 }

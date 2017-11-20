@@ -3,7 +3,7 @@ import { Storage } from "@ionic/storage";
 
 @Injectable()
 export class TokenProvider {
-  public latestToken: String;
+  public latestToken: string;
   public latestUser: any;
 
   constructor(public storage: Storage) {}
@@ -28,7 +28,7 @@ export class TokenProvider {
       });
   }
 
-  saveToken(token: String): Promise<void> {
+  saveToken(token: string): Promise<void> {
     this.latestToken = token;
     return this.storage
       .ready()
