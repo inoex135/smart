@@ -57,6 +57,8 @@ import { PersonalProvider } from "../providers/personal/personal";
 import { SuratProvider } from "../providers/surat/surat";
 import { TokenProvider } from "../providers/token/token";
 import { UserProvider } from "../providers/user/user";
+import { HomeProvider } from "../providers/home/home";
+import { HttpClientModule } from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -76,6 +78,7 @@ import { UserProvider } from "../providers/user/user";
     BrowserModule,
     FormsModule,
     HttpModule,
+    HttpClientModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
     ComponentsModule,
@@ -121,7 +124,8 @@ import { UserProvider } from "../providers/user/user";
     GrafikSuratProvider,
     PersonalAgendaDetailProvider,
     DatePicker,
-    DatepickerProvider
+    DatepickerProvider,
+    HomeProvider
   ]
 })
 export class AppModule {}
