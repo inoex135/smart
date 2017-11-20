@@ -4,7 +4,7 @@ import { Http, Headers } from "@angular/http";
 import { Observable } from "rxjs/Observable";
 
 import "rxjs/add/operator/catch";
-
+import "rxjs/add/observable/throw";
 import { ENV } from "../../config/environment";
 import { TokenProvider } from "../token/token";
 
