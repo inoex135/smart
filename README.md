@@ -46,16 +46,16 @@ npm install -g ionic
 ```
 cli packages:
 
-    @ionic/cli-utils  : 1.12.0
-    ionic (Ionic CLI) : 3.12.0
+    @ionic/cli-utils  : 1.16.0
+    ionic (Ionic CLI) : 3.16.0
 
 global packages:
     cordova (Cordova CLI) : 7.1.0
 
 local packages:
-    @ionic/app-scripts : 3.0.0
-    Cordova Platforms  : android 6.2.1
-    Ionic Framework    : ionic-angular 3.7.0
+    @ionic/app-scripts : 3.1.2
+    Cordova Platforms  : android 6.3.0
+    Ionic Framework    : ionic-angular 3.9.0
 
 System:
     Android SDK Tools : 26.0.2
@@ -66,6 +66,7 @@ System:
 Misc:
     backend : legacy
 ```
+
 ## Note
 * You can downgrade to your old version by running: npm i --save -E ionic@3.16.0
 
