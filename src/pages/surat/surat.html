@@ -5,57 +5,50 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-grid>
-    <ion-row>
-      <ion-col>
-        <ion-list no-lines>
-          <pemberitahuan [redirectComponent]="redirectComponent"></pemberitahuan>
+  <ion-list no-lines>
+    <pemberitahuan [redirectComponent]="redirectComponent"></pemberitahuan>
 
-          <ion-item class="item-surat-header" margin-top (click)="openPage('naskah')">
-            <h2 ion-text item-end class="item-surat-title">Daftar Naskah Unit</h2>
-          </ion-item>
+    <ion-item class="item-surat-header" margin-top (click)="openPage('naskah')">
+      <h2 ion-text item-end class="item-surat-title">Daftar Naskah Unit</h2>
+    </ion-item>
 
-          <ion-item class="periode-awal" margin-top>
-            <ion-datetime (ionChange)="changeDate()" no-padding displayFormat="DD-MM-YYYY" pickerFormat="DD MMM YYYY" placeholder="Periode Awal"
-              [(ngModel)]="filter.startTime"></ion-datetime>
-          </ion-item>
+    <ion-item class="periode-awal" margin-top>
+      <ion-datetime (ionChange)="changeDate()" no-padding displayFormat="DD-MM-YYYY" pickerFormat="DD MMM YYYY" placeholder="Periode Awal"
+        [(ngModel)]="filter.startTime"></ion-datetime>
+    </ion-item>
 
-          <ion-item class="periode-akhir" margin-top margin-bottom>
-            <ion-datetime [min]="filter.startTime" (ionChange)="changeDate()" no-padding displayFormat="DD-MM-YYYY" pickerFormat="DD MMM YYYY"
-              [(ngModel)]="filter.endTime" placeholder="Periode Akhir"></ion-datetime>
-          </ion-item>
+    <ion-item class="periode-akhir" margin-top margin-bottom>
+      <ion-datetime [min]="filter.startTime" (ionChange)="changeDate()" no-padding displayFormat="DD-MM-YYYY" pickerFormat="DD MMM YYYY"
+        [(ngModel)]="filter.endTime" placeholder="Periode Akhir"></ion-datetime>
+    </ion-item>
 
-          <div>
-            <div [ng2-highcharts]="chartData"></div>
-          </div>
+    <div>
+      <div [ng2-highcharts]="chartData"></div>
+    </div>
 
-          <ion-item class="item-middle" no-padding>
-            <ion-row>
-              <ion-col col-6 class="item-content-left" no-margin>
-                <h1 ion-text text-center padding> 10</h1>
-                <h3 ion-text text-center>Total Hari ini</h3>
-              </ion-col>
-              <ion-col col-6 class="item-content-right" no-margin>
-                <h1 ion-text text-center padding> 10</h1>
-                <h3 ion-text text-center>Total Hari ini</h3>
-              </ion-col>
-            </ion-row>
-          </ion-item>
+    <ion-item class="item-middle" no-padding>
+      <ion-row>
+        <ion-col col-6 class="item-content-left" no-margin>
+          <h1 ion-text text-center padding> 10</h1>
+          <h3 ion-text text-center>Total Hari ini</h3>
+        </ion-col>
+        <ion-col col-6 class="item-content-right" no-margin>
+          <h1 ion-text text-center padding> 10</h1>
+          <h3 ion-text text-center>Total Hari ini</h3>
+        </ion-col>
+      </ion-row>
+    </ion-item>
 
-          <br>
+    <br>
 
-          <ion-card no-margin class="item-card-bottom">
-            <ion-item color="red-default">
-              <h1 ion-text text-center color="light">100</h1>
-            </ion-item>
-            <ion-item color="brown-red" class="item-sub">
-              <h3 ion-text text-center color="light"> Keseluruhan</h3>
-            </ion-item>
-          </ion-card>
+    <ion-card no-margin class="item-card-bottom">
+      <ion-item color="red-default">
+        <h1 ion-text text-center color="light">100</h1>
+      </ion-item>
+      <ion-item color="brown-red" class="item-sub">
+        <h3 ion-text text-center color="light"> Keseluruhan</h3>
+      </ion-item>
+    </ion-card>
 
-        </ion-list>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-
+  </ion-list>
 </ion-content>

@@ -75,13 +75,14 @@ page-home {
     position: relative;
 
     .img-content {
-      opacity: 0.6 !important;
+      opacity: 0.4 !important;
     }
 
     .avatar-content {
       position: absolute;
-      top: 25%;
-      left: 20%;
+      top: 30%;
+      left: 30%;
+      font-size: 16px;
       font-weight: bold;
     }
   }

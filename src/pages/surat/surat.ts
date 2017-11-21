@@ -1,11 +1,14 @@
 import { Component, ViewChildren } from "@angular/core";
 import { NavController, NavParams } from "ionic-angular";
 
-import { Ng2Highcharts } from "ng2-highcharts";
-import * as moment from "moment-timezone";
 import { LoaderHelper } from "../../helpers/loader-helper";
-import { GrafikSuratProvider } from "../../providers/grafik-surat/grafik-surat";
 import { NaskahMasukPage } from "../naskah-masuk/naskah-masuk";
+import { GrafikSuratProvider } from "../../providers/grafik-surat/grafik-surat";
+import { SuratProvider } from "../../providers/surat/surat";
+
+import * as moment from "moment-timezone";
+import { Ng2Highcharts } from "ng2-highcharts";
+import { Observable } from "rxjs/Observable";
 
 @Component({
   selector: "page-surat",
@@ -21,6 +24,8 @@ export class SuratPage {
     NASKAH: "naskah"
   };
 
+  totalPersuratan: any = "";
+
   redirectComponent: string = "NaskahNotifikasiPage";
 
   @ViewChildren(Ng2Highcharts) allCharts;
@@ -31,24 +36,44 @@ export class SuratPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public loaderHelper: LoaderHelper,
-    public grafikSuratProvider: GrafikSuratProvider
+    public grafikSuratProvider: GrafikSuratProvider,
+    public suratProvider: SuratProvider
   ) {
     this.redirectComponent = "NaskahNotifikasiPage";
   }
 
   ionViewDidLoad() {
     this.setIntervalDate();
-    this.getDataChart();
+    // this.getDataChart();
+    this.initData();
   }
 
-  getDataChart() {
-    this.loaderHelper.createLoader();
+  // getDataChart() {
+  //   this.loaderHelper.createLoader();
 
+  //   const params = this.grafikSuratProvider.paramsStartAndEnd();
+
+  //   return this.grafikSuratProvider.getFilterSumasData(params).subscribe(
+  //     res => {
+  //       this.chartData = this.grafikSuratProvider.chartData(res);
+  //       this.loaderHelper.dismiss();
+  //     },
+  //     err => this.loaderHelper.errorHandleLoader(err.error_code, this.navCtrl)
+  //   );
+  // }
+
+  // set first data when load page
+  initData() {
     const params = this.grafikSuratProvider.paramsStartAndEnd();
 
-    return this.grafikSuratProvider.getFilterSumasData(params).subscribe(
-      res => {
-        this.chartData = this.grafikSuratProvider.chartData(res);
+    Observable.zip(
+      this.grafikSuratProvider.getFilterSumasData(params),
+      this.suratProvider.getTotalPersuratan()
+    ).subscribe(
+      ([a, b]) => {
+        this.chartData = this.grafikSuratProvider.chartData(a);
+        this.totalPersuratan = b;
+        console.log(b);
         this.loaderHelper.dismiss();
       },
       err => {
@@ -57,6 +82,7 @@ export class SuratPage {
     );
   }
 
+  // search sumas grafik by date
   changeDate() {
     const startTime = this.filter.startTime;
     const endTime = this.filter.endTime;
@@ -82,20 +108,18 @@ export class SuratPage {
     return setInterval(() => this.dateNow(), 60);
   }
 
+  // show date
   dateNow() {
     return moment.tz("Asia/Jakarta").format("HH:mm");
   }
 
   openPage(component: any) {
-    switch (component) {
-      case this.PAGE.NOTIFIKASI:
-        this.navCtrl.push("NaskahNotifikasiPage");
-        break;
-      case this.PAGE.NASKAH:
-        this.navCtrl.push(NaskahMasukPage);
-        break;
-      default:
-        break;
+    if (component === this.PAGE.NOTIFIKASI) {
+      this.navCtrl.push("NaskahNotifikasiPage");
+    }
+
+    if (component === this.PAGE.NASKAH) {
+      this.navCtrl.push(NaskahMasukPage);
     }
   }
 

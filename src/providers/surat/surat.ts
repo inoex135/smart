@@ -51,4 +51,8 @@ export class SuratProvider {
 
     return options;
   }
+
+  getTotalPersuratan() {
+    return this.api.get("/api/surat/total");
+  }
 }
