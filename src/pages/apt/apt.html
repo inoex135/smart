@@ -39,10 +39,7 @@
   </ion-list>
 
 
-  <div *ngIf="items === undefined" class="empty-stage" margin-top>
-    <ion-icon name="document" item-end></ion-icon>
-    <h3 ion-text text-center class="empty-stage-title">APT Tidak Ditemukan</h3>
-  </div>
+  <empty-state *ngIf="items === undefined"></empty-state>
 </ion-content>
 
 <ion-footer *ngIf="isPress">
