@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { ApiProvider } from "../api/api";
+
 import * as moment from "moment";
 
 @Injectable()
@@ -43,7 +44,7 @@ export class GrafikSuratProvider {
         type: "column"
       },
       title: {
-        text: "Info Umum Naskah Masuk"
+        text: "Jenis Surat Unit / Pribadi"
       },
       xAxis: {
         categories: moment.months()
