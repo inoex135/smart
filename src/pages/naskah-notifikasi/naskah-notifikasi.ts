@@ -2,6 +2,7 @@ import { Component } from "@angular/core";
 import { NavController, NavParams, IonicPage } from "ionic-angular";
 import { NaskahNotifikasiProvider } from "../../providers/naskah-notifikasi/naskah-notifikasi";
 import { LoaderHelper } from "../../helpers/loader-helper";
+import { NaskahMasukDetailPage } from "../naskah-masuk-detail/naskah-masuk-detail";
 
 @IonicPage()
 @Component({
@@ -35,5 +36,9 @@ export class NaskahNotifikasiPage {
 
   statusRead(isRead: number) {
     return isRead === 0 ? "Unread" : "Read";
+  }
+
+  detailNotifikasi(naskahId: number) {
+    this.navCtrl.push(NaskahMasukDetailPage, { naskahId: naskahId });
   }
 }
