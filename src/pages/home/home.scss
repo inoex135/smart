@@ -71,16 +71,17 @@ page-home {
     background-color: red !important;
     border-radius: 50%;
     border: 1px solid white !important;
+    text-align: center;
+    position: relative;
 
     .img-content {
-      opacity: 0.4 !important;
+      opacity: 0.6 !important;
     }
 
     .avatar-content {
       position: absolute;
-      top: 3.6rem;
-      left: 3.2rem;
-      text-align: center;
+      top: 25%;
+      left: 20%;
       font-weight: bold;
     }
   }
