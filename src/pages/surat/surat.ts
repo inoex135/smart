@@ -9,7 +9,8 @@ import { SuratProvider } from "../../providers/surat/surat";
 import * as moment from "moment-timezone";
 import { Ng2Highcharts } from "ng2-highcharts";
 import { Observable } from "rxjs/Observable";
-
+// import { zip } from "rxjs/observable/zip";
+import "rxjs/add/observable/zip";
 @Component({
   selector: "page-surat",
   templateUrl: "surat.html"
@@ -44,27 +45,14 @@ export class SuratPage {
 
   ionViewDidLoad() {
     this.setIntervalDate();
-    // this.getDataChart();
     this.initData();
   }
 
-  // getDataChart() {
-  //   this.loaderHelper.createLoader();
-
-  //   const params = this.grafikSuratProvider.paramsStartAndEnd();
-
-  //   return this.grafikSuratProvider.getFilterSumasData(params).subscribe(
-  //     res => {
-  //       this.chartData = this.grafikSuratProvider.chartData(res);
-  //       this.loaderHelper.dismiss();
-  //     },
-  //     err => this.loaderHelper.errorHandleLoader(err.error_code, this.navCtrl)
-  //   );
-  // }
-
-  // set first data when load page
+  // set first data when load page for total surat + filter sumas grafik
   initData() {
     const params = this.grafikSuratProvider.paramsStartAndEnd();
+
+    this.loaderHelper.createLoader();
 
     Observable.zip(
       this.grafikSuratProvider.getFilterSumasData(params),
@@ -73,7 +61,7 @@ export class SuratPage {
       ([a, b]) => {
         this.chartData = this.grafikSuratProvider.chartData(a);
         this.totalPersuratan = b;
-        console.log(b);
+
         this.loaderHelper.dismiss();
       },
       err => {
@@ -127,4 +115,7 @@ export class SuratPage {
     const notification = "Notifikasi";
     return menu == notification ? true : false;
   }
+
+  // onchange pencarian surat
+  searchSurat() {}
 }

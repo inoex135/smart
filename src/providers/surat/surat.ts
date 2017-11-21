@@ -53,6 +53,10 @@ export class SuratProvider {
   }
 
   getTotalPersuratan() {
-    return this.api.get("/api/surat/total");
+    return this.api.get("/surat/total");
+  }
+
+  suratSearch() {
+    return this.api.get("/surat/masuk");
   }
 }
