@@ -1,11 +1,10 @@
 import { Injectable } from "@angular/core";
-import { Http } from "@angular/http";
 import "rxjs/add/operator/map";
 import { ApiProvider } from "../api/api";
 
 @Injectable()
 export class NaskahMasukProvider {
-  constructor(public http: Http, public api: ApiProvider) {}
+  constructor(public api: ApiProvider) {}
 
   getDetailNaskah(naskahId: any) {
     const url = `/surat/masuk/${naskahId}`;
@@ -22,18 +21,18 @@ export class NaskahMasukProvider {
 
   disposisi(dataNaskah: any) {
     const url = "/naskah";
-    return this.api.post(url, dataNaskah).map(res => res.json());
+    return this.api.post(url, dataNaskah);
   }
 
   teruskan(dataNaskah: any) {
     const url = "/naskah";
 
-    return this.api.post(url, dataNaskah).map(res => res.json());
+    return this.api.post(url, dataNaskah);
   }
 
   selesai(dataNaskah: any) {
     const url = "/naskah";
 
-    return this.api.post(url, dataNaskah).map(res => res.json());
+    return this.api.post(url, dataNaskah);
   }
 }

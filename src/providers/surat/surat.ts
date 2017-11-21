@@ -1,17 +1,15 @@
 import { Injectable } from "@angular/core";
-import { Http } from "@angular/http";
-import "rxjs/add/operator/map";
-import { ApiProvider } from "../api/api";
-
 import { FileTransfer, FileTransferObject } from "@ionic-native/file-transfer";
 import { File } from "@ionic-native/file";
+
+import { ApiProvider } from "../api/api";
+
 import { TokenProvider } from "../token/token";
 import { ENV } from "../../config/environment";
 
 @Injectable()
 export class SuratProvider {
   constructor(
-    public http: Http,
     public api: ApiProvider,
     public transfer: FileTransfer,
     public file: File,

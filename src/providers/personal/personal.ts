@@ -1,8 +1,9 @@
 import { Injectable } from "@angular/core";
 
 import { ApiProvider } from "../api/api";
-import * as moment from "moment";
 import { TokenProvider } from "../token/token";
+
+import * as moment from "moment";
 
 @Injectable()
 export class PersonalProvider {

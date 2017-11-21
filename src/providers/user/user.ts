@@ -1,10 +1,9 @@
 import { Injectable } from "@angular/core";
-import { Http } from "@angular/http";
-import "rxjs/add/operator/map";
+import { ReplaySubject } from "rxjs/ReplaySubject";
+
 import { ApiProvider } from "../api/api";
 import { TokenProvider } from "../token/token";
 
-import { ReplaySubject } from "rxjs/ReplaySubject";
 import { User } from "../../models/users";
 
 @Injectable()
@@ -13,7 +12,6 @@ export class UserProvider {
   public isAuthenticated = this.isAuthenticatedSubject.asObservable();
 
   constructor(
-    public http: Http,
     public apiProvider: ApiProvider,
     public tokenProvider: TokenProvider
   ) {}

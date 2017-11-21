@@ -1,6 +1,4 @@
 import { Injectable } from "@angular/core";
-import { Http } from "@angular/http";
-import "rxjs/add/operator/map";
 import { ApiProvider } from "../api/api";
 import { FileTransfer, FileTransferObject } from "@ionic-native/file-transfer";
 import { ENV } from "../../config/environment";
@@ -12,7 +10,6 @@ export class AptProvider {
   fileDir: string;
 
   constructor(
-    public http: Http,
     public apiProvider: ApiProvider,
     transfer: FileTransfer,
     private token: TokenProvider
