@@ -2,9 +2,9 @@ import { Injectable } from "@angular/core";
 import { HttpHeaders, HttpClient } from "@angular/common/http";
 
 import { Observable } from "rxjs/Observable";
+import { map, catchError } from "rxjs/operators";
+import { ErrorObservable } from "rxjs/observable/errorObservable";
 
-import "rxjs/add/operator/catch";
-import "rxjs/add/observable/throw";
 import { ENV } from "../../config/environment";
 import { TokenProvider } from "../token/token";
 
@@ -34,15 +34,29 @@ export class ApiProvider {
 
     return new HttpHeaders().set("Authorization", "smartdjkn2017mobile");
   }
+  private extractData(res: Response) {
+    let body = res;
+    return body || {};
+  }
 
-  private formatErrors(error: any) {
-    return Observable.throw(error);
+  private handleError(error: Response | any) {
+    let errMsg: string;
+
+    if (error instanceof Response) {
+      const err = error || "";
+      errMsg = `${error.status} - ${error.statusText || ""} ${err}`;
+    } else {
+      errMsg = error.message ? error.message : error.toString();
+    }
+
+    console.error(errMsg);
+    return ErrorObservable.create(errMsg);
   }
 
   get(path: string) {
     return this.http
       .get(`${ENV.API_URL}${path}`, { headers: this.setHeaders() })
-      .catch(this.formatErrors);
+      .pipe(map(this.extractData), catchError(this.handleError));
   }
 
   put(path: string, body: Object = {}) {
@@ -50,19 +64,19 @@ export class ApiProvider {
       .put(`${ENV.API_URL}${path}`, JSON.stringify(body), {
         headers: this.setHeaders()
       })
-      .catch(this.formatErrors);
+      .pipe(map(this.extractData), catchError(this.handleError));
   }
 
   post(path: string, body: Object = {}) {
     return this.http
       .post(`${ENV.API_URL}${path}`, body, { headers: this.setHeaders() })
-      .catch(this.formatErrors);
+      .pipe(map(this.extractData), catchError(this.handleError));
   }
 
   delete(path: string) {
     return this.http
       .delete(`${ENV.API_URL}${path}`, { headers: this.setHeaders() })
-      .catch(this.formatErrors);
+      .pipe(map(this.extractData), catchError(this.handleError));
   }
 
   // POST data as FormData
@@ -71,6 +85,6 @@ export class ApiProvider {
       .post(`${ENV.API_URL}${path}`, body, {
         headers: this.setHeadersForm()
       })
-      .catch(this.formatErrors);
+      .pipe(map(this.extractData), catchError(this.handleError));
   }
 }
