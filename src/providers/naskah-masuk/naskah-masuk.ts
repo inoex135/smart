@@ -35,4 +35,13 @@ export class NaskahMasukProvider {
 
     return this.api.post(url, dataNaskah);
   }
+
+  searchNaskah(params: any) {
+    return this.api.get("/surat/masuk/cari?tanggal=07-03-2016");
+  }
+
+  searchNaskahByTipe() {
+    // The last segment {type} is required. Available options : permohonan, unit, personal.
+    return this.api.get("/surat/masuk/tipe/{type}?page=0&size=10");
+  }
 }

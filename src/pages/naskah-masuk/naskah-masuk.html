@@ -8,7 +8,7 @@
   <ion-grid>
     <ion-row>
       <ion-col>
-        <ion-searchbar [(ngModel)]="filter.keyword" search-bar-bcg (ionInput)="onEvent('onTextChange', $event)"></ion-searchbar>
+        <ion-searchbar [(ngModel)]="filter.keyword" search-bar-bcg (ionInput)="searchSumas($event)"></ion-searchbar>
       </ion-col>
 
       <ion-col col-12 col-sm-12 col-md-12 offset-lg-3 col-lg-6 offset-xl-3 col-xl-6>

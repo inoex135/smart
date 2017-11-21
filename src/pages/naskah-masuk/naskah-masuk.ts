@@ -48,4 +48,10 @@ export class NaskahMasukPage {
       err => this.loaderHelper.errorHandleLoader(err, this.navCtrl)
     );
   }
+
+  searchSumas(event: any) {
+    this.naskahProvider
+      .searchNaskah(event)
+      .subscribe(res => console.log(), err => console.log(err));
+  }
 }
