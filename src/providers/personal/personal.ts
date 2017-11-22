@@ -66,4 +66,16 @@ export class PersonalProvider {
       });
     });
   }
+
+  agendaPersonal() {
+    return this.api.get("/apt/dashboard/progres-pengajuan");
+  }
+
+  tambahAgenda() {
+    return this.api.get("/personal/agenda");
+  }
+
+  detailAgenda() {
+    return this.api.get("/personal/");
+  }
 }

@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
 import { IonicPage, NavController, NavParams } from "ionic-angular";
 import { DatepickerProvider } from "../../providers/datepicker/datepicker";
+import { PersonalProvider } from "../../providers/personal/personal";
 
 @IonicPage()
 @Component({
@@ -25,7 +26,8 @@ export class PersonalAgendaAddPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    private datePicker: DatepickerProvider
+    private datePicker: DatepickerProvider,
+    private personalProvider: PersonalProvider
   ) {}
 
   ionViewDidLoad() {}
@@ -52,6 +54,10 @@ export class PersonalAgendaAddPage {
     this.agendaData.jamAkhir = await this.datePicker.datePickerData(
       this.MODE.TIME
     );
+  }
+
+  tambahAgenda() {
+    this.personalProvider.tambahAgenda();
   }
 
   addPeserta(peserta: string) {

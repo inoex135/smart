@@ -24,18 +24,21 @@ export class PersonalPage {
     private loaderHelper: LoaderHelper
   ) {}
   getListEvent() {
-    this.loaderHelper.createLoader();
+    // this.loaderHelper.createLoader();
+    // this.personalProvider
+    //   .getListEvent()
+    //   .then(res => {
+    //     this.date = res;
+    //     this.loaderHelper.dismiss();
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //     this.loaderHelper.errorHandleLoader(err.error_message, this.navCtrl);
+    //   });
 
     this.personalProvider
-      .getListEvent()
-      .then(res => {
-        this.date = res;
-        this.loaderHelper.dismiss();
-      })
-      .catch(err => {
-        console.log(err);
-        this.loaderHelper.errorHandleLoader(err.error_message, this.navCtrl);
-      });
+      .agendaPersonal()
+      .subscribe(res => console.log(res), err => console.log());
   }
 
   ionViewDidLoad() {
