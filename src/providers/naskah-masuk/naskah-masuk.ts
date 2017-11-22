@@ -44,4 +44,8 @@ export class NaskahMasukProvider {
     // The last segment {type} is required. Available options : permohonan, unit, personal.
     return this.api.get("/surat/masuk/tipe/{type}?page=0&size=10");
   }
+
+  terimaSemuaNaskah(idList: any) {
+    return this.api.post("/surat/masuk/terima-batch", idList);
+  }
 }

@@ -58,7 +58,7 @@ export class LoginPage {
         // toast error
         this.toastController
           .create({
-            message: err.error_message,
+            message: err,
             duration: 3000,
             position: "bottom"
           })
