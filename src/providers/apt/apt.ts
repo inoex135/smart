@@ -3,6 +3,7 @@ import { ApiProvider } from "../api/api";
 import { FileTransfer, FileTransferObject } from "@ionic-native/file-transfer";
 import { ENV } from "../../config/environment";
 import { TokenProvider } from "../token/token";
+import { map } from "rxjs/operators/map";
 
 @Injectable()
 export class AptProvider {
@@ -21,6 +22,14 @@ export class AptProvider {
     const url = "/apt/permohonan/verifikasi/index";
 
     return this.apiProvider.get(url).map(res => res.content);
+  }
+
+  // get list notifikasi apt
+
+  getListNotification() {
+    return this.apiProvider
+      .get("/personal/notification/apt")
+      .pipe(map(data => data.content));
   }
 
   download(fileDir) {

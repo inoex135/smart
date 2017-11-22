@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
-import { IonicPage, NavController, NavParams } from "ionic-angular";
-import { NotificationDummy } from "../../dummy/notification.dummy";
+import { IonicPage, NavController } from "ionic-angular";
 import { AptDetailPage } from "../apt-detail/apt-detail";
+import { AptProvider } from "../../providers/apt/apt";
 
 @IonicPage()
 @Component({
@@ -10,13 +10,27 @@ import { AptDetailPage } from "../apt-detail/apt-detail";
 })
 export class AptNotifikasiPage {
   notifications: any[] = [];
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+
+  constructor(
+    public navCtrl: NavController,
+    private aptProvider: AptProvider
+  ) {}
 
   ionViewDidLoad() {
-    this.notifications = NotificationDummy.lists();
+    this.getListNotification();
+  }
+
+  getListNotification() {
+    this.aptProvider
+      .getListNotification()
+      .subscribe(res => (this.notifications = res), err => console.log(err));
   }
 
   goToAptDetail(aptId: number) {
     this.navCtrl.push(AptDetailPage, { aptId: aptId });
+  }
+
+  statusRead(isRead: number) {
+    return isRead === 0 ? "Unread" : "Read";
   }
 }
