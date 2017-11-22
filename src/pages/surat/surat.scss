@@ -9,7 +9,19 @@ page-surat {
       color: white;
     }
   }
-
+  .select--role {
+    ion-item {
+      height: 33.33% !important;
+    }
+    ion-row {
+      height: 40px;
+    }
+  }
+  .role--radio {
+    ion-radio {
+      margin: 0 5px 0 0 !important;
+    }
+  }
   // ion-date-time item
   .periode-awal,
   .periode-akhir {
