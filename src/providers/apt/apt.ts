@@ -18,10 +18,12 @@ export class AptProvider {
     this.fileTransfer = transfer.create();
   }
 
+  // get daftar permohonan apt
   getPermohonanList() {
-    const url = "/apt/permohonan/verifikasi/index";
+    const url =
+      "/apt/permohonan/index?pelayanan_id=&sub_pelayanan_id=&nomor_tiket=&status=&tanggal_surat_dari=&tanggal_surat_sampai=&tanggal_permohonan_dari=&tanggal_permohonan_sampai=&page=0&size=20";
 
-    return this.apiProvider.get(url).map(res => res.content);
+    return this.apiProvider.get(url).pipe(map(res => res.content));
   }
 
   // get list notifikasi apt
