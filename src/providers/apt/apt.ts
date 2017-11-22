@@ -34,6 +34,11 @@ export class AptProvider {
       .pipe(map(data => data.content));
   }
 
+  // get detail apt
+  getDetailApt(aptId: number) {
+    return this.apiProvider.get(`/apt/permohonan/detail/${aptId}`);
+  }
+
   download(fileDir) {
     // @todo : dummy url, change when api already
     // const url = `http://www.lkpp.go.id/v3/files/attachments/5_fWwUnTrpMTbexDEmAMSCNDzObHttIcYl.pdf`;
