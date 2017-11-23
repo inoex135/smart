@@ -325,20 +325,6 @@
       </ion-card>
     </ion-row>
   </ion-grid>
-
 </ion-content>
 
-<div class="main-view" *ngIf="showDownloadModal">
-  <div class="overlay" (click)="dismiss()"></div>
-  <div class="modal_content">
-    <p ion-text text-center text-wrap>
-      Download File Digital
-    </p>
-    <ion-list no-lines>
-      <ion-item>
-        <p item-start>File Digital #1</p>
-        <button item-end ion-button color="default-blue">Download</button>
-      </ion-item>
-    </ion-list>
-  </div>
-</div>
+<naskah-modal-download #naskahModalDownload (downloadFile)="downloadFile()"></naskah-modal-download>
