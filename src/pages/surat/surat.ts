@@ -93,7 +93,7 @@ export class SuratPage {
   }
 
   setIntervalDate(): number {
-    return setInterval(() => this.dateNow(), 60);
+    return window.setInterval(() => this.dateNow(), 60);
   }
 
   // show date
