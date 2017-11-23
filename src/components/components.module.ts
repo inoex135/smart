@@ -20,6 +20,7 @@ import { AptPratinjauComponent } from './apt-pratinjau/apt-pratinjau';
 import { AptTopLabelComponent } from './apt-top-label/apt-top-label';
 import { AptIdentitasPetugasComponent } from './apt-identitas-petugas/apt-identitas-petugas';
 import { EmptyStateComponent } from './empty-state/empty-state';
+import { NaskahModalTerimaComponent } from './naskah-modal-terima/naskah-modal-terima';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { EmptyStateComponent } from './empty-state/empty-state';
     AptPratinjauComponent,
     AptTopLabelComponent,
     AptIdentitasPetugasComponent,
-    EmptyStateComponent
+    EmptyStateComponent,
+    NaskahModalTerimaComponent
   ],
   imports: [IonicModule],
   exports: [
@@ -59,7 +61,8 @@ import { EmptyStateComponent } from './empty-state/empty-state';
     AptPratinjauComponent,
     AptTopLabelComponent,
     AptIdentitasPetugasComponent,
-    EmptyStateComponent
+    EmptyStateComponent,
+    NaskahModalTerimaComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

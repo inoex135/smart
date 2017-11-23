@@ -4,7 +4,8 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content>
+  <naskah-modal-terima *ngIf="showModalTerima" (terimaNaskah)="terimaNaskah($event)"></naskah-modal-terima>
   <ion-grid>
     <ion-row class="list-action-button">
       <ion-col *ngFor="let actions of actionList">

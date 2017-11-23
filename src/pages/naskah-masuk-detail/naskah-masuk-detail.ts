@@ -16,6 +16,7 @@ export class NaskahMasukDetailPage {
   private naskahId: string = "";
   sizeDetail: number = 0;
   actionList: Array<any> = [];
+  showModalTerima: boolean = false;
 
   constructor(
     public navCtrl: NavController,
@@ -32,6 +33,7 @@ export class NaskahMasukDetailPage {
 
   ionViewDidLoad() {
     this.actionList = NaskahAction.getAction();
+
     this.getDetailNaskah();
   }
 
@@ -42,7 +44,26 @@ export class NaskahMasukDetailPage {
       .getDetailNaskah(this.naskahId)
       .finally(() => this.loaderHelper.dismiss())
       .subscribe(res => {
-        return (this.detail = res);
+        this.detail = res;
+        this.showModal();
       });
+  }
+
+  terimaNaskah() {
+    const idList = { idList: [this.naskahId] };
+    this.naskahProvider
+      .terimaSemuaNaskah(idList)
+      .finally(this.dismiss)
+      .subscribe(res => true, err => this.navCtrl.pop());
+  }
+
+  showModal() {
+    if (!this.detail.statusTerimaSurat) {
+      return (this.showModalTerima = true);
+    }
+  }
+
+  dismiss() {
+    this.showModalTerima = false;
   }
 }

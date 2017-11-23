@@ -16,7 +16,7 @@
       </ion-select>
     </ion-item>
 
-    <ion-list *ngIf="listNaskah?.length > 0">
+    <ion-list>
       <ion-card (press)="pressAndHoldSurat(naskah)" *ngFor="let naskah of listNaskah" class="naskah-list">
         <ion-row>
           <ion-col col-1 margin-right *ngIf="isBulkAction" class="checkbox-input">
