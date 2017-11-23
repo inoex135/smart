@@ -1,0 +1,16 @@
+<div class="main-view">
+  <div class="overlay" (click)="dismiss()"></div>
+  <div class="modal_content">
+    <p ion-text text-center text-wrap>
+      Untuk Melihat Detail Naskah
+      <br> Anda Harus Klik Tombol "Terima Naskah"
+      <br> Dibawah ini.
+    </p>
+    <div ion-col col-8 push-2>
+      <button ion-button large color="green-light" text-center (tap)="callTerimaNaskah()">
+        <ion-icon name="checkmark"></ion-icon>
+        Terima Naskah
+      </button>
+    </div>
+  </div>
+</div>
