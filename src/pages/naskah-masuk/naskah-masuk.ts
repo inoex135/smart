@@ -9,7 +9,7 @@ import remove from "lodash/remove";
   templateUrl: "naskah-masuk.html"
 })
 export class NaskahMasukPage {
-  private listNaskah: any = [];
+  private listNaskah: any;
   isBulkAction: boolean = false;
 
   filter: any = {
