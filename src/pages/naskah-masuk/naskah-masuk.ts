@@ -43,7 +43,7 @@ export class NaskahMasukPage {
     // show naskah from API
     this.naskahProvider.getNaskahMasuk().subscribe(
       res => {
-        this.listNaskah = res;
+        this.listNaskah = res.data;
 
         this.loaderHelper.dismiss();
       },

@@ -16,7 +16,7 @@ export class NaskahMasukProvider {
 
   getNaskahMasuk() {
     const url = "/surat/masuk";
-    return this.api.get(url).map(res => res.content);
+    return this.api.get(url);
   }
 
   disposisi(dataNaskah: any) {

@@ -105,7 +105,7 @@
               <p ion-text item-start text-wrap card-title>Pemberi Disposisi</p>
             </ion-col>
             <ion-col>
-              <p ion-text item-start text-wrap>{{detail?.noAgenda}}</p>
+              <p ion-text item-start text-wrap>{{detail?.noAgenda || "-"}}</p>
             </ion-col>
           </ion-row>
         </ion-item>
@@ -127,7 +127,7 @@
               <p ion-text item-start text-wrap card-title>Tanggal Naskah</p>
             </ion-col>
             <ion-col>
-              <p ion-text item-start text-wrap>{{detail?.noAgenda}}</p>
+              <p ion-text item-start text-wrap>{{detail?.tanggalSurat}}</p>
             </ion-col>
           </ion-row>
         </ion-item>
