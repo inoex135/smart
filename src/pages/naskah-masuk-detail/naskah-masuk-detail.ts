@@ -18,6 +18,8 @@ export class NaskahMasukDetailPage {
   actionList: Array<any> = [];
   showModalTerima: boolean = false;
 
+  showDownloadModal: boolean = false;
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -56,7 +58,6 @@ export class NaskahMasukDetailPage {
       .finally(this.dismiss)
       .subscribe(res => true, err => this.navCtrl.pop());
   }
-
   showModal() {
     if (!this.detail.statusTerimaSurat) {
       return (this.showModalTerima = true);
@@ -65,5 +66,9 @@ export class NaskahMasukDetailPage {
 
   dismiss() {
     this.showModalTerima = false;
+  }
+
+  showDownloadList() {
+    this.showDownloadModal = true;
   }
 }
