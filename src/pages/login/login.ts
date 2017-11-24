@@ -68,6 +68,22 @@ export class LoginPage {
   }
 
   loginSSO(user: User) {
-    this.navCtrl.push("SsoPage");
+    this.isLoading = true;
+    
+        this.userProvider.attemptAuthSso(user).subscribe(
+          data => this.navCtrl.setRoot(HomePage),
+          err => {
+            this.isLoading = false;
+    
+            // toast error
+            this.toastController
+              .create({
+                message: err,
+                duration: 3000,
+                position: "bottom"
+              })
+              .present();
+          }
+        );
   }
 }

@@ -55,4 +55,16 @@ export class UserProvider {
       return data;
     });
   }
+
+  attemptAuthSso(credentials: User) {
+    let formData = new FormData();
+
+    formData.append("username", credentials.username);
+    formData.append("password", credentials.password);
+
+    return this.apiProvider.postForm("/auth/sso", formData).map(data => {
+      this.setAuth(data);
+      return data;
+    });
+  }
 }
