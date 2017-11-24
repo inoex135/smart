@@ -19,4 +19,6 @@ export class NaskahDetailActionPage {
   ionViewDidLoad() {
     this.actionData = this.navParams.get("actionData");
   }
+
+  saveDisposisi() {}
 }

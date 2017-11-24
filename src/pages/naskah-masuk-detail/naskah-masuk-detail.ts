@@ -1,11 +1,13 @@
-import { Component } from "@angular/core";
+import { Component, ViewChild } from "@angular/core";
 import { NavController, NavParams } from "ionic-angular";
+import "rxjs/add/operator/finally";
+
 import { NaskahMasukProvider } from "../../providers/naskah-masuk/naskah-masuk";
 import { LoaderHelper } from "../../helpers/loader-helper";
 import { NaskahDetailActionPage } from "../naskah-detail-action/naskah-detail-action";
 import { NaskahAction } from "../../constant/naskah-action";
 
-import "rxjs/add/operator/finally";
+import { NaskahModalDownloadComponent } from "../../components/naskah-modal-download/naskah-modal-download";
 
 @Component({
   selector: "page-naskah-masuk-detail",
@@ -19,6 +21,9 @@ export class NaskahMasukDetailPage {
   showModalTerima: boolean = false;
 
   showDownloadModal: boolean = false;
+
+  @ViewChild(NaskahModalDownloadComponent)
+  naskahDownload: NaskahModalDownloadComponent;
 
   constructor(
     public navCtrl: NavController,
@@ -68,7 +73,11 @@ export class NaskahMasukDetailPage {
     this.showModalTerima = false;
   }
 
+  downloadFile() {
+    alert("download success");
+  }
+
   showDownloadList() {
-    this.showDownloadModal = true;
+    this.naskahDownload.present();
   }
 }

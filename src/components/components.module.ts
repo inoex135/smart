@@ -21,6 +21,7 @@ import { AptTopLabelComponent } from './apt-top-label/apt-top-label';
 import { AptIdentitasPetugasComponent } from './apt-identitas-petugas/apt-identitas-petugas';
 import { EmptyStateComponent } from './empty-state/empty-state';
 import { NaskahModalTerimaComponent } from './naskah-modal-terima/naskah-modal-terima';
+import { NaskahModalDownloadComponent } from './naskah-modal-download/naskah-modal-download';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { NaskahModalTerimaComponent } from './naskah-modal-terima/naskah-modal-t
     AptTopLabelComponent,
     AptIdentitasPetugasComponent,
     EmptyStateComponent,
-    NaskahModalTerimaComponent
+    NaskahModalTerimaComponent,
+    NaskahModalDownloadComponent
   ],
   imports: [IonicModule],
   exports: [
@@ -62,7 +64,8 @@ import { NaskahModalTerimaComponent } from './naskah-modal-terima/naskah-modal-t
     AptTopLabelComponent,
     AptIdentitasPetugasComponent,
     EmptyStateComponent,
-    NaskahModalTerimaComponent
+    NaskahModalTerimaComponent,
+    NaskahModalDownloadComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

@@ -4,6 +4,9 @@ import { UserProvider } from "../../providers/user/user";
 
 import { MenuHomeConstant } from "../../constant/menu-home";
 import { HomeProvider } from "../../providers/home/home";
+import { Observable } from "rxjs/Observable";
+
+import "rxjs/add/observable/zip";
 
 @Component({
   selector: "page-home",
@@ -13,7 +16,7 @@ export class HomePage {
   menus: Array<any> = [];
   backgroundImage: string = "assets/images/bg_login.png";
   notifications: Array<any> = [];
-
+  profile: any = {};
   constructor(
     public navCtrl: NavController,
     public userProvider: UserProvider,
@@ -22,7 +25,7 @@ export class HomePage {
 
   ionViewDidLoad() {
     this.listMenu();
-    this.getTotalNotification();
+    this.initData();
   }
 
   listMenu() {
@@ -30,15 +33,10 @@ export class HomePage {
     return this.menus;
   }
 
-  getTotalNotification() {
-    this.homeProvider.getTotalNotication().subscribe(
-      res => {
-        this.menus.map((data, index) => {
-          data.notificationTotal = this.setNotificationTotal(data.title, res);
-        });
-      },
-      err => console.log(err)
-    );
+  mappingResponNotif(res?: any) {
+    return this.menus.map((data, index) => {
+      data.notificationTotal = this.setNotificationTotal(data.title, res);
+    });
   }
   setNotificationTotal(title: any, res: any) {
     if (title === "PERSURATAN") return res.notification_persuratan;
@@ -64,5 +62,17 @@ export class HomePage {
 
   private assets(name: string) {
     return `assets/icon/${name}.png`;
+  }
+
+  initData() {
+    const getProfile = this.userProvider.getProfile();
+    const getTotalNotif = this.homeProvider.getTotalNotication();
+
+    Observable.zip(getProfile, getTotalNotif).subscribe(
+      ([profile, totalNotif]) => {
+        this.profile = profile;
+        this.mappingResponNotif(totalNotif);
+      }
+    );
   }
 }

@@ -21,9 +21,28 @@ export class Disposisi {
     petunjuk: []
   };
 
+  disposisiAs: string = "";
+
+  readonly selectAs: any = {
+    unit: "UNIT",
+    personal: "PERSONAL"
+  };
+
+  component: any = {
+    unitOrPersonal: true,
+    disposisiUnit: false,
+    disposisiPersonal: false,
+    disposisiSifat: false,
+    disposisiPetunjuk: false,
+    disposisiTanggal: false
+  };
+
+  show: boolean = false;
+
   constructor() {
     this.datas.petunjuk = PetunjukDisposisi.getPetunjuk();
     this.datas.jabatan = Jabatan.getJabatan();
+    console.log(this.disposisi);
   }
 
   onChange(petunjuk: string, checked: boolean, id: number) {
@@ -35,7 +54,7 @@ export class Disposisi {
         checked: checked
       });
     } else {
-      this.disposisi.petunjuk.splice(id);
+      this.disposisi.petunjuk.splice(id, 1);
     }
 
     console.log(this.disposisi);
@@ -52,4 +71,70 @@ export class Disposisi {
     alert("sukses");
     console.log(this.disposisi);
   }
+
+  selectDisposisiAs() {}
+
+  nextStep(to: string = "root") {
+    if (to === this.selectAs.unit) {
+      this.component.unitOrPersonal = false;
+      this.component.disposisiUnit = true;
+    }
+
+    if (to === this.selectAs.personal) {
+      this.component.disposisiPersonal = true;
+      this.component.unitOrPersonal = false;
+    }
+
+    if (to === "disposisiPersonal") {
+      this.component.disposisiPersonal = true;
+      this.component.disposisiUnit = false;
+    }
+
+    if (to === "disposisiSifat") {
+      this.component.disposisiSifat = true;
+      this.component.disposisiPersonal = false;
+      this.component.disposisiUnit = false;
+    }
+
+    if (to === "disposisiPetunjuk") {
+      this.component.disposisiPetunjuk = true;
+      this.component.disposisiSifat = false;
+    }
+
+    if (to === "disposisiTanggal") {
+      this.component.disposisiTanggal = true;
+      this.component.disposisiPetunjuk = false;
+    }
+  }
+
+  back(to: string = "root") {
+    if (to === "root") {
+      this.component.unitOrPersonal = true;
+      this.component.disposisiUnit = false;
+      this.component.disposisiPersonal = false;
+    }
+
+    if (to === "disposisiPersonal" || to === this.selectAs.personal) {
+      this.component.disposisiPersonal = true;
+      this.component.disposisiSifat = false;
+    }
+
+    if (to === "disposisiUnit" || to === this.selectAs.unit) {
+      this.component.disposisiUnit = true;
+      this.component.disposisiSifat = false;
+    }
+
+    if (to === "disposisiSifat") {
+      this.component.disposisiSifat = true;
+      this.component.disposisiPetunjuk = false;
+    }
+
+    if (to === "disposisiPetunjuk") {
+      this.component.disposisiPetunjuk = true;
+      this.component.disposisiTanggal = false;
+    }
+    console.log(to);
+  }
+
+  showComponent() {}
 }
