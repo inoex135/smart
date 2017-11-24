@@ -9,8 +9,8 @@ import { SuratProvider } from "../../providers/surat/surat";
 import * as moment from "moment-timezone";
 import { Ng2Highcharts } from "ng2-highcharts";
 import { Observable } from "rxjs/Observable";
-// import { zip } from "rxjs/observable/zip";
 import "rxjs/add/observable/zip";
+import { UserProvider } from "../../providers/user/user";
 @Component({
   selector: "page-surat",
   templateUrl: "surat.html"
@@ -58,9 +58,9 @@ export class SuratPage {
       this.grafikSuratProvider.getFilterSumasData(params),
       this.suratProvider.getTotalPersuratan()
     ).subscribe(
-      ([a, b]) => {
-        this.chartData = this.grafikSuratProvider.chartData(a);
-        this.totalPersuratan = b;
+      ([chartData, totalSurat]) => {
+        this.chartData = this.grafikSuratProvider.chartData(chartData);
+        this.totalPersuratan = totalSurat;
 
         this.loaderHelper.dismiss();
       },
