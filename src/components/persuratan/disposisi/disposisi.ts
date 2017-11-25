@@ -1,6 +1,8 @@
 import { Component } from "@angular/core";
 import { PetunjukDisposisi } from "../../../constant/petunjuk-disposisi";
 import { Jabatan } from "../../../constant/jabatan";
+import { NaskahDisposisiProvider } from "../../../providers/naskah-disposisi/naskah-disposisi";
+import { Observable } from "rxjs/Observable";
 
 @Component({
   selector: "disposisi",
@@ -37,16 +39,25 @@ export class Disposisi {
     disposisiTanggal: false
   };
 
-  show: boolean = false;
+  constructor(private disposisiProvider: NaskahDisposisiProvider) {
+    this.init();
+  }
 
-  constructor() {
-    this.datas.petunjuk = PetunjukDisposisi.getPetunjuk();
-    this.datas.jabatan = Jabatan.getJabatan();
-    console.log(this.disposisi);
+  init() {
+    const petunjuk = this.disposisiProvider.getPetunjuk();
+    const unitDisposisi = this.disposisiProvider.getUnitDisposisi();
+    const sifatSurat = this.disposisiProvider.getSifatSurat();
+
+    Observable.zip(petunjuk, unitDisposisi, sifatSurat).subscribe(
+      ([petunjuk, unitDisposisi, sifatSurat]) => {
+        this.datas.jabatan = unitDisposisi;
+        this.datas.petunjuk = petunjuk;
+        this.datas.sifatSurat = sifatSurat;
+      }
+    );
   }
 
   onChange(petunjuk: string, checked: boolean, id: number) {
-    // console.log(petunjuk, checked, id);
     if (checked) {
       this.disposisi.petunjuk.push({
         petunjuk: petunjuk,
@@ -56,8 +67,6 @@ export class Disposisi {
     } else {
       this.disposisi.petunjuk.splice(id, 1);
     }
-
-    console.log(this.disposisi);
   }
   setLead(event: any, unit: any) {
     // @TODO: selectedUnit msh duplikat
@@ -69,10 +78,7 @@ export class Disposisi {
   }
   simpan() {
     alert("sukses");
-    console.log(this.disposisi);
   }
-
-  selectDisposisiAs() {}
 
   nextStep(to: string = "root") {
     if (to === this.selectAs.unit) {
@@ -133,8 +139,5 @@ export class Disposisi {
       this.component.disposisiPetunjuk = true;
       this.component.disposisiTanggal = false;
     }
-    console.log(to);
   }
-
-  showComponent() {}
 }

@@ -23,7 +23,7 @@
 
 <ion-card padding-right *ngIf="component?.disposisiUnit">
     <ion-item>
-        <ion-label color="default-blue">Disposisi Kepada Unit</ion-label>
+        <ion-label text-center color="default-blue">Disposisi Kepada Unit</ion-label>
     </ion-item>
 
     <ion-item margin-top>
@@ -51,7 +51,7 @@
 
 <ion-card padding-right *ngIf="component?.disposisiPersonal">
     <ion-item>
-        <ion-label color="default-blue">Disposisi Kepada Personal</ion-label>
+        <ion-label text-center color="default-blue">Disposisi Kepada Personal</ion-label>
     </ion-item>
 
     <ion-item margin-top>
@@ -76,7 +76,6 @@
         <button item-end ion-button color="default-blue" (tap)="nextStep('disposisiSifat')">NEXT</button>
     </ion-item>
 </ion-card>
-
 
 <ion-card *ngIf="component?.disposisiSifat">
     <ion-list no-lines>
@@ -104,12 +103,11 @@
     </ion-list>
 </ion-card>
 
-
 <ion-card *ngIf="component?.disposisiPetunjuk">
     <ion-item-group>
         <ion-label margin-left>Petunjuk</ion-label>
-        <ion-item *ngFor="let petunjuk of datas.petunjuk; let i = index" class="petunjuk">
-            <ion-label text-wrap>{{petunjuk}}</ion-label>
+        <ion-item *ngFor="let petunjuk of datas?.petunjuk; let i = index" class="petunjuk">
+            <ion-label text-wrap>{{petunjuk?.keterangan}}</ion-label>
             <ion-checkbox color="primary" name="petunjuk[i]" (ionChange)="onChange(petunjuk, $event.checked, i)"></ion-checkbox>
         </ion-item>
     </ion-item-group>
