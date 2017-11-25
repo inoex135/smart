@@ -56,7 +56,9 @@ export class HomePage {
         this.userProvider.purgeAuth();
         this.navCtrl.setRoot("LoginPage");
       },
-      err => alert("Terjadi Kesalahan")
+      err => {
+        console.log(err);
+      }
     );
   }
 

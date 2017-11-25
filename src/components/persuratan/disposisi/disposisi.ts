@@ -1,9 +1,11 @@
 import { Component } from "@angular/core";
 import { PetunjukDisposisi } from "../../../constant/petunjuk-disposisi";
-import { Jabatan } from "../../../constant/jabatan";
 import { NaskahDisposisiProvider } from "../../../providers/naskah-disposisi/naskah-disposisi";
 import { Observable } from "rxjs/Observable";
+import { IDisposisiUnit } from "../../../interface/disposisi-unit";
 
+import * as _ from "lodash";
+// import remove from "lodash/remove";
 @Component({
   selector: "disposisi",
   templateUrl: "disposisi.html"
@@ -11,7 +13,7 @@ import { Observable } from "rxjs/Observable";
 export class Disposisi {
   datas: any = {};
   tanggalDisposisi: string = new Date().toISOString();
-  unit: Array<string> = [];
+  unit: Array<any> = [];
   selectedUnit: Array<any> = [];
   lead: Array<string> = [];
 
@@ -56,7 +58,19 @@ export class Disposisi {
       }
     );
   }
+  // CHECKBOX
+  // untuk get dan remove value checkbox unit
+  // remove by index dari unit yg di klik
+  // dan add by index yang di klik
+  selectUnit(unit: IDisposisiUnit, checked: boolean) {
+    let unitIndex = this.selectedUnit.indexOf(unit);
 
+    if (unitIndex !== -1) {
+      this.selectedUnit.splice(unitIndex, 1);
+    } else {
+      this.selectedUnit.push(unit);
+    }
+  }
   onChange(petunjuk: string, checked: boolean, id: number) {
     if (checked) {
       this.disposisi.petunjuk.push({
@@ -75,9 +89,6 @@ export class Disposisi {
     if (event.checked) {
       this.selectedUnit.push(unit);
     }
-  }
-  simpan() {
-    alert("sukses");
   }
 
   nextStep(to: string = "root") {
