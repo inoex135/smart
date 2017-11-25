@@ -25,12 +25,10 @@
     <ion-item>
         <ion-label text-center color="default-blue">Disposisi Kepada Unit</ion-label>
     </ion-item>
-
     <ion-item *ngFor="let jabatan of datas?.jabatan; let i = index">
         <ion-label text-wrap>{{jabatan?.uraian_jabatan}}</ion-label>
         <ion-checkbox (ionChange)="selectUnit(jabatan, $event.checked)" [value]="jabatan?.kode_utuh"></ion-checkbox>
     </ion-item>
-    {{ selectedUnit | json }}
     <ion-item>
         <button item-start clear ion-button color="default-blue" (tap)="back()">BACK</button>
         <button item-end ion-button color="default-blue" (tap)="nextStep('disposisiSifat')">NEXT</button>
