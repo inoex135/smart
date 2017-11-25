@@ -5,7 +5,6 @@ import { ApiProvider } from "../api/api";
 import { TokenProvider } from "../token/token";
 
 import { User } from "../../models/users";
-import { Observable } from "rxjs/Observable";
 
 @Injectable()
 export class UserProvider {

@@ -1,11 +1,8 @@
 import { Component } from "@angular/core";
-import { PetunjukDisposisi } from "../../../constant/petunjuk-disposisi";
 import { NaskahDisposisiProvider } from "../../../providers/naskah-disposisi/naskah-disposisi";
 import { Observable } from "rxjs/Observable";
 import { IDisposisiUnit } from "../../../interface/disposisi-unit";
 
-import * as _ from "lodash";
-// import remove from "lodash/remove";
 @Component({
   selector: "disposisi",
   templateUrl: "disposisi.html"
