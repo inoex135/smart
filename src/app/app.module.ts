@@ -59,7 +59,7 @@ import { TokenProvider } from "../providers/token/token";
 import { UserProvider } from "../providers/user/user";
 import { HomeProvider } from "../providers/home/home";
 import { HttpClientModule } from "@angular/common/http";
-import { NaskahDisposisiProvider } from '../providers/naskah-disposisi/naskah-disposisi';
+import { NaskahDisposisiProvider } from "../providers/naskah-disposisi/naskah-disposisi";
 
 @NgModule({
   declarations: [
