@@ -10,24 +10,23 @@ import {
   TimelineComponent,
   TimelineAgendaComponent
 } from "./timeline/timeline";
-import { LoginSso } from "./login/sso/login-sso";
+
 import { PemberitahuanComponent } from "./pemberitahuan/pemberitahuan";
 import { TextAvatarDirective } from "../directives/text-avatar/text-avatar";
-import { AptVerifikasiComponent } from './apt-verifikasi/apt-verifikasi';
-import { ChecklistDokumenPendukungComponent } from './checklist-dokumen-pendukung/checklist-dokumen-pendukung';
-import { AptStatusPermohonanComponent } from './apt-status-permohonan/apt-status-permohonan';
-import { AptPratinjauComponent } from './apt-pratinjau/apt-pratinjau';
-import { AptTopLabelComponent } from './apt-top-label/apt-top-label';
-import { AptIdentitasPetugasComponent } from './apt-identitas-petugas/apt-identitas-petugas';
-import { EmptyStateComponent } from './empty-state/empty-state';
-import { NaskahModalTerimaComponent } from './naskah-modal-terima/naskah-modal-terima';
-import { NaskahModalDownloadComponent } from './naskah-modal-download/naskah-modal-download';
+import { AptVerifikasiComponent } from "./apt-verifikasi/apt-verifikasi";
+import { ChecklistDokumenPendukungComponent } from "./checklist-dokumen-pendukung/checklist-dokumen-pendukung";
+import { AptStatusPermohonanComponent } from "./apt-status-permohonan/apt-status-permohonan";
+import { AptPratinjauComponent } from "./apt-pratinjau/apt-pratinjau";
+import { AptTopLabelComponent } from "./apt-top-label/apt-top-label";
+import { AptIdentitasPetugasComponent } from "./apt-identitas-petugas/apt-identitas-petugas";
+import { EmptyStateComponent } from "./empty-state/empty-state";
+import { NaskahModalTerimaComponent } from "./naskah-modal-terima/naskah-modal-terima";
+import { NaskahModalDownloadComponent } from "./naskah-modal-download/naskah-modal-download";
 
 @NgModule({
   declarations: [
     Disposisi,
     LoginLayout1,
-    LoginSso,
     PemberitahuanComponent,
     RiwayatComponent,
     Selesai,
@@ -49,7 +48,6 @@ import { NaskahModalDownloadComponent } from './naskah-modal-download/naskah-mod
   exports: [
     Disposisi,
     LoginLayout1,
-    LoginSso,
     PemberitahuanComponent,
     RiwayatComponent,
     Selesai,
