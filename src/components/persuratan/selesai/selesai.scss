@@ -12,21 +12,26 @@ selesai {
     border: 0 !important;
   }
 
-  ion-select,
-  ion-textarea {
-    border: $solid-border;
-  }
-
-  .item-input .label-md,
-  .item-select .label-md,
-  .item-datetime .label-md {
-    color: map-get($colors, primary) !important;
-    font-size: 1em;
-    font-weight: bold;
-    padding-bottom: 10px;
-  }
-
   #upload {
     display: none !important;
+  }
+
+  ion-item.textarea--form {
+    border: 1px solid #e8e9eb !important;
+    border-radius: 5px;
+    //set heigh ion-text
+    max-height: 10em;
+    height: 10em !important;
+
+    ion-textarea {
+      max-height: 100% !important;
+      textarea {
+        margin: 2px;
+        // agar scroll di pepetkan ke kanan
+        &.text-input-md {
+          width: 100%;
+        }
+      }
+    }
   }
 }
