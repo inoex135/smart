@@ -13,11 +13,20 @@
     <ion-item>
       <ion-input required type="password" [(ngModel)]="password" placeholder="Password"></ion-input>
     </ion-item>
-    <button ion-button color="blue-template" full block (click)="onEvent('onLogin')">{{data.login}}</button>
+    <button [disabled]="loginState?.isLogin" ion-button color="blue-template" full block (click)="onEvent('onLogin')">
+      <ion-spinner name="crescent" *ngIf="!loginState?.sso && loginState?.isLogin "></ion-spinner>
+      {{data.login}}
+    </button>
   </div>
 
   <div padding>
-    <button ion-button color="danger" full block (click)="onEvent('onLoginSSO')">Login SSO</button>
+    <button [disabled]="loginState?.isLogin" ion-button color="danger" full block (click)="onEvent('onLoginSSO')">
+      <ion-spinner name="crescent" *ngIf="loginState?.sso"></ion-spinner>
+      <div>
+        Login SSO
+      </div>
+    </button>
+
   </div>
 
   <div class="smart-footer">

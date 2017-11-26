@@ -10,6 +10,7 @@ import { User } from "../../models/users";
 import { UserProvider } from "../../providers/user/user";
 import { HomePage } from "../home/home";
 import { TokenProvider } from "../../providers/token/token";
+import { LoginState } from "../../models/login-state.model";
 @IonicPage()
 @Component({
   selector: "page-login",
@@ -20,6 +21,11 @@ export class LoginPage {
   error: any = false;
   isLoading: boolean = false;
   params: any = {};
+
+  loginState: LoginState = {
+    isLogin: false,
+    sso: false
+  };
 
   constructor(
     public navCtrl: NavController,
@@ -48,12 +54,12 @@ export class LoginPage {
   ionViewDidLoad() {}
 
   login(user: User) {
-    this.isLoading = true;
+    this.loginState.isLogin = true;
 
     this.userProvider.attemptAuth(user).subscribe(
       data => this.navCtrl.setRoot(HomePage),
       err => {
-        this.isLoading = false;
+        this.loginState.isLogin = false;
 
         // toast error
         this.toastController
@@ -68,22 +74,27 @@ export class LoginPage {
   }
 
   loginSSO(user: User) {
-    this.isLoading = true;
-    
-        this.userProvider.attemptAuthSso(user).subscribe(
-          data => this.navCtrl.setRoot(HomePage),
-          err => {
-            this.isLoading = false;
-    
-            // toast error
-            this.toastController
-              .create({
-                message: err,
-                duration: 3000,
-                position: "bottom"
-              })
-              .present();
-          }
-        );
+    // as flag show loader spinner dan disable button
+    this.loginState.isLogin = true;
+    this.loginState.sso = true;
+
+    // login http
+    this.userProvider.attemptAuthSso(user).subscribe(
+      data => this.navCtrl.setRoot(HomePage),
+      err => {
+        // as flag untuk hide loader spinner dan un-disable button
+        this.loginState.isLogin = false;
+        this.loginState.sso = false;
+
+        // show toast when get error
+        this.toastController
+          .create({
+            message: err,
+            duration: 3000,
+            position: "bottom"
+          })
+          .present();
+      }
+    );
   }
 }
