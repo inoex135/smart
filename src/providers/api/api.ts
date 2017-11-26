@@ -1,5 +1,9 @@
 import { Injectable } from "@angular/core";
-import { HttpHeaders, HttpClient } from "@angular/common/http";
+import {
+  HttpHeaders,
+  HttpClient,
+  HttpErrorResponse
+} from "@angular/common/http";
 
 import { map, catchError } from "rxjs/operators";
 import { ErrorObservable } from "rxjs/observable/ErrorObservable";
@@ -38,12 +42,11 @@ export class ApiProvider {
     return body || {};
   }
 
-  private handleError(error: Response | any) {
+  private handleError(error: HttpErrorResponse | any) {
     let errMsg: string;
 
-    if (error instanceof Response) {
-      const err = error || "";
-      errMsg = `${error.status} - ${error.statusText || ""} ${err}`;
+    if (error instanceof HttpErrorResponse) {
+      errMsg = `${error.status} - ${error.error.error_code || ""}`;
     } else {
       errMsg = error.message ? error.message : error.toString();
     }
