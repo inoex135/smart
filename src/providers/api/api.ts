@@ -44,8 +44,8 @@ export class ApiProvider {
 
   private handleError(error: HttpErrorResponse | any) {
     let errMsg: string;
-
-    if (error instanceof HttpErrorResponse) {
+    // check error if have custom error message from server
+    if (error.error.error_code) {
       errMsg = `${error.status} - ${error.error.error_code || ""}`;
     } else {
       errMsg = error.message ? error.message : error.toString();
