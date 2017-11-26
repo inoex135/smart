@@ -2,23 +2,20 @@
     <ion-row wrap>
         <ion-col col-12 col-sm-12 col-md-12 offset-lg-3 col-lg-6 offset-xl-3 col-xl-6>
             <div class="form">
-                <ion-item no-padding>
-                    <ion-label floating>Tujuan</ion-label>
-                    <ion-input type="text" [(ngModel)]="naskah.tujuan" name="tujuan"></ion-input>
+                <ion-item margin-bottom class="input--form">
+                    <ion-input type="text" placeholder="Tujuan" [(ngModel)]="naskah.tujuan" name="tujuan"></ion-input>
                 </ion-item>
 
-                <ion-item no-padding>
-                    <ion-label floating>Alasan</ion-label>
-                    <ion-select [(ngModel)]="naskah.alasan" name="alasan">
+                <ion-item no-padding margin-bottom class="input--form">
+                    <ion-select placeholder="Cuti, Lainnya, Tidak sesuai Tugas dan Fungsi" [(ngModel)]="naskah.alasan" name="alasan">
                         <ion-option value="1">Cuti</ion-option>
                         <ion-option value="2">Lainnya</ion-option>
                         <ion-option value="3">Tidak Sesuai Tugas dan Fungsinya</ion-option>
                     </ion-select>
                 </ion-item>
 
-                <ion-item no-padding>
-                    <ion-label floating>Alasan</ion-label>
-                    <ion-textarea required name="catatan" type="text" [(ngModel)]="naskah.catatan"></ion-textarea>
+                <ion-item no-padding class="textarea--form">
+                    <ion-textarea placeholder="Catatan" required name="catatan" type="text" [(ngModel)]="naskah.catatan"></ion-textarea>
                 </ion-item>
 
                 <button ion-button full block color="default-blue" icon-start (click)="teruskan()" margin-top>

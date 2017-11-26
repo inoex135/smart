@@ -1,15 +1,47 @@
 teruskan {
-  .form {
-    background: #fff;
-    border-radius: $border-radius;
-    // box-shadow: $box-shadow-z2;
-    overflow: hidden;
-    margin-bottom: 20px;
+  // custom input from
+  ion-item {
+    max-height: 1em;
 
+    // hapus padding agar scroll bisa mepet ke kanan form
     .item-inner {
-      border-bottom-color: theme-colors("mainColors", "primary") !important;
-      box-shadow: none !important;
-      // padding-right: 0 !important;
+      padding-right: 0 !important;
+    }
+
+    &.input--form {
+      border: 1px solid #e8e9eb !important;
+      border-radius: 5px;
+      .item-inner {
+        margin-left: 0 !important;
+      }
+      &.item-md {
+        padding-right: 0;
+        padding-left: 0;
+      }
+    }
+
+    ion-select {
+      width: 100%;
+      max-width: 100%; // agar value select bisa full muncul di semua, tidak terpotong
+    }
+  }
+
+  ion-item.textarea--form {
+    border: 1px solid #e8e9eb !important;
+    border-radius: 5px;
+    //set heigh ion-text
+    max-height: 10em;
+    height: 10em !important;
+
+    ion-textarea {
+      max-height: 100% !important;
+      textarea {
+        margin: 2px;
+        // agar scroll di pepetkan ke kanan
+        &.text-input-md {
+          width: 100%;
+        }
+      }
     }
   }
 }
