@@ -13,3 +13,41 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+
+ion-item.input--form {
+  max-height: 1em;
+  border: 1px solid #e8e9eb !important;
+  border-radius: 5px;
+
+  .item-inner {
+    margin-left: 0 !important;
+  }
+  &.item-md {
+    padding-right: 0;
+    padding-left: 0;
+  }
+  ion-select {
+    width: 100%;
+    max-width: 100%; // agar value select bisa full muncul di semua, tidak terpotong
+  }
+}
+
+// ion-textarea custom
+ion-item.textarea--form {
+  border: 1px solid #e8e9eb !important;
+  border-radius: 5px;
+  //set heigh ion-text
+  max-height: 10em;
+  height: 10em !important;
+
+  ion-textarea {
+    max-height: 100% !important;
+    textarea {
+      margin: 2px;
+      // agar scroll di pepetkan ke kanan
+      &.text-input-md {
+        width: 100%;
+      }
+    }
+  }
+}

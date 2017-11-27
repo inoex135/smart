@@ -60,6 +60,7 @@ export class Disposisi {
         this.datas.jabatan = unitDisposisi;
         this.datas.petunjuk = petunjuk;
         this.datas.sifatSurat = sifatSurat;
+        console.log(this.datas.sifatSurat);
       }
     );
   }

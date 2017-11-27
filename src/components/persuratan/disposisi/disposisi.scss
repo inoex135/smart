@@ -4,30 +4,6 @@ disposisi {
       margin: 0;
     }
   }
-  .card-etc {
-    background-color: #f0f4fd;
-    ion-item {
-      background-color: transparent;
-    }
-    ion-textarea,
-    ion-select,
-    ion-datetime,
-    ion-input {
-      background-color: #ffffff;
-    }
-    ion-datetime {
-      height: 35px;
-      padding: 7px 0 5px 10px;
-    }
-  }
-
-  .item-inner {
-    box-shadow: none !important;
-    padding-right: 0 !important;
-    .ion-wrapper {
-      border: 0 !important;
-    }
-  }
 
   .blue-background {
     background-color: #d9ecff !important;

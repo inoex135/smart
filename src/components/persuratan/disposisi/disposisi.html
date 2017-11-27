@@ -1,51 +1,55 @@
 <!-- disposisi unit or personal -->
-<ion-card *ngIf="component?.unitOrPersonal">
-    <ion-card-header text-center color="defult-blue">Disposisi Kepada</ion-card-header>
-    <ion-grid>
-        <ion-row>
-            <ion-col col-8 push-2 class="blue-background">
-                <ion-list class="blue-background" *ngFor="let target of selectUnitDisposisi">
-                    <ion-item>
-                        <ion-checkbox (ionChange)="selectDisposisi(target)" color="primary" [value]="target"></ion-checkbox>
-                        <ion-label text-wrap>{{target}}</ion-label>
-                    </ion-item>
-                </ion-list>
-            </ion-col>
-            <ion-col col-6 push-3>
-                <button block full ion-button color="default-blue" (tap)="nextStep(disposisiTarget)">NEXT</button>
-            </ion-col>
-        </ion-row>
-    </ion-grid>
-</ion-card>
+<ion-grid *ngIf="component?.unitOrPersonal">
+    <ion-row>
+        <ion-col col-8 push-2>
+            <h4 ion-text text-center color="default-blue">Disposisi Kepada</h4>
+        </ion-col>
 
-<ion-card padding-right>
+        <ion-col col-8 push-2 class="blue-background">
+            <ion-list>
+                <ion-item class="blue-background" *ngFor="let target of selectUnitDisposisi">
+                    <ion-checkbox (ionChange)="selectDisposisi(target)" color="primary" [value]="target"></ion-checkbox>
+                    <ion-label text-wrap>{{target}}</ion-label>
+                </ion-item>
+            </ion-list>
+        </ion-col>
+
+        <ion-col col-6 push-3>
+            <button block full ion-button color="default-blue" (tap)="nextStep(disposisiTarget)">NEXT</button>
+        </ion-col>
+    </ion-row>
+</ion-grid>
+
+<!-- target disposisi untuk personal atau unit -->
+<ion-grid padding *ngIf="component?.disposisiUnit || component?.disposisiPersonal">
     <!-- disposisi unit -->
-    <ion-grid *ngIf="component?.disposisiUnit">
-        <ion-item>
-            <ion-label text-center color="default-blue">Disposisi Kepada Unit</ion-label>
+    <ion-row *ngIf="component?.disposisiUnit">
+        <ion-col col-12>
+            <h4 ion-text text-center color="default-blue">Disposisi Kepada Unit</h4>
+        </ion-col>
+        <ion-item no-lines class="blue-background">
+            <ion-label>Jabatan(Unit)</ion-label>
         </ion-item>
-        <ion-item *ngFor="let jabatan of datas?.jabatan; let i = index">
+        <ion-item class="blue-background" *ngFor="let jabatan of datas?.jabatan; let i = index" no-lines>
             <ion-label text-wrap>{{jabatan?.uraian_jabatan}}</ion-label>
             <ion-checkbox (ionChange)="selectUnit(jabatan, $event.checked)" [value]="jabatan?.kode_utuh"></ion-checkbox>
         </ion-item>
-    </ion-grid>
+    </ion-row>
 
     <!-- disposisi personal -->
-    <ion-grid margin-top *ngIf="component?.disposisiPersonal">
-        <ion-item>
-            <ion-label text-center color="default-blue">Disposisi Kepada Personal</ion-label>
+    <ion-row *ngIf="component?.disposisiPersonal">
+        <h4 text-center ion-text color="default-blue">Disposisi Kepada Personal</h4>
+    </ion-row>
+    <ion-row *ngIf="component?.disposisiPersonal">
+        <ion-item class="input--form">
+            <ion-input type="text" placeholder="Nama Personal"></ion-input>
         </ion-item>
 
-        <ion-item margin-top>
-            <ion-label floating></ion-label>
-            <ion-input class="ion-input-custom" type="text" placeholder="Nama Personal"></ion-input>
+        <ion-item margin-top class="input--form">
+            <ion-input type="text" placeholder="Selaku"></ion-input>
         </ion-item>
 
-        <ion-item margin-top>
-            <ion-label floating></ion-label>
-            <ion-input class="ion-input-custom" type="text" placeholder="Selaku"></ion-input>
-        </ion-item>
-        <ion-item>
+        <ion-item no-lines class="blue-background">
             <button ion-button small item-end color="danger">
                 <ion-icon name="close-circle"></ion-icon>
             </button>
@@ -53,81 +57,87 @@
                 <ion-icon name="add"></ion-icon>
             </button>
         </ion-item>
-    </ion-grid>
+    </ion-row>
     <!-- show button untuk button next and text -->
-    <ion-item *ngIf="component?.disposisiPersonal || component?.disposisiUnit">
+    <ion-item no-lines *ngIf="component?.disposisiPersonal || component?.disposisiUnit">
         <button item-start clear ion-button color="default-blue" (tap)="back()">BACK</button>
         <button item-end ion-button color="default-blue" (tap)="nextStep('disposisiSifat')">NEXT</button>
     </ion-item>
-</ion-card>
-
-<ion-card margin top padding-right>
-
-</ion-card>
+</ion-grid>
 
 <!-- disposisi pilih sifat -->
-<ion-card *ngIf="component?.disposisiSifat">
-    <ion-list no-lines>
-        <ion-item no-margin>
-            <ion-label>Sifat Disposisi</ion-label>
-        </ion-item>
-        <ion-item>
-            <ion-label stacked>Sifat Surat</ion-label>
-            <ion-select name="sifatSurat" [(ngModel)]="disposisi.sifatSurat">
-                <option [value]="sifat?.kode" *ngFor="let sifat of datas?.sifatSurat">
-                    {{sifat?.keterangan}}
-                </option>
-            </ion-select>
-        </ion-item>
+<ion-grid padding *ngIf="component?.disposisiSifat">
+    <ion-row wrap>
+        <ion-col col-12>
+            <h4 ion-text text-center color="default-blue">Sifat Disposisi</h4>
+        </ion-col>
 
-        <ion-item>
-            <ion-label floating></ion-label>
-            <ion-textarea class="ion-textarea-custom" placeholder="Catatan" type="text" [(ngModel)]="disposisi.catatan"></ion-textarea>
-        </ion-item>
+        <ion-col col-12 class="blue-background">
+            <ion-item class="input--form">
+                <ion-select name="sifatSurat" [(ngModel)]="disposisi.sifatSurat" placeholder="Sifat">
+                    <ion-option [value]="sifat?.kode" *ngFor="let sifat of datas?.sifatSurat">
+                        {{sifat?.keterangan}}
+                    </ion-option>
+                </ion-select>
+            </ion-item>
 
-        <ion-item>
-            <button ion-button item-start clear color="default-blue" (tap)="back(disposisiAs)">Back</button>
-            <button ion-button item-end color="default-blue" (tap)="nextStep('disposisiPetunjuk')">Next</button>
-        </ion-item>
-    </ion-list>
-</ion-card>
+            <ion-item margin-top no-padding class="textarea--form">
+                <ion-textarea placeholder="Catatan" type="text" [(ngModel)]="disposisi.catatan"></ion-textarea>
+            </ion-item>
+
+            <ion-item no-lines class="blue-background">
+                <button ion-button item-start clear color="default-blue" (tap)="back(disposisiAs)">Back</button>
+                <button ion-button item-end color="default-blue" (tap)="nextStep('disposisiPetunjuk')">Next</button>
+            </ion-item>
+        </ion-col>
+    </ion-row>
+</ion-grid>
 
 <!-- disposisi pilih petunjuk -->
-<ion-card *ngIf="component?.disposisiPetunjuk">
-    <ion-item-group>
-        <ion-label margin-left>Petunjuk</ion-label>
-        <ion-item *ngFor="let petunjuk of datas?.petunjuk; let i = index" class="petunjuk">
-            <ion-label text-wrap>{{petunjuk?.keterangan}}</ion-label>
-            <ion-checkbox color="primary" name="petunjuk[i]" (ionChange)="onChange(petunjuk, $event.checked, i)"></ion-checkbox>
+<ion-grid *ngIf="component?.disposisiPetunjuk">
+    <ion-row wrap>
+        <ion-col>
+            <h4 ion-text text-center color="default-blue">Petunjuk</h4>
+        </ion-col>
+        <ion-item-group class="blue-background">
+            <ion-item *ngFor="let petunjuk of datas?.petunjuk; let i = index" class="petunjuk blue-background">
+                <ion-label text-wrap>{{petunjuk?.keterangan}}</ion-label>
+                <ion-checkbox color="primary" name="petunjuk[i]" (ionChange)="onChange(petunjuk, $event.checked, i)"></ion-checkbox>
+            </ion-item>
+        </ion-item-group>
+
+        <ion-item class="blue-background">
+            <button ion-button item-start clear color="default-blue" (tap)="back('disposisiSifat')">Back</button>
+            <button ion-button item-end color="default-blue" (tap)="nextStep('disposisiTanggal')">Next</button>
         </ion-item>
-    </ion-item-group>
+    </ion-row>
+</ion-grid>
 
-    <ion-item>
-        <button ion-button item-start clear color="default-blue" (tap)="back('disposisiSifat')">Back</button>
-        <button ion-button item-end color="default-blue" (tap)="nextStep('disposisiTanggal')">Next</button>
-    </ion-item>
-</ion-card>
+<ion-grid *ngIf="component?.disposisiTanggal">
+    <ion-row wrap>
+        <ion-col>
+            <h4 ion-text text-center color="default-blue">Tanggal Selesai</h4>
+        </ion-col>
+        <ion-item class="blue-background">
+            <ion-label stacked>Target Selesai</ion-label>
+            <ion-datetime no-padding class="ion-datetime-custom" type="text" [(ngModel)]="tujuan" displayFormat="DD-MM-YYYY" pickerFormat="DD-MM-YYYY"
+                [(ngModel)]="disposisi.targetSelesai"></ion-datetime>
+        </ion-item>
 
-<ion-card *ngIf="component?.disposisiTanggal">
-    <ion-item>
-        <ion-label stacked>Target Selesai</ion-label>
-        <ion-datetime no-padding class="ion-datetime-custom" type="text" [(ngModel)]="tujuan" displayFormat="DD-MM-YYYY" pickerFormat="DD-MM-YYYY"
-            [(ngModel)]="disposisi.targetSelesai"></ion-datetime>
-    </ion-item>
+        <ion-item class="blue-background">
+            <ion-label stacked>Tanggal Disposisi</ion-label>
+            <ion-datetime no-padding class="ion-datetime-custom" displayFormat="DD-MM-YYYY" pickerFormat="DD-MM-YYYY" [(ngModel)]="disposisi.tanggal"></ion-datetime>
+        </ion-item>
 
-    <ion-item>
-        <ion-label stacked>Tanggal Disposisi</ion-label>
-        <ion-datetime no-padding class="ion-input-custom" displayFormat="DD-MM-YYYY" pickerFormat="DD-MM-YYYY" [(ngModel)]="disposisi.tanggal"></ion-datetime>
-    </ion-item>
+        <ion-item class="blue-background">
+            <button ion-button full block (click)="simpan()" full color="default-blue" icon-left>
+                <ion-icon name="add"></ion-icon>
+                Simpan
+            </button>
 
-    <ion-item>
-        <button ion-button full block (click)="simpan()" full color="default-blue" icon-left>
-            <ion-icon name="add"></ion-icon>
-            Simpan
-        </button>
-
-        <ion-button ion-button clear (tap)="back('disposisiPetunjuk')" color="default-blue" block>
-            Back
-        </ion-button>
-    </ion-item>
-</ion-card>
+            <ion-button ion-button clear (tap)="back('disposisiPetunjuk')" color="default-blue" block>
+                Back
+            </ion-button>
+        </ion-item>
+    </ion-row>
+</ion-grid>
