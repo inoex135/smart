@@ -7,6 +7,7 @@ import { Component, Input } from "@angular/core";
 export class LoginLayout1 {
   @Input() data: any;
   @Input() events: any;
+  @Input() loginState: any;
 
   public username: string;
   public password: string;
