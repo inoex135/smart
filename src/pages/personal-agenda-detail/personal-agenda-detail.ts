@@ -20,6 +20,6 @@ export class PersonalAgendaDetailPage {
   }
 
   getDetailAgenda() {
-    this.detailAgenda = this.agendaProvider.getDetailAgenda();
+    this.detailAgenda = this.agendaProvider.getDetailAgenda(true);
   }
 }
