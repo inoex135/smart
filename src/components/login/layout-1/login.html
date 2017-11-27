@@ -8,25 +8,25 @@
 
   <div padding has-header class="card">
     <ion-item>
-      <ion-input required type="text" [(ngModel)]="username" placeholder="Username"></ion-input>
+      <ion-input required type="text" [(ngModel)]="username" placeholder="Username" #username1="ngModel"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-input required type="password" [(ngModel)]="password" placeholder="Password"></ion-input>
+      <ion-input required type="password" [(ngModel)]="password" placeholder="Password" #password1="ngModel"></ion-input>
     </ion-item>
-    <button [disabled]="loginState?.isLogin" ion-button color="blue-template" full block (click)="onEvent('onLogin')">
+    <button [disabled]="loginState?.isLogin || username1.invalid || password1.invalid" ion-button color="blue-template" full
+      block (click)="onEvent('onLogin')">
       <ion-spinner name="crescent" *ngIf="!loginState?.sso && loginState?.isLogin "></ion-spinner>
       {{data.login}}
     </button>
   </div>
 
   <div padding>
-    <button [disabled]="loginState?.isLogin" ion-button color="danger" full block (click)="onEvent('onLoginSSO')">
+    <button [disabled]="loginState?.isLogin || username1.invalid || password1.invalid" ion-button color="danger" full block (click)="onEvent('onLoginSSO')">
       <ion-spinner name="crescent" *ngIf="loginState?.sso"></ion-spinner>
       <div>
         Login SSO
       </div>
     </button>
-
   </div>
 
   <div class="smart-footer">
