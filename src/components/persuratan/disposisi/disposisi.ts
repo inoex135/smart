@@ -29,6 +29,14 @@ export class Disposisi {
     personal: "PERSONAL"
   };
 
+  // untuk menampilkan label ketika pilih unit
+  readonly selectUnitDisposisi: Array<string> = ["UNIT", "PERSONAL"];
+
+  disposisiTarget: { unit: boolean; personal: boolean } = {
+    unit: false,
+    personal: false
+  };
+
   component: any = {
     unitOrPersonal: true,
     disposisiUnit: false,
@@ -55,11 +63,22 @@ export class Disposisi {
       }
     );
   }
+
+  selectDisposisi(target: string) {
+    if (target === this.selectAs.unit) {
+      this.disposisiTarget.unit = !this.disposisiTarget.unit;
+    }
+
+    if (target === this.selectAs.personal) {
+      this.disposisiTarget.personal = !this.disposisiTarget.personal;
+    }
+  }
+
   // CHECKBOX
   // untuk get dan remove value checkbox unit
   // remove by index dari unit yg di klik
   // dan add by index yang di klik
-  selectUnit(unit: IDisposisiUnit, checked: boolean) {
+  selectUnit(unit: IDisposisiUnit) {
     let unitIndex = this.selectedUnit.indexOf(unit);
 
     if (unitIndex !== -1) {
@@ -88,13 +107,13 @@ export class Disposisi {
     }
   }
 
-  nextStep(to: string = "root") {
-    if (to === this.selectAs.unit) {
+  nextStep(to: any = "root") {
+    if (to.unit) {
       this.component.unitOrPersonal = false;
       this.component.disposisiUnit = true;
     }
 
-    if (to === this.selectAs.personal) {
+    if (to.personal) {
       this.component.disposisiPersonal = true;
       this.component.unitOrPersonal = false;
     }
@@ -119,6 +138,13 @@ export class Disposisi {
       this.component.disposisiTanggal = true;
       this.component.disposisiPetunjuk = false;
     }
+
+    this.setDisposisiTarget(false);
+  }
+
+  setDisposisiTarget(status: boolean) {
+    this.disposisiTarget.personal = status;
+    this.disposisiTarget.unit = status;
   }
 
   back(to: string = "root") {
