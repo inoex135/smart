@@ -9,7 +9,7 @@
   <ion-list *ngIf="notifications.length > 0">
     <ion-item *ngFor="let notif of notifications" (click)="goToAptDetail(notif?.id)">
       <h6 ion-text>{{notif?.nama}}</h6>
-      <text-avatar [text]="notif?.sender" item-left></text-avatar>
+      <text-avatar [text]="notif?.nama" item-left></text-avatar>
       <p ion-text text-wrap>{{notif?.pesan}}</p>
       <p ion-text color="blue-template" text-wrap>{{ notif?.tanggal | indonesianDate:'dddd, DD MMMM YYYY' }}</p>
       <ion-note item-end>{{statusRead(notif?.is_read)}}</ion-note>
