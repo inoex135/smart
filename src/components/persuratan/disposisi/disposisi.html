@@ -21,7 +21,7 @@
 </ion-grid>
 
 <!-- target disposisi untuk personal atau unit -->
-<ion-grid padding *ngIf="component?.disposisiUnit || component?.disposisiPersonal">
+<ion-grid class="blue-background" padding margin-top *ngIf="component?.disposisiUnit || component?.disposisiPersonal">
     <!-- disposisi unit -->
     <ion-row *ngIf="component?.disposisiUnit">
         <ion-col col-12>
@@ -38,7 +38,9 @@
 
     <!-- disposisi personal -->
     <ion-row *ngIf="component?.disposisiPersonal">
-        <h4 text-center ion-text color="default-blue">Disposisi Kepada Personal</h4>
+        <ion-col col-12>
+            <h4 text-center ion-text color="default-blue">Disposisi Kepada Personal</h4>
+        </ion-col>
     </ion-row>
     <ion-row *ngIf="component?.disposisiPersonal">
         <ion-item class="input--form">
@@ -59,7 +61,7 @@
         </ion-item>
     </ion-row>
     <!-- show button untuk button next and text -->
-    <ion-item no-lines *ngIf="component?.disposisiPersonal || component?.disposisiUnit">
+    <ion-item no-lines class="blue-background" *ngIf="component?.disposisiPersonal || component?.disposisiUnit">
         <button item-start clear ion-button color="default-blue" (tap)="back()">BACK</button>
         <button item-end ion-button color="default-blue" (tap)="nextStep('disposisiSifat')">NEXT</button>
     </ion-item>

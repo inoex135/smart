@@ -7,6 +7,7 @@ import { HomeProvider } from "../../providers/home/home";
 import { Observable } from "rxjs/Observable";
 
 import "rxjs/add/observable/zip";
+import { LoaderHelper } from "../../helpers/loader-helper";
 
 @Component({
   selector: "page-home",
@@ -20,7 +21,8 @@ export class HomePage {
   constructor(
     public navCtrl: NavController,
     public userProvider: UserProvider,
-    private homeProvider: HomeProvider
+    private homeProvider: HomeProvider,
+    private loaderHelper: LoaderHelper
   ) {}
 
   ionViewDidLoad() {
@@ -51,10 +53,12 @@ export class HomePage {
   }
 
   logout() {
+    this.loaderHelper.createLoader();
     this.userProvider.logout().subscribe(
       () => {
         this.userProvider.purgeAuth();
         this.navCtrl.setRoot("LoginPage");
+        this.loaderHelper.dismiss();
       },
       err => {
         console.log(err);
