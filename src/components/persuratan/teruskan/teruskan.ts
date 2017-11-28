@@ -2,7 +2,7 @@ import { Component } from "@angular/core";
 import { SuratTeruskan } from "../../../models/surat-teruskan";
 import { LoadingController, NavController } from "ionic-angular";
 import { NaskahMasukProvider } from "../../../providers/naskah-masuk/naskah-masuk";
-import { NavController, NavParams } from "ionic-angular";
+import {  NavParams } from "ionic-angular";
 
 @Component({
   selector: "teruskan",
