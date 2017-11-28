@@ -1,6 +1,6 @@
 <ion-card>
     <ion-card-header padding-left>
-        <b>AM-1731/KN.54/2017</b>
+        <b>naskah?.no_agenda</b>
     </ion-card-header>
 
     <ion-row padding-left padding-right>
@@ -8,7 +8,7 @@
             <p ion-text card-content>Tanggal Naskah</p>
         </ion-col>
         <ion-col float-left>
-            <p ion-text card-content>{{data?.tanggal}}</p>
+            <p ion-text card-content>{{naskah?.tanggal_naskah}}</p>
         </ion-col>
     </ion-row>
 
@@ -17,7 +17,7 @@
             <p ion-text card-content>Perihal</p>
         </ion-col>
         <ion-col float-left>
-            <p ion-text card-content text-wrap>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Adipisci, excepturi.</p>
+            <p ion-text card-content text-wrap>{{naskah?.perihal}}</p>
         </ion-col>
     </ion-row>
 
@@ -26,7 +26,7 @@
             <p ion-text card-content>Jenis Naskah</p>
         </ion-col>
         <ion-col float-left>
-            <p ion-text card-content>{{data?.jenis}}</p>
+            <p ion-text card-content>{{naskah?.jenis_naskah}}</p>
         </ion-col>
     </ion-row>
 
@@ -35,7 +35,7 @@
             <p ion-text card-content>Asal Pengiriman</p>
         </ion-col>
         <ion-col float-left>
-            <p ion-text card-content>{{data?.asalPengiriman}}</p>
+            <p ion-text card-content>{{naskah?.asal_pengirim}}</p>
         </ion-col>
     </ion-row>
 
@@ -44,7 +44,9 @@
             <p ion-text card-content>Sifat Naskah</p>
         </ion-col>
         <ion-col float-left>
-            <p ion-text card-content>{{data?.Sifat}}</p>
+            <p ion-text card-content>{{naskah?.sifat_naskah}}</p>
         </ion-col>
     </ion-row>
 </ion-card>
+
+<timeline [items]="naskah?.riwayat" [type]="type"></timeline>
