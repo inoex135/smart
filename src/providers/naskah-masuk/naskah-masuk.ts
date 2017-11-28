@@ -24,10 +24,11 @@ export class NaskahMasukProvider {
     return this.api.post(url, dataNaskah);
   }
 
-  teruskan(dataNaskah: any) {
-    const url = "/naskah";
+  teruskan(data: any) {
+    const url = "/surat/masuk/teruskan";
 
-    return this.api.post(url, dataNaskah);
+    return this.api.post(url, data);
+
   }
 
   selesai(dataNaskah: any) {
