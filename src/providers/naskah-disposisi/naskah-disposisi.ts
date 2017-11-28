@@ -5,21 +5,6 @@ import { ApiProvider } from "../api/api";
 export class NaskahDisposisiProvider {
   constructor(public apiProvider: ApiProvider) {}
 
-  // get unit disposisi di page disposisi
-  getUnitDisposisi() {
-    return this.apiProvider.get("/master/unit/disposisi");
-  }
-
-  // get petunjuk surat untuk disposisi
-  getPetunjuk() {
-    return this.apiProvider.get("/master/petunjuk-surat/disposisi");
-  }
-
-  // get petunjuk surat untuk disposisi
-  getSifatSurat() {
-    return this.apiProvider.get("/master/sifat-surat/disposisi");
-  }
-
   simpanDisposisi(data: any) {
     let formData = new FormData();
     formData.append("sumas_id", data.sumasId);

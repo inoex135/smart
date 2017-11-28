@@ -60,16 +60,15 @@ export class Disposisi {
   }
 
   init() {
-    const petunjuk = this.disposisiProvider.getPetunjuk();
-    const unitDisposisi = this.disposisiProvider.getUnitDisposisi();
-    const sifatSurat = this.disposisiProvider.getSifatSurat();
+    const petunjuk = this.masterProvider.getPetunjuk();
+    const unitDisposisi = this.masterProvider.getUnitDisposisi();
+    const sifatSurat = this.masterProvider.getSifatSurat();
 
     Observable.zip(petunjuk, unitDisposisi, sifatSurat).subscribe(
       ([petunjuk, unitDisposisi, sifatSurat]) => {
         this.datas.jabatan = unitDisposisi;
         this.datas.petunjuk = petunjuk;
         this.datas.sifatSurat = sifatSurat;
-        console.log(this.datas.sifatSurat);
       }
     );
   }
@@ -130,6 +129,8 @@ export class Disposisi {
       this.selectedUnit.push(unit);
     }
   }
+
+  downloadFileSurat() {}
 
   nextStep(to: any = "root") {
     if (to.unit) {

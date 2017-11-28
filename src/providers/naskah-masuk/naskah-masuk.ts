@@ -52,4 +52,6 @@ export class NaskahMasukProvider {
   riwayatNaskah(naskahId: number) {
     return this.api.get(`/surat/masuk/riwayat/${naskahId}`);
   }
+
+  downloadFileSurat() {}
 }
