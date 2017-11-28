@@ -46,7 +46,7 @@ export class ApiProvider {
     let errMsg: string;
     // check error if have custom error message from server
     if (error.error.error_code) {
-      errMsg = `${error.status} - ${error.error.error_code || ""}`;
+      errMsg = `${error.error.error_message || ""}`;
     } else {
       errMsg = error.message ? error.message : error.toString();
     }
