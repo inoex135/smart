@@ -40,9 +40,4 @@ export class NaskahDisposisiProvider {
       }
     );
   }
-
-  // search pegawai/user
-  searchUser(params: string) {
-    return this.apiProvider.get(`/master/pegawai/search?nip=${params}`);
-  }
 }
