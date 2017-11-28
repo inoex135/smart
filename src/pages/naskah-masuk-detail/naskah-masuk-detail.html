@@ -327,4 +327,4 @@
   </ion-grid>
 </ion-content>
 
-<naskah-modal-download #naskahModalDownload (downloadFile)="downloadFile()"></naskah-modal-download>
+<naskah-modal-download #naskahModalDownload [files]="detail?.files" (downloadFile)="downloadFile()"></naskah-modal-download>

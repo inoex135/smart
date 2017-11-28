@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from "@angular/core";
+import { Component, Output, EventEmitter, Input } from "@angular/core";
 
 @Component({
   selector: "naskah-modal-download",
@@ -6,7 +6,7 @@ import { Component, Output, EventEmitter } from "@angular/core";
 })
 export class NaskahModalDownloadComponent {
   show: boolean = false;
-
+  @Input() files: Array<any> = [];
   @Output() downloadFile: EventEmitter<any> = new EventEmitter();
 
   constructor() {}
