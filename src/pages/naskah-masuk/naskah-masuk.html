@@ -9,7 +9,7 @@
     <ion-searchbar [(ngModel)]="filter.keyword" search-bar-bcg (ionInput)="searchNaskahBy('search', $event?.target?.value)" (ionCancel)="searchNaskahBy('search', $event?.target?.value)"></ion-searchbar>
 
     <ion-item class="input--form">
-      <ion-select (ionChange)="searchNaskahByType('type', filter?.naskahUnit)" class="ion-select-custom" [(ngModel)]="filter.naskahUnit"
+      <ion-select (ionChange)="searchNaskahBy('type', filter?.naskahUnit)" class="ion-select-custom" [(ngModel)]="filter.naskahUnit"
         placeholder="Naskah Unit / Pribadi / Permohonan">
         <ion-option value="unit">Naskah Unit</ion-option>
         <ion-option value="personal">Naskah Pribadi</ion-option>

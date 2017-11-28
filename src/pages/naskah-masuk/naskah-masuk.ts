@@ -37,8 +37,12 @@ export class NaskahMasukPage {
     this.navCtrl.push(NaskahMasukDetailPage, { naskahId: naskah.id });
   }
 
+  //proses search by type dan default search
   searchNaskahBy(type: string, params: any) {
     let searchProvider: any;
+
+    this.showLoader();
+
     if (type === "type") {
       searchProvider = this.naskahProvider.searchNaskahByTipe(params);
     } else {
@@ -91,6 +95,7 @@ export class NaskahMasukPage {
   hideLoader() {
     this.searching = false;
   }
+
   terimaSemuaNaskah() {
     const idList = { idList: this.naskahTerima };
 
