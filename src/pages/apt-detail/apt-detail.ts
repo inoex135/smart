@@ -3,13 +3,14 @@ import { NavParams, NavController } from "ionic-angular";
 import { AptDetailActionPage } from "../apt-detail-action/apt-detail-action";
 import { AptAction } from "../../constant/apt-action";
 import { AptProvider } from "../../providers/apt/apt";
+import { LoaderHelper } from "../../helpers/loader-helper";
 
 @Component({
   selector: "page-apt-detail",
   templateUrl: "apt-detail.html"
 })
 export class AptDetailPage {
-  detail: any;
+  itemId: any;
   ACTION = AptAction;
 
   aptDetail: any = {};
@@ -17,21 +18,29 @@ export class AptDetailPage {
   constructor(
     private navParams: NavParams,
     private navCtrl: NavController,
-    private aptProvider: AptProvider
+    private aptProvider: AptProvider,
+    private loaderHelper: LoaderHelper
   ) {}
 
   ionViewDidLoad() {
-    this.detail = this.navParams.get("detail");
+    this.itemId = this.navParams.get("itemId");
+    this.getDetailApt();
   }
 
-  getDetailApt() {
-    this.aptProvider.getDetailApt(this.detail.id).subscribe(
-      res => (this.aptDetail = res),
+ async getDetailApt() {
+    await this.loaderHelper.createLoader();
+
+    this.aptProvider.getDetailApt(this.itemId).subscribe(
+      res => {
+        this.aptDetail = res;
+        this.loaderHelper.dismiss();
+      },
       err => {
         console.log(err);
       }
     );
   }
+  
 
   detailAction(action: string) {
     this.navCtrl.push(AptDetailActionPage, { action: action });

@@ -15,17 +15,16 @@
 
     <ion-row>
       <ion-col col-6 class="label">Nama Pemohon</ion-col>
-      <ion-col col-6>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Explicabo asperiores ipsum distinctio, iure vel sit quibusdam
-        nihil ratione alias provident atque ea, excepturi adipisci debitis repellendus dolore. Vitae, sed quaerat!</ion-col>
+      <ion-col col-6>{{aptDetail?.namaPengirim}}</ion-col>
       <ion-col col-6 class="label">Telepon Pengirim</ion-col>
-      <ion-col col-6>Nama Pemohon</ion-col>
+      <ion-col col-6>{{aptDetail?.teleponPengirim}}</ion-col>
       <ion-col col-6 class="label">Nomor Tiket</ion-col>
-      <ion-col col-6>Nama Pemohon</ion-col>
-      <ion-col col-6 class="label">Nomor Permohonan</ion-col>
-      <ion-col col-6>Nama Pemohon</ion-col>
+      <ion-col col-6>{{aptDetail?.nomorTiket}}</ion-col>
+      
       <ion-col col-6 class="label">Tanggal Surat</ion-col>
-      <ion-col col-6>Nama Pemohon</ion-col>
+      <ion-col col-6>{{aptDetail?.tanggalString}} </ion-col>
       <ion-col col-6 class="label">Indikator</ion-col>
+      <ion-col col-6>{{aptDetail?.statusString}}</ion-col>
       <ion-col col-6>
         <button ion-button full block>Disposisi</button>
       </ion-col>

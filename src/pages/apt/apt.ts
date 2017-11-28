@@ -37,15 +37,15 @@ export class AptPage {
       content: "Wait download....",
       spinner: "dots"
     });
-    this.items = AptDummy.getApt();
+    //this.items = AptDummy.getApt();
   }
 
   ionViewDidLoad() {
     this.getAptList();
   }
 
-  detailApt(item: any) {
-    this.navCtrl.push(AptDetailPage, { detail: item });
+  detailApt(itemId: any) {
+    this.navCtrl.push(AptDetailPage, { itemId: itemId });
   }
 
   isItemPressed() {
@@ -58,7 +58,7 @@ export class AptPage {
     this.aptProvider.getPermohonanList().subscribe(
       res => {
         // @TODO : uncomment if data already
-        // this.items = res;
+        this.items = res;
 
         this.loaderHelper.dismiss();
       },
