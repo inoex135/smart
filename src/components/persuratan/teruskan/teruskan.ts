@@ -1,8 +1,8 @@
 import { Component } from "@angular/core";
 import { SuratTeruskan } from "../../../models/surat-teruskan";
-import { LoadingController, NavController } from "ionic-angular";
+
 import { NaskahMasukProvider } from "../../../providers/naskah-masuk/naskah-masuk";
-import { NavController, NavParams } from "ionic-angular";
+import { NavController, NavParams, LoadingController } from "ionic-angular";
 
 @Component({
   selector: "teruskan",
@@ -10,7 +10,7 @@ import { NavController, NavParams } from "ionic-angular";
 })
 export class Teruskan {
   naskah: SuratTeruskan = {
-    id:0,
+    id: 0,
     tujuan: "",
     alasan: "",
     catatan: ""
@@ -22,8 +22,7 @@ export class Teruskan {
     public navParams: NavParams,
     public naskahProvider: NaskahMasukProvider
   ) {
-
-  this.naskah.id = this.navParams.get("naskahId");
+    this.naskah.id = this.navParams.get("naskahId");
   }
 
   teruskan() {
