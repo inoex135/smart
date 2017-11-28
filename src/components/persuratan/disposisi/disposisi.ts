@@ -3,7 +3,6 @@ import { NaskahDisposisiProvider } from "../../../providers/naskah-disposisi/nas
 import { Observable } from "rxjs/Observable";
 import { IDisposisiUnit } from "../../../interface/disposisi-unit";
 import { debounceTime, distinctUntilChanged } from "rxjs/operators";
-import { MasterProvider } from "../../../providers/master/master";
 
 @Component({
   selector: "disposisi",
@@ -52,17 +51,14 @@ export class Disposisi {
     disposisiTanggal: false
   };
 
-  constructor(
-    private disposisiProvider: NaskahDisposisiProvider,
-    private masterProvider: MasterProvider
-  ) {
+  constructor(private disposisiProvider: NaskahDisposisiProvider) {
     this.init();
   }
 
   init() {
-    const petunjuk = this.masterProvider.getPetunjuk();
-    const unitDisposisi = this.masterProvider.getUnitDisposisi();
-    const sifatSurat = this.masterProvider.getSifatSurat();
+    const petunjuk = this.disposisiProvider.getPetunjuk();
+    const unitDisposisi = this.disposisiProvider.getUnitDisposisi();
+    const sifatSurat = this.disposisiProvider.getSifatSurat();
 
     Observable.zip(petunjuk, unitDisposisi, sifatSurat).subscribe(
       ([petunjuk, unitDisposisi, sifatSurat]) => {
@@ -98,7 +94,7 @@ export class Disposisi {
   }
 
   searchPegawai(param: any) {
-    this.masterProvider
+    this.disposisiProvider
       .searchPegawai(param)
       .pipe(debounceTime(700), distinctUntilChanged())
       .subscribe(

@@ -3,8 +3,26 @@ import { ApiProvider } from "../api/api";
 
 @Injectable()
 export class NaskahDisposisiProvider {
-  constructor(public apiProvider: ApiProvider) {}
+  constructor(public api: ApiProvider) {}
+  // search pegawai/user
+  searchPegawai(params: any) {
+    return this.api.get(`/master/pegawai/search?nama=${params}&nip=${params}`);
+  }
 
+  // get unit disposisi di page disposisi
+  getUnitDisposisi() {
+    return this.api.get("/master/unit/disposisi");
+  }
+
+  // get petunjuk surat untuk disposisi
+  getPetunjuk() {
+    return this.api.get("/master/petunjuk-surat/disposisi");
+  }
+
+  // get petunjuk surat untuk disposisi
+  getSifatSurat() {
+    return this.api.get("/master/sifat-surat/disposisi");
+  }
   simpanDisposisi(data: any) {
     let formData = new FormData();
     formData.append("sumas_id", data.sumasId);
@@ -16,7 +34,7 @@ export class NaskahDisposisiProvider {
     formData.append("tanggal_disposisi", data.tanggalDisposisi);
     formData.append("catatan_disposisi", data);
 
-    this.apiProvider.postForm("/surat/disposisi/create", formData).subscribe(
+    this.api.postForm("/surat/disposisi/create", formData).subscribe(
       res => {
         console.log(res);
       },
