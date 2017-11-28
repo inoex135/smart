@@ -32,7 +32,7 @@
           <p ion-text color="default-blue">{{item?.nomorTiket}}</p>
         </ion-col>
         <ion-col (tap)="detailApt(item?.id)">
-          <p ion-text text-right>{{item?.tanggalSurat[2]}} - {{item?.tanggalSurat[1]}} - {{item?.tanggalSurat[0]}}</p>
+          <p ion-text text-right>{{item?.tanggalString}}</p>
         </ion-col>
       </ion-row>
     </ion-card>

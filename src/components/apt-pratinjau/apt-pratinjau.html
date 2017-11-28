@@ -5,14 +5,14 @@
 </ion-card>
 
 <ion-card padding>
-  <checklist-dokumen-pendukung></checklist-dokumen-pendukung>
+  <checklist-dokumen-pendukung [data]="aptDetailAction"></checklist-dokumen-pendukung>
 </ion-card>
 
 <ion-card padding margin-top margin-bottom>
   <ion-slides #slider effect="fade" pager="true" (ionSlideWillChange)="onSlideChanged()">
 
     <ion-slide *ngFor="let slide of slides" class="swiper-no-swiping">
-      <apt-status-permohonan></apt-status-permohonan>
+      <apt-status-permohonan [data]="slide"></apt-status-permohonan>
     </ion-slide>
 
     <div *ngIf="currentIndex > 0" class="swiper-button-prev swiper-button-red" (click)="previousSlide()"></div>

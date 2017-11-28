@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,Input } from '@angular/core';
 
 /**
  * Generated class for the AptStatusPermohonanComponent component.
@@ -13,7 +13,7 @@ import { Component } from '@angular/core';
 export class AptStatusPermohonanComponent {
 
   text: string;
-
+ @Input() data: any;
   constructor() {
     console.log('Hello AptStatusPermohonanComponent Component');
     this.text = 'Hello World';

@@ -1,5 +1,8 @@
 import { Component, ViewChild } from "@angular/core";
-import { Slides, NavController } from "ionic-angular";
+import { Slides, NavController,NavParams } from "ionic-angular";
+import { LoaderHelper } from "../../helpers/loader-helper";
+
+import { AptProvider } from "../../providers/apt/apt";
 @Component({
   selector: "apt-pratinjau",
   templateUrl: "apt-pratinjau.html"
@@ -7,21 +10,37 @@ import { Slides, NavController } from "ionic-angular";
 export class AptPratinjauComponent {
   @ViewChild("slider") slider: Slides;
   currentIndex = 0;
-  slides = [
-    {
-      title: "Dream's Adventure",
-      imageUrl: "assets/img/lists/wishlist-1.jpg",
-      songs: 2,
-      private: false
-    },
-    {
-      title: "Dream's Adventure",
-      imageUrl: "assets/img/lists/wishlist-1.jpg",
-      songs: 2,
-      private: false
-    }
-  ];
-  constructor() {}
+  aptDetailAction  : [];
+  action: string;
+  itemId: string;
+  slides = [];
+  constructor(
+    public navParams: NavParams,
+    private aptProvider: AptProvider,
+     private loaderHelper: LoaderHelper
+  ) {
+
+    this.action = this.navParams.get("action");
+    this.itemId = this.navParams.get("itemId");
+    this.getDetailAptAction();
+  }
+
+ 
+  async getDetailAptAction() {
+    await this.loaderHelper.createLoader();
+
+    this.aptProvider.getDetailAptAction(this.action, this.itemId).subscribe(
+      res => {
+        this.aptDetailAction = res.response;
+        this.slides = res.response.permohonanSyarat;
+        this.loaderHelper.dismiss();
+      },
+      err => {
+        console.log(err);
+      }
+    );
+  }
+
   nextSlide() {
     this.slider.slideNext();
   }

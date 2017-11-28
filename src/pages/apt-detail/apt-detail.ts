@@ -42,7 +42,7 @@ export class AptDetailPage {
   }
   
 
-  detailAction(action: string) {
-    this.navCtrl.push(AptDetailActionPage, { action: action });
+  detailAction(action: string,itemId:any) {
+    this.navCtrl.push(AptDetailActionPage, { action: action,itemId:itemId });
   }
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,Input } from '@angular/core';
 
 /**
  * Generated class for the ChecklistDokumenPendukungComponent component.
@@ -13,9 +13,9 @@ import { Component } from '@angular/core';
 export class ChecklistDokumenPendukungComponent {
 
   text: string;
-
+   @Input() data: any;
   constructor() {
-    console.log('Hello ChecklistDokumenPendukungComponent Component');
+    console.log('data :  ');
     this.text = 'Hello World';
   }
 

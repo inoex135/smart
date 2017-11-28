@@ -38,6 +38,12 @@ export class AptProvider {
     return this.apiProvider.get(`/apt/permohonan/detail/${aptId}`);
   }
 
+  // get detail apt pratinjau
+  getDetailAptAction(action: string,aptId: number) {
+
+    return this.apiProvider.get(`/apt/permohonan/${action}/${aptId}`);
+  }
+
   download(fileDir) {
     // @todo : dummy url, change when api already
     // const url = `http://www.lkpp.go.id/v3/files/attachments/5_fWwUnTrpMTbexDEmAMSCNDzObHttIcYl.pdf`;

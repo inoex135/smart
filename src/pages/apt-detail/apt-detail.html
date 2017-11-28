@@ -32,7 +32,7 @@
 
     <ion-row margin-top>
       <ion-col class="apt--action" col-10 push-1>
-        <p ion-text (click)="detailAction(ACTION.PRATINJAU)" color="default-blue">Pratinjau</p>
+        <p ion-text (click)="detailAction(ACTION.PRATINJAU,aptDetail?.id)" color="default-blue">Pratinjau</p>
         <p ion-text color="default-blue">Cetak</p>
         <p ion-text (click)="detailAction(ACTION.VERIFIKASI)" color="danger"> Verifikasi</p>
       </ion-col>
