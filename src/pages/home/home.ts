@@ -78,7 +78,8 @@ export class HomePage {
       ([profile, totalNotif]) => {
         this.profile = profile;
         this.mappingResponNotif(totalNotif);
-      }
+      },
+      err => false
     );
   }
 }
