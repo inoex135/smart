@@ -2,6 +2,8 @@ import { Component } from "@angular/core";
 import { NaskahDisposisiProvider } from "../../../providers/naskah-disposisi/naskah-disposisi";
 import { Observable } from "rxjs/Observable";
 import { IDisposisiUnit } from "../../../interface/disposisi-unit";
+import { debounceTime, distinctUntilChanged } from "rxjs/operators";
+import { MasterProvider } from "../../../providers/master/master";
 
 @Component({
   selector: "disposisi",
@@ -37,6 +39,10 @@ export class Disposisi {
     personal: false
   };
 
+  //query string
+  autocompleteItems: any = [];
+  queryString: any = [];
+
   component: any = {
     unitOrPersonal: true,
     disposisiUnit: false,
@@ -46,7 +52,10 @@ export class Disposisi {
     disposisiTanggal: false
   };
 
-  constructor(private disposisiProvider: NaskahDisposisiProvider) {
+  constructor(
+    private disposisiProvider: NaskahDisposisiProvider,
+    private masterProvider: MasterProvider
+  ) {
     this.init();
   }
 
@@ -87,6 +96,20 @@ export class Disposisi {
     } else {
       this.selectedUnit.push(unit);
     }
+  }
+
+  searchPegawai(param: any) {
+    this.masterProvider
+      .searchPegawai(param)
+      .pipe(debounceTime(700), distinctUntilChanged())
+      .subscribe(
+        res => {
+          this.autocompleteItems = res.content.map(res => {
+            return res.nip;
+          });
+        },
+        err => {}
+      );
   }
   onChange(petunjuk: string, checked: boolean, id: number) {
     if (checked) {

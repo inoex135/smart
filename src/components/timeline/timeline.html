@@ -2,13 +2,13 @@
   <timeline-item *ngFor="let item of items">
     <ion-icon></ion-icon>
     <ion-card>
-      <ion-card-header>
-        {{item.title}}
+      <ion-card-header ion-text text-uppercase>
+        {{item.tanggal_proses}} - {{item?.proses_naskah}}
       </ion-card-header>
       <ion-card-content *ngIf="type === CURRENT_TYPE.RIWAYAT">
-        <p ion-text>{{item?.content}}</p>
-        <p ion-text>{{item?.time?.subtitle}}</p>
-        <p ion-text>{{item?.time?.subtitle}}</p>
+        <p ion-text>{{item?.no_agenda || "-"}}</p>
+        <p ion-text>{{item?.tanggal_agenda || "-"}}</p>
+        <p ion-text>{{item?.pihak || "-"}}</p>
       </ion-card-content>
       <ion-item *ngIf="type === CURRENT_TYPE.AGENDA">
         <timeline-kegiatan [kegiatan]="kegiatan" *ngFor="let kegiatan of item.content"></timeline-kegiatan>
@@ -16,5 +16,4 @@
       </ion-item>
     </ion-card>
   </timeline-item>
-
 </div>
