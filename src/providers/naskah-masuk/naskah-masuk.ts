@@ -48,4 +48,8 @@ export class NaskahMasukProvider {
   terimaSemuaNaskah(idList: {}) {
     return this.api.post("/surat/masuk/terima-batch", idList);
   }
+
+  riwayatNaskah(naskahId: number) {
+    return this.api.get(`/surat/masuk/riwayat/${naskahId}`);
+  }
 }
