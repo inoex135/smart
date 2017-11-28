@@ -37,24 +37,32 @@ export class NaskahMasukPage {
     this.navCtrl.push(NaskahMasukDetailPage, { naskahId: naskah.id });
   }
 
-  // search naskah by tipe
-  searchNaskahByType(param: string) {
-    this.searching = true;
-    this.naskahProvider
-      .searchNaskahByTipe(param)
+  searchNaskahBy(type: string, params: any) {
+    let searchProvider: any;
+    if (type === "type") {
+      searchProvider = this.naskahProvider.searchNaskahByTipe(params);
+    } else {
+      searchProvider = this.naskahProvider.searchNaskah(params);
+    }
+
+    searchProvider
       .pipe(debounceTime(700))
-      .finally(() => {
-        this.searching = false;
-      })
-      .subscribe(res => {
-        this.listNaskah = res.data;
-      });
+      .finally(() => this.hideLoader())
+      .subscribe(
+        res => (this.listNaskah = res.data),
+        err => this.handleErrorSearch(params)
+      );
   }
-  // search sumas by tanggal, no_naskah and terima/tdk terima (0, 1)
-  searchSumas(event: any) {
-    this.naskahProvider
-      .searchNaskah(event)
-      .subscribe(res => console.log(), err => console.log(err));
+
+  // untuk handle ketika klik ion-cancel di klik
+  // dan ketika dihapus melaui backspace
+  handleErrorSearch(params: any) {
+    // undefined return dari ion-cancel, sedangkan "" dari $event.target.value
+    if (params === undefined || params === "") {
+      this.getNaskahMasuk();
+    } else {
+      this.listNaskah = [];
+    }
   }
 
   async getNaskahMasuk() {
@@ -76,7 +84,13 @@ export class NaskahMasukPage {
   pressAndHoldSurat() {
     this.isBulkAction = !this.isBulkAction;
   }
+  showLoader() {
+    this.searching = true;
+  }
 
+  hideLoader() {
+    this.searching = false;
+  }
   terimaSemuaNaskah() {
     const idList = { idList: this.naskahTerima };
 
