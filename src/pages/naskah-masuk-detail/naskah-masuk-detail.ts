@@ -35,7 +35,10 @@ export class NaskahMasukDetailPage {
   }
 
   openPage(actionData: String) {
-    this.navCtrl.push(NaskahDetailActionPage, { actionData: actionData });
+    this.navCtrl.push(NaskahDetailActionPage, {
+      actionData: actionData,
+      naskahId: this.naskahId
+    });
   }
 
   ionViewDidLoad() {
@@ -47,13 +50,16 @@ export class NaskahMasukDetailPage {
   async getDetailNaskah() {
     await this.loaderHelper.createLoader();
 
-    this.naskahProvider
-      .getDetailNaskah(this.naskahId)
-      .finally(() => this.loaderHelper.dismiss())
-      .subscribe(res => {
+    this.naskahProvider.getDetailNaskah(this.naskahId).subscribe(
+      res => {
         this.detail = res;
         this.showModal();
-      });
+        this.loaderHelper.dismiss();
+      },
+      err => {
+        this.loaderHelper.errorHandleLoader(err.error_message, this.navCtrl);
+      }
+    );
   }
 
   terimaNaskah() {
