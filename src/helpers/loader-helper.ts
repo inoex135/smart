@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { LoadingController } from "ionic-angular";
+import { LoadingController, NavController } from "ionic-angular";
 
 @Injectable()
 export class LoaderHelper {
@@ -15,7 +15,7 @@ export class LoaderHelper {
     return this.loading.present();
   }
 
-  errorHandleLoader(message: string = "Error", nav: any) {
+  errorHandleLoader(message: string = "Error", nav?: NavController) {
     this.loading.setContent(message);
 
     setTimeout(() => {
