@@ -4,6 +4,8 @@ import { NaskahMasukProvider } from "../../providers/naskah-masuk/naskah-masuk";
 import { NaskahMasukDetailPage } from "../naskah-masuk-detail/naskah-masuk-detail";
 import { LoaderHelper } from "../../helpers/loader-helper";
 import remove from "lodash/remove";
+import { debounceTime } from "rxjs/operators";
+
 @Component({
   selector: "page-naskah-masuk",
   templateUrl: "naskah-masuk.html"
@@ -17,6 +19,9 @@ export class NaskahMasukPage {
     keyword: ""
   };
   naskahTerima: any[] = [];
+
+  searching: boolean = false;
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -32,8 +37,24 @@ export class NaskahMasukPage {
     this.navCtrl.push(NaskahMasukDetailPage, { naskahId: naskah.id });
   }
 
-  searchNaskah() {
-    alert(this.filter.naskahUnit);
+  // search naskah by tipe
+  searchNaskahByType(param: string) {
+    this.searching = true;
+    this.naskahProvider
+      .searchNaskahByTipe(param)
+      .pipe(debounceTime(700))
+      .finally(() => {
+        this.searching = false;
+      })
+      .subscribe(res => {
+        this.listNaskah = res.data;
+      });
+  }
+  // search sumas by tanggal, no_naskah and terima/tdk terima (0, 1)
+  searchSumas(event: any) {
+    this.naskahProvider
+      .searchNaskah(event)
+      .subscribe(res => console.log(), err => console.log(err));
   }
 
   async getNaskahMasuk() {
@@ -81,11 +102,5 @@ export class NaskahMasukPage {
     });
 
     return removeNaskah;
-  }
-
-  searchSumas(event: any) {
-    this.naskahProvider
-      .searchNaskah(event)
-      .subscribe(res => console.log(), err => console.log(err));
   }
 }

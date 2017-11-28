@@ -8,12 +8,17 @@
   <ion-list no-lines>
     <ion-searchbar [(ngModel)]="filter.keyword" search-bar-bcg (ionInput)="searchSumas($event)"></ion-searchbar>
 
-    <ion-item>
-      <ion-select (ionChange)="searchNaskah()" class="ion-select-custom" [(ngModel)]="filter.naskahUnit" placeholder="Naskah Unit / Naskah Pribadi / Permohonan">
-        <ion-option value="f">Naskah Unit</ion-option>
-        <ion-option value="m">Naskah Pribadi</ion-option>
-        <ion-option value="m">Naskah Permohonan</ion-option>
+    <ion-item class="input--form">
+      <ion-select (ionChange)="searchNaskahByType(filter?.naskahUnit)" class="ion-select-custom" [(ngModel)]="filter.naskahUnit"
+        placeholder="Naskah Unit / Naskah Pribadi / Permohonan">
+        <ion-option value="unit">Naskah Unit</ion-option>
+        <ion-option value="personal">Naskah Pribadi</ion-option>
+        <ion-option value="permohonan">Naskah Permohonan</ion-option>
       </ion-select>
+    </ion-item>
+
+    <ion-item *ngIf="searching" class="spinner-container">
+      <ion-spinner></ion-spinner>
     </ion-item>
   </ion-list>
 

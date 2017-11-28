@@ -4,6 +4,12 @@ page-naskah-masuk {
     color: $blue-font;
   }
 
+  .spinner-container {
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+  }
+
   .naskah-list {
     box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
   }
