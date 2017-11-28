@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { NavController, NavParams, IonicPage } from "ionic-angular";
+import { NavController, IonicPage } from "ionic-angular";
 import { NaskahNotifikasiProvider } from "../../providers/naskah-notifikasi/naskah-notifikasi";
 import { LoaderHelper } from "../../helpers/loader-helper";
 import { NaskahMasukDetailPage } from "../naskah-masuk-detail/naskah-masuk-detail";

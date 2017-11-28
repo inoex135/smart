@@ -2,7 +2,6 @@ import { Component } from "@angular/core";
 import { NaskahMasukProvider } from "../../../providers/naskah-masuk/naskah-masuk";
 import { NavParams } from "ionic-angular";
 import { TimelineType } from "../../../constant/TimelineType";
-import { TimelineDummy } from "../../../dummy/timeline.dummy";
 
 @Component({
   selector: "riwayat-component",
