@@ -20,13 +20,13 @@
       <ion-col col-6>{{aptDetail?.teleponPengirim}}</ion-col>
       <ion-col col-6 class="label">Nomor Tiket</ion-col>
       <ion-col col-6>{{aptDetail?.nomorTiket}}</ion-col>
-      
+
       <ion-col col-6 class="label">Tanggal Surat</ion-col>
       <ion-col col-6>{{aptDetail?.tanggalString}} </ion-col>
       <ion-col col-6 class="label">Indikator</ion-col>
       <ion-col col-6>{{aptDetail?.statusString}}</ion-col>
-      <ion-col col-6>
-        <button ion-button full block>Disposisi</button>
+      <ion-col col-6 push-6>
+        <apt-indikator-button [status]="aptDetail?.statusString"></apt-indikator-button>
       </ion-col>
     </ion-row>
 
