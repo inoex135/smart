@@ -10,9 +10,9 @@ import { AptProvider } from "../../providers/apt/apt";
 export class AptPratinjauComponent {
   @ViewChild("slider") slider: Slides;
   currentIndex = 0;
-  aptDetailAction  : [];
+  aptDetailAction  : any;
   action: string;
-  itemId: string;
+  itemId: number;
   slides = [];
   constructor(
     public navParams: NavParams,
