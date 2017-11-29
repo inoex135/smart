@@ -83,10 +83,16 @@ export class PersonalProvider {
     formData.append("jam_akhir", params.jam_akhir);
     formData.append("uraian", params.uraian);
     formData.append("lokasi", params.lokasi);
-    formData.append("unit", params.unit);
-    formData.append("pegawai", "197602162002121001");
+    formData.append("unit", JSON.stringify(params.unit));
+    formData.append("pegawai", JSON.stringify(params.pegawai));
 
     return this.api.postForm("/personal/agenda/create", formData);
+  }
+
+  getUnit(query: any, number: number = 0, size: number = 10) {
+    this.api.get(
+      `/api/master/unit?query=${query}&number=${number}&size=${size}`
+    );
   }
 
   detailAgenda() {
