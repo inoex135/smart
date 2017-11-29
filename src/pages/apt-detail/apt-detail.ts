@@ -27,22 +27,16 @@ export class AptDetailPage {
     this.getDetailApt();
   }
 
- async getDetailApt() {
+  async getDetailApt() {
     await this.loaderHelper.createLoader();
 
-    this.aptProvider.getDetailApt(this.itemId).subscribe(
-      res => {
-        this.aptDetail = res;
-        this.loaderHelper.dismiss();
-      },
-      err => {
-        console.log(err);
-      }
-    );
+    this.aptProvider.getDetailApt(this.itemId).subscribe(res => {
+      this.aptDetail = res;
+      this.loaderHelper.dismiss();
+    }, err => false);
   }
-  
 
-  detailAction(action: string,itemId:any) {
-    this.navCtrl.push(AptDetailActionPage, { action: action,itemId:itemId });
+  detailAction(action: string, itemId: any) {
+    this.navCtrl.push(AptDetailActionPage, { action: action, itemId: itemId });
   }
 }
