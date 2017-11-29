@@ -61,6 +61,13 @@ export class AptProvider {
     return this.apiProvider.get(`/apt/permohonan/${action}/${aptId}`);
   }
 
+  verifikasi(id:number,status:any){
+
+  console.log("inside verifikasi provider");
+  const statusString = status.status;
+   return this.apiProvider.post(`/apt/permohonan/verifikasi/${id}?status=${statusString}`); 
+  }
+
   download(fileDir) {
     // @todo : dummy url, change when api already
     // const url = `http://www.lkpp.go.id/v3/files/attachments/5_fWwUnTrpMTbexDEmAMSCNDzObHttIcYl.pdf`;

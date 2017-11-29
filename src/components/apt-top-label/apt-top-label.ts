@@ -12,11 +12,8 @@ import { Component,Input } from '@angular/core';
 })
 export class AptTopLabelComponent {
 
-  text: string;
  @Input() data: any;
   constructor() {
-    console.log('Hello AptTopLabelComponent Component');
-    this.text = 'Hello World';
   }
 
 }

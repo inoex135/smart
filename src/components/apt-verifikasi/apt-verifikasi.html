@@ -20,7 +20,7 @@
       </ion-col>
     </ion-row>
 
-    <button ion-button full block color="default-blue">VERIFIKASI</button>
+    <button ion-button full block color="default-blue" (tap)="verifikasi()">VERIFIKASI</button>
   </div>
 </ion-card>
 
@@ -34,4 +34,14 @@
   <checklist-dokumen-pendukung [data]="aptDetailAction"></checklist-dokumen-pendukung>
 </ion-card>
 
-<apt-status-permohonan></apt-status-permohonan>
+<ion-card margin-top margin-bottom>
+  <ion-slides #slider effect="fade" pager="true" (ionSlideWillChange)="onSlideChanged()">
+
+    <ion-slide *ngFor="let slide of slides" class="swiper-no-swiping">
+      <apt-status-permohonan [data]="slide"></apt-status-permohonan>
+    </ion-slide>
+
+    <div *ngIf="currentIndex > 0" class="swiper-button-prev swiper-button-red" (click)="previousSlide()"></div>
+    <div *ngIf="currentIndex < slides.length-1" class="swiper-button-next swiper-button-red" (click)="nextSlide()"></div>
+  </ion-slides>
+</ion-card>

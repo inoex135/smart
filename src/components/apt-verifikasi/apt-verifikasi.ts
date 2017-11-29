@@ -10,11 +10,13 @@ import { Slides, NavController,NavParams } from "ionic-angular";
 })
 export class AptVerifikasiComponent {
   	verifikasiStatus: string;
+  	currentIndex = 0;
 	aptDetailAction  : any;
 	itemId: number;
 	action: string;
 	@ViewChild("slider") slider: Slides;
 	slides = [];
+	message :any;
   constructor(
   	public navParams: NavParams,
     private aptProvider: AptProvider,
@@ -39,5 +41,30 @@ export class AptVerifikasiComponent {
         console.log(err);
       }
     );
+  }
+   nextSlide() {
+    this.slider.slideNext();
+  }
+
+  previousSlide() {
+    this.slider.slidePrev();
+  }
+
+  onSlideChanged() {
+    this.currentIndex = this.slider.getActiveIndex();
+    console.log("Slide changed! Current index is", this.currentIndex);
+  }
+
+  verifikasi() {
+  	const status = {status:this.verifikasiStatus};
+  	console.log("inside verifikasi ",status);
+  	console.log("inside verifikasi ",this.itemId);
+    this.aptProvider.verifikasi(this.itemId,status).subscribe(
+        res => ( this.message = res),
+        err => {
+        console.log(err);
+      	}
+      );
+      
   }
 }

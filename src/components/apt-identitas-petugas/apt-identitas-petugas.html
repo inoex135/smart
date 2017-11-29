@@ -1,27 +1,27 @@
 <ion-row>
   <ion-col col-12>
     <p ion-text text-right>
-      Yogyakarta/ 55164, 11 Desember 2017
+      {{data?.tanggalVerifikasi}}
     </p>
   </ion-col>
 
   <ion-col col-12>
     <p>Penyelia: </p>
     <p ion-text text-left>
-      SRI WAHYUNI
+      {{data?.namaPenyelia}}
     </p>
     <p ion-text text-left>
-      NIP: 123456789
+      NIP: {{data?.nipPenyelia}}
     </p>
   </ion-col>
 
   <ion-col col-12>
     <p>Petugas APT: </p>
     <p ion-text text-left>
-      SUWARNI
+      {{data?.namaPetugasApt}}
     </p>
     <p ion-text text-left>
-      NIP: 123456789
+      NIP: {{data?.nipPetugasApt}}
     </p>
   </ion-col>
 </ion-row>
