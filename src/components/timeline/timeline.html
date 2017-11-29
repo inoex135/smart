@@ -3,7 +3,7 @@
     <ion-icon></ion-icon>
     <ion-card>
       <ion-card-header ion-text text-uppercase>
-        {{item.tanggal_proses}} - {{item?.proses_naskah}}
+        {{item?.tanggal}} 
       </ion-card-header>
       <ion-card-content *ngIf="type === CURRENT_TYPE.RIWAYAT">
         <p ion-text>{{item?.no_agenda || "-"}}</p>
@@ -11,8 +11,10 @@
         <p ion-text>{{item?.pihak || "-"}}</p>
       </ion-card-content>
       <ion-item *ngIf="type === CURRENT_TYPE.AGENDA">
-        <timeline-kegiatan [kegiatan]="kegiatan" *ngFor="let kegiatan of item.content"></timeline-kegiatan>
-        <ion-note item-end (click)="detailAgenda(item?.title)">View</ion-note>
+        <timeline-kegiatan [kegiatan]="kegiatan" *ngFor="let kegiatan of item.detail">
+          
+        </timeline-kegiatan>
+        <ion-note item-end (click)="detailAgenda(item?.id)">View</ion-note>
       </ion-item>
     </ion-card>
   </timeline-item>

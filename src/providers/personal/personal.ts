@@ -78,4 +78,8 @@ export class PersonalProvider {
   detailAgenda() {
     return this.api.get("/personal/");
   }
+
+  listAgenda(){
+    return this.api.get("/personal/agenda/daftar");
+  }
 }
