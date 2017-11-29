@@ -5,57 +5,62 @@
 </ion-header>
 
 
-<ion-content padding>
-  <ion-card padding-bottom>
-    <ion-card-header>Tambah Agenda</ion-card-header>
-    <ion-item>
-      <ion-label floating></ion-label>
-      <ion-input [value]="agendaData.tanggalMulai" (click)="tanggalMulai()" type="text" class="ion-input-custom" placeholder="Tanggal Mulai Kegiatan"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label floating></ion-label>
-      <ion-input [value]="agendaData.jamMulai" (click)="jamMulai()" type="text" class="ion-input-custom" placeholder="Waktu Mulai Kegiatan"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label floating></ion-label>
-      <ion-input [value]="agendaData.tanggalAkhir" (click)="tanggalAkhir()" type="text" class="ion-input-custom" placeholder="Tanggal Akhir Kegiatan"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label floating></ion-label>
-      <ion-input [value]="agendaData.jamAkhir" (click)="jamAkhir()" type="text" class="ion-input-custom" placeholder="Waktu Akhir Kegiatan"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label floating></ion-label>
-      <ion-textarea [(ngModel)]="agendaData.uraian" type="text" class="ion-textarea-custom" placeholder="Uraian Kegiatan"></ion-textarea>
-    </ion-item>
-    <ion-item>
-      <ion-label floating></ion-label>
-      <ion-input [(ngModel)]="agendaData.lokasi" type="text" class="ion-input-custom" placeholder="Lokasi"></ion-input>
-    </ion-item>
+<ion-content>
+  <ion-grid>
+    <ion-row wrap>
+      <ion-col col-12>
+        <ion-item item-start>
+          <h4 ion-text>Tambah Agenda</h4>
+        </ion-item>
+        <ion-item margin-bottom class="input--form">
+          <ion-input [value]="agendaData.tanggalMulai" (click)="tanggalMulai()" type="text" placeholder="Tanggal Mulai Kegiatan"></ion-input>
+        </ion-item>
 
-    <div class="tambah-peserta">
-      <ion-item>
-        <div item-start>
-          <ion-label stacked>Tambah Peserta</ion-label>
-          <ion-input [(ngModel)]="peserta" type="text" class="ion-input-custom" placeholder="Tambah Peserta"></ion-input>
+        <ion-item margin-bottom class="input--form">
+          <ion-input [value]="agendaData.jamMulai" (click)="jamMulai()" type="text" placeholder="Waktu Mulai Kegiatan"></ion-input>
+        </ion-item>
+
+        <ion-item margin-bottom class="input--form">
+          <ion-input [value]="agendaData.tanggalAkhir" (click)="tanggalAkhir()" type="text" placeholder="Tanggal Akhir Kegiatan"></ion-input>
+        </ion-item>
+
+        <ion-item margin-bottom class="input--form">
+          <ion-input [value]="agendaData.jamAkhir" (click)="jamAkhir()" type="text" placeholder="Waktu Akhir Kegiatan"></ion-input>
+        </ion-item>
+
+        <ion-item margin-bottom no-padding class="textarea--form">
+          <ion-textarea [(ngModel)]="agendaData.uraian" type="text" placeholder="Uraian Kegiatan"></ion-textarea>
+        </ion-item>
+
+        <ion-item margin-bottom class="input--form">
+          <ion-input [(ngModel)]="agendaData.lokasi" type="text" placeholder="Lokasi"></ion-input>
+        </ion-item>
+
+        <div class="tambah-peserta">
+          <ion-item>
+            <div item-start>
+              <ion-label stacked>Tambah Peserta</ion-label>
+              <ion-input [(ngModel)]="peserta" type="text" placeholder="Tambah Peserta"></ion-input>
+            </div>
+
+            <button (click)="addPeserta(peserta)" class="button-side" block margin-top ion-button item-end color="danger">
+              <ion-icon name="add"></ion-icon>
+            </button>
+          </ion-item>
         </div>
 
-        <button (click)="addPeserta(peserta)" class="button-side" block margin-top ion-button item-end color="danger">
-          <ion-icon name="add"></ion-icon>
-        </button>
-      </ion-item>
-    </div>
+        <ion-item *ngFor="let person of agendaData?.peserta; let i = index">
+          {{person?.nama}}
+          <button (click)="removePeserta(i)" ion-button color="light" item-end>
+            <ion-icon name="close"></ion-icon>
+          </button>
+        </ion-item>
 
-    <ion-item *ngFor="let person of agendaData?.peserta; let i = index">
-      {{person?.nama}}
-      <button (click)="removePeserta(i)" ion-button color="light" item-end>
-        <ion-icon name="close"></ion-icon>
-      </button>
-    </ion-item>
+        <ion-item>
+          <button ion-button full block color="orange">Simpan</button>
+        </ion-item>
 
-    <ion-item>
-      <button ion-button full block color="orange">Simpan</button>
-    </ion-item>
-
-  </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

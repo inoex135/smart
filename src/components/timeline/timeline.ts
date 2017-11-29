@@ -22,7 +22,7 @@ export class TimelineComponent {
 
 @Component({
   selector: "timeline-kegiatan",
-  template: "<p ion-text>{{kegiatan?.title}}</p>"
+  template: `<p ion-text>{{kegiatan?.uraian}}</p>`
 })
 export class TimelineAgendaComponent {
   @Input("kegiatan") kegiatan = {};

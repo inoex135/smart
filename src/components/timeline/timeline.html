@@ -2,11 +2,12 @@
   <timeline-item *ngFor="let item of items">
     <ion-icon></ion-icon>
     <ion-card>
-      <ion-card-header  *ngIf="type === CURRENT_TYPE.RIWAYAT" ion-text text-uppercase>
+      <ion-card-header *ngIf="type === CURRENT_TYPE.RIWAYAT" ion-text text-uppercase>
         {{item?.tanggal_proses}} - {{item?.proses_naskah}}
       </ion-card-header>
-      <ion-card-header  *ngIf="type === CURRENT_TYPE.AGENDA" ion-text text-uppercase>
-        {{item?.tanggal}}
+
+      <ion-card-header *ngIf="type === CURRENT_TYPE.AGENDA" ion-text text-uppercase>
+        {{item?.tanggal | indonesianDate: 'DD MMMM YYYY'}}
       </ion-card-header>
 
       <ion-card-content *ngIf="type === CURRENT_TYPE.RIWAYAT">
@@ -14,10 +15,12 @@
         <p ion-text>{{item?.tanggal_agenda || "-"}}</p>
         <p ion-text>{{item?.pihak || "-"}}</p>
       </ion-card-content>
+
       <ion-item *ngIf="type === CURRENT_TYPE.AGENDA">
-        <timeline-kegiatan [kegiatan]="kegiatan" *ngFor="let kegiatan of item.detail"></timeline-kegiatan>
+        <timeline-kegiatan [kegiatan]="kegiatan" *ngFor="let kegiatan of item?.detail"></timeline-kegiatan>
         <ion-note item-end (click)="detailAgenda(item?.title)">View</ion-note>
       </ion-item>
+
     </ion-card>
   </timeline-item>
 </div>

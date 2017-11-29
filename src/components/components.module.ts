@@ -23,6 +23,7 @@ import { EmptyStateComponent } from "./empty-state/empty-state";
 import { NaskahModalTerimaComponent } from "./naskah-modal-terima/naskah-modal-terima";
 import { NaskahModalDownloadComponent } from "./naskah-modal-download/naskah-modal-download";
 import { AptIndikatorButtonComponent } from "./apt-indikator-button/apt-indikator-button";
+import { PipesModule } from "../pipes/pipes.module";
 
 @NgModule({
   declarations: [
@@ -46,7 +47,7 @@ import { AptIndikatorButtonComponent } from "./apt-indikator-button/apt-indikato
     NaskahModalDownloadComponent,
     AptIndikatorButtonComponent
   ],
-  imports: [IonicModule],
+  imports: [IonicModule, PipesModule],
   exports: [
     Disposisi,
     LoginLayout1,
