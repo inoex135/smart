@@ -4,7 +4,7 @@
             <h4 ion-text>Selesai</h4>
         </ion-col>
         <ion-col col-12 col-sm-12 col-md-12 offset-lg-3 col-lg-6 offset-xl-3 col-xl-6>
-            <ion-item no-padding>
+            <ion-item margin-bottom no-padding class="input--form">
                 <ion-datetime placeholder="Tanggal Selesai" displayFormat="DD-MM-YYYY" pickerFormat="DD MM YYYY" [(ngModel)]="data.tanggalSelesai"></ion-datetime>
             </ion-item>
             <div *ngIf="detail?.naskahPermohonan === 'ya'">
