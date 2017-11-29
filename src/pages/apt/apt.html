@@ -8,17 +8,20 @@
   <ion-list>
     <pemberitahuan [redirectComponent]="redirectComponent"></pemberitahuan>
 
-    <ion-item margin-top class="search--form">
-      <ion-icon item-start name="search"></ion-icon>
-      <ion-input type="text" placeholder="Cari Permohonan"></ion-input>
-      <ion-icon name="arrow-dropdown" item-end></ion-icon>
-    </ion-item>
+    
+    <ion-searchbar [(ngModel)]="keyword" search-bar-bcg (ionInput)="search( $event?.target?.value)" (ionCancel)="search( $event?.target?.value)"></ion-searchbar>
 
-    <ion-item margin-top class="search--form">
-      <ion-input type="text" placeholder="Pelayanan"></ion-input>
-      <ion-icon name="arrow-dropdown" item-end></ion-icon>
+    <ion-item class="input--form">
+      <ion-select (ionChange)="searchByTipe(keyword)" class="ion-select-custom" [(ngModel)]="keyword"
+        placeholder="Jenis Pelayanan">
+        <ion-option [value]="pelayanan?.id" *ngFor="let pelayanan of pelayanans">
+                            {{pelayanan?.nama}}
+                         </ion-option>
+      </ion-select>
     </ion-item>
+    
   </ion-list>
+   
 
   <ion-list class="list--apt">
     <ion-card (press)="isItemPressed(item?.id)" item no-margin padding *ngFor="let item of items;let i = index">

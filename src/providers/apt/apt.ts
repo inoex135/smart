@@ -25,6 +25,23 @@ export class AptProvider {
     return this.apiProvider.get(url).pipe(map(res => res.content));
   }
 
+   getPelayananList() {
+    const url = "/apt/pelayanan";
+    const data = this.apiProvider.get(url);
+    console.log("after getting list pelayanan"+ data);
+    return data;
+  }
+
+  search(keyword:string, page: number = 0, size: number = 10) {
+   return this.apiProvider.get(`/apt/permohonan/pending?keyword=${keyword}&page=${page}&size=${size}`);
+  }
+
+  searchByTipe(keyword:string, page: number = 0, size: number = 10) {
+    
+    return this.apiProvider.get(`/apt/permohonan/pending?layanan=${keyword}&page=${page}&size=${size}`);
+    
+  }
+
   // get list notifikasi apt
 
   getListNotification() {

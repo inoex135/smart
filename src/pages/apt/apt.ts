@@ -9,6 +9,8 @@ import { AptHelper } from "../../helpers/apt-helper";
 import { LoaderHelper } from "../../helpers/loader-helper";
 import { AptDummy } from "../../dummy/apt.dummy";
 
+import { debounceTime } from "rxjs/operators";
+
 @Component({
   selector: "page-apt",
   templateUrl: "apt.html"
@@ -16,11 +18,14 @@ import { AptDummy } from "../../dummy/apt.dummy";
 export class AptPage {
   params: any = {};
   items: any = [];
+  pelayanans : any=[];
   fileDirectory: any;
   loader: any;
   redirectComponent: string = "AptNotifikasiPage";
 
   isPress: boolean = false;
+  keyword :string;
+  searching: boolean = false;
 
   constructor(
     public navCtrl: NavController,
@@ -32,15 +37,16 @@ export class AptPage {
     private loaderHelper: LoaderHelper
   ) {
     this.fileDirectory = file.externalRootDirectory + "Download";
-
+    
     this.loader = this.loadingCtrl.create({
       content: "Wait download....",
       spinner: "dots"
     });
-    //this.items = AptDummy.getApt();
+    
   }
 
   ionViewDidLoad() {
+    this.getPelayananList();
     this.getAptList();
   }
 
@@ -50,6 +56,21 @@ export class AptPage {
 
   isItemPressed() {
     this.isPress = !this.isPress;
+  }
+
+   getPelayananList() {
+    
+ 
+    this.aptProvider.getPelayananList().subscribe(
+      res => {
+        // @TODO : uncomment if data already
+        this.pelayanans = res.content;
+ 
+      },
+      err => {
+        this.loaderHelper.errorHandleLoader(err.error_code, this.navCtrl);
+      }
+    );
   }
 
   async getAptList() {
@@ -87,5 +108,36 @@ export class AptPage {
     alert(openFile.message);
 
     this.loader.dismiss();
+  }
+
+  search( keyword: any) {
+    let searchProvider: any;
+    this.showLoader();
+      searchProvider = this.aptProvider.search(keyword);
+    searchProvider
+      .pipe(debounceTime(700))
+      .finally(() => this.hideLoader())
+      .subscribe(
+        res => ( this.items = res.content)
+        
+      );
+  }
+
+  searchByTipe( keyword: any) {
+    let searchProvider: any;
+    searchProvider = this.aptProvider.searchByTipe(keyword);
+    searchProvider.subscribe(
+        res => ( this.items = res.content),
+        err => false
+      );
+      
+  }
+
+  showLoader() {
+    this.searching = true;
+  }
+
+  hideLoader() {
+    this.searching = false;
   }
 }
