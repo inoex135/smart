@@ -13,19 +13,19 @@
           <h4 ion-text>Tambah Agenda</h4>
         </ion-item>
         <ion-item margin-bottom class="input--form">
-          <ion-input [value]="agendaData.tanggalMulai" (click)="tanggalMulai()" type="text" placeholder="Tanggal Mulai Kegiatan"></ion-input>
+          <ion-input [(ngModel)]="agendaData.tanggal_mulai" (tap)="tanggalMulai()" type="text" placeholder="Tanggal Mulai Kegiatan"></ion-input>
         </ion-item>
 
         <ion-item margin-bottom class="input--form">
-          <ion-input [value]="agendaData.jamMulai" (click)="jamMulai()" type="text" placeholder="Waktu Mulai Kegiatan"></ion-input>
+          <ion-input [value]="agendaData.jam_mulai" (tap)="jamMulai()" type="text" placeholder="Waktu Mulai Kegiatan"></ion-input>
         </ion-item>
 
         <ion-item margin-bottom class="input--form">
-          <ion-input [value]="agendaData.tanggalAkhir" (click)="tanggalAkhir()" type="text" placeholder="Tanggal Akhir Kegiatan"></ion-input>
+          <ion-input [value]="agendaData.tanggal_akhir" (tap)="tanggalAkhir()" type="text" placeholder="Tanggal Akhir Kegiatan"></ion-input>
         </ion-item>
 
         <ion-item margin-bottom class="input--form">
-          <ion-input [value]="agendaData.jamAkhir" (click)="jamAkhir()" type="text" placeholder="Waktu Akhir Kegiatan"></ion-input>
+          <ion-input [value]="agendaData.jam_akhir" (tap)="jamAkhir()" type="text" placeholder="Waktu Akhir Kegiatan"></ion-input>
         </ion-item>
 
         <ion-item margin-bottom no-padding class="textarea--form">
@@ -57,7 +57,7 @@
         </ion-item>
 
         <ion-item>
-          <button ion-button full block color="orange">Simpan</button>
+          <button ion-button full block color="orange" (tap)="tambahAgenda()">Simpan</button>
         </ion-item>
 
       </ion-col>
