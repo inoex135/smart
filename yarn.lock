@@ -74,6 +74,10 @@
   version "4.2.1"
   resolved "https://registry.yarnpkg.com/@ionic-native/date-picker/-/date-picker-4.2.1.tgz#1d156d77bca2ee8d3aee33330d390e4e7062d17b"
 
+"@ionic-native/device@^4.4.2":
+  version "4.4.2"
+  resolved "https://registry.yarnpkg.com/@ionic-native/device/-/device-4.4.2.tgz#d50396462ff7d7f0176590b4c36afec8e154b576"
+
 "@ionic-native/fcm@4.2.1":
   version "4.2.1"
   resolved "https://registry.yarnpkg.com/@ionic-native/fcm/-/fcm-4.2.1.tgz#8c30b1332cb57f13f483ba590012a7fbf986978e"
@@ -1679,6 +1683,10 @@ ionic-angular@3.9.0:
 ionic-plugin-keyboard@^2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/ionic-plugin-keyboard/-/ionic-plugin-keyboard-2.2.1.tgz#f2a9e169bbe9b5522400347c9fd6d3467ee3fa12"
+
+ionic2-auto-complete@1.6.0-alpha:
+  version "1.6.0-alpha"
+  resolved "https://registry.yarnpkg.com/ionic2-auto-complete/-/ionic2-auto-complete-1.6.0-alpha.tgz#1f90ea678f13c6684c0898cc70923386fec71eca"
 
 ionic2-calendar@^0.4.0:
   version "0.4.0"
