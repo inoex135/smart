@@ -37,7 +37,8 @@ export class NaskahMasukDetailPage {
   openPage(actionData: String) {
     this.navCtrl.push(NaskahDetailActionPage, {
       actionData: actionData,
-      naskahId: this.naskahId
+      naskahId: this.naskahId,
+      detailNaskah: this.detail
     });
   }
 
