@@ -9,7 +9,7 @@ import { LoaderHelper } from "../../helpers/loader-helper";
 })
 export class AptDetailActionPage {
   action: string;
-  itemId: string;
+  itemId: number;
   
 
   readonly APT_ACTION = AptAction;

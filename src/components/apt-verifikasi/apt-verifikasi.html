@@ -27,11 +27,11 @@
 <ion-card padding>
   <ion-row>
     <ion-col>
-      <apt-top-label></apt-top-label>
+      <apt-top-label [data]="aptDetailAction"></apt-top-label>
     </ion-col>
   </ion-row>
 
-  <checklist-dokumen-pendukung></checklist-dokumen-pendukung>
+  <checklist-dokumen-pendukung [data]="aptDetailAction"></checklist-dokumen-pendukung>
 </ion-card>
 
 <apt-status-permohonan></apt-status-permohonan>

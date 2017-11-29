@@ -15,9 +15,9 @@ export class AptPratinjauComponent {
   itemId: number;
   slides = [];
   constructor(
-    public navParams: NavParams,
-    private aptProvider: AptProvider,
-     private loaderHelper: LoaderHelper
+      public navParams: NavParams,
+      private aptProvider: AptProvider,
+      private loaderHelper: LoaderHelper
   ) {
 
     this.action = this.navParams.get("action");
