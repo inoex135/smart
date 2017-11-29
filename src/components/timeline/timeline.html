@@ -18,7 +18,7 @@
 
       <ion-item *ngIf="type === CURRENT_TYPE.AGENDA">
         <timeline-kegiatan [kegiatan]="kegiatan" *ngFor="let kegiatan of item?.detail"></timeline-kegiatan>
-        <ion-note item-end (click)="detailAgenda(item?.title)">View</ion-note>
+        <ion-note item-end (click)="detailAgenda(item?.tanggal)">View</ion-note>
       </ion-item>
 
     </ion-card>

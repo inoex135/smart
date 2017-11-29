@@ -4,6 +4,7 @@ import { ApiProvider } from "../api/api";
 import { TokenProvider } from "../token/token";
 
 import * as moment from "moment";
+import { IAgendaAdd } from "../../interface/agenda-add";
 
 @Injectable()
 export class PersonalProvider {
@@ -15,7 +16,9 @@ export class PersonalProvider {
   async getListEvent(date: any = moment()) {
     const params = await this.getParams(date);
 
-    const url = `/personal/calendar/${params.nip}/${params.startDate}/${params.endDate}`;
+    const url = `/personal/calendar/${params.nip}/${params.startDate}/${
+      params.endDate
+    }`;
 
     return this.api
       .get(url)
@@ -71,15 +74,26 @@ export class PersonalProvider {
     return this.api.get("/apt/dashboard/progres-pengajuan");
   }
 
-  tambahAgenda() {
-    return this.api.get("/personal/agenda");
+  tambahAgenda(params: IAgendaAdd) {
+    let formData = new FormData();
+
+    formData.append("tanggal_mulai", params.tanggal_mulai);
+    formData.append("tanggal_akhir", params.tanggal_akhir);
+    formData.append("jam_mulai", params.jam_mulai);
+    formData.append("jam_akhir", params.jam_akhir);
+    formData.append("uraian", params.uraian);
+    formData.append("lokasi", params.lokasi);
+    formData.append("unit", params.unit);
+    formData.append("pegawai", "197602162002121001");
+
+    return this.api.postForm("/personal/agenda/create", formData);
   }
 
   detailAgenda() {
     return this.api.get("/personal/");
   }
 
-  listAgenda(){
+  listAgenda() {
     return this.api.get("/personal/agenda/daftar");
   }
 }

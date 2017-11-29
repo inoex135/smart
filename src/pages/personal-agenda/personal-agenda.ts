@@ -10,13 +10,15 @@ import { LoaderHelper } from "../../helpers/loader-helper";
   templateUrl: "personal-agenda.html"
 })
 export class PersonalAgendaPage {
-  public items: any ;
+  public items: any;
   public type: string;
 
-  constructor(public navCtrl: NavController, 
-  public navParams: NavParams,
-   private personalProvider: PersonalProvider,
-    private loaderHelper: LoaderHelper) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private personalProvider: PersonalProvider,
+    private loaderHelper: LoaderHelper
+  ) {
     this.type = TimelineType.AGENDA;
   }
 
@@ -24,12 +26,11 @@ export class PersonalAgendaPage {
     this.getDataList();
   }
 
- async getDataList() {
+  async getDataList() {
     await this.loaderHelper.createLoader();
 
     this.personalProvider.listAgenda().subscribe(
       res => {
-        // @TODO : uncomment if data already
         this.items = res;
 
         this.loaderHelper.dismiss();
@@ -39,7 +40,7 @@ export class PersonalAgendaPage {
       }
     );
   }
-  detailAgenda(event) {
-    this.navCtrl.push("PersonalAgendaDetailPage", { agendaId: event });
+  detailAgenda(date: any) {
+    this.navCtrl.push("PersonalAgendaDetailPage", { date: date });
   }
 }

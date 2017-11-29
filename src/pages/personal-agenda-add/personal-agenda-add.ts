@@ -2,6 +2,8 @@ import { Component } from "@angular/core";
 import { IonicPage, NavController, NavParams } from "ionic-angular";
 import { DatepickerProvider } from "../../providers/datepicker/datepicker";
 import { PersonalProvider } from "../../providers/personal/personal";
+import { IAgendaAdd } from "../../interface/agenda-add";
+import * as moment from "moment";
 
 @IonicPage()
 @Component({
@@ -9,14 +11,15 @@ import { PersonalProvider } from "../../providers/personal/personal";
   templateUrl: "personal-agenda-add.html"
 })
 export class PersonalAgendaAddPage {
-  private agendaData: any = {
-    tanggalMulai: "",
-    waktuMulai: "",
-    tanggalAkhir: "",
-    waktuAkhir: "",
+  private agendaData: IAgendaAdd = {
+    tanggal_mulai: "",
+    jam_mulai: "",
+    tanggal_akhir: "",
+    jam_akhir: "",
     uraian: "",
     lokasi: "",
-    peserta: []
+    unit: "",
+    pegawai: ""
   };
 
   peserta: string = "";
@@ -33,39 +36,40 @@ export class PersonalAgendaAddPage {
   ionViewDidLoad() {}
 
   async tanggalMulai() {
-    this.agendaData.tanggalMulai = await this.datePicker.datePickerData(
-      this.MODE.DATE
-    );
+    const date = await this.datePicker.datePickerData(this.MODE.DATE);
+    this.agendaData.tanggal_mulai = this.convertDatepickerDate(date);
   }
 
   async jamMulai() {
-    this.agendaData.waktuMulai = await this.datePicker.datePickerData(
-      this.MODE.TIME
-    );
+    const jamMulai = await this.datePicker.datePickerData(this.MODE.TIME);
+    this.agendaData.jam_mulai = this.convertDatepickerDate(jamMulai, "HH:mm");
   }
 
   async tanggalAkhir() {
-    this.agendaData.tanggalAkhir = await this.datePicker.datePickerData(
-      this.MODE.DATE
-    );
+    const tanggalAkhir = await this.datePicker.datePickerData(this.MODE.DATE);
+    this.agendaData.tanggal_akhir = this.convertDatepickerDate(tanggalAkhir);
   }
 
   async jamAkhir() {
-    this.agendaData.jamAkhir = await this.datePicker.datePickerData(
-      this.MODE.TIME
-    );
+    const jamAkhir = await this.datePicker.datePickerData(this.MODE.TIME);
+    this.agendaData.jam_akhir = this.convertDatepickerDate(jamAkhir, "HH:mm");
+  }
+  convertDatepickerDate(date: any, format: any = "DD-MM-YYYY") {
+    return moment(date, moment.ISO_8601).format(format);
   }
 
   tambahAgenda() {
-    this.personalProvider.tambahAgenda();
+    this.personalProvider
+      .tambahAgenda(this.agendaData)
+      .subscribe(res => console.log(res), err => console.log(err));
   }
 
-  addPeserta(peserta: string) {
-    this.agendaData.peserta.push({ nama: peserta });
-    console.log(this.agendaData.peserta);
-  }
+  // addPeserta(peserta: string) {
+  //   this.agendaData.peserta.push({ nama: peserta });
+  //   console.log(this.agendaData.peserta);
+  // }
 
-  removePeserta(index: number) {
-    this.agendaData.peserta.splice(index, 1);
-  }
+  // removePeserta(index: number) {
+  //   this.agendaData.peserta.splice(index, 1);
+  // }
 }

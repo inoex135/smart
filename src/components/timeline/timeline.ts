@@ -15,8 +15,8 @@ export class TimelineComponent {
     this.CURRENT_TYPE = TimelineType;
   }
 
-  detailAgenda() {
-    this.childEvent.emit("this is a test");
+  detailAgenda(date: any) {
+    this.childEvent.emit(date);
   }
 }
 

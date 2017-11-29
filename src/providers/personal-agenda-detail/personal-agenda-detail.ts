@@ -8,9 +8,8 @@ import { HttpParams } from "@angular/common/http";
 export class PersonalAgendaDetailProvider {
   constructor(private api: ApiProvider) {}
 
+  // untuk personal -> view agenda -> view detail
   getDetailAgenda(params?: any) {
-    // let httpParams = new HttpParams().set("start", "John").set("end", "Doe");
-    // return this.api.get("/personal/calendar?start=01-01-2017&end=31-12-2017");
-    return AgendaDetailDummy.detail();
+    return this.api.get(`/personal/calendar?start=${params}&end=${params}`);
   }
 }
