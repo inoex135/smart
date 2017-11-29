@@ -76,15 +76,22 @@ export class PersonalProvider {
 
   tambahAgenda(params: IAgendaAdd) {
     let formData = new FormData();
+    const unit = params.unit.map(res => {
+      return res.kode_utuh;
+    });
 
-    formData.append("tanggal_mulai", params.tanggal_mulai);
-    formData.append("tanggal_akhir", params.tanggal_akhir);
+    const pegawai = params.pegawai.map(res => {
+      return res.nip;
+    });
+
+    formData.append("tanggal_mulai", params.tanggal_akhir);
+    formData.append("tanggal_akhir", params.tanggal_mulai);
     formData.append("jam_mulai", params.jam_mulai);
     formData.append("jam_akhir", params.jam_akhir);
     formData.append("uraian", params.uraian);
     formData.append("lokasi", params.lokasi);
-    formData.append("unit", JSON.stringify(params.unit));
-    formData.append("pegawai", JSON.stringify(params.pegawai));
+    formData.append("unit", unit);
+    formData.append("pegawai", pegawai);
 
     return this.api.postForm("/personal/agenda/create", formData);
   }
