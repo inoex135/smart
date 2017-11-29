@@ -13,13 +13,18 @@ export class PersonalAgendaDetailPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     private agendaProvider: PersonalAgendaDetailProvider
-  ) {}
+  ) {
+    console.log(this.navParams.get("date"));
 
-  ionViewDidLoad() {
     this.getDetailAgenda();
   }
 
+  ionViewDidLoad() {}
+
   getDetailAgenda() {
-    this.detailAgenda = this.agendaProvider.getDetailAgenda(true);
+    const date = this.navParams.get("date");
+    const agenda = this.agendaProvider.getDetailAgenda(date);
+
+    agenda.subscribe(res => (this.detailAgenda = res), err => false);
   }
 }
