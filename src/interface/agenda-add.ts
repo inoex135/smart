@@ -5,6 +5,6 @@ export interface IAgendaAdd {
   jam_akhir: any;
   uraian: string;
   lokasi: string;
-  unit: string;
+  unit: any[];
   pegawai: any;
 }
