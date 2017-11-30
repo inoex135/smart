@@ -46,12 +46,14 @@ export class PersonalAgendaAddPage {
     private masterUnit: MasterUnitProvider,
     private momentHelper: MomentHelper,
     private toastHelper: ToastHelper,
-    tokenProvider: TokenProvider
-  ) {
-    this.isSekretaris = tokenProvider.latestProfile.is_sekretaris;
-  }
+    private tokenProvider: TokenProvider
+  ) {}
 
-  ionViewDidLoad() {}
+  ionViewDidLoad() {
+    this.tokenProvider.getProfile().then(res => {
+      this.isSekretaris = this.tokenProvider.latestProfile.is_sekretaris;
+    });
+  }
 
   async tanggalMulai() {
     const tanggalMulai = await this.datePicker.datePickerData(this.MODE.DATE);
