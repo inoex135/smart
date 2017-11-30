@@ -12,7 +12,9 @@ export class MasterPegawaiProvider {
       .get(`/master/pegawai/search?nip=${keyword}&nama=${keyword}`)
       .pipe(
         map(res => {
-          return res.content;
+          return res.content.filter(item =>
+            item.nama.toLowerCase().startsWith(keyword.toLowerCase())
+          );
         })
       );
   }
