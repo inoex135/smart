@@ -32,7 +32,7 @@ export class NaskahDisposisiProvider {
     formData.append("petunjuk", data.petunjuk);
     formData.append("tanggal_selesai", data.tanggalSelesai);
     formData.append("tanggal_disposisi", data.tanggalDisposisi);
-    formData.append("catatan_disposisi", data);
+    formData.append("catatan_disposisi", data.catatan);
 
     this.api.postForm("/surat/disposisi/create", formData).subscribe(
       res => {

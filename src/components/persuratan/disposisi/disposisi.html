@@ -48,7 +48,7 @@
         </ion-item>
 
         <ion-item margin-top class="input--form">
-            <ion-input type="text" placeholder="Selaku"></ion-input>
+            <ion-input type="text" placeholder="Selaku" [(ngModel)]="disposisi.selaku"></ion-input>
         </ion-item>
 
         <ion-item no-lines class="blue-background">
@@ -102,7 +102,7 @@
             <h4 ion-text text-center color="default-blue">Petunjuk</h4>
         </ion-col>
         <ion-item-group class="blue-background">
-            <ion-item *ngFor="let petunjuk of datas?.petunjuk; let i = index" class="petunjuk blue-background">
+            <ion-item [(ngModel)]="disposisi.petunjuk" *ngFor="let petunjuk of datas?.petunjuk; let i = index" class="petunjuk blue-background" >
                 <ion-label text-wrap>{{petunjuk?.keterangan}}</ion-label>
                 <ion-checkbox color="primary" name="petunjuk[i]" (ionChange)="onChange(petunjuk, $event.checked, i)"></ion-checkbox>
             </ion-item>
@@ -122,13 +122,12 @@
         </ion-col>
         <ion-item class="blue-background">
             <ion-label stacked>Target Selesai</ion-label>
-            <ion-datetime no-padding class="ion-datetime-custom" type="text" [(ngModel)]="tujuan" displayFormat="DD-MM-YYYY" pickerFormat="DD-MM-YYYY"
-                [(ngModel)]="disposisi.targetSelesai"></ion-datetime>
+            <ion-datetime no-padding class="ion-datetime-custom" type="text" [(ngModel)]="disposisi.tanggalSelesai" displayFormat="DD-MM-YYYY" pickerFormat="DD-MM-YYYY"></ion-datetime>
         </ion-item>
 
         <ion-item class="blue-background">
             <ion-label stacked>Tanggal Disposisi</ion-label>
-            <ion-datetime no-padding class="ion-datetime-custom" displayFormat="DD-MM-YYYY" pickerFormat="DD-MM-YYYY" [(ngModel)]="disposisi.tanggal"></ion-datetime>
+            <ion-datetime no-padding class="ion-datetime-custom" [(ngModel)]="disposisi.tanggalDisposisi" displayFormat="DD-MM-YYYY" pickerFormat="DD-MM-YYYY" [(ngModel)]="disposisi.tanggal"></ion-datetime>
         </ion-item>
 
         <ion-item class="blue-background">

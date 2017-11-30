@@ -57,8 +57,6 @@ export class AptVerifikasiComponent {
 
   verifikasi() {
   	const status = {status:this.verifikasiStatus};
-  	console.log("inside verifikasi ",status);
-  	console.log("inside verifikasi ",this.itemId);
     this.aptProvider.verifikasi(this.itemId,status).subscribe(
         res => ( this.message = res),
         err => {
