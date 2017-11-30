@@ -11,6 +11,7 @@ import { AptDummy } from "../../dummy/apt.dummy";
 import remove from "lodash/remove";
 import { debounceTime } from "rxjs/operators";
 import { ToastHelper } from "../../helpers/toast-helper";
+import { APT_INDIKATOR } from "../../constant/apt-indikator";
 
 @Component({
   selector: "page-apt",
@@ -29,6 +30,7 @@ export class AptPage {
   searching: boolean = false;
 
   listAptId: any[] = [];
+  showAgendaButton: boolean = false;
 
   constructor(
     public navCtrl: NavController,
@@ -53,8 +55,13 @@ export class AptPage {
     this.getAptList();
   }
 
-  detailApt(itemId: any) {
-    this.navCtrl.push(AptDetailPage, { itemId: itemId });
+  detailApt(item: any) {
+    if (item.statusString === APT_INDIKATOR.DIAGENDAKAN) {
+      this.navCtrl.push(AptDetailPage, { itemId: item.id });
+    } else {
+      this.showAgendaButton = true;
+      this.listAptId.push(item.id);
+    }
   }
 
   isItemPressed() {
@@ -146,7 +153,10 @@ export class AptPage {
     this.aptProvider.agendakanApt({ idList: this.listAptId }).subscribe(
       res => {
         this.isPress = false;
+        this.showAgendaButton = false;
         this.toastHelper.present(res.message);
+        // ketika sukses agendakan, get data apt yg terbaru
+        this.getAptList();
       },
       err => {
         this.isPress = false;
