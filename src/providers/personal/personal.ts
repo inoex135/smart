@@ -16,7 +16,7 @@ export class PersonalProvider {
   async getListEvent(date: any = moment()) {
     const params = await this.getParams(date);
 
-    const url = `/personal/calendar/${params.nip}/${params.startDate}/${
+    const url = `/personal/calendar?start=${params.startDate}&end=${
       params.endDate
     }`;
 
@@ -70,8 +70,10 @@ export class PersonalProvider {
     });
   }
 
-  agendaPersonal() {
-    return this.api.get("/apt/dashboard/progres-pengajuan");
+  agendaPersonal(params: { start: string; end: string }) {
+    return this.api.get(
+      `/personal/calendar?start=${params.start}&end=${params.end}`
+    );
   }
 
   tambahAgenda(params: IAgendaAdd) {
@@ -84,8 +86,8 @@ export class PersonalProvider {
       return res.nip;
     });
 
-    formData.append("tanggal_mulai", params.tanggal_akhir);
-    formData.append("tanggal_akhir", params.tanggal_mulai);
+    formData.append("tanggal_mulai", params.tanggal_mulai);
+    formData.append("tanggal_akhir", params.tanggal_akhir);
     formData.append("jam_mulai", params.jam_mulai);
     formData.append("jam_akhir", params.jam_akhir);
     formData.append("uraian", params.uraian);

@@ -25,21 +25,23 @@ export class AptProvider {
     return this.apiProvider.get(url).pipe(map(res => res.content));
   }
 
-   getPelayananList() {
+  getPelayananList() {
     const url = "/apt/pelayanan";
     const data = this.apiProvider.get(url);
-    console.log("after getting list pelayanan"+ data);
+
     return data;
   }
 
-  search(keyword:string, page: number = 0, size: number = 10) {
-   return this.apiProvider.get(`/apt/permohonan/pending?keyword=${keyword}&page=${page}&size=${size}`);
+  search(keyword: string, page: number = 0, size: number = 10) {
+    return this.apiProvider.get(
+      `/apt/permohonan/pending?keyword=${keyword}&page=${page}&size=${size}`
+    );
   }
 
-  searchByTipe(keyword:string, page: number = 0, size: number = 10) {
-    
-    return this.apiProvider.get(`/apt/permohonan/pending?layanan=${keyword}&page=${page}&size=${size}`);
-    
+  searchByTipe(keyword: string, page: number = 0, size: number = 10) {
+    return this.apiProvider.get(
+      `/apt/permohonan/pending?layanan=${keyword}&page=${page}&size=${size}`
+    );
   }
 
   // get list notifikasi apt
@@ -55,17 +57,24 @@ export class AptProvider {
     return this.apiProvider.get(`/apt/permohonan/detail/${aptId}`);
   }
 
-  // get detail apt pratinjau
-  getDetailAptAction(action: string,aptId: number) {
+  agendakanApt(params: any) {
+    return this.apiProvider.post("/apt/permohonan/agendakan", params);
+  }
 
+  tidakAgendakanApt(params: any) {
+    return this.apiProvider.post("/apt/permohonan/tolak", params);
+  }
+
+  // get detail apt pratinjau
+  getDetailAptAction(action: string, aptId: number) {
     return this.apiProvider.get(`/apt/permohonan/${action}/${aptId}`);
   }
 
-  verifikasi(id:number,status:any){
-
-  console.log("inside verifikasi provider");
-  const statusString = status.status;
-   return this.apiProvider.post(`/apt/permohonan/verifikasi/${id}?status=${statusString}`); 
+  verifikasi(id: number, status: any) {
+    const statusString = status.status;
+    return this.apiProvider.post(
+      `/apt/permohonan/verifikasi/${id}?status=${statusString}`
+    );
   }
 
   download(fileDir) {

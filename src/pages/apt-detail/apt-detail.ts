@@ -7,6 +7,8 @@ import { LoaderHelper } from "../../helpers/loader-helper";
 import { FileTransfer } from "@ionic-native/file-transfer";
 import { AptHelper } from "../../helpers/apt-helper";
 import { File } from "@ionic-native/file";
+import { APT_INDIKATOR } from "../../constant/apt-indikator";
+
 @Component({
   selector: "page-apt-detail",
   templateUrl: "apt-detail.html"
@@ -14,10 +16,10 @@ import { File } from "@ionic-native/file";
 export class AptDetailPage {
   itemId: any;
   ACTION = AptAction;
-
+  aptIndikator = APT_INDIKATOR;
   aptDetail: any = {};
   fileDirectory: any;
-
+  column: string;
   constructor(
     private navParams: NavParams,
     private navCtrl: NavController,

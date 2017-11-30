@@ -1,4 +1,4 @@
-import { Component,Input } from "@angular/core";
+import { Component, Input } from "@angular/core";
 import { NaskahDisposisiProvider } from "../../../providers/naskah-disposisi/naskah-disposisi";
 import { Observable } from "rxjs/Observable";
 import { IDisposisiUnit } from "../../../interface/disposisi-unit";
@@ -15,21 +15,20 @@ export class Disposisi {
   unit: Array<any> = [];
   selectedUnit: Array<any> = [];
   lead: Array<string> = [];
-  message : string="";
+  message: string = "";
   disposisi: any = {
     sifatSurat: "",
     catatan: "",
     tanggalSelesai: "",
     tanggalDisposisi: "",
     tanggal: "",
-    sumasId:"",
-    petunjuk: [],
-    unitTujuan:[]
+    sumasId: "",
+    petunjuk: []
   };
 
   disposisiAs: string = "";
-  @Input() naskahId:any;
-  sumasId : any;
+  @Input() naskahId: any;
+  sumasId: any;
 
   readonly selectAs: any = {
     unit: "UNIT",
@@ -57,7 +56,10 @@ export class Disposisi {
     disposisiTanggal: false
   };
 
-  constructor(private disposisiProvider: NaskahDisposisiProvider,private navParams: NavParams) {
+  constructor(
+    private disposisiProvider: NaskahDisposisiProvider,
+    private navParams: NavParams
+  ) {
     this.init();
   }
 
@@ -65,7 +67,7 @@ export class Disposisi {
     const petunjuk = this.disposisiProvider.getPetunjuk();
     const unitDisposisi = this.disposisiProvider.getUnitDisposisi();
     const sifatSurat = this.disposisiProvider.getSifatSurat();
-    
+
     Observable.zip(petunjuk, unitDisposisi, sifatSurat).subscribe(
       ([petunjuk, unitDisposisi, sifatSurat]) => {
         this.datas.jabatan = unitDisposisi;
@@ -202,16 +204,14 @@ export class Disposisi {
     }
   }
 
-  simpan(){
-  this.disposisi.sumasId = this.naskahId;
-  console.log(this.disposisi);
-  
-    this.disposisiProvider.simpanDisposisi(this.disposisi)
-    .subscribe(
-        res => ( this.message = res),
-        err => {
+  simpan() {
+    this.disposisi.sumasId = this.naskahId;
+
+    this.disposisiProvider.simpanDisposisi(this.disposisi).subscribe(
+      res => (this.message = res),
+      err => {
         console.log(err);
-        }
-      );;
+      }
+    );
   }
 }

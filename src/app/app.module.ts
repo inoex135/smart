@@ -60,6 +60,7 @@ import { UserProvider } from "../providers/user/user";
 import { HomeProvider } from "../providers/home/home";
 import { HttpClientModule } from "@angular/common/http";
 import { NaskahDisposisiProvider } from "../providers/naskah-disposisi/naskah-disposisi";
+import { ToastHelper } from "../helpers/toast-helper";
 
 @NgModule({
   declarations: [
@@ -127,7 +128,8 @@ import { NaskahDisposisiProvider } from "../providers/naskah-disposisi/naskah-di
     DatePicker,
     DatepickerProvider,
     HomeProvider,
-    NaskahDisposisiProvider
+    NaskahDisposisiProvider,
+    ToastHelper
   ]
 })
 export class AppModule {}

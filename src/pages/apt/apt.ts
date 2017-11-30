@@ -8,8 +8,10 @@ import { AptDetailPage } from "../apt-detail/apt-detail";
 import { AptHelper } from "../../helpers/apt-helper";
 import { LoaderHelper } from "../../helpers/loader-helper";
 import { AptDummy } from "../../dummy/apt.dummy";
-
+import remove from "lodash/remove";
 import { debounceTime } from "rxjs/operators";
+import { ToastHelper } from "../../helpers/toast-helper";
+import { APT_INDIKATOR } from "../../constant/apt-indikator";
 
 @Component({
   selector: "page-apt",
@@ -18,14 +20,17 @@ import { debounceTime } from "rxjs/operators";
 export class AptPage {
   params: any = {};
   items: any = [];
-  pelayanans : any=[];
+  pelayanans: any = [];
   fileDirectory: any;
   loader: any;
   redirectComponent: string = "AptNotifikasiPage";
 
   isPress: boolean = false;
-  keyword :string;
+  keyword: string;
   searching: boolean = false;
+
+  listAptId: any[] = [];
+  showAgendaButton: boolean = false;
 
   constructor(
     public navCtrl: NavController,
@@ -34,15 +39,15 @@ export class AptPage {
     private loadingCtrl: LoadingController,
     file: File,
     private aptHelper: AptHelper,
-    private loaderHelper: LoaderHelper
+    private loaderHelper: LoaderHelper,
+    private toastHelper: ToastHelper
   ) {
     this.fileDirectory = file.externalRootDirectory + "Download";
-    
+
     this.loader = this.loadingCtrl.create({
       content: "Wait download....",
       spinner: "dots"
     });
-    
   }
 
   ionViewDidLoad() {
@@ -50,22 +55,24 @@ export class AptPage {
     this.getAptList();
   }
 
-  detailApt(itemId: any) {
-    this.navCtrl.push(AptDetailPage, { itemId: itemId });
+  detailApt(item: any) {
+    if (item.statusString === APT_INDIKATOR.DIAGENDAKAN) {
+      this.navCtrl.push(AptDetailPage, { itemId: item.id });
+    } else {
+      this.showAgendaButton = true;
+      this.listAptId.push(item.id);
+    }
   }
 
   isItemPressed() {
     this.isPress = !this.isPress;
   }
 
-   getPelayananList() {
-    
- 
+  getPelayananList() {
     this.aptProvider.getPelayananList().subscribe(
       res => {
         // @TODO : uncomment if data already
         this.pelayanans = res.content;
- 
       },
       err => {
         this.loaderHelper.errorHandleLoader(err.error_code, this.navCtrl);
@@ -110,27 +117,71 @@ export class AptPage {
     this.loader.dismiss();
   }
 
-  search( keyword: any) {
+  search(keyword: any) {
     let searchProvider: any;
     this.showLoader();
-      searchProvider = this.aptProvider.search(keyword);
+    searchProvider = this.aptProvider.search(keyword);
     searchProvider
       .pipe(debounceTime(700))
       .finally(() => this.hideLoader())
-      .subscribe(
-        res => ( this.items = res.content)
-        
-      );
+      .subscribe(res => (this.items = res.content));
   }
 
-  searchByTipe( keyword: any) {
+  searchByTipe(keyword: any) {
     let searchProvider: any;
     searchProvider = this.aptProvider.searchByTipe(keyword);
-    searchProvider.subscribe(
-        res => ( this.items = res.content),
-        err => false
-      );
-      
+    searchProvider.subscribe(res => (this.items = res.content), err => false);
+  }
+
+  selectedApt(naskahId: any, event) {
+    if (event.checked) {
+      this.listAptId.push(naskahId);
+    } else {
+      this.removeNaskah(naskahId);
+    }
+  }
+
+  removeNaskah(naskahId: number) {
+    const removeNaskah = remove(this.listAptId, res => {
+      return res == naskahId;
+    });
+
+    return removeNaskah;
+  }
+
+  agendakanApt() {
+    this.aptProvider.agendakanApt({ idList: this.listAptId }).subscribe(
+      res => {
+        this.isPress = false;
+        this.showAgendaButton = false;
+        this.toastHelper.present(res.message);
+        // ketika sukses agendakan, get data apt yg terbaru
+        this.getAptList();
+      },
+      err => {
+        this.isPress = false;
+      }
+    );
+  }
+
+  tidakAgendakanApt() {
+    this.aptProvider.tidakAgendakanApt({ idList: this.listAptId }).subscribe(
+      res => {
+        this.isPress = false;
+        this.showAgendaButton = false;
+        this.toastHelper.present(res.message);
+        // ketika sukses agendakan, get data apt yg terbaru
+        this.getAptList();
+      },
+      err => {
+        this.listAptId = [];
+        this.isPress = false;
+        this.showAgendaButton = false;
+        console.log(err);
+
+        // this.toastHelper.present(err.data.message);
+      }
+    );
   }
 
   showLoader() {
