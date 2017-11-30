@@ -32,7 +32,9 @@ export class ApiProvider {
   // set header for FormData in login
   private setHeadersForm() {
     if (this.tokenProvider.latestToken) {
-      return new HttpHeaders().append("token", this.tokenProvider.latestToken);
+      return new HttpHeaders()
+        .set("token", this.tokenProvider.latestToken)
+        .set("Authorization", "smartdjkn2017mobile");
     }
 
     return new HttpHeaders().set("Authorization", "smartdjkn2017mobile");
@@ -52,6 +54,19 @@ export class ApiProvider {
     }
 
     return ErrorObservable.create(errMsg);
+  }
+
+  private handleErrorForm(httpError: HttpErrorResponse) {
+    let errMessage: any;
+    let errorData: any = httpError.error;
+
+    if (errorData.error_message) {
+      errMessage = errorData.error_message;
+    } else {
+      errMessage = errorData.data;
+    }
+
+    return ErrorObservable.create(errMessage);
   }
 
   get(path: string) {
@@ -86,6 +101,6 @@ export class ApiProvider {
       .post(`${ENV.API_URL}${path}`, body, {
         headers: this.setHeadersForm()
       })
-      .pipe(map(this.extractData), catchError(this.handleError));
+      .pipe(map(this.extractData), catchError(this.handleErrorForm));
   }
 }
