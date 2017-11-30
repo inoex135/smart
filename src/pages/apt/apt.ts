@@ -7,7 +7,6 @@ import { AptDetailPage } from "../apt-detail/apt-detail";
 
 import { AptHelper } from "../../helpers/apt-helper";
 import { LoaderHelper } from "../../helpers/loader-helper";
-import { AptDummy } from "../../dummy/apt.dummy";
 import remove from "lodash/remove";
 import { debounceTime } from "rxjs/operators";
 import { ToastHelper } from "../../helpers/toast-helper";

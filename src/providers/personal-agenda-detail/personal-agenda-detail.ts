@@ -1,8 +1,6 @@
 import { Injectable } from "@angular/core";
 
 import { ApiProvider } from "../api/api";
-import { AgendaDetailDummy } from "../../dummy/agenda-detail.dummy";
-import { HttpParams } from "@angular/common/http";
 
 @Injectable()
 export class PersonalAgendaDetailProvider {

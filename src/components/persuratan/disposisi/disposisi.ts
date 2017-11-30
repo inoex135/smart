@@ -3,7 +3,6 @@ import { NaskahDisposisiProvider } from "../../../providers/naskah-disposisi/nas
 import { Observable } from "rxjs/Observable";
 import { IDisposisiUnit } from "../../../interface/disposisi-unit";
 import { debounceTime, distinctUntilChanged } from "rxjs/operators";
-import { NavParams } from "ionic-angular";
 
 @Component({
   selector: "disposisi",
@@ -56,10 +55,7 @@ export class Disposisi {
     disposisiTanggal: false
   };
 
-  constructor(
-    private disposisiProvider: NaskahDisposisiProvider,
-    private navParams: NavParams
-  ) {
+  constructor(private disposisiProvider: NaskahDisposisiProvider) {
     this.init();
   }
 

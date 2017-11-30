@@ -1,11 +1,9 @@
 import { Component } from "@angular/core";
-import { NavController, NavParams, AlertController } from "ionic-angular";
+import { NavController, NavParams } from "ionic-angular";
 
 import { PersonalProvider } from "../../providers/personal/personal";
 import { LoaderHelper } from "../../helpers/loader-helper";
-import { PersonalCalendarOptions } from "../../config/personal-calendar";
-import { CalendarComponentOptions } from "ion2-calendar";
-import * as moment from "moment";
+
 @Component({
   selector: "page-personal",
   templateUrl: "personal.html"
@@ -28,7 +26,6 @@ export class PersonalPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    private alertCtrl: AlertController,
     private personalProvider: PersonalProvider,
     private loaderHelper: LoaderHelper
   ) {}
