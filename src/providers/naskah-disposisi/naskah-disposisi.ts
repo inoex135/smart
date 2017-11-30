@@ -34,13 +34,6 @@ export class NaskahDisposisiProvider {
     formData.append("tanggal_disposisi", data.tanggalDisposisi);
     formData.append("catatan_disposisi", data.catatan);
 
-    this.api.postForm("/surat/disposisi/create", formData).subscribe(
-      res => {
-        console.log(res);
-      },
-      err => {
-        console.log(err);
-      }
-    );
+    return this.api.postForm("/surat/disposisi/create", formData);
   }
 }
