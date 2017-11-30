@@ -23,7 +23,8 @@ export class Disposisi {
     tanggalDisposisi: "",
     tanggal: "",
     sumasId:"",
-    petunjuk: []
+    petunjuk: [],
+    unitTujuan:[]
   };
 
   disposisiAs: string = "";
@@ -205,7 +206,8 @@ export class Disposisi {
   this.disposisi.sumasId = this.naskahId;
   console.log(this.disposisi);
   
-    this.disposisiProvider.simpanDisposisi(this.disposisi).subscribe(
+    this.disposisiProvider.simpanDisposisi(this.disposisi)
+    .subscribe(
         res => ( this.message = res),
         err => {
         console.log(err);

@@ -10,7 +10,7 @@ import { Slides, NavController,NavParams } from "ionic-angular";
 })
 export class AptVerifikasiComponent {
   	verifikasiStatus: string;
-  	currentIndex = 0;
+  	currentIndex:number = 0;
 	aptDetailAction  : any;
 	itemId: number;
 	action: string;
