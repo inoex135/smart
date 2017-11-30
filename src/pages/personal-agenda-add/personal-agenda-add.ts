@@ -10,6 +10,7 @@ import { MomentHelper } from "../../helpers/moment-helper";
 import { MasterPegawaiProvider } from "../../providers/master-pegawai/master-pegawai";
 import { MasterUnitProvider } from "../../providers/master-unit/master-unit";
 import { ToastHelper } from "../../helpers/toast-helper";
+import { TokenProvider } from "../../providers/token/token";
 
 @IonicPage()
 @Component({
@@ -17,6 +18,8 @@ import { ToastHelper } from "../../helpers/toast-helper";
   templateUrl: "personal-agenda-add.html"
 })
 export class PersonalAgendaAddPage {
+  isSekretaris: boolean = false;
+
   private agendaData: IAgendaAdd = {
     tanggal_mulai: "",
     jam_mulai: "",
@@ -42,8 +45,11 @@ export class PersonalAgendaAddPage {
     private masterPegawai: MasterPegawaiProvider,
     private masterUnit: MasterUnitProvider,
     private momentHelper: MomentHelper,
-    private toastHelper: ToastHelper
-  ) {}
+    private toastHelper: ToastHelper,
+    tokenProvider: TokenProvider
+  ) {
+    this.isSekretaris = tokenProvider.latestProfile.is_sekretaris;
+  }
 
   ionViewDidLoad() {}
 

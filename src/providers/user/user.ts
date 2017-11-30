@@ -5,6 +5,7 @@ import { ApiProvider } from "../api/api";
 import { TokenProvider } from "../token/token";
 
 import { User } from "../../models/users";
+import { map } from "rxjs/operators/map";
 
 @Injectable()
 export class UserProvider {
@@ -34,6 +35,10 @@ export class UserProvider {
     this.tokenProvider.saveToken(data.token);
     this.tokenProvider.saveUser(data.user);
     // this.isAuthenticatedSubject.next(true);
+  }
+
+  setProfile(data: any) {
+    this.tokenProvider.saveProfile(data);
   }
 
   purgeAuth() {
@@ -69,6 +74,13 @@ export class UserProvider {
   }
 
   getProfile() {
-    return this.apiProvider.get("/personal/profile");
+    return this.apiProvider.get("/personal/profile").pipe(
+      map(res => {
+        if (!this.tokenProvider.latestProfile) {
+          this.setProfile(res);
+        }
+        return res;
+      })
+    );
   }
 }

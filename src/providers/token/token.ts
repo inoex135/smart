@@ -1,10 +1,12 @@
 import { Injectable } from "@angular/core";
 import { Storage } from "@ionic/storage";
+import { User } from "../../models/users";
 
 @Injectable()
 export class TokenProvider {
   public latestToken: string;
   public latestUser: any;
+  public latestProfile: any;
 
   constructor(public storage: Storage) {}
 
@@ -28,6 +30,16 @@ export class TokenProvider {
       });
   }
 
+  getProfile(): Promise<Object> {
+    return this.storage
+      .ready()
+      .then(() => this.storage.get("profile") as Promise<Object>)
+      .then(profile => {
+        this.latestProfile = profile;
+        return profile;
+      });
+  }
+
   saveToken(token: string): Promise<void> {
     this.latestToken = token;
     return this.storage
@@ -42,9 +54,22 @@ export class TokenProvider {
       .then(() => this.storage.set("user", user) as Promise<void>);
   }
 
+  saveProfile(profile: any): Promise<void> {
+    this.latestProfile = profile;
+
+    return this.storage
+      .ready()
+      .then(() => this.storage.set("profile", profile) as Promise<void>);
+  }
+
   destroyToken() {
     this.latestToken = null;
     return this.storage.remove("token");
+  }
+
+  destroyProfile() {
+    this.latestProfile = null;
+    return this.storage.remove("profile");
   }
 
   destroyUser() {
@@ -55,5 +80,6 @@ export class TokenProvider {
   destroy() {
     this.destroyToken();
     this.destroyUser();
+    this.destroyProfile();
   }
 }

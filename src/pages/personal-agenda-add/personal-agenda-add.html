@@ -36,33 +36,35 @@
           <ion-input required [(ngModel)]="agendaData.lokasi" type="text" placeholder="Lokasi"></ion-input>
         </ion-item>
 
-        <!-- search unit -->
-        <ion-item no-lines>
-          <ion-label no-margin color="orange">Undang Unit</ion-label>
-        </ion-item>
+        <div *ngIf="isSekretaris">
+          <!-- search unit -->
+          <ion-item no-lines>
+            <ion-label no-margin color="orange">Undang Unit</ion-label>
+          </ion-item>
 
-        <ion-auto-complete (itemSelected)="addData(agendaData?.unit, $event)" [dataProvider]="masterUnit" #autoComplete></ion-auto-complete>
+          <ion-auto-complete (itemSelected)="addData(agendaData?.unit, $event)" [dataProvider]="masterUnit" #autoComplete></ion-auto-complete>
 
-        <ion-item *ngFor="let person of agendaData?.unit; let i = index">
-          {{person?.singkatan}}
-          <button (click)="removeData(agendaData?.unit, i)" ion-button color="light" item-end>
-            <ion-icon name="close"></ion-icon>
-          </button>
-        </ion-item>
+          <ion-item *ngFor="let person of agendaData?.unit; let i = index">
+            {{person?.singkatan}}
+            <button (click)="removeData(agendaData?.unit, i)" ion-button color="light" item-end>
+              <ion-icon name="close"></ion-icon>
+            </button>
+          </ion-item>
 
-        <!-- search pegawai -->
-        <ion-item no-lines>
-          <ion-label no-margin color="orange">Undang Pegawai</ion-label>
-        </ion-item>
+          <!-- search pegawai -->
+          <ion-item no-lines>
+            <ion-label no-margin color="orange">Undang Pegawai</ion-label>
+          </ion-item>
 
-        <ion-auto-complete (itemSelected)="addData(agendaData?.pegawai, $event)" [dataProvider]="masterPegawai" #autoComplete></ion-auto-complete>
+          <ion-auto-complete (itemSelected)="addData(agendaData?.pegawai, $event)" [dataProvider]="masterPegawai" #autoComplete></ion-auto-complete>
 
-        <ion-item *ngFor="let person of agendaData?.pegawai; let i = index">
-          {{person?.nama}}
-          <button (click)="removeData(agendaData?.pegawai, i)" ion-button color="light" item-end>
-            <ion-icon name="close"></ion-icon>
-          </button>
-        </ion-item>
+          <ion-item *ngFor="let person of agendaData?.pegawai; let i = index">
+            {{person?.nama}}
+            <button (click)="removeData(agendaData?.pegawai, i)" ion-button color="light" item-end>
+              <ion-icon name="close"></ion-icon>
+            </button>
+          </ion-item>
+        </div>
 
         <!-- <div class="tambah-peserta">
           <ion-item>
