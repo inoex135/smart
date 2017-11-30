@@ -9,6 +9,7 @@ import { MomentHelper } from "../../helpers/moment-helper";
 
 import { MasterPegawaiProvider } from "../../providers/master-pegawai/master-pegawai";
 import { MasterUnitProvider } from "../../providers/master-unit/master-unit";
+import { ToastHelper } from "../../helpers/toast-helper";
 
 @IonicPage()
 @Component({
@@ -40,7 +41,8 @@ export class PersonalAgendaAddPage {
     private personalProvider: PersonalProvider,
     private masterPegawai: MasterPegawaiProvider,
     private masterUnit: MasterUnitProvider,
-    private momentHelper: MomentHelper
+    private momentHelper: MomentHelper,
+    private toastHelper: ToastHelper
   ) {}
 
   ionViewDidLoad() {}
@@ -78,9 +80,15 @@ export class PersonalAgendaAddPage {
   }
 
   tambahAgenda() {
-    this.personalProvider
-      .tambahAgenda(this.agendaData)
-      .subscribe(res => console.log(res), err => console.log(err));
+    this.personalProvider.tambahAgenda(this.agendaData).subscribe(
+      res => {
+        this.toastHelper.present(res.messages);
+        this.navCtrl.pop();
+      },
+      err => {
+        this.toastHelper.present(err.errors[0].message);
+      }
+    );
   }
 
   addData(data: Array<any>, item: any) {
