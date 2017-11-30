@@ -61,7 +61,8 @@ export class HomePage {
         this.loaderHelper.dismiss();
       },
       err => {
-        console.log(err);
+        this.userProvider.purgeAuth();
+        this.loaderHelper.dismiss();
       }
     );
   }
