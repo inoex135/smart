@@ -15,7 +15,7 @@
     <ion-list>
       <ion-item *ngFor="let event of selectedDay.events">
         <p ion-text>{{event?.title}}</p>
-        <p ion-text>{{event?.startTime | indonesianDate:'HH:mm'}} - {{event?.endTime | indonesianDate:'HH:mm'}}</p>
+        <p ion-text>{{event?.timeStart }} - {{event?.timeEnd }}</p>
         <p ion-text>{{event?.type}}</p>
       </ion-item>
     </ion-list>
