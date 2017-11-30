@@ -37,7 +37,7 @@ export class NaskahMasukProvider {
   }
 
   searchNaskah(params: any = "") {
-    return this.api.get(`/surat/masuk/cari?tanggal=${params}`);
+    return this.api.get(`/surat/masuk/cari?keyword=${params}`);
   }
 
   searchNaskahByTipe(type: string, page: number = 0, size: number = 10) {

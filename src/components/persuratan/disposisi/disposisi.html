@@ -7,7 +7,7 @@
 
         <ion-col col-8 push-2 class="blue-background">
             <ion-list>
-                <ion-item class="blue-background" *ngFor="let target of selectUnitDisposisi">
+                <ion-item class="blue-background" *ngFor="let target of selectUnitDisposisi" >
                     <ion-checkbox (ionChange)="selectDisposisi(target)" color="primary" [value]="target"></ion-checkbox>
                     <ion-label text-wrap>{{target}}</ion-label>
                 </ion-item>
@@ -32,7 +32,7 @@
         </ion-item>
         <ion-item class="blue-background" *ngFor="let jabatan of datas?.jabatan; let i = index" no-lines>
             <ion-label text-wrap>{{jabatan?.uraian_jabatan}}</ion-label>
-            <ion-checkbox (ionChange)="selectUnit(jabatan, $event.checked)" [value]="jabatan?.kode_utuh"></ion-checkbox>
+            <ion-checkbox [(ngModel)]="disposisi.unitTujuan[i]" (ionChange)="selectUnit(jabatan, $event.checked)" [value]="jabatan?.kode_utuh"></ion-checkbox>
         </ion-item>
     </ion-row>
 
@@ -102,9 +102,9 @@
             <h4 ion-text text-center color="default-blue">Petunjuk</h4>
         </ion-col>
         <ion-item-group class="blue-background">
-            <ion-item [(ngModel)]="disposisi.petunjuk" *ngFor="let petunjuk of datas?.petunjuk; let i = index" class="petunjuk blue-background" >
+            <ion-item  *ngFor="let petunjuk of datas?.petunjuk; let i = index" class="petunjuk blue-background" >
                 <ion-label text-wrap>{{petunjuk?.keterangan}}</ion-label>
-                <ion-checkbox color="primary" name="petunjuk[i]" (ionChange)="onChange(petunjuk, $event.checked, i)"></ion-checkbox>
+                <ion-checkbox color="primary" name="petunjuk[i]" (ionChange)="onChange(petunjuk, $event.checked,i)"></ion-checkbox>
             </ion-item>
         </ion-item-group>
 
