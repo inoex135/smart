@@ -7,9 +7,24 @@
 
 
 <ion-content>
-  <ion-calendar [(ngModel)]="date" (onChange)="onChange($event)" [options]="options" [type]="type" [format]="'YYYY-MM-DD'"
-    [readonly]="readonly">
-  </ion-calendar>
+  <ion-label no-margin>
+    <h4 ion-text>{{viewTitle}}</h4>
+  </ion-label>
+
+  <ng-template #template let-showEventDetail="showEventDetail" let-selectedDate="selectedDay" let-noEventsLabel="noEventsLabel">
+    <ion-list>
+      <ion-item *ngFor="let event of selectedDay.events">
+        <p ion-text>{{event?.title}}</p>
+        <p ion-text>{{event?.startTime | indonesianDate:'HH:mm'}} - {{event?.endTime | indonesianDate:'HH:mm'}}</p>
+        <p ion-text>{{event?.type}}</p>
+      </ion-item>
+    </ion-list>
+  </ng-template>
+
+  <calendar [monthviewEventDetailTemplate]="template" [eventSource]="eventSource" [calendarMode]="calendar.mode" [currentDate]="calendar.currentDate"
+    (onEventSelected)="onEventSelected($event)" (onTitleChanged)="onViewTitleChanged($event)" (onTimeSelected)="onTimeSelected($event)"
+    step="30" class="calendar">
+  </calendar>
 
   <ion-fab right middle>
     <button ion-fab color="default-blue" (click)="addEvent()">

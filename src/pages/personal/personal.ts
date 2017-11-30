@@ -5,16 +5,25 @@ import { PersonalProvider } from "../../providers/personal/personal";
 import { LoaderHelper } from "../../helpers/loader-helper";
 import { PersonalCalendarOptions } from "../../config/personal-calendar";
 import { CalendarComponentOptions } from "ion2-calendar";
+import * as moment from "moment";
 @Component({
   selector: "page-personal",
   templateUrl: "personal.html"
 })
 export class PersonalPage {
-  date: string[] = ["2017-11-15", "2017-11-16"];
-  type: "string"; // 'string' | 'js-date' | 'moment' | 'time' | 'object'
-  readonly: boolean = true;
+  // date: string[] = ["2017-11-15", "2017-11-16"];
+  // type: "string"; // 'string' | 'js-date' | 'moment' | 'time' | 'object'
+  // readonly: boolean = true;
 
-  options: CalendarComponentOptions = PersonalCalendarOptions.options();
+  // options: CalendarComponentOptions = PersonalCalendarOptions.options();
+  eventSource: any;
+  selectedDay = new Date();
+  viewTitle: string;
+  date: any;
+  calendar = {
+    mode: "month",
+    currentDate: this.selectedDay
+  };
 
   constructor(
     public navCtrl: NavController,
@@ -23,22 +32,36 @@ export class PersonalPage {
     private personalProvider: PersonalProvider,
     private loaderHelper: LoaderHelper
   ) {}
-  getListEvent() {
-    // this.loaderHelper.createLoader();
-    // this.personalProvider
-    //   .getListEvent()
-    //   .then(res => {
-    //     this.date = res;
-    //     this.loaderHelper.dismiss();
-    //   })
-    //   .catch(err => {
-    //     console.log(err);
-    //     this.loaderHelper.errorHandleLoader(err.error_message, this.navCtrl);
-    //   });
 
+  onViewTitleChanged(title) {
+    this.viewTitle = title;
+  }
+  //func when date is click
+  onEventSelected(event) {
+    alert("ntak");
+    this.selectedDay = event;
+  }
+
+  onTimeSelected(ev) {
+    console.log(ev);
+
+    this.selectedDay = ev;
+  }
+  getListEvent() {
+    this.loaderHelper.createLoader();
     this.personalProvider
-      .agendaPersonal()
-      .subscribe(res => console.log(res), err => console.log());
+      .getListEvent()
+      .then(res => {
+        this.eventSource = res;
+        this.loaderHelper.dismiss();
+      })
+      .catch(err => {
+        this.loaderHelper.errorHandleLoader(err.error_message, this.navCtrl);
+      });
+
+    // this.personalProvider
+    //   .agendaPersonal()
+    //   .subscribe(res => (this.eventSource = res), err => console.log());
   }
 
   ionViewDidLoad() {
