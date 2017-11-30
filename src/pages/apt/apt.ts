@@ -8,8 +8,9 @@ import { AptDetailPage } from "../apt-detail/apt-detail";
 import { AptHelper } from "../../helpers/apt-helper";
 import { LoaderHelper } from "../../helpers/loader-helper";
 import { AptDummy } from "../../dummy/apt.dummy";
-
+import remove from "lodash/remove";
 import { debounceTime } from "rxjs/operators";
+import { ToastHelper } from "../../helpers/toast-helper";
 
 @Component({
   selector: "page-apt",
@@ -18,14 +19,16 @@ import { debounceTime } from "rxjs/operators";
 export class AptPage {
   params: any = {};
   items: any = [];
-  pelayanans : any=[];
+  pelayanans: any = [];
   fileDirectory: any;
   loader: any;
   redirectComponent: string = "AptNotifikasiPage";
 
   isPress: boolean = false;
-  keyword :string;
+  keyword: string;
   searching: boolean = false;
+
+  listAptId: any[] = [];
 
   constructor(
     public navCtrl: NavController,
@@ -34,15 +37,15 @@ export class AptPage {
     private loadingCtrl: LoadingController,
     file: File,
     private aptHelper: AptHelper,
-    private loaderHelper: LoaderHelper
+    private loaderHelper: LoaderHelper,
+    private toastHelper: ToastHelper
   ) {
     this.fileDirectory = file.externalRootDirectory + "Download";
-    
+
     this.loader = this.loadingCtrl.create({
       content: "Wait download....",
       spinner: "dots"
     });
-    
   }
 
   ionViewDidLoad() {
@@ -58,14 +61,11 @@ export class AptPage {
     this.isPress = !this.isPress;
   }
 
-   getPelayananList() {
-    
- 
+  getPelayananList() {
     this.aptProvider.getPelayananList().subscribe(
       res => {
         // @TODO : uncomment if data already
         this.pelayanans = res.content;
- 
       },
       err => {
         this.loaderHelper.errorHandleLoader(err.error_code, this.navCtrl);
@@ -110,27 +110,52 @@ export class AptPage {
     this.loader.dismiss();
   }
 
-  search( keyword: any) {
+  search(keyword: any) {
     let searchProvider: any;
     this.showLoader();
-      searchProvider = this.aptProvider.search(keyword);
+    searchProvider = this.aptProvider.search(keyword);
     searchProvider
       .pipe(debounceTime(700))
       .finally(() => this.hideLoader())
-      .subscribe(
-        res => ( this.items = res.content)
-        
-      );
+      .subscribe(res => (this.items = res.content));
   }
 
-  searchByTipe( keyword: any) {
+  searchByTipe(keyword: any) {
     let searchProvider: any;
     searchProvider = this.aptProvider.searchByTipe(keyword);
-    searchProvider.subscribe(
-        res => ( this.items = res.content),
-        err => false
-      );
-      
+    searchProvider.subscribe(res => (this.items = res.content), err => false);
+  }
+
+  selectedApt(naskahId: any, event) {
+    if (event.checked) {
+      this.listAptId.push(naskahId);
+    } else {
+      this.removeNaskah(naskahId);
+    }
+  }
+
+  removeNaskah(naskahId: number) {
+    const removeNaskah = remove(this.listAptId, res => {
+      return res == naskahId;
+    });
+
+    return removeNaskah;
+  }
+
+  agendakanApt() {
+    this.aptProvider.agendakanApt({ idList: this.listAptId }).subscribe(
+      res => {
+        this.isPress = false;
+        this.toastHelper.present(res.message);
+      },
+      err => {
+        this.isPress = false;
+      }
+    );
+  }
+
+  tidakAgendakanApt() {
+    this.aptProvider.tidakAgendakanApt();
   }
 
   showLoader() {
