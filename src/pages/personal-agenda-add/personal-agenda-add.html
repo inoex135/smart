@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="orange">
     <ion-title>Tambah Agenda</ion-title>
   </ion-navbar>
 </ion-header>
@@ -9,9 +9,9 @@
   <ion-grid>
     <ion-row wrap>
       <ion-col col-12>
-        <ion-item item-start>
-          <h4 ion-text>Tambah Agenda</h4>
-        </ion-item>
+        <h4 ion-text>Tambah Agenda</h4>
+      </ion-col>
+      <ion-col col-12>
         <ion-item margin-bottom class="input--form">
           <ion-input [(ngModel)]="agendaData.tanggal_mulai" (tap)="tanggalMulai()" type="text" placeholder="Tanggal Mulai Kegiatan"></ion-input>
         </ion-item>
@@ -29,15 +29,15 @@
         </ion-item>
 
         <ion-item margin-bottom no-padding class="textarea--form">
-          <ion-textarea [(ngModel)]="agendaData.uraian" type="text" placeholder="Uraian Kegiatan"></ion-textarea>
+          <ion-textarea required [(ngModel)]="agendaData.uraian" type="text" placeholder="Uraian Kegiatan"></ion-textarea>
         </ion-item>
 
         <ion-item margin-bottom class="input--form">
-          <ion-input [(ngModel)]="agendaData.lokasi" type="text" placeholder="Lokasi"></ion-input>
+          <ion-input required [(ngModel)]="agendaData.lokasi" type="text" placeholder="Lokasi"></ion-input>
         </ion-item>
 
         <!-- search unit -->
-        <ion-item>
+        <ion-item no-lines>
           <ion-label no-margin color="orange">Undang Unit</ion-label>
         </ion-item>
 
@@ -51,7 +51,7 @@
         </ion-item>
 
         <!-- search pegawai -->
-        <ion-item>
+        <ion-item no-lines>
           <ion-label no-margin color="orange">Undang Pegawai</ion-label>
         </ion-item>
 
