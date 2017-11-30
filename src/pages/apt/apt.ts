@@ -165,7 +165,23 @@ export class AptPage {
   }
 
   tidakAgendakanApt() {
-    this.aptProvider.tidakAgendakanApt();
+    this.aptProvider.tidakAgendakanApt({ idList: this.listAptId }).subscribe(
+      res => {
+        this.isPress = false;
+        this.showAgendaButton = false;
+        this.toastHelper.present(res.message);
+        // ketika sukses agendakan, get data apt yg terbaru
+        this.getAptList();
+      },
+      err => {
+        this.listAptId = [];
+        this.isPress = false;
+        this.showAgendaButton = false;
+        console.log(err);
+
+        // this.toastHelper.present(err.data.message);
+      }
+    );
   }
 
   showLoader() {

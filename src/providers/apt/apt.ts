@@ -61,8 +61,8 @@ export class AptProvider {
     return this.apiProvider.post("/apt/permohonan/agendakan", params);
   }
 
-  tidakAgendakanApt() {
-    return this.apiProvider.get("/apt/permohonan/pending");
+  tidakAgendakanApt(params: any) {
+    return this.apiProvider.post("/apt/permohonan/tolak", params);
   }
 
   // get detail apt pratinjau
