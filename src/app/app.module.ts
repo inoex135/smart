@@ -61,6 +61,9 @@ import { HomeProvider } from "../providers/home/home";
 import { HttpClientModule } from "@angular/common/http";
 import { NaskahDisposisiProvider } from "../providers/naskah-disposisi/naskah-disposisi";
 import { ToastHelper } from "../helpers/toast-helper";
+import { MomentHelper } from "../helpers/moment-helper";
+import { MasterUnitProvider } from "../providers/master-unit/master-unit";
+import { AutoCompleteModule } from "ionic2-auto-complete";
 
 @NgModule({
   declarations: [
@@ -88,7 +91,8 @@ import { ToastHelper } from "../helpers/toast-helper";
     PipesModule,
     RlTagInputModule,
     Ng2HighchartsModule,
-    CalendarModule
+    CalendarModule,
+    AutoCompleteModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -129,7 +133,9 @@ import { ToastHelper } from "../helpers/toast-helper";
     DatepickerProvider,
     HomeProvider,
     NaskahDisposisiProvider,
-    ToastHelper
+    ToastHelper,
+    MomentHelper,
+    MasterUnitProvider
   ]
 })
 export class AppModule {}
