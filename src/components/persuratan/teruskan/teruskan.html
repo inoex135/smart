@@ -2,11 +2,7 @@
     <ion-row wrap>
         <ion-col col-12 col-sm-12 col-md-12 offset-lg-3 col-lg-6 offset-xl-3 col-xl-6>
             <div class="form">
-                <!-- <ion-item margin-bottom class="input--form">
-                    <ion-input type="text" placeholder="Tujuan" [(ngModel)]="naskah.tujuan" name="tujuan"></ion-input>
-                </ion-item> -->
-
-                <ion-auto-complete (itemSelected)="addData(naskah.tujuan, $event)" [dataProvider]="masterUnit" #autoComplete></ion-auto-complete>
+                <ion-auto-complete (itemSelected)="setTujuan(agendaData?.tujuan, $event)" [dataProvider]="masterUnit" #autoComplete></ion-auto-complete>
 
                 <ion-item no-padding margin-bottom class="input--form">
                     <ion-select placeholder="Cuti, Lainnya, Tidak sesuai Tugas dan Fungsi" [(ngModel)]="naskah.alasan" name="alasan">

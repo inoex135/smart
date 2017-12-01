@@ -1,31 +1,6 @@
 teruskan {
   ion-auto-complete {
-    width: 50vw;
-  }
-  // custom input from
-  ion-item {
-    max-height: 1em;
-
-    // hapus padding agar scroll bisa mepet ke kanan form
-    .item-inner {
-      padding-right: 0 !important;
-    }
-
-    &.input--form {
-      border: 1px solid #e8e9eb !important;
-      border-radius: 5px;
-      .item-inner {
-        margin-left: 0 !important;
-      }
-      &.item-md {
-        padding-right: 0;
-        padding-left: 0;
-      }
-    }
-
-    ion-select {
-      width: 100%;
-      max-width: 100%; // agar value select bisa full muncul di semua, tidak terpotong
-    }
+    width: 95vw;
+    max-width: 95vh;
   }
 }
