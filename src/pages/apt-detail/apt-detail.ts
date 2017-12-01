@@ -19,7 +19,7 @@ export class AptDetailPage {
   aptIndikator = APT_INDIKATOR;
   aptDetail: any = {};
   fileDirectory: any;
-  isVerifikasiExist: string;
+  isVerifikasiExist: boolean;
   constructor(
     private navParams: NavParams,
     private navCtrl: NavController,
@@ -44,7 +44,8 @@ export class AptDetailPage {
       res => {
         const response = res.response;
         this.aptDetail = response.permohonan;
-        this.isVerifikasiExist = res.isVerifikasiExist;
+        this.isVerifikasiExist = response.isVerifikasiExist;
+
         this.loaderHelper.dismiss();
       },
       err => {
