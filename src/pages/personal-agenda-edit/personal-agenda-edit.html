@@ -1,0 +1,76 @@
+<ion-header>
+  <ion-navbar color="orange">
+    <ion-title>Edit Agenda</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-grid>
+    <ion-row wrap>
+      <ion-col col-12>
+        <h4 ion-text>Tambah Agenda</h4>
+      </ion-col>
+      <ion-col col-12>
+        <ion-item margin-bottom class="input--form">
+          <ion-input [(ngModel)]="agendaData.tanggal_mulai" (tap)="tanggalMulai()" type="text" placeholder="Tanggal Mulai Kegiatan"></ion-input>
+        </ion-item>
+
+        <ion-item margin-bottom class="input--form">
+          <ion-input [value]="agendaData.jam_mulai" (tap)="jamMulai()" type="text" placeholder="Waktu Mulai Kegiatan"></ion-input>
+        </ion-item>
+
+        <ion-item margin-bottom class="input--form">
+          <ion-input [value]="agendaData.tanggal_akhir" (tap)="tanggalAkhir()" type="text" placeholder="Tanggal Akhir Kegiatan"></ion-input>
+        </ion-item>
+
+        <ion-item margin-bottom class="input--form">
+          <ion-input [value]="agendaData.jam_akhir" (tap)="jamAkhir()" type="text" placeholder="Waktu Akhir Kegiatan"></ion-input>
+        </ion-item>
+
+        <ion-item margin-bottom no-padding class="textarea--form">
+          <ion-textarea required [(ngModel)]="agendaData.uraian" type="text" placeholder="Uraian Kegiatan"></ion-textarea>
+        </ion-item>
+
+        <ion-item margin-bottom class="input--form">
+          <ion-input required [(ngModel)]="agendaData.lokasi" type="text" placeholder="Lokasi"></ion-input>
+        </ion-item>
+
+        <div *ngIf="isSekretaris">
+          <!-- search unit -->
+          <ion-item no-lines>
+            <ion-label no-margin color="orange">Undang Unit</ion-label>
+          </ion-item>
+
+          <ion-auto-complete (itemSelected)="addData(agendaData?.unit, $event)" [dataProvider]="masterUnit" #autoComplete></ion-auto-complete>
+
+          <ion-item *ngFor="let person of agendaData?.unit; let i = index">
+            {{person?.singkatan}}
+            <button (click)="removeData(agendaData?.unit, i)" ion-button color="light" item-end>
+              <ion-icon name="close"></ion-icon>
+            </button>
+          </ion-item>
+
+          <!-- search pegawai -->
+          <ion-item no-lines>
+            <ion-label no-margin color="orange">Undang Pegawai</ion-label>
+          </ion-item>
+
+          <ion-auto-complete (itemSelected)="addData(agendaData?.pegawai, $event)" [dataProvider]="masterPegawai" #autoComplete></ion-auto-complete>
+
+          <ion-item *ngFor="let person of agendaData?.pegawai; let i = index">
+            {{person?.nama}}
+            <button (click)="removeData(agendaData?.pegawai, i)" ion-button color="light" item-end>
+              <ion-icon name="close"></ion-icon>
+            </button>
+          </ion-item>
+        </div>
+
+        <ion-item>
+          <button ion-button full block color="orange" (tap)="editAgenda()">Simpan</button>
+        </ion-item>
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
