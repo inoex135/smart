@@ -3,6 +3,7 @@ import { NaskahDisposisiProvider } from "../../../providers/naskah-disposisi/nas
 import { Observable } from "rxjs/Observable";
 import { IDisposisiUnit } from "../../../interface/disposisi-unit";
 import { debounceTime, distinctUntilChanged } from "rxjs/operators";
+import { ToastHelper } from "../../../helpers/toast-helper";
 
 @Component({
   selector: "disposisi",
@@ -57,7 +58,8 @@ export class Disposisi {
     disposisiTanggal: false
   };
 
-  constructor(private disposisiProvider: NaskahDisposisiProvider) {
+  constructor(private disposisiProvider: NaskahDisposisiProvider,
+  private toastHelper: ToastHelper) {
     this.init();
   }
 
@@ -204,7 +206,10 @@ export class Disposisi {
     console.log("disposisi data ",this.disposisi);
     console.log("unit data ",this.selectedUnit);
     this.disposisiProvider.simpanDisposisi(this.disposisi).subscribe(
-      res => (this.message = res),
+      res => {
+      this.message = res.message;
+      this.toastHelper.present(this.message);
+      },
       err => {
         console.log(err);
       }
