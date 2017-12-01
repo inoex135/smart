@@ -35,6 +35,9 @@
         </ion-col>
         <ion-col (tap)="detailApt(item)">
           <p ion-text text-right>{{item?.tanggalString}}</p>
+          
+        <apt-indikator-button [status]="item?.statusString"></apt-indikator-button>
+      
         </ion-col>
       </ion-row>
     </ion-card>
