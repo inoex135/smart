@@ -40,6 +40,7 @@ export class PersonalAgendaPage {
       }
     );
   }
+
   detailAgenda(date: any) {
     this.navCtrl.push("PersonalAgendaDetailPage", { date: date });
   }

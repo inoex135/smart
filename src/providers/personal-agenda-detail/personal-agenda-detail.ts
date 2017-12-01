@@ -10,4 +10,14 @@ export class PersonalAgendaDetailProvider {
   getDetailAgenda(params?: any) {
     return this.api.get(`/personal/calendar?start=${params}&end=${params}`);
   }
+
+  // update agenda
+  update(agendaId: number) {
+    return this.api.post(`/personal/agenda/update/${agendaId}`);
+  }
+
+  //hapus agenda
+  delete(agendaId: number) {
+    return this.api.get(`/personal/agenda/delete/${agendaId}`);
+  }
 }
