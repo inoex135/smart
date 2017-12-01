@@ -10,6 +10,9 @@ import * as moment from "moment-timezone";
 import { Ng2Highcharts } from "ng2-highcharts";
 import { Observable } from "rxjs/Observable";
 import "rxjs/add/observable/zip";
+import { DatepickerProvider } from "../../providers/datepicker/datepicker";
+import { MomentHelper } from "../../helpers/moment-helper";
+import { TokenProvider } from "../../providers/token/token";
 
 @Component({
   selector: "page-surat",
@@ -25,6 +28,8 @@ export class SuratPage {
     NASKAH: "naskah"
   };
 
+  isSekretaris: boolean = false;
+
   totalPersuratan: any = "";
 
   redirectComponent: string = "NaskahNotifikasiPage";
@@ -38,7 +43,10 @@ export class SuratPage {
     public navParams: NavParams,
     public loaderHelper: LoaderHelper,
     public grafikSuratProvider: GrafikSuratProvider,
-    public suratProvider: SuratProvider
+    public suratProvider: SuratProvider,
+    private datepicker: DatepickerProvider,
+    private momentHelper: MomentHelper,
+    private tokenProvider: TokenProvider
   ) {
     this.redirectComponent = "NaskahNotifikasiPage";
   }
@@ -46,6 +54,12 @@ export class SuratPage {
   ionViewDidLoad() {
     this.setIntervalDate();
     this.initData();
+    this.checkSekretaris();
+  }
+
+  async checkSekretaris() {
+    const profile: any = await this.tokenProvider.getProfile();
+    this.isSekretaris = profile.is_sekretaris;
   }
 
   // set first data when load page for total surat + filter sumas grafik
@@ -71,20 +85,43 @@ export class SuratPage {
   }
 
   // search sumas grafik by date
-  changeDate() {
+  changeDate() {}
+
+  getDataFilter() {
     const startTime = this.filter.startTime;
     const endTime = this.filter.endTime;
 
-    const filterDate = this.grafikSuratProvider.filterParams(this.filter);
-
     if (startTime && endTime) {
-      this.grafikSuratProvider.getFilterSumasData(filterDate).subscribe(res => {
-        // set new data from server
-        this.allCharts.forEach(chartRef => {
-          chartRef.options.series = res;
+      this.grafikSuratProvider
+        .getFilterSumasData(this.filter)
+        .subscribe(res => {
+          // set new data from server
+          this.allCharts.forEach(chartRef => {
+            chartRef.options.series = res;
+          });
         });
-      });
     }
+  }
+
+  async getStartTime() {
+    try {
+      const startTime = await this.datepicker.datePickerData("date");
+
+      this.filter.startTime = this.momentHelper.convertIsoTo(
+        startTime,
+        "DD-MM-YYYY"
+      );
+    } catch (error) {}
+  }
+
+  async getEndTime() {
+    try {
+      const endTime = await this.datepicker.datePickerData("date");
+      this.filter.endTime = this.momentHelper.convertIsoTo(
+        endTime,
+        "DD-MM-YYYY"
+      );
+    } catch (error) {}
   }
 
   // when page leave, stop interval date

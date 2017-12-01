@@ -12,7 +12,7 @@
       <h2 ion-text item-end class="item-surat-title">Daftar Naskah Unit</h2>
     </ion-item>
 
-    <div class="select--role">
+    <div class="select--role" *ngIf="isSekretaris">
       <ion-row margin-top>
         <ion-col col-6>
           <h2 no-margin ion-text color="default-blue">Lihat Sebagai</h2>
@@ -34,14 +34,12 @@
       </ion-row>
     </div>
 
-    <ion-item class="periode-awal" margin-top>
-      <ion-datetime (ionChange)="changeDate()" no-padding displayFormat="DD-MM-YYYY" pickerFormat="DD MMM YYYY" placeholder="Periode Awal"
-        [(ngModel)]="filter.startTime"></ion-datetime>
+    <ion-item class="input--form" margin-top>
+      <ion-input (tap)="getStartTime()" (ionChange)="getDataFilter()" [value]="filter.startTime" placeholder="Periode Awal"></ion-input>
     </ion-item>
 
-    <ion-item class="periode-akhir" margin-top margin-bottom>
-      <ion-datetime [min]="filter.startTime" (ionChange)="changeDate()" no-padding displayFormat="DD-MM-YYYY" pickerFormat="DD MMM YYYY"
-        [(ngModel)]="filter.endTime" placeholder="Periode Akhir"></ion-datetime>
+    <ion-item class="input--form" margin-top margin-bottom>
+      <ion-input (tap)="getEndTime()" (ionChange)="getDataFilter()" [value]="filter.endTime" placeholder="Periode Akhir"></ion-input>
     </ion-item>
 
     <div>
