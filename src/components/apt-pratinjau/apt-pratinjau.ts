@@ -1,5 +1,5 @@
 import { Component, ViewChild } from "@angular/core";
-import { Slides, NavController,NavParams } from "ionic-angular";
+import { Slides, NavParams } from "ionic-angular";
 import { LoaderHelper } from "../../helpers/loader-helper";
 
 import { AptProvider } from "../../providers/apt/apt";
@@ -10,22 +10,20 @@ import { AptProvider } from "../../providers/apt/apt";
 export class AptPratinjauComponent {
   @ViewChild("slider") slider: Slides;
   currentIndex = 0;
-  aptDetailAction  : any;
+  aptDetailAction: any;
   action: string;
   itemId: number;
   slides = [];
   constructor(
-      public navParams: NavParams,
-      private aptProvider: AptProvider,
-      private loaderHelper: LoaderHelper
+    public navParams: NavParams,
+    private aptProvider: AptProvider,
+    private loaderHelper: LoaderHelper
   ) {
-
     this.action = this.navParams.get("action");
     this.itemId = this.navParams.get("itemId");
     this.getDetailAptAction();
   }
 
- 
   async getDetailAptAction() {
     await this.loaderHelper.createLoader();
 
