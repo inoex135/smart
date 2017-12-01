@@ -2,7 +2,7 @@ import { Component, ViewChild } from "@angular/core";
 import { LoaderHelper } from "../../helpers/loader-helper";
 
 import { AptProvider } from "../../providers/apt/apt";
-import { Slides, NavController, NavParams } from "ionic-angular";
+import { Slides, NavParams } from "ionic-angular";
 import { ToastHelper } from "../../helpers/toast-helper";
 
 @Component({

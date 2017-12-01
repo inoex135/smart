@@ -1,6 +1,5 @@
 import { Injectable } from "@angular/core";
 import { Storage } from "@ionic/storage";
-import { User } from "../../models/users";
 
 @Injectable()
 export class TokenProvider {

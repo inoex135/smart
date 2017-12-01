@@ -22,7 +22,7 @@
   </ion-list>
 
 
-  <ion-list class="list--apt">
+  <ion-list class="list--apt" *ngIf="items?.length > 0">
     <ion-card (press)="isItemPressed(item?.id)" item no-margin padding *ngFor="let item of items;let i = index">
       <ion-row>
         <ion-col col-1 margin-right *ngIf="isPress" class="checkbox-input">
@@ -40,8 +40,7 @@
     </ion-card>
   </ion-list>
 
-
-  <empty-state *ngIf="items === undefined"></empty-state>
+  <empty-state *ngIf="items?.length == 0"></empty-state>
 </ion-content>
 
 <ion-footer *ngIf="isPress || showAgendaButton">

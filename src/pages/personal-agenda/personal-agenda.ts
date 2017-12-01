@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { IonicPage, NavController, NavParams } from "ionic-angular";
-import { TimelineDummy } from "../../dummy/timeline.dummy";
+
 import { TimelineType } from "../../constant/TimelineType";
 import { PersonalProvider } from "../../providers/personal/personal";
 import { LoaderHelper } from "../../helpers/loader-helper";

@@ -12,7 +12,9 @@ export class MasterUnitProvider implements AutoCompleteService {
   getResults(keyword: string) {
     return this.http.get(`/master/unit?query=${keyword}`).pipe(
       map(res => {
-        return res.content;
+        return res.content.filter(item =>
+          item.singkatan.toLowerCase().startsWith(keyword.toLowerCase())
+        );
       })
     );
   }

@@ -1,4 +1,4 @@
-import { Component,Input } from '@angular/core';
+import { Component, Input } from "@angular/core";
 
 /**
  * Generated class for the AptIdentitasPetugasComponent component.
@@ -7,16 +7,10 @@ import { Component,Input } from '@angular/core';
  * Components.
  */
 @Component({
-  selector: 'apt-identitas-petugas',
-  templateUrl: 'apt-identitas-petugas.html'
+  selector: "apt-identitas-petugas",
+  templateUrl: "apt-identitas-petugas.html"
 })
 export class AptIdentitasPetugasComponent {
-
-  text: string;
-@Input() data: any;
-  constructor() {
-    console.log('Hello AptIdentitasPetugasComponent Component');
-    this.text = 'Hello World';
-  }
-
+  @Input() data: any;
+  constructor() {}
 }

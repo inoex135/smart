@@ -19,7 +19,7 @@ export class AptDetailPage {
   aptIndikator = APT_INDIKATOR;
   aptDetail: any = {};
   fileDirectory: any;
-  column: string;
+  isVerifikasiExist: string;
   constructor(
     private navParams: NavParams,
     private navCtrl: NavController,
@@ -40,10 +40,17 @@ export class AptDetailPage {
   async getDetailApt() {
     await this.loaderHelper.createLoader();
 
-    this.aptProvider.getDetailApt(this.itemId).subscribe(res => {
-      this.aptDetail = res;
-      this.loaderHelper.dismiss();
-    }, err => false);
+    this.aptProvider.getDetailApt(this.itemId).subscribe(
+      res => {
+        const response = res.response;
+        this.aptDetail = response.permohonan;
+        this.isVerifikasiExist = res.isVerifikasiExist;
+        this.loaderHelper.dismiss();
+      },
+      err => {
+        this.loaderHelper.errorHandleLoader(err, this.navCtrl);
+      }
+    );
   }
 
   detailAction(action: string, itemId: any) {
