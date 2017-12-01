@@ -90,12 +90,12 @@ export class Disposisi {
   // remove by index dari unit yg di klik
   // dan add by index yang di klik
   selectUnit(unit: IDisposisiUnit) {
-    let unitIndex = this.selectedUnit.indexOf(unit);
+    let unitIndex = this.disposisi.unitTujuan.indexOf(unit.kode_utuh);
 
     if (unitIndex !== -1) {
-      this.selectedUnit.splice(unitIndex, 1);
+      this.disposisi.unitTujuan.splice(unitIndex, 1);
     } else {
-      this.selectedUnit.push(unit);
+      this.disposisi.unitTujuan.push(unit.kode_utuh);
     }
   }
 
@@ -114,11 +114,7 @@ export class Disposisi {
   }
   onChange(petunjuk: string, checked: boolean, id: number) {
     if (checked) {
-      this.disposisi.petunjuk.push({
-        petunjuk: petunjuk,
-        id: id,
-        checked: checked
-      });
+      this.disposisi.petunjuk.push(petunjuk);
     } else {
       this.disposisi.petunjuk.splice(id, 1);
     }
@@ -205,7 +201,8 @@ export class Disposisi {
 
   simpan() {
     this.disposisi.sumasId = this.naskahId;
-
+    console.log("disposisi data ",this.disposisi);
+    console.log("unit data ",this.selectedUnit);
     this.disposisiProvider.simpanDisposisi(this.disposisi).subscribe(
       res => (this.message = res),
       err => {

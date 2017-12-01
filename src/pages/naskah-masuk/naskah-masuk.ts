@@ -11,7 +11,7 @@ import { debounceTime } from "rxjs/operators";
   templateUrl: "naskah-masuk.html"
 })
 export class NaskahMasukPage {
-  private listNaskah: any;
+  listNaskah: any=[];
   isBulkAction: boolean = false;
 
   filter: any = {
@@ -21,6 +21,7 @@ export class NaskahMasukPage {
   naskahTerima: any[] = [];
 
   searching: boolean = false;
+
 
   constructor(
     public navCtrl: NavController,
@@ -53,7 +54,7 @@ export class NaskahMasukPage {
       .pipe(debounceTime(700))
       .finally(() => this.hideLoader())
       .subscribe(
-        res => (this.listNaskah = res.data),
+        res => (this.listNaskah = res.response),
         err => this.handleErrorSearch(params)
       );
   }
@@ -71,13 +72,13 @@ export class NaskahMasukPage {
 
   async getNaskahMasuk() {
     // create loader
-    this.loaderHelper.createLoader();
+    await this.loaderHelper.createLoader();
 
     // show naskah from API
     this.naskahProvider.getNaskahMasuk().subscribe(
       res => {
-        this.listNaskah = res.data;
-
+        this.listNaskah = res.response;
+        console.log("list naskah : ",this.listNaskah);
         this.loaderHelper.dismiss();
       },
       err => this.loaderHelper.errorHandleLoader(err, this.navCtrl)

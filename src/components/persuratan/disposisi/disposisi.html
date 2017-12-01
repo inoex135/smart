@@ -32,7 +32,7 @@
         </ion-item>
         <ion-item class="blue-background" *ngFor="let jabatan of datas?.jabatan; let i = index" no-lines>
             <ion-label text-wrap>{{jabatan?.uraian_jabatan}}</ion-label>
-            <ion-checkbox [(ngModel)]="disposisi.unitTujuan[i]" (ionChange)="selectUnit(jabatan, $event.checked)" [value]="jabatan?.kode"></ion-checkbox>
+            <ion-checkbox  (ionChange)="selectUnit(jabatan, $event.checked)" [value]="jabatan?.kode"></ion-checkbox>
         </ion-item>
     </ion-row>
 
@@ -104,7 +104,7 @@
         <ion-item-group class="blue-background">
             <ion-item  *ngFor="let petunjuk of datas?.petunjuk; let i = index" class="petunjuk blue-background" >
                 <ion-label text-wrap>{{petunjuk?.keterangan}}</ion-label>
-                <ion-checkbox color="primary" name="petunjuk[i]" (ionChange)="onChange(petunjuk, $event.checked,i)"></ion-checkbox>
+                <ion-checkbox color="primary" name="petunjuk[i]" (ionChange)="onChange(petunjuk?.id, $event.checked,i)"></ion-checkbox>
             </ion-item>
         </ion-item-group>
 
