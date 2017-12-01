@@ -6,16 +6,16 @@
 
 <ion-content>
   <ion-list no-lines>
-    <ion-searchbar [(ngModel)]="filter.keyword" search-bar-bcg (ionInput)="searchNaskahBy('search', $event?.target?.value)" (ionCancel)="searchNaskahBy('search', $event?.target?.value)"></ion-searchbar>
-
     <ion-item class="input--form">
-      <ion-select (ionChange)="searchNaskahBy('type', filter?.naskahUnit)" class="ion-select-custom" [(ngModel)]="filter.naskahUnit"
-        placeholder="Naskah Unit / Pribadi / Permohonan">
+      <ion-select (ionChange)="searchNaskahBy('type', filter?.naskahUnit)" [(ngModel)]="filter.naskahUnit" placeholder="Naskah Unit / Pribadi / Permohonan">
         <ion-option value="unit">Naskah Unit</ion-option>
         <ion-option value="personal">Naskah Pribadi</ion-option>
         <ion-option value="permohonan">Naskah Permohonan</ion-option>
       </ion-select>
     </ion-item>
+
+    <ion-searchbar [(ngModel)]="filter.keyword" search-bar-bcg (ionInput)="searchNaskahBy('search', $event?.target?.value)" (ionCancel)="searchNaskahBy('search', $event?.target?.value)"></ion-searchbar>
+
 
     <ion-item *ngIf="searching" class="spinner-container">
       <ion-spinner></ion-spinner>
@@ -31,7 +31,7 @@
         <ion-col (tap)="detailNaskah(naskah)">
           <h6 ion-text card-title text-left text-wrap>{{naskah?.nomorSurat}}</h6>
           <p ion-text text-wrap>{{naskah?.perihal}}</p>
-          <p ion-text class="unit-pemohon">{{naskah?.namaUnit || "-"}} / Pemohon</p>
+          <p ion-text class="unit-pemohon">{{naskah?.namaUnit || "-"}}</p>
         </ion-col>
 
         <ion-col (tap)="detailNaskah(naskah)">

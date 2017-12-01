@@ -76,11 +76,11 @@ export class NaskahMasukPage {
     // show naskah from API
     this.naskahProvider.getNaskahMasuk().subscribe(
       res => {
-        this.listNaskah = res.data;
+        this.listNaskah = res.response;
 
         this.loaderHelper.dismiss();
       },
-      err => this.loaderHelper.errorHandleLoader(err, this.navCtrl)
+      err => this.loaderHelper.dismiss()
     );
   }
 
