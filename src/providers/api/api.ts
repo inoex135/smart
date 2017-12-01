@@ -66,6 +66,11 @@ export class ApiProvider {
       errMessage = errorData.data;
     }
 
+    // ketika offline munculkan pesan erroor dari httpError
+    if (httpError.error instanceof ProgressEvent) {
+      errMessage = httpError.message;
+    }
+
     return ErrorObservable.create(errMessage);
   }
 
