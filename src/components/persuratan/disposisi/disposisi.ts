@@ -23,7 +23,9 @@ export class Disposisi {
     tanggalDisposisi: "",
     tanggal: "",
     sumasId: "",
-    petunjuk: []
+    petunjuk: [],
+    unitTujuan:[],
+    leader:"",
   };
 
   disposisiAs: string = "";
@@ -130,7 +132,8 @@ export class Disposisi {
     // jika checkbox di select setelah itu di uncheck,
     // kemudian di cheklist lagi
     if (event.checked) {
-      this.selectedUnit.push(unit);
+      //this.selectedUnit.push(unit);
+      this.disposisi.lead = unit;
     }
   }
 
