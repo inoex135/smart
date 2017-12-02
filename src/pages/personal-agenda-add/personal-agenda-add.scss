@@ -1,31 +1,4 @@
 page-personal-agenda-add {
-  .tambah-peserta {
-    ion-item {
-      [item-start] {
-        width: 80%;
-      }
-    }
-    .button-side {
-      position: relative;
-      margin-top: 45px !important;
-      height: 38px;
-    }
-    // remove border buttom color
-    .item-md.item-input.input-has-focus .item-inner {
-      border-bottom-color: transparent !important;
-      box-shadow: none !important;
-    }
-
-    // change color font
-    [stacked] {
-      color: map-get($colors, orange) !important;
-    }
-  }
-
-  [ion-button] {
-    border-radius: 3px;
-  }
-
   ion-auto-complete {
     width: 95vw;
   }
