@@ -1,6 +1,10 @@
 page-home {
   $transparent: transparent;
 
+  .select--plt {
+    max-height: 100%;
+  }
+
   ion-content {
     background-position: center;
     background-repeat: no-repeat;
