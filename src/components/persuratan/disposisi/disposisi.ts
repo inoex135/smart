@@ -7,6 +7,7 @@ import { ToastHelper } from "../../../helpers/toast-helper";
 import { MomentHelper } from "../../../helpers/moment-helper";
 import { DatepickerProvider } from "../../../providers/datepicker/datepicker";
 import { NavController } from "ionic-angular";
+import { MasterPegawaiProvider } from "../../../providers/master-pegawai/master-pegawai";
 
 @Component({
   selector: "disposisi",
@@ -19,7 +20,12 @@ export class Disposisi {
   selectedUnit: Array<any> = [];
   lead: Array<string> = [];
   message: string = "";
+
+  pelaku: string;
+
   disposisi: any = {
+    personal: [],
+    selaku: [],
     sifatSurat: "",
     catatan: "",
     tanggalSelesai: "",
@@ -65,7 +71,8 @@ export class Disposisi {
     private toastHelper: ToastHelper,
     private momentHelper: MomentHelper,
     private datepickerProvider: DatepickerProvider,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private masterPegawai: MasterPegawaiProvider
   ) {
     this.init();
   }
@@ -142,7 +149,15 @@ export class Disposisi {
   // }
 
   downloadFileSurat() {}
+  addData(data: Array<any>, item: any) {
+    data.push(item);
+  }
 
+  removeData(data: Array<any>, index: number) {
+    data.splice(index, 1);
+  }
+
+  addPersonal() {}
   nextStep(to: any = "root") {
     if (to.unit) {
       this.component.unitOrPersonal = false;

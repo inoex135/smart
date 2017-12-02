@@ -54,23 +54,28 @@
         </ion-col>
     </ion-row>
     <ion-row *ngIf="component?.disposisiPersonal">
-        <ion-item class="input--form">
-            <ion-input type="text" placeholder="Nama Personal"></ion-input>
-        </ion-item>
+        <ion-auto-complete (itemSelected)="addData(disposisi?.personal, $event)" [dataProvider]="masterPegawai" #autoComplete></ion-auto-complete>
 
         <ion-item margin-top class="input--form">
-            <ion-input type="text" placeholder="Selaku" [(ngModel)]="disposisi.selaku"></ion-input>
+            <ion-input type="text" placeholder="Selaku" [(ngModel)]="pelaku"></ion-input>
         </ion-item>
-
         <ion-item no-lines class="blue-background">
-            <button ion-button small item-end color="danger">
+            <!-- <button ion-button small item-end color="danger">
                 <ion-icon name="close-circle"></ion-icon>
-            </button>
-            <button ion-button small item-end color="default-blue">
+            </button> -->
+            <button ion-button small item-end color="default-blue" (tap)="addData(disposisi?.selaku, pelaku)">
                 <ion-icon name="add"></ion-icon>
             </button>
         </ion-item>
+
+        <ion-item margin-top *ngFor="let selaku of disposisi?.selaku; let i = index;">
+            <p ion-text item-start>
+                Nama: {{disposisi?.personal[i]?.nama}}
+                <br>Selaku: {{selaku}}
+            </p>
+        </ion-item>
     </ion-row>
+
     <!-- show button untuk button next and text -->
     <ion-item no-lines class="blue-background" *ngIf="component?.disposisiPersonal || component?.disposisiUnit">
         <button item-start clear ion-button color="default-blue" (tap)="back()">BACK</button>
