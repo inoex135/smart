@@ -1,6 +1,8 @@
 import { Component, Input } from "@angular/core";
 import { SelesaiModel } from "../../../models/selesai.model";
 import { NavParams } from "ionic-angular";
+import { SuratProvider } from "../../../providers/surat/surat";
+import { ToastHelper } from "../../../helpers/toast-helper";
 
 @Component({
   selector: "selesai",
@@ -18,11 +20,25 @@ export class Selesai {
     klasifikasiArsip: "",
     unit: ""
   };
-  constructor(private navParam: NavParams) {
+  constructor(private suratProvider: SuratProvider,
+  private toastHelper: ToastHelper,
+  private navParam: NavParams) {
     this.detail = this.navParam;
   }
 
   selesai(data: SelesaiModel) {
-    console.log(data);
+    console.log("data : ",data);
+    console.log("detail : ",this.detail.data.naskahId);
+    
+
+    this.suratProvider.simpanSelesai(this.detail.data.naskahId,data).subscribe(
+      res => {
+      
+      this.toastHelper.present(res.message);
+      },
+      err => {
+        console.log(err);
+      }
+    );
   }
 }

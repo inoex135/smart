@@ -2,7 +2,7 @@ import { Component } from "@angular/core";
 import { SuratTeruskan } from "../../../models/surat-teruskan";
 
 import { NaskahMasukProvider } from "../../../providers/naskah-masuk/naskah-masuk";
-
+import { ToastHelper } from "../../../helpers/toast-helper";
 import { NavController, NavParams, LoadingController } from "ionic-angular";
 
 
@@ -22,7 +22,8 @@ export class Teruskan {
     public loading: LoadingController,
     public nav: NavController,
     public navParams: NavParams,
-    public naskahProvider: NaskahMasukProvider
+    public naskahProvider: NaskahMasukProvider,
+    private toastHelper: ToastHelper
   ) {
     this.naskah.id = this.navParams.get("naskahId");
   }
@@ -37,7 +38,7 @@ export class Teruskan {
     // save data naskah untuk diteruskan
     this.naskahProvider.teruskan(this.naskah).subscribe(
       res => {
-        console.log(res);
+        this.toastHelper.present(res.message);
         loading.dismiss();
       },
       err => {
