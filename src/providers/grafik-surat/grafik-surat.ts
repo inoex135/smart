@@ -41,10 +41,10 @@ export class GrafikSuratProvider {
   chartData(series: any) {
     const chartData = {
       chart: {
-        type: "column"
+        type: "line"
       },
       title: {
-        text: "Jenis Surat Unit / Pribadi"
+        text: ""
       },
       xAxis: {
         categories: moment.months()

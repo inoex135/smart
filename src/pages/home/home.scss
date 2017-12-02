@@ -1,5 +1,6 @@
 page-home {
   $transparent: transparent;
+  font-family:Roboto;
 
   .select--plt {
     max-height: 100%;
@@ -38,6 +39,8 @@ page-home {
     justify-content: center; /* center items vertically, in this case */
     align-items: center; /* center single-line items horizontally, in this case */
     align-content: center; /* center multi-line items horizontally, in this case */
+    margin-bottom:5%;
+    margin-top:10%;
   }
 
   // header
@@ -80,12 +83,18 @@ page-home {
 
     .img-content {
       opacity: 0.4 !important;
+      position: static;
+      left:0px;
+      top:0px;
+      z-index:-1;
     }
 
     .avatar-content {
-      position: absolute;
+      position :absolute;
+      text-align: center;
       top: 30%;
-      left: 30%;
+      left:0%;
+      right:0;
       font-size: 16px;
       font-weight: bold;
     }
