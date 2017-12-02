@@ -5,8 +5,8 @@ import { IDisposisiUnit } from "../../../interface/disposisi-unit";
 import { debounceTime, distinctUntilChanged } from "rxjs/operators";
 import { ToastHelper } from "../../../helpers/toast-helper";
 import { MomentHelper } from "../../../helpers/moment-helper";
-import { DatePicker } from "@ionic-native/date-picker";
 import { DatepickerProvider } from "../../../providers/datepicker/datepicker";
+import { NavController } from "ionic-angular";
 
 @Component({
   selector: "disposisi",
@@ -64,7 +64,8 @@ export class Disposisi {
     private disposisiProvider: NaskahDisposisiProvider,
     private toastHelper: ToastHelper,
     private momentHelper: MomentHelper,
-    private datepickerProvider: DatepickerProvider
+    private datepickerProvider: DatepickerProvider,
+    private navCtrl: NavController
   ) {
     this.init();
   }
@@ -231,6 +232,7 @@ export class Disposisi {
     this.disposisiProvider.simpanDisposisi(this.disposisi).subscribe(
       res => {
         this.message = res.message;
+        this.navCtrl.pop();
         this.toastHelper.present(this.message);
       },
       err => {
