@@ -20,4 +20,8 @@ export class PersonalAgendaDetailProvider {
   delete(agendaId: number) {
     return this.api.get(`/personal/agenda/delete/${agendaId}`);
   }
+
+  edit(agendaId: number) {
+    return this.api.get(`/personal/agenda/edit/${agendaId}`);
+  }
 }

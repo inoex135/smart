@@ -59,7 +59,7 @@ export class PersonalAgendaDetailPage {
           text: "Hapus",
           handler: () => {
             this.agendaProvider
-              .delete(100000)
+              .delete(agendaId)
               .subscribe(
                 res => this.showToast(res.message),
                 err => this.showToast(err)
