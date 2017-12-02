@@ -4,6 +4,9 @@ import { Observable } from "rxjs/Observable";
 import { IDisposisiUnit } from "../../../interface/disposisi-unit";
 import { debounceTime, distinctUntilChanged } from "rxjs/operators";
 import { ToastHelper } from "../../../helpers/toast-helper";
+import { MomentHelper } from "../../../helpers/moment-helper";
+import { DatePicker } from "@ionic-native/date-picker";
+import { DatepickerProvider } from "../../../providers/datepicker/datepicker";
 
 @Component({
   selector: "disposisi",
@@ -11,7 +14,7 @@ import { ToastHelper } from "../../../helpers/toast-helper";
 })
 export class Disposisi {
   datas: any = {};
-  tanggalDisposisi: string = new Date().toISOString();
+  Picker: string = new Date().toISOString();
   unit: Array<any> = [];
   selectedUnit: Array<any> = [];
   lead: Array<string> = [];
@@ -20,12 +23,11 @@ export class Disposisi {
     sifatSurat: "",
     catatan: "",
     tanggalSelesai: "",
-    tanggalDisposisi: "",
     tanggal: "",
     sumasId: "",
     petunjuk: [],
-    unitTujuan:[],
-    leader:"",
+    unitTujuan: [],
+    leader: ""
   };
 
   disposisiAs: string = "";
@@ -58,8 +60,12 @@ export class Disposisi {
     disposisiTanggal: false
   };
 
-  constructor(private disposisiProvider: NaskahDisposisiProvider,
-  private toastHelper: ToastHelper) {
+  constructor(
+    private disposisiProvider: NaskahDisposisiProvider,
+    private toastHelper: ToastHelper,
+    private momentHelper: MomentHelper,
+    private datepickerProvider: DatepickerProvider
+  ) {
     this.init();
   }
 
@@ -97,7 +103,10 @@ export class Disposisi {
     if (unitIndex !== -1) {
       this.disposisi.unitTujuan.splice(unitIndex, 1);
     } else {
-      this.disposisi.unitTujuan.push(unit.kode_utuh);
+      this.disposisi.unitTujuan.push({
+        kode_utuh: unit.kode_utuh,
+        uraian_jabatan: unit.uraian_jabatan
+      });
     }
   }
 
@@ -121,15 +130,15 @@ export class Disposisi {
       this.disposisi.petunjuk.splice(id, 1);
     }
   }
-  setLead(event: any, unit: any) {
-    // @TODO: selectedUnit msh duplikat
-    // jika checkbox di select setelah itu di uncheck,
-    // kemudian di cheklist lagi
-    if (event.checked) {
-      //this.selectedUnit.push(unit);
-      this.disposisi.lead = unit;
-    }
-  }
+  // setLead(event: any, unit: any) {
+  //   // @TODO: selectedUnit msh duplikat
+  //   // jika checkbox di select setelah itu di uncheck,
+  //   // kemudian di cheklist lagi
+  //   if (event.checked) {
+  //     //this.selectedUnit.push(unit);
+  //     this.disposisi.lead = unit;
+  //   }
+  // }
 
   downloadFileSurat() {}
 
@@ -201,14 +210,28 @@ export class Disposisi {
     }
   }
 
+  async tanggalSelesaiPicker() {
+    const tanggalMulai = await this.datepickerProvider.datePickerData("date");
+    this.disposisi.tanggalSelesai = this.momentHelper.convertIsoTo(
+      tanggalMulai,
+      "DD-MM-YYYY"
+    );
+  }
+
+  async tanggalDisposisiPicker() {
+    const tanggalMulai = await this.datepickerProvider.datePickerData("date");
+    this.disposisi.tanggalDisposisi = this.momentHelper.convertIsoTo(
+      tanggalMulai,
+      "DD-MM-YYYY"
+    );
+  }
   simpan() {
     this.disposisi.sumasId = this.naskahId;
-    console.log("disposisi data ",this.disposisi);
-    console.log("unit data ",this.selectedUnit);
+
     this.disposisiProvider.simpanDisposisi(this.disposisi).subscribe(
       res => {
-      this.message = res.message;
-      this.toastHelper.present(this.message);
+        this.message = res.message;
+        this.toastHelper.present(this.message);
       },
       err => {
         console.log(err);

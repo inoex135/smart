@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { ApiProvider } from "../api/api";
+import { map } from "rxjs/operators/map";
 
 @Injectable()
 export class NaskahDisposisiProvider {
@@ -24,7 +25,13 @@ export class NaskahDisposisiProvider {
     return this.api.get("/master/sifat-surat/disposisi");
   }
   simpanDisposisi(data: any) {
+    const unitTujuan = data.unitTujuan.map(res => {
+      return res.kode_utuh;
+    });
+    console.log(unitTujuan);
+
     let formData = new FormData();
+
     formData.append("sumas_id", data.sumasId);
     formData.append("personal", data.personalId);
     formData.append("selaku", data.selaku);
@@ -33,8 +40,9 @@ export class NaskahDisposisiProvider {
     formData.append("tanggal_selesai", data.tanggalSelesai);
     formData.append("tanggal_disposisi", data.tanggalDisposisi);
     formData.append("catatan_disposisi", data.catatan);
-    formData.append("unit", data.unitTujuan);
+    formData.append("unit", unitTujuan);
     formData.append("lead", data.lead);
+
     return this.api.postForm("/surat/disposisi/create", formData);
   }
 }
