@@ -18,6 +18,9 @@ export class HomePage {
   backgroundImage: string = "assets/images/bg_login.png";
   notifications: Array<any> = [];
   profile: any = {};
+
+  profileName: string = "";
+
   constructor(
     public navCtrl: NavController,
     public userProvider: UserProvider,
@@ -79,6 +82,9 @@ export class HomePage {
     Observable.zip(getProfile, getTotalNotif).subscribe(
       ([profile, totalNotif]) => {
         this.profile = profile;
+        this.profileName = profile.nama;
+        console.log(this.profileName);
+
         this.mappingResponNotif(totalNotif);
       },
       err => false

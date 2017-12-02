@@ -17,9 +17,9 @@
   </ion-item>
 
   <ion-item col-8 push-2 class="input--form">
-    <ion-select [(ngModel)]="gender" col-12>
-      <ion-option [selected]="!profile?.user_pengganti" value="">{{profile?.nama}}</ion-option>
-      <ion-option [selected] *ngFor="let user of profile?.user_pengganti">
+    <ion-select [(ngModel)]="profileName" col-12>
+      <ion-option [value]="profile?.nama" [selected]="profile?.user_pengganti?.length == 0" value="">{{profile?.nama}}</ion-option>
+      <ion-option *ngFor="let user of profile?.user_pengganti">
         {{user?.nama}}
       </ion-option>
     </ion-select>
