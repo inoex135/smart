@@ -34,7 +34,7 @@ export class Selesai {
     this.suratProvider.simpanSelesai(this.detail.data.naskahId,data).subscribe(
       res => {
       
-      this.toastHelper.present(res.message);
+      this.toastHelper.present(res.messages);
       },
       err => {
         console.log(err);
