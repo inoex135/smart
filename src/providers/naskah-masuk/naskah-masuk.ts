@@ -42,7 +42,7 @@ export class NaskahMasukProvider {
 
   searchNaskahByTipe(type: string, page: number = 0, size: number = 10) {
     // The last segment {type} is required. Available options : permohonan, unit, personal.
-    return this.api.get(`/surat/masuk/tipe/${type}?page=${page}&size=${size}`);
+    return this.api.get(`/surat/masuk/cari?tipe=${type}&page=${page}&size=${size}`);
   }
 
   terimaSemuaNaskah(idList: {}) {
