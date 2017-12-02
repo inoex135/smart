@@ -12,10 +12,7 @@ export class LoginLayout1 {
   public username: string;
   public password: string;
 
-  constructor() {
-    this.username = "196208271982091001";
-    this.password = "sm4rt@DJKN";
-  }
+  constructor() {}
 
   onEvent = (event: string): void => {
     if (this.events[event]) {
