@@ -63,6 +63,7 @@ export class HomePage {
       err => {
         this.userProvider.purgeAuth();
         this.loaderHelper.dismiss();
+        this.navCtrl.push("LoginPage");
       }
     );
   }

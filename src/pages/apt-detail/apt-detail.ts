@@ -19,7 +19,7 @@ export class AptDetailPage {
   aptIndikator = APT_INDIKATOR;
   aptDetail: any = {};
   fileDirectory: any;
-  isVerifikasiExist: string;
+  isVerifikasiExist: boolean;
   constructor(
     private navParams: NavParams,
     private navCtrl: NavController,
@@ -44,7 +44,8 @@ export class AptDetailPage {
       res => {
         const response = res.response;
         this.aptDetail = response.permohonan;
-        this.isVerifikasiExist = res.isVerifikasiExist;
+        this.isVerifikasiExist = response.isVerifikasiExist;
+
         this.loaderHelper.dismiss();
       },
       err => {
@@ -58,23 +59,25 @@ export class AptDetailPage {
   }
 
   async downloadPermohonan() {
-    const targetPath = this.fileDirectory + "smart.xlsx";
+    try {
+      const targetPath = this.fileDirectory + "smart.xlsx";
 
-    await this.loaderHelper.createLoader();
+      await this.loaderHelper.createLoader();
 
-    const checkPermission = await this.aptHelper.checkPermission();
+      const checkPermission = await this.aptHelper.checkPermission();
 
-    // check if apps has permission to write storage
-    if (!checkPermission.hasPermission) {
-      await this.aptHelper.requestPermission();
-    }
+      // check if apps has permission to write storage
+      if (!checkPermission.hasPermission) {
+        await this.aptHelper.requestPermission();
+      }
 
-    const download = await this.aptProvider.download(targetPath);
-    console.log(download);
+      await this.aptProvider.download(targetPath);
 
-    const openFile = await this.aptHelper.openFile(targetPath);
-    alert(openFile.message);
+      // open file after download
+      // const openFile = await this.aptHelper.openFile(targetPath);
+      // alert(openFile.message);
 
-    this.loaderHelper.dismiss();
+      this.loaderHelper.dismiss();
+    } catch (error) {}
   }
 }

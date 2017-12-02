@@ -86,10 +86,11 @@ export class PersonalProvider {
       return res.nip;
     });
 
-    formData.append("tanggal_mulai", params.tanggal_mulai);
-    formData.append("tanggal_akhir", params.tanggal_akhir);
-    formData.append("jam_mulai", params.jam_mulai);
-    formData.append("jam_akhir", params.jam_akhir);
+    formData.append("is_sekretaris", params.is_sekretaris);
+    formData.append("tanggal_mulai", "12-12-2017");
+    formData.append("tanggal_akhir", "12-12-2017");
+    formData.append("jam_mulai", "09:30");
+    formData.append("jam_akhir", "10:30");
     formData.append("uraian", params.uraian);
     formData.append("lokasi", params.lokasi);
     formData.append("unit", unit);

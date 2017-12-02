@@ -35,13 +35,10 @@ export class PersonalPage {
   }
   //func when date is click
   onEventSelected(event) {
-    alert("ntak");
     this.selectedDay = event;
   }
 
   onTimeSelected(ev) {
-    console.log(ev);
-
     this.selectedDay = ev;
   }
   getListEvent() {

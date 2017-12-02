@@ -1,16 +1,17 @@
 <ion-header>
   <ion-navbar color="orange">
-    <ion-title>Tambah Agenda</ion-title>
+    <ion-buttons start>
+      <button ion-button icon-only (click)="dismiss()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>Edit Agenda</ion-title>
   </ion-navbar>
 </ion-header>
-
 
 <ion-content>
   <ion-grid>
     <ion-row wrap>
-      <ion-col col-12>
-        <h4 ion-text color="orange">Tambah Agenda</h4>
-      </ion-col>
       <ion-col col-12>
         <div class="select--role" *ngIf="isSekretaris">
           <ion-row no-margin radio-group [(ngModel)]="agendaData.is_sekretaris" class="radio--select">
@@ -37,7 +38,7 @@
         </ion-item>
 
         <ion-item margin-bottom class="input--form">
-          <ion-input [value]="agendaData.jam_mulai" (tap)="jamMulai()" type="text" placeholder="Waktu Mulai Kegiatan"></ion-input>
+          <ion-input [value]="agendaData.waktu_mulai" (tap)="jamMulai()" type="text" placeholder="Waktu Mulai Kegiatan"></ion-input>
         </ion-item>
 
         <ion-item margin-bottom class="input--form">
@@ -45,7 +46,7 @@
         </ion-item>
 
         <ion-item margin-bottom class="input--form">
-          <ion-input [value]="agendaData.jam_akhir" (tap)="jamAkhir()" type="text" placeholder="Waktu Akhir Kegiatan"></ion-input>
+          <ion-input [value]="agendaData.waktu_akhir" (tap)="jamAkhir()" type="text" placeholder="Waktu Akhir Kegiatan"></ion-input>
         </ion-item>
 
         <ion-item margin-bottom no-padding class="textarea--form">
@@ -87,9 +88,14 @@
         </div>
 
         <ion-item>
-          <button ion-button full block color="orange" (tap)="tambahAgenda()">Simpan</button>
+          <button ion-button full block color="orange" (tap)="update(agendaData?.id)">Update</button>
         </ion-item>
 
+        <ion-item no-lines>
+          <p ion-text color="danger" *ngFor="let error of err">
+            {{error?.message}}
+          </p>
+        </ion-item>
       </ion-col>
     </ion-row>
   </ion-grid>

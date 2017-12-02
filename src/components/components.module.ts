@@ -24,6 +24,7 @@ import { NaskahModalTerimaComponent } from "./naskah-modal-terima/naskah-modal-t
 import { NaskahModalDownloadComponent } from "./naskah-modal-download/naskah-modal-download";
 import { AptIndikatorButtonComponent } from "./apt-indikator-button/apt-indikator-button";
 import { PipesModule } from "../pipes/pipes.module";
+import { AutoCompleteModule } from "ionic2-auto-complete";
 
 @NgModule({
   declarations: [
@@ -47,7 +48,7 @@ import { PipesModule } from "../pipes/pipes.module";
     NaskahModalDownloadComponent,
     AptIndikatorButtonComponent
   ],
-  imports: [IonicModule, PipesModule],
+  imports: [IonicModule, PipesModule, AutoCompleteModule],
   exports: [
     Disposisi,
     LoginLayout1,

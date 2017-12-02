@@ -15,7 +15,7 @@ export class LoaderHelper {
     return this.loading.present();
   }
 
-  errorHandleLoader(message: string = "Error", nav?: NavController) {
+  errorHandleLoader(message: string = "Error", nav?: any) {
     this.loading.setContent(message);
 
     setTimeout(() => {

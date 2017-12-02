@@ -13,9 +13,9 @@
         <p ion-text>{{detail?.uraian}}</p>
         <p ion-text>{{detail?.lokasi}}</p>
       </ion-card-content>
-      <ion-item>
-        <p ion-text item-end>Edit</p>
-        <p ion-text item-end>Delete</p>
+      <ion-item item-end *ngIf="detail?.type === 'Agenda'">
+        <button item-right clear ion-button (click)="edit(detail?.id)">Edit</button>
+        <button item-right clear ion-button (click)="delete(detail?.id)">Delete</button>
       </ion-item>
     </ion-card>
   </div>

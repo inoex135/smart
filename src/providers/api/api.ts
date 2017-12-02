@@ -60,10 +60,21 @@ export class ApiProvider {
     let errMessage: any;
     let errorData: any = httpError.error;
 
+    let errorFormValidasi = errorData.data; //untuk catch error validasi agenda update/create
+
     if (errorData.error_message) {
       errMessage = errorData.error_message;
     } else {
       errMessage = errorData.data;
+    }
+
+    if (errorFormValidasi) {
+      errMessage = errorFormValidasi;
+    }
+
+    // ketika offline munculkan pesan erroor dari httpError
+    if (httpError.error instanceof ProgressEvent) {
+      errMessage = httpError.message;
     }
 
     return ErrorObservable.create(errMessage);

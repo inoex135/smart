@@ -78,10 +78,10 @@ export class NaskahMasukPage {
     this.naskahProvider.getNaskahMasuk().subscribe(
       res => {
         this.listNaskah = res.response;
-        console.log("list naskah : ",this.listNaskah);
+
         this.loaderHelper.dismiss();
       },
-      err => this.loaderHelper.errorHandleLoader(err, this.navCtrl)
+      err => this.loaderHelper.dismiss()
     );
   }
 

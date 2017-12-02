@@ -1,10 +1,16 @@
-import { Component } from "@angular/core";
+import { Component, ViewChild } from "@angular/core";
 import { SuratTeruskan } from "../../../models/surat-teruskan";
 
 import { NaskahMasukProvider } from "../../../providers/naskah-masuk/naskah-masuk";
-import { ToastHelper } from "../../../helpers/toast-helper";
-import { NavController, NavParams, LoadingController } from "ionic-angular";
 
+import {
+  NavController,
+  NavParams,
+  LoadingController,
+  ToastController
+} from "ionic-angular";
+import { MasterUnitProvider } from "../../../providers/master-unit/master-unit";
+import { AutoCompleteComponent } from "ionic2-auto-complete";
 
 @Component({
   selector: "teruskan",
@@ -23,9 +29,27 @@ export class Teruskan {
     public nav: NavController,
     public navParams: NavParams,
     public naskahProvider: NaskahMasukProvider,
-    private toastHelper: ToastHelper
+    private masterUnit: MasterUnitProvider,
+    private toast: ToastController
   ) {
     this.naskah.id = this.navParams.get("naskahId");
+  }
+
+  loader() {
+    const loading = this.loading.create({
+      content: "Please wait..."
+    });
+    return loading;
+  }
+
+  toaster(message: string) {
+    const toast = this.toast.create({
+      message: message,
+      duration: 3000,
+      position: "bottom"
+    });
+
+    return toast;
   }
 
   teruskan() {
@@ -38,13 +62,22 @@ export class Teruskan {
     // save data naskah untuk diteruskan
     this.naskahProvider.teruskan(this.naskah).subscribe(
       res => {
-        this.toastHelper.present(res.message);
-        loading.dismiss();
+        this.toaster(res.message).present();
+        this.isFinally(loading);
       },
       err => {
-        console.log(err);
-        loading.dismiss();
+        this.toaster(err.message).present();
+        this.isFinally(loading);
       }
     );
+  }
+
+  isFinally(loading: any) {
+    loading.dismiss();
+    this.nav.pop();
+  }
+
+  setTujuan(unit, event: any) {
+    return (this.naskah.tujuan = event.kode_utuh);
   }
 }

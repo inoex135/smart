@@ -7,4 +7,5 @@ export interface IAgendaAdd {
   lokasi: string;
   unit: any;
   pegawai: any;
+  is_sekretaris: string;
 }

@@ -9,7 +9,8 @@
   <ion-grid>
     <ion-row class="list-action-button">
       <ion-col *ngFor="let actions of actionList">
-        <button *ngFor="let action of actions" ion-button block icon-left [color]='action?.color' (click)="openPage(action)">
+        <button [disabled]="detail?.prosesSurat =='Selesai' && action.type !== 'riwayat'" *ngFor="let action of actions" ion-button
+          block icon-left [color]='action?.color' (click)="openPage(action)">
           <ion-icon [name]="action?.icon"></ion-icon>
           {{action?.type}}
         </button>
