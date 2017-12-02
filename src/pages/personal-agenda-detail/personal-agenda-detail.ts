@@ -23,17 +23,20 @@ export class PersonalAgendaDetailPage {
     private modalController: ModalController,
     private alertController: AlertController,
     private toastHelper: ToastHelper
-  ) {
+  ) {}
+
+  ionViewDidLoad() {
     this.getDetailAgenda();
   }
-
-  ionViewDidLoad() {}
 
   getDetailAgenda() {
     const date = this.navParams.get("date");
     const agenda = this.agendaProvider.getDetailAgenda(date);
 
-    agenda.subscribe(res => (this.detailAgenda = res), err => false);
+    agenda.subscribe(
+      res => (this.detailAgenda = res),
+      err => this.navCtrl.pop()
+    );
   }
 
   edit(agendaId: number) {
@@ -58,12 +61,10 @@ export class PersonalAgendaDetailPage {
         {
           text: "Hapus",
           handler: () => {
-            this.agendaProvider
-              .delete(agendaId)
-              .subscribe(
-                res => this.showToast(res.message),
-                err => this.showToast(err)
-              );
+            this.agendaProvider.delete(agendaId).subscribe(res => {
+              this.showToast(res.message);
+              this.getDetailAgenda();
+            }, this.showToast);
           }
         }
       ]

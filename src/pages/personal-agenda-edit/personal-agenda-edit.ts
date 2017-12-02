@@ -5,8 +5,6 @@ import {
   NavParams,
   ViewController
 } from "ionic-angular";
-import { PersonalProvider } from "../../providers/personal/personal";
-import { IAgendaAdd } from "../../interface/agenda-add";
 import { PersonalAgendaDetailProvider } from "../../providers/personal-agenda-detail/personal-agenda-detail";
 import { ToastHelper } from "../../helpers/toast-helper";
 
@@ -26,6 +24,8 @@ export class PersonalAgendaEditPage {
     unit: [],
     pegawai: []
   };
+
+  err: any = "";
 
   constructor(
     public navCtrl: NavController,
@@ -47,14 +47,15 @@ export class PersonalAgendaEditPage {
   }
 
   update(agendaId: number) {
-    this.agenda.update(agendaId).subscribe(
+    this.agenda.update(agendaId, this.agendaData).subscribe(
       res => {
-        this.toast.present(res.message);
+        this.toast.present(res.messages);
         this.dismiss();
       },
       err => {
-        this.toast.present(err);
-        this.dismiss();
+        const errorRespon = err.error ? err.error : err.errors;
+        this.err = errorRespon;
+        this.toast.present(err.error_code);
       }
     );
   }

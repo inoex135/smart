@@ -74,6 +74,11 @@
           <button ion-button full block color="orange" (tap)="update(agendaData?.id)">Update</button>
         </ion-item>
 
+        <ion-item no-lines>
+          <p ion-text color="danger" *ngFor="let error of err">
+            {{error?.message}}
+          </p>
+        </ion-item>
       </ion-col>
     </ion-row>
   </ion-grid>

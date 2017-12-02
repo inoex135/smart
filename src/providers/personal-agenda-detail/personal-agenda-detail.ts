@@ -12,8 +12,26 @@ export class PersonalAgendaDetailProvider {
   }
 
   // update agenda
-  update(agendaId: number) {
-    return this.api.post(`/personal/agenda/update/${agendaId}`);
+  update(agendaId: number, params: any) {
+    let formData = new FormData();
+    const unit = params.unit.map(res => {
+      return res.kode_utuh;
+    });
+
+    const pegawai = params.pegawai.map(res => {
+      return res.nip;
+    });
+
+    formData.append("tanggal_mulai", "20-12-2017");
+    formData.append("tanggal_akhir", "23-12-2017");
+    formData.append("jam_mulai", params.waktu_mulai);
+    formData.append("jam_akhir", params.waktu_akhir);
+    formData.append("uraian", params.uraian);
+    formData.append("lokasi", params.lokasi);
+    formData.append("unit", unit);
+    formData.append("pegawai", pegawai);
+
+    return this.api.postForm(`/personal/agenda/update/${agendaId}`, formData);
   }
 
   //hapus agenda
