@@ -18,8 +18,8 @@
 
   <ion-item col-8 push-2 class="input--form">
     <ion-select [(ngModel)]="profileName" col-12>
-      <ion-option [value]="profile?.nama" [selected]="profile?.user_pengganti?.length == 0" value="">{{profile?.nama}}</ion-option>
-      <ion-option *ngFor="let user of profile?.user_pengganti">
+      <ion-option [value]="profile?.nama" [selected]="profile?.user_pengganti == 0">{{profile?.nama}}</ion-option>
+      <ion-option [value]="user?.nama" *ngFor="let user of profile?.user_pengganti">
         {{user?.nama}}
       </ion-option>
     </ion-select>
