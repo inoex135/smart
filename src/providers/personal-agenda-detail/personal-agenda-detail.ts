@@ -22,8 +22,8 @@ export class PersonalAgendaDetailProvider {
       return res.nip;
     });
 
-    formData.append("tanggal_mulai", "20-12-2017");
-    formData.append("tanggal_akhir", "23-12-2017");
+    formData.append("tanggal_mulai", params.tanggal_mulai);
+    formData.append("tanggal_akhir", params.tanggal_akhir);
     formData.append("jam_mulai", params.waktu_mulai);
     formData.append("jam_akhir", params.waktu_akhir);
     formData.append("uraian", params.uraian);

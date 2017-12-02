@@ -40,10 +40,16 @@ export class PersonalAgendaDetailPage {
   }
 
   edit(agendaId: number) {
-    let profileModal = this.modalController.create("PersonalAgendaEditPage", {
-      agendaId: agendaId
+    let editModalAgenda = this.modalController.create(
+      "PersonalAgendaEditPage",
+      {
+        agendaId: agendaId
+      }
+    );
+    editModalAgenda.onDidDismiss(() => {
+      this.getDetailAgenda();
     });
-    profileModal.present();
+    editModalAgenda.present();
   }
 
   delete(agendaId: number = 0) {

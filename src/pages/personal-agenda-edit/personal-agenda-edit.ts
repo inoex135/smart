@@ -7,6 +7,9 @@ import {
 } from "ionic-angular";
 import { PersonalAgendaDetailProvider } from "../../providers/personal-agenda-detail/personal-agenda-detail";
 import { ToastHelper } from "../../helpers/toast-helper";
+import { TokenProvider } from "../../providers/token/token";
+import { MasterUnitProvider } from "../../providers/master-unit/master-unit";
+import { MasterPegawaiProvider } from "../../providers/master-pegawai/master-pegawai";
 
 @IonicPage()
 @Component({
@@ -26,14 +29,22 @@ export class PersonalAgendaEditPage {
   };
 
   err: any = "";
+  isSekretaris: boolean = false;
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     private agenda: PersonalAgendaDetailProvider,
     private viewCtrl: ViewController,
-    private toast: ToastHelper
-  ) {}
+    private toast: ToastHelper,
+    private tokenProvider: TokenProvider,
+    private masterUnit: MasterUnitProvider,
+    private masterPegawai: MasterPegawaiProvider
+  ) {
+    this.tokenProvider.getProfile().then(res => {
+      this.isSekretaris = this.tokenProvider.latestProfile.is_sekretaris;
+    });
+  }
 
   ionViewDidLoad() {
     this.edit();
@@ -62,5 +73,13 @@ export class PersonalAgendaEditPage {
 
   dismiss() {
     this.viewCtrl.dismiss();
+  }
+
+  addData(data: Array<any>, item: any) {
+    data.push(item);
+  }
+
+  removeData(data: Array<any>, index: number) {
+    data.splice(index, 1);
   }
 }

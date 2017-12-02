@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="orange">
     <ion-buttons start>
       <button ion-button icon-only (click)="dismiss()">
         <ion-icon name="close"></ion-icon>
@@ -49,7 +49,7 @@
           <ion-auto-complete (itemSelected)="addData(agendaData?.unit, $event)" [dataProvider]="masterUnit" #autoComplete></ion-auto-complete>
 
           <ion-item *ngFor="let person of agendaData?.unit; let i = index">
-            {{person?.singkatan}}
+            {{person?.uraian}}
             <button (click)="removeData(agendaData?.unit, i)" ion-button color="light" item-end>
               <ion-icon name="close"></ion-icon>
             </button>
