@@ -111,8 +111,4 @@ export class PersonalProvider {
   listAgenda() {
     return this.api.get("/personal/agenda/daftar");
   }
-
-  editAgenda(agendaId: number) {
-    return this.api.get(`/personal/agenda/edit/${agendaId}`);
-  }
 }
