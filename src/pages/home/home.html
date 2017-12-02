@@ -12,13 +12,13 @@
   <ion-item class="avatar-item" no-lines>
     <ion-avatar class="avatar-center">
       <text-avatar [text]="profile?.nama || ''"></text-avatar>
-      <h4 ion-text color="light" class="title">{{profile?.nama}}</h4>
+      <!-- <h4 ion-text color="light" class="title">{{profile?.nama}}</h4> -->
     </ion-avatar>
   </ion-item>
 
   <ion-item col-8 push-2 class="input--form">
     <ion-select [(ngModel)]="gender" col-12>
-      <ion-option [selected]="!profile?.user_pengganti" value="">Diri Sendiri</ion-option>
+      <ion-option [selected]="!profile?.user_pengganti" value="">{{profile?.nama}}</ion-option>
       <ion-option [selected] *ngFor="let user of profile?.user_pengganti">
         {{user?.nama}}
       </ion-option>

@@ -1,5 +1,6 @@
 page-surat {
   $brown-red: map-get($colors, brown-red);
+  font-family:Roboto;
 
   .item-surat-header {
     background-color: map-get($colors, default-blue);
@@ -60,5 +61,77 @@ page-surat {
     .label-md {
       margin: 0;
     }
+  }
+
+  .profile-chooser-header{
+     color: #0288D1;
+     background-color: #B3E5FC;
+  }
+
+  .profile-chooser{
+    margin-left: 0;
+    margin-right: 0;
+    width:100%;
+    border:1px solid #E0E0E0;
+  }
+
+  .infografis-surat{
+    margin-left: 0;
+    margin-right: 0;
+    width:100%;
+    border:1px solid #E0E0E0;
+    margin-bottom:4%;
+  }
+
+  .infografis-surat-chart{
+      margin-left: -5%;
+      margin-top:5%;
+  }
+
+  .total-surat-card{
+    margin-left: 0;
+    margin-right: 0;
+    width:100%;
+  }
+
+  .total-surat-sekarang{
+      background: rgba(59,5,255,1);
+      background: -moz-linear-gradient(left, rgba(59,5,255,1) 0%, rgba(231,15,255,1) 100%);
+      background: -webkit-gradient(left top, right top, color-stop(0%, rgba(59,5,255,1)), color-stop(100%, rgba(231,15,255,1)));
+      background: -webkit-linear-gradient(left, rgba(59,5,255,1) 0%, rgba(231,15,255,1) 100%);
+      background: -o-linear-gradient(left, rgba(59,5,255,1) 0%, rgba(231,15,255,1) 100%);
+      background: -ms-linear-gradient(left, rgba(59,5,255,1) 0%, rgba(231,15,255,1) 100%);
+      background: linear-gradient(to right, rgba(59,5,255,1) 0%, rgba(231,15,255,1) 100%);
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3b05ff', endColorstr='#e70fff', GradientType=1 );
+      margin-bottom: 5px;
+  }
+
+  .total-surat-kemarin{
+      background: rgba(5,180,255,1);
+      background: -moz-linear-gradient(left, rgba(5,180,255,1) 0%, rgba(65,230,115,1) 100%);
+      background: -webkit-gradient(left top, right top, color-stop(0%, rgba(5,180,255,1)), color-stop(100%, rgba(65,230,115,1)));
+      background: -webkit-linear-gradient(left, rgba(5,180,255,1) 0%, rgba(65,230,115,1) 100%);
+      background: -o-linear-gradient(left, rgba(5,180,255,1) 0%, rgba(65,230,115,1) 100%);
+      background: -ms-linear-gradient(left, rgba(5,180,255,1) 0%, rgba(65,230,115,1) 100%);
+      background: linear-gradient(to right, rgba(5,180,255,1) 0%, rgba(65,230,115,1) 100%);
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#05b4ff', endColorstr='#41e673', GradientType=1 );
+      margin-bottom: 5px;
+  }
+
+  .total-surat-semua{
+    background: rgba(255,4,0,1);
+    background: -moz-linear-gradient(left, rgba(255,4,0,1) 0%, rgba(255,149,0,1) 100%);
+    background: -webkit-gradient(left top, right top, color-stop(0%, rgba(255,4,0,1)), color-stop(100%, rgba(255,149,0,1)));
+    background: -webkit-linear-gradient(left, rgba(255,4,0,1) 0%, rgba(255,149,0,1) 100%);
+    background: -o-linear-gradient(left, rgba(255,4,0,1) 0%, rgba(255,149,0,1) 100%);
+    background: -ms-linear-gradient(left, rgba(255,4,0,1) 0%, rgba(255,149,0,1) 100%);
+    background: linear-gradient(to right, rgba(255,4,0,1) 0%, rgba(255,149,0,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0400', endColorstr='#ff9500', GradientType=1 );
+    margin-bottom:10%;
+  }
+
+  .total-surat-content{
+    color:white;
+    font-size:150%;
   }
 }
