@@ -1,4 +1,6 @@
 page-naskah-masuk {
+  font-family: Roboto;
+
   $blue-font: map-get($colors, "blue-template");
   .unit-pemohon {
     color: $blue-font;
@@ -45,4 +47,32 @@ page-naskah-masuk {
   ion-footer {
     background-color: rgba(44, 48, 48, 0.8);
   }
+
+  .daftar-naskah-filter{
+      margin-top: 2%;
+  }
+
+  .daftar-naskah-all{
+      margin-top:25%;
+  }
+
+  .daftar-naskah-title{
+      margin-left:2%;
+      color: white;
+      font-weight:bolder;
+  }
+
+  .daftar-naskah-head{
+    padding-top:3%;
+    padding-bottom:3%;
+    background: rgba(87,162,255,1);
+background: -moz-linear-gradient(left, rgba(87,162,255,1) 0%, rgba(40,208,230,1) 100%);
+background: -webkit-gradient(left top, right top, color-stop(0%, rgba(87,162,255,1)), color-stop(100%, rgba(40,208,230,1)));
+background: -webkit-linear-gradient(left, rgba(87,162,255,1) 0%, rgba(40,208,230,1) 100%);
+background: -o-linear-gradient(left, rgba(87,162,255,1) 0%, rgba(40,208,230,1) 100%);
+background: -ms-linear-gradient(left, rgba(87,162,255,1) 0%, rgba(40,208,230,1) 100%);
+background: linear-gradient(to right, rgba(87,162,255,1) 0%, rgba(40,208,230,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#57a2ff', endColorstr='#28d0e6', GradientType=1 );
+  }
+
 }
