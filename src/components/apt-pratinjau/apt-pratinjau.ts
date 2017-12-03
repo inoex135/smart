@@ -34,7 +34,7 @@ export class AptPratinjauComponent {
         this.loaderHelper.dismiss();
       },
       err => {
-        console.log(err);
+        this.loaderHelper.dismiss();
       }
     );
   }
