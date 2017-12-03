@@ -83,7 +83,6 @@ export class HomePage {
       ([profile, totalNotif]) => {
         this.profile = profile;
         this.profileName = profile.nama;
-        console.log(this.profileName);
 
         this.mappingResponNotif(totalNotif);
       },

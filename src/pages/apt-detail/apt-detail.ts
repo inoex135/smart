@@ -4,7 +4,6 @@ import { AptDetailActionPage } from "../apt-detail-action/apt-detail-action";
 import { AptAction } from "../../constant/apt-action";
 import { AptProvider } from "../../providers/apt/apt";
 import { LoaderHelper } from "../../helpers/loader-helper";
-import { FileTransfer } from "@ionic-native/file-transfer";
 import { AptHelper } from "../../helpers/apt-helper";
 import { File } from "@ionic-native/file";
 import { APT_INDIKATOR } from "../../constant/apt-indikator";
@@ -25,7 +24,6 @@ export class AptDetailPage {
     private navCtrl: NavController,
     private aptProvider: AptProvider,
     private loaderHelper: LoaderHelper,
-    private fileTransfer: FileTransfer,
     file: File,
     private aptHelper: AptHelper
   ) {

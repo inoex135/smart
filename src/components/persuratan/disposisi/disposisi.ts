@@ -148,7 +148,6 @@ export class Disposisi {
   //   }
   // }
 
-  downloadFileSurat() {}
   addData(data: Array<any>, item: any) {
     data.push(item);
   }
@@ -167,11 +166,6 @@ export class Disposisi {
     if (to.personal) {
       this.component.disposisiPersonal = true;
       this.component.unitOrPersonal = false;
-    }
-
-    if (to === "disposisiPersonal") {
-      this.component.disposisiPersonal = true;
-      this.component.disposisiUnit = false;
     }
 
     if (to === "disposisiSifat") {
