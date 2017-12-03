@@ -84,6 +84,16 @@ export class UserProvider {
     );
   }
 
+  //registrasi fcm token
+  saveFcmToken(token: string) {
+    let formData = new FormData();
+    formData.append("token", token);
+
+    return this.apiProvider.postForm("/personal/register-fcm-token/create", formData).map(data => {
+      return data;
+    });
+  }
+  
   // bypass digunakan untuk bisa menggunakan apps, dengan nip orang lain
   byPass(nip: number) {
     return this.apiProvider.get(`/auth/login/bypass?nip=${nip}`);

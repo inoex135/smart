@@ -8,6 +8,7 @@ import { Observable } from "rxjs/Observable";
 
 import "rxjs/add/observable/zip";
 import { LoaderHelper } from "../../helpers/loader-helper";
+import { FCM } from "@ionic-native/fcm";
 
 @Component({
   selector: "page-home",
@@ -24,6 +25,7 @@ export class HomePage {
   constructor(
     public navCtrl: NavController,
     public userProvider: UserProvider,
+    public fcm: FCM,
     private homeProvider: HomeProvider,
     private loaderHelper: LoaderHelper
   ) {}
@@ -31,6 +33,7 @@ export class HomePage {
   ionViewDidLoad() {
     this.listMenu();
     this.initData();
+    this.fcmGetToken();
   }
 
   listMenu() {
@@ -73,6 +76,16 @@ export class HomePage {
 
   private assets(name: string) {
     return `assets/icon/${name}.png`;
+  }
+
+  fcmGetToken() {
+    this.fcm.getToken().then(token => {
+      this.userProvider.saveFcmToken(token).subscribe();
+    });
+
+    this.fcm.onTokenRefresh().subscribe(token => {
+      this.userProvider.saveFcmToken(token).subscribe();
+    });
   }
 
   initData() {
