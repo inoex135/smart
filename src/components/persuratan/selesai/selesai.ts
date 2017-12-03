@@ -3,6 +3,8 @@ import { SelesaiModel } from "../../../models/selesai.model";
 import { NavParams } from "ionic-angular";
 import { SuratProvider } from "../../../providers/surat/surat";
 import { ToastHelper } from "../../../helpers/toast-helper";
+import { DatepickerProvider } from "../../../providers/datepicker/datepicker";
+import { MomentHelper } from "../../../helpers/moment-helper";
 
 @Component({
   selector: "selesai",
@@ -20,25 +22,32 @@ export class Selesai {
     klasifikasiArsip: "",
     unit: ""
   };
-  constructor(private suratProvider: SuratProvider,
-  private toastHelper: ToastHelper,
-  private navParam: NavParams) {
-    this.detail = this.navParam;
+  constructor(
+    private suratProvider: SuratProvider,
+    private toastHelper: ToastHelper,
+    private navParam: NavParams,
+    private datepicker: DatepickerProvider,
+    private momentHelper: MomentHelper
+  ) {
+    this.detail = this.navParam.get("detailNaskah");
   }
 
   selesai(data: SelesaiModel) {
-    console.log("data : ",data);
-    console.log("detail : ",this.detail.data.naskahId);
-    
-
-    this.suratProvider.simpanSelesai(this.detail.data.naskahId,data).subscribe(
+    this.suratProvider.simpanSelesai(this.detail.data.naskahId, data).subscribe(
       res => {
-      
-      this.toastHelper.present(res.messages);
+        this.toastHelper.present(res.messages);
       },
       err => {
         console.log(err);
       }
+    );
+  }
+
+  async setTanggalSelesai() {
+    const tanggalSelesai = await this.datepicker.datePickerData("date");
+    this.data.tanggalSelesai = this.momentHelper.convertIsoTo(
+      tanggalSelesai,
+      "DD-MM-YYYY"
     );
   }
 }

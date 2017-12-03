@@ -36,13 +36,13 @@
       <ion-col class="apt--action" col-8 push-3 *ngIf="isVerifikasiExist">
 
         <p ion-text text-center (click)="detailAction(ACTION.PRATINJAU,aptDetail?.id)" color="default-blue">Pratinjau</p>
-        <p ion-text text-center color="default-blue" (tap)="downloadPermohonan(aptDetail?.id)">Cetak</p>
+        <p ion-text text-center color="default-blue" (tap)="downloadPermohonan(aptDetail)">Cetak</p>
       </ion-col>
 
       <ion-col class="apt--action" col-10 push-1 *ngIf="!isVerifikasiExist">
 
         <p ion-text text-center (click)="detailAction(ACTION.PRATINJAU,aptDetail?.id)" color="default-blue">Pratinjau</p>
-        <p ion-text text-center color="default-blue" (tap)="downloadPermohonan(aptDetail?.id)">Cetak</p>
+        <p ion-text text-center color="default-blue" (tap)="downloadPermohonan(aptDetail)">Cetak</p>
         <p ion-text text-center (click)="detailAction(ACTION.VERIFIKASI,aptDetail?.id)" color="danger"> Verifikasi</p>
       </ion-col>
       <!--  *ngIf="aptIndikator?.BELUM_DIVERIFIKASI === aptDetail?.statusString" -->

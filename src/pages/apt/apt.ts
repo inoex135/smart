@@ -95,26 +95,25 @@ export class AptPage {
     );
   }
 
-  async download() {
-    const targetPath = this.fileDirectory + "smart.xlsx";
+  // async download() {
+  //   const targetPath = this.fileDirectory + "smart.xlsx";
 
-    await this.loaderHelper.createLoader();
+  //   await this.loaderHelper.createLoader();
 
-    const checkPermission = await this.aptHelper.checkPermission();
+  //   const checkPermission = await this.aptHelper.checkPermission();
 
-    // check if apps has permission to write storage
-    if (!checkPermission.hasPermission) {
-      await this.aptHelper.requestPermission();
-    }
+  //   // check if apps has permission to write storage
+  //   if (!checkPermission.hasPermission) {
+  //     await this.aptHelper.requestPermission();
+  //   }
 
-    const download = await this.aptProvider.download(targetPath);
-    console.log(download);
+  //   const download = await this.aptProvider.download(targetPath);
 
-    const openFile = await this.aptHelper.openFile(targetPath);
-    alert(openFile.message);
+  //   const openFile = await this.aptHelper.openFile(targetPath);
+  //   alert(openFile.message);
 
-    this.loader.dismiss();
-  }
+  //   this.loader.dismiss();
+  // }
 
   search(keyword: any) {
     let searchProvider: any;
@@ -181,6 +180,10 @@ export class AptPage {
         // this.toastHelper.present(err.data.message);
       }
     );
+  }
+
+  showAgendakanModal() {
+    this.showAgendaButton = !this.showAgendaButton;
   }
 
   showLoader() {
