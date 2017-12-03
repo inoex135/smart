@@ -20,21 +20,18 @@ export class Selesai {
     klasifikasiArsip: "",
     unit: ""
   };
-  constructor(private suratProvider: SuratProvider,
-  private toastHelper: ToastHelper,
-  private navParam: NavParams) {
-    this.detail = this.navParam;
+  constructor(
+    private suratProvider: SuratProvider,
+    private toastHelper: ToastHelper,
+    private navParam: NavParams
+  ) {
+    this.detail = this.navParam.get("detailNaskah");
   }
 
   selesai(data: SelesaiModel) {
-    console.log("data : ",data);
-    console.log("detail : ",this.detail.data.naskahId);
-    
-
-    this.suratProvider.simpanSelesai(this.detail.data.naskahId,data).subscribe(
+    this.suratProvider.simpanSelesai(this.detail.data.naskahId, data).subscribe(
       res => {
-      
-      this.toastHelper.present(res.messages);
+        this.toastHelper.present(res.messages);
       },
       err => {
         console.log(err);
