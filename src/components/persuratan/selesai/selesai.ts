@@ -3,6 +3,8 @@ import { SelesaiModel } from "../../../models/selesai.model";
 import { NavParams } from "ionic-angular";
 import { SuratProvider } from "../../../providers/surat/surat";
 import { ToastHelper } from "../../../helpers/toast-helper";
+import { DatepickerProvider } from "../../../providers/datepicker/datepicker";
+import { MomentHelper } from "../../../helpers/moment-helper";
 
 @Component({
   selector: "selesai",
@@ -23,7 +25,9 @@ export class Selesai {
   constructor(
     private suratProvider: SuratProvider,
     private toastHelper: ToastHelper,
-    private navParam: NavParams
+    private navParam: NavParams,
+    private datepicker: DatepickerProvider,
+    private momentHelper: MomentHelper
   ) {
     this.detail = this.navParam.get("detailNaskah");
   }
@@ -36,6 +40,14 @@ export class Selesai {
       err => {
         console.log(err);
       }
+    );
+  }
+
+  async setTanggalSelesai() {
+    const tanggalSelesai = await this.datepicker.datePickerData("date");
+    this.data.tanggalSelesai = this.momentHelper.convertIsoTo(
+      tanggalSelesai,
+      "DD-MM-YYYY"
     );
   }
 }
