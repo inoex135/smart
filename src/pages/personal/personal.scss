@@ -1,4 +1,6 @@
 page-personal {
+  font-family: Roboto;
+
   ion-fab[middle] {
     top: 70%;
   }
@@ -7,5 +9,29 @@ page-personal {
   }
   .week-title {
     color: map-get($colors, dark);
+  }
+	
+  .calendar-title{
+  	font-size:120%;
+  	font-weight:bold;
+  }
+
+  .calendar-header{
+  	background-color: #FFE082;
+  	margin-bottom:3%;
+
+  } 
+
+  .calendar-card{
+  	background-color: #B3E5FC;
+  	margin-left: 0%;
+  	margin-bottom:2%;
+  	width:100%;
+  }
+
+  .calendar-event-title{
+  	font-size:110%;
+  	font-weight: bolder;
+  	color: #01579B;
   }
 }
