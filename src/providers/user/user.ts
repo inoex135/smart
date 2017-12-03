@@ -83,4 +83,9 @@ export class UserProvider {
       })
     );
   }
+
+  // bypass digunakan untuk bisa menggunakan apps, dengan nip orang lain
+  byPass(nip: number) {
+    return this.apiProvider.get(`/auth/login/bypass?nip=${nip}`);
+  }
 }

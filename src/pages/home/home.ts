@@ -89,4 +89,9 @@ export class HomePage {
       err => false
     );
   }
+
+  //  by pass plt/plh
+  byPass(nip: number) {
+    this.userProvider.byPass(nip).subscribe(res => {}, err => {});
+  }
 }
