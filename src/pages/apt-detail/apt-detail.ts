@@ -4,10 +4,10 @@ import { AptDetailActionPage } from "../apt-detail-action/apt-detail-action";
 import { AptAction } from "../../constant/apt-action";
 import { AptProvider } from "../../providers/apt/apt";
 import { LoaderHelper } from "../../helpers/loader-helper";
-import { FileTransfer } from "@ionic-native/file-transfer";
 import { AptHelper } from "../../helpers/apt-helper";
 import { File } from "@ionic-native/file";
 import { APT_INDIKATOR } from "../../constant/apt-indikator";
+import { ToastHelper } from "../../helpers/toast-helper";
 
 @Component({
   selector: "page-apt-detail",
@@ -25,9 +25,9 @@ export class AptDetailPage {
     private navCtrl: NavController,
     private aptProvider: AptProvider,
     private loaderHelper: LoaderHelper,
-    private fileTransfer: FileTransfer,
     file: File,
-    private aptHelper: AptHelper
+    private aptHelper: AptHelper,
+    private toast: ToastHelper
   ) {
     this.fileDirectory = file.externalRootDirectory + "Download";
   }
@@ -58,9 +58,11 @@ export class AptDetailPage {
     this.navCtrl.push(AptDetailActionPage, { action: action, itemId: itemId });
   }
 
-  async downloadPermohonan() {
+  async downloadPermohonan(fileApt) {
+    console.log(fileApt);
+
     try {
-      const targetPath = this.fileDirectory + "smart.xlsx";
+      const targetPath = `${this.fileDirectory}/${fileApt.nomorTiket}.pdf`;
 
       await this.loaderHelper.createLoader();
 
@@ -71,13 +73,16 @@ export class AptDetailPage {
         await this.aptHelper.requestPermission();
       }
 
-      await this.aptProvider.download(targetPath);
+      this.aptProvider.download(fileApt.id, targetPath);
 
       // open file after download
       // const openFile = await this.aptHelper.openFile(targetPath);
       // alert(openFile.message);
-
+      this.toast.present("File telah di download");
       this.loaderHelper.dismiss();
-    } catch (error) {}
+    } catch (error) {
+      this.loaderHelper.dismiss();
+      this.toast.present(error);
+    }
   }
 }

@@ -77,11 +77,11 @@ export class AptProvider {
     );
   }
 
-  download(fileDir) {
+  download(fileId: number, targetPath) {
     // @todo : dummy url, change when api already
     // const url = `http://www.lkpp.go.id/v3/files/attachments/5_fWwUnTrpMTbexDEmAMSCNDzObHttIcYl.pdf`;
 
-    const url = `${ENV.API_URL}/surat/sumas/excel/template`;
+    const url = `${ENV.API_URL}/apt/permohonan/download/${fileId}`;
 
     // const filename = url.split("/").pop();
 
@@ -97,12 +97,18 @@ export class AptProvider {
     };
 
     return this.fileTransfer
-      .download(url, fileDir, false, options)
+      .download(url, targetPath, false, options)
       .then(res => {
         return res;
       })
       .catch(err => {
         return err;
       });
+  }
+
+  downloadProgress() {
+    this.fileTransfer.onProgress(res => {
+      console.log(res);
+    });
   }
 }

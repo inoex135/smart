@@ -5,8 +5,9 @@ import { IDisposisiUnit } from "../../../interface/disposisi-unit";
 import { debounceTime, distinctUntilChanged } from "rxjs/operators";
 import { ToastHelper } from "../../../helpers/toast-helper";
 import { MomentHelper } from "../../../helpers/moment-helper";
-import { DatePicker } from "@ionic-native/date-picker";
 import { DatepickerProvider } from "../../../providers/datepicker/datepicker";
+import { NavController } from "ionic-angular";
+import { MasterPegawaiProvider } from "../../../providers/master-pegawai/master-pegawai";
 
 @Component({
   selector: "disposisi",
@@ -19,7 +20,12 @@ export class Disposisi {
   selectedUnit: Array<any> = [];
   lead: Array<string> = [];
   message: string = "";
+
+  pelaku: string;
+
   disposisi: any = {
+    personal: [],
+    selaku: [],
     sifatSurat: "",
     catatan: "",
     tanggalSelesai: "",
@@ -64,7 +70,9 @@ export class Disposisi {
     private disposisiProvider: NaskahDisposisiProvider,
     private toastHelper: ToastHelper,
     private momentHelper: MomentHelper,
-    private datepickerProvider: DatepickerProvider
+    private datepickerProvider: DatepickerProvider,
+    private navCtrl: NavController,
+    private masterPegawai: MasterPegawaiProvider
   ) {
     this.init();
   }
@@ -140,8 +148,15 @@ export class Disposisi {
   //   }
   // }
 
-  downloadFileSurat() {}
+  addData(data: Array<any>, item: any) {
+    data.push(item);
+  }
 
+  removeData(data: Array<any>, index: number) {
+    data.splice(index, 1);
+  }
+
+  addPersonal() {}
   nextStep(to: any = "root") {
     if (to.unit) {
       this.component.unitOrPersonal = false;
@@ -151,11 +166,6 @@ export class Disposisi {
     if (to.personal) {
       this.component.disposisiPersonal = true;
       this.component.unitOrPersonal = false;
-    }
-
-    if (to === "disposisiPersonal") {
-      this.component.disposisiPersonal = true;
-      this.component.disposisiUnit = false;
     }
 
     if (to === "disposisiSifat") {
@@ -174,7 +184,7 @@ export class Disposisi {
       this.component.disposisiPetunjuk = false;
     }
 
-    this.setDisposisiTarget(false);
+    // this.setDisposisiTarget(false);
   }
 
   setDisposisiTarget(status: boolean) {
@@ -182,19 +192,19 @@ export class Disposisi {
     this.disposisiTarget.unit = status;
   }
 
-  back(to: string = "root") {
+  back(to: string | any = "root") {
     if (to === "root") {
       this.component.unitOrPersonal = true;
       this.component.disposisiUnit = false;
       this.component.disposisiPersonal = false;
     }
 
-    if (to === "disposisiPersonal" || to === this.selectAs.personal) {
+    if (to === "disposisiPersonal" || to.personal) {
       this.component.disposisiPersonal = true;
       this.component.disposisiSifat = false;
     }
 
-    if (to === "disposisiUnit" || to === this.selectAs.unit) {
+    if (to === "disposisiUnit" || to.unit) {
       this.component.disposisiUnit = true;
       this.component.disposisiSifat = false;
     }
@@ -231,6 +241,7 @@ export class Disposisi {
     this.disposisiProvider.simpanDisposisi(this.disposisi).subscribe(
       res => {
         this.message = res.message;
+        this.navCtrl.pop();
         this.toastHelper.present(this.message);
       },
       err => {

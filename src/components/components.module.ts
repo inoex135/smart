@@ -25,6 +25,7 @@ import { NaskahModalDownloadComponent } from "./naskah-modal-download/naskah-mod
 import { AptIndikatorButtonComponent } from "./apt-indikator-button/apt-indikator-button";
 import { PipesModule } from "../pipes/pipes.module";
 import { AutoCompleteModule } from "ionic2-auto-complete";
+import { MasterPegawaiProvider } from "../providers/master-pegawai/master-pegawai";
 
 @NgModule({
   declarations: [
@@ -70,6 +71,7 @@ import { AutoCompleteModule } from "ionic2-auto-complete";
     NaskahModalDownloadComponent,
     AptIndikatorButtonComponent
   ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  providers: [MasterPegawaiProvider]
 })
 export class ComponentsModule {}

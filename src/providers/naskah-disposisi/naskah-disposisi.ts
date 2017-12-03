@@ -28,7 +28,6 @@ export class NaskahDisposisiProvider {
     const unitTujuan = data.unitTujuan.map(res => {
       return res.kode_utuh;
     });
-    console.log(unitTujuan);
 
     let formData = new FormData();
 
@@ -41,7 +40,7 @@ export class NaskahDisposisiProvider {
     formData.append("tanggal_disposisi", data.tanggalDisposisi);
     formData.append("catatan_disposisi", data.catatan);
     formData.append("unit", unitTujuan);
-    formData.append("lead", data.lead);
+    formData.append("lead", data.leader);
 
     return this.api.postForm("/surat/disposisi/create", formData);
   }
