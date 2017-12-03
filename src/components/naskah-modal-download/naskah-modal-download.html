@@ -7,7 +7,7 @@
     <ion-list no-lines>
       <ion-item *ngFor="let file of files">
         <p item-start>{{file?.namaFile}}</p>
-        <button item-end ion-button color="default-blue" (tap)="download(file?.id)">Download</button>
+        <button item-end ion-button color="default-blue" (tap)="download(file)">Download</button>
       </ion-item>
     </ion-list>
   </div>

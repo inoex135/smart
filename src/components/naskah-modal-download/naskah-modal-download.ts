@@ -11,8 +11,8 @@ export class NaskahModalDownloadComponent {
 
   constructor() {}
 
-  download(event: Event) {
-    this.downloadFile.emit(event);
+  download(fileData: Event) {
+    this.downloadFile.emit(fileData);
   }
 
   present() {
