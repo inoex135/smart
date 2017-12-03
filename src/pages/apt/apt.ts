@@ -26,6 +26,7 @@ export class AptPage {
 
   isPress: boolean = false;
   keyword: string;
+  jenisPelayanan :string;
   searching: boolean = false;
 
   listAptId: any[] = [];

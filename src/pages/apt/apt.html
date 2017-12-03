@@ -12,7 +12,7 @@
     <ion-searchbar [(ngModel)]="keyword" search-bar-bcg (ionInput)="search( $event?.target?.value)" (ionCancel)="search( $event?.target?.value)"></ion-searchbar>
 
     <ion-item class="input--form">
-      <ion-select (ionChange)="searchByTipe(keyword)" [(ngModel)]="keyword" placeholder="Jenis Pelayanan">
+      <ion-select (ionChange)="searchByTipe(jenisPelayanan)" [(ngModel)]="jenisPelayanan" placeholder="Jenis Pelayanan">
         <ion-option [value]="pelayanan?.id" *ngFor="let pelayanan of pelayanans">
           {{pelayanan?.nama}}
         </ion-option>
