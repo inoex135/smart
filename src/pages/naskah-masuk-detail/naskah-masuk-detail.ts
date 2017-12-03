@@ -9,11 +9,18 @@ import { NaskahAction } from "../../constant/naskah-action";
 
 import { NaskahModalDownloadComponent } from "../../components/naskah-modal-download/naskah-modal-download";
 
+import { File } from "@ionic-native/file";
+import { AptHelper } from "../../helpers/apt-helper";
+import { ToastHelper } from "../../helpers/toast-helper";
+
 @Component({
   selector: "page-naskah-masuk-detail",
   templateUrl: "naskah-masuk-detail.html"
 })
 export class NaskahMasukDetailPage {
+  //file dir transfer for download
+  fileDirectory: any;
+
   private detail: any = {};
   private naskahId: string = "";
   sizeDetail: number = 0;
@@ -29,9 +36,13 @@ export class NaskahMasukDetailPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     private naskahProvider: NaskahMasukProvider,
-    private loaderHelper: LoaderHelper
+    private loaderHelper: LoaderHelper,
+    file: File,
+    private aptHelper: AptHelper,
+    private toast: ToastHelper
   ) {
     this.naskahId = this.navParams.get("naskahId");
+    this.fileDirectory = file.externalRootDirectory + "Download";
   }
 
   openPage(actionData: String) {
@@ -79,8 +90,28 @@ export class NaskahMasukDetailPage {
     this.showModalTerima = false;
   }
 
-  downloadFile() {
-    alert("download success");
+  async downloadFile(fileData: any) {
+    try {
+      const targetPath = this.fileDirectory + "/" + fileData.namaFile;
+
+      await this.loaderHelper.createLoader();
+
+      const checkPermission = await this.aptHelper.checkPermission();
+
+      // check if apps has permission to write storage
+      if (!checkPermission.hasPermission) {
+        await this.aptHelper.requestPermission();
+      }
+
+      await this.naskahProvider.downloadFileSurat(fileData.id, targetPath);
+
+      // open file after download
+      // const openFile = await this.aptHelper.openFile(targetPath);
+      // alert(openFile.message);
+
+      this.loaderHelper.dismiss();
+      this.toast.present("File telah di download");
+    } catch (error) {}
   }
 
   showDownloadList() {
