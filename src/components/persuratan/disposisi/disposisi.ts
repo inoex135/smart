@@ -184,7 +184,7 @@ export class Disposisi {
       this.component.disposisiPetunjuk = false;
     }
 
-    this.setDisposisiTarget(false);
+    // this.setDisposisiTarget(false);
   }
 
   setDisposisiTarget(status: boolean) {
@@ -192,19 +192,19 @@ export class Disposisi {
     this.disposisiTarget.unit = status;
   }
 
-  back(to: string = "root") {
+  back(to: string | any = "root") {
     if (to === "root") {
       this.component.unitOrPersonal = true;
       this.component.disposisiUnit = false;
       this.component.disposisiPersonal = false;
     }
 
-    if (to === "disposisiPersonal" || to === this.selectAs.personal) {
+    if (to === "disposisiPersonal" || to.personal) {
       this.component.disposisiPersonal = true;
       this.component.disposisiSifat = false;
     }
 
-    if (to === "disposisiUnit" || to === this.selectAs.unit) {
+    if (to === "disposisiUnit" || to.unit) {
       this.component.disposisiUnit = true;
       this.component.disposisiSifat = false;
     }
