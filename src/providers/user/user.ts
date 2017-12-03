@@ -83,4 +83,13 @@ export class UserProvider {
       })
     );
   }
+
+  saveFcmToken(token: string) {
+    let formData = new FormData();
+    formData.append("token", token);
+
+    return this.apiProvider.postForm("/personal/register-fcm-token/create", formData).map(data => {
+      return data;
+    });
+  }
 }
