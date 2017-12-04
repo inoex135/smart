@@ -7,14 +7,14 @@
 <ion-content>
   <ion-list no-lines padding>
     <ion-header>
-          <ion-item class="input--form daftar-naskah-filter">
-            <ion-select (ionChange)="searchNaskahBy('type', filter?.naskahUnit)" [(ngModel)]="filter.naskahUnit" placeholder="Naskah Unit / Pribadi / Permohonan">
-              <ion-option value="unit">Naskah Unit</ion-option>
-              <ion-option value="personal">Naskah Pribadi</ion-option>
-              <ion-option value="permohonan">Naskah Permohonan</ion-option>
-            </ion-select>
-          </ion-item>
-          <ion-searchbar [(ngModel)]="filter.keyword" search-bar-bcg (ionInput)="searchNaskahBy('search', $event?.target?.value)" (ionCancel)="searchNaskahBy('search', $event?.target?.value)"></ion-searchbar>
+      <ion-item class="input--form daftar-naskah-filter">
+        <ion-select (ionChange)="searchNaskahBy('type', filter?.naskahUnit)" [(ngModel)]="filter.naskahUnit" placeholder="Naskah Unit / Pribadi / Permohonan">
+          <ion-option value="unit">Naskah Unit</ion-option>
+          <ion-option value="personal">Naskah Pribadi</ion-option>
+          <ion-option value="permohonan">Naskah Permohonan</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-searchbar [(ngModel)]="filter.keyword" search-bar-bcg (ionInput)="searchNaskahBy('search', $event?.target?.value)" (ionCancel)="searchNaskahBy('search', $event?.target?.value)"></ion-searchbar>
     </ion-header>
     <ion-item *ngIf="searching" class="spinner-container">
       <ion-spinner></ion-spinner>
@@ -24,10 +24,11 @@
 
   <ion-list class="daftar-naskah-all">
     <ion-card class="daftar-naskah-head">
-        <span class="daftar-naskah-title"> <ion-icon name="md-list"></ion-icon> Daftar Naskah Masuk</span>
+      <span class="daftar-naskah-title">
+        <ion-icon name="md-list"></ion-icon> Daftar Naskah Masuk</span>
     </ion-card>
-    
-    
+
+
     <ion-card padding (press)="pressAndHoldSurat(naskah)" *ngFor="let naskah of listNaskah" class="naskah-list">
       <ion-row>
         <ion-col col-1 margin-right *ngIf="isBulkAction" class="checkbox-input">
