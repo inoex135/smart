@@ -59,11 +59,13 @@ export class GrafikSuratProvider {
     return this.api.get(this.url).map(res => this.mappingDataSumas(res));
   }
 
-  getFilterSumasData(params: any) {
+  getFilterSumasData(params: any, profile: number = 1) {
+    //is_profile = 1 => sekretaris, 2=>personal
     return this.api
       .get(
-        `${this
-          .url}?tanggal_dari=${params.startTime}&tanggal_sampai=${params.endTime}`
+        `${this.url}?tanggal_dari=${params.startTime}&tanggal_sampai=${
+          params.endTime
+        }&is_profile=${profile}`
       )
       .map(mapping => this.mappingDataSumas(mapping));
   }

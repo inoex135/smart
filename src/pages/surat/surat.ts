@@ -63,13 +63,13 @@ export class SuratPage {
   }
 
   // set first data when load page for total surat + filter sumas grafik
-  initData() {
+  initData(profile: number = 1) {
     const params = this.grafikSuratProvider.paramsStartAndEnd();
 
     this.loaderHelper.createLoader();
 
     Observable.zip(
-      this.grafikSuratProvider.getFilterSumasData(params),
+      this.grafikSuratProvider.getFilterSumasData(params, profile),
       this.suratProvider.getTotalPersuratan()
     ).subscribe(
       ([chartData, totalSurat]) => {
@@ -153,6 +153,10 @@ export class SuratPage {
     return menu == notification ? true : false;
   }
 
+  showGrafikAndTotalSuratBy(profile: number = 1) {
+    // default profile 1, yaitu unit, sedangkan 2 untuk personal
+    this.initData(profile);
+  }
   // onchange pencarian surat
   searchSurat() {}
 }
