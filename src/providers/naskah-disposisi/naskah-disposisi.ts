@@ -32,7 +32,7 @@ export class NaskahDisposisiProvider {
     let formData = new FormData();
 
     formData.append("sumas_id", data.sumasId);
-    formData.append("personal", data.personalId);
+    formData.append("personal", data.personal);
     formData.append("selaku", data.selaku);
     formData.append("sifat_surat", data.sifatSurat);
     formData.append("petunjuk", data.petunjuk);
