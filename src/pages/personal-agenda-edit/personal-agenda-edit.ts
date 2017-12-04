@@ -12,6 +12,7 @@ import { MasterUnitProvider } from "../../providers/master-unit/master-unit";
 import { MasterPegawaiProvider } from "../../providers/master-pegawai/master-pegawai";
 import { MomentHelper } from "../../helpers/moment-helper";
 import { DatepickerProvider } from "../../providers/datepicker/datepicker";
+import { LoaderHelper } from "../../helpers/loader-helper";
 
 @IonicPage()
 @Component({
@@ -45,7 +46,8 @@ export class PersonalAgendaEditPage {
     private masterUnit: MasterUnitProvider,
     private masterPegawai: MasterPegawaiProvider,
     private momentHelper: MomentHelper,
-    private datePicker: DatepickerProvider
+    private datePicker: DatepickerProvider,
+    private loader: LoaderHelper
   ) {
     this.tokenProvider.getProfile().then(res => {
       this.isSekretaris = this.tokenProvider.latestProfile.is_sekretaris;
@@ -58,9 +60,16 @@ export class PersonalAgendaEditPage {
 
   edit() {
     const agendaId = this.navParams.get("agendaId");
-    this.agenda
-      .edit(agendaId)
-      .subscribe(res => (this.agendaData = res), err => true);
+    this.loader.createLoader();
+    this.agenda.edit(agendaId).subscribe(
+      res => {
+        this.agendaData = res;
+        this.loader.dismiss();
+      },
+      err => {
+        this.loader.dismiss();
+      }
+    );
   }
 
   update(agendaId: number) {

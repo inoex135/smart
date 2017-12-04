@@ -8,6 +8,7 @@ import {
 } from "ionic-angular";
 import { PersonalAgendaDetailProvider } from "../../providers/personal-agenda-detail/personal-agenda-detail";
 import { ToastHelper } from "../../helpers/toast-helper";
+import { LoaderHelper } from "../../helpers/loader-helper";
 
 @IonicPage()
 @Component({
@@ -22,7 +23,8 @@ export class PersonalAgendaDetailPage {
     private agendaProvider: PersonalAgendaDetailProvider,
     private modalController: ModalController,
     private alertController: AlertController,
-    private toastHelper: ToastHelper
+    private toastHelper: ToastHelper,
+    private loader: LoaderHelper
   ) {}
 
   ionViewDidLoad() {
@@ -31,11 +33,20 @@ export class PersonalAgendaDetailPage {
 
   getDetailAgenda() {
     const date = this.navParams.get("date");
+
+    this.loader.createLoader();
+
     const agenda = this.agendaProvider.getDetailAgenda(date);
 
     agenda.subscribe(
-      res => (this.detailAgenda = res),
-      err => this.navCtrl.pop()
+      res => {
+        this.detailAgenda = res;
+        this.loader.dismiss();
+      },
+      err => {
+        this.navCtrl.pop();
+        this.loader.dismiss();
+      }
     );
   }
 
