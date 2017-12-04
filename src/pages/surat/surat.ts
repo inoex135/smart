@@ -70,7 +70,7 @@ export class SuratPage {
 
     Observable.zip(
       this.grafikSuratProvider.getFilterSumasData(params, profile),
-      this.suratProvider.getTotalPersuratan()
+      this.suratProvider.getTotalPersuratan(profile)
     ).subscribe(
       ([chartData, totalSurat]) => {
         this.chartData = this.grafikSuratProvider.chartData(chartData);

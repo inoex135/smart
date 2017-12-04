@@ -52,18 +52,19 @@ export class SuratProvider {
     return options;
   }
 
-  getTotalPersuratan() {
-    return this.api.get("/surat/total");
+  //profile 1 yaitu sekretaris, 2 adalah personal
+  getTotalPersuratan(profile: number = 1) {
+    return this.api.get(`/surat/total?is_profile=${profile}`);
   }
 
-  simpanSelesai(id:number, data:any){
-  let formData = new FormData();
+  simpanSelesai(id: number, data: any) {
+    let formData = new FormData();
     formData.append("tanggal_selesai", data.tanggalSelesai);
     formData.append("catatan_selesai", data.catatanSelesai);
     formData.append("lokasi_arsip", data.lokasiArsip);
     formData.append("klasifikasi_arsip", data.klasifikasiArsip);
     formData.append("jra_unit", data.unit);
-   
+
     return this.api.postForm(`/surat/selesai/create/${id}`, formData);
   }
 }
