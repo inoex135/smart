@@ -24,8 +24,8 @@ export class Disposisi {
   pelaku: string;
 
   disposisi: any = {
-    personal: [],
-    selaku: [],
+    personal: "",
+    selaku: "",
     sifatSurat: "",
     catatan: "",
     tanggalSelesai: "",
@@ -158,6 +158,7 @@ export class Disposisi {
 
   addPersonal() {}
   nextStep(to: any = "root") {
+    setTimeout(true, 5000);
     if (to.unit) {
       this.component.unitOrPersonal = false;
       this.component.disposisiUnit = true;
