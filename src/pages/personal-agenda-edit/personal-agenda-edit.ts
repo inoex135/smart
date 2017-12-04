@@ -10,6 +10,8 @@ import { ToastHelper } from "../../helpers/toast-helper";
 import { TokenProvider } from "../../providers/token/token";
 import { MasterUnitProvider } from "../../providers/master-unit/master-unit";
 import { MasterPegawaiProvider } from "../../providers/master-pegawai/master-pegawai";
+import { MomentHelper } from "../../helpers/moment-helper";
+import { DatepickerProvider } from "../../providers/datepicker/datepicker";
 
 @IonicPage()
 @Component({
@@ -31,6 +33,8 @@ export class PersonalAgendaEditPage {
   err: any = "";
   isSekretaris: boolean = false;
 
+  readonly MODE = { DATE: "date", TIME: "time" };
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -39,7 +43,9 @@ export class PersonalAgendaEditPage {
     private toast: ToastHelper,
     private tokenProvider: TokenProvider,
     private masterUnit: MasterUnitProvider,
-    private masterPegawai: MasterPegawaiProvider
+    private masterPegawai: MasterPegawaiProvider,
+    private momentHelper: MomentHelper,
+    private datePicker: DatepickerProvider
   ) {
     this.tokenProvider.getProfile().then(res => {
       this.isSekretaris = this.tokenProvider.latestProfile.is_sekretaris;
@@ -81,5 +87,37 @@ export class PersonalAgendaEditPage {
 
   removeData(data: Array<any>, index: number) {
     data.splice(index, 1);
+  }
+
+  async tanggalMulai() {
+    const tanggalMulai = await this.datePicker.datePickerData(this.MODE.DATE);
+    this.agendaData.tanggal_mulai = this.momentHelper.convertIsoTo(
+      tanggalMulai,
+      "DD-MM-YYYY"
+    );
+  }
+
+  async jamMulai() {
+    const jamMulai = await this.datePicker.datePickerData(this.MODE.TIME);
+    this.agendaData.waktu_mulai = this.momentHelper.convertIsoTo(
+      jamMulai,
+      "HH:mm"
+    );
+  }
+
+  async tanggalAkhir() {
+    const tanggalAkhir = await this.datePicker.datePickerData(this.MODE.DATE);
+    this.agendaData.tanggal_akhir = this.momentHelper.convertIsoTo(
+      tanggalAkhir,
+      "DD-MM-YYYY"
+    );
+  }
+
+  async jamAkhir() {
+    const jamAkhir = await this.datePicker.datePickerData(this.MODE.TIME);
+    this.agendaData.waktu_akhir = this.momentHelper.convertIsoTo(
+      jamAkhir,
+      "HH:mm"
+    );
   }
 }
