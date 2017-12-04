@@ -17,9 +17,11 @@
   </ion-item>
 
   <ion-item col-8 push-2 class="input--form">
-    <ion-select [ngModel]="profileName" col-12 (ngModelChange)="byPass(profileName)">
-      <ion-option [value]="profile?.nip" [selected]="profile?.nip == 0">{{profile?.nama}}</ion-option>
-      <ion-option [value]="user?.nip" [selected]="" *ngFor="let user of profile?.user_pengganti">
+
+    <ion-select [(ngModel)]="profileName" col-12 (ionChange)="byPass(profileName)">
+      <ion-option [value]="profile?.nip">{{profile?.nama}}</ion-option>
+      <ion-option [value]="user?.nip" *ngFor="let user of profile?.user_pengganti">
+        {{user?.nama}}
       </ion-option>
     </ion-select>
   </ion-item>

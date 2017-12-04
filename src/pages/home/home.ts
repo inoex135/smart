@@ -117,13 +117,15 @@ export class HomePage {
 
   //  by pass plt/plh
   byPass(nip: string) {
-    if (nip !== this.profile.nip) {
+    //cek apakah nip yg di select, sama dengan currentUser
+    if (nip == this.profile.nip) {
+      console.log(nip);
+    } else {
       this.loaderHelper.createLoader();
       this.userProvider.byPass(nip).subscribe(
         res => {
-          console.log(res);
-
-          // this.token.saveTokenPltPlh(res);
+          this.token.saveTokenPltPlh(res);
+          this.initData();
           this.loaderHelper.dismiss();
         },
         err => {

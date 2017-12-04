@@ -96,9 +96,15 @@ export class TokenProvider {
     return this.storage.remove("user");
   }
 
+  destroyPltPlh() {
+    this.pltPlh = null;
+    return this.storage.remove("plt_plh");
+  }
+
   destroy() {
     this.destroyToken();
     this.destroyUser();
     this.destroyProfile();
+    this.destroyPltPlh();
   }
 }
