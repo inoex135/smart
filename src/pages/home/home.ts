@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { NavController } from "ionic-angular";
+import { NavController, Platform } from "ionic-angular";
 import { UserProvider } from "../../providers/user/user";
 
 import { MenuHomeConstant } from "../../constant/menu-home";
@@ -9,6 +9,8 @@ import { Observable } from "rxjs/Observable";
 import "rxjs/add/observable/zip";
 import { LoaderHelper } from "../../helpers/loader-helper";
 import { FCM } from "@ionic-native/fcm";
+import { TokenProvider } from "../../providers/token/token";
+import { ToastHelper } from "../../helpers/toast-helper";
 
 @Component({
   selector: "page-home",
@@ -27,13 +29,18 @@ export class HomePage {
     public userProvider: UserProvider,
     public fcm: FCM,
     private homeProvider: HomeProvider,
-    private loaderHelper: LoaderHelper
+    private loaderHelper: LoaderHelper,
+    private token: TokenProvider,
+    private toast: ToastHelper,
+    private platform: Platform
   ) {}
 
   ionViewDidLoad() {
     this.listMenu();
     this.initData();
-    this.fcmGetToken();
+    this.platform.ready().then(() => {
+      this.fcmGetToken();
+    });
   }
 
   listMenu() {
@@ -79,13 +86,18 @@ export class HomePage {
   }
 
   fcmGetToken() {
-    this.fcm.getToken().then(token => {
-      this.userProvider.saveFcmToken(token).subscribe();
-    });
-
-    this.fcm.onTokenRefresh().subscribe(token => {
-      this.userProvider.saveFcmToken(token).subscribe();
-    });
+    this.fcm.getToken().then(
+      token => {
+        this.userProvider.saveFcmToken(token).subscribe();
+      },
+      err => {}
+    );
+    this.fcm.onTokenRefresh().subscribe(
+      token => {
+        this.userProvider.saveFcmToken(token).subscribe();
+      },
+      err => {}
+    );
   }
 
   initData() {
@@ -95,7 +107,7 @@ export class HomePage {
     Observable.zip(getProfile, getTotalNotif).subscribe(
       ([profile, totalNotif]) => {
         this.profile = profile;
-        this.profileName = profile.nama;
+        this.profileName = profile.nip;
 
         this.mappingResponNotif(totalNotif);
       },
@@ -104,7 +116,21 @@ export class HomePage {
   }
 
   //  by pass plt/plh
-  byPass(nip: number) {
-    this.userProvider.byPass(nip).subscribe(res => {}, err => {});
+  byPass(nip: string) {
+    if (nip !== this.profile.nip) {
+      this.loaderHelper.createLoader();
+      this.userProvider.byPass(nip).subscribe(
+        res => {
+          console.log(res);
+
+          // this.token.saveTokenPltPlh(res);
+          this.loaderHelper.dismiss();
+        },
+        err => {
+          this.loaderHelper.dismiss();
+          this.toast.present(err.error_message);
+        }
+      );
+    }
   }
 }

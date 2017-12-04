@@ -6,6 +6,7 @@ export class TokenProvider {
   public latestToken: string;
   public latestUser: any;
   public latestProfile: any;
+  public pltPlh: any;
 
   constructor(public storage: Storage) {}
 
@@ -39,6 +40,18 @@ export class TokenProvider {
       });
   }
 
+  getProfilePltPlh() {
+    return this.storage
+      .ready()
+      .then(() => {
+        this.storage.get("plt_plh") as Promise<Object>;
+      })
+      .then(res => {
+        this.pltPlh = res;
+        return res;
+      });
+  }
+
   saveToken(token: string): Promise<void> {
     this.latestToken = token;
     return this.storage
@@ -59,6 +72,13 @@ export class TokenProvider {
     return this.storage
       .ready()
       .then(() => this.storage.set("profile", profile) as Promise<void>);
+  }
+
+  saveTokenPltPlh(plt_plh) {
+    this.latestToken = plt_plh.token;
+    return this.storage
+      .ready()
+      .then(() => this.storage.set("plt_plh", plt_plh));
   }
 
   destroyToken() {
