@@ -1,58 +1,62 @@
 <ion-grid padding>
-    <ion-row wrap>
-        <ion-col col-12>
-            <h4 ion-text>Selesai</h4>
-        </ion-col>
-        <ion-col col-12 col-sm-12 col-md-12 offset-lg-3 col-lg-6 offset-xl-3 col-xl-6>
-            <ion-item margin-bottom no-padding class="input--form">
-                <ion-input placeholder="Tanggal Selesai" (tap)="setTanggalSelesai()"></ion-input>
-            </ion-item>
-            <div *ngIf="detail?.naskahPermohonan === 'ya'">
-                <ion-row radio-group>
-                    <ion-label col-12>Status Persetujuan</ion-label>
-                    <ion-col col-6>
-                        <ion-radio value="1"></ion-radio> Setujui
-                    </ion-col>
-                    <ion-col col-6>
-                        <ion-radio value="0"></ion-radio> Tolak
-                    </ion-col>
-                </ion-row>
+    <ion-card class="selesai-card">
+        <ion-card-header class="selesai-header">
+            Penyelesaian Naskah
+        </ion-card-header>
+        <ion-card-content>
+            <ion-row wrap>
+                <ion-col col-12 col-sm-12 col-md-12 offset-lg-3 col-lg-6 offset-xl-3 col-xl-6>
+                    <ion-item margin-bottom no-padding class="input--form">
+                        <ion-input placeholder="Tanggal Selesai" (tap)="setTanggalSelesai()"></ion-input>
+                    </ion-item>
+                    <div *ngIf="detail?.naskahPermohonan === 'ya'">
+                        <ion-row radio-group>
+                            <ion-label col-12>Status Persetujuan</ion-label>
+                            <ion-col col-6>
+                                <ion-radio value="1"></ion-radio> Setujui
+                            </ion-col>
+                            <ion-col col-6>
+                                <ion-radio value="0"></ion-radio> Tolak
+                            </ion-col>
+                        </ion-row>
 
-                <!-- <ion-item no-padding>
-                    <button ion-button full icon-start color="orange">
-                        <ion-icon name="cloud-upload"></ion-icon>
-                        Upload File
-                    </button>
-                </ion-item> -->
-            </div>
-            <!---Input field catatan selesai-->
-            <ion-item no-padding class="textarea--form">
-                <ion-textarea placeholder="Catatan Selesai" type="text" [(ngModel)]="data.catatanSelesai"></ion-textarea>
-            </ion-item>
+                        <!-- <ion-item no-padding>
+                            <button ion-button full icon-start color="orange">
+                                <ion-icon name="cloud-upload"></ion-icon>
+                                Upload File
+                            </button>
+                        </ion-item> -->
+                    </div>
+                    <!---Input field catatan selesai-->
+                    <ion-item no-padding class="textarea--form">
+                        <ion-textarea placeholder="Catatan Selesai" type="text" [(ngModel)]="data.catatanSelesai"></ion-textarea>
+                    </ion-item>
 
-            <!---Input field lokasi arsip-->
-            <ion-item no-padding margin-top class="textarea--form">
-                <ion-textarea placeholder="Lokasi Arsip" type="text" [(ngModel)]="data.lokasiArsip"></ion-textarea>
-            </ion-item>
+                    <!---Input field lokasi arsip-->
+                    <ion-item no-padding margin-top class="textarea--form">
+                        <ion-textarea placeholder="Lokasi Arsip" type="text" [(ngModel)]="data.lokasiArsip"></ion-textarea>
+                    </ion-item>
 
-            <!---Input field klasifikasi arsip-->
-            <ion-item no-padding>
-                <ion-label stacked>Klasifikasi Arsip</ion-label>
-                <ion-select [(ngModel)]="data.klasifikasiArsip" placeholder="Substantif / Fasilitatif">
-                    <ion-option value="0">Substantif</ion-option>
-                    <ion-option value="1">Fasilitatif</ion-option>
-                </ion-select>
-            </ion-item>
+                    <!---Input field klasifikasi arsip-->
+                    <ion-item no-padding>
+                        <ion-label stacked>Klasifikasi Arsip</ion-label>
+                        <ion-select [(ngModel)]="data.klasifikasiArsip" placeholder="Substantif / Fasilitatif">
+                            <ion-option value="0">Substantif</ion-option>
+                            <ion-option value="1">Fasilitatif</ion-option>
+                        </ion-select>
+                    </ion-item>
 
-            <!---Input field JRA unit-->
-            <ion-item no-padding>
-                <ion-label stacked color="primary">JRA Unit</ion-label>
-                <ion-select [(ngModel)]="data.unit">
-                    <ion-option value="1">KEKAYAAN NEGARA</ion-option>
-                </ion-select>
-            </ion-item>
+                    <!---Input field JRA unit-->
+                    <ion-item no-padding>
+                        <ion-label stacked color="primary">JRA Unit</ion-label>
+                        <ion-select [(ngModel)]="data.unit">
+                            <ion-option value="1">KEKAYAAN NEGARA</ion-option>
+                        </ion-select>
+                    </ion-item>
 
-            <button ion-button full (click)="selesai(data)" margin-top color="default-blue">Simpan</button>
-        </ion-col>
-    </ion-row>
+                    <button ion-button full (click)="selesai(data)" margin-top color="default-blue">Simpan</button>
+                </ion-col>
+            </ion-row>
+        </ion-card-content>
+    </ion-card>
 </ion-grid>

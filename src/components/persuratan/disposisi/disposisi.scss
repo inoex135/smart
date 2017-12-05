@@ -1,4 +1,6 @@
 disposisi {
+  font-family: Roboto;
+
   .petunjuk {
     .label-md {
       margin: 0;
@@ -12,4 +14,22 @@ disposisi {
   ion-auto-complete {
     width: 95vw;
   }
+
+  .disposisi-kepada{
+    background-color: #FF8A80;
+    color:white;
+  }
+
+  .next-btn{
+    padding: 10%;
+  }
+
+  .disposisi-padding-top-form{
+    margin-top:5%;
+  }
+
+  .disposisi-btn-simpan{
+    margin-top:20px;
+  }
+
 }

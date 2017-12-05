@@ -1,4 +1,5 @@
 selesai {
+  font-family: Roboto;
   $solid-border: 0.4px solid rgba(0, 0, 0, 0.2);
 
   ion-datetime {
@@ -33,5 +34,17 @@ selesai {
         }
       }
     }
+  }
+
+  .selesai-header{
+    background-color: #9E9E9E;
+    margin-bottom: 5%;
+    color: white;
+  }
+
+  .selesai-card{
+    margin-left:0%;
+    margin-top: 0%;
+    width: 100%;
   }
 }

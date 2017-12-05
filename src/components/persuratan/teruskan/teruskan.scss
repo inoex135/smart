@@ -1,6 +1,18 @@
 teruskan {
+  font-family: Roboto;
+
   ion-auto-complete {
     width: 95vw;
     max-width: 95vh;
+  }
+
+  .teruskan-header{
+  	background-color: #FFCC80;
+  }
+
+  .tujuan-penerusan{
+  	width:100%;
+  	margin-top: 4%;
+  	margin-bottom: 4%;
   }
 }
