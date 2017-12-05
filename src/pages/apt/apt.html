@@ -26,7 +26,7 @@
     <ion-card (press)="isItemPressed(item?.id)" item no-margin padding *ngFor="let item of items;let i = index">
       <ion-row>
         <ion-col col-1 margin-right *ngIf="isPress" class="checkbox-input">
-          <ion-checkbox color="green-light" (ionChange)="selectedApt(item?.id, $event)"></ion-checkbox>
+          <ion-checkbox *ngIf="item?.statusString == 'Belum diverifikasi'" color="green-light" (ionChange)="selectedApt(item?.id, $event)"></ion-checkbox>
         </ion-col>
         <ion-col (tap)="detailApt(item)">
           <b ion-text item-start text-wrap text-left>{{item?.pelayanan?.nama}}</b>
