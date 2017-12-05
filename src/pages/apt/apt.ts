@@ -26,7 +26,7 @@ export class AptPage {
 
   isPress: boolean = false;
   keyword: string;
-  jenisPelayanan :string;
+  jenisPelayanan: string;
   searching: boolean = false;
 
   listAptId: any[] = [];
@@ -56,12 +56,7 @@ export class AptPage {
   }
 
   detailApt(item: any) {
-    if (item.statusString === APT_INDIKATOR.DIAGENDAKAN) {
-      this.navCtrl.push(AptDetailPage, { itemId: item.id });
-    } else {
-      this.showAgendaButton = true;
-      this.listAptId.push(item.id);
-    }
+    this.navCtrl.push(AptDetailPage, { itemId: item.id });
   }
 
   isItemPressed() {
@@ -71,7 +66,6 @@ export class AptPage {
   getPelayananList() {
     this.aptProvider.getPelayananList().subscribe(
       res => {
-        // @TODO : uncomment if data already
         this.pelayanans = res.content;
       },
       err => {
