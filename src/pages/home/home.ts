@@ -11,6 +11,7 @@ import { LoaderHelper } from "../../helpers/loader-helper";
 import { FCM } from "@ionic-native/fcm";
 import { TokenProvider } from "../../providers/token/token";
 import { ToastHelper } from "../../helpers/toast-helper";
+import { Storage } from "@ionic/storage";
 
 @Component({
   selector: "page-home",
@@ -32,7 +33,8 @@ export class HomePage {
     private loaderHelper: LoaderHelper,
     private token: TokenProvider,
     private toast: ToastHelper,
-    private platform: Platform
+    private platform: Platform,
+    private storage: Storage
   ) {}
 
   ionViewDidLoad() {
@@ -100,26 +102,39 @@ export class HomePage {
     );
   }
 
-  initData() {
-    const getProfile = this.userProvider.getProfile();
+  async initData() {
+    const profile = await this.token.getProfile();
     const getTotalNotif = this.homeProvider.getTotalNotication();
+    // console.log(getTotalNotif);
 
-    Observable.zip(getProfile, getTotalNotif).subscribe(
-      ([profile, totalNotif]) => {
-        this.profile = profile;
-        this.profileName = profile.nip;
+    if (profile) {
+      this.profile = profile;
+      this.profileName = profile.nip;
+      getTotalNotif.subscribe(res => this.mappingResponNotif(res));
+    } else {
+      const getProfile = this.userProvider.getProfile();
 
-        this.mappingResponNotif(totalNotif);
-      },
-      err => false
-    );
+      Observable.zip(getProfile, getTotalNotif).subscribe(
+        ([profile, totalNotif]) => {
+          this.profile = profile;
+          this.profileName = profile.nip;
+
+          this.mappingResponNotif(totalNotif);
+        },
+        err => false
+      );
+    }
   }
 
   //  by pass plt/plh
   byPass(nip: string) {
     //cek apakah nip yg di select, sama dengan currentUser
     if (nip == this.profile.nip) {
-      console.log(nip);
+      //jika ada, ubah token kembali dengan user asli/bukan plt -plh nya
+      this.storage.get("token").then(res => {
+        this.token.latestToken = res;
+        this.initData();
+      }, err => true);
     } else {
       this.loaderHelper.createLoader();
       this.userProvider.byPass(nip).subscribe(

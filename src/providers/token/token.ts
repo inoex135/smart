@@ -30,10 +30,10 @@ export class TokenProvider {
       });
   }
 
-  getProfile(): Promise<Object> {
+  getProfile(): Promise<any> {
     return this.storage
       .ready()
-      .then(() => this.storage.get("profile") as Promise<Object>)
+      .then(() => this.storage.get("profile") as Promise<any>)
       .then(profile => {
         this.latestProfile = profile;
         return profile;
