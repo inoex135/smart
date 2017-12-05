@@ -1,28 +1,33 @@
 <ion-grid>
-    <ion-row wrap>
-        <ion-col col-12 col-sm-12 col-md-12 offset-lg-3 col-lg-6 offset-xl-3 col-xl-6>
-            <div class="form">
-                <ion-auto-complete (itemSelected)="setTujuan(agendaData?.tujuan, $event)" [dataProvider]="masterUnit" #autoComplete [options]="{ placeholder : 'Unit' }"></ion-auto-complete>
+    <ion-card>
+        <ion-card-header class="teruskan-header">
+            Penerusan Naskah
+        </ion-card-header>
+        <ion-card-content>
+            <ion-row wrap>
+                <ion-col col-12 col-sm-12 col-md-12 offset-lg-3 col-lg-6 offset-xl-3 col-xl-6>
+                    <div class="form">
+                        <ion-auto-complete (itemSelected)="setTujuan(agendaData?.tujuan, $event)" [dataProvider]="masterUnit" #autoComplete class="tujuan-penerusan"></ion-auto-complete>
 
-                <ion-item no-padding margin-bottom class="input--form">
-                    <ion-select placeholder="Alasan Penerusan" [(ngModel)]="naskah.alasan" name="alasan">
-                        <ion-option value="1">Cuti</ion-option>
-                        <ion-option value="2">Lainnya</ion-option>
-                        <ion-option value="3">Tidak Sesuai Tugas dan Fungsinya</ion-option>
-                    </ion-select>
-                </ion-item>
+                        <ion-item no-padding margin-bottom class="input--form">
+                            <ion-select placeholder="Alasan Penerusan" [(ngModel)]="naskah.alasan" name="alasan">
+                                <ion-option value="1">Cuti</ion-option>
+                                <ion-option value="2">Lainnya</ion-option>
+                                <ion-option value="3">Tidak Sesuai Tugas dan Fungsinya</ion-option>
+                            </ion-select>
+                        </ion-item>
 
-                <ion-item no-padding class="textarea--form">
-                    <ion-textarea placeholder=" Catatan" required name="catatan" type="text" [(ngModel)]="naskah.catatan"></ion-textarea>
-                </ion-item>
+                        <ion-item no-padding class="textarea--form">
+                            <ion-textarea placeholder=" Catatan" required name="catatan" type="text" [(ngModel)]="naskah.catatan"></ion-textarea>
+                        </ion-item>
 
-                <button ion-button full block color="default-blue" icon-start (click)="teruskan()" margin-top>
-                    <ion-icon name="checkmark"></ion-icon>
-                    Simpan
-                </button>
-            </div>
-        </ion-col>
-    </ion-row>
-    </ion-card-content>
+                        <button ion-button full block color="default-blue" icon-start (click)="teruskan()" margin-top>
+                            <ion-icon name="checkmark"></ion-icon>
+                            Simpan
+                        </button>
+                    </div>
+                </ion-col>
+            </ion-row>
+        </ion-card-content>
     </ion-card>
 </ion-grid>
