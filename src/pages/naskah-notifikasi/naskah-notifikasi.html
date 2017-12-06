@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content class="list-avatar-page">
-  <ion-list>
+  <ion-list *ngIf="notifications">
     <ion-item *ngFor="let notif of notifications" (tap)="detailNotifikasi(notif?.id)">
       <h6 ion-text>{{notif?.nama}}</h6>
       <text-avatar [text]="notif?.nama" item-left></text-avatar>
@@ -14,5 +14,5 @@
       <ion-note item-end>{{statusRead(notif?.is_read)}}</ion-note>
     </ion-item>
   </ion-list>
-  <empty-state *ngIf="listNotif?.length == 0"></empty-state>
+  <empty-state *ngIf="notifications?.length == 0"></empty-state>
 </ion-content>
