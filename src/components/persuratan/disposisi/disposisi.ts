@@ -24,12 +24,12 @@ export class Disposisi {
   pelaku: string;
 
   disposisi: any = {
-    personal: "",
-    selaku: "",
+    personal: [],
+    selaku: [],
     sifatSurat: "",
     catatan: "",
     tanggalSelesai: "",
-    tanggal: "",
+    tanggalDisposisi: "",
     sumasId: "",
     petunjuk: [],
     unitTujuan: [],
@@ -156,7 +156,6 @@ export class Disposisi {
     data.splice(index, 1);
   }
 
-  addPersonal() {}
   nextStep(to: any = "root") {
     setTimeout(true, 5000);
     if (to.unit) {
