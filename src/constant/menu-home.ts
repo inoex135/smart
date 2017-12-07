@@ -1,5 +1,3 @@
-import { PersonalPage } from "../pages/personal/personal";
-
 export class MenuHomeConstant {
   public static getMenus(): Array<any> {
     const menus = [
@@ -16,7 +14,7 @@ export class MenuHomeConstant {
         subtitle: "Pemberitahuan Kalender Kegiatan",
         iconSmall: "calendar_sm",
         iconLarge: "calendar_lg",
-        component: PersonalPage,
+        component: "PersonalPage",
         color: "orange"
       },
       {

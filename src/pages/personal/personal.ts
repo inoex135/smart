@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { NavController, NavParams } from "ionic-angular";
+import { NavController, NavParams, IonicPage } from "ionic-angular";
 
 import { PersonalProvider } from "../../providers/personal/personal";
 import { LoaderHelper } from "../../helpers/loader-helper";
@@ -8,6 +8,7 @@ import { LoaderHelper } from "../../helpers/loader-helper";
   selector: "page-personal",
   templateUrl: "personal.html"
 })
+@IonicPage()
 export class PersonalPage {
   // date: string[] = ["2017-11-15", "2017-11-16"];
   // type: "string"; // 'string' | 'js-date' | 'moment' | 'time' | 'object'

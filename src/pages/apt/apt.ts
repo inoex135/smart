@@ -8,7 +8,6 @@ import {
 import { File } from "@ionic-native/file";
 
 import { AptProvider } from "../../providers/apt/apt";
-import { AptDetailPage } from "../apt-detail/apt-detail";
 
 import { AptHelper } from "../../helpers/apt-helper";
 import { LoaderHelper } from "../../helpers/loader-helper";
@@ -62,7 +61,7 @@ export class AptPage {
   }
 
   detailApt(item: any) {
-    this.navCtrl.push(AptDetailPage, { itemId: item.id });
+    this.navCtrl.push("AptDetailPage", { itemId: item.id });
   }
 
   isItemPressed() {
