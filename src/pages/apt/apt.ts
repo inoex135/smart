@@ -12,7 +12,7 @@ import { AptProvider } from "../../providers/apt/apt";
 import { AptHelper } from "../../helpers/apt-helper";
 import { LoaderHelper } from "../../helpers/loader-helper";
 import remove from "lodash/remove";
-import { debounceTime } from "rxjs/operators";
+import { debounceTime, finalize } from "rxjs/operators";
 import { ToastHelper } from "../../helpers/toast-helper";
 import { APT_INDIKATOR } from "../../constant/apt-indikator";
 
@@ -120,8 +120,7 @@ export class AptPage {
     this.showLoader();
     searchProvider = this.aptProvider.search(keyword);
     searchProvider
-      .pipe(debounceTime(700))
-      .finally(() => this.hideLoader())
+      .pipe(debounceTime(700), finalize(() => this.hideLoader()))
       .subscribe(res => (this.items = res.content));
   }
 

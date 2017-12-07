@@ -1,6 +1,5 @@
 import { Component, ViewChild } from "@angular/core";
 import { NavController, NavParams, IonicPage } from "ionic-angular";
-import "rxjs/add/operator/finally";
 
 import { NaskahMasukProvider } from "../../providers/naskah-masuk/naskah-masuk";
 import { LoaderHelper } from "../../helpers/loader-helper";
