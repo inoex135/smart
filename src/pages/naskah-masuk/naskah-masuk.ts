@@ -1,17 +1,17 @@
 import { Component } from "@angular/core";
-import { NavController, NavParams } from "ionic-angular";
+import { NavController, NavParams, IonicPage } from "ionic-angular";
 import { NaskahMasukProvider } from "../../providers/naskah-masuk/naskah-masuk";
-import { NaskahMasukDetailPage } from "../naskah-masuk-detail/naskah-masuk-detail";
 import { LoaderHelper } from "../../helpers/loader-helper";
 import remove from "lodash/remove";
 import { debounceTime } from "rxjs/operators";
 
+@IonicPage()
 @Component({
   selector: "page-naskah-masuk",
   templateUrl: "naskah-masuk.html"
 })
 export class NaskahMasukPage {
-  listNaskah: any=[];
+  listNaskah: any = [];
   isBulkAction: boolean = false;
 
   filter: any = {
@@ -21,7 +21,6 @@ export class NaskahMasukPage {
   naskahTerima: any[] = [];
 
   searching: boolean = false;
-
 
   constructor(
     public navCtrl: NavController,
@@ -35,7 +34,7 @@ export class NaskahMasukPage {
   }
 
   detailNaskah(naskah: any) {
-    this.navCtrl.push(NaskahMasukDetailPage, { naskahId: naskah.id });
+    this.navCtrl.push("NaskahMasukDetailPage", { naskahId: naskah.id });
   }
 
   //proses search by type dan default search

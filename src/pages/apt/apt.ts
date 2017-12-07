@@ -1,5 +1,10 @@
 import { Component } from "@angular/core";
-import { NavController, NavParams, LoadingController } from "ionic-angular";
+import {
+  NavController,
+  NavParams,
+  LoadingController,
+  IonicPage
+} from "ionic-angular";
 import { File } from "@ionic-native/file";
 
 import { AptProvider } from "../../providers/apt/apt";
@@ -12,6 +17,7 @@ import { debounceTime } from "rxjs/operators";
 import { ToastHelper } from "../../helpers/toast-helper";
 import { APT_INDIKATOR } from "../../constant/apt-indikator";
 
+@IonicPage()
 @Component({
   selector: "page-apt",
   templateUrl: "apt.html"

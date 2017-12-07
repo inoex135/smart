@@ -1,5 +1,3 @@
-import { SuratPage } from "../pages/surat/surat";
-import { AptPage } from "../pages/apt/apt";
 import { PersonalPage } from "../pages/personal/personal";
 
 export class MenuHomeConstant {
@@ -10,7 +8,7 @@ export class MenuHomeConstant {
         subtitle: "Pemberitahuan Persuratan",
         iconSmall: "mail_sm",
         iconLarge: "mail_lg",
-        component: SuratPage,
+        component: "SuratPage",
         color: "blue-light"
       },
       {
@@ -26,7 +24,7 @@ export class MenuHomeConstant {
         subtitle: "Pemberitahuan Supervisi",
         iconSmall: "checkmark-circle-outline_sm",
         iconLarge: "checkmark-circle-outline_lg",
-        component: AptPage,
+        component: "AptPage",
         color: "green-light"
       }
     ];

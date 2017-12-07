@@ -1,5 +1,5 @@
 import { Component, ViewChild } from "@angular/core";
-import { NavController, NavParams } from "ionic-angular";
+import { NavController, NavParams, IonicPage } from "ionic-angular";
 import "rxjs/add/operator/finally";
 
 import { NaskahMasukProvider } from "../../providers/naskah-masuk/naskah-masuk";
@@ -13,6 +13,7 @@ import { File } from "@ionic-native/file";
 import { AptHelper } from "../../helpers/apt-helper";
 import { ToastHelper } from "../../helpers/toast-helper";
 
+@IonicPage()
 @Component({
   selector: "page-naskah-masuk-detail",
   templateUrl: "naskah-masuk-detail.html"

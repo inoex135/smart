@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { NavController, Platform } from "ionic-angular";
+import { NavController, Platform, IonicPage } from "ionic-angular";
 import { UserProvider } from "../../providers/user/user";
 
 import { MenuHomeConstant } from "../../constant/menu-home";
@@ -12,7 +12,7 @@ import { FCM } from "@ionic-native/fcm";
 import { TokenProvider } from "../../providers/token/token";
 import { ToastHelper } from "../../helpers/toast-helper";
 import { Storage } from "@ionic/storage";
-
+@IonicPage()
 @Component({
   selector: "page-home",
   templateUrl: "home.html"

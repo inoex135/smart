@@ -1,8 +1,7 @@
 import { Component, ViewChildren } from "@angular/core";
-import { NavController, NavParams } from "ionic-angular";
+import { NavController, NavParams, IonicPage } from "ionic-angular";
 
 import { LoaderHelper } from "../../helpers/loader-helper";
-import { NaskahMasukPage } from "../naskah-masuk/naskah-masuk";
 import { GrafikSuratProvider } from "../../providers/grafik-surat/grafik-surat";
 import { SuratProvider } from "../../providers/surat/surat";
 
@@ -14,6 +13,7 @@ import { DatepickerProvider } from "../../providers/datepicker/datepicker";
 import { MomentHelper } from "../../helpers/moment-helper";
 import { TokenProvider } from "../../providers/token/token";
 
+@IonicPage()
 @Component({
   selector: "page-surat",
   templateUrl: "surat.html"
@@ -144,7 +144,7 @@ export class SuratPage {
     }
 
     if (component === this.PAGE.NASKAH) {
-      this.navCtrl.push(NaskahMasukPage);
+      this.navCtrl.push("NaskahMasukPage");
     }
   }
 
