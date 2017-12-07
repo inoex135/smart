@@ -1,4 +1,6 @@
 page-apt {
+  font-family: Roboto;
+  
   ion-item {
     max-height: 1em;
   }
@@ -61,5 +63,15 @@ page-apt {
   //footer
   ion-footer {
     background-color: rgba(44, 48, 48, 0.514);
+  }
+
+  .apt-searchbar{
+    margin-left: -20px;
+    width:100%;
+  }
+
+  .apt-head-panel{
+    background-color: white;
+    margin-bottom: 40%;
   }
 }

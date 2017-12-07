@@ -2,25 +2,23 @@
   <ion-navbar color="green-light">
     <ion-title>APT</ion-title>
   </ion-navbar>
+    
 </ion-header>
 
 <ion-content padding>
-  <ion-list>
-    <pemberitahuan [redirectComponent]="redirectComponent"></pemberitahuan>
-
-
-    <ion-searchbar [(ngModel)]="keyword" search-bar-bcg (ionInput)="search( $event?.target?.value)" (ionCancel)="search( $event?.target?.value)"></ion-searchbar>
-
-    <ion-item class="input--form">
-      <ion-select (ionChange)="searchByTipe(jenisPelayanan)" [(ngModel)]="jenisPelayanan" placeholder="Jenis Pelayanan">
-        <ion-option [value]="pelayanan?.id" *ngFor="let pelayanan of pelayanans">
-          {{pelayanan?.nama}}
-        </ion-option>
-      </ion-select>
-    </ion-item>
-
+  <ion-list no-lines padding class="apt-head-panel">
+    <ion-header>
+        <pemberitahuan [redirectComponent]="redirectComponent" class="apt-notif"></pemberitahuan>
+        <ion-item class="input--form">
+          <ion-select (ionChange)="searchByTipe(jenisPelayanan)" [(ngModel)]="jenisPelayanan" placeholder="Filter berdasarkan Jenis Pelayanan">
+            <ion-option [value]="pelayanan?.id" *ngFor="let pelayanan of pelayanans">
+              {{pelayanan?.nama}}
+            </ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-searchbar [(ngModel)]="keyword" search-bar-bcg (ionInput)="search( $event?.target?.value)" (ionCancel)="search( $event?.target?.value)" class="apt-search"></ion-searchbar>
+    </ion-header>
   </ion-list>
-
 
   <ion-list class="list--apt" *ngIf="items?.length > 0">
     <ion-card (press)="isItemPressed(item?.id)" item no-margin padding *ngFor="let item of items;let i = index">
@@ -35,10 +33,10 @@
         </ion-col>
         <ion-col (tap)="detailApt(item)">
           <p ion-text text-right>{{item?.tanggalString}}</p>
-
-          <apt-indikator-button [status]="item?.statusString"></apt-indikator-button>
-
         </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col><apt-indikator-button [status]="item?.statusString"></apt-indikator-button></ion-col>
       </ion-row>
     </ion-card>
   </ion-list>
