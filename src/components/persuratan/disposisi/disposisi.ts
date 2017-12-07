@@ -245,7 +245,7 @@ export class Disposisi {
         this.toastHelper.present(this.message);
       },
       err => {
-        console.log(err);
+        this.toastHelper.present("ERROR_VALIDATION");
       }
     );
   }

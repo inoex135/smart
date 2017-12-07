@@ -49,9 +49,6 @@
                         [value]="jabatan?.kode"></ion-checkbox>
                 </ion-item>
                 <ion-item no-lines>
-                    <p>
-                        {{datas?.jabatan | json}} - {{disposisi?.unitTujuan | json}}
-                    </p>
                     <ion-label>Lead</ion-label>
                 </ion-item>
 
@@ -93,6 +90,9 @@
                             Nama: {{disposisi?.personal[i]?.nama}}
                             <br>Selaku: {{selaku}}
                         </p>
+                        <button (click)="removeData(disposisi?.selaku, i)" ion-button color="light" item-end>
+                            <ion-icon name="close"></ion-icon>
+                        </button>
                     </ion-item>
                 </ion-row>
             </ion-card-content>
