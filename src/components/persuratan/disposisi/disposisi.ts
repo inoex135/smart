@@ -105,16 +105,16 @@ export class Disposisi {
   // untuk get dan remove value checkbox unit
   // remove by index dari unit yg di klik
   // dan add by index yang di klik
-  selectUnit(unit: IDisposisiUnit) {
+  selectUnit(unit: IDisposisiUnit, checked) {
     let unitIndex = this.disposisi.unitTujuan.indexOf(unit.kode_utuh);
 
-    if (unitIndex !== -1) {
-      this.disposisi.unitTujuan.splice(unitIndex, 1);
-    } else {
+    if (checked) {
       this.disposisi.unitTujuan.push({
         kode_utuh: unit.kode_utuh,
         uraian_jabatan: unit.uraian_jabatan
       });
+    } else {
+      this.disposisi.unitTujuan.splice(unitIndex, 1);
     }
   }
 
@@ -157,7 +157,7 @@ export class Disposisi {
   }
 
   nextStep(to: any = "root") {
-    setTimeout(true, 5000);
+    setTimeout(() => {}, 10000);
     if (to.unit) {
       this.component.unitOrPersonal = false;
       this.component.disposisiUnit = true;
