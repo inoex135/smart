@@ -10,15 +10,15 @@
     <ion-card>
       <ion-card-header>{{detail?.title}}</ion-card-header>
       <ion-card-content>
-        <p ion-text>{{detail?.startDateLabel | indonesianDate: 'dddd, DD MMMM YYYY'}}</p>
-        <p ion-text>{{detail?.timeStart}} - {{detail?.timeEnd}}</p>
-        <p ion-text>{{detail?.uraian}}</p>
-        <p ion-text>{{detail?.lokasi}}</p>
+        <p ion-text><ion-icon name="md-calendar"></ion-icon> {{detail?.startDateLabel | indonesianDate: 'dddd, DD MMMM YYYY'}}</p>
+        <p ion-text><ion-icon name="ios-clock-outline"></ion-icon> {{detail?.timeStart}} - {{detail?.timeEnd}}</p>
+        <!-- <p ion-text>{{detail?.uraian}}</p> -->
+        <p ion-text><ion-icon name="md-pin"></ion-icon> {{detail?.lokasi}}</p>
         <p ion-text>{{detail?.type}}</p>
       </ion-card-content>
-      <ion-item item-end *ngIf="detail?.edit">
-        <button item-right clear ion-button (click)="edit(detail?.id)">Edit</button>
-        <button item-right clear ion-button (click)="delete(detail?.id)">Delete</button>
+      <ion-item item-end *ngIf="!detail?.edit">
+        <button item-right clear ion-button (click)="edit(detail?.id)"><ion-icon name="md-create"></ion-icon> Edit</button>
+        <button item-right clear ion-button (click)="delete(detail?.id)"> <ion-icon name="trash"></ion-icon>Delete</button>
       </ion-item>
     </ion-card>
   </div>

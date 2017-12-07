@@ -9,7 +9,7 @@
     <pemberitahuan [redirectComponent]="redirectComponent"></pemberitahuan>
 
     <ion-item class="item-surat-header" margin-top (click)="openPage('naskah')">
-      <h2 ion-text item-end class="item-surat-title">Daftar Naskah Unit</h2>
+      <h2 ion-text item-end class="item-surat-title">Daftar Naskah Masuk</h2>
     </ion-item>
 
     <div class="select--role" *ngIf="isSekretaris">
@@ -57,21 +57,27 @@
 
     <ion-card class="total-surat-card total-surat-sekarang">
       <ion-card-content>
-        <h3 class="total-surat-content">{{totalPersuratan?.total_hari_ini}}
+        <h3 class="total-surat-content">
+          <ion-icon name="md-calendar"></ion-icon>
+          {{totalPersuratan?.total_hari_ini}}
           <small>Total Surat Hari Ini</small>
         </h3>
       </ion-card-content>
     </ion-card>
     <ion-card class="total-surat-card total-surat-kemarin">
       <ion-card-content>
-        <h3 class="total-surat-content">{{totalPersuratan?.total_kemarin}}
+        <h3 class="total-surat-content">
+          <ion-icon name="md-refresh-circle"></ion-icon>
+          {{totalPersuratan?.total_kemarin}}
           <small>Total Surat Kemarin</small>
         </h3>
       </ion-card-content>
     </ion-card>
     <ion-card class="total-surat-card total-surat-semua">
       <ion-card-content>
-        <h3 class="total-surat-content">{{totalPersuratan?.total_keseluruhan}}
+        <h3 class="total-surat-content">
+          <ion-icon name="md-stats"></ion-icon>
+          {{totalPersuratan?.total_keseluruhan}}
           <small>Total Surat Keseluruhan</small>
         </h3>
       </ion-card-content>

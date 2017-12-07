@@ -1,6 +1,11 @@
 ul {
   list-style-type: none;
 }
+
+.agenda-timeline-header{
+  margin-top:2%;
+}
+
 .timeline {
   $default-blue: map-get($colors, default-blue);
 

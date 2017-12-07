@@ -10,14 +10,14 @@
 
   <ul class="timeline" *ngIf="type === CURRENT_TYPE.AGENDA">
     <li *ngFor="let kegiatan of item?.detail">
-      <div class="timeline-thumb bg-color-blue timeline-icon">
+      <div class="timeline-thumb bg-color-orange timeline-icon">
         <i class="ion-heart"></i>
       </div>
       <div class="timeline-item">
-        <h4>{{kegiatan?.uraian}}</h4>
+        <h6 class="agenda-timeline-header" style="margin-top: 2%;">{{kegiatan?.uraian}}</h6>
         <p></p>
-        <div class="timeline-stats" (tap)="detailAgenda(item?.tanggal)">
-          View
+        <div class="timeline-stats" (tap)="detailAgenda(item?.id)">
+          Lihat Agenda
           <span class="pos-absolute-right">
             <i class="ion-ios-clock"></i> {{kegiatan?.jam_dari}} - {{kegiatan?.jam_sampai}}</span>
         </div>
