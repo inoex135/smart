@@ -104,7 +104,7 @@ export class HomePage {
 
   async initData() {
     const profile = await this.token.getProfile();
-    const getTotalNotif = this.homeProvider.getTotalNotication();
+    const getTotalNotif = await this.homeProvider.getTotalNotication();
     // console.log(getTotalNotif);
 
     if (profile) {

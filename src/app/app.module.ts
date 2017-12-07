@@ -38,7 +38,6 @@ import { LoaderHelper } from "../helpers/loader-helper";
 import { ApiProvider } from "../providers/api/api";
 import { AptProvider } from "../providers/apt/apt";
 import { DatepickerProvider } from "../providers/datepicker/datepicker";
-import { EventModalPage } from "../pages/personal/event-modal/event-modal";
 import { GrafikSuratProvider } from "../providers/grafik-surat/grafik-surat";
 import { NaskahNotifikasiProvider } from "../providers/naskah-notifikasi/naskah-notifikasi";
 import { NaskahMasukProvider } from "../providers/naskah-masuk/naskah-masuk";
@@ -56,7 +55,7 @@ import { MasterUnitProvider } from "../providers/master-unit/master-unit";
 import { AutoCompleteModule } from "ionic2-auto-complete";
 
 @NgModule({
-  declarations: [MyApp, EventModalPage, AptDetailActionPage],
+  declarations: [MyApp, AptDetailActionPage],
   imports: [
     BrowserModule,
     FormsModule,
@@ -72,7 +71,7 @@ import { AutoCompleteModule } from "ionic2-auto-complete";
     AutoCompleteModule
   ],
   bootstrap: [IonicApp],
-  entryComponents: [MyApp, EventModalPage, AptDetailActionPage],
+  entryComponents: [MyApp, AptDetailActionPage],
   providers: [
     StatusBar,
     SplashScreen,
