@@ -76,9 +76,13 @@ export class NaskahMasukDetailPage {
 
   terimaNaskah() {
     const idList = { idList: [this.naskahId] };
-    this.naskahProvider
-      .terimaSemuaNaskah(idList)
-      .subscribe(res => this.dismiss(), err => this.navCtrl.pop());
+    this.naskahProvider.terimaSemuaNaskah(idList).subscribe(
+      res => {
+        this.dismiss();
+        this.getDetailNaskah();
+      },
+      err => this.navCtrl.pop()
+    );
   }
   showModal() {
     if (!this.detail.statusTerimaSurat) {
