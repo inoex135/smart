@@ -3,7 +3,7 @@ import { NavController, NavParams, IonicPage } from "ionic-angular";
 import { NaskahMasukProvider } from "../../providers/naskah-masuk/naskah-masuk";
 import { LoaderHelper } from "../../helpers/loader-helper";
 import remove from "lodash/remove";
-import { debounceTime } from "rxjs/operators";
+import { debounceTime, finalize } from "rxjs/operators";
 
 @IonicPage()
 @Component({
@@ -50,8 +50,7 @@ export class NaskahMasukPage {
     }
 
     searchProvider
-      .pipe(debounceTime(700))
-      .finally(() => this.hideLoader())
+      .pipe(debounceTime(700), finalize(() => this.hideLoader()))
       .subscribe(
         res => (this.listNaskah = res.response),
         err => this.handleErrorSearch(params)
