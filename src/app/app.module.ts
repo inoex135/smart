@@ -30,8 +30,6 @@ import { CalendarModule } from "ion2-calendar";
 // pages
 import { AptDetailActionPage } from "../pages/apt-detail-action/apt-detail-action";
 
-import { NaskahDetailActionPage } from "../pages/naskah-detail-action/naskah-detail-action";
-
 // helper
 import { AptHelper } from "../helpers/apt-helper";
 import { LoaderHelper } from "../helpers/loader-helper";
@@ -58,12 +56,7 @@ import { MasterUnitProvider } from "../providers/master-unit/master-unit";
 import { AutoCompleteModule } from "ionic2-auto-complete";
 
 @NgModule({
-  declarations: [
-    MyApp,
-    NaskahDetailActionPage,
-    EventModalPage,
-    AptDetailActionPage
-  ],
+  declarations: [MyApp, EventModalPage, AptDetailActionPage],
   imports: [
     BrowserModule,
     FormsModule,
@@ -79,13 +72,7 @@ import { AutoCompleteModule } from "ionic2-auto-complete";
     AutoCompleteModule
   ],
   bootstrap: [IonicApp],
-  entryComponents: [
-    MyApp,
-
-    NaskahDetailActionPage,
-    EventModalPage,
-    AptDetailActionPage
-  ],
+  entryComponents: [MyApp, EventModalPage, AptDetailActionPage],
   providers: [
     StatusBar,
     SplashScreen,

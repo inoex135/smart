@@ -4,7 +4,7 @@ import "rxjs/add/operator/finally";
 
 import { NaskahMasukProvider } from "../../providers/naskah-masuk/naskah-masuk";
 import { LoaderHelper } from "../../helpers/loader-helper";
-import { NaskahDetailActionPage } from "../naskah-detail-action/naskah-detail-action";
+
 import { NaskahAction } from "../../constant/naskah-action";
 
 import { NaskahModalDownloadComponent } from "../../components/naskah-modal-download/naskah-modal-download";
@@ -47,7 +47,7 @@ export class NaskahMasukDetailPage {
   }
 
   openPage(actionData: String) {
-    this.navCtrl.push(NaskahDetailActionPage, {
+    this.navCtrl.push("NaskahDetailActionPage", {
       actionData: actionData,
       naskahId: this.naskahId,
       detailNaskah: this.detail
