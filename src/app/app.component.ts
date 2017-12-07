@@ -5,8 +5,6 @@ import { SplashScreen } from "@ionic-native/splash-screen";
 
 import { UserProvider } from "../providers/user/user";
 import { TokenProvider } from "../providers/token/token";
-import { HomePage } from "../pages/home/home";
-
 import { FCM } from "@ionic-native/fcm";
 
 @Component({
@@ -69,7 +67,7 @@ export class MyApp {
   initHomePage(): void {
     this.token.getToken().then(token => {
       if (token) {
-        this.rootPage = HomePage;
+        this.rootPage = "HomePage";
         // this.userProvider.populate();
       } else {
         this.rootPage = "LoginPage";

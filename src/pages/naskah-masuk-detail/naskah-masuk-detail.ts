@@ -1,10 +1,9 @@
 import { Component, ViewChild } from "@angular/core";
-import { NavController, NavParams } from "ionic-angular";
-import "rxjs/add/operator/finally";
+import { NavController, NavParams, IonicPage } from "ionic-angular";
 
 import { NaskahMasukProvider } from "../../providers/naskah-masuk/naskah-masuk";
 import { LoaderHelper } from "../../helpers/loader-helper";
-import { NaskahDetailActionPage } from "../naskah-detail-action/naskah-detail-action";
+
 import { NaskahAction } from "../../constant/naskah-action";
 
 import { NaskahModalDownloadComponent } from "../../components/naskah-modal-download/naskah-modal-download";
@@ -13,6 +12,7 @@ import { File } from "@ionic-native/file";
 import { AptHelper } from "../../helpers/apt-helper";
 import { ToastHelper } from "../../helpers/toast-helper";
 
+@IonicPage()
 @Component({
   selector: "page-naskah-masuk-detail",
   templateUrl: "naskah-masuk-detail.html"
@@ -46,7 +46,7 @@ export class NaskahMasukDetailPage {
   }
 
   openPage(actionData: String) {
-    this.navCtrl.push(NaskahDetailActionPage, {
+    this.navCtrl.push("NaskahDetailActionPage", {
       actionData: actionData,
       naskahId: this.naskahId,
       detailNaskah: this.detail
@@ -76,9 +76,13 @@ export class NaskahMasukDetailPage {
 
   terimaNaskah() {
     const idList = { idList: [this.naskahId] };
-    this.naskahProvider
-      .terimaSemuaNaskah(idList)
-      .subscribe(res => this.dismiss(), err => this.navCtrl.pop());
+    this.naskahProvider.terimaSemuaNaskah(idList).subscribe(
+      res => {
+        this.dismiss();
+        this.getDetailNaskah();
+      },
+      err => this.navCtrl.pop()
+    );
   }
   showModal() {
     if (!this.detail.statusTerimaSurat) {

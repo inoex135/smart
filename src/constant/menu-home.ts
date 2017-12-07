@@ -1,7 +1,3 @@
-import { SuratPage } from "../pages/surat/surat";
-import { AptPage } from "../pages/apt/apt";
-import { PersonalPage } from "../pages/personal/personal";
-
 export class MenuHomeConstant {
   public static getMenus(): Array<any> {
     const menus = [
@@ -10,7 +6,7 @@ export class MenuHomeConstant {
         subtitle: "Pemberitahuan Persuratan",
         iconSmall: "mail_sm",
         iconLarge: "mail_lg",
-        component: SuratPage,
+        component: "SuratPage",
         color: "blue-light"
       },
       {
@@ -18,7 +14,7 @@ export class MenuHomeConstant {
         subtitle: "Pemberitahuan Kalender Kegiatan",
         iconSmall: "calendar_sm",
         iconLarge: "calendar_lg",
-        component: PersonalPage,
+        component: "PersonalPage",
         color: "orange"
       },
       {
@@ -26,7 +22,7 @@ export class MenuHomeConstant {
         subtitle: "Pemberitahuan Supervisi",
         iconSmall: "checkmark-circle-outline_sm",
         iconLarge: "checkmark-circle-outline_lg",
-        component: AptPage,
+        component: "AptPage",
         color: "green-light"
       }
     ];

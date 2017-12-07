@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { NavParams, NavController } from "ionic-angular";
+import { NavParams, NavController, IonicPage } from "ionic-angular";
 import { AptDetailActionPage } from "../apt-detail-action/apt-detail-action";
 import { AptAction } from "../../constant/apt-action";
 import { AptProvider } from "../../providers/apt/apt";
@@ -9,6 +9,7 @@ import { File } from "@ionic-native/file";
 import { APT_INDIKATOR } from "../../constant/apt-indikator";
 import { ToastHelper } from "../../helpers/toast-helper";
 
+@IonicPage()
 @Component({
   selector: "page-apt-detail",
   templateUrl: "apt-detail.html"
@@ -58,8 +59,6 @@ export class AptDetailPage {
   }
 
   async downloadPermohonan(fileApt) {
-    console.log(fileApt);
-
     try {
       const targetPath = `${this.fileDirectory}/${fileApt.nomorTiket}.pdf`;
 
@@ -74,11 +73,11 @@ export class AptDetailPage {
 
       this.aptProvider.download(fileApt.id, targetPath);
 
-      // open file after download
-      // const openFile = await this.aptHelper.openFile(targetPath);
-      // alert(openFile.message);
       this.toast.present("File telah di download");
       this.loaderHelper.dismiss();
+
+      // open file after download
+      // await this.aptHelper.openFile(targetPath);
     } catch (error) {
       this.loaderHelper.dismiss();
       this.toast.present(error);

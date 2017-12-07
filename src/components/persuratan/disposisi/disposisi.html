@@ -42,17 +42,19 @@
                 <ion-item no-lines>
                     <ion-label>Jabatan(Unit)</ion-label>
                 </ion-item>
+
                 <ion-item *ngFor="let jabatan of datas?.jabatan; let i = index" no-lines>
                     <ion-label text-wrap>{{jabatan?.uraian_jabatan}}</ion-label>
-                    <ion-checkbox (ionChange)="selectUnit(jabatan, $event.checked)" [value]="jabatan?.kode"></ion-checkbox>
+                    <ion-checkbox [checked]="jabatan?.kode_utuh == disposisi?.unitTujuan[0]?.kode_utuh" (ionChange)="selectUnit(jabatan, $event.checked)"
+                        [value]="jabatan?.kode"></ion-checkbox>
                 </ion-item>
                 <ion-item no-lines>
                     <ion-label>Lead</ion-label>
                 </ion-item>
 
                 <ion-item class="input--form">
-                    <ion-select [(ngModel)]="disposisi.leader">
-                        <ion-option [value]="unit?.kode_utuh" text-wrap *ngFor="let unit of disposisi?.unitTujuan">
+                    <ion-select [checked]="" [(ngModel)]="disposisi.leader">
+                        <ion-option [selected]="unit?.kode_utuh == disposisi?.leader" [value]="unit?.kode_utuh" text-wrap *ngFor="let unit of disposisi?.unitTujuan">
                             {{unit?.uraian_jabatan}}
                         </ion-option>
                     </ion-select>
@@ -88,12 +90,15 @@
                             Nama: {{disposisi?.personal[i]?.nama}}
                             <br>Selaku: {{selaku}}
                         </p>
+                        <button (click)="removeData(disposisi?.selaku, i)" ion-button color="light" item-end>
+                            <ion-icon name="close"></ion-icon>
+                        </button>
                     </ion-item>
                 </ion-row>
             </ion-card-content>
         </ion-card>
     </ion-row>
-    
+
 
     <!-- show button untuk button next and text -->
     <ion-item no-lines *ngIf="component?.disposisiPersonal || component?.disposisiUnit">
@@ -179,8 +184,8 @@
     </ion-card>
     <button ion-button block (click)="simpan()" color="default-blue" icon-left class="disposisi-btn-simpan">
         <ion-icon name="paper"></ion-icon>
-            SIMPAN DISPOSISI
-        </button>
+        SIMPAN DISPOSISI
+    </button>
 
     <ion-button ion-button clear (tap)="back('disposisiPetunjuk')" color="default-blue" block>
         KEMBALI

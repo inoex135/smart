@@ -1,17 +1,22 @@
 import { Component } from "@angular/core";
-import { NavController, NavParams, LoadingController } from "ionic-angular";
+import {
+  NavController,
+  NavParams,
+  LoadingController,
+  IonicPage
+} from "ionic-angular";
 import { File } from "@ionic-native/file";
 
 import { AptProvider } from "../../providers/apt/apt";
-import { AptDetailPage } from "../apt-detail/apt-detail";
 
 import { AptHelper } from "../../helpers/apt-helper";
 import { LoaderHelper } from "../../helpers/loader-helper";
 import remove from "lodash/remove";
-import { debounceTime } from "rxjs/operators";
+import { debounceTime, finalize } from "rxjs/operators";
 import { ToastHelper } from "../../helpers/toast-helper";
 import { APT_INDIKATOR } from "../../constant/apt-indikator";
 
+@IonicPage()
 @Component({
   selector: "page-apt",
   templateUrl: "apt.html"
@@ -56,7 +61,7 @@ export class AptPage {
   }
 
   detailApt(item: any) {
-    this.navCtrl.push(AptDetailPage, { itemId: item.id });
+    this.navCtrl.push("AptDetailPage", { itemId: item.id });
   }
 
   isItemPressed() {
@@ -115,8 +120,7 @@ export class AptPage {
     this.showLoader();
     searchProvider = this.aptProvider.search(keyword);
     searchProvider
-      .pipe(debounceTime(700))
-      .finally(() => this.hideLoader())
+      .pipe(debounceTime(700), finalize(() => this.hideLoader()))
       .subscribe(res => (this.items = res.content));
   }
 

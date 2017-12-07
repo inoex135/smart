@@ -1,6 +1,5 @@
 import { Component } from "@angular/core";
 import { IonicPage, NavController } from "ionic-angular";
-import { AptDetailPage } from "../apt-detail/apt-detail";
 import { AptProvider } from "../../providers/apt/apt";
 
 @IonicPage()
@@ -27,7 +26,7 @@ export class AptNotifikasiPage {
   }
 
   goToAptDetail(aptId: number) {
-    this.navCtrl.push(AptDetailPage, { aptId: aptId });
+    this.navCtrl.push("AptDetailPage", { aptId: aptId });
   }
 
   statusRead(isRead: number) {

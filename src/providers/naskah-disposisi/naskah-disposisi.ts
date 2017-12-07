@@ -29,10 +29,19 @@ export class NaskahDisposisiProvider {
       return res.kode_utuh;
     });
 
+    const personal = data.personal.map(
+      res => {
+        return res.nip;
+      },
+      err => {
+        return null;
+      }
+    );
+
     let formData = new FormData();
 
     formData.append("sumas_id", data.sumasId);
-    formData.append("personal", data.personal);
+    formData.append("personal", personal);
     formData.append("selaku", data.selaku);
     formData.append("sifat_surat", data.sifatSurat);
     formData.append("petunjuk", data.petunjuk);

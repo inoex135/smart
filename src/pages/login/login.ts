@@ -8,7 +8,6 @@ import {
 
 import { User } from "../../models/users";
 import { UserProvider } from "../../providers/user/user";
-import { HomePage } from "../home/home";
 import { TokenProvider } from "../../providers/token/token";
 import { LoginState } from "../../models/login-state.model";
 @IonicPage()
@@ -57,7 +56,7 @@ export class LoginPage {
     this.loginState.isLogin = true;
 
     this.userProvider.attemptAuth(user).subscribe(
-      data => this.navCtrl.setRoot(HomePage),
+      data => this.navCtrl.setRoot("HomePage"),
       err => {
         this.loginState.isLogin = false;
 
@@ -80,7 +79,7 @@ export class LoginPage {
 
     // login http
     this.userProvider.attemptAuthSso(user).subscribe(
-      data => this.navCtrl.setRoot(HomePage),
+      data => this.navCtrl.setRoot("HomePage"),
       err => {
         // as flag untuk hide loader spinner dan un-disable button
         this.loginState.isLogin = false;

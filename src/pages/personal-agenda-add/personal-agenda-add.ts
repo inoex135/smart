@@ -29,7 +29,7 @@ export class PersonalAgendaAddPage {
     lokasi: "",
     unit: [],
     pegawai: [],
-    is_sekretaris: ""
+    is_sekretaris: "0"
   };
 
   peserta: string = "";

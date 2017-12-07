@@ -9,7 +9,6 @@ import { IonicStorageModule } from "@ionic/storage";
 import { PipesModule } from "../pipes/pipes.module";
 
 import { MyApp } from "./app.component";
-import { HomePage } from "../pages/home/home";
 
 import { ComponentsModule } from "../components/components.module";
 
@@ -26,19 +25,10 @@ import { RlTagInputModule } from "../directives/angular2-tag-input/tag-input.mod
 
 // 3rd package angular
 import { NgCalendarModule } from "ionic2-calendar";
-import { Ng2HighchartsModule } from "ng2-highcharts";
 import { CalendarModule } from "ion2-calendar";
 
 // pages
-import { AptPage } from "../pages/apt/apt";
-import { PersonalPage } from "../pages/personal/personal";
-import { AptDetailPage } from "../pages/apt-detail/apt-detail";
 import { AptDetailActionPage } from "../pages/apt-detail-action/apt-detail-action";
-
-import { SuratPage } from "../pages/surat/surat";
-import { NaskahMasukPage } from "../pages/naskah-masuk/naskah-masuk";
-import { NaskahMasukDetailPage } from "../pages/naskah-masuk-detail/naskah-masuk-detail";
-import { NaskahDetailActionPage } from "../pages/naskah-detail-action/naskah-detail-action";
 
 // helper
 import { AptHelper } from "../helpers/apt-helper";
@@ -48,7 +38,6 @@ import { LoaderHelper } from "../helpers/loader-helper";
 import { ApiProvider } from "../providers/api/api";
 import { AptProvider } from "../providers/apt/apt";
 import { DatepickerProvider } from "../providers/datepicker/datepicker";
-import { EventModalPage } from "../pages/personal/event-modal/event-modal";
 import { GrafikSuratProvider } from "../providers/grafik-surat/grafik-surat";
 import { NaskahNotifikasiProvider } from "../providers/naskah-notifikasi/naskah-notifikasi";
 import { NaskahMasukProvider } from "../providers/naskah-masuk/naskah-masuk";
@@ -66,19 +55,7 @@ import { MasterUnitProvider } from "../providers/master-unit/master-unit";
 import { AutoCompleteModule } from "ionic2-auto-complete";
 
 @NgModule({
-  declarations: [
-    MyApp,
-    HomePage,
-    PersonalPage,
-    AptPage,
-    AptDetailPage,
-    SuratPage,
-    NaskahMasukPage,
-    NaskahMasukDetailPage,
-    NaskahDetailActionPage,
-    EventModalPage,
-    AptDetailActionPage
-  ],
+  declarations: [MyApp, AptDetailActionPage],
   imports: [
     BrowserModule,
     FormsModule,
@@ -90,24 +67,11 @@ import { AutoCompleteModule } from "ionic2-auto-complete";
     NgCalendarModule,
     PipesModule,
     RlTagInputModule,
-    Ng2HighchartsModule,
     CalendarModule,
     AutoCompleteModule
   ],
   bootstrap: [IonicApp],
-  entryComponents: [
-    MyApp,
-    HomePage,
-    PersonalPage,
-    AptPage,
-    AptDetailPage,
-    SuratPage,
-    NaskahMasukPage,
-    NaskahMasukDetailPage,
-    NaskahDetailActionPage,
-    EventModalPage,
-    AptDetailActionPage
-  ],
+  entryComponents: [MyApp, AptDetailActionPage],
   providers: [
     StatusBar,
     SplashScreen,
