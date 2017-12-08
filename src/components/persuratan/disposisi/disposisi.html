@@ -8,7 +8,7 @@
             <ion-row>
                 <ion-col col-8 push-2>
                     <ion-list>
-                        <ion-item>
+                        <ion-item *ngIf="profile?.jenis_eselon < 4">
                             <ion-checkbox (ionChange)="selectDisposisi('UNIT')" color="primary" [checked]="disposisiTarget?.unit" [value]="UNIT"></ion-checkbox>
                             <ion-label text-wrap>UNIT</ion-label>
                         </ion-item>
@@ -69,7 +69,8 @@
             <ion-card-header class="disposisi-kepada">
                 Disposisi Kepada Personal
             </ion-card-header>
-            <ion-card-content class="disposisi-padding-top-form">
+
+            <ion-card-content class="disposisi-padding-top-form" *ngIf="profile?.jenis_eselon <  4">
                 <ion-row *ngIf="component?.disposisiPersonal">
                     <ion-auto-complete (itemSelected)="addData(disposisi?.personal, $event)" [dataProvider]="masterPegawai" #autoComplete></ion-auto-complete>
 
@@ -77,9 +78,6 @@
                         <ion-input type="text" placeholder="Selaku" [(ngModel)]="pelaku"></ion-input>
                     </ion-item>
                     <ion-item no-lines>
-                        <!-- <button ion-button small item-end color="danger">
-                            <ion-icon name="close-circle"></ion-icon>
-                        </button> -->
                         <button ion-button small item-end color="default-blue" (tap)="addData(disposisi?.selaku, pelaku)">
                             <ion-icon name="add"></ion-icon>
                         </button>
@@ -93,6 +91,15 @@
                         <button (click)="removeData(disposisi?.selaku, i)" ion-button color="light" item-end>
                             <ion-icon name="close"></ion-icon>
                         </button>
+                    </ion-item>
+                </ion-row>
+            </ion-card-content>
+
+            <ion-card-content class="disposisi-padding-top-form" *ngIf="profile?.jenis_eselon == 4">
+                <ion-row *ngIf="component?.disposisiPersonal">
+                    <ion-item *ngFor="let pelaksana of datas?.pelaksana; let i = index" no-lines>
+                        <ion-label text-wrap>{{pelaksana?.nama}}</ion-label>
+                        <ion-checkbox (ionChange)="selectPelaksana(pelaksana, $event?.checked)" color="primary" [value]="pelaksana?.nip"></ion-checkbox>
                     </ion-item>
                 </ion-row>
             </ion-card-content>
@@ -149,7 +156,7 @@
                 <ion-item-group class="blue-background">
                     <ion-item *ngFor="let petunjuk of datas?.petunjuk; let i = index" class="petunjuk blue-background">
                         <ion-label text-wrap>{{petunjuk?.keterangan}}</ion-label>
-                        <ion-checkbox color="primary" name="petunjuk[i]" (ionChange)="onChange(petunjuk?.id, $event.checked,i)"></ion-checkbox>
+                        <ion-checkbox [checked]="petunjuk?.id == disposisi?.petunjuk[i]" color="primary" name="petunjuk[i]" (ionChange)="onChange(petunjuk?.id, $event.checked,i)"></ion-checkbox>
                     </ion-item>
                 </ion-item-group>
 

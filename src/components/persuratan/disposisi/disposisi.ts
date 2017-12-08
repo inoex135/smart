@@ -8,7 +8,9 @@ import { MomentHelper } from "../../../helpers/moment-helper";
 import { DatepickerProvider } from "../../../providers/datepicker/datepicker";
 import { NavController } from "ionic-angular";
 import { MasterPegawaiProvider } from "../../../providers/master-pegawai/master-pegawai";
+import { UserProvider } from "../../../providers/user/user";
 
+import findIndex from "lodash/findIndex";
 @Component({
   selector: "disposisi",
   templateUrl: "disposisi.html"
@@ -66,27 +68,33 @@ export class Disposisi {
     disposisiTanggal: false
   };
 
+  profile: any = "";
+
   constructor(
     private disposisiProvider: NaskahDisposisiProvider,
     private toastHelper: ToastHelper,
     private momentHelper: MomentHelper,
     private datepickerProvider: DatepickerProvider,
     private navCtrl: NavController,
-    private masterPegawai: MasterPegawaiProvider
+    private masterPegawai: MasterPegawaiProvider,
+    private user: UserProvider
   ) {
     this.init();
+    this.user.getProfile().subscribe(res => (this.profile = res));
   }
 
   init() {
     const petunjuk = this.disposisiProvider.getPetunjuk();
     const unitDisposisi = this.disposisiProvider.getUnitDisposisi();
     const sifatSurat = this.disposisiProvider.getSifatSurat();
+    const pelaksana = this.disposisiProvider.getPelaksana();
 
-    Observable.zip(petunjuk, unitDisposisi, sifatSurat).subscribe(
-      ([petunjuk, unitDisposisi, sifatSurat]) => {
+    Observable.zip(petunjuk, unitDisposisi, sifatSurat, pelaksana).subscribe(
+      ([petunjuk, unitDisposisi, sifatSurat, pelaksana]) => {
         this.datas.jabatan = unitDisposisi;
         this.datas.petunjuk = petunjuk;
         this.datas.sifatSurat = sifatSurat;
+        this.datas.pelaksana = pelaksana.response;
       }
     );
   }
@@ -118,6 +126,16 @@ export class Disposisi {
     }
   }
 
+  selectPelaksana(nip: string, checked: boolean) {
+    let pelaksanaIndex = findIndex(this.disposisi.personal, nip);
+
+    if (checked) {
+      this.disposisi.personal.push(nip);
+    } else {
+      this.disposisi.personal.splice(pelaksanaIndex, 1);
+    }
+  }
+
   searchPegawai(param: any) {
     this.disposisiProvider
       .searchPegawai(param)
@@ -132,10 +150,12 @@ export class Disposisi {
       );
   }
   onChange(petunjuk: string, checked: boolean, id: number) {
+    const indexPetunjuk = this.datas.petunjuk.indexOf(petunjuk);
+
     if (checked) {
       this.disposisi.petunjuk.push(petunjuk);
     } else {
-      this.disposisi.petunjuk.splice(id, 1);
+      this.disposisi.petunjuk.splice(indexPetunjuk, 1);
     }
   }
   // setLead(event: any, unit: any) {
