@@ -27,7 +27,7 @@
           Naskah Terima
         </button>
       </ion-col>
-      <ion-col *ngIf="detail?.prosesSurat !=='Selesai' || profile?.jenis_eselon !== null">
+      <ion-col *ngIf="detail?.prosesSurat !=='Selesai' && profile?.jenis_eselon !== null ">
         <button ion-button block icon-left color="silver" (click)="openPage('teruskan')">
           <ion-icon name="fastforward"></ion-icon>
           Teruskan
