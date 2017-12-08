@@ -1,6 +1,6 @@
 import { Component, Input } from "@angular/core";
 import { SelesaiModel } from "../../../models/selesai.model";
-import { NavParams } from "ionic-angular";
+import { NavParams, NavController } from "ionic-angular";
 import { SuratProvider } from "../../../providers/surat/surat";
 import { ToastHelper } from "../../../helpers/toast-helper";
 import { DatepickerProvider } from "../../../providers/datepicker/datepicker";
@@ -27,17 +27,22 @@ export class Selesai {
     private toastHelper: ToastHelper,
     private navParam: NavParams,
     private datepicker: DatepickerProvider,
-    private momentHelper: MomentHelper
+    private momentHelper: MomentHelper,
+    private navCtrl: NavController
   ) {
     this.detail = this.navParam.get("detailNaskah");
   }
 
   selesai(data: SelesaiModel) {
-    this.suratProvider.simpanSelesai(this.detail.data.naskahId, data).subscribe(
+    this.suratProvider.simpanSelesai(this.detail.id, data).subscribe(
       res => {
         this.toastHelper.present(res.messages);
+        this.navCtrl.pop();
       },
       err => {
+        err.errors.forEach(res => {
+          this.toastHelper.present(res.messages);
+        });
         console.log(err);
       }
     );

@@ -29,18 +29,18 @@
                     </div>
                     <!---Input field catatan selesai-->
                     <ion-item no-padding class="textarea--form">
-                        <ion-textarea placeholder="Catatan Selesai" type="text" [(ngModel)]="data.catatanSelesai"></ion-textarea>
+                        <ion-textarea #catatanSelesai="ngModel" required placeholder="Catatan Selesai" type="text" [(ngModel)]="data.catatanSelesai"></ion-textarea>
                     </ion-item>
 
                     <!---Input field lokasi arsip-->
                     <ion-item no-padding margin-top class="textarea--form">
-                        <ion-textarea placeholder="Lokasi Arsip" type="text" [(ngModel)]="data.lokasiArsip"></ion-textarea>
+                        <ion-textarea #lokasiArsip="ngModel" required placeholder="Lokasi Arsip" type="text" [(ngModel)]="data.lokasiArsip"></ion-textarea>
                     </ion-item>
 
                     <!---Input field klasifikasi arsip-->
                     <ion-item no-padding>
                         <ion-label stacked>Klasifikasi Arsip</ion-label>
-                        <ion-select [(ngModel)]="data.klasifikasiArsip" placeholder="Substantif / Fasilitatif">
+                        <ion-select #klasifikasi="ngModel" [(ngModel)]="data.klasifikasiArsip" placeholder="Substantif / Fasilitatif">
                             <ion-option value="0">Substantif</ion-option>
                             <ion-option value="1">Fasilitatif</ion-option>
                         </ion-select>
@@ -54,7 +54,8 @@
                         </ion-select>
                     </ion-item>
 
-                    <button ion-button full (click)="selesai(data)" margin-top color="default-blue">Simpan</button>
+                    <button ion-button full [disabled]="catatanSelesai.invalid ||
+                    lokasiArsip.invalid || klasifikasi.invalid" (click)="selesai(data)" margin-top color="default-blue">Simpan</button>
                 </ion-col>
             </ion-row>
         </ion-card-content>

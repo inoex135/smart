@@ -105,12 +105,12 @@ export class HomePage {
   async initData() {
     const profile = await this.token.getProfile();
     const getTotalNotif = await this.homeProvider.getTotalNotication();
-    // console.log(getTotalNotif);
 
+    // get profile dari localStorage jika sudah ada
     if (profile) {
       this.profile = profile;
       this.profileName = profile.nip;
-      getTotalNotif.subscribe(res => this.mappingResponNotif(res));
+      getTotalNotif.subscribe(res => this.mappingResponNotif(res), err => {});
     } else {
       const getProfile = this.userProvider.getProfile();
 
