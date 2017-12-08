@@ -7,7 +7,8 @@
             <ion-row wrap>
                 <ion-col col-12 col-sm-12 col-md-12 offset-lg-3 col-lg-6 offset-xl-3 col-xl-6>
                     <div class="form">
-                        <ion-auto-complete (itemSelected)="setTujuan(agendaData?.tujuan, $event)" [dataProvider]="masterUnit" #autoComplete class="tujuan-penerusan"></ion-auto-complete>
+                        <ion-auto-complete [options]="{ placeholder : 'Tujuan penerusan naskah' }" (itemSelected)="setTujuan(agendaData?.tujuan, $event)"
+                            [dataProvider]="masterUnit" #autoComplete class="tujuan-penerusan"></ion-auto-complete>
 
                         <ion-item no-padding margin-bottom class="input--form">
                             <ion-select placeholder="Alasan Penerusan" [(ngModel)]="naskah.alasan" name="alasan">

@@ -27,7 +27,7 @@
           Naskah Terima
         </button>
       </ion-col>
-      <ion-col *ngIf="detail?.prosesSurat !=='Selesai'">
+      <ion-col *ngIf="detail?.prosesSurat !=='Selesai' || profile?.jenis_eselon !== null">
         <button ion-button block icon-left color="silver" (click)="openPage('teruskan')">
           <ion-icon name="fastforward"></ion-icon>
           Teruskan
@@ -59,7 +59,7 @@
               <p ion-text item-start text-wrap card-title>Nomor Agenda Pemberi Disposisi</p>
             </ion-col>
             <ion-col>
-              <p ion-text item-start text-wrap>{{detail?.noAgenda}}</p>
+              <p ion-text item-start text-wrap>{{detail?.pemberiDisposisi}}</p>
             </ion-col>
           </ion-row>
         </ion-item>
