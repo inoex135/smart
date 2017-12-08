@@ -24,6 +24,10 @@ export class NaskahDisposisiProvider {
   getSifatSurat() {
     return this.api.get("/master/sifat-surat/disposisi");
   }
+
+  getPelaksana() {
+    return this.api.get("/master/pegawai/pelaksana");
+  }
   simpanDisposisi(data: any) {
     const unitTujuan = data.unitTujuan.map(res => {
       return res.kode_utuh;
