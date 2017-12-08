@@ -57,14 +57,19 @@ export class SuratProvider {
     return this.api.get(`/surat/total?is_profile=${profile}`);
   }
 
-  simpanSelesai(id: number, data: any) {
+  simpanSelesai(detail: any, data: any) {
     let formData = new FormData();
-    formData.append("tanggal_selesai", data.tanggalSelesai);
+
+    if (detail.naskahPermohonan == "ya") {
+      formData.append("status", data.status);
+    }
+
+    formData.append("tanggal_selesai", "20-12-2017");
     formData.append("catatan_selesai", data.catatanSelesai);
     formData.append("lokasi_arsip", data.lokasiArsip);
     formData.append("klasifikasi_arsip", data.klasifikasiArsip);
     formData.append("jra_unit", data.unit);
 
-    return this.api.postForm(`/surat/selesai/create/${id}`, formData);
+    return this.api.postForm(`/surat/selesai/create/${detail.id}`, formData);
   }
 }

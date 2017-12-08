@@ -16,7 +16,7 @@ export class Selesai {
 
   data: SelesaiModel = {
     tanggalSelesai: "",
-    status: "any",
+    status: "",
     catatanSelesai: "",
     lokasiArsip: "",
     klasifikasiArsip: "",
@@ -34,7 +34,7 @@ export class Selesai {
   }
 
   selesai(data: SelesaiModel) {
-    this.suratProvider.simpanSelesai(this.detail.id, data).subscribe(
+    this.suratProvider.simpanSelesai(this.detail, data).subscribe(
       res => {
         this.toastHelper.present(res.messages);
         this.navCtrl.pop();
@@ -43,7 +43,6 @@ export class Selesai {
         err.errors.forEach(res => {
           this.toastHelper.present(res.messages);
         });
-        console.log(err);
       }
     );
   }

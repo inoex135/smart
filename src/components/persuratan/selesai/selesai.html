@@ -7,7 +7,7 @@
             <ion-row wrap>
                 <ion-col col-12 col-sm-12 col-md-12 offset-lg-3 col-lg-6 offset-xl-3 col-xl-6>
                     <ion-item margin-bottom no-padding class="input--form">
-                        <ion-input placeholder="Tanggal Selesai" (tap)="setTanggalSelesai()"></ion-input>
+                        <ion-input placeholder="Tanggal Selesai" (tap)="setTanggalSelesai()" [value]="data.tanggalSelesai"></ion-input>
                     </ion-item>
                     <div *ngIf="detail?.naskahPermohonan === 'ya'">
                         <ion-row radio-group>
@@ -41,8 +41,8 @@
                     <ion-item no-padding>
                         <ion-label stacked>Klasifikasi Arsip</ion-label>
                         <ion-select #klasifikasi="ngModel" [(ngModel)]="data.klasifikasiArsip" placeholder="Substantif / Fasilitatif">
-                            <ion-option value="0">Substantif</ion-option>
-                            <ion-option value="1">Fasilitatif</ion-option>
+                            <ion-option value="Substantif">Substantif</ion-option>
+                            <ion-option value="Fasilitatif">Fasilitatif</ion-option>
                         </ion-select>
                     </ion-item>
 
@@ -50,7 +50,7 @@
                     <ion-item no-padding>
                         <ion-label stacked color="primary">JRA Unit</ion-label>
                         <ion-select [(ngModel)]="data.unit">
-                            <ion-option value="1">KEKAYAAN NEGARA</ion-option>
+                            <ion-option value="KEKAYAAN NEGARA">KEKAYAAN NEGARA</ion-option>
                         </ion-select>
                     </ion-item>
 
