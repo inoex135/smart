@@ -86,7 +86,7 @@ export class NaskahMasukDetailPage {
     this.naskahProvider.terimaSemuaNaskah(idList).subscribe(
       res => {
         this.dismiss();
-        this.toast.present(res);
+        this.toast.present(res.message);
         this.getDetailNaskah();
       },
       err => this.navCtrl.pop()
