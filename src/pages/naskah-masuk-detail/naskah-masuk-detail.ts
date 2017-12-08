@@ -11,6 +11,7 @@ import { NaskahModalDownloadComponent } from "../../components/naskah-modal-down
 import { File } from "@ionic-native/file";
 import { AptHelper } from "../../helpers/apt-helper";
 import { ToastHelper } from "../../helpers/toast-helper";
+import { UserProvider } from "../../providers/user/user";
 
 @IonicPage()
 @Component({
@@ -32,6 +33,8 @@ export class NaskahMasukDetailPage {
   @ViewChild(NaskahModalDownloadComponent)
   naskahDownload: NaskahModalDownloadComponent;
 
+  profile: any;
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -39,13 +42,17 @@ export class NaskahMasukDetailPage {
     private loaderHelper: LoaderHelper,
     file: File,
     private aptHelper: AptHelper,
-    private toast: ToastHelper
+    private toast: ToastHelper,
+    userProvider: UserProvider
   ) {
     this.naskahId = this.navParams.get("naskahId");
     this.fileDirectory = file.externalRootDirectory + "Download";
+    userProvider
+      .getProfile()
+      .subscribe(res => (this.profile = res), err => true);
   }
 
-  openPage(actionData: String) {
+  openPage(actionData: string) {
     this.navCtrl.push("NaskahDetailActionPage", {
       actionData: actionData,
       naskahId: this.naskahId,
@@ -79,6 +86,7 @@ export class NaskahMasukDetailPage {
     this.naskahProvider.terimaSemuaNaskah(idList).subscribe(
       res => {
         this.dismiss();
+        this.toast.present(res);
         this.getDetailNaskah();
       },
       err => this.navCtrl.pop()
@@ -110,7 +118,7 @@ export class NaskahMasukDetailPage {
       await this.naskahProvider.downloadFileSurat(fileData.id, targetPath);
 
       // open file after download
-      // const openFile = await this.aptHelper.openFile(targetPath);
+      await this.aptHelper.openFile(targetPath, "application/pdf");
       // alert(openFile.message);
 
       this.loaderHelper.dismiss();

@@ -1,12 +1,12 @@
 <ion-header>
   <ion-navbar [color]="actionData?.color">
-    <ion-title>{{actionData?.type}}</ion-title>
+    <ion-title>{{actionData}}</ion-title>
   </ion-navbar>
 </ion-header>
 
 
 <ion-content>
-  <div [ngSwitch]="actionData.type">
+  <div [ngSwitch]="actionData">
     <!--Form teruskan-->
     <div *ngSwitchCase="'teruskan'">
       <teruskan></teruskan>

@@ -5,14 +5,44 @@
 </ion-header>
 
 <ion-content>
-  <naskah-modal-terima *ngIf="showModalTerima" (terimaNaskah)="terimaNaskah($event)"></naskah-modal-terima>
+  <!-- <naskah-modal-terima *ngIf="showModalTerima" (terimaNaskah)="terimaNaskah($event)"></naskah-modal-terima> -->
   <ion-grid>
     <ion-row class="list-action-button">
-      <ion-col *ngFor="let actions of actionList">
+      <!-- <ion-col *ngFor="let actions of actionList">
         <button [disabled]="detail?.prosesSurat =='Selesai' && action.type !== 'riwayat'" *ngFor="let action of actions" ion-button
           block icon-left [color]='action?.color' (click)="openPage(action)">
           <ion-icon [name]="action?.icon"></ion-icon>
           {{action?.type}}
+        </button>
+      </ion-col> -->
+      <ion-col *ngIf="((profile?.jenis_eselon != null) || (profile?.jenis_eselon >= 1 && profile?.jenis_eselon <= 4)) && detail?.prosesSurat !=='Selesai'">
+        <button ion-button block icon-left color="danger" (click)="openPage('disposisi')">
+          <ion-icon name="open"></ion-icon>
+          Disposisi
+        </button>
+      </ion-col>
+      <ion-col *ngIf="detail?.statusTerimaSurat == null">
+        <button ion-button block icon-left color="green-light" (click)="terimaNaskah()">
+          <ion-icon name="checkbox"></ion-icon>
+          Naskah Terima
+        </button>
+      </ion-col>
+      <ion-col *ngIf="detail?.prosesSurat !=='Selesai'">
+        <button ion-button block icon-left color="silver" (click)="openPage('teruskan')">
+          <ion-icon name="fastforward"></ion-icon>
+          Teruskan
+        </button>
+      </ion-col>
+      <ion-col>
+        <button [disabled]="detail?.prosesSurat =='Selesai'" ion-button block icon-left color="blue-donker" (click)="openPage('selesai')">
+          <ion-icon name="flag"></ion-icon>
+          Selesai
+        </button>
+      </ion-col>
+      <ion-col>
+        <button ion-button block icon-left color="orange" (click)="openPage('riwayat')">
+          <ion-icon name="refresh-circle"></ion-icon>
+          Riwayat
         </button>
       </ion-col>
     </ion-row>
