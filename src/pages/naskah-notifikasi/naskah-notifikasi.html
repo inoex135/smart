@@ -14,5 +14,14 @@
       <ion-note item-end>{{statusRead(notif?.is_read)}}</ion-note>
     </ion-item>
   </ion-list>
+
+  <ion-list>
+    <ion-item *ngFor="let i of items">{{i}}</ion-item>
+  </ion-list>
+
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data..."></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
   <empty-state *ngIf="notifications?.length == 0"></empty-state>
 </ion-content>

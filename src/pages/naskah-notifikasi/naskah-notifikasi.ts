@@ -10,6 +10,8 @@ import { LoaderHelper } from "../../helpers/loader-helper";
 })
 export class NaskahNotifikasiPage {
   notifications: any;
+  page: number = 0;
+  items = [];
   constructor(
     public navCtrl: NavController,
     private notifProvider: NaskahNotifikasiProvider,
@@ -31,6 +33,18 @@ export class NaskahNotifikasiPage {
         this.loaderHelper.errorHandleLoader(err.error_code, this.navCtrl);
       }
     );
+  }
+
+  doInfinite(infiniteScroll) {
+    this.page = this.page + 1;
+    setTimeout(() => {
+      this.notifProvider.getNotifikasi(this.page).subscribe(res => {
+        for (var index = 0; index < res.length; index++) {
+          this.notifications.push(res[index]);
+        }
+      });
+      infiniteScroll.complete();
+    }, 1000);
   }
 
   statusRead(isRead: number) {

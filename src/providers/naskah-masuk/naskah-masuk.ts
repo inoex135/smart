@@ -24,8 +24,8 @@ export class NaskahMasukProvider {
     });
   }
 
-  getNaskahMasuk() {
-    const url = "/surat/masuk";
+  getNaskahMasuk(page: number = 0, size: number = 10) {
+    const url = `/surat/masuk?page=${page}&size=${size}`;
     return this.api.get(url);
   }
 

@@ -22,6 +22,8 @@ export class NaskahMasukPage {
 
   searching: boolean = false;
 
+  page: number = 0;
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -81,6 +83,18 @@ export class NaskahMasukPage {
       },
       err => this.loaderHelper.dismiss()
     );
+  }
+
+  doInfinite(infiniteScroll) {
+    this.page = this.page + 1;
+    setTimeout(() => {
+      this.naskahProvider.getNaskahMasuk(this.page).subscribe(res => {
+        for (var index = 0; index < res.length; index++) {
+          this.listNaskah.push(res[index]);
+        }
+      });
+      infiniteScroll.complete();
+    }, 1000);
   }
 
   // event press and hold for bulk terima naskah

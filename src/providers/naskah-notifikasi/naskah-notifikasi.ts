@@ -6,9 +6,9 @@ import { map } from "rxjs/operators/map";
 export class NaskahNotifikasiProvider {
   constructor(private apiProvider: ApiProvider) {}
 
-  getNotifikasi() {
+  getNotifikasi(page: number = 0, size: number = 10) {
     return this.apiProvider
-      .get("/personal/notification/persuratan")
+      .get(`/personal/notification/persuratan?page=${page}&size=${size}`)
       .pipe(map(data => data.content));
   }
 }
