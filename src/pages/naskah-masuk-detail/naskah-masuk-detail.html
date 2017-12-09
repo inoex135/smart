@@ -28,12 +28,12 @@
         </button>
       </ion-col>
       <ion-col *ngIf="detail?.prosesSurat !=='Selesai' && profile?.jenis_eselon !== null ">
-        <button ion-button block icon-left color="silver" (click)="openPage('teruskan')">
+        <button ion-button block icon-left color="teruskan" (click)="openPage('teruskan')">
           <ion-icon name="fastforward"></ion-icon>
           Teruskan
         </button>
       </ion-col>
-      <ion-col>
+      <ion-col *ngIf="detail?.prosesSurat !=='Belum Proses'">
         <button [disabled]="detail?.prosesSurat =='Selesai'" ion-button block icon-left color="blue-donker" (click)="openPage('selesai')">
           <ion-icon name="flag"></ion-icon>
           Selesai
@@ -59,7 +59,7 @@
               <p ion-text item-start text-wrap card-title>Nomor Agenda Pemberi Disposisi</p>
             </ion-col>
             <ion-col>
-              <p ion-text item-start text-wrap>{{detail?.noAgendaPemberi}}</p>
+              <p ion-text item-start text-wrap>{{detail?.noAgenda}}</p>
             </ion-col>
           </ion-row>
         </ion-item>
@@ -70,7 +70,7 @@
               <p ion-text item-start text-wrap card-title>Amplop Tertutup</p>
             </ion-col>
             <ion-col>
-              <p ion-text item-start text-wrap>{{detail?.amplopTertutup}}</p>
+              <p ion-text item-start text-wrap text-capitalize>{{detail?.amplopTertutup}}</p>
             </ion-col>
           </ion-row>
         </ion-item>
@@ -81,7 +81,7 @@
               <p ion-text text-wrap item-start card-title>Naskah Permohonan</p>
             </ion-col>
             <ion-col>
-              <p ion-text text-wrap item-start>{{detail?.naskahPermohonan}}</p>
+              <p ion-text text-wrap item-start text-capitalize>{{detail?.naskahPermohonan}}</p>
             </ion-col>
           </ion-row>
         </ion-item>
@@ -92,7 +92,7 @@
               <p ion-text item-start text-wrap card-title>Jenis Pengiriman</p>
             </ion-col>
             <ion-col>
-              <p ion-text item-start text-wrap>{{detail?.jenisPengiriman}}</p>
+              <p ion-text item-start text-wrap text-capitalize>{{detail?.jenisPengiriman}}</p>
             </ion-col>
           </ion-row>
         </ion-item>
@@ -114,7 +114,7 @@
               <p ion-text item-start text-wrap card-title>Jenis Naskah</p>
             </ion-col>
             <ion-col>
-              <p ion-text item-start text-wrap>{{detail?.jenisSurat || "-"}}</p>
+              <p ion-text item-start text-wrap>{{detail?.jenisNaskah || "-"}}</p>
             </ion-col>
           </ion-row>
 
@@ -181,7 +181,8 @@
               <p ion-text item-start text-wrap card-title>Sifat Naskah</p>
             </ion-col>
             <ion-col>
-              <p ion-text item-start text-wrap>{{detail?.sifatSurat}}</p>
+              <p ion-text item-start text-wrap>Kecepatan: {{detail?.sifatSurat}}</p>
+              <p ion-text item-start text-wrap>Keamanan: {{detail?.keamananSurat}}</p>
             </ion-col>
           </ion-row>
         </ion-item>
@@ -203,7 +204,7 @@
               <p ion-text text-wrap item-start card-title>Sifat Berkas</p>
             </ion-col>
             <ion-col>
-              <p ion-text text-wrap item-start>{{detail?.jenisTujuan}}</p>
+              <p ion-text text-wrap item-start text-capitalize>{{detail?.jenisTujuan}}</p>
             </ion-col>
           </ion-row>
         </ion-item>
@@ -272,7 +273,7 @@
               <p ion-text text-wrap item-start card-title>Naskah Dinas Terkait</p>
             </ion-col>
             <ion-col>
-              <p ion-text text-wrap item-start>{{detail?.naskahDinasTerkait || '-'}}</p>
+              <p ion-text text-wrap item-start text-capitalize>{{detail?.naskahDinasTerkait || '-'}}</p>
             </ion-col>
           </ion-row>
         </ion-item>
