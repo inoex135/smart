@@ -11,6 +11,7 @@ import { MasterPegawaiProvider } from "../../../providers/master-pegawai/master-
 import { UserProvider } from "../../../providers/user/user";
 
 import findIndex from "lodash/findIndex";
+import orderBy from "lodash/sortBy";
 @Component({
   selector: "disposisi",
   templateUrl: "disposisi.html"
@@ -95,8 +96,16 @@ export class Disposisi {
       ([petunjuk, unitDisposisi, sifatSurat, pelaksana]) => {
         this.datas.jabatan = unitDisposisi;
         this.datas.petunjuk = petunjuk;
-        this.datas.sifatSurat = sifatSurat;
+
         this.datas.pelaksana = pelaksana.response;
+
+        // order by sifat by kode
+        const sifat = sifatSurat.map(res => {
+          return { keterangan: res.keterangan, kode: parseInt(res.kode) };
+        });
+
+        const mappingSifat = orderBy(sifat, ["kode"], ["desc"]);
+        this.datas.sifatSurat = mappingSifat;
 
         // set default value sifat surat
         this.disposisi.sifatSurat = this.datas.sifatSurat[0].kode;
@@ -140,7 +149,7 @@ export class Disposisi {
     let pelaksanaIndex = findIndex(this.disposisi.personal, nip);
 
     if (checked) {
-      this.disposisi.personal.push(nip);
+      this.disposisi.personal.push({ nip: nip, is_checked: true });
     } else {
       this.disposisi.personal.splice(pelaksanaIndex, 1);
     }
@@ -163,7 +172,7 @@ export class Disposisi {
     const indexPetunjuk = this.datas.petunjuk.indexOf(petunjuk);
 
     if (checked) {
-      this.disposisi.petunjuk.push(petunjuk);
+      this.disposisi.petunjuk.push({ id: petunjuk, is_checked: true });
     } else {
       this.disposisi.petunjuk.splice(indexPetunjuk, 1);
     }
@@ -224,31 +233,33 @@ export class Disposisi {
   }
 
   back(to: string | any = "root") {
-    if (to === "root") {
-      this.component.unitOrPersonal = true;
-      this.component.disposisiUnit = false;
-      this.component.disposisiPersonal = false;
-    }
+    setTimeout(() => {
+      if (to === "root") {
+        this.component.unitOrPersonal = true;
+        this.component.disposisiUnit = false;
+        this.component.disposisiPersonal = false;
+      }
 
-    if (to === "disposisiPersonal" || to.personal) {
-      this.component.disposisiPersonal = true;
-      this.component.disposisiSifat = false;
-    }
+      if (to === "disposisiPersonal" || to.personal) {
+        this.component.disposisiPersonal = true;
+        this.component.disposisiSifat = false;
+      }
 
-    if (to === "disposisiUnit" || to.unit) {
-      this.component.disposisiUnit = true;
-      this.component.disposisiSifat = false;
-    }
+      if (to === "disposisiUnit" || to.unit) {
+        this.component.disposisiUnit = true;
+        this.component.disposisiSifat = false;
+      }
 
-    if (to === "disposisiSifat") {
-      this.component.disposisiSifat = true;
-      this.component.disposisiPetunjuk = false;
-    }
+      if (to === "disposisiSifat") {
+        this.component.disposisiSifat = true;
+        this.component.disposisiPetunjuk = false;
+      }
 
-    if (to === "disposisiPetunjuk") {
-      this.component.disposisiPetunjuk = true;
-      this.component.disposisiTanggal = false;
-    }
+      if (to === "disposisiPetunjuk") {
+        this.component.disposisiPetunjuk = true;
+        this.component.disposisiTanggal = false;
+      }
+    }, 100);
   }
 
   async tanggalSelesaiPicker() {
@@ -276,10 +287,8 @@ export class Disposisi {
         this.toastHelper.present(this.message);
       },
       err => {
-        console.log(err.errors);
-
         this.errorMessages = err;
-        this.toastHelper.present("ERROR_VALIDATION");
+        this.toastHelper.present("Terjadi Kesalahan");
       }
     );
   }

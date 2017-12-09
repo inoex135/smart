@@ -40,13 +40,20 @@
             </ion-card-header>
             <ion-card-content>
                 <ion-item no-lines>
-                    <ion-label>Jabatan(Unit)</ion-label>
+                    <ion-label>Jabatan(Unit)
+                        <span class="required">*</span>
+                    </ion-label>
                 </ion-item>
 
                 <ion-item *ngFor="let jabatan of datas?.jabatan; let i = index" no-lines>
                     <ion-label text-wrap>{{jabatan?.uraian_jabatan}}</ion-label>
                     <ion-checkbox [checked]="jabatan?.kode_utuh == disposisi?.unitTujuan[0]?.kode_utuh" (ionChange)="selectUnit(jabatan, $event.checked)"
                         [value]="jabatan?.kode"></ion-checkbox>
+                </ion-item>
+                <ion-item>
+                    <ion-col>
+                        <h6 no-margin no-padding ion-text color="danger" text-wrap>* Jika Tujuan Disposisi Lebih dari 2, maka Lead Wajib dipilih</h6>
+                    </ion-col>
                 </ion-item>
                 <ion-item no-lines *ngIf="disposisi?.unitTujuan?.length > 1">
                     <ion-label>Lead
@@ -208,7 +215,7 @@
     </ion-button>
     <ion-item>
         <p ion-text color="danger" *ngFor="let error of errorMessages?.errors">
-            {{error?.field}} {{error?.message}}
+            *{{error?.field}} {{error?.message}}
         </p>
     </ion-item>
 </ion-grid>
