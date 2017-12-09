@@ -6,7 +6,6 @@
 
 
 <ion-content padding>
-  <timeline *ngIf="items?.length > 1" (childEvent)="detailAgenda($event)" [items]="items" [type]="type"></timeline>
-
+  <timeline *ngIf="items?.length >= 1" (childEvent)="detailAgenda($event)" [items]="items" [type]="type"></timeline>
   <empty-state *ngIf="items?.length == 0"></empty-state>
 </ion-content>
