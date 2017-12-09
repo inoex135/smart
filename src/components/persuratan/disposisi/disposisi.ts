@@ -12,6 +12,7 @@ import { UserProvider } from "../../../providers/user/user";
 
 import findIndex from "lodash/findIndex";
 import orderBy from "lodash/sortBy";
+import * as moment from "moment-timezone";
 @Component({
   selector: "disposisi",
   templateUrl: "disposisi.html"
@@ -34,7 +35,7 @@ export class Disposisi {
     sifatSurat: "",
     catatan: "",
     tanggalSelesai: "",
-    tanggalDisposisi: "",
+    tanggalDisposisi: moment().format("DD-MM-YYYY"),
     sumasId: "",
     petunjuk: [],
     unitTujuan: [],
