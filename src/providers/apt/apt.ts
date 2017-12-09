@@ -32,10 +32,19 @@ export class AptProvider {
     return data;
   }
 
-  search(keyword: string, page: number = 0, size: number = 10) {
-    return this.apiProvider.get(
-      `/apt/permohonan/pending?keyword=${keyword}&page=${page}&size=${size}`
-    );
+  search(
+    keyword: string,
+    layananId: number,
+    page: number = 0,
+    size: number = 10
+  ) {
+    return this.apiProvider
+      .get(
+        `/apt/permohonan/pending?keyword=${keyword}&layanan=${layananId}&page=${
+          page
+        }&size=${size}`
+      )
+      .pipe(map(data => data.content));
   }
 
   searchByTipe(keyword: string, page: number = 0, size: number = 10) {
@@ -46,9 +55,9 @@ export class AptProvider {
 
   // get list notifikasi apt
 
-  getListNotification() {
+  getListNotification(page: number = 0, size: number = 10) {
     return this.apiProvider
-      .get("/personal/notification/apt")
+      .get(`/personal/notification/apt?page=${page}&size=${size}`)
       .pipe(map(data => data.content));
   }
 

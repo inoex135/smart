@@ -10,7 +10,7 @@
     <ion-header>
       <pemberitahuan [redirectComponent]="redirectComponent" class="apt-notif"></pemberitahuan>
       <ion-item class="input--form">
-        <ion-select (ionChange)="searchByTipe(jenisPelayanan)" [(ngModel)]="jenisPelayanan" placeholder="Filter berdasarkan Jenis Pelayanan">
+        <ion-select (ionChange)="search(keyword, jenisPelayanan)" [(ngModel)]="jenisPelayanan" placeholder="Filter berdasarkan Jenis Pelayanan">
           <ion-option [value]="pelayanan?.id" *ngFor="let pelayanan of pelayanans">
             {{pelayanan?.nama}}
           </ion-option>

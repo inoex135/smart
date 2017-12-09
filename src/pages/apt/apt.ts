@@ -30,8 +30,8 @@ export class AptPage {
   redirectComponent: string = "AptNotifikasiPage";
 
   isPress: boolean = false;
-  keyword: string;
-  jenisPelayanan: string;
+  keyword: string = "";
+  jenisPelayanan: any = "";
   searching: boolean = false;
 
   listAptId: any[] = [];
@@ -99,11 +99,18 @@ export class AptPage {
   doInfinite(infiniteScroll) {
     this.page = this.page + 1;
     setTimeout(() => {
-      this.aptProvider.getPermohonanList(this.page).subscribe(res => {
-        for (var index = 0; index < res.length; index++) {
-          this.items.push(res[index]);
-        }
-      });
+      this.aptProvider
+        .search(this.keyword, this.jenisPelayanan, this.page)
+        .subscribe(
+          res => {
+            for (var index = 0; index < res.length; index++) {
+              this.items.push(res[index]);
+            }
+          },
+          err => {
+            this.navCtrl.pop();
+          }
+        );
       infiniteScroll.complete();
     }, 1000);
   }
@@ -128,13 +135,14 @@ export class AptPage {
   //   this.loader.dismiss();
   // }
 
-  search(keyword: any) {
+  search(keyword: any, layananId: number) {
     let searchProvider: any;
+    this.page = this.page + 1;
     this.showLoader();
-    searchProvider = this.aptProvider.search(keyword);
+    searchProvider = this.aptProvider.search(keyword, layananId);
     searchProvider
       .pipe(debounceTime(700), finalize(() => this.hideLoader()))
-      .subscribe(res => (this.items = res.content));
+      .subscribe(res => (this.items = res));
   }
 
   searchByTipe(keyword: any) {

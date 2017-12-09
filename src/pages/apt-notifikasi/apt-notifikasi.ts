@@ -9,6 +9,7 @@ import { AptProvider } from "../../providers/apt/apt";
 })
 export class AptNotifikasiPage {
   notifications: any[] = [];
+  page: number = 0;
 
   constructor(
     public navCtrl: NavController,
@@ -23,6 +24,18 @@ export class AptNotifikasiPage {
     this.aptProvider
       .getListNotification()
       .subscribe(res => (this.notifications = res), err => console.log(err));
+  }
+
+  doInfinite(infiniteScroll) {
+    this.page = this.page + 1;
+    setTimeout(() => {
+      this.aptProvider.getListNotification(this.page).subscribe(res => {
+        for (var index = 0; index < res.length; index++) {
+          this.notifications.push(res[index]);
+        }
+      });
+      infiniteScroll.complete();
+    }, 1000);
   }
 
   goToAptDetail(aptId: number) {
