@@ -25,6 +25,8 @@
 
       <ion-col col-6 class="label">Tanggal Surat</ion-col>
       <ion-col col-6>{{aptDetail?.tanggalString}} </ion-col>
+      <ion-col col-6 class="label">Tanggal Terima</ion-col>
+      <ion-col col-6>{{aptDetail?.tanggalTerimaNaskah}}</ion-col>
       <ion-col col-6 class="label">Indikator</ion-col>
       <ion-col col-6></ion-col>
       <ion-col col-6 push-6>
@@ -39,11 +41,11 @@
         <p ion-text text-center color="default-blue" (tap)="downloadPermohonan(aptDetail)">Unduh</p>
       </ion-col>
 
-      <ion-col class="apt--action" col-10 push-1 *ngIf="aptDetail?.statusString == 'Belum diverifikasi'">
+      <ion-col class="apt--action" *ngIf="aptDetail?.statusString == 'Belum diverifikasi'">
 
-        <p ion-text text-center (click)="detailAction(ACTION.PRATINJAU,aptDetail?.id)" color="default-blue">Pratinjau</p>
-        <p ion-text text-center color="default-blue" (tap)="downloadPermohonan(aptDetail)">Unduh</p>
-        <p ion-text text-center (click)="detailAction(ACTION.VERIFIKASI,aptDetail?.id)" color="danger"> Verifikasi</p>
+        <p text-center ion-text text-center (click)="detailAction(ACTION.PRATINJAU,aptDetail?.id)" color="default-blue">Pratinjau</p>
+        <p ion-text text-center (click)="detailAction(ACTION.VERIFIKASI,aptDetail?.id)" color="danger" *ngIf="profile?.jenis_eselon">
+          Verifikasi</p>
       </ion-col>
     </ion-row>
 

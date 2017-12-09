@@ -8,6 +8,7 @@ import { AptHelper } from "../../helpers/apt-helper";
 import { File } from "@ionic-native/file";
 import { APT_INDIKATOR } from "../../constant/apt-indikator";
 import { ToastHelper } from "../../helpers/toast-helper";
+import { UserProvider } from "../../providers/user/user";
 
 @IonicPage()
 @Component({
@@ -20,6 +21,7 @@ export class AptDetailPage {
   aptIndikator = APT_INDIKATOR;
   aptDetail: any = {};
   fileDirectory: any;
+  profile: any;
 
   constructor(
     private navParams: NavParams,
@@ -28,7 +30,8 @@ export class AptDetailPage {
     private loaderHelper: LoaderHelper,
     file: File,
     private aptHelper: AptHelper,
-    private toast: ToastHelper
+    private toast: ToastHelper,
+    private userProvider: UserProvider
   ) {
     this.fileDirectory = file.externalRootDirectory + "Download";
   }
@@ -36,6 +39,13 @@ export class AptDetailPage {
   ionViewDidLoad() {
     this.itemId = this.navParams.get("itemId");
     this.getDetailApt();
+    this.getProfile();
+  }
+
+  getProfile() {
+    this.userProvider.getProfile().subscribe(res => {
+      this.profile = res;
+    });
   }
 
   async getDetailApt() {
