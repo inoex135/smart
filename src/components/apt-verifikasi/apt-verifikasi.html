@@ -20,7 +20,7 @@
       </ion-col>
     </ion-row>
 
-    <button ion-button full block color="default-blue" (tap)="verifikasi()">VERIFIKASI</button>
+    <button ion-button full block color="default-blue" [disabled]="verifikasiStatus == null" (tap)="verifikasi()">VERIFIKASI</button>
   </div>
 </ion-card>
 
@@ -35,6 +35,9 @@
 </ion-card>
 
 <ion-card margin-top margin-bottom>
+  <ion-col col-12>
+    <b ion-text padding-left class="label">Status Permohonan</b>
+  </ion-col>
   <ion-slides #slider effect="fade" pager="true" (ionSlideWillChange)="onSlideChanged()">
 
     <ion-slide *ngFor="let slide of slides" class="swiper-no-swiping">

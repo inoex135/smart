@@ -53,7 +53,6 @@ export class AptVerifikasiComponent {
 
   onSlideChanged() {
     this.currentIndex = this.slider.getActiveIndex();
-    console.log("Slide changed! Current index is", this.currentIndex);
   }
 
   verifikasi() {
