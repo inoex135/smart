@@ -2,21 +2,22 @@
   <ion-navbar color="green-light">
     <ion-title>APT</ion-title>
   </ion-navbar>
-    
+
 </ion-header>
 
 <ion-content padding>
   <ion-list no-lines padding class="apt-head-panel">
     <ion-header>
-        <pemberitahuan [redirectComponent]="redirectComponent" class="apt-notif"></pemberitahuan>
-        <ion-item class="input--form">
-          <ion-select (ionChange)="searchByTipe(jenisPelayanan)" [(ngModel)]="jenisPelayanan" placeholder="Filter berdasarkan Jenis Pelayanan">
-            <ion-option [value]="pelayanan?.id" *ngFor="let pelayanan of pelayanans">
-              {{pelayanan?.nama}}
-            </ion-option>
-          </ion-select>
-        </ion-item>
-        <ion-searchbar [(ngModel)]="keyword" search-bar-bcg (ionInput)="search( $event?.target?.value)" (ionCancel)="search( $event?.target?.value)" class="apt-search"></ion-searchbar>
+      <pemberitahuan [redirectComponent]="redirectComponent" class="apt-notif"></pemberitahuan>
+      <ion-item class="input--form">
+        <ion-select (ionChange)="searchByTipe(jenisPelayanan)" [(ngModel)]="jenisPelayanan" placeholder="Filter berdasarkan Jenis Pelayanan">
+          <ion-option [value]="pelayanan?.id" *ngFor="let pelayanan of pelayanans">
+            {{pelayanan?.nama}}
+          </ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-searchbar [(ngModel)]="keyword" search-bar-bcg (ionInput)="search( $event?.target?.value)" (ionCancel)="search( $event?.target?.value)"
+        class="apt-search"></ion-searchbar>
     </ion-header>
   </ion-list>
 
@@ -36,10 +37,16 @@
         </ion-col>
       </ion-row>
       <ion-row>
-        <ion-col><apt-indikator-button [status]="item?.statusString"></apt-indikator-button></ion-col>
+        <ion-col>
+          <apt-indikator-button [status]="item?.statusString"></apt-indikator-button>
+        </ion-col>
       </ion-row>
     </ion-card>
   </ion-list>
+
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data..."></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 
   <empty-state *ngIf="items?.length == 0"></empty-state>
 </ion-content>

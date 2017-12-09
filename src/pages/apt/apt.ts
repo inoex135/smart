@@ -37,6 +37,7 @@ export class AptPage {
   listAptId: any[] = [];
   showAgendaButton: boolean = false;
 
+  page: number = 0;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -93,6 +94,18 @@ export class AptPage {
         this.loaderHelper.errorHandleLoader(err.error_code, this.navCtrl);
       }
     );
+  }
+
+  doInfinite(infiniteScroll) {
+    this.page = this.page + 1;
+    setTimeout(() => {
+      this.aptProvider.getPermohonanList(this.page).subscribe(res => {
+        for (var index = 0; index < res.length; index++) {
+          this.items.push(res[index]);
+        }
+      });
+      infiniteScroll.complete();
+    }, 1000);
   }
 
   // async download() {

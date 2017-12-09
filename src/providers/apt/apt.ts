@@ -19,8 +19,8 @@ export class AptProvider {
   }
 
   // get daftar permohonan apt
-  getPermohonanList() {
-    const url = "/apt/permohonan/pending";
+  getPermohonanList(page: number = 0, size: number = 10) {
+    const url = `/apt/permohonan/pending?page=${page}&size=${size}`;
 
     return this.apiProvider.get(url).pipe(map(res => res.content));
   }
