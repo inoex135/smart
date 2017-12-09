@@ -33,7 +33,7 @@
           Teruskan
         </button>
       </ion-col>
-      <ion-col *ngIf="detail?.prosesSurat !=='Belum Proses'">
+      <ion-col *ngIf="detail?.prosesSurat != 'Belum Proses' || detail?.prosesSurat != 'Disposisi'">
         <button [disabled]="detail?.prosesSurat =='Selesai'" ion-button block icon-left color="blue-donker" (click)="openPage('selesai')">
           <ion-icon name="flag"></ion-icon>
           Selesai
