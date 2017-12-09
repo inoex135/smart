@@ -25,6 +25,8 @@ export class Disposisi {
 
   pelaku: string;
 
+  errorMessages: any;
+
   disposisi: any = {
     personal: [],
     selaku: [],
@@ -95,6 +97,9 @@ export class Disposisi {
         this.datas.petunjuk = petunjuk;
         this.datas.sifatSurat = sifatSurat;
         this.datas.pelaksana = pelaksana.response;
+
+        // set default value sifat surat
+        this.disposisi.sifatSurat = this.datas.sifatSurat[0].kode;
       }
     );
   }
@@ -123,6 +128,11 @@ export class Disposisi {
       });
     } else {
       this.disposisi.unitTujuan.splice(unitIndex, 1);
+    }
+
+    //untuk set default lead jika unit yg di select adalah 1
+    if (this.disposisi.unitTujuan.length == 1) {
+      this.disposisi.leader = this.disposisi.unitTujuan[0].kode_utuh;
     }
   }
 
@@ -177,32 +187,33 @@ export class Disposisi {
   }
 
   nextStep(to: any = "root") {
-    setTimeout(() => {}, 10000);
-    if (to.unit) {
-      this.component.unitOrPersonal = false;
-      this.component.disposisiUnit = true;
-    }
+    setTimeout(() => {
+      if (to.unit) {
+        this.component.unitOrPersonal = false;
+        this.component.disposisiUnit = true;
+      }
 
-    if (to.personal) {
-      this.component.disposisiPersonal = true;
-      this.component.unitOrPersonal = false;
-    }
+      if (to.personal) {
+        this.component.disposisiPersonal = true;
+        this.component.unitOrPersonal = false;
+      }
 
-    if (to === "disposisiSifat") {
-      this.component.disposisiSifat = true;
-      this.component.disposisiPersonal = false;
-      this.component.disposisiUnit = false;
-    }
+      if (to === "disposisiSifat") {
+        this.component.disposisiSifat = true;
+        this.component.disposisiPersonal = false;
+        this.component.disposisiUnit = false;
+      }
 
-    if (to === "disposisiPetunjuk") {
-      this.component.disposisiPetunjuk = true;
-      this.component.disposisiSifat = false;
-    }
+      if (to === "disposisiPetunjuk") {
+        this.component.disposisiPetunjuk = true;
+        this.component.disposisiSifat = false;
+      }
 
-    if (to === "disposisiTanggal") {
-      this.component.disposisiTanggal = true;
-      this.component.disposisiPetunjuk = false;
-    }
+      if (to === "disposisiTanggal") {
+        this.component.disposisiTanggal = true;
+        this.component.disposisiPetunjuk = false;
+      }
+    }, 100);
 
     // this.setDisposisiTarget(false);
   }
@@ -265,6 +276,9 @@ export class Disposisi {
         this.toastHelper.present(this.message);
       },
       err => {
+        console.log(err.errors);
+
+        this.errorMessages = err;
         this.toastHelper.present("ERROR_VALIDATION");
       }
     );
