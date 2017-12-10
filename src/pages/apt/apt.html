@@ -16,7 +16,7 @@
           </ion-option>
         </ion-select>
       </ion-item>
-      <ion-searchbar [(ngModel)]="keyword" search-bar-bcg (ionInput)="search( $event?.target?.value)" (ionCancel)="search( $event?.target?.value)"
+      <ion-searchbar [(ngModel)]="keyword" search-bar-bcg (ionInput)="search( $event?.target?.value, jenisPelayanan)" (ionCancel)="search( $event?.target?.value)"
         class="apt-search"></ion-searchbar>
     </ion-header>
   </ion-list>

@@ -142,7 +142,7 @@ export class AptPage {
     searchProvider = this.aptProvider.search(keyword, layananId);
     searchProvider
       .pipe(debounceTime(700), finalize(() => this.hideLoader()))
-      .subscribe(res => (this.items = res));
+      .subscribe(res => (this.items = res), err => true);
   }
 
   searchByTipe(keyword: any) {
