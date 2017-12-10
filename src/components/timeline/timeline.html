@@ -16,7 +16,7 @@
       <div class="timeline-item">
         <h6 class="agenda-timeline-header" style="margin-top: 2%;">{{kegiatan?.uraian}}</h6>
         <p></p>
-        <div class="timeline-stats" (tap)="detailAgenda(item?.id)">
+        <div class="timeline-stats" (tap)="detailAgenda(item?.tanggal)">
           Lihat Agenda
           <span class="pos-absolute-right">
             <i class="ion-ios-clock"></i> {{kegiatan?.jam_dari}} - {{kegiatan?.jam_sampai}}</span>
