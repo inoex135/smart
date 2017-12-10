@@ -105,7 +105,7 @@ export class Disposisi {
           return { keterangan: res.keterangan, kode: parseInt(res.kode) };
         });
 
-        const mappingSifat = orderBy(sifat, ["kode"], ["desc"]);
+        const mappingSifat = orderBy(sifat, ["keterangan"], ["asc"]);
         this.datas.sifatSurat = mappingSifat;
 
         // set default value sifat surat
