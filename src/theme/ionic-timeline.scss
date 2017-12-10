@@ -34,15 +34,15 @@
 }
 
 .timeline .timeline-thumb {
-  border-radius: 500px;
-  width: 50px;
+  border-radius: 50%;
+  width: 30px;
   z-index: 2;
   position: absolute;
-  left: 10px;
+  left: 22px;
 }
 
 .timeline .timeline-thumb.timeline-icon {
-  height: 50px;
+  height: 30px;
   text-align: center;
   color: white;
   border: 5px solid #cbd0d3;
