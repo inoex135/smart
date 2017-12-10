@@ -22,7 +22,7 @@ export class AptDetailPage {
   aptDetail: any = {};
   fileDirectory: any;
   profile: any;
-
+  aptVerifikasi: any;
   constructor(
     private navParams: NavParams,
     private navCtrl: NavController,
@@ -55,6 +55,7 @@ export class AptDetailPage {
       res => {
         const response = res.response;
         this.aptDetail = response.permohonan;
+        this.aptVerifikasi = response.permohonanVerifikasi;
 
         this.loaderHelper.dismiss();
       },

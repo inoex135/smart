@@ -24,9 +24,9 @@
       <ion-col col-6>{{aptDetail?.nomorTiket}}</ion-col>
 
       <ion-col col-6 class="label">Tanggal Surat</ion-col>
-      <ion-col col-6>{{aptDetail?.tanggalString}} </ion-col>
-      <ion-col col-6 class="label">Tanggal Terima</ion-col>
-      <ion-col col-6>{{aptDetail?.tanggalTerimaNaskah}}</ion-col>
+      <ion-col col-6>{{aptDetail?.dateCreated | customDate}} </ion-col>
+      <ion-col col-6 class="label">Tanggal Terima Naskah</ion-col>
+      <ion-col col-6>{{aptVerifikasi?.tanggal | customDate}}</ion-col>
       <ion-col col-6 class="label">Indikator</ion-col>
       <ion-col col-6></ion-col>
       <ion-col col-6 push-6>
