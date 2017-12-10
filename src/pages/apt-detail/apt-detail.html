@@ -35,13 +35,13 @@
     </ion-row>
 
     <ion-row margin-top>
-      <ion-col class="apt--action" col-8 push-3 *ngIf="aptDetail?.statusString != 'Belum diverifikasi'">
+      <ion-col class="apt--action" col-8 push-3 *ngIf="aptDetail?.statusString == 'Diagendakan'">
 
         <p ion-text text-center (click)="detailAction(ACTION.PRATINJAU,aptDetail?.id)" color="default-blue">Pratinjau</p>
         <p ion-text text-center color="default-blue" (tap)="downloadPermohonan(aptDetail)">Unduh</p>
       </ion-col>
 
-      <ion-col class="apt--action" *ngIf="aptDetail?.statusString == 'Belum diverifikasi'">
+      <ion-col text-center class="apt--action" *ngIf="aptDetail?.statusString == 'Belum diverifikasi'">
 
         <p text-center ion-text text-center (click)="detailAction(ACTION.PRATINJAU,aptDetail?.id)" color="default-blue">Pratinjau</p>
         <p ion-text text-center (click)="detailAction(ACTION.VERIFIKASI,aptDetail?.id)" color="danger" *ngIf="profile?.jenis_eselon">
