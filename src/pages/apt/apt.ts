@@ -75,7 +75,8 @@ export class AptPage {
         this.pelayanans = res.content;
       },
       err => {
-        this.loaderHelper.errorHandleLoader(err.error_code, this.navCtrl);
+        console.log(err);
+        this.loaderHelper.errorHandleLoader(err, this.navCtrl);
       }
     );
   }
@@ -91,7 +92,8 @@ export class AptPage {
         this.loaderHelper.dismiss();
       },
       err => {
-        this.loaderHelper.errorHandleLoader(err.error_code, this.navCtrl);
+      console.log(err);
+        this.loaderHelper.errorHandleLoader(err, this.navCtrl);
       }
     );
   }

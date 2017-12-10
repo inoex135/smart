@@ -79,7 +79,7 @@ export class SuratPage {
         this.loaderHelper.dismiss();
       },
       err => {
-        this.loaderHelper.errorHandleLoader(err.error_code, this.navCtrl);
+        this.loaderHelper.errorHandleLoader(err, this.navCtrl);
       }
     );
   }
