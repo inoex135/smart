@@ -3,4 +3,9 @@ apt-pratinjau {
     background-color: map-get($colors, primary-bootstrap);
     border-radius: 5px;
   }
+
+  .swiper-button-prev,
+  .swiper-button-next {
+    background-size: 18px 44px !important;
+  }
 }
