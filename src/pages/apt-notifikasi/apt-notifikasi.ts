@@ -39,7 +39,7 @@ export class AptNotifikasiPage {
   }
 
   goToAptDetail(aptId: number) {
-    this.navCtrl.push("AptDetailPage", { aptId: aptId });
+    this.navCtrl.push("AptDetailPage", { itemId: aptId });
   }
 
   statusRead(isRead: number) {
