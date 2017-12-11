@@ -16,7 +16,10 @@ export class PemberitahuanComponent {
   }
 
   now() {
-    return moment.tz("Asia/Jakarta").format("HH:mm");
+    return moment
+      .tz("Asia/Jakarta")
+      .locale("ID_id")
+      .format("dddd, HH:mm");
   }
 
   redirectTo() {
