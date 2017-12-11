@@ -53,7 +53,11 @@
                             <ion-option value="KEKAYAAN NEGARA">KEKAYAAN NEGARA</ion-option>
                         </ion-select>
                     </ion-item>
-
+                    <ion-item>
+                        <p color="danger" ion-text *ngFor="let err of errors">
+                            * {{err?.messages}}
+                        </p>
+                    </ion-item>
                     <button ion-button full [disabled]="catatanSelesai.invalid ||
                     lokasiArsip.invalid || klasifikasi.invalid" (click)="selesai(data)" margin-top color="default-blue">Simpan</button>
                 </ion-col>

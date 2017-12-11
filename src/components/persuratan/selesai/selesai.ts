@@ -13,6 +13,7 @@ import { MomentHelper } from "../../../helpers/moment-helper";
 export class Selesai {
   @Input() type: string;
   detail: any = "";
+  errors: any = "";
 
   data: SelesaiModel = {
     tanggalSelesai: "",
@@ -40,9 +41,11 @@ export class Selesai {
         this.navCtrl.pop();
       },
       err => {
-        err.errors.forEach(res => {
-          this.toastHelper.present(res.messages);
-        });
+        if (err.errors) {
+          this.errors = err.errors;
+        } else {
+          this.toastHelper.present(err);
+        }
       }
     );
   }
