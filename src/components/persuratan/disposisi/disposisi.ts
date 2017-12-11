@@ -150,7 +150,7 @@ export class Disposisi {
     let pelaksanaIndex = findIndex(this.disposisi.personal, nip);
 
     if (checked) {
-      this.disposisi.personal.push({ nip: nip, is_checked: true });
+      this.disposisi.personal.push(nip);
     } else {
       this.disposisi.personal.splice(pelaksanaIndex, 1);
     }
@@ -173,7 +173,7 @@ export class Disposisi {
     const indexPetunjuk = this.datas.petunjuk.indexOf(petunjuk);
 
     if (checked) {
-      this.disposisi.petunjuk.push({ id: petunjuk, is_checked: true });
+      this.disposisi.petunjuk.push(petunjuk);
     } else {
       this.disposisi.petunjuk.splice(indexPetunjuk, 1);
     }
