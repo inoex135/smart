@@ -16,6 +16,7 @@ export class PemberitahuanComponent {
   }
 
   now() {
+    // return Senin, 13:30
     return moment
       .tz("Asia/Jakarta")
       .locale("ID_id")
