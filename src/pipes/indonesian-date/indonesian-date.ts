@@ -12,10 +12,14 @@ export class IndonesianDatePipe implements PipeTransform {
     args = "dddd, DD MMMM YYYY H:m:s",
     parse = "DD-MM-YYYY"
   ) {
-    const newDate = moment(value, parse)
-      .locale("ID_id")
-      .format(args);
+    if (value) {
+      const newDate = moment(value, parse)
+        .locale("ID_id")
+        .format(args);
 
-    return newDate;
+      return newDate;
+    }
+
+    return;
   }
 }
