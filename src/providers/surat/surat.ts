@@ -64,7 +64,7 @@ export class SuratProvider {
       formData.append("status", data.status);
     }
 
-    formData.append("tanggal_selesai", "20-12-2017");
+    formData.append("tanggal_selesai", data.tanggalSelesai);
     formData.append("catatan_selesai", data.catatanSelesai);
     formData.append("lokasi_arsip", data.lokasiArsip);
     formData.append("klasifikasi_arsip", data.klasifikasiArsip);
