@@ -44,6 +44,11 @@ export class NaskahDisposisiProvider {
 
     let formData = new FormData();
 
+    //disposisi personal, form unit tidak perlu dikirim
+    if (unitTujuan) {
+      formData.append("unit", unitTujuan);
+    }
+
     formData.append("sumas_id", data.sumasId);
     formData.append("personal", personal);
     formData.append("selaku", data.selaku);
@@ -52,7 +57,7 @@ export class NaskahDisposisiProvider {
     formData.append("tanggal_selesai", data.tanggalSelesai);
     formData.append("tanggal_disposisi", data.tanggalDisposisi);
     formData.append("catatan_disposisi", data.catatan);
-    formData.append("unit", unitTujuan);
+
     formData.append("lead", data.leader);
 
     return this.api.postForm("/surat/disposisi/create", formData);
