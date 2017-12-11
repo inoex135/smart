@@ -118,7 +118,7 @@
 
 
     <!-- show button untuk button next and text -->
-    <ion-item no-lines *ngIf="component?.disposisiUnit">
+    <ion-item no-lines *ngIf="component?.disposisiUnit && !component?.disposisiPersonal">
         <button item-start clear ion-button color="default-blue" (tap)="back()">KEMBALI</button>
         <button item-end ion-button color="default-blue" (tap)="nextStep('disposisiSifat')" [disabled]="disposisi?.unitTujuan?.length == 0">SELANJUTNYA</button>
     </ion-item>
