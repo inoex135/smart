@@ -60,7 +60,7 @@ export class GrafikSuratProvider {
   }
 
   getFilterSumasData(params: any, profile: number = 1) {
-    //is_profile = 1 => sekretaris, 2=>personal
+    //is_profile = 1 => personal, 2=>sekretaris
     return this.api
       .get(
         `${this.url}?tanggal_dari=${params.startTime}&tanggal_sampai=${

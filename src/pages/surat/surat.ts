@@ -63,6 +63,8 @@ export class SuratPage {
   }
 
   // set first data when load page for total surat + filter sumas grafik
+
+  // profile 1 adalah personal sedangkan 2 adalah sekretaris
   initData(profile: number = 1) {
     const params = this.grafikSuratProvider.paramsStartAndEnd();
 
