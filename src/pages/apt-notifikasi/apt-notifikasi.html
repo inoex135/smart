@@ -14,6 +14,9 @@
       <p ion-text color="blue-template" text-wrap>{{ notif?.tanggal | indonesianDate:'dddd, DD MMMM YYYY' }}</p>
       <ion-note item-end>{{statusRead(notif?.is_read)}}</ion-note>
     </ion-item>
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data..."></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
   </ion-list>
 
   <empty-state *ngIf="notifications.length == 0"></empty-state>
