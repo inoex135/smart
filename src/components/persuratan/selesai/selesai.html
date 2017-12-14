@@ -7,16 +7,17 @@
             <ion-row wrap>
                 <ion-col col-12 col-sm-12 col-md-12 offset-lg-3 col-lg-6 offset-xl-3 col-xl-6>
                     <ion-item margin-bottom no-padding class="input--form">
-                        <ion-input placeholder="Tanggal Selesai" (tap)="setTanggalSelesai()" [value]="data.tanggalSelesai"></ion-input>
+                        <ion-input #tanggalSelesai="ngModel" placeholder="Tanggal Selesai" (tap)="setTanggalSelesai()" [value]="data.tanggalSelesai"
+                            [(ngModel)]="data.tanggalSelesai"></ion-input>
                     </ion-item>
                     <div *ngIf="detail?.naskahPermohonan === 'ya'">
-                        <ion-row radio-group>
+                        <ion-row radio-group [(ngModel)]="data.status">
                             <ion-label col-12>Status Persetujuan</ion-label>
                             <ion-col col-6>
                                 <ion-radio value="1"></ion-radio> Setujui
                             </ion-col>
                             <ion-col col-6>
-                                <ion-radio value="0"></ion-radio> Tolak
+                                <ion-radio value="0"></ion-radio> Tolak {{data?.status}}
                             </ion-col>
                         </ion-row>
 
@@ -58,8 +59,8 @@
                             * {{err?.messages}}
                         </p>
                     </ion-item>
-                    <button ion-button full [disabled]="catatanSelesai.invalid ||
-                    lokasiArsip.invalid || klasifikasi.invalid" (click)="selesai(data)" margin-top color="default-blue">Simpan</button>
+                    <button ion-button full [disabled]="catatanSelesai.invalid||data?.status =='' || data?.tanggalSelesai ==''" (click)="selesai(data)"
+                        margin-top color="default-blue">Simpan</button>
                 </ion-col>
             </ion-row>
         </ion-card-content>
