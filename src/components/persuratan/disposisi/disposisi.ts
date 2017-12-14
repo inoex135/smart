@@ -13,6 +13,7 @@ import { UserProvider } from "../../../providers/user/user";
 import findIndex from "lodash/findIndex";
 import orderBy from "lodash/sortBy";
 import * as moment from "moment-timezone";
+import { LoaderHelper } from "../../../helpers/loader-helper";
 @Component({
   selector: "disposisi",
   templateUrl: "disposisi.html"
@@ -81,7 +82,8 @@ export class Disposisi {
     private datepickerProvider: DatepickerProvider,
     private navCtrl: NavController,
     private masterPegawai: MasterPegawaiProvider,
-    private user: UserProvider
+    private user: UserProvider,
+    private loader: LoaderHelper
   ) {
     this.init();
     this.user.getProfile().subscribe(res => (this.profile = res));
@@ -280,14 +282,16 @@ export class Disposisi {
   }
   simpan() {
     this.disposisi.sumasId = this.naskahId;
-
+    this.loader.createLoader();
     this.disposisiProvider.simpanDisposisi(this.disposisi).subscribe(
       res => {
         this.message = res.message;
         this.navCtrl.pop();
+        this.loader.dismiss();
         this.toastHelper.present(this.message);
       },
       err => {
+        this.loader.dismiss();
         this.errorMessages = err;
         this.toastHelper.present("Terjadi Kesalahan");
       }
