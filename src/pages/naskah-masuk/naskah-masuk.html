@@ -35,6 +35,11 @@
           <ion-checkbox color="green-light" (ionChange)="selectedNaskah(naskah?.id, $event)"></ion-checkbox>
         </ion-col>
         <ion-col (tap)="detailNaskah(naskah)">
+          <h6 ion-text text-right>{{naskah?.tanggalSurat | indonesianDate: 'DD MMMM YYYY': 'x'}}</h6>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col (tap)="detailNaskah(naskah)">
           <h6 ion-text card-title text-left text-wrap>{{naskah?.nomorSurat}}</h6>
           <p ion-text text-wrap>{{naskah?.perihal}}</p>
           <p ion-text class="unit-pemohon">{{naskah?.namaUnit || "-"}}</p>
@@ -44,11 +49,6 @@
           <p ion-text text-wrap>{{naskah?.subPelayan}}</p>
           <p ion-text text-wrap>{{naskah?.normaWaktu}}</p>
         </ion-col>
-
-        <ion-col (tap)="detailNaskah(naskah)">
-          <h6 ion-text text-right>{{naskah?.tanggalSurat | indonesianDate: 'DD MMMM YYYY': 'x'}}</h6>
-        </ion-col>
-
       </ion-row>
     </ion-card>
   </ion-list>

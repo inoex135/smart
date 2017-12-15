@@ -37,7 +37,7 @@ export class LoginPage {
     this.params.data = {
       login: "Login",
       logo: "assets/logo/kemenkeu.png",
-      backgroundImage: "assets/images/bg_login.png"
+      backgroundImage: "assets/images/bg_login_smart.png"
     };
 
     this.params.events = {

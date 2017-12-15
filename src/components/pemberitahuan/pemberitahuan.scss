@@ -17,7 +17,11 @@ pemberitahuan {
       background-color: red !important;
       border: 0.4px solid #fff;
       border-radius: 50%;
-    }
 
+      .envelope-clear{
+        opacity: 0.5;
+        filter: alpha(opacity=50);
+      }
+    }
   }
 }
