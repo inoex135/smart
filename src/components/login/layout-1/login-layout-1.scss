@@ -4,7 +4,7 @@ login-layout-1 {
   $transparent-white: rgba(255, 255, 255, 0.6);
   $blue-font: map-get($colors, "blue-template");
   $gray: #c5c9ce;
-
+  
   // header
   .toolbar-content,
   span {
@@ -86,15 +86,16 @@ login-layout-1 {
   h6,
   h1,
   p {
-    color: $blue-font;
+    color: white;
   }
 
   .smart-footer {
-    margin-top: 20% !important;
+    color: white;
+    margin-top: 10% !important;
+    margin-bottom: 10px;
 
     .smart-title {
       margin-bottom: 0px !important;
-      font-weight: bold;
     }
 
     .smart-subtitle {
@@ -105,5 +106,9 @@ login-layout-1 {
 
   [ion-button] {
     border-radius: 5px;
+  }
+
+  .username{
+    color: lightgrey;
   }
 }
