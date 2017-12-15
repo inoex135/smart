@@ -20,8 +20,8 @@ export class Selesai {
     status: "",
     catatanSelesai: "",
     lokasiArsip: "",
-    klasifikasiArsip: "",
-    unit: ""
+    klasifikasiArsip: "Substantif",
+    unit: "KEKAYAAN NEGARA" //jra unit
   };
   constructor(
     private suratProvider: SuratProvider,
