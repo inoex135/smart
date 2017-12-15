@@ -1,6 +1,6 @@
 <ion-row>
   <ion-col col-6 class="label">Nomor / Tanggal Surat</ion-col>
-  <ion-col col-6>{{data?.permohonanNomor}} / {{data?.permohonanTanggal}}</ion-col>
+  <ion-col col-6>{{data?.permohonanNomor}} / {{data?.permohonanTanggal | indonesianDate:'DD MMMM YYYY': 'DD MMM YYYY'}}</ion-col>
   <ion-col col-6 class="label">Hal</ion-col>
   <ion-col col-6>{{data?.permohonanPerihal}}</ion-col>
   <ion-col col-6 class="label">Nilai Perolehan</ion-col>
