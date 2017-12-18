@@ -4,6 +4,7 @@ import { NaskahMasukProvider } from "../../providers/naskah-masuk/naskah-masuk";
 import { LoaderHelper } from "../../helpers/loader-helper";
 import remove from "lodash/remove";
 import { debounceTime, finalize } from "rxjs/operators";
+import { ToastHelper } from "../../helpers/toast-helper";
 
 @IonicPage()
 @Component({
@@ -28,7 +29,8 @@ export class NaskahMasukPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     private naskahProvider: NaskahMasukProvider,
-    private loaderHelper: LoaderHelper
+    private loaderHelper: LoaderHelper,
+    private toast: ToastHelper
   ) {}
 
   ionViewDidLoad() {
@@ -109,14 +111,17 @@ export class NaskahMasukPage {
     this.searching = false;
   }
 
+  //proses terima naskah bulk action
   terimaSemuaNaskah() {
     const idList = { idList: this.naskahTerima };
 
     this.naskahProvider.terimaSemuaNaskah(idList).subscribe(
       res => {
+        this.toast.present("Naskah telah diterima");
+        this.getNaskahMasuk();
         this.isBulkAction = false;
       },
-      err => console.log(err)
+      err => this.toast.present("Gagal terima naskah")
     );
   }
 

@@ -31,14 +31,15 @@
 
     <ion-card padding (press)="pressAndHoldSurat(naskah)" *ngFor="let naskah of listNaskah" class="naskah-list">
       <ion-row>
-        <ion-col col-1 margin-right *ngIf="isBulkAction" class="checkbox-input">
-          <ion-checkbox color="green-light" (ionChange)="selectedNaskah(naskah?.id, $event)"></ion-checkbox>
-        </ion-col>
+
         <ion-col (tap)="detailNaskah(naskah)">
           <h6 ion-text text-right>{{naskah?.tanggalSurat | indonesianDate: 'DD MMMM YYYY': 'x'}}</h6>
         </ion-col>
       </ion-row>
       <ion-row>
+        <ion-col col-1 margin-right *ngIf="isBulkAction" class="checkbox-input">
+          <ion-checkbox *ngIf="naskah?.statusTerimaSurat != 1" color="green-light" (ionChange)="selectedNaskah(naskah?.id, $event)"></ion-checkbox>
+        </ion-col>
         <ion-col (tap)="detailNaskah(naskah)">
           <h6 ion-text card-title text-left text-wrap>{{naskah?.nomorSurat}}</h6>
           <p ion-text text-wrap>{{naskah?.perihal}}</p>
