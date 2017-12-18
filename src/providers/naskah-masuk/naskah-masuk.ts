@@ -34,6 +34,11 @@ export class NaskahMasukProvider {
     return this.api.post(url, dataNaskah);
   }
 
+  // list penerima naskah yg ada di naskah-terima page
+  getPenerimaNaskah() {
+    return this.api.get("/master/pegawai/penerima-naskah");
+  }
+
   teruskan(data: any) {
     const url = "/surat/masuk/teruskan";
 
