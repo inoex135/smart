@@ -19,6 +19,7 @@ import { TokenProvider } from "../../providers/token/token";
 })
 export class PersonalAgendaAddPage {
   isSekretaris: boolean = false;
+  isDisabled: boolean = false;
 
   private agendaData: IAgendaAdd = {
     tanggal_mulai: "",
@@ -89,12 +90,15 @@ export class PersonalAgendaAddPage {
   }
 
   tambahAgenda() {
+    this.isDisabled = true;
     this.personalProvider.tambahAgenda(this.agendaData).subscribe(
       res => {
+        this.isDisabled = false;
         this.toastHelper.present(res.messages);
         this.navCtrl.pop();
       },
       err => {
+        this.isDisabled = false;
         this.toastHelper.present(err.errors[0].message);
       }
     );
