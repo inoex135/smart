@@ -36,7 +36,7 @@ export class AptDetailPage {
     this.fileDirectory = file.externalRootDirectory + "Download";
   }
 
-  ionViewDidLoad() {
+  ionViewWillEnter() {
     this.itemId = this.navParams.get("itemId");
     this.getDetailApt();
     this.getProfile();
