@@ -19,6 +19,7 @@ import { ToastHelper } from "../../helpers/toast-helper";
 import { UserProvider } from "../../providers/user/user";
 import { TokenProvider } from "../../providers/token/token";
 
+import assign from "lodash/assign";
 @IonicPage()
 @Component({
   selector: "page-naskah-masuk-detail",
@@ -40,6 +41,9 @@ export class NaskahMasukDetailPage {
   naskahDownload: NaskahModalDownloadComponent;
 
   profile: any;
+
+  // get terima naskah param dari modal
+  terimaNaskahParam: any;
 
   constructor(
     public navCtrl: NavController,
@@ -92,17 +96,29 @@ export class NaskahMasukDetailPage {
       userId: 8675309
     });
     naskahTerima.present();
+
+    naskahTerima.onDidDismiss(param => {
+      this.terimaNaskahParam = param;
+      this.terimaNaskah();
+    });
   }
 
   terimaNaskah() {
     const idList = { idList: [this.naskahId] };
-    this.naskahProvider.terimaSemuaNaskah(idList).subscribe(
+
+    const params = assign(idList, this.terimaNaskahParam);
+
+    this.naskahProvider.terimaSemuaNaskah(params).subscribe(
       res => {
         this.dismiss();
         this.toast.present(res.message);
         this.getDetailNaskah();
       },
-      err => this.navCtrl.pop()
+      err => {
+        this.dismiss();
+        this.toast.present("Terjadi Kesalahan");
+        this.navCtrl.pop();
+      }
     );
   }
   showModal() {
