@@ -108,7 +108,8 @@
                 <ion-row *ngIf="component?.disposisiPersonal">
                     <ion-item *ngFor="let pelaksana of datas?.pelaksana; let i = index" no-lines>
                         <ion-label text-wrap>{{pelaksana?.nama}}</ion-label>
-                        <ion-checkbox (ionChange)="selectPelaksana(pelaksana, $event?.checked)" color="primary" [value]="pelaksana?.nip"></ion-checkbox>
+                        <ion-checkbox [checked]="pelaksana?.isChecked" (ionChange)="selectPelaksana(pelaksana, $event?.checked, i)" color="primary"
+                            [value]="pelaksana?.nip"></ion-checkbox>
                     </ion-item>
                 </ion-row>
             </ion-card-content>
@@ -171,7 +172,7 @@
                 <ion-item-group class="blue-background">
                     <ion-item *ngFor="let petunjuk of datas?.petunjuk; let i = index" class="petunjuk blue-background">
                         <ion-label text-wrap>{{petunjuk?.keterangan}}</ion-label>
-                        <ion-checkbox [checked]="petunjuk?.id == disposisi?.petunjuk[i]" color="primary" name="petunjuk[i]" (ionChange)="onChange(petunjuk?.id, $event.checked,i)"></ion-checkbox>
+                        <ion-checkbox [checked]="petunjuk?.isChecked" color="primary" name="petunjuk[i]" (ionChange)="onChange(petunjuk?.id, $event.checked, i)"></ion-checkbox>
                     </ion-item>
                 </ion-item-group>
 

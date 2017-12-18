@@ -98,9 +98,9 @@ export class Disposisi {
     Observable.zip(petunjuk, unitDisposisi, sifatSurat, pelaksana).subscribe(
       ([petunjuk, unitDisposisi, sifatSurat, pelaksana]) => {
         this.datas.jabatan = unitDisposisi;
-        this.datas.petunjuk = petunjuk;
+        this.datas.petunjuk = this.mappingPetunjuk(petunjuk);
 
-        this.datas.pelaksana = pelaksana.response;
+        this.datas.pelaksana = this.mappingPelaksana(pelaksana.response);
 
         // order by sifat by kode
         const sifat = sifatSurat.map(res => {
@@ -116,6 +116,25 @@ export class Disposisi {
     );
   }
 
+  // add isChecked untuk flagging ketika kembali ke halaman sebelumnya
+  // langsung terceklist data pelaksana yg sudah di ceklist sebelumnya
+  mappingPelaksana(pelaksana: any) {
+    const data = pelaksana.map(data => {
+      data.isChecked = false;
+      return data;
+    });
+
+    return data;
+  }
+
+  mappingPetunjuk(petunjuk: any) {
+    const data = petunjuk.map(res => {
+      res.isChecked = false;
+      return res;
+    });
+
+    return data;
+  }
   selectDisposisi(target: string) {
     if (target === this.selectAs.unit) {
       this.disposisiTarget.unit = !this.disposisiTarget.unit;
@@ -148,14 +167,18 @@ export class Disposisi {
     }
   }
 
-  selectPelaksana(nip: string, checked: boolean) {
+  //checked/select pelaksana
+  selectPelaksana(nip: string, checked: boolean, index: number) {
     let pelaksanaIndex = findIndex(this.disposisi.personal, nip);
 
     if (checked) {
+      this.datas.pelaksana[index].isChecked = true;
       this.disposisi.personal.push(nip);
     } else {
+      this.datas.pelaksana[index].isChecked = false;
       this.disposisi.personal.splice(pelaksanaIndex, 1);
     }
+    console.log(this.datas.pelaksana[index]);
   }
 
   searchPegawai(param: any) {
@@ -171,12 +194,14 @@ export class Disposisi {
         err => {}
       );
   }
-  onChange(petunjuk: string, checked: boolean, id: number) {
+  onChange(petunjuk: string, checked: boolean, index: number) {
     const indexPetunjuk = this.datas.petunjuk.indexOf(petunjuk);
 
     if (checked) {
+      this.datas.petunjuk[index].isChecked = true;
       this.disposisi.petunjuk.push(petunjuk);
     } else {
+      this.datas.petunjuk[index].isChecked = false;
       this.disposisi.petunjuk.splice(indexPetunjuk, 1);
     }
   }
