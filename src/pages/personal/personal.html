@@ -8,30 +8,30 @@
 
 <ion-content>
   <ion-card>
-      <ion-card-header class="calendar-header">
-        <ion-label no-margin>
-          <h4 ion-text class="calendar-title">{{viewTitle}}</h4>
-        </ion-label>
-      </ion-card-header>
-      <ion-card-content>
+    <ion-card-header class="calendar-header">
+      <ion-label no-margin>
+        <h4 ion-text class="calendar-title">{{viewTitle}}</h4>
+      </ion-label>
+    </ion-card-header>
+    <ion-card-content>
 
-          <ng-template #template let-showEventDetail="showEventDetail" let-selectedDate="selectedDay" let-noEventsLabel="noEventsLabel" >
-            <ion-card *ngFor="let event of selectedDay.events" class="calendar-card">
-              <ion-card-content>
-                <ion-row>
-                  <ion-col col-4>
-                    <ion-icon name="ios-clock-outline"></ion-icon>
-                    <p ion-text>{{event?.timeStart }} - {{event?.timeEnd }}</p>
-                  </ion-col>
-                  <ion-col col-8>
-                    <p ion-text class="calendar-event-title">{{event?.title}}</p>
-                    <p ion-text>{{event?.type}}</p>
-                  </ion-col>
-                </ion-row>
-              </ion-card-content>
-            </ion-card>
+      <ng-template #template let-showEventDetail="showEventDetail" let-selectedDate="selectedDay" let-noEventsLabel="noEventsLabel">
+        <ion-card *ngFor="let event of selectedDay.events" [class]="setLabelColorCalendarDetail(event?.type)">
+          <ion-card-content>
+            <ion-row>
+              <ion-col col-4>
+                <ion-icon name="ios-clock-outline"></ion-icon>
+                <p ion-text>{{event?.timeStart }} - {{event?.timeEnd }}</p>
+              </ion-col>
+              <ion-col col-8>
+                <p ion-text class="calendar-event-title">{{event?.title}}</p>
+                <p ion-text>{{event?.type}}</p>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
 
-            <!-- <ion-list>
+        <!-- <ion-list>
               <ion-item *ngFor="let event of selectedDay.events">
                 <p ion-text>{{event?.title}}</p>
                 <p ion-text>{{event?.timeStart }} - {{event?.timeEnd }}</p>
@@ -39,17 +39,17 @@
               </ion-item>
             </ion-list> -->
 
-          </ng-template>
+      </ng-template>
 
-          <calendar [monthviewEventDetailTemplate]="template" [eventSource]="eventSource" [calendarMode]="calendar.mode" [currentDate]="calendar.currentDate"
-            (onEventSelected)="onEventSelected($event)" (onTitleChanged)="onViewTitleChanged($event)" (onTimeSelected)="onTimeSelected($event)"
-            step="30" class="calendar">
-          </calendar>
-      </ion-card-content>
+      <calendar [monthviewEventDetailTemplate]="template" [eventSource]="eventSource" [calendarMode]="calendar.mode" [currentDate]="calendar.currentDate"
+        (onEventSelected)="onEventSelected($event)" (onTitleChanged)="onViewTitleChanged($event)" (onTimeSelected)="onTimeSelected($event)"
+        step="30" class="calendar">
+      </calendar>
+    </ion-card-content>
   </ion-card>
 
 
-  
+
 
   <ion-fab right bottom>
     <button ion-fab color="default-blue" (click)="addEvent()">

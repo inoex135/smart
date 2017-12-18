@@ -59,12 +59,28 @@ export class PersonalPage {
     //   .subscribe(res => (this.eventSource = res), err => console.log());
   }
 
-  ionViewDidLoad() {
+  ionViewWillEnter() {
     this.getListEvent();
   }
 
   onChange($event) {
     console.log($event);
+  }
+
+  setLabelColorCalendarDetail(eventType?) {
+    let className;
+
+    if (eventType == "Agenda Personal") {
+      className = "calendar-card agenda-personal";
+    } else if (eventType == "Agenda Sekretaris") {
+      className = "calendar-card agenda-sekretaris";
+    } else if (eventType == "ABSEN") {
+      className = "calendar-card absen";
+    } else {
+      className = "calendar-card dinas-cuti";
+    }
+
+    return className;
   }
 
   addEvent() {

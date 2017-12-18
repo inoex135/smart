@@ -10,28 +10,43 @@ page-personal {
   .week-title {
     color: map-get($colors, dark);
   }
-	
-  .calendar-title{
-  	font-size:120%;
-  	font-weight:bold;
+
+  .calendar-title {
+    font-size: 120%;
+    font-weight: bold;
   }
 
-  .calendar-header{
-  	background-color: #FFE082;
-  	margin-bottom:3%;
-
-  } 
-
-  .calendar-card{
-  	background-color: #B3E5FC;
-  	margin-left: 0%;
-  	margin-bottom:2%;
-  	width:100%;
+  .calendar-header {
+    background-color: #ffe082;
+    margin-bottom: 3%;
   }
 
-  .calendar-event-title{
-  	font-size:110%;
-  	font-weight: bolder;
-  	color: #01579B;
+  .calendar-card {
+    margin-left: 0%;
+    margin-bottom: 2%;
+    width: 100%;
+  }
+
+  .agenda-personal {
+    background-color: #3f51b5;
+  }
+
+  .agenda-sekretaris {
+    background-color: #b71c1c;
+  }
+
+  .dinas-cuti {
+    background-color: #ba68c8;
+  }
+
+  .absen {
+    //
+    background-color: #424242;
+  }
+
+  .calendar-event-title {
+    font-size: 110%;
+    font-weight: bolder;
+    color: #fff;
   }
 }
