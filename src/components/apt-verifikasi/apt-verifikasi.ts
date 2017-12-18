@@ -2,7 +2,7 @@ import { Component, ViewChild } from "@angular/core";
 import { LoaderHelper } from "../../helpers/loader-helper";
 
 import { AptProvider } from "../../providers/apt/apt";
-import { Slides, NavParams } from "ionic-angular";
+import { Slides, NavParams, Events, NavController } from "ionic-angular";
 import { ToastHelper } from "../../helpers/toast-helper";
 
 @Component({
@@ -22,7 +22,9 @@ export class AptVerifikasiComponent {
     public navParams: NavParams,
     private aptProvider: AptProvider,
     private loaderHelper: LoaderHelper,
-    private toastHelper: ToastHelper
+    private toastHelper: ToastHelper,
+    private event: Events,
+    private nav: NavController
   ) {
     this.action = this.navParams.get("action");
     this.itemId = this.navParams.get("itemId");
@@ -40,6 +42,7 @@ export class AptVerifikasiComponent {
       },
       err => {
         this.loaderHelper.dismiss();
+        this.nav.pop();
       }
     );
   }
@@ -62,6 +65,7 @@ export class AptVerifikasiComponent {
       res => {
         this.loaderHelper.dismiss();
         this.toastHelper.present(res.message);
+        this.nav.pop();
       },
       err => {
         this.loaderHelper.dismiss();
