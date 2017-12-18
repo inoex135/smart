@@ -1,5 +1,10 @@
 import { Component, ViewChild } from "@angular/core";
-import { NavController, NavParams, IonicPage } from "ionic-angular";
+import {
+  NavController,
+  NavParams,
+  IonicPage,
+  ModalController
+} from "ionic-angular";
 
 import { NaskahMasukProvider } from "../../providers/naskah-masuk/naskah-masuk";
 import { LoaderHelper } from "../../helpers/loader-helper";
@@ -12,6 +17,7 @@ import { File } from "@ionic-native/file";
 import { AptHelper } from "../../helpers/apt-helper";
 import { ToastHelper } from "../../helpers/toast-helper";
 import { UserProvider } from "../../providers/user/user";
+import { TokenProvider } from "../../providers/token/token";
 
 @IonicPage()
 @Component({
@@ -43,13 +49,13 @@ export class NaskahMasukDetailPage {
     file: File,
     private aptHelper: AptHelper,
     private toast: ToastHelper,
-    userProvider: UserProvider
+    userProvider: UserProvider,
+    private token: TokenProvider,
+    private modalController: ModalController
   ) {
     this.naskahId = this.navParams.get("naskahId");
     this.fileDirectory = file.externalRootDirectory + "Download";
-    userProvider
-      .getProfile()
-      .subscribe(res => (this.profile = res), err => true);
+    this.token.getProfile().then(res => (this.profile = res), err => true);
   }
 
   openPage(actionData: string) {
@@ -79,6 +85,13 @@ export class NaskahMasukDetailPage {
         this.loaderHelper.errorHandleLoader(err.error_message, this.navCtrl);
       }
     );
+  }
+
+  showModalTerimaNaskah() {
+    let naskahTerima = this.modalController.create("NaskahTerimaPage", {
+      userId: 8675309
+    });
+    naskahTerima.present();
   }
 
   terimaNaskah() {

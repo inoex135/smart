@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons start>
+      <button ion-button icon-only (click)="dismiss()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>Terima Naskah</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <ion-item>
+      <ion-label floating>Tanggal Naskah Terima
+        <span class="required">*</span>
+      </ion-label>
+      <ion-input type="text" (tap)="getTanggalTerima()" [value]="tanggalTerima"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Penerima</ion-label>
+      <ion-select [(ngModel)]="nip">
+        <ion-option value="nes">NES</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <button ion-button full color="danger">Simpan</button>
+    </ion-item>
+  </ion-list>
+</ion-content>
