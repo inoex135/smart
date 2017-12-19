@@ -59,8 +59,16 @@
                             * {{err?.messages}}
                         </p>
                     </ion-item>
-                    <button ion-button full [disabled]="catatanSelesai.invalid||data?.status =='' || data?.tanggalSelesai ==''" (click)="selesai(data)"
-                        margin-top color="default-blue">Simpan</button>
+
+                    <button *ngIf="detail?.naskahPermohonan !== 'ya'" ion-button full [disabled]="catatanSelesai.invalid|| data?.tanggalSelesai ==''"
+                        (click)="selesai(data)" margin-top color="default-blue">Simpan</button>
+
+                    <button *ngIf="detail?.naskahPermohonan === 'ya'" ion-button full [disabled]="catatanSelesai.invalid|| data?.status =='' || data?.tanggalSelesai ==''"
+                        (click)="selesai(data)" margin-top color="default-blue">
+                        Simpan
+                    </button>
+
+
                 </ion-col>
             </ion-row>
         </ion-card-content>
