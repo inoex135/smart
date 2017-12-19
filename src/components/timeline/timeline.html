@@ -5,7 +5,7 @@
   </div>
 
   <div class="divider-title" *ngIf="type === CURRENT_TYPE.RIWAYAT">
-    {{item?.tanggal_proses}} - {{item?.proses_naskah}}
+    {{item?.tanggal_proses | indonesianDate:'DD MMMM YYYY':'DD MMM YYYY'}} - {{item?.proses_naskah}}
   </div>
 
   <ul class="timeline" *ngIf="type === CURRENT_TYPE.AGENDA">
