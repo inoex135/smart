@@ -92,9 +92,7 @@ export class NaskahMasukDetailPage {
   }
 
   showModalTerimaNaskah() {
-    let naskahTerima = this.modalController.create("NaskahTerimaPage", {
-      userId: 8675309
-    });
+    let naskahTerima = this.modalController.create("NaskahTerimaPage");
     naskahTerima.present();
 
     naskahTerima.onDidDismiss(param => {
