@@ -92,4 +92,5 @@
     <plugin name="cordova-plugin-android-permissions" spec="^1.0.0" />
     <plugin name="cordova-plugin-fcm" spec="^2.1.2" />
     <plugin name="cordova-plugin-datepicker" spec="^0.9.3" />
+    <engine name="browser" spec="~4.1.0" />
 </widget>
