@@ -91,3 +91,5 @@ $card-md-box-shadow: 0 2px 2px 0 rgba(7, 7, 7, 0.14),
 
 //https://github.com/kevincobain2000/ionic-timeline
 @import "ionic-timeline";
+// Tabs Setting
+$tabs-background: map-get($colors, "green-light") !important;

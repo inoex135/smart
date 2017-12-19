@@ -40,9 +40,7 @@ export class AptProvider {
   ) {
     return this.apiProvider
       .get(
-        `/apt/permohonan/pending?keyword=${keyword}&layanan=${layananId}&page=${
-          page
-        }&size=${size}`
+        `/apt/permohonan/pending?keyword=${keyword}&layanan=${layananId}&page=${page}&size=${size}`
       )
       .pipe(map(data => data.content));
   }
@@ -119,5 +117,17 @@ export class AptProvider {
     this.fileTransfer.onProgress(res => {
       console.log(res);
     });
+  }
+
+  getDekatBatasWaktu() {
+    return this.apiProvider
+      .get("/apt/permohonan/dekat")
+      .pipe(map(res => res.content));
+  }
+
+  getLewatiBatasWaktu() {
+    return this.apiProvider
+      .get("/apt/permohonan/lewat")
+      .pipe(map(res => res.content));
   }
 }

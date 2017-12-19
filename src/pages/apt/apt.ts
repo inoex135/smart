@@ -58,7 +58,20 @@ export class AptPage {
 
   ionViewDidLoad() {
     this.getPelayananList();
-    this.getAptList();
+    this.mappingGetData();
+  }
+
+  mappingGetData() {
+    const type = this.navParams.data;
+    if (type === "dekatBatasWaktu") {
+      return this.getDekatBatasWaktu();
+    }
+
+    if (type === "lewatBatasWaktu") {
+      return this.getLewatiBatasWaktu();
+    }
+
+    return this.getAptList();
   }
 
   detailApt(item: any) {
@@ -75,7 +88,6 @@ export class AptPage {
         this.pelayanans = res.content;
       },
       err => {
-        console.log(err);
         this.loaderHelper.errorHandleLoader(err, this.navCtrl);
       }
     );
@@ -92,7 +104,7 @@ export class AptPage {
         this.loaderHelper.dismiss();
       },
       err => {
-      console.log(err);
+        console.log(err);
         this.loaderHelper.errorHandleLoader(err, this.navCtrl);
       }
     );
@@ -214,5 +226,31 @@ export class AptPage {
 
   hideLoader() {
     this.searching = false;
+  }
+
+  // get data apt yg lewati batas norma waktu
+  async getDekatBatasWaktu() {
+    await this.loaderHelper.createLoader();
+    this.aptProvider.getDekatBatasWaktu().subscribe(
+      res => {
+        this.loaderHelper.dismiss();
+        this.items = res;
+      },
+      err => {
+        this.loaderHelper.dismiss();
+      }
+    );
+  }
+
+  // get data apt yg lewati batas norma waktu
+  async getLewatiBatasWaktu() {
+    await this.loaderHelper.createLoader();
+    this.aptProvider.getLewatiBatasWaktu().subscribe(
+      res => {
+        this.loaderHelper.dismiss();
+        this.items = res;
+      },
+      err => this.loaderHelper.dismiss()
+    );
   }
 }
