@@ -1,10 +1,16 @@
 import { Component } from "@angular/core";
-import { NavController, NavParams, IonicPage } from "ionic-angular";
+import {
+  NavController,
+  NavParams,
+  IonicPage,
+  ModalController
+} from "ionic-angular";
 import { NaskahMasukProvider } from "../../providers/naskah-masuk/naskah-masuk";
 import { LoaderHelper } from "../../helpers/loader-helper";
 import remove from "lodash/remove";
 import { debounceTime, finalize } from "rxjs/operators";
 import { ToastHelper } from "../../helpers/toast-helper";
+import assign from "lodash/assign";
 
 @IonicPage()
 @Component({
@@ -25,12 +31,16 @@ export class NaskahMasukPage {
 
   page: number = 0;
 
+  //get param terima naskah modal
+  terimaNaskahParam: any;
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     private naskahProvider: NaskahMasukProvider,
     private loaderHelper: LoaderHelper,
-    private toast: ToastHelper
+    private toast: ToastHelper,
+    private modalController: ModalController
   ) {}
 
   ionViewDidLoad() {
@@ -111,9 +121,21 @@ export class NaskahMasukPage {
     this.searching = false;
   }
 
+  showModalTerimaNaskah() {
+    let naskahTerima = this.modalController.create("NaskahTerimaPage");
+    naskahTerima.present();
+
+    naskahTerima.onDidDismiss(param => {
+      this.terimaNaskahParam = param;
+      this.terimaSemuaNaskah();
+    });
+  }
+
   //proses terima naskah bulk action
   terimaSemuaNaskah() {
     const idList = { idList: this.naskahTerima };
+
+    const params = assign(idList, this.terimaNaskahParam);
 
     this.naskahProvider.terimaSemuaNaskah(idList).subscribe(
       res => {

@@ -43,6 +43,6 @@ export class AptNotifikasiPage {
   }
 
   statusRead(isRead: number) {
-    return isRead === 0 ? "Unread" : "Read";
+    return isRead === 0 ? "Belum dibaca" : "Sudah dibaca";
   }
 }

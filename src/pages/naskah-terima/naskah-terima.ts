@@ -3,6 +3,7 @@ import { IonicPage, ViewController } from "ionic-angular";
 import { DatepickerProvider } from "../../providers/datepicker/datepicker";
 import { MomentHelper } from "../../helpers/moment-helper";
 import { NaskahMasukProvider } from "../../providers/naskah-masuk/naskah-masuk";
+import * as moment from "moment-timezone";
 
 @IonicPage()
 @Component({
@@ -12,7 +13,7 @@ import { NaskahMasukProvider } from "../../providers/naskah-masuk/naskah-masuk";
 export class NaskahTerimaPage {
   // param untuk terima naskah
   nip: number;
-  tanggalTerima: any;
+  tanggalTerima: string = moment().format("DD-MM-YYYY");
 
   //variabel penerima naskah
   personils: any[] = [];
