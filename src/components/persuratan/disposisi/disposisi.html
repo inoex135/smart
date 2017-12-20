@@ -108,12 +108,17 @@
             </ion-card-content>
 
             <ion-card-content class="disposisi-padding-top-form" *ngIf="profile?.jenis_eselon == 4">
-                <ion-row *ngIf="component?.disposisiPersonal">
-                    <ion-item *ngFor="let pelaksana of datas?.pelaksana; let i = index" no-lines>
-                        <ion-label text-wrap>{{pelaksana?.nama}}</ion-label>
-                        <ion-checkbox [checked]="pelaksana?.isChecked" (ionChange)="selectPelaksana(pelaksana, $event?.checked, i)" color="primary"
-                            [value]="pelaksana?.nip"></ion-checkbox>
-                    </ion-item>
+                <ion-row *ngIf="component?.disposisiPersonal" class="row">
+                    <div *ngFor="let pelaksana of datas?.pelaksana; let i = index" col-12>
+                        <ion-item no-lines>
+                            <ion-label text-wrap>{{pelaksana?.nama}}</ion-label>
+                            <ion-checkbox [checked]="pelaksana?.isChecked" (ionChange)="selectPelaksana(pelaksana, $event?.checked, i)" color="primary"
+                                [value]="pelaksana?.nip"></ion-checkbox>
+                        </ion-item>
+                        <ion-item class="input--form">
+                            <ion-input type="text" placeholder="Selaku" [(ngModel)]="disposisi.selaku[i]"></ion-input>
+                        </ion-item>
+                    </div>
                 </ion-row>
             </ion-card-content>
         </ion-card>

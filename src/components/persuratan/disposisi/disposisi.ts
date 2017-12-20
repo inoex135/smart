@@ -12,6 +12,7 @@ import { UserProvider } from "../../../providers/user/user";
 
 import findIndex from "lodash/findIndex";
 import orderBy from "lodash/sortBy";
+import compact from "lodash/compact";
 import * as moment from "moment-timezone";
 import { LoaderHelper } from "../../../helpers/loader-helper";
 @Component({
@@ -178,7 +179,6 @@ export class Disposisi {
       this.datas.pelaksana[index].isChecked = false;
       this.disposisi.personal.splice(pelaksanaIndex, 1);
     }
-    console.log(this.datas.pelaksana[index]);
   }
 
   searchPegawai(param: any) {
@@ -307,6 +307,9 @@ export class Disposisi {
   }
   simpan() {
     this.disposisi.sumasId = this.naskahId;
+    //remove array value null, undefined, ""
+    this.disposisi.selaku = compact(this.disposisi.selaku);
+
     this.loader.createLoader();
     this.disposisiProvider.simpanDisposisi(this.disposisi).subscribe(
       res => {
