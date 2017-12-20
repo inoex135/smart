@@ -126,8 +126,11 @@ export class NaskahMasukPage {
     naskahTerima.present();
 
     naskahTerima.onDidDismiss(param => {
-      this.terimaNaskahParam = param;
-      this.terimaSemuaNaskah();
+      // naskah diterima jika terdapat param tanggal terima dan personal terima
+      if (param) {
+        this.terimaNaskahParam = param;
+        this.terimaSemuaNaskah();
+      }
     });
   }
 
@@ -137,7 +140,7 @@ export class NaskahMasukPage {
 
     const params = assign(idList, this.terimaNaskahParam);
 
-    this.naskahProvider.terimaSemuaNaskah(idList).subscribe(
+    this.naskahProvider.terimaSemuaNaskah(params).subscribe(
       res => {
         this.toast.present("Naskah telah diterima");
         this.getNaskahMasuk();

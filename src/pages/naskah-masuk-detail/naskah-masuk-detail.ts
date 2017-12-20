@@ -95,9 +95,11 @@ export class NaskahMasukDetailPage {
     let naskahTerima = this.modalController.create("NaskahTerimaPage");
     naskahTerima.present();
 
-    naskahTerima.onDidDismiss(param => {
-      this.terimaNaskahParam = param;
-      this.terimaNaskah();
+    naskahTerima.onDidDismiss(params => {
+      if (params) {
+        this.terimaNaskahParam = params;
+        this.terimaNaskah();
+      }
     });
   }
 

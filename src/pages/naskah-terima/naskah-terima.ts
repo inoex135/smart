@@ -37,6 +37,10 @@ export class NaskahTerimaPage {
   }
 
   dismiss() {
+    this.viewCtrl.dismiss();
+  }
+
+  save() {
     const data = { nip: this.nip, tanggalTerima: this.tanggalTerima };
     this.viewCtrl.dismiss(data);
   }
