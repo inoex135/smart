@@ -77,7 +77,11 @@
             <ion-label no-margin color="orange">Undang Pegawai</ion-label>
           </ion-item>
 
-          <ion-auto-complete (itemSelected)="addData(agendaData?.pegawai, $event)" [dataProvider]="masterPegawai" #autoComplete></ion-auto-complete>
+          <ng-template #withFlags let-attrs="attrs">
+            <span>{{attrs?.data?.nip}}, {{attrs?.data?.nama}}</span>
+          </ng-template>
+
+          <ion-auto-complete (itemSelected)="addData(agendaData?.pegawai, $event)" [dataProvider]="masterPegawai" #autoComplete [template]="withFlags"></ion-auto-complete>
 
           <ion-item *ngFor="let person of agendaData?.pegawai; let i = index">
             {{person?.nama}}

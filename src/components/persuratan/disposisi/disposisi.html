@@ -81,7 +81,10 @@
 
             <ion-card-content class="disposisi-padding-top-form" *ngIf="profile?.jenis_eselon <  4">
                 <ion-row *ngIf="component?.disposisiPersonal">
-                    <ion-auto-complete (itemSelected)="addData(disposisi?.personal, $event)" [dataProvider]="masterPegawai" #autoComplete></ion-auto-complete>
+                    <ng-template #withFlags let-attrs="attrs">
+                        <span>{{attrs?.data?.nip}}, {{attrs?.data?.nama}}</span>
+                    </ng-template>
+                    <ion-auto-complete (itemSelected)="addData(disposisi?.personal, $event)" [dataProvider]="masterPegawai" #autoComplete [template]="withFlags"></ion-auto-complete>
 
                     <ion-item margin-top class="input--form">
                         <ion-input type="text" placeholder="Selaku" [(ngModel)]="pelaku"></ion-input>
@@ -126,7 +129,7 @@
 
     <ion-item no-lines *ngIf="component?.disposisiPersonal">
         <button item-start clear ion-button color="default-blue" (tap)="back()">KEMBALI</button>
-        <button item-end ion-button color="default-blue" (tap)="nextStep('disposisiSifat')" [disabled]="disposisi?.disposisiPersonal?.length == 0">SELANJUTNYA</button>
+        <button item-end ion-button color="default-blue" (tap)="nextStep('disposisiSifat')" [disabled]="disposisi?.selaku?.length == 0">SELANJUTNYA</button>
     </ion-item>
 </ion-grid>
 
