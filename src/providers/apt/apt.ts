@@ -119,15 +119,15 @@ export class AptProvider {
     });
   }
 
-  getDekatBatasWaktu() {
+  getDekatBatasWaktu(keyword: string, page: number = 0, size: number = 10) {
     return this.apiProvider
-      .get("/apt/permohonan/dekat")
+      .get(`/apt/permohonan/dekat?page=${page}&size=${size}`)
       .pipe(map(res => res.content));
   }
 
-  getLewatiBatasWaktu() {
+  getLewatiBatasWaktu(keyword: string, page: number = 0, size: number = 10) {
     return this.apiProvider
-      .get("/apt/permohonan/lewat")
+      .get(`/apt/permohonan/lewat?page=${page}&size=${size}`)
       .pipe(map(res => res.content));
   }
 }

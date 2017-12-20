@@ -113,20 +113,37 @@ export class AptPage {
   doInfinite(infiniteScroll) {
     this.page = this.page + 1;
     setTimeout(() => {
-      this.aptProvider
-        .search(this.keyword, this.jenisPelayanan, this.page)
-        .subscribe(
-          res => {
-            for (var index = 0; index < res.length; index++) {
-              this.items.push(res[index]);
-            }
-          },
-          err => {
-            this.navCtrl.pop();
+      const resourceData = this.mappingInfinityScrollData();
+
+      resourceData.subscribe(
+        res => {
+          for (var index = 0; index < res.length; index++) {
+            this.items.push(res[index]);
           }
-        );
+        },
+        err => {
+          this.navCtrl.pop();
+        }
+      );
       infiniteScroll.complete();
     }, 1000);
+  }
+
+  mappingInfinityScrollData() {
+    const type = this.navParams.data;
+    if (type === "dekatBatasWaktu") {
+      return this.aptProvider.getDekatBatasWaktu(this.keyword, this.page);
+    }
+
+    if (type === "lewatBatasWaktu") {
+      return this.aptProvider.getLewatiBatasWaktu(this.keyword, this.page);
+    }
+
+    return this.aptProvider.search(
+      this.keyword,
+      this.jenisPelayanan,
+      this.page
+    );
   }
 
   // async download() {
@@ -231,7 +248,7 @@ export class AptPage {
   // get data apt yg lewati batas norma waktu
   async getDekatBatasWaktu() {
     await this.loaderHelper.createLoader();
-    this.aptProvider.getDekatBatasWaktu().subscribe(
+    this.aptProvider.getDekatBatasWaktu(this.keyword, this.page).subscribe(
       res => {
         this.loaderHelper.dismiss();
         this.items = res;
@@ -245,7 +262,7 @@ export class AptPage {
   // get data apt yg lewati batas norma waktu
   async getLewatiBatasWaktu() {
     await this.loaderHelper.createLoader();
-    this.aptProvider.getLewatiBatasWaktu().subscribe(
+    this.aptProvider.getLewatiBatasWaktu(this.keyword, this.page).subscribe(
       res => {
         this.loaderHelper.dismiss();
         this.items = res;
