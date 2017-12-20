@@ -45,7 +45,7 @@ export class NaskahDisposisiProvider {
     let formData = new FormData();
 
     //disposisi personal, form unit tidak perlu dikirim
-    if (unitTujuan) {
+    if (unitTujuan.length > 0) {
       formData.append("unit", unitTujuan);
     }
 
