@@ -1,6 +1,5 @@
 import { Injectable } from "@angular/core";
 import { ApiProvider } from "../api/api";
-import { map } from "rxjs/operators/map";
 
 @Injectable()
 export class NaskahDisposisiProvider {

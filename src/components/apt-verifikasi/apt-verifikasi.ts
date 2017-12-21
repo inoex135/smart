@@ -2,7 +2,7 @@ import { Component, ViewChild } from "@angular/core";
 import { LoaderHelper } from "../../helpers/loader-helper";
 
 import { AptProvider } from "../../providers/apt/apt";
-import { Slides, NavParams, Events, NavController } from "ionic-angular";
+import { Slides, NavParams, NavController } from "ionic-angular";
 import { ToastHelper } from "../../helpers/toast-helper";
 
 @Component({
@@ -23,7 +23,6 @@ export class AptVerifikasiComponent {
     private aptProvider: AptProvider,
     private loaderHelper: LoaderHelper,
     private toastHelper: ToastHelper,
-    private event: Events,
     private nav: NavController
   ) {
     this.action = this.navParams.get("action");

@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { LoadingController, NavController } from "ionic-angular";
+import { LoadingController } from "ionic-angular";
 
 @Injectable()
 export class LoaderHelper {
