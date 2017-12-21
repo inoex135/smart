@@ -214,7 +214,10 @@ export class Disposisi {
   //     this.disposisi.lead = unit;
   //   }
   // }
-
+  addDisposisiPersonal(data: Array<any>, item: any) {
+    data.push(item);
+    this.pelaku = "";
+  }
   addData(data: Array<any>, item: any) {
     data.push(item);
   }
