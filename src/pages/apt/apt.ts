@@ -3,7 +3,8 @@ import {
   NavController,
   NavParams,
   LoadingController,
-  IonicPage
+  IonicPage,
+  App
 } from "ionic-angular";
 import { File } from "@ionic-native/file";
 
@@ -46,7 +47,8 @@ export class AptPage {
     file: File,
     private aptHelper: AptHelper,
     private loaderHelper: LoaderHelper,
-    private toastHelper: ToastHelper
+    private toastHelper: ToastHelper,
+    private app: App
   ) {
     this.fileDirectory = file.externalRootDirectory + "Download";
 
@@ -75,7 +77,7 @@ export class AptPage {
   }
 
   detailApt(item: any) {
-    this.navCtrl.push("AptDetailPage", { itemId: item.id });
+    this.app.getRootNav().push("AptDetailPage", { itemId: item.id });
   }
 
   isItemPressed() {

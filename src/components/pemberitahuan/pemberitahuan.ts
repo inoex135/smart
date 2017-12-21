@@ -1,13 +1,13 @@
 import { Component, Input } from "@angular/core";
 import * as moment from "moment-timezone";
-import { NavController } from "ionic-angular";
+import { NavController, App } from "ionic-angular";
 
 @Component({
   selector: "pemberitahuan",
   templateUrl: "pemberitahuan.html"
 })
 export class PemberitahuanComponent {
-  constructor(private navCtrl: NavController) {}
+  constructor(private navCtrl: NavController, private app: App) {}
 
   @Input() redirectComponent: string = "";
 
@@ -24,6 +24,6 @@ export class PemberitahuanComponent {
   }
 
   redirectTo() {
-    this.navCtrl.push(this.redirectComponent);
+    this.app.getRootNav().push(this.redirectComponent);
   }
 }
