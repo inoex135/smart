@@ -21,7 +21,7 @@
           Disposisi
         </button>
       </ion-col>
-      <ion-col *ngIf="detail?.statusTerimaSurat == null">
+      <ion-col *ngIf="detail?.statusTerimaSurat == null || detail?.statusTerimaSurat == 0">
         <button ion-button block icon-left color="green-light" (click)="showModalTerimaNaskah()">
           <ion-icon name="checkbox"></ion-icon>
           Naskah Terima
