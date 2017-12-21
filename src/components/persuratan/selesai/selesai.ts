@@ -5,6 +5,7 @@ import { SuratProvider } from "../../../providers/surat/surat";
 import { ToastHelper } from "../../../helpers/toast-helper";
 import { DatepickerProvider } from "../../../providers/datepicker/datepicker";
 import { MomentHelper } from "../../../helpers/moment-helper";
+import { LoaderHelper } from "../../../helpers/loader-helper";
 
 @Component({
   selector: "selesai",
@@ -29,18 +30,22 @@ export class Selesai {
     private navParam: NavParams,
     private datepicker: DatepickerProvider,
     private momentHelper: MomentHelper,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private loaderHelper: LoaderHelper
   ) {
     this.detail = this.navParam.get("detailNaskah");
   }
 
   selesai(data: SelesaiModel) {
+    this.loaderHelper.createLoader();
     this.suratProvider.simpanSelesai(this.detail, data).subscribe(
       res => {
+        this.loaderHelper.dismiss();
         this.toastHelper.present(res.messages);
         this.navCtrl.pop();
       },
       err => {
+        this.loaderHelper.dismiss();
         if (err.errors) {
           this.errors = err.errors;
         } else {
