@@ -1,4 +1,14 @@
 page-apt-detail {
+  font-family: Roboto;
+
+  .detail-permohonan-header{
+    background-color: #81C784;
+  }
+
+  .detail-permohonan-content{
+    font-size: 12px;
+  }
+
   p.background.green {
     background-color: map-get($colors, green-bootstrap) !important;
     border-radius: 0.25rem;

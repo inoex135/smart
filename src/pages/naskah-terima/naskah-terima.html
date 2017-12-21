@@ -10,23 +10,27 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-list>
-    <ion-item>
-      <ion-label floating>Tanggal Naskah Terima
-        <span class="required">*</span>
-      </ion-label>
-      <ion-input readonly type="text" (tap)="getTanggalTerima()" [value]="tanggalTerima"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label floating>Penerima</ion-label>
-      <ion-select [(ngModel)]="nip">
-        <ion-option [value]="personil?.nip" *ngFor="let personil of personils">
-          {{personil?.nama}}
-        </ion-option>
-      </ion-select>
-    </ion-item>
-    <ion-item>
-      <button ion-button full color="danger" (tap)="save()" [disabled]="tglTerima?.invalid">Simpan</button>
-    </ion-item>
-  </ion-list>
+  <ion-card class="terima-naskah-card">
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-label floating>Tanggal Naskah Terima
+            <span class="required">*</span>
+          </ion-label>
+          <ion-input readonly type="text" (tap)="getTanggalTerima()" [value]="tanggalTerima"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>Penerima</ion-label>
+          <ion-select [(ngModel)]="nip">
+            <ion-option [value]="personil?.nip" *ngFor="let personil of personils">
+              {{personil?.nama}}
+            </ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <button ion-button full color="danger" (tap)="save()" [disabled]="tglTerima?.invalid" class="terima-naskah-btn"><ion-icon name="md-checkmark-circle-outline"></ion-icon> Simpan</button>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
