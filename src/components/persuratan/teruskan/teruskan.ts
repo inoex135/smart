@@ -1,4 +1,4 @@
-import { Component, ViewChild } from "@angular/core";
+import { Component } from "@angular/core";
 import { SuratTeruskan } from "../../../models/surat-teruskan";
 
 import { NaskahMasukProvider } from "../../../providers/naskah-masuk/naskah-masuk";
