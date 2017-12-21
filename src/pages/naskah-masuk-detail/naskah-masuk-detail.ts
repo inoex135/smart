@@ -70,7 +70,7 @@ export class NaskahMasukDetailPage {
     });
   }
 
-  ionViewDidLoad() {
+  ionViewWillEnter() {
     this.actionList = NaskahAction.getAction();
 
     this.getDetailNaskah();
