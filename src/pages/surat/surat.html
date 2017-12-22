@@ -39,11 +39,11 @@
     </div>
 
     <ion-item class="input--form" margin-top>
-      <ion-input (tap)="getStartTime()" (ionChange)="getDataFilter()" [value]="filter.startTime" placeholder="Filter Infografis Surat (Periode Awal)"></ion-input>
+      <ion-input disabled="true" (tap)="getStartTime()" (ionChange)="getDataFilter()" [value]="filter.startTime" placeholder="Filter Infografis Surat (Periode Awal)"></ion-input>
     </ion-item>
 
     <ion-item class="input--form" margin-top margin-bottom>
-      <ion-input (tap)="getEndTime()" (ionChange)="getDataFilter()" [value]="filter.endTime" placeholder="Filter Infografis Surat (Periode Akhir)"></ion-input>
+      <ion-input disabled="true" (tap)="getEndTime()" (ionChange)="getDataFilter()" [value]="filter.endTime" placeholder="Filter Infografis Surat (Periode Akhir)"></ion-input>
     </ion-item>
 
     <ion-card class="infografis-surat">

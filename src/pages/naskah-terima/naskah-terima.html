@@ -17,7 +17,7 @@
           <ion-label floating>Tanggal Naskah Terima
             <span class="required">*</span>
           </ion-label>
-          <ion-input readonly type="text" (tap)="getTanggalTerima()" [value]="tanggalTerima"></ion-input>
+          <ion-input disabled="true" type="text" (tap)="getTanggalTerima()" [value]="tanggalTerima"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label floating>Penerima</ion-label>
@@ -28,7 +28,8 @@
           </ion-select>
         </ion-item>
         <ion-item>
-          <button ion-button full color="danger" (tap)="save()" [disabled]="tglTerima?.invalid" class="terima-naskah-btn"><ion-icon name="md-checkmark-circle-outline"></ion-icon> Simpan</button>
+          <button ion-button full color="danger" (tap)="save()" [disabled]="tglTerima?.invalid" class="terima-naskah-btn">
+            <ion-icon name="md-checkmark-circle-outline"></ion-icon> Simpan</button>
         </ion-item>
       </ion-list>
     </ion-card-content>

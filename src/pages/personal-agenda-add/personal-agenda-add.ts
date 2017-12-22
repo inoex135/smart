@@ -58,35 +58,43 @@ export class PersonalAgendaAddPage {
   }
 
   async tanggalMulai() {
-    const tanggalMulai = await this.datePicker.datePickerData(this.MODE.DATE);
-    this.agendaData.tanggal_mulai = this.momentHelper.convertIsoTo(
-      tanggalMulai,
-      "DD-MM-YYYY"
-    );
+    try {
+      const tanggalMulai = await this.datePicker.datePickerData(this.MODE.DATE);
+      this.agendaData.tanggal_mulai = this.momentHelper.convertIsoTo(
+        tanggalMulai,
+        "DD-MM-YYYY"
+      );
+    } catch (error) {}
   }
 
   async jamMulai() {
-    const jamMulai = await this.datePicker.datePickerData(this.MODE.TIME);
-    this.agendaData.jam_mulai = this.momentHelper.convertIsoTo(
-      jamMulai,
-      "HH:mm"
-    );
+    try {
+      const jamMulai = await this.datePicker.datePickerData(this.MODE.TIME);
+      this.agendaData.jam_mulai = this.momentHelper.convertIsoTo(
+        jamMulai,
+        "HH:mm"
+      );
+    } catch (error) {}
   }
 
   async tanggalAkhir() {
-    const tanggalAkhir = await this.datePicker.datePickerData(this.MODE.DATE);
-    this.agendaData.tanggal_akhir = this.momentHelper.convertIsoTo(
-      tanggalAkhir,
-      "DD-MM-YYYY"
-    );
+    try {
+      const tanggalAkhir = await this.datePicker.datePickerData(this.MODE.DATE);
+      this.agendaData.tanggal_akhir = this.momentHelper.convertIsoTo(
+        tanggalAkhir,
+        "DD-MM-YYYY"
+      );
+    } catch (error) {}
   }
 
   async jamAkhir() {
-    const jamAkhir = await this.datePicker.datePickerData(this.MODE.TIME);
-    this.agendaData.jam_akhir = this.momentHelper.convertIsoTo(
-      jamAkhir,
-      "HH:mm"
-    );
+    try {
+      const jamAkhir = await this.datePicker.datePickerData(this.MODE.TIME);
+      this.agendaData.jam_akhir = this.momentHelper.convertIsoTo(
+        jamAkhir,
+        "HH:mm"
+      );
+    } catch (error) {}
   }
 
   tambahAgenda() {
