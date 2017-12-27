@@ -99,6 +99,7 @@ Misc:
 
 ## Reference
 
+* [https://ionicframework.com/docs/v1/guide/publishing.html](https://ionicframework.com/docs/v1/guide/publishing.html)
 * [https://ionicframework.com/docs](https://ionicframework.com/docs)
 * [https://github.com/shumbo/ionic-realworld-example-app](https://github.com/shumbo/ionic-realworld-example-app)
 * [https://www.joshmorony.com/adding-responsive-charts-graphs-to-ionic-2-applications/](https://www.joshmorony.com/adding-responsive-charts-graphs-to-ionic-2-applications/)
