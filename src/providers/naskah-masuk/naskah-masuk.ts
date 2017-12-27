@@ -90,4 +90,8 @@ export class NaskahMasukProvider {
         return err;
       });
   }
+
+  updateNotification() {
+    this.api.get("notification");
+  }
 }

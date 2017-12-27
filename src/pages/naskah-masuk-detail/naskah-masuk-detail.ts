@@ -74,6 +74,8 @@ export class NaskahMasukDetailPage {
     this.actionList = NaskahAction.getAction();
 
     this.getDetailNaskah();
+    // update notification
+    // this.updateNotification();
   }
 
   async getDetailNaskah() {
@@ -89,6 +91,10 @@ export class NaskahMasukDetailPage {
         this.loaderHelper.errorHandleLoader(err.error_message, this.navCtrl);
       }
     );
+  }
+
+  updateNotification() {
+    this.naskahProvider.updateNotification();
   }
 
   showModalTerimaNaskah() {
