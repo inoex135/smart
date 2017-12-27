@@ -24,8 +24,7 @@ Untuk menjalankan project :
 
 ## Production
 
-1. Pertama, tambahkan target platform yang diinginkan dengan command `ionic
-   cordova platform add android`
+1. Pertama, tambahkan target platform yang diinginkan dengan command `ionic cordova platform add android`
 2. Jika platform sudah pernah ditambahkan, bisa langsung jalankan command ini
    untuk build menjadi APK `ionic cordova build android --prod`.
 3. Atau juga ketika akan sudah rilis bisa tambahkan `--release` di step nomor 2.
@@ -62,6 +61,11 @@ npm install -g ionic
 * Jika error build setelah menambahkan plugin cordova, Cara fixnya hapus folder
   `/platform` dan `/plugin`, kemudian tambahkan platform lagi dengan command
   `ionic cordova platform add android`, baru jalankan ulang buildnya.
+
+## Server
+
+* Server production DJKN: https://www.djkn.kemenkeu.go.id/smart.service
+* Server development JAVAN: http://api.smart.javan.co.id/api
 
 ### Etc
 
