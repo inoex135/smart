@@ -31,7 +31,7 @@
 </ion-grid>
 
 <!-- target disposisi untuk personal atau unit -->
-<ion-grid padding margin-top *ngIf="component?.disposisiUnit || component?.disposisiPersonal">
+<ion-grid *ngIf="component?.disposisiUnit || component?.disposisiPersonal">
     <!-- disposisi unit -->
     <ion-row *ngIf="component?.disposisiUnit">
         <ion-card>
@@ -79,6 +79,7 @@
                 Disposisi Kepada Personal
             </ion-card-header>
 
+            <!-- jenis esolon bukan 4 -->
             <ion-card-content class="disposisi-padding-top-form" *ngIf="profile?.jenis_eselon <  4">
                 <ion-row *ngIf="component?.disposisiPersonal">
                     <ng-template #withFlags let-attrs="attrs">
@@ -96,10 +97,12 @@
                     </ion-item>
 
                     <ion-item margin-top *ngFor="let selaku of disposisi?.selaku; let i = index;">
-                        <p ion-text item-start>
-                            Nama: {{disposisi?.personal[i]?.nama}}
-                            <br>Selaku: {{selaku}}
-                        </p>
+                        <h2 text-wrap>Nama: {{disposisi?.personal[i]?.nama}}</h2>
+                        <p>Selaku: {{selaku}}</p>
+                        <!-- <p ion-text item-start text-wrap>
+
+                            <br>
+                        </p> -->
                         <button (click)="removeData(disposisi?.selaku, i)" ion-button color="light" item-end>
                             <ion-icon name="close"></ion-icon>
                         </button>
@@ -107,6 +110,7 @@
                 </ion-row>
             </ion-card-content>
 
+            <!-- jenis esolon adalah 4 -->
             <ion-card-content class="disposisi-padding-top-form" *ngIf="profile?.jenis_eselon == 4">
                 <ion-row *ngIf="component?.disposisiPersonal" class="row">
                     <div *ngFor="let pelaksana of datas?.pelaksana; let i = index" col-12>
@@ -139,7 +143,7 @@
 </ion-grid>
 
 <!-- disposisi pilih sifat -->
-<ion-grid padding *ngIf="component?.disposisiSifat">
+<ion-grid *ngIf="component?.disposisiSifat">
     <ion-row wrap>
         <ion-card>
             <ion-card-header class="disposisi-kepada" class="required">
