@@ -3,7 +3,7 @@
     <ion-navbar transparent>
       <ion-buttons end>
         <button ion-button (click)="logout()">
-           Logout
+          Logout
         </button>
       </ion-buttons>
     </ion-navbar>
@@ -20,8 +20,8 @@
 
     <ion-select [ngModel]="profileName" col-12 (ngModelChange)="byPass($event)">
       <ion-option [value]="profile?.nip">{{profile?.nama}}</ion-option>
-      <ion-option [value]="user?.nip" *ngFor="let user of profile?.user_pengganti">
-        {{user?.nama}}
+      <ion-option text-wrap [value]="user?.nip" *ngFor="let user of profile?.user_pengganti">
+        {{user?.nama}} ({{user?.posisi}})
       </ion-option>
     </ion-select>
   </ion-item>
