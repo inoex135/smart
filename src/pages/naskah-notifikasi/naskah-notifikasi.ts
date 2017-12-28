@@ -18,7 +18,7 @@ export class NaskahNotifikasiPage {
     private loaderHelper: LoaderHelper
   ) {}
 
-  ionViewDidLoad() {
+  ionViewWillEnter() {
     this.getNotifikasi();
   }
 

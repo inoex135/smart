@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
 import { IonicPage, NavController } from "ionic-angular";
 import { AptProvider } from "../../providers/apt/apt";
+import { LoaderHelper } from "../../helpers/loader-helper";
 
 @IonicPage()
 @Component({
@@ -13,17 +14,24 @@ export class AptNotifikasiPage {
 
   constructor(
     public navCtrl: NavController,
-    private aptProvider: AptProvider
+    private aptProvider: AptProvider,
+    private loader: LoaderHelper
   ) {}
 
-  ionViewDidLoad() {
+  ionViewWillEnter() {
     this.getListNotification();
   }
 
   getListNotification() {
-    this.aptProvider
-      .getListNotification()
-      .subscribe(res => (this.notifications = res), err => console.log(err));
+    this.loader.createLoader();
+
+    this.aptProvider.getListNotification().subscribe(
+      res => {
+        this.notifications = res;
+        this.loader.dismiss();
+      },
+      err => this.loader.dismiss()
+    );
   }
 
   doInfinite(infiniteScroll) {

@@ -11,4 +11,12 @@ export class NaskahNotifikasiProvider {
       .get(`/personal/notification/persuratan?page=${page}&size=${size}`)
       .pipe(map(data => data.content));
   }
+
+  readNotifikasi(naskahId: any) {
+    let formData = new FormData();
+    formData.append("idList", naskahId);
+    formData.append("tipe", "sumas");
+
+    return this.apiProvider.postForm("/personal/notification/read/", formData);
+  }
 }

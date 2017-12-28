@@ -56,7 +56,7 @@ export class AptDetailPage {
         const response = res.response;
         this.aptDetail = response.permohonan;
         this.aptVerifikasi = response.permohonanVerifikasi;
-
+        this.readNotifikasi();
         this.loaderHelper.dismiss();
       },
       err => {
@@ -67,6 +67,13 @@ export class AptDetailPage {
 
   detailAction(action: string, itemId: any) {
     this.navCtrl.push(AptDetailActionPage, { action: action, itemId: itemId });
+  }
+
+  //read notifikasi
+  readNotifikasi() {
+    this.aptProvider
+      .readNotifikasi(this.itemId)
+      .subscribe(res => true, err => true);
   }
 
   async downloadPermohonan(fileApt) {

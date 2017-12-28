@@ -59,6 +59,14 @@ export class AptProvider {
       .pipe(map(data => data.content));
   }
 
+  readNotifikasi(aptId: any) {
+    let formData = new FormData();
+    formData.append("idList", aptId);
+    formData.append("tipe", "apt");
+
+    return this.apiProvider.postForm("/personal/notification/read/", formData);
+  }
+
   // get detail apt
   getDetailApt(aptId: number) {
     return this.apiProvider.get(`/apt/permohonan/detail/${aptId}`);

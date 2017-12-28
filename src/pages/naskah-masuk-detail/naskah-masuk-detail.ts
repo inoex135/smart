@@ -20,6 +20,7 @@ import { UserProvider } from "../../providers/user/user";
 import { TokenProvider } from "../../providers/token/token";
 
 import assign from "lodash/assign";
+import { NaskahNotifikasiProvider } from "../../providers/naskah-notifikasi/naskah-notifikasi";
 @IonicPage()
 @Component({
   selector: "page-naskah-masuk-detail",
@@ -55,7 +56,8 @@ export class NaskahMasukDetailPage {
     private toast: ToastHelper,
     userProvider: UserProvider,
     private token: TokenProvider,
-    private modalController: ModalController
+    private modalController: ModalController,
+    private naskahNotifikasi: NaskahNotifikasiProvider
   ) {
     this.naskahId = this.navParams.get("naskahId");
     this.fileDirectory = file.externalRootDirectory + "Download";
@@ -86,6 +88,9 @@ export class NaskahMasukDetailPage {
         this.detail = res;
         this.showModal();
         this.loaderHelper.dismiss();
+        this.naskahNotifikasi
+          .readNotifikasi(this.naskahId)
+          .subscribe(res => true, err => false);
       },
       err => {
         this.loaderHelper.errorHandleLoader(err.error_message, this.navCtrl);

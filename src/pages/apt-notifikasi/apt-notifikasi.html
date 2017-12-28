@@ -5,7 +5,7 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
   <ion-list *ngIf="notifications.length > 0">
     <ion-item *ngFor="let notif of notifications" (click)="goToAptDetail(notif?.id)">
       <h6 ion-text>{{notif?.nama}}</h6>
