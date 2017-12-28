@@ -21,7 +21,7 @@
     <ion-select [ngModel]="profileName" col-12 (ngModelChange)="byPass($event)">
       <ion-option [value]="profile?.nip">{{profile?.nama}}</ion-option>
       <ion-option text-wrap [value]="user?.nip" *ngFor="let user of profile?.user_pengganti">
-        {{user?.nama}} ({{user?.posisi}})
+        {{user?.nama}}
       </ion-option>
     </ion-select>
   </ion-item>
