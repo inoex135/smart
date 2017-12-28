@@ -64,7 +64,7 @@ npm install -g ionic
 
 ## Server
 
-* Server production DJKN: https://www.djkn.kemenkeu.go.id/smart.service
+* Server production DJKN: https://www.djkn.kemenkeu.go.id/smart.service/api
 * Server development JAVAN: http://api.smart.javan.co.id/api
 
 ### Etc
