@@ -1,4 +1,4 @@
-import { Component, Input } from "@angular/core";
+import { Component, Input, ViewChild } from "@angular/core";
 import { NaskahDisposisiProvider } from "../../../providers/naskah-disposisi/naskah-disposisi";
 import { Observable } from "rxjs/Observable";
 import { IDisposisiUnit } from "../../../interface/disposisi-unit";
@@ -15,6 +15,7 @@ import orderBy from "lodash/sortBy";
 import compact from "lodash/compact";
 import * as moment from "moment-timezone";
 import { LoaderHelper } from "../../../helpers/loader-helper";
+import { AutoCompleteComponent } from "ionic2-auto-complete";
 @Component({
   selector: "disposisi",
   templateUrl: "disposisi.html"
@@ -75,6 +76,9 @@ export class Disposisi {
   };
 
   profile: any = "";
+
+  //access ion-autocomplete func
+  @ViewChild("searchbar") searchbar: AutoCompleteComponent;
 
   constructor(
     private disposisiProvider: NaskahDisposisiProvider,
@@ -214,10 +218,20 @@ export class Disposisi {
   //     this.disposisi.lead = unit;
   //   }
   // }
-  addDisposisiPersonal(data: Array<any>, item: any) {
-    data.push(item);
+  addDisposisiPersonalDanPersonal(selaku: Array<any>, item: any) {
+    selaku.push(item);
+    this.addPersonal();
+
+    //clear searchbar dan selaku form
     this.pelaku = "";
+    this.searchbar.clearValue();
   }
+
+  addPersonal() {
+    const personal = this.searchbar.getSelection();
+    this.disposisi.personal.push(personal);
+  }
+
   addData(data: Array<any>, item: any) {
     data.push(item);
   }

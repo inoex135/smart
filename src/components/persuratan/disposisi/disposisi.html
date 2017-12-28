@@ -85,13 +85,14 @@
                     <ng-template #withFlags let-attrs="attrs">
                         <span>{{attrs?.data?.nip}}, {{attrs?.data?.nama}}</span>
                     </ng-template>
-                    <ion-auto-complete (itemSelected)="addData(disposisi?.personal, $event)" [dataProvider]="masterPegawai" #autoComplete [template]="withFlags"></ion-auto-complete>
+
+                    <ion-auto-complete [dataProvider]="masterPegawai" #searchbar [template]="withFlags"></ion-auto-complete>
 
                     <ion-item margin-top class="input--form">
                         <ion-input type="text" placeholder="Selaku" [(ngModel)]="pelaku"></ion-input>
                     </ion-item>
                     <ion-item no-lines>
-                        <button ion-button small item-end color="default-blue" (tap)="addDisposisiPersonal(disposisi?.selaku, pelaku)">
+                        <button [disabled]="searchbar?.getSelection() == null" ion-button small item-end color="default-blue" (tap)="addDisposisiPersonalDanPersonal(disposisi?.selaku, pelaku)">
                             <ion-icon name="add"></ion-icon>
                         </button>
                     </ion-item>
