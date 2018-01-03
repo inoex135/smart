@@ -14,6 +14,9 @@ import { IonicPage, NavController, NavParams } from "ionic-angular";
   templateUrl: "tabs.html"
 })
 export class TabsPage {
+  // root link when tabs is click
+  tab1Root = "AptPage";
+
   params: {} = {
     PERMOHONAN_MASUK: "permohonanMasuk",
     DEKAT_BATAS_WAKTU: "dekatBatasWaktu",
