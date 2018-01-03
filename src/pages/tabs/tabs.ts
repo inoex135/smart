@@ -14,10 +14,6 @@ import { IonicPage, NavController, NavParams } from "ionic-angular";
   templateUrl: "tabs.html"
 })
 export class TabsPage {
-  tab1Root = "AptPage";
-  tab2Root = "AptPage";
-  tab3Root = "AptPage";
-
   params: {} = {
     PERMOHONAN_MASUK: "permohonanMasuk",
     DEKAT_BATAS_WAKTU: "dekatBatasWaktu",
@@ -26,7 +22,5 @@ export class TabsPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {}
 
-  ionViewDidLoad() {
-    console.log("ionViewDidLoad TabsPage");
-  }
+  ionViewDidLoad() {}
 }
