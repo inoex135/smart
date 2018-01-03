@@ -1,13 +1,13 @@
 <button ion-button full block color="favorite" *ngIf="status === INDIKATOR?.DIAGENDAKAN">
-  {{INDIKATOR?.DIAGENDAKAN}}
+  {{INDIKATOR?.DIPROSES}}
 </button>
 
 <button ion-button full block color="default-blue" *ngIf="status === INDIKATOR?.BELUM_DIVERIFIKASI">
   {{INDIKATOR?.BELUM_DIVERIFIKASI}}
 </button>
 
-<button ion-button full block color="default-blue" *ngIf="status === INDIKATOR?.TIDAK_DIAGENDAKAN">
-  {{INDIKATOR?.TIDAK_DIAGENDAKAN}}
+<button ion-button full block color="danger" *ngIf="status === INDIKATOR?.TIDAK_DIAGENDAKAN">
+  {{INDIKATOR?.TIDAK_DIPROSES}}
 </button>
 
 <button ion-button full block color="green" *ngIf="status === INDIKATOR?.DISETUJUI">
