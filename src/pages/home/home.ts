@@ -78,7 +78,7 @@ export class HomePage {
       err => {
         this.userProvider.purgeAuth();
         this.loaderHelper.dismiss();
-        this.navCtrl.push("LoginPage");
+        this.navCtrl.setRoot("LoginPage");
       }
     );
   }
@@ -110,7 +110,13 @@ export class HomePage {
     if (profile) {
       this.profile = profile;
       this.profileName = profile.nip;
-      getTotalNotif.subscribe(res => this.mappingResponNotif(res), err => {});
+      getTotalNotif.subscribe(
+        res => this.mappingResponNotif(res),
+        err => {
+          this.userProvider.purgeAuth();
+          this.navCtrl.setRoot("LoginPage");
+        }
+      );
     } else {
       const getProfile = this.userProvider.getProfile();
 
