@@ -4,7 +4,7 @@ login-layout-1 {
   $transparent-white: rgba(255, 255, 255, 0.6);
   $blue-font: map-get($colors, "blue-template");
   $gray: #c5c9ce;
-  
+
   // header
   .toolbar-content,
   span {
@@ -68,6 +68,12 @@ login-layout-1 {
     border-bottom: 0.1px solid $gray !important;
   }
 
+  // handle placeholder yang kurang tengah tampilannya
+  .text-input-md,
+  .label-md {
+    margin: 25px 0;
+  }
+
   // footer
   ion-footer {
     height: 47px;
@@ -108,7 +114,7 @@ login-layout-1 {
     border-radius: 5px;
   }
 
-  .username{
+  .username {
     color: lightgrey;
   }
 }
