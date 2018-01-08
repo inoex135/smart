@@ -25,9 +25,12 @@ Untuk menjalankan project :
 ## Production
 
 1. Pertama, tambahkan target platform yang diinginkan dengan command `ionic cordova platform add android`
-2. Jika platform sudah pernah ditambahkan, bisa langsung jalankan command ini
-   untuk build menjadi APK `ionic cordova build android --prod`.
-3. Atau juga ketika akan sudah rilis bisa tambahkan `--release` di step nomor 2.
+2. ketika akan sudah rilis bisa tambahkan command `ionic cordova build android --prod --release`.
+3. Atau bisa juga mengikuti cara ini [https://ionicframework.com/docs/v1/guide/publishing.html](https://ionicframework.com/docs/v1/guide/publishing.html)
+4. Bisa juga untuk signed apk menggunakan android studio. yaitu build terlebih dahulu menggunakan step 2, lalu klik tab build lalu pilih `generate signed apk`.
+5. kemudian isi form dengan keystore yang sudah dibuat.
+
+* keystore dan passwordnya ada disini https://collab.javan.co.id/projects/138/notes?modal=Note-119-138-0
 
 ## Template
 
