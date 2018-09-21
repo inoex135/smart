@@ -7,6 +7,36 @@
 <ion-content>
   <!-- <naskah-modal-terima *ngIf="showModalTerima" (terimaNaskah)="terimaNaskah($event)"></naskah-modal-terima> -->
   <ion-grid>
+    <ion-row>
+      <ion-col *ngIf="((profile?.jenis_eselon != null) || (profile?.jenis_eselon >= 1 && profile?.jenis_eselon <= 4)) && detail?.prosesSurat !=='Selesai'">
+        <button ion-button icon-left color="danger" (click)="openPage('disposisi')" style="width:100%">
+            <ion-icon name="open"></ion-icon>
+            Disposisi
+        </button>
+      </ion-col>
+      <ion-col *ngIf="detail?.statusTerimaSurat == null || detail?.statusTerimaSurat == 0">
+        <button ion-button icon-left color="green-light" (click)="showModalTerimaNaskah()" style="width:100%">
+              <ion-icon name="checkbox"></ion-icon>
+              Naskah Terima
+        </button>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col *ngIf="detail?.prosesSurat !=='Selesai' && profile?.jenis_eselon !== null ">
+        <button ion-button icon-left color="teruskan" (click)="openPage('teruskan')" style="width:100%">
+          <ion-icon name="fastforward"></ion-icon>
+          Teruskan
+        </button>
+      </ion-col>
+      <ion-col *ngIf="detail?.prosesSurat != 'Belum Proses' || detail?.prosesSurat != 'Disposisi'">
+          <button [disabled]="detail?.prosesSurat =='Selesai'" ion-button block icon-left color="blue-donker" (click)="openPage('selesai')" style="width:100%">
+            <ion-icon name="flag"></ion-icon>
+            Selesai
+          </button>
+        </ion-col>
+    </ion-row>
+   
     <ion-row class="list-action-button">
       <!-- <ion-col *ngFor="let actions of actionList">
         <button [disabled]="detail?.prosesSurat =='Selesai' && action.type !== 'riwayat'" *ngFor="let action of actions" ion-button
@@ -15,32 +45,8 @@
           {{action?.type}}
         </button>
       </ion-col> -->
-      <ion-col *ngIf="((profile?.jenis_eselon != null) || (profile?.jenis_eselon >= 1 && profile?.jenis_eselon <= 4)) && detail?.prosesSurat !=='Selesai'">
-        <button ion-button block icon-left color="danger" (click)="openPage('disposisi')">
-          <ion-icon name="open"></ion-icon>
-          Disposisi
-        </button>
-      </ion-col>
-      <ion-col *ngIf="detail?.statusTerimaSurat == null || detail?.statusTerimaSurat == 0">
-        <button ion-button block icon-left color="green-light" (click)="showModalTerimaNaskah()">
-          <ion-icon name="checkbox"></ion-icon>
-          Naskah Terima
-        </button>
-      </ion-col>
-      <ion-col *ngIf="detail?.prosesSurat !=='Selesai' && profile?.jenis_eselon !== null ">
-        <button ion-button block icon-left color="teruskan" (click)="openPage('teruskan')">
-          <ion-icon name="fastforward"></ion-icon>
-          Teruskan
-        </button>
-      </ion-col>
-      <ion-col *ngIf="detail?.prosesSurat != 'Belum Proses' || detail?.prosesSurat != 'Disposisi'">
-        <button [disabled]="detail?.prosesSurat =='Selesai'" ion-button block icon-left color="blue-donker" (click)="openPage('selesai')">
-          <ion-icon name="flag"></ion-icon>
-          Selesai
-        </button>
-      </ion-col>
       <ion-col>
-        <button ion-button block icon-left color="orange" (click)="openPage('riwayat')">
+        <button ion-button icon-left color="orange" (click)="openPage('riwayat')" style="width:100%">
           <ion-icon name="refresh-circle"></ion-icon>
           Riwayat
         </button>

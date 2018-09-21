@@ -99,10 +99,13 @@ export class NaskahMasukPage {
 
   doInfinite(infiniteScroll) {
     this.page = this.page + 1;
+    console.log("page " + this.page);
     setTimeout(() => {
       this.naskahProvider.getNaskahMasuk(this.page).subscribe(res => {
-        for (var index = 0; index < res.length; index++) {
-          this.listNaskah.push(res[index]);
+      
+        for (var index = 0; index < res.response.length; index++) {
+          
+          this.listNaskah.push(res.response[index]);
         }
       });
       infiniteScroll.complete();
