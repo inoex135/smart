@@ -58,6 +58,7 @@ export class LoginPage {
     this.userProvider.attemptAuth(user).subscribe(
       data => this.navCtrl.setRoot("HomePage"),
       err => {
+        console.log(err)
         this.loginState.isLogin = false;
 
         // toast error
@@ -74,7 +75,11 @@ export class LoginPage {
 
   loginSSO(user: User) {
     // as flag show loader spinner dan disable button
-    this.loginState.isLogin = true;
+
+    this.navCtrl.push('LoginSso')
+  
+
+    /* this.loginState.isLogin = true;
     this.loginState.sso = true;
 
     // login http
@@ -94,6 +99,6 @@ export class LoginPage {
           })
           .present();
       }
-    );
+    ); */
   }
 }

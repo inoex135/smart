@@ -73,6 +73,13 @@ export class UserProvider {
     });
   }
 
+  attemptAuthSsoCode(code: string) {
+    return this.apiProvider.get("/auth/sso?code=" + code).map(data => {
+      this.setAuth(data);
+      return data;
+    });
+  }
+
   getProfile() {
     return this.apiProvider.get("/personal/profile").pipe(
       map(res => {

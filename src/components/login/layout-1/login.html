@@ -24,8 +24,7 @@
   </div>
 
   <div padding>
-    <button [disabled]="loginState?.isLogin || username1.invalid || password1.invalid" ion-button color="danger" full block (click)="onEvent('onLoginSSO')">
-      <ion-spinner name="crescent" *ngIf="loginState?.sso"></ion-spinner>
+    <button ion-button color="danger" full block (click)="onEvent('onLoginSSO')">
       <div>
         Login SSO
       </div>
