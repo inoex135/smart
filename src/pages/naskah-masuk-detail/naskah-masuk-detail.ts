@@ -21,12 +21,16 @@ import { TokenProvider } from "../../providers/token/token";
 
 import assign from "lodash/assign";
 import { NaskahNotifikasiProvider } from "../../providers/naskah-notifikasi/naskah-notifikasi";
+import { LogUtil } from "../../utils/logutil";
 @IonicPage()
 @Component({
   selector: "page-naskah-masuk-detail",
   templateUrl: "naskah-masuk-detail.html"
 })
 export class NaskahMasukDetailPage {
+ 
+  TAG:string = 'NaskahMasukDetailPage'
+
   //file dir transfer for download
   fileDirectory: any;
 
@@ -72,6 +76,13 @@ export class NaskahMasukDetailPage {
     });
   }
 
+  openDisposisiPage() {
+    this.navCtrl.push('DisposisiPage', {
+      naskahId: this.naskahId,
+      detailNaskah: this.detail
+    })
+  }
+
   ionViewWillEnter() {
     this.actionList = NaskahAction.getAction();
 
@@ -81,13 +92,13 @@ export class NaskahMasukDetailPage {
   }
 
   async getDetailNaskah() {
-    await this.loaderHelper.createLoader();
+    await this.loaderHelper.show();
 
     this.naskahProvider.getDetailNaskah(this.naskahId).subscribe(
       res => {
         this.detail = res;
         this.showModal();
-        this.loaderHelper.dismiss();
+        this.loaderHelper.dismissLoader();
         this.naskahNotifikasi
           .readNotifikasi(this.naskahId)
           .subscribe(res => true, err => false);
@@ -143,13 +154,13 @@ export class NaskahMasukDetailPage {
   }
 
   async downloadFile(fileData: any) {
+    await this.loaderHelper.show();
     try {
+      LogUtil.d(this.TAG, fileData)
       const targetPath = this.fileDirectory + "/" + fileData.namaFile;
-
-      await this.loaderHelper.createLoader();
+      LogUtil.d(this.TAG, targetPath)
 
       const checkPermission = await this.aptHelper.checkPermission();
-
       // check if apps has permission to write storage
       if (!checkPermission.hasPermission) {
         await this.aptHelper.requestPermission();
@@ -161,9 +172,12 @@ export class NaskahMasukDetailPage {
       await this.aptHelper.openFile(targetPath, "application/pdf");
       // alert(openFile.message);
 
-      this.loaderHelper.dismiss();
+      this.loaderHelper.dismissLoader()
       this.toast.present("File telah di download");
-    } catch (error) {}
+    } catch (error) {
+      this.loaderHelper.dismissLoader()
+      LogUtil.e(this.TAG, error)
+    }
   }
 
   showDownloadList() {

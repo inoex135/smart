@@ -140,6 +140,7 @@ export class Disposisi {
 
     return data;
   }
+
   selectDisposisi(target: string) {
     if (target === this.selectAs.unit) {
       this.disposisiTarget.unit = !this.disposisiTarget.unit;
@@ -148,6 +149,10 @@ export class Disposisi {
     if (target === this.selectAs.personal) {
       this.disposisiTarget.personal = !this.disposisiTarget.personal;
     }
+  }
+
+  isDisposisiChecked() {
+    return this.disposisiTarget.unit || this.disposisiTarget.personal
   }
 
   // CHECKBOX
@@ -342,4 +347,13 @@ export class Disposisi {
       }
     );
   }
+
+  showNextStepOnPage2() {
+    if (this.component.disposisiUnit && !this.component.disposisiPersonal) {
+      return this.disposisi.unitTujuan.length == 0
+    } else if (this.component.disposisiPersonal) {
+      return this.disposisi.selaku.length == 0
+    }
+  }
+
 }
