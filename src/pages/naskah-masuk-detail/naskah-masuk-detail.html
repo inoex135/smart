@@ -73,6 +73,20 @@
         <ion-item>
           <ion-row>
             <ion-col>
+              <p ion-text text-wrap item-start card-title>File Digital</p>
+            </ion-col>
+            <ion-col class="file-digital">
+              <p ion-text text-wrap item-start color="default-blue" (click)="showDownloadList()">
+                <ion-icon name="download"></ion-icon>
+                File Digital
+              </p>
+            </ion-col>
+          </ion-row>
+        </ion-item>
+
+        <ion-item>
+          <ion-row>
+            <ion-col>
               <p ion-text item-start text-wrap card-title>Amplop Tertutup</p>
             </ion-col>
             <ion-col>
@@ -222,20 +236,6 @@
             </ion-col>
             <ion-col>
               <p ion-text text-wrap item-start>{{detail?.lampiran}}</p>
-            </ion-col>
-          </ion-row>
-        </ion-item>
-
-        <ion-item>
-          <ion-row>
-            <ion-col>
-              <p ion-text text-wrap item-start card-title>File Digital</p>
-            </ion-col>
-            <ion-col class="file-digital">
-              <p ion-text text-wrap item-start color="default-blue" (click)="showDownloadList()">
-                <ion-icon name="download"></ion-icon>
-                File Digital
-              </p>
             </ion-col>
           </ion-row>
         </ion-item>

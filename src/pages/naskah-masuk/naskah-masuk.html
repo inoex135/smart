@@ -23,12 +23,6 @@
 
 
   <ion-list class="daftar-naskah-all">
-    <ion-card class="daftar-naskah-head">
-      <span class="daftar-naskah-title">
-        <ion-icon name="md-list"></ion-icon> Daftar Naskah Masuk</span>
-    </ion-card>
-
-
     <ion-card padding (press)="pressAndHoldSurat(naskah)" *ngFor="let naskah of listNaskah" class="naskah-list">
       <ion-row>
 

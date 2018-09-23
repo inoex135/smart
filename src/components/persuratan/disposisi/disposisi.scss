@@ -1,4 +1,5 @@
 disposisi {
+  height: 100%;
   font-family: Roboto;
 
   .petunjuk {
@@ -20,12 +21,26 @@ disposisi {
     color:white;
   }
 
-  .next-btn{
-    padding: 10%;
+  .stepper-bottom-navigation {
+    margin-top: 5px;
+    padding-right: 7px;
+    padding-left: 7px;
+  }
+
+  .disposition-type, .title-list, .hint-list {
+    
+    .item {
+      height: 30px !important;
+    }
+
+  }
+
+  .personal-disposition {
+    margin-bottom: 5px;
   }
 
   .disposisi-padding-top-form{
-    margin-top:5%;
+    margin-top:20px;
   }
 
   .disposisi-btn-simpan{
