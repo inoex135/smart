@@ -1,10 +1,7 @@
 import { Component } from "@angular/core";
 import {
   NavController,
-  NavParams,
-  ToastController,
-  IonicPage,
-  Platform
+  IonicPage
 } from "ionic-angular";
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { ENV } from "../../config/environment";
@@ -23,7 +20,9 @@ export class LoginSso {
 
     browser
     requested:boolean = false
-    automaticExit: boolean = false;
+    automaticExit:boolean = false
+    authenticated:boolean = false
+    isPresent:boolean = false
 
     constructor(
         public navCtr: NavController, 
@@ -38,7 +37,7 @@ export class LoginSso {
         LogUtil.d(this.TAG, 'view did load')
         this.browser = this.iab.create('https://sso.djkn.kemenkeu.go.id/via/sso/remote/login?no_cache=874&redirect_uri=http%3A%2F%2Flayanandjkn.kemenkeu.go.id&client_id=smart_djkn&encoded=true',
         '_blank',
-        'location=no,hardwareback=no,zoom=no'
+        'location=no,hardwareback=no,zoom=no,hidden=yes'
         )
         this.startLoading()
         this.stopLoading()
@@ -46,10 +45,16 @@ export class LoginSso {
         .subscribe(
             (event) => {
                 LogUtil.d(this.TAG, "back button click")
-                this.navCtr.pop()
+                this.dismissProgess()
+                if (this.authenticated) {
+                    this.navCtr.setRoot("HomePage")
+                } else {
+                    this.navCtr.pop()
+                }
             },
             err => {
-              LogUtil.e(this.TAG, err);
+                this.dismissProgess()
+                LogUtil.e(this.TAG, err);
         });
     }
 
@@ -59,11 +64,14 @@ export class LoginSso {
             (event) => {
                 LogUtil.d(this.TAG, event)
                 LogUtil.d(this.TAG, "show loader")
-              //  this.loaderHelper.createLoader()
+                this.showProgress()
+                this.browser.hide()
+                //this.loaderHelper.createLoader()
                 this.extractCodeFromUrl(event)
             },
             err => {
-              LogUtil.e(this.TAG, err);
+                this.dismissProgess()
+                LogUtil.e(this.TAG, err);
         });
     }
 
@@ -71,13 +79,15 @@ export class LoginSso {
         this.browser.on("loadstop")
         .subscribe(
            (event) => {
+                this.dismissProgess()
+                this.browser.show()
                 LogUtil.d(this.TAG, 'page event loadstop')
                 if (ENV.DEV) {
                     this.currentUrlSso()   
                 }
-                
             },
             err => {
+                this.dismissProgess()
                LogUtil.e(this.TAG, err);
        });
     }
@@ -133,28 +143,39 @@ export class LoginSso {
     };
 
     doLogin(code: string) {
-        this.loaderHelper.createLoader()
         this.requested = true
         this.userProvider.attemptAuthSsoCode(code).subscribe(
             data => {
                 this.requested = false
                 LogUtil.d(this.TAG, data)
-                this.dismissLoader()
+                this.authenticated = true
                 this.browser.close()
-                this.navCtr.setRoot("HomePage")
             },
             err => {
+                this.authenticated = false
                 this.requested = false
-                this.dismissLoader()
                 this.browser.close()
                 LogUtil.d(this.TAG, err)
             }
         );
     }
 
-    dismissLoader() {
-        LogUtil.d(this.TAG, "dismiss loader")
-        this.loaderHelper.dismiss()
+    showProgress() {
+        /* if (!this.isPresent) {
+            this.isPresent = true
+            this.loaderHelper.createLoader()
+        } */
+        this.loaderHelper.show()
+        //this.toast.present()
+    }
+
+    dismissProgess() {
+        this.loaderHelper.dismissLoader()
+        /* if (this.isPresent) {
+            this.isPresent = false
+            return this.loaderHelper.dismiss()
+        } */
+        //this.toast.dismiss()
     }
 
 }
