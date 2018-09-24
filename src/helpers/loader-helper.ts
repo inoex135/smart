@@ -14,7 +14,8 @@ export class LoaderHelper {
 
   createLoader(message: string = "Loading....."): LoadingController {
     this.loading = this.loadingCtrl.create({
-      content: message
+      content: message,
+      dismissOnPageChange: true
     })
     return this.loading.present()
   }
@@ -33,7 +34,8 @@ export class LoaderHelper {
     if (!this.isPresent()) {
       this.isLoaderPresent = true
       this.loading = this.loadingCtrl.create({
-        content: message
+        content: message,
+        dismissOnPageChange: true
       })
       this.loading.present()
     }
