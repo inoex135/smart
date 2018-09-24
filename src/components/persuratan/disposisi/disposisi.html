@@ -198,7 +198,10 @@
     <button *ngIf="hidePrevButton()" class="prev-btn" small left clear ion-button color="default-blue" (tap)="prev()">
         Sebelumnya
     </button>
-    <button [disabled]="disabledNextButton()" [innerHTML]="getButtonNextTitle()" right clear ion-button color="default-blue" (tap)="next()" class="next-btn" small>
-        
+    <button *ngIf="!isLastStep()" [disabled]="disabledNextButton()" right clear ion-button color="default-blue" (tap)="next()" class="next-btn" small>
+        Selanjutnya
+    </button>
+    <button *ngIf="isLastStep()" [disabled]="disabledNextButton()" right clear ion-button color="default-blue" (tap)="showDialogSave()" class="next-btn" small>
+        <ion-icon name="paper"></ion-icon> Simpan
     </button>
 </div>

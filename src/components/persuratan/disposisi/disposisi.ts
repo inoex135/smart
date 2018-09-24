@@ -6,7 +6,7 @@ import { debounceTime, distinctUntilChanged } from "rxjs/operators";
 import { ToastHelper } from "../../../helpers/toast-helper";
 import { MomentHelper } from "../../../helpers/moment-helper";
 import { DatepickerProvider } from "../../../providers/datepicker/datepicker";
-import { NavController } from "ionic-angular";
+import { NavController, AlertController } from "ionic-angular";
 import { MasterPegawaiProvider } from "../../../providers/master-pegawai/master-pegawai";
 import { UserProvider } from "../../../providers/user/user";
 
@@ -98,7 +98,8 @@ export class Disposisi {
     private navCtrl: NavController,
     private masterPegawai: MasterPegawaiProvider,
     private user: UserProvider,
-    private loader: LoaderHelper
+    private loader: LoaderHelper,
+    private alert: AlertController
   ) {
     this.init();
     this.user.getProfile().subscribe(res => (this.profile = res));
@@ -274,37 +275,10 @@ export class Disposisi {
   nextStep(to: any = "root") {
     setTimeout(() => {
       if (this.currentStep == 1) {
-        /* if (to.unit) {
-          this.component.unitOrPersonal = false;
-          this.component.disposisiUnit = true;
-        } */
         this.component.disposisiPersonal = this.disposisiTarget.personal
         this.component.disposisiUnit = this.disposisiTarget.unit
         this.component.unitOrPersonal = this.disposisiTarget.unit && this.disposisiTarget.personal
-
-        /* if (to.personal) {
-          this.component.disposisiPersonal = true;
-          this.component.unitOrPersonal = false;
-        } */
-      } /* else if (this.currentStep == 2) {
-
-      }
-
-      if (to === "disposisiSifat") {
-        this.component.disposisiSifat = true;
-        this.component.disposisiPersonal = false;
-        this.component.disposisiUnit = false;
-      }
-
-      if (to === "disposisiPetunjuk") {
-        this.component.disposisiPetunjuk = true;
-        this.component.disposisiSifat = false;
-      }
-
-      if (to === "disposisiTanggal") {
-        this.component.disposisiTanggal = true;
-        this.component.disposisiPetunjuk = false;
-      } */
+      } 
     }, 100);
 
     // this.setDisposisiTarget(false);
@@ -325,26 +299,6 @@ export class Disposisi {
         this.component.disposisiPersonal = this.disposisiTarget.personal;
         this.component.disposisiUnit = this.disposisiTarget.unit;
       }
-
-      /* if (to === "disposisiPersonal" || to.personal) {
-        this.component.disposisiPersonal = true;
-        this.component.disposisiSifat = false;
-      }
-
-      if (to === "disposisiUnit" || to.unit) {
-        this.component.disposisiUnit = true;
-        this.component.disposisiSifat = false;
-      }
-
-      if (to === "disposisiSifat") {
-        this.component.disposisiSifat = true;
-        this.component.disposisiPetunjuk = false;
-      }
-
-      if (to === "disposisiPetunjuk") {
-        this.component.disposisiPetunjuk = true;
-        this.component.disposisiTanggal = false;
-      } */
     }, 100);
   }
 
@@ -363,6 +317,7 @@ export class Disposisi {
       "DD-MM-YYYY"
     );
   }
+
   simpan() {
     this.disposisi.sumasId = this.naskahId;
     //remove array value null, undefined, ""
@@ -372,8 +327,8 @@ export class Disposisi {
     this.disposisiProvider.simpanDisposisi(this.disposisi).subscribe(
       res => {
         this.message = res.message;
-        this.navCtrl.pop();
         this.loader.dismiss();
+        this.navCtrl.pop();
         this.toastHelper.present(this.message);
       },
       err => {
@@ -399,23 +354,46 @@ export class Disposisi {
     } else if (this.currentStep == 3) {
       return this.disposisi.petunjuk.length == 0
     } else if (this.currentStep == 4) {
-      return this.disposisi.tanggalSelesai === ''
+      return this.disposisi.tanggalSelesai === '' || this.disposisi.tanggalSelesai === null
     } else {
       return false
     }
+  }
+
+  isLastStep() {
+    return this.currentStep == (this.steps.length - 1)
   }
 
   hidePrevButton() {
     return this.currentStep != 0
   }
 
-  getButtonNextTitle() {
-    if (this.currentStep == (this.steps.length - 1)) {
-      LogUtil.d(this.TAG, "it's the last step!")
-      return '<ion-icon name="paper"></ion-icon> SIMPAN DISPOSISI'
-    } else {
-      return "Selenjutnya"
-    }
+  showDialogSave() {
+    let alert = this.alert.create({
+      title: 'Konfirmasi',
+      message: 'Apakah anda yakin untuk menyimpan data disposisi?',
+      buttons: [
+        {
+          text: 'Batal',
+          role: 'cancel',
+          handler: () => {
+            alert.dismiss()
+            return false
+          }
+        },
+        {
+          text: 'Simpan',
+          handler: () => {
+            console.log('Buy clicked')
+            alert.dismiss().then(() => {
+              this.simpan()
+            })
+            return false
+          }
+        }
+      ]
+    });
+    alert.present();
   }
 
 }
