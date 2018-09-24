@@ -3,19 +3,24 @@ import {
   NavController,
   NavParams,
   ToastController,
-  IonicPage
+  IonicPage,
+  Platform
 } from "ionic-angular";
 
 import { User } from "../../models/users";
 import { UserProvider } from "../../providers/user/user";
 import { TokenProvider } from "../../providers/token/token";
 import { LoginState } from "../../models/login-state.model";
+import { LogUtil } from "../../utils/logutil";
 @IonicPage()
 @Component({
   selector: "page-login",
   templateUrl: "login.html"
 })
 export class LoginPage {
+
+  TAG:string = 'LoginPage'
+
   user = {} as User;
   error: any = false;
   isLoading: boolean = false;
@@ -31,7 +36,8 @@ export class LoginPage {
     public navParams: NavParams,
     public userProvider: UserProvider,
     public tokenProvider: TokenProvider,
-    public toastController: ToastController
+    public toastController: ToastController,
+    public platform: Platform
   ) {
     let self = this;
     this.params.data = {
@@ -58,6 +64,7 @@ export class LoginPage {
     this.userProvider.attemptAuth(user).subscribe(
       data => this.navCtrl.setRoot("HomePage"),
       err => {
+        console.log(err)
         this.loginState.isLogin = false;
 
         // toast error
@@ -74,26 +81,32 @@ export class LoginPage {
 
   loginSSO(user: User) {
     // as flag show loader spinner dan disable button
-    this.loginState.isLogin = true;
-    this.loginState.sso = true;
 
-    // login http
-    this.userProvider.attemptAuthSso(user).subscribe(
-      data => this.navCtrl.setRoot("HomePage"),
-      err => {
-        // as flag untuk hide loader spinner dan un-disable button
-        this.loginState.isLogin = false;
-        this.loginState.sso = false;
+    if (this.platform.is('android') || this.platform.is('ios')) {
+      LogUtil.d(this.TAG, 'mobile platform using web base')
+      this.navCtrl.push('LoginSso')
+    } else {
+      this.loginState.isLogin = true;
+      this.loginState.sso = true;
 
-        // show toast when get error
-        this.toastController
-          .create({
-            message: err,
-            duration: 3000,
-            position: "bottom"
-          })
-          .present();
-      }
-    );
+      // login http
+      this.userProvider.attemptAuthSso(user).subscribe(
+        data => this.navCtrl.setRoot("HomePage"),
+        err => {
+          // as flag untuk hide loader spinner dan un-disable button
+          this.loginState.isLogin = false;
+          this.loginState.sso = false;
+
+          // show toast when get error
+          this.toastController
+            .create({
+              message: err,
+              duration: 3000,
+              position: "bottom"
+            })
+            .present();
+        }
+      );
+    }
   }
 }

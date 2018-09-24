@@ -9,6 +9,7 @@
     <ion-header>
       <ion-item class="input--form daftar-naskah-filter">
         <ion-select (ionChange)="searchNaskahBy('type', filter?.naskahUnit)" [(ngModel)]="filter.naskahUnit" placeholder="Naskah Unit / Pribadi / Permohonan">
+          <ion-option value="alltype">Semua</ion-option>
           <ion-option value="unit">Naskah Unit</ion-option>
           <ion-option value="personal">Naskah Pribadi</ion-option>
           <ion-option value="permohonan">Naskah Permohonan</ion-option>
@@ -23,12 +24,6 @@
 
 
   <ion-list class="daftar-naskah-all">
-    <ion-card class="daftar-naskah-head">
-      <span class="daftar-naskah-title">
-        <ion-icon name="md-list"></ion-icon> Daftar Naskah Masuk</span>
-    </ion-card>
-
-
     <ion-card padding (press)="pressAndHoldSurat(naskah)" *ngFor="let naskah of listNaskah" class="naskah-list">
       <ion-row>
 

@@ -16,11 +16,15 @@ import compact from "lodash/compact";
 import * as moment from "moment-timezone";
 import { LoaderHelper } from "../../../helpers/loader-helper";
 import { AutoCompleteComponent } from "ionic2-auto-complete";
+import { LogUtil } from "../../../utils/logutil";
 @Component({
   selector: "disposisi",
   templateUrl: "disposisi.html"
 })
 export class Disposisi {
+
+  TAG:string = 'Disposisi'
+
   datas: any = {};
   Picker: string = new Date().toISOString();
   unit: Array<any> = [];
@@ -31,6 +35,8 @@ export class Disposisi {
   pelaku: string;
 
   errorMessages: any;
+
+  nextButtonDisabled:boolean = true;
 
   disposisi: any = {
     personal: [],
@@ -74,6 +80,10 @@ export class Disposisi {
     disposisiPetunjuk: false,
     disposisiTanggal: false
   };
+
+  currentStep:number = 0
+
+  steps:any = ['step1', 'step2', 'step3', 'step4', 'step5']
 
   profile: any = "";
 
@@ -140,6 +150,7 @@ export class Disposisi {
 
     return data;
   }
+
   selectDisposisi(target: string) {
     if (target === this.selectAs.unit) {
       this.disposisiTarget.unit = !this.disposisiTarget.unit;
@@ -148,6 +159,10 @@ export class Disposisi {
     if (target === this.selectAs.personal) {
       this.disposisiTarget.personal = !this.disposisiTarget.personal;
     }
+  }
+
+  isDisposisiChecked() {
+    return this.disposisiTarget.unit || this.disposisiTarget.personal
   }
 
   // CHECKBOX
@@ -240,16 +255,39 @@ export class Disposisi {
     data.splice(index, 1);
   }
 
+  next() {
+    this.currentStep++
+    if (this.currentStep > this.steps.length) {
+      this.currentStep = this.steps.length - 1
+    }
+    this.nextStep(this.steps[this.currentStep])
+  }
+
+  prev() {
+    this.currentStep--
+    if (this.currentStep < 0) {
+      this.currentStep = 0
+    }
+    this.back('')
+  }
+
   nextStep(to: any = "root") {
     setTimeout(() => {
-      if (to.unit) {
-        this.component.unitOrPersonal = false;
-        this.component.disposisiUnit = true;
-      }
+      if (this.currentStep == 1) {
+        /* if (to.unit) {
+          this.component.unitOrPersonal = false;
+          this.component.disposisiUnit = true;
+        } */
+        this.component.disposisiPersonal = this.disposisiTarget.personal
+        this.component.disposisiUnit = this.disposisiTarget.unit
+        this.component.unitOrPersonal = this.disposisiTarget.unit && this.disposisiTarget.personal
 
-      if (to.personal) {
-        this.component.disposisiPersonal = true;
-        this.component.unitOrPersonal = false;
+        /* if (to.personal) {
+          this.component.disposisiPersonal = true;
+          this.component.unitOrPersonal = false;
+        } */
+      } /* else if (this.currentStep == 2) {
+
       }
 
       if (to === "disposisiSifat") {
@@ -266,7 +304,7 @@ export class Disposisi {
       if (to === "disposisiTanggal") {
         this.component.disposisiTanggal = true;
         this.component.disposisiPetunjuk = false;
-      }
+      } */
     }, 100);
 
     // this.setDisposisiTarget(false);
@@ -279,13 +317,16 @@ export class Disposisi {
 
   back(to: string | any = "root") {
     setTimeout(() => {
-      if (to === "root") {
+      if (this.currentStep == 0) {
         this.component.unitOrPersonal = true;
         this.component.disposisiUnit = false;
         this.component.disposisiPersonal = false;
+      } else if (this.currentStep == 1) {
+        this.component.disposisiPersonal = this.disposisiTarget.personal;
+        this.component.disposisiUnit = this.disposisiTarget.unit;
       }
 
-      if (to === "disposisiPersonal" || to.personal) {
+      /* if (to === "disposisiPersonal" || to.personal) {
         this.component.disposisiPersonal = true;
         this.component.disposisiSifat = false;
       }
@@ -303,7 +344,7 @@ export class Disposisi {
       if (to === "disposisiPetunjuk") {
         this.component.disposisiPetunjuk = true;
         this.component.disposisiTanggal = false;
-      }
+      } */
     }, 100);
   }
 
@@ -342,4 +383,39 @@ export class Disposisi {
       }
     );
   }
+
+  disabledNextButton = () => {
+    LogUtil.d(this.TAG, 'disabled next button')
+    if (this.currentStep == 0) {
+      return !this.isDisposisiChecked()
+    } else if (this.currentStep == 1) {
+      if (this.component.disposisiUnit && !this.component.disposisiPersonal) {
+        return this.disposisi.unitTujuan.length == 0
+      } else if (this.component.disposisiPersonal) {
+        return this.disposisi.selaku.length == 0
+      }
+    } else if (this.currentStep == 2) {
+      return this.disposisi.catatan === ''
+    } else if (this.currentStep == 3) {
+      return this.disposisi.petunjuk === ''
+    } else if (this.currentStep == 4) {
+      return this.disposisi.tanggalSelesai === ''
+    } else {
+      return false
+    }
+  }
+
+  hidePrevButton() {
+    return this.currentStep != 0
+  }
+
+  getButtonNextTitle() {
+    if (this.currentStep == (this.steps.length - 1)) {
+      LogUtil.d(this.TAG, "it's the last step!")
+      return '<ion-icon name="paper"></ion-icon> SIMPAN DISPOSISI'
+    } else {
+      return "Selenjutnya"
+    }
+  }
+
 }

@@ -4,9 +4,13 @@ import { ApiProvider } from "../api/api";
 import { TokenProvider } from "../token/token";
 import { FileTransfer, FileTransferObject } from "@ionic-native/file-transfer";
 import { ENV } from "../../config/environment";
+import { LogUtil } from "../../utils/logutil";
 
 @Injectable()
 export class NaskahMasukProvider {
+
+  TAG:string = 'NaskahMasukProvider'
+
   fileTransfer: FileTransferObject;
   constructor(
     public api: ApiProvider,
@@ -71,6 +75,7 @@ export class NaskahMasukProvider {
   }
   downloadFileSurat(fileId: number, fileDir: any) {
     const url = `${ENV.API_URL}/surat/dokumen/download/${fileId}`;
+    LogUtil.d(this.TAG, url)
     const options = {
       headers: {
         Authorization: "smartdjkn2017mobile",
@@ -78,15 +83,15 @@ export class NaskahMasukProvider {
       },
       httpMethod: "GET"
     };
-
+    LogUtil.d(this.TAG, options)
     return this.fileTransfer
       .download(url, fileDir, false, options)
       .then(res => {
+        LogUtil.e(this.TAG, res)
         return res;
       })
       .catch(err => {
-        console.log(err);
-
+        LogUtil.e(this.TAG, err)
         return err;
       });
   }
