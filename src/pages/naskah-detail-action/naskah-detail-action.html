@@ -1,11 +1,17 @@
 <ion-header>
-  <ion-navbar [color]="actionData?.color">
+  <ion-navbar class="custom-action-bar" [color]="actionData?.color" hideBackButton="true">
+      <ion-buttons start left>
+          <button class="custom-back-button" ion-button icon-only (click)="backButtonClick()">
+              <ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon>
+          </button>
+      </ion-buttons>
     <ion-title>{{actionData}}</ion-title>
   </ion-navbar>
 </ion-header>
+  
 
 
-<ion-content>
+<ion-content scroll="false" class="no-scroll" fixed-content>
   <div [ngSwitch]="actionData">
     <!--Form teruskan-->
     <div *ngSwitchCase="'teruskan'">
@@ -27,3 +33,4 @@
     </div>
   </div>
 </ion-content>
+

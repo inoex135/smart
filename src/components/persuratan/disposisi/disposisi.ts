@@ -397,7 +397,7 @@ export class Disposisi {
     } else if (this.currentStep == 2) {
       return this.disposisi.catatan === ''
     } else if (this.currentStep == 3) {
-      return this.disposisi.petunjuk === ''
+      return this.disposisi.petunjuk.length == 0
     } else if (this.currentStep == 4) {
       return this.disposisi.tanggalSelesai === ''
     } else {

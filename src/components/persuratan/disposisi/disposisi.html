@@ -159,10 +159,8 @@
                     <ion-checkbox [checked]="petunjuk?.isChecked" color="primary" name="petunjuk[i]" (ionChange)="onChange(petunjuk?.id, $event.checked, i)"></ion-checkbox>
                 </ion-item>
             </ion-list>
-        
         </ion-card-content>
     </ion-card>
-
 </ion-grid>
 
 <!-- component?.disposisiTanggal -->
@@ -200,7 +198,7 @@
     <button *ngIf="hidePrevButton()" class="prev-btn" small left clear ion-button color="default-blue" (tap)="prev()">
         Sebelumnya
     </button>
-    <button [disabled]="disabledNextButton()" right clear ion-button color="default-blue" (tap)="next()" class="next-btn" small>
-        {{getButtonNextTitle()}}
+    <button [disabled]="disabledNextButton()" [innerHTML]="getButtonNextTitle()" right clear ion-button color="default-blue" (tap)="next()" class="next-btn" small>
+        
     </button>
 </div>
