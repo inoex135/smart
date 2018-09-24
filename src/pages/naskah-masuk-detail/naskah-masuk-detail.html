@@ -30,17 +30,25 @@
     </ion-row>
 
     <ion-row>
-     
       <ion-col *ngIf="detail?.prosesSurat != 'Belum Proses' || detail?.prosesSurat != 'Disposisi'">
-          <button [disabled]="detail?.prosesSurat =='Selesai'" ion-button block icon-left color="blue-donker" (click)="openPage('selesai')" style="width:100%">
+          <button [disabled]="detail?.prosesSurat =='Selesai'" ion-button icon-left color="blue-donker" (click)="openPage('selesai')" style="width:100%">
             <ion-icon name="flag"></ion-icon>
             Selesai
           </button>
         </ion-col>
         <ion-col>
-        <button ion-button icon-left color="orange" (click)="openPage('riwayat')" style="width:100%">
-          <ion-icon name="refresh-circle"></ion-icon>
-          Riwayat
+          <button ion-button icon-left color="orange" (click)="openPage('riwayat')" style="width:100%">
+            <ion-icon name="refresh-circle"></ion-icon>
+            Riwayat
+          </button>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <button ion-button icon-left color="green-light" (click)="showDownloadList()" style="width:100%;">
+            <ion-icon name="download"></ion-icon>
+            File Digital
         </button>
       </ion-col>
     </ion-row>
@@ -53,12 +61,6 @@
           {{action?.type}}
         </button>
       </ion-col> -->
-       <ion-col class="file-digital">
-              <p ion-text text-wrap item-start color="default-blue" (click)="showDownloadList()">
-                <ion-icon name="download"></ion-icon>
-                File Digital
-              </p>
-            </ion-col>
     </ion-row>
 
     <ion-row>
@@ -66,6 +68,62 @@
         <ion-card-header class="detail-naskah-header">
           <ion-icon name="md-list-box"></ion-icon> Identitas Naskah
         </ion-card-header>
+
+        <ion-item>
+            <ion-row>
+              <ion-col>
+                <p ion-text item-start text-wrap card-title>Tanggal Naskah</p>
+              </ion-col>
+              <ion-col>
+                <p ion-text item-start text-wrap>{{detail?.tanggalSurat}}</p>
+              </ion-col>
+            </ion-row>
+        </ion-item>
+
+        <ion-item>
+            <ion-row>
+              <ion-col>
+                <p ion-text item-start text-wrap card-title>Perihal</p>
+              </ion-col>
+              <ion-col>
+                <p ion-text item-start text-wrap>{{detail?.perihal}}</p>
+              </ion-col>
+            </ion-row>
+        </ion-item>
+
+        <ion-item>
+            <ion-row>
+              <ion-col>
+                <p ion-text item-start text-wrap card-title>Nomor Naskah</p>
+              </ion-col>
+              <ion-col>
+                <p ion-text item-start text-wrap>{{detail?.nomorSurat}}</p>
+              </ion-col>
+            </ion-row>
+        </ion-item>
+
+        <ion-item>
+            <ion-row>
+              <ion-col>
+                <p ion-text item-start text-wrap card-title>Sifat Naskah</p>
+              </ion-col>
+              <ion-col>
+                <p ion-text item-start text-wrap>Kecepatan: {{detail?.sifatSurat}}</p>
+                <p ion-text item-start text-wrap>Keamanan: {{detail?.keamananSurat}}</p>
+              </ion-col>
+            </ion-row>
+          </ion-item>
+  
+          <ion-item>
+            <ion-row>
+              <ion-col>
+                <p ion-text text-wrap item-start card-title>Sifat Disposisi</p>
+              </ion-col>
+              <ion-col>
+                <p ion-text text-wrap item-start>{{detail?.sifatDisposisi || "-"}}</p>
+              </ion-col>
+            </ion-row>
+          </ion-item>
 
         <ion-item>
           <ion-row>
@@ -78,7 +136,7 @@
           </ion-row>
         </ion-item>
 
-        <ion-item>
+        <!-- <ion-item>
           <ion-row>
             <ion-col>
               <p ion-text text-wrap item-start card-title>File Digital</p>
@@ -90,7 +148,7 @@
               </p>
             </ion-col>
           </ion-row>
-        </ion-item>
+        </ion-item> -->
 
         <ion-item>
           <ion-row>
@@ -166,62 +224,6 @@
             </ion-col>
             <ion-col>
               <p ion-text item-start text-wrap>{{detail?.pemberiDisposisi || "-"}}</p>
-            </ion-col>
-          </ion-row>
-        </ion-item>
-
-        <ion-item>
-          <ion-row>
-            <ion-col>
-              <p ion-text item-start text-wrap card-title>Nomor Naskah</p>
-            </ion-col>
-            <ion-col>
-              <p ion-text item-start text-wrap>{{detail?.nomorSurat}}</p>
-            </ion-col>
-          </ion-row>
-        </ion-item>
-
-        <ion-item>
-          <ion-row>
-            <ion-col>
-              <p ion-text item-start text-wrap card-title>Tanggal Naskah</p>
-            </ion-col>
-            <ion-col>
-              <p ion-text item-start text-wrap>{{detail?.tanggalSurat}}</p>
-            </ion-col>
-          </ion-row>
-        </ion-item>
-
-        <ion-item>
-          <ion-row>
-            <ion-col>
-              <p ion-text item-start text-wrap card-title>Perihal</p>
-            </ion-col>
-            <ion-col>
-              <p ion-text item-start text-wrap>{{detail?.perihal}}</p>
-            </ion-col>
-          </ion-row>
-        </ion-item>
-
-        <ion-item>
-          <ion-row>
-            <ion-col>
-              <p ion-text item-start text-wrap card-title>Sifat Naskah</p>
-            </ion-col>
-            <ion-col>
-              <p ion-text item-start text-wrap>Kecepatan: {{detail?.sifatSurat}}</p>
-              <p ion-text item-start text-wrap>Keamanan: {{detail?.keamananSurat}}</p>
-            </ion-col>
-          </ion-row>
-        </ion-item>
-
-        <ion-item>
-          <ion-row>
-            <ion-col>
-              <p ion-text text-wrap item-start card-title>Sifat Disposisi</p>
-            </ion-col>
-            <ion-col>
-              <p ion-text text-wrap item-start>{{detail?.sifatDisposisi || "-"}}</p>
             </ion-col>
           </ion-row>
         </ion-item>
