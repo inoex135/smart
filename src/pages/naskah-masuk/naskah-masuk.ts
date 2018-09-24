@@ -33,6 +33,9 @@ export class NaskahMasukPage {
 
   //get param terima naskah modal
   terimaNaskahParam: any;
+  jenis :any="";
+  sifat :any="";
+  keyword :any="";
 
   constructor(
     public navCtrl: NavController,
@@ -56,13 +59,21 @@ export class NaskahMasukPage {
     let searchProvider: any;
 
     this.showLoader();
-
+    console.log("tipe : "+ type);
     if (type === "type") {
-      searchProvider = this.naskahProvider.searchNaskahByTipe(params);
-    } else {
-      searchProvider = this.naskahProvider.searchNaskah(params);
+      this.jenis = params;
+      //searchProvider = this.naskahProvider.searchNaskahByTipe(params);
+    } 
+    else if (type === "sifat") {
+      this.sifat = params;
+      //searchProvider = this.naskahProvider.searchNaskahBySifat(params);
+    } 
+    else {
+      this.keyword = params;
+      //
     }
-
+    console.log("keyword : "+ this.keyword);
+    searchProvider = this.naskahProvider.searchNaskahComplete(this.jenis,this.sifat,this.keyword);
     searchProvider
       .pipe(debounceTime(700), finalize(() => this.hideLoader()))
       .subscribe(
@@ -101,7 +112,7 @@ export class NaskahMasukPage {
     this.page = this.page + 1;
     console.log("page " + this.page);
     setTimeout(() => {
-      this.naskahProvider.getNaskahMasuk(this.page).subscribe(res => {
+      this.naskahProvider.searchNaskahComplete(this.jenis,this.sifat,this.keyword,this.page).subscribe(res => {
       
         for (var index = 0; index < res.response.length; index++) {
           
