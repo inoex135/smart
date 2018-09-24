@@ -21,11 +21,11 @@
           <div class="col col-50">
               <ion-item class="input--form daftar-naskah-filter">
                   <ion-select (ionChange)="searchNaskahBy('sifat', filter?.naskahSifat)" [(ngModel)]="filter.naskahSifat" placeholder="Sifat Naskah">
-                    <ion-option value="allsifat">Semua</ion-option>
-                    <ion-option value="biasa">Biasa</ion-option>
-                    <ion-option value="segera">Segera</ion-option>
-                    <ion-option value="sangatsegera">Sangat Segera</ion-option>
-                    <ion-option value="kilat">Kilat</ion-option>
+                    <ion-option value="">Semua</ion-option>
+                    <ion-option value="00">Biasa</ion-option>
+                    <ion-option value="11">Segera</ion-option>
+                    <ion-option value="12">Sangat Segera</ion-option>
+                    <ion-option value="23">Kilat</ion-option>
                   </ion-select>
                 </ion-item>
           </div>

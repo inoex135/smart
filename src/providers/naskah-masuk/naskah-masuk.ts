@@ -59,10 +59,23 @@ export class NaskahMasukProvider {
     return this.api.get(`/surat/masuk/cari?keyword=${params}`);
   }
 
+  searchNaskahComplete(jenis: any = "",sifat: any = "",keyword: any = "", page: number = 0, size: number = 10) {
+    return this.api.get(
+      `/surat/masuk/cari?tipe=${jenis}&sifat=${sifat}&keyword=${keyword}&page=${page}&size=${size}`
+      );
+  }
+
   searchNaskahByTipe(type: string, page: number = 0, size: number = 10) {
     // The last segment {type} is required. Available options : permohonan, unit, personal.
     return this.api.get(
       `/surat/masuk/cari?tipe=${type}&page=${page}&size=${size}`
+    );
+  }
+
+  searchNaskahBySifat(sifat: string, page: number = 0, size: number = 10) {
+    // The last segment {type} is required. Available options : permohonan, unit, personal.
+    return this.api.get(
+      `/surat/masuk/cari?sifat=${sifat}&page=${page}&size=${size}`
     );
   }
 
