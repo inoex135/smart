@@ -79,7 +79,6 @@
     </platform>
     <allow-navigation href="*" />
     <allow-navigation href="http://192.168.1.74:8100" />
-    <engine name="android" spec="6.3.0" />
     <plugin name="cordova-plugin-console" spec="^1.1.0" />
     <plugin name="cordova-plugin-device" spec="^1.1.7" />
     <plugin name="cordova-plugin-splashscreen" spec="^4.1.0" />
@@ -92,5 +91,6 @@
     <plugin name="cordova-plugin-android-permissions" spec="^1.0.0" />
     <plugin name="cordova-plugin-fcm" spec="^2.1.2" />
     <plugin name="cordova-plugin-datepicker" spec="^0.9.3" />
+    <engine name="android" spec="6.3.0" />
     <engine name="browser" spec="~4.1.0" />
 </widget>
