@@ -31,9 +31,16 @@ disposisi {
     margin-top: 5px;
     padding-right: 7px;
     padding-left: 7px;
+    padding-top: 5px;
+    padding-bottom: 5px;
     position: fixed;
     bottom: 0px;
     width: 100%;
+
+    button {
+      color: color($colors, danger) !important
+    }
+
   }
 
   .disposition-type, .title-list, .hint-list {
@@ -45,6 +52,7 @@ disposisi {
   }
 
   .personal-disposition {
+    margin-top: 5px;
     margin-bottom: 5px;
   }
 
