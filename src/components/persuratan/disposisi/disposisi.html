@@ -1,5 +1,5 @@
-<!-- disposisi unit or personal -->
-<ion-grid *ngIf="component?.unitOrPersonal">
+<!-- disposisi unit or personal component?.unitOrPersonal -->
+<ion-grid *ngIf="currentStep == 0">
     <ion-card>
         <ion-card-header class="disposisi-kepada">
             <ion-icon name="share-alt"></ion-icon>Disposisi Kepada
@@ -21,15 +21,15 @@
             </ion-row>
         </ion-card-content>
     </ion-card>
-    <div class="stepper-bottom-navigation">
+<!--     <div class="stepper-bottom-navigation">
         <button [disabled]="!isDisposisiChecked()" right ion-button color="default-blue" (tap)="nextStep(disposisiTarget)" class="next-btn" small>
             Selanjutnya
         </button>
-    </div>
+    </div> -->
 </ion-grid>
 
-<!-- target disposisi untuk personal atau unit -->
-<ion-grid *ngIf="component?.disposisiUnit || component?.disposisiPersonal">
+<!-- target disposisi untuk personal atau unit component?.disposisiUnit || component?.disposisiPersonal -->
+<ion-grid *ngIf="currentStep == 1">
     <!-- disposisi unit -->
     <ion-card *ngIf="component?.disposisiUnit">
         <ion-card-header class="disposisi-kepada">
@@ -126,10 +126,10 @@
         </ion-card-content>
     </ion-card>
 
-    <div class="stepper-bottom-navigation">
+   <!--  <div class="stepper-bottom-navigation">
         <button class="prev-btn" small left clear ion-button color="default-blue" (tap)="back()">Sebelumnya</button>
         <button class="next-btn" small right ion-button color="default-blue" (tap)="nextStep('disposisiSifat')" [disabled]="showNextStepOnPage2()">Selanjutnya</button>
-    </div>
+    </div> -->
 
     <!-- show button untuk button next and text -->
     <!-- <div class="stepper-buttom-navigation" *ngIf="component?.disposisiUnit && !component?.disposisiPersonal">
@@ -143,8 +143,8 @@
     </div> -->
 </ion-grid>
 
-<!-- disposisi pilih sifat -->
-<ion-grid *ngIf="component?.disposisiSifat">
+<!-- disposisi pilih sifat component?.disposisiSifat -->
+<ion-grid *ngIf="currentStep == 2">
     <ion-card>
         <ion-card-header class="disposisi-kepada" >
             Sifat Disposisi
@@ -171,14 +171,14 @@
         </ion-card-content>
     </ion-card>
 
-    <div class="stepper-bottom-navigation">
+    <!-- <div class="stepper-bottom-navigation">
         <button class="prev-btn" small left clear ion-button color="default-blue" (tap)="back(disposisiTarget)">Sebelumnya</button>
         <button class="next-btn" small right ion-button color="default-blue" (tap)="nextStep('disposisiPetunjuk')" [disabled]="disposisi?.catatan == 0">Selanjutnya</button>
-    </div>
+    </div> -->
 </ion-grid>
 
-<!-- disposisi pilih petunjuk -->
-<ion-grid *ngIf="component?.disposisiPetunjuk">
+<!-- disposisi pilih petunjuk component?.disposisiPetunjuk -->
+<ion-grid *ngIf="currentStep == 3">
     <ion-card>
         <ion-card-header class="disposisi-kepada">
             Petunjuk
@@ -206,13 +206,14 @@
         </ion-card-content>
     </ion-card>
 
-    <div class="stepper-bottom-navigation">
+    <!-- <div class="stepper-bottom-navigation">
         <button class="prev-btn" small left clear ion-button color="default-blue" (tap)="back('disposisiSifat')">Sebelumnya</button>
         <button class="next-btn" small right ion-button color="default-blue" (tap)="nextStep('disposisiTanggal')" [disabled]="disposisi?.petunjuk?.length == 0">Selanjutnya</button>
-    </div>
+    </div> -->
 </ion-grid>
 
-<ion-grid *ngIf="component?.disposisiTanggal">
+<!-- component?.disposisiTanggal -->
+<ion-grid *ngIf="currentStep == 4">
     <ion-card>
         <ion-card-header class="disposisi-kepada">
             Tanggal Selesai
@@ -243,11 +244,11 @@
     </ion-button> -->
 
     <div class="stepper-bottom-navigation">
-        <button class="prev-btn" small left clear ion-button color="default-blue" (tap)="back('disposisiPetunjuk')">Sebelumnya</button>
+        <!-- <button class="prev-btn" small left clear ion-button color="default-blue" (tap)="back('disposisiPetunjuk')">Sebelumnya</button>
         <button class="next-btn" small right ion-button color="default-blue" (tap)="simpan()" [disabled]="targetSelesai.invalid">
             <ion-icon name="paper"></ion-icon>
             SIMPAN DISPOSISI
-        </button>
+        </button> -->
     </div>
 
     <ion-item no-line>
@@ -256,3 +257,13 @@
         </p>
     </ion-item>
 </ion-grid>
+
+<div class="spacer"></div>
+<div class="stepper-bottom-navigation">
+    <button *ngIf="hidePrevButton()" class="prev-btn" small left clear ion-button color="default-blue" (tap)="prev()">
+        Sebelumnya
+    </button>
+    <button [disabled]="disabledNextButton()" right clear ion-button color="default-blue" (tap)="next()" class="next-btn" small>
+        {{getButtonNextTitle()}}
+    </button>
+</div>

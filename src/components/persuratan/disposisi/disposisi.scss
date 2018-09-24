@@ -1,4 +1,5 @@
 disposisi {
+  margin-bottom: 40px;
   height: 100%;
   font-family: Roboto;
 
@@ -6,6 +7,10 @@ disposisi {
     .label-md {
       margin: 0;
     }
+  }
+
+  .spacer {
+    height: 40px;
   }
 
   .blue-background {
@@ -22,15 +27,19 @@ disposisi {
   }
 
   .stepper-bottom-navigation {
+    background-color: #fff;
     margin-top: 5px;
     padding-right: 7px;
     padding-left: 7px;
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
   }
 
   .disposition-type, .title-list, .hint-list {
     
     .item {
-      height: 30px !important;
+      height: 40px !important;
     }
 
   }
