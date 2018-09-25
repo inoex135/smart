@@ -23,7 +23,7 @@ export class NaskahDetailActionPage {
     this.actionData = this.navParams.get("actionData");
     this.platform.registerBackButtonAction(() => {
       this.backButtonClick()
-    },2)
+    })
   }
 
   saveDisposisi() {}
