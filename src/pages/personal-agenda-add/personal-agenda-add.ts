@@ -3,12 +3,8 @@ import { IonicPage, NavController, NavParams } from "ionic-angular";
 import { DatepickerProvider } from "../../providers/datepicker/datepicker";
 import { PersonalProvider } from "../../providers/personal/personal";
 import { IAgendaAdd } from "../../interface/agenda-add";
-
 import { AutoCompleteComponent } from "ionic2-auto-complete";
 import { MomentHelper } from "../../helpers/moment-helper";
-
-import { MasterPegawaiProvider } from "../../providers/master-pegawai/master-pegawai";
-import { MasterUnitProvider } from "../../providers/master-unit/master-unit";
 import { ToastHelper } from "../../helpers/toast-helper";
 import { TokenProvider } from "../../providers/token/token";
 
@@ -44,8 +40,6 @@ export class PersonalAgendaAddPage {
     public navParams: NavParams,
     private datePicker: DatepickerProvider,
     private personalProvider: PersonalProvider,
-    private masterPegawai: MasterPegawaiProvider,
-    private masterUnit: MasterUnitProvider,
     private momentHelper: MomentHelper,
     private toastHelper: ToastHelper,
     private tokenProvider: TokenProvider

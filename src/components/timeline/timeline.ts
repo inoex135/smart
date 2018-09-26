@@ -28,12 +28,3 @@ export class TimelineAgendaComponent {
   @Input("kegiatan") kegiatan = {};
   constructor() {}
 }
-
-// @Component({
-//   selector: "timeline-riwayat",
-//   template: "<p ion-text>{{riwayat?.title}}</p>"
-// })
-// export class TimelineRiwayatNaskahComponent {
-//   @Input("riwayat") riwayat = {};
-//   constructor() {}
-// }
