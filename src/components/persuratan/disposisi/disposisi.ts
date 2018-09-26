@@ -7,7 +7,6 @@ import { ToastHelper } from "../../../helpers/toast-helper";
 import { MomentHelper } from "../../../helpers/moment-helper";
 import { DatepickerProvider } from "../../../providers/datepicker/datepicker";
 import { NavController, AlertController } from "ionic-angular";
-import { MasterPegawaiProvider } from "../../../providers/master-pegawai/master-pegawai";
 import { UserProvider } from "../../../providers/user/user";
 
 import findIndex from "lodash/findIndex";
@@ -96,7 +95,6 @@ export class Disposisi {
     private momentHelper: MomentHelper,
     private datepickerProvider: DatepickerProvider,
     private navCtrl: NavController,
-    private masterPegawai: MasterPegawaiProvider,
     private user: UserProvider,
     private loader: LoaderHelper,
     private alert: AlertController

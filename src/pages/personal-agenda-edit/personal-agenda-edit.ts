@@ -42,9 +42,7 @@ export class PersonalAgendaEditPage {
     private agenda: PersonalAgendaDetailProvider,
     private viewCtrl: ViewController,
     private toast: ToastHelper,
-    private tokenProvider: TokenProvider,
-    private masterUnit: MasterUnitProvider,
-    private masterPegawai: MasterPegawaiProvider,
+    private tokenProvider: TokenProvider, 
     private momentHelper: MomentHelper,
     private datePicker: DatepickerProvider,
     private loader: LoaderHelper
