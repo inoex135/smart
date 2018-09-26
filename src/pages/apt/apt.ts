@@ -7,15 +7,11 @@ import {
   App
 } from "ionic-angular";
 import { File } from "@ionic-native/file";
-
 import { AptProvider } from "../../providers/apt/apt";
-
-import { AptHelper } from "../../helpers/apt-helper";
 import { LoaderHelper } from "../../helpers/loader-helper";
 import remove from "lodash/remove";
 import { debounceTime, finalize } from "rxjs/operators";
 import { ToastHelper } from "../../helpers/toast-helper";
-import { APT_INDIKATOR } from "../../constant/apt-indikator";
 
 @IonicPage()
 @Component({
@@ -45,7 +41,6 @@ export class AptPage {
     private aptProvider: AptProvider,
     private loadingCtrl: LoadingController,
     file: File,
-    private aptHelper: AptHelper,
     private loaderHelper: LoaderHelper,
     private toastHelper: ToastHelper,
     private app: App
