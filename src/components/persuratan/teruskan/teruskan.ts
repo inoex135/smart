@@ -9,8 +9,6 @@ import {
   LoadingController,
   ToastController
 } from "ionic-angular";
-import { MasterUnitProvider } from "../../../providers/master-unit/master-unit";
-import { AutoCompleteComponent } from "ionic2-auto-complete";
 
 @Component({
   selector: "teruskan",
@@ -29,7 +27,6 @@ export class Teruskan {
     public nav: NavController,
     public navParams: NavParams,
     public naskahProvider: NaskahMasukProvider,
-    private masterUnit: MasterUnitProvider,
     private toast: ToastController
   ) {
     this.naskah.id = this.navParams.get("naskahId");
