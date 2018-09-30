@@ -1,5 +1,7 @@
-import { Component } from "@angular/core";
+import { Component, ViewChild } from "@angular/core";
 import { NavController, NavParams, IonicPage, AlertController, Platform } from "ionic-angular";
+import { LogUtil } from "../../utils/logutil";
+import { Disposisi } from "../../components/persuratan/disposisi/disposisi";
 @IonicPage()
 @Component({
   selector: "page-naskah-detail-action",
@@ -7,8 +9,13 @@ import { NavController, NavParams, IonicPage, AlertController, Platform } from "
 })
 export class NaskahDetailActionPage {
 
+  TAG:string = 'NaskahDetailActionPage'
+
   actionData:string = '';
   naskahId: any;
+  canShowDialogExit:boolean = false
+
+  @ViewChild('disposisiComponent') disposisiComponent: Disposisi
 
   constructor(
     public navCtrl: NavController, 
@@ -30,7 +37,9 @@ export class NaskahDetailActionPage {
 
   backButtonClick() {
     if (this.actionData.includes('disposisi')) {
-      this.showDialogExit()
+      if (this.disposisiComponent.prev() == -1) {
+        this.showDialogExit()
+      }
     } else {
       this.navCtrl.pop()
     }
@@ -52,7 +61,6 @@ export class NaskahDetailActionPage {
         {
           text: 'Keluar',
           handler: () => {
-            console.log('Buy clicked')
             alert.dismiss().then(() => {
               this.navCtrl.pop()
             })

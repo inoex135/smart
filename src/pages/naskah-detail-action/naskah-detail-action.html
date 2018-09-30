@@ -9,8 +9,6 @@
   </ion-navbar>
 </ion-header>
   
-
-
 <ion-content scroll="false" class="no-scroll" fixed-content>
   <div [ngSwitch]="actionData">
     <!--Form teruskan-->
@@ -20,7 +18,7 @@
 
     <!-- form disposisi -->
     <div *ngSwitchCase="'disposisi'">
-      <disposisi [naskahId]="naskahId"></disposisi>
+      <disposisi [naskahId]="naskahId" #disposisiComponent ></disposisi>
     </div>
 
     <!-- form selesai -->
