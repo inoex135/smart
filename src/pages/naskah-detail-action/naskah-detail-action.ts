@@ -45,6 +45,10 @@ export class NaskahDetailActionPage {
     }
   }
 
+  homeUpButtonClick() {
+    this.showDialogExit()
+  }
+
   showDialogExit() {
     let alert = this.dialog.create({
       title: 'Konfirmasi Keluar',
