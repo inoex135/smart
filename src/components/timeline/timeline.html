@@ -4,8 +4,12 @@
     {{item?.tanggal | indonesianDate: 'DD MMMM YYYY'}}
   </div>
 
-  <div class="divider-title" *ngIf="type === CURRENT_TYPE.RIWAYAT">
-    {{item?.tanggal_proses | indonesianDate:'DD MMMM YYYY':'DD MMM YYYY'}} - {{item?.proses_naskah}}
+  <div class="divider-title" *ngIf="type === CURRENT_TYPE.RIWAYAT && item?.tanggal_proses != '-' ">
+    Tanggal Proses : {{item?.tanggal_proses | indonesianDate:'DD MMMM YYYY':'DD MMM YYYY'}} - {{item?.proses_naskah}}
+  </div>
+
+  <div class="divider-title" *ngIf="item?.tanggal_proses === '-' ">
+    Proses Naskah : {{item?.proses_naskah}}
   </div>
 
   <ul class="timeline" *ngIf="type === CURRENT_TYPE.AGENDA">
