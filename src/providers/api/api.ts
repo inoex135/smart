@@ -10,9 +10,13 @@ import { ErrorObservable } from "rxjs/observable/ErrorObservable";
 
 import { ENV } from "../../config/environment";
 import { TokenProvider } from "../token/token";
+import { LogUtil } from "../../utils/logutil";
 
 @Injectable()
 export class ApiProvider {
+
+  TAG:string = 'ApiProvider'
+
   constructor(public http: HttpClient, public tokenProvider: TokenProvider) {}
 
   private setHeaders() {
@@ -67,6 +71,8 @@ export class ApiProvider {
     } else {
       errMessage = errorData.data;
     }
+
+    LogUtil.d(this.TAG, errMessage)
 
     if (errorFormValidasi) {
       errMessage = errorFormValidasi;

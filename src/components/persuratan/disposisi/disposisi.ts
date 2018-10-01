@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild } from "@angular/core";
+import { Component, Input, ViewChild, Output, EventEmitter } from "@angular/core";
 import { NaskahDisposisiProvider } from "../../../providers/naskah-disposisi/naskah-disposisi";
 import { Observable } from "rxjs/Observable";
 import { IDisposisiUnit } from "../../../interface/disposisi-unit";
@@ -16,6 +16,8 @@ import * as moment from "moment-timezone";
 import { LoaderHelper } from "../../../helpers/loader-helper";
 import { AutoCompleteComponent } from "ionic2-auto-complete";
 import { LogUtil } from "../../../utils/logutil";
+import { MasterPegawaiProvider } from "../../../providers/master-pegawai/master-pegawai";
+
 @Component({
   selector: "disposisi",
   templateUrl: "disposisi.html"
@@ -23,6 +25,9 @@ import { LogUtil } from "../../../utils/logutil";
 export class Disposisi {
 
   TAG:string = 'Disposisi'
+
+  @Output() 
+  onPageChanged = new EventEmitter<Object>()
 
   datas: any = {};
   Picker: string = new Date().toISOString();
@@ -94,6 +99,7 @@ export class Disposisi {
     private toastHelper: ToastHelper,
     private momentHelper: MomentHelper,
     private datepickerProvider: DatepickerProvider,
+    private masterPegawai: MasterPegawaiProvider,
     private navCtrl: NavController,
     private user: UserProvider,
     private loader: LoaderHelper,
@@ -255,6 +261,9 @@ export class Disposisi {
   }
 
   next() {
+    if (this.currentStep < 0) {
+      this.currentStep = 0
+    }
     this.currentStep++
     if (this.currentStep > this.steps.length) {
       this.currentStep = this.steps.length - 1
@@ -262,12 +271,13 @@ export class Disposisi {
     this.nextStep(this.steps[this.currentStep])
   }
 
-  prev() {
+  prev(): number {
     this.currentStep--
     if (this.currentStep < 0) {
       this.currentStep = 0
+      return -1
     }
-    this.back('')
+    return this.back('')
   }
 
   nextStep(to: any = "root") {
@@ -276,7 +286,8 @@ export class Disposisi {
         this.component.disposisiPersonal = this.disposisiTarget.personal
         this.component.disposisiUnit = this.disposisiTarget.unit
         this.component.unitOrPersonal = this.disposisiTarget.unit && this.disposisiTarget.personal
-      } 
+      }
+      this.emitPageChange()
     }, 100);
 
     // this.setDisposisiTarget(false);
@@ -287,17 +298,21 @@ export class Disposisi {
     this.disposisiTarget.unit = status;
   }
 
-  back(to: string | any = "root") {
-    setTimeout(() => {
-      if (this.currentStep == 0) {
-        this.component.unitOrPersonal = true;
-        this.component.disposisiUnit = false;
-        this.component.disposisiPersonal = false;
-      } else if (this.currentStep == 1) {
-        this.component.disposisiPersonal = this.disposisiTarget.personal;
-        this.component.disposisiUnit = this.disposisiTarget.unit;
-      }
-    }, 100);
+  private back(to: string | any = "root") {
+    if (this.currentStep == 0) {
+      this.component.unitOrPersonal = true;
+      this.component.disposisiUnit = false;
+      this.component.disposisiPersonal = false;
+    } else if (this.currentStep == 1) {
+      this.component.disposisiPersonal = this.disposisiTarget.personal;
+      this.component.disposisiUnit = this.disposisiTarget.unit;
+    }
+    this.emitPageChange()
+    return this.currentStep
+  }
+
+  emitPageChange() {
+    this.onPageChanged.emit({step: this.currentStep, isLastPage: this.isLastStep()})
   }
 
   async tanggalSelesaiPicker() {
@@ -382,7 +397,6 @@ export class Disposisi {
         {
           text: 'Simpan',
           handler: () => {
-            console.log('Buy clicked')
             alert.dismiss().then(() => {
               this.simpan()
             })
