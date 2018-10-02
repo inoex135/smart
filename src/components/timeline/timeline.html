@@ -36,8 +36,11 @@
       </div>
       <div class="timeline-item">
         <h4>{{item?.no_agenda || "-"}}</h4>
-        <p>{{item?.tanggal_agenda || "-"}}</p>
-        <p>{{item?.pihak || "-"}}</p>
+        <p>Tanggal Proses : {{item?.tanggal_agenda || "-"}}</p>
+        <p><b style="color:#2A99F9;">{{item?.pihak || "-"}}</b></p>
+        <hr>
+        <p text-wrap style="margin-right:10px;">Petunjuk :<br>{{item?.petunjuk || "-"}} </p>
+        <p text-wrap>Catatan :<br>{{item?.catatan || "-"}} </p>
       </div>
     </li>
   </ul>
