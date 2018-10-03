@@ -8,4 +8,9 @@ export class HomeProvider {
   getTotalNotication() {
     return this.apiProvider.get("/personal/notification");
   }
+
+  getPhotoProfile() {
+    return this.apiProvider.getBlob("/personal/foto");
+  }
+
 }

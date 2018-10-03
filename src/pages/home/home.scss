@@ -45,6 +45,12 @@ page-home {
     align-content: center; /* center multi-line items horizontally, in this case */
     margin-bottom:5%;
     margin-top:10%;
+
+    img {
+      height: 64px;
+      width: 64px;
+    }
+
   }
 
   // header

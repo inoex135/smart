@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, ViewChild, ElementRef } from "@angular/core";
 import { NavController, Platform, IonicPage } from "ionic-angular";
 import { UserProvider } from "../../providers/user/user";
 
@@ -12,12 +12,18 @@ import { FCM } from "@ionic-native/fcm";
 import { TokenProvider } from "../../providers/token/token";
 import { ToastHelper } from "../../helpers/toast-helper";
 import { Storage } from "@ionic/storage";
+import { LogUtil } from "../../utils/logutil";
 @IonicPage()
 @Component({
   selector: "page-home",
   templateUrl: "home.html"
 })
 export class HomePage {
+
+  TAG:string = 'HomePage'
+
+  @ViewChild("profileImage") image: ElementRef;
+
   menus: Array<any> = [];
   backgroundImage: string = "assets/images/bg_login.png";
   notifications: Array<any> = [];
@@ -105,6 +111,14 @@ export class HomePage {
   async initData() {
     const profile = await this.token.getProfile();
     const getTotalNotif = await this.homeProvider.getTotalNotication();
+
+    this.homeProvider.getPhotoProfile().subscribe(
+      res => {
+        if (res != null) {
+          this.image.nativeElement.src = URL.createObjectURL(res)
+        }
+      }
+    );
 
     // get profile dari localStorage jika sudah ada
     if (profile) {

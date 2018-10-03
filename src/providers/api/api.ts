@@ -43,12 +43,20 @@ export class ApiProvider {
 
     return new HttpHeaders().set("Authorization", "smartdjkn2017mobile");
   }
+
   private extractData(res: Response) {
     let body = res;
     return body || {};
   }
 
+  private extractBlob(res: Blob) {
+    console.log(res)
+    let body = res
+    return body || null
+  }
+
   private handleError(error: HttpErrorResponse | any) {
+    console.log(error)
     let errMsg: string;
     // check error if have custom error message from server
     if (error.error.error_code) {
@@ -90,6 +98,15 @@ export class ApiProvider {
     return this.http
       .get(`${ENV.API_URL}${path}`, { headers: this.setHeaders() })
       .pipe(map(this.extractData), catchError(this.handleError));
+  }
+
+  getBlob(path: string) {
+    return this.http
+    .get(`${ENV.API_URL}${path}`, { 
+      headers: this.setHeaders().set("Content-Type", "application/octet-stream"),
+      responseType: "blob"
+    })
+    .pipe(map(this.extractBlob), catchError(this.handleError));
   }
 
   put(path: string, body: Object = {}) {
