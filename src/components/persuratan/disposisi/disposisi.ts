@@ -362,8 +362,6 @@ export class Disposisi {
       } 
     } else if (this.currentStep == 3) {
       return this.disposisi.petunjuk.length == 0
-    } else if (this.currentStep == 4) {
-      return this.disposisi.tanggalSelesai === '' || this.disposisi.tanggalSelesai === null
     } else {
       return false
     }
