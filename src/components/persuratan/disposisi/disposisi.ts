@@ -359,11 +359,7 @@ export class Disposisi {
     } else if (this.currentStep == 1) {
       if (this.component.disposisiUnit && !this.component.disposisiPersonal) {
         return this.disposisi.unitTujuan.length == 0
-      } else if (this.component.disposisiPersonal) {
-        return this.disposisi.selaku.length == 0
-      }
-    } else if (this.currentStep == 2) {
-      return this.disposisi.catatan === ''
+      } 
     } else if (this.currentStep == 3) {
       return this.disposisi.petunjuk.length == 0
     } else if (this.currentStep == 4) {

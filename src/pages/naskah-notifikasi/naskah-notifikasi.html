@@ -8,9 +8,9 @@
   <ion-list *ngIf="notifications">
     <ion-item *ngFor="let notif of notifications" (tap)="detailNotifikasi(notif?.id)">
       <h6 ion-text>{{notif?.nomorNaskah}}</h6>
-      <h6 ion-text>{{notif?.perihal}}</h6>
+      <h6 ion-text text-wrap>{{notif?.perihal}}</h6><br>
       <h6 ion-text>{{notif?.nama}}</h6>
-      <h6 ion-text>{{notif?.unit}}</h6>
+      <h6 ion-text text-wrap>{{notif?.unit}}</h6>
       <text-avatar [text]="notif?.nama" item-left></text-avatar>
       <p ion-text color="blue-template" text-wrap>{{ notif?.tanggalSurat | indonesianDate: 'dddd, DD MMMM YYYY' }}</p>
       <ion-note item-end>{{statusRead(notif?.is_read)}}</ion-note>
