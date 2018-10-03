@@ -64,6 +64,48 @@
     </ion-row>
 
     <ion-row>
+      <ion-card *ngIf="detail?.jenisPengiriman == 'disposisi'" text-left class="detail-naskah" padding-bottom>
+        <ion-card-header class="detail-naskah-header">
+          <ion-icon name="open"></ion-icon> Detail Disposisi
+        </ion-card-header>
+
+          <ion-item>
+            <ion-row>
+              <ion-col>
+                <p ion-text item-start text-wrap card-title>Pemberi Disposisi</p>
+              </ion-col>
+              <ion-col>
+                <p ion-text item-start text-wrap>{{detail?.pemberiDisposisi || "-"}}</p>
+              </ion-col>
+            </ion-row>
+          </ion-item>
+
+          <ion-item>
+            <ion-row>
+              <ion-col>
+                <p ion-text item-start text-wrap card-title>Petunjuk Disposisi</p>
+              </ion-col>
+              <ion-col>
+                <p ion-text item-start text-wrap>{{detail?.petunjuk_disposisi || "-"}}</p>
+              </ion-col>
+            </ion-row>
+          </ion-item>
+
+          <ion-item>
+            <ion-row>
+              <ion-col>
+                <p ion-text item-start text-wrap card-title>Catatan Disposisi</p>
+              </ion-col>
+              <ion-col>
+                <p ion-text item-start text-wrap>{{detail?.catatanDisposisi || "-"}}</p>
+              </ion-col>
+            </ion-row>
+          </ion-item>
+
+      </ion-card>
+    </ion-row>
+
+    <ion-row>
       <ion-card text-left class="detail-naskah" padding-bottom>
         <ion-card-header class="detail-naskah-header">
           <ion-icon name="md-list-box"></ion-icon> Identitas Naskah
@@ -201,29 +243,6 @@
             </ion-col>
             <ion-col>
               <p ion-text item-start text-wrap>{{detail?.jenisSurat || "-"}}</p>
-            </ion-col>
-          </ion-row>
-
-        </ion-item>
-
-        <ion-item>
-          <ion-row>
-            <ion-col>
-              <p ion-text item-start text-wrap card-title>Nomor Agenda Disposisi</p>
-            </ion-col>
-            <ion-col>
-              <p ion-text item-start text-wrap>{{detail?.nomorAgendaDisposisi}}</p>
-            </ion-col>
-          </ion-row>
-        </ion-item>
-
-        <ion-item>
-          <ion-row>
-            <ion-col>
-              <p ion-text item-start text-wrap card-title>Pemberi Disposisi</p>
-            </ion-col>
-            <ion-col>
-              <p ion-text item-start text-wrap>{{detail?.pemberiDisposisi || "-"}}</p>
             </ion-col>
           </ion-row>
         </ion-item>

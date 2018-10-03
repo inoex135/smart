@@ -107,11 +107,11 @@
         <!-- jenis esolon adalah 4 -->
         <ion-card-content class="disposisi-padding-top-form" *ngIf="profile?.jenis_eselon == 4">
             <ion-row *ngIf="component?.disposisiPersonal" class="row">
-                <div *ngFor="let pelaksana of datas?.pelaksana; let i = index" col-12>
+                <div *ngFor="let pelaksana of datas?.pelaksana; let i = index" col-12 class="pelaksana">
                     <ion-item no-lines>
                         <ion-label text-wrap>{{pelaksana?.nama}}</ion-label>
-                        <ion-checkbox [checked]="pelaksana?.isChecked" (ionChange)="selectPelaksana(pelaksana, $event?.checked, i)" color="primary"
-                            [value]="pelaksana?.nip"></ion-checkbox>
+                        <ion-checkbox [checked]="pelaksana?.isChecked" (ionChange)="selectPelaksana(pelaksana, $event.checked, i)" color="primary"
+                            [value]="pelaksana?.nip" name="pelaksana[i]"></ion-checkbox>
                     </ion-item>
                     <ion-item class="input--form">
                         <ion-input type="text" placeholder="Selaku" [(ngModel)]="disposisi.selaku[i]"></ion-input>
@@ -170,27 +170,25 @@
             Tanggal Selesai
         </ion-card-header>
         <ion-card-content>
-            <ion-row wrap>
-                <ion-col col-12>
-                    <ion-item class="input--form" margin-bottom margin-top>
-                        <ion-input #targetSelesai="ngModel" placeholder="Target Selesai" [(ngModel)]="disposisi.tanggalSelesai" (tap)="tanggalSelesaiPicker()"
-                            type="text">
-                        </ion-input>
-                    </ion-item>
+            <ion-col col-12>
+                <ion-item class="input--form" margin-bottom margin-top>
+                    <ion-input #targetSelesai="ngModel" placeholder="Target Selesai" [(ngModel)]="disposisi.tanggalSelesai" (tap)="tanggalSelesaiPicker()"
+                                type="text">
+                    </ion-input>
+                </ion-item>
+    
+                <!-- <ion-item class="input--form" margin-bottom margin-top>
+                    <ion-input placeholder="Tanggal Disposisi" [(ngModel)]="disposisi.tanggalDisposisi" (tap)="tanggalDisposisiPicker()" type="text"></ion-input>
+                </ion-item> -->
 
-                    <ion-item class="input--form" margin-bottom margin-top>
-                        <ion-input placeholder="Tanggal Disposisi" [(ngModel)]="disposisi.tanggalDisposisi" (tap)="tanggalDisposisiPicker()" type="text"></ion-input>
-                    </ion-item>
-                </ion-col>
-            </ion-row>
+                <ion-item no-line>
+                    <p ion-text color="danger" *ngFor="let error of errorMessages?.errors">
+                        *{{error?.field}} {{error?.message}}
+                    </p>
+                </ion-item>
+            </ion-col>
         </ion-card-content>
     </ion-card>
-
-    <ion-item no-line>
-        <p ion-text color="danger" *ngFor="let error of errorMessages?.errors">
-            *{{error?.field}} {{error?.message}}
-        </p>
-    </ion-item>
 </ion-grid>
 
 <div class="spacer"></div>
