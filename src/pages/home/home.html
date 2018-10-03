@@ -12,7 +12,8 @@
   <ion-item class="avatar-item" no-lines>
     <ion-avatar class="avatar-center">
       <img #profileImage >
-     <!--  <text-avatar [text]="profile?.nama || ''"></text-avatar> -->
+      <text-avatar [hidden]="!showAvatar" [text]="profile?.nama || ''"></text-avatar>
+     <!--   -->
       <!-- <h4 ion-text color="light" class="title">{{profile?.nama}}</h4> -->
     </ion-avatar>
   </ion-item>

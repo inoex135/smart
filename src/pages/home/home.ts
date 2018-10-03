@@ -28,6 +28,7 @@ export class HomePage {
   backgroundImage: string = "assets/images/bg_login.png";
   notifications: Array<any> = [];
   profile: any = {};
+  showAvatar:boolean = true;
 
   profileName: string = "";
 
@@ -116,7 +117,13 @@ export class HomePage {
       res => {
         if (res != null) {
           this.image.nativeElement.src = URL.createObjectURL(res)
+          this.showAvatar = false
+        } else {
+          this.showAvatar = true
         }
+      },
+      err => {
+        this.showAvatar = true
       }
     );
 
