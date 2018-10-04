@@ -52,7 +52,7 @@ export class NaskahDetailActionPage {
   showDialogExit() {
     let alert = this.dialog.create({
       title: 'Konfirmasi Keluar',
-      message: 'Apakah anda takin untuk keluar dari halaman ini?',
+      message: 'Apakah anda yakin untuk keluar dari halaman ini?',
       buttons: [
         {
           text: 'Batal',

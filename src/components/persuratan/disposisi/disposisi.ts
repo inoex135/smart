@@ -17,6 +17,7 @@ import { LoaderHelper } from "../../../helpers/loader-helper";
 import { AutoCompleteComponent } from "ionic2-auto-complete";
 import { LogUtil } from "../../../utils/logutil";
 import { MasterPegawaiProvider } from "../../../providers/master-pegawai/master-pegawai";
+import { TokenProvider } from "../../../providers/token/token";
 
 @Component({
   selector: "disposisi",
@@ -87,7 +88,7 @@ export class Disposisi {
 
   currentStep:number = 0
 
-  steps:any = ['step1', 'step2', 'step3', 'step4', 'step5']
+  arraySteps:any = [0, 1, 2, 3, 4]
 
   profile: any = "";
 
@@ -101,12 +102,20 @@ export class Disposisi {
     private datepickerProvider: DatepickerProvider,
     private masterPegawai: MasterPegawaiProvider,
     private navCtrl: NavController,
-    private user: UserProvider,
+    private user: TokenProvider,
     private loader: LoaderHelper,
     private alert: AlertController
   ) {
+    this.user.getProfile().then(res => {
+      LogUtil.d(this.TAG, res)
+      this.profile = res
+      if (this.isEselon4()) {
+        this.arraySteps = [-2, 0, 1, 2, 3]
+        this.component.disposisiPersonal = true
+        this.disposisiTarget.personal = true
+      }
+    });
     this.init();
-    this.user.getProfile().subscribe(res => (this.profile = res));
   }
 
   init() {
@@ -145,6 +154,10 @@ export class Disposisi {
     });
 
     return data;
+  }
+
+  isEselon4():boolean {
+    return this.profile.jenis_eselon == 4
   }
 
   mappingPetunjuk(petunjuk: any) {
@@ -265,10 +278,10 @@ export class Disposisi {
       this.currentStep = 0
     }
     this.currentStep++
-    if (this.currentStep > this.steps.length) {
-      this.currentStep = this.steps.length - 1
+    if (this.currentStep > this.arraySteps.length) {
+      this.currentStep = this.arraySteps.length - 1
     }
-    this.nextStep(this.steps[this.currentStep])
+    this.nextStep(this.arraySteps[this.currentStep])
   }
 
   prev(): number {
@@ -299,11 +312,11 @@ export class Disposisi {
   }
 
   private back(to: string | any = "root") {
-    if (this.currentStep == 0) {
+    if (this.currentStep == this.arraySteps[0]) {
       this.component.unitOrPersonal = true;
       this.component.disposisiUnit = false;
       this.component.disposisiPersonal = false;
-    } else if (this.currentStep == 1) {
+    } else if (this.currentStep == this.arraySteps[1]) {
       this.component.disposisiPersonal = this.disposisiTarget.personal;
       this.component.disposisiUnit = this.disposisiTarget.unit;
     }
@@ -354,13 +367,16 @@ export class Disposisi {
 
   disabledNextButton = () => {
     LogUtil.d(this.TAG, 'disabled next button')
-    if (this.currentStep == 0) {
+    if (this.currentStep == this.arraySteps[0]) {
       return !this.isDisposisiChecked()
-    } else if (this.currentStep == 1) {
+    } else if (this.currentStep == this.arraySteps[1]) {
+      if (this.isEselon4()) {
+        return this.disposisi.personal.length == 0
+      }
       if (this.component.disposisiUnit && !this.component.disposisiPersonal) {
         return this.disposisi.unitTujuan.length == 0
       } 
-    } else if (this.currentStep == 3) {
+    } else if (this.currentStep == this.arraySteps[3]) {
       return this.disposisi.petunjuk.length == 0
     } else {
       return false
@@ -368,7 +384,7 @@ export class Disposisi {
   }
 
   isLastStep() {
-    return this.currentStep == (this.steps.length - 1)
+    return this.currentStep == (this.arraySteps.length - 1)
   }
 
   hidePrevButton() {

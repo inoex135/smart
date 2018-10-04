@@ -1,5 +1,5 @@
 <!-- disposisi unit or personal component?.unitOrPersonal -->
-<ion-grid *ngIf="currentStep == 0">
+<ion-grid *ngIf="currentStep == arraySteps[0]">
     <ion-card>
         <ion-card-header class="disposisi-kepada">
             <ion-icon name="share-alt"></ion-icon>Disposisi Kepada
@@ -24,7 +24,7 @@
 </ion-grid>
 
 <!-- target disposisi untuk personal atau unit component?.disposisiUnit || component?.disposisiPersonal -->
-<ion-grid *ngIf="currentStep == 1">
+<ion-grid *ngIf="currentStep == arraySteps[1]">
     <!-- disposisi unit -->
     <ion-card *ngIf="component?.disposisiUnit">
         <ion-card-header class="disposisi-kepada">
@@ -73,7 +73,7 @@
         </ion-card-header>
 
         <!-- jenis esolon bukan 4 -->
-        <ion-card-content class="disposisi-padding-top-form" *ngIf="profile?.jenis_eselon <  4">
+        <ion-card-content class="disposisi-padding-top-form" *ngIf="!isEselon4()">
             <ion-row *ngIf="component?.disposisiPersonal">
                 <ng-template #withFlags let-attrs="attrs">
                     <span>{{attrs?.data?.nip}}, {{attrs?.data?.nama}}</span>
@@ -105,7 +105,7 @@
         </ion-card-content>
 
         <!-- jenis esolon adalah 4 -->
-        <ion-card-content class="disposisi-padding-top-form" *ngIf="profile?.jenis_eselon == 4">
+        <ion-card-content class="disposisi-padding-top-form" *ngIf="isEselon4()">
             <ion-row *ngIf="component?.disposisiPersonal" class="row">
                 <div *ngFor="let pelaksana of datas?.pelaksana; let i = index" col-12 class="pelaksana">
                     <ion-item no-lines>
@@ -120,27 +120,11 @@
             </ion-row>
         </ion-card-content>
     </ion-card>
+
 </ion-grid>
 
 <!-- disposisi pilih sifat component?.disposisiSifat -->
-<ion-grid *ngIf="currentStep == 2">
-    <ion-card>
-        <ion-card-header class="disposisi-kepada">
-            Petunjuk
-        </ion-card-header>
-        <ion-card-content>
-            <ion-list class="hint-list">
-                <ion-item class="item" *ngFor="let petunjuk of datas?.petunjuk; let i = index" class="petunjuk">
-                    <ion-label text-wrap>{{petunjuk?.keterangan}}</ion-label>
-                    <ion-checkbox [checked]="petunjuk?.isChecked" color="primary" name="petunjuk[i]" (ionChange)="onChange(petunjuk?.id, $event.checked, i)"></ion-checkbox>
-                </ion-item>
-            </ion-list>
-        </ion-card-content>
-    </ion-card>
-</ion-grid>
-
-<!-- disposisi pilih petunjuk component?.disposisiPetunjuk -->
-<ion-grid *ngIf="currentStep == 3">
+<ion-grid *ngIf="currentStep == arraySteps[2]">
     <ion-card>
         <ion-card-header class="disposisi-kepada" >
             Sifat Disposisi
@@ -163,8 +147,25 @@
     </ion-card>
 </ion-grid>
 
+<!-- disposisi pilih petunjuk component?.disposisiPetunjuk -->
+<ion-grid *ngIf="currentStep == arraySteps[3]">
+    <ion-card>
+        <ion-card-header class="disposisi-kepada">
+            Petunjuk
+        </ion-card-header>
+        <ion-card-content>
+            <ion-list class="hint-list">
+                <ion-item class="item" *ngFor="let petunjuk of datas?.petunjuk; let i = index" class="petunjuk">
+                    <ion-label text-wrap>{{petunjuk?.keterangan}}</ion-label>
+                    <ion-checkbox [checked]="petunjuk?.isChecked" color="primary" name="petunjuk[i]" (ionChange)="onChange(petunjuk?.id, $event.checked, i)"></ion-checkbox>
+                </ion-item>
+            </ion-list>
+        </ion-card-content>
+    </ion-card>
+</ion-grid>
+
 <!-- component?.disposisiTanggal -->
-<ion-grid *ngIf="currentStep == 4">
+<ion-grid *ngIf="currentStep == arraySteps[4]">
     <ion-card>
         <ion-card-header class="disposisi-kepada">
             Tanggal Selesai
