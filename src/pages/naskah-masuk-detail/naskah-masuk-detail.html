@@ -11,7 +11,8 @@
       <ion-col *ngIf="((profile?.jenis_eselon != null) || (profile?.jenis_eselon >= 1 && profile?.jenis_eselon <= 4)) && detail?.prosesSurat !=='Selesai'">
         <button ion-button icon-left color="danger" (click)="openPage('disposisi')" style="width:100%">
             <ion-icon name="open"></ion-icon>
-            Disposisi
+            <span *ngIf="detail?.prosesSurat == 'Belum Proses'">Disposisi</span>
+            <span *ngIf="detail?.prosesSurat == 'Disposisi'">Redisposisi</span>
         </button>
       </ion-col>
       <!-- <ion-col *ngIf="detail?.statusTerimaSurat == null || detail?.statusTerimaSurat == 0">
