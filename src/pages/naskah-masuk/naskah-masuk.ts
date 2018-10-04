@@ -179,4 +179,18 @@ export class NaskahMasukPage {
 
     return removeNaskah;
   }
+
+  changeColor(status:string = '') {
+    if (status.includes('Disposisi')) {
+      return 'orange'
+    } else if (status.includes('Belum Proses')) {
+      return 'danger'
+    } else if (status.includes('Teruskan')) {
+      return 'default-blue'
+    } else if (status.includes('Selesai')) {
+      return 'green-light'
+    }
+    return 'default' 
+  }
+
 }

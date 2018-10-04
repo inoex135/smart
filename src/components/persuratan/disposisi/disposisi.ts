@@ -7,7 +7,6 @@ import { ToastHelper } from "../../../helpers/toast-helper";
 import { MomentHelper } from "../../../helpers/moment-helper";
 import { DatepickerProvider } from "../../../providers/datepicker/datepicker";
 import { NavController, AlertController } from "ionic-angular";
-import { UserProvider } from "../../../providers/user/user";
 
 import findIndex from "lodash/findIndex";
 import orderBy from "lodash/sortBy";

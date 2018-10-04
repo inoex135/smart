@@ -11,6 +11,8 @@ export class NaskahDetailActionPage {
 
   TAG:string = 'NaskahDetailActionPage'
 
+  private unRegisterBackButtonAction: Function;
+
   actionData:string = '';
   naskahId: any;
   canShowDialogExit:boolean = false
@@ -28,22 +30,10 @@ export class NaskahDetailActionPage {
 
   ionViewDidLoad() {
     this.actionData = this.navParams.get("actionData");
-    this.platform.registerBackButtonAction(() => {
-      this.backButtonClick()
-    })
+    this.registerAction()
   }
 
   saveDisposisi() {}
-
-  backButtonClick() {
-    if (this.actionData.includes('disposisi')) {
-      if (this.disposisiComponent.prev() == -1) {
-        this.showDialogExit()
-      }
-    } else {
-      this.navCtrl.pop()
-    }
-  }
 
   homeUpButtonClick() {
     this.showDialogExit()
@@ -66,6 +56,7 @@ export class NaskahDetailActionPage {
           text: 'Keluar',
           handler: () => {
             alert.dismiss().then(() => {
+              this.actionData = ''
               this.navCtrl.pop()
             })
             return false
@@ -75,5 +66,31 @@ export class NaskahDetailActionPage {
     });
     alert.present();
   }
+
+
+/* https://forum.ionicframework.com/t/an-android-register-back-button-action-sample/130058 */
+  registerAction(): void {
+    this.unRegisterBackButtonAction = this.platform.registerBackButtonAction(() => { 
+      LogUtil.d(this.TAG, "back button clicked")
+      LogUtil.d(this.TAG, this.actionData)
+      if (this.actionData.includes('disposisi')) {
+        if (this.disposisiComponent.prev() == -1) {
+          this.showDialogExit()
+        }
+      } else {
+        this.navCtrl.pop()
+      }
+      return;
+    });
+   }
+   
+   unRegister() {
+     this.unRegisterBackButtonAction && this.unRegisterBackButtonAction();
+   }
+
+  ionViewWillLeave() {
+    this.unRegister();
+  }
+
 
 }
