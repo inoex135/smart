@@ -125,6 +125,23 @@
 <!-- disposisi pilih sifat component?.disposisiSifat -->
 <ion-grid *ngIf="currentStep == 2">
     <ion-card>
+        <ion-card-header class="disposisi-kepada">
+            Petunjuk
+        </ion-card-header>
+        <ion-card-content>
+            <ion-list class="hint-list">
+                <ion-item class="item" *ngFor="let petunjuk of datas?.petunjuk; let i = index" class="petunjuk">
+                    <ion-label text-wrap>{{petunjuk?.keterangan}}</ion-label>
+                    <ion-checkbox [checked]="petunjuk?.isChecked" color="primary" name="petunjuk[i]" (ionChange)="onChange(petunjuk?.id, $event.checked, i)"></ion-checkbox>
+                </ion-item>
+            </ion-list>
+        </ion-card-content>
+    </ion-card>
+</ion-grid>
+
+<!-- disposisi pilih petunjuk component?.disposisiPetunjuk -->
+<ion-grid *ngIf="currentStep == 3">
+    <ion-card>
         <ion-card-header class="disposisi-kepada" >
             Sifat Disposisi
         </ion-card-header>
@@ -142,23 +159,6 @@
                     <ion-textarea placeholder="Catatan" type="text" [(ngModel)]="disposisi.catatan"></ion-textarea>
                 </ion-item>
             </ion-col>
-        </ion-card-content>
-    </ion-card>
-</ion-grid>
-
-<!-- disposisi pilih petunjuk component?.disposisiPetunjuk -->
-<ion-grid *ngIf="currentStep == 3">
-    <ion-card>
-        <ion-card-header class="disposisi-kepada">
-            Petunjuk
-        </ion-card-header>
-        <ion-card-content>
-            <ion-list class="hint-list">
-                <ion-item class="item" *ngFor="let petunjuk of datas?.petunjuk; let i = index" class="petunjuk">
-                    <ion-label text-wrap>{{petunjuk?.keterangan}}</ion-label>
-                    <ion-checkbox [checked]="petunjuk?.isChecked" color="primary" name="petunjuk[i]" (ionChange)="onChange(petunjuk?.id, $event.checked, i)"></ion-checkbox>
-                </ion-item>
-            </ion-list>
         </ion-card-content>
     </ion-card>
 </ion-grid>
