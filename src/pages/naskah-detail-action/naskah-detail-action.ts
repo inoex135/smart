@@ -35,8 +35,17 @@ export class NaskahDetailActionPage {
 
   saveDisposisi() {}
 
+  private isDisposition(): boolean {
+    return this.actionData.includes('disposisi')
+  }
+
+
   homeUpButtonClick() {
-    this.showDialogExit()
+    if (this.isDisposition()) {
+      this.showDialogExit()
+    } else {
+      this.navCtrl.pop()
+    }
   }
 
   showDialogExit() {
@@ -73,7 +82,7 @@ export class NaskahDetailActionPage {
     this.unRegisterBackButtonAction = this.platform.registerBackButtonAction(() => { 
       LogUtil.d(this.TAG, "back button clicked")
       LogUtil.d(this.TAG, this.actionData)
-      if (this.actionData.includes('disposisi')) {
+      if (this.isDisposition()) {
         if (this.disposisiComponent.prev() == -1) {
           this.showDialogExit()
         }
@@ -89,6 +98,7 @@ export class NaskahDetailActionPage {
    }
 
   ionViewWillLeave() {
+    this.actionData = ''
     this.unRegister();
   }
 
