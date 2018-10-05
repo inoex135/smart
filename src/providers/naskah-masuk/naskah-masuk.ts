@@ -112,4 +112,5 @@ export class NaskahMasukProvider {
   updateNotification() {
     this.api.get("notification");
   }
+
 }

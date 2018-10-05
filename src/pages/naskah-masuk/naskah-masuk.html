@@ -44,7 +44,7 @@
       <ion-row>
 
         <ion-col (tap)="detailNaskah(naskah)">
-          <h6 ion-text text-right>{{naskah?.tanggalSurat | indonesianDate: 'DD MMMM YYYY': 'x'}}</h6>
+          <h6 ion-text text-right>{{naskah?.createdDate | indonesianDate: 'DD MMMM YYYY': 'x'}}</h6>
         </ion-col>
       </ion-row>
       <ion-row>
@@ -53,9 +53,10 @@
         </ion-col>
         <ion-col (tap)="detailNaskah(naskah)">
           <h6 ion-text card-title text-left text-wrap>{{naskah?.nomorSurat}}</h6>
+          <p ion-text text-wrap>Tanggal Naskah : {{naskah?.tanggalSurat | indonesianDate: 'DD MMMM YYYY': 'x'}}</p><br>
           <p ion-text text-wrap>{{naskah?.perihal}}</p>
           <p ion-text class="unit-pemohon">{{naskah?.namaUnit || "-"}}</p>
-          <ion-badge text-wrap [color]="changeColor(naskah?.statusSurat)">{{naskah?.statusSurat}}</ion-badge>
+          <p ion-text text-wrap>Status : <ion-badge text-wrap [style.background-color]="changeColor(naskah?.statusSurat)">{{naskah?.statusSurat}}</ion-badge></p>
 
           <p ion-text text-wrap>{{naskah?.namaPemohon}}</p>
           <p ion-text text-wrap>{{naskah?.pelayanan}}</p>

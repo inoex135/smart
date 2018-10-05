@@ -182,13 +182,13 @@ export class NaskahMasukPage {
 
   changeColor(status:string = '') {
     if (status.includes('Disposisi')) {
-      return 'orange'
+      return '#ffb600'
     } else if (status.includes('Belum Proses')) {
-      return 'danger'
+      return '#d62222'
     } else if (status.includes('Teruskan')) {
-      return 'default-blue'
+      return '#1cb3ff'
     } else if (status.includes('Selesai')) {
-      return 'green-light'
+      return '#26b459'
     }
     return 'default' 
   }
