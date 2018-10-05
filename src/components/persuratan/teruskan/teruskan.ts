@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
 import { SuratTeruskan } from "../../../models/surat-teruskan";
-
+import { MasterUnitProvider } from "../../../providers/master-unit/master-unit";
+import { AutoCompleteComponent } from "ionic2-auto-complete";
 import { NaskahMasukProvider } from "../../../providers/naskah-masuk/naskah-masuk";
 
 import {
@@ -26,6 +27,7 @@ export class Teruskan {
     public loading: LoadingController,
     public nav: NavController,
     public navParams: NavParams,
+    private masterUnit: MasterUnitProvider,
     public naskahProvider: NaskahMasukProvider,
     private toast: ToastController
   ) {
