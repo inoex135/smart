@@ -6,6 +6,7 @@ import { Disposisi } from "./persuratan/disposisi/disposisi";
 import { Teruskan } from "./persuratan/teruskan/teruskan";
 import { Selesai } from "./persuratan/selesai/selesai";
 import { RiwayatComponent } from "./persuratan/riwayat/riwayat-component";
+import { Askrecall } from "./persuratan/askrecall/askrecall";
 import {
   TimelineComponent,
   TimelineAgendaComponent
@@ -35,6 +36,7 @@ import { MasterPegawaiProvider } from "../providers/master-pegawai/master-pegawa
     RiwayatComponent,
     Selesai,
     Teruskan,
+    Askrecall,
     TimelineComponent,
     TimelineAgendaComponent,
     TextAvatarDirective,
@@ -57,6 +59,7 @@ import { MasterPegawaiProvider } from "../providers/master-pegawai/master-pegawa
     RiwayatComponent,
     Selesai,
     Teruskan,
+    Askrecall,
     TimelineComponent,
     TimelineAgendaComponent,
     TextAvatarDirective,

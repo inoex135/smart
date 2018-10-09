@@ -72,4 +72,15 @@ export class SuratProvider {
 
     return this.api.postForm(`/surat/selesai/create/${detail.id}`, formData);
   }
+
+  simpanAskrecall(detail: any, data: any) {
+    let formData = new FormData();
+
+    
+    formData.append("id_sumas", detail.id);
+    formData.append("alasan", data.alasan);
+    
+
+    return this.api.postForm(`/sumas/recall`, formData);
+  }
 }
