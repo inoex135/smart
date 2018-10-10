@@ -62,7 +62,6 @@ export class NaskahMasukPage {
     let searchProvider: any;
 
     this.showLoader();
-    console.log("tipe : "+ type);
     /* if (type === "type") {
       this.jenis = params;
       //searchProvider = this.naskahProvider.searchNaskahByTipe(params);
@@ -74,7 +73,6 @@ export class NaskahMasukPage {
       //
     } */
     this.keyword = params;
-    console.log("keyword : "+ this.keyword);
     searchProvider = this.naskahProvider.searchNaskahComplete(this.filter.naskahUnit, this.filter.naskahSifat, this.keyword);
     searchProvider
       .pipe(debounceTime(700), finalize(() => this.hideLoader()))
@@ -112,7 +110,6 @@ export class NaskahMasukPage {
 
   doInfinite(infiniteScroll) {
     this.page = this.page + 1;
-    console.log("page " + this.page);
     setTimeout(() => {
       this.naskahProvider.searchNaskahComplete(this.filter.naskahUnit, this.filter.naskahSifat,this.keyword,this.page)
       .subscribe(res => {
@@ -184,7 +181,6 @@ export class NaskahMasukPage {
   }
 
   doRefresh(refresher) {
-    console.log('Begin async operation', refresher);
     this.naskahProvider.getNaskahMasuk().subscribe(
       res => {
         this.listNaskah = res.response
@@ -225,10 +221,10 @@ export class NaskahMasukPage {
     const myModal: Modal = this.modal.create('ModalFilterPage', { filter: this.filter }, myModalOptions);
     myModal.present();
     myModal.onDidDismiss(data => {
-      console.log("I have dismissed.");
-      console.log(data);
-      this.filter = data
-      this.searchNaskahBy('search', this.keyword);
+      if (data != null) {
+        this.filter = data
+        this.searchNaskahBy('search', this.keyword);
+      }
     });
  
   }

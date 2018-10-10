@@ -33,6 +33,10 @@ export class ModalFilterPage {
   }
 
   closeModal() {
+    this.view.dismiss(null);
+  }
+
+  closeWithReturn() {
     this.view.dismiss(this.filter);
   }
 

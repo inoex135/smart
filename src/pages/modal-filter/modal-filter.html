@@ -8,7 +8,6 @@
 
   <ion-navbar>
     <ion-title>Filter</ion-title>
-    
     <ion-buttons end>
         <button ion-button icon-only (click)="closeModal()">
             <ion-icon ios="ios-close" md="md-close"></ion-icon>
@@ -53,4 +52,12 @@
     </ion-list>
 
 </ion-content>
+
+<ion-footer>
+    <ion-buttons>
+        <button ion-button full (click)="closeWithReturn()">
+            Terapkan
+        </button>
+    </ion-buttons>
+</ion-footer>
 
