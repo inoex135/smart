@@ -39,16 +39,16 @@
         </ion-col>
         <ion-col>
           <button ion-button icon-left color="orange" (click)="openPage('riwayat')" style="width:100%">
-            <ion-icon name="refresh-circle"></ion-icon>
+            <ion-icon name="clock"></ion-icon>
             Riwayat
           </button>
       </ion-col>
     </ion-row>
 
     <ion-row>
-      <ion-col>
+      <ion-col *ngIf="detail?.prosesSurat == 'Belum Proses'">
         <button ion-button icon-left color="navy" (click)="openPage('askrecall')" style="width:100%;">
-            <ion-icon name="recall"></ion-icon>
+            <ion-icon name="refresh-circle"></ion-icon>
             Ask For Recall
         </button>
       </ion-col>
