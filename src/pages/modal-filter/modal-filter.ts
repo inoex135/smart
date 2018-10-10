@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
+import { LogUtil } from '../../utils/logutil';
 
 /**
  * Generated class for the ModalFilterPage page.
@@ -15,6 +16,8 @@ import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angul
 })
 export class ModalFilterPage {
 
+  static TAG:string = 'ModalFilterPage'
+
   filter: {} = {
     naskahUnit: "",
     naskahSifat: ""
@@ -28,7 +31,7 @@ export class ModalFilterPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ModalFilterPage');
+    LogUtil.d(ModalFilterPage.TAG, 'ionViewDidLoad ModalFilterPage');
     this.filter = this.navParams.get('filter')
   }
 

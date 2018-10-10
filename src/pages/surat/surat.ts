@@ -12,6 +12,7 @@ import "rxjs/add/observable/zip";
 import { DatepickerProvider } from "../../providers/datepicker/datepicker";
 import { MomentHelper } from "../../helpers/moment-helper";
 import { TokenProvider } from "../../providers/token/token";
+import { LogUtil } from "../../utils/logutil";
 
 @IonicPage()
 @Component({
@@ -19,6 +20,9 @@ import { TokenProvider } from "../../providers/token/token";
   templateUrl: "surat.html"
 })
 export class SuratPage {
+
+  TAG:string = 'SuratPage'
+
   filter: any = {
     startTime: "",
     endTime: ""
@@ -51,7 +55,8 @@ export class SuratPage {
     this.redirectComponent = "NaskahNotifikasiPage";
   }
 
-  ionViewDidLoad() {
+  ionViewWillEnter() {
+    LogUtil.d(this.TAG, "ionViewWillEnter")
     this.setIntervalDate();
     this.initData();
     this.checkSekretaris();

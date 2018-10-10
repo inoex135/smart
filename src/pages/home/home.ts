@@ -44,7 +44,8 @@ export class HomePage {
     private storage: Storage
   ) {}
 
-  ionViewDidLoad() {
+  ionViewWillEnter() {
+    LogUtil.d(this.TAG, "ionViewWillEnter")
     this.listMenu();
     this.initData();
     this.platform.ready().then(() => {

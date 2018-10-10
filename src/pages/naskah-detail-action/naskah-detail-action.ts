@@ -9,7 +9,7 @@ import { Disposisi } from "../../components/persuratan/disposisi/disposisi";
 })
 export class NaskahDetailActionPage {
 
-  TAG:string = 'NaskahDetailActionPage'
+  static TAG:string = 'NaskahDetailActionPage'
 
   private unRegisterBackButtonAction: Function;
 
@@ -80,8 +80,8 @@ export class NaskahDetailActionPage {
 /* https://forum.ionicframework.com/t/an-android-register-back-button-action-sample/130058 */
   registerAction(): void {
     this.unRegisterBackButtonAction = this.platform.registerBackButtonAction(() => { 
-      LogUtil.d(this.TAG, "back button clicked")
-      LogUtil.d(this.TAG, this.actionData)
+      LogUtil.d(NaskahDetailActionPage.TAG, "back button clicked")
+      LogUtil.d(NaskahDetailActionPage.TAG, this.actionData)
       if (this.isDisposition()) {
         if (this.disposisiComponent.prev() == -1) {
           this.showDialogExit()

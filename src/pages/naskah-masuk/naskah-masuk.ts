@@ -11,6 +11,9 @@ import remove from "lodash/remove";
 import { debounceTime, finalize } from "rxjs/operators";
 import { ToastHelper } from "../../helpers/toast-helper";
 import assign from "lodash/assign";
+import { LogUtil } from "../../utils/logutil";
+import { ModalFilterPage } from "../modal-filter/modal-filter";
+import { NaskahMasukDetailPage } from "../naskah-masuk-detail/naskah-masuk-detail";
 
 @IonicPage()
 @Component({
@@ -18,6 +21,9 @@ import assign from "lodash/assign";
   templateUrl: "naskah-masuk.html"
 })
 export class NaskahMasukPage {
+
+  TAG:string = 'NaskahMasukPage'
+
   listNaskah: any = [];
   isBulkAction: boolean = false;
 
@@ -49,12 +55,18 @@ export class NaskahMasukPage {
     private modal: ModalController
   ) {}
 
-  ionViewDidLoad() {
+ /*  ionViewDidLoad() {
+    LogUtil.d(this.TAG, "ionViewDidLoad")
+    this.getNaskahMasuk();
+  } */
+
+  ionViewWillEnter() {
+    LogUtil.d(this.TAG, "ionViewWillEnter")
     this.getNaskahMasuk();
   }
 
   detailNaskah(naskah: any) {
-    this.navCtrl.push("NaskahMasukDetailPage", { naskahId: naskah.id });
+    this.navCtrl.push(NaskahMasukDetailPage.TAG, { naskahId: naskah.id });
   }
 
   //proses search by type dan default search
@@ -218,7 +230,7 @@ export class NaskahMasukPage {
     const myModalOptions: ModalOptions = {
       enableBackdropDismiss: false
     };
-    const myModal: Modal = this.modal.create('ModalFilterPage', { filter: this.filter }, myModalOptions);
+    const myModal: Modal = this.modal.create(ModalFilterPage.TAG, { filter: this.filter }, myModalOptions);
     myModal.present();
     myModal.onDidDismiss(data => {
       if (data != null) {
