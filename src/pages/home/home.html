@@ -1,22 +1,70 @@
-<ion-content [ngStyle]="{'background-image': 'url(' + backgroundImage +')'}">
+<ion-content>
   <ion-header>
-    <ion-navbar transparent>
+    <ion-navbar>
+      <ion-buttons start left>
+        <button ion-button >
+            <img class="svg-img"  />
+        </button>
+      </ion-buttons>
+      <ion-title center>SMARt</ion-title>
       <ion-buttons end>
-        <button ion-button (click)="logout()">
-          Logout
+        <button ion-button>
+          <img class="svg-img" src="../assets/svg/Bell.svg" />
         </button>
       </ion-buttons>
     </ion-navbar>
   </ion-header>
 
-  <ion-item class="avatar-item" no-lines>
-    <ion-avatar class="avatar-center">
-      <img #profileImage >
-      <text-avatar [hidden]="!showAvatar" [text]="profile?.nama || ''"></text-avatar>
-     <!--   -->
-      <!-- <h4 ion-text color="light" class="title">{{profile?.nama}}</h4> -->
-    </ion-avatar>
-  </ion-item>
+  <ion-card class="profile-card">
+    <ion-item>
+      <ion-avatar item-start>
+        <img class="svg-img" src="../assets/svg/Options.svg">
+      </ion-avatar>
+      <ion-avatar class="avatar-center">
+        <img #profileImage >
+        <text-avatar [hidden]="!showAvatar" [text]="profile?.nama || ''"></text-avatar>
+      </ion-avatar>
+      <ion-avatar item-end class="logout-text" (click)="logout()">
+          Logout
+      </ion-avatar>
+    </ion-item>
+    
+    <ion-card-content>
+      <p>{{profile?.nama}}</p>
+      <p>{{profile?.nip}}</p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-grid class="grid menu-grid">
+    <ion-row class="row img-grid">
+      <ion-col class="col">
+          <img src="../assets/svg/Mail.svg">
+      </ion-col>
+      <ion-col class="col">
+          <img src="../assets/svg/Customer_Service.svg">
+      </ion-col>
+      <ion-col class="col">
+          <img src="../assets/svg/Calendar.svg">
+      </ion-col>
+      <ion-col class="col">
+          <img src="../assets/svg/Meeting.svg">
+      </ion-col>
+    </ion-row>
+    <ion-row class="row text-grid">
+        <ion-col class="col">
+            Persuratan
+        </ion-col>
+        <ion-col class="col">
+            APT
+        </ion-col>
+        <ion-col class="col">
+            Personal
+        </ion-col>
+        <ion-col class="col">
+            E-Rapat
+        </ion-col>
+      </ion-row>
+  </ion-grid>
 
   <ion-item col-8 push-2 class="input--form">
 

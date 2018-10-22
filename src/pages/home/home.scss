@@ -1,6 +1,11 @@
 page-home {
+
   $transparent: transparent;
   font-family:Roboto;
+
+  ion-navbar {
+    box-shadow: 0 1px 8px #dfe2e4 !important;
+  }
 
   .logout-icon{
     font-size: 10px;
@@ -11,9 +16,68 @@ page-home {
   }
 
   ion-content {
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+    background: color($colors, 'new-background') !important;
+  }
+
+  .svg-img {
+    width: 32px !important;
+    height: 32px !important;
+  }
+
+  .profile-card {
+    margin-top: 75px;
+
+    .label-md {
+      margin: 0;
+    }
+
+    .logout-text {
+      text-align: right;
+      color: color($colors, 'new-text-color-light');
+    }
+
+    ion-card-content {
+      text-align: center;
+      margin-top: 10px;
+
+      :nth-child(1) {
+        font-weight: bold;
+      }
+
+    }
+
+  }
+
+  .menu-grid {    
+
+    margin-top: 15px;
+
+    .img-grid ion-col {
+      background: color($colors, "light-white");
+      margin: 5px;
+      border: 0.5px color($colors, 'new-text-color-light') solid;
+      border-radius: 2px;
+      box-shadow: 3px 3px 3px 1px #e3ebf7;
+      padding: 5px;
+      img {
+        text-align: center;
+        width: 80px;
+        height: 80px;
+        display: block;
+        margin: auto;
+       }
+    }
+    .text-grid ion-col {
+      text-align: center;
+      color: #4a4a4a !important;
+    }
+
+  }
+
+  ion-title .toolbar-title {
+    color: color($colors, 'new-text-color-dark') !important;
+    text-transform: none;
+    text-align: center;
   }
 
   .toolbar-logo {
@@ -58,12 +122,7 @@ page-home {
   span {
     color: white;
   }
-  .toolbar-background,
-  ion-navbar,
-  ion-header {
-    background: $transparent !important;
-    background-color: $transparent !important;
-  }
+
   .header-md::after,
   .toolbar-background-ios {
     background-image: none;
