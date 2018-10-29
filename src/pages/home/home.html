@@ -1,24 +1,24 @@
-<ion-content>
-  <ion-header>
-    <ion-navbar>
-      <ion-buttons start left>
-        <button ion-button >
-            <img class="svg-img"  />
-        </button>
-      </ion-buttons>
-      <ion-title center>SMARt</ion-title>
-      <ion-buttons end>
-        <button ion-button>
-          <img class="svg-img" src="../assets/svg/Bell.svg" />
-        </button>
-      </ion-buttons>
-    </ion-navbar>
-  </ion-header>
+<ion-header>
+  <ion-navbar>
+    <ion-buttons start left>
+      <button ion-button >
+          <img class="svg-img"  />
+      </button>
+    </ion-buttons>
+    <ion-title center>SMARt</ion-title>
+    <ion-buttons end>
+      <button ion-button>
+        <img class="svg-img" src="../assets/svg/Bell.svg" />
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
 
+<ion-content>
   <ion-card class="profile-card">
     <ion-item>
       <ion-avatar item-start>
-        <img class="svg-img" src="../assets/svg/Options.svg">
+        <img class="svg-img" src="../assets/icon/Group.png">
       </ion-avatar>
       <ion-avatar class="avatar-center">
         <img #profileImage >
@@ -37,17 +37,13 @@
 
   <ion-grid class="grid menu-grid">
     <ion-row class="row img-grid">
-      <ion-col class="col">
-          <img src="../assets/svg/Mail.svg">
+      <ion-col class="col mpersuratan-background" (click)="pagesTo('SuratPage')">
       </ion-col>
-      <ion-col class="col">
-          <img src="../assets/svg/Customer_Service.svg">
+      <ion-col class="col mapt-background" (click)="pagesTo('TabPage')">
       </ion-col>
-      <ion-col class="col">
-          <img src="../assets/svg/Calendar.svg">
+      <ion-col class="col mpersonal-background" (click)="pagesTo('PersonalPage')">
       </ion-col>
-      <ion-col class="col">
-          <img src="../assets/svg/Meeting.svg">
+      <ion-col class="col mrapat-background" (click)="pagesTo('')">
       </ion-col>
     </ion-row>
     <ion-row class="row text-grid">
@@ -66,6 +62,34 @@
       </ion-row>
   </ion-grid>
 
+  <ion-card>
+    <ion-card-content>
+      <p>Test Slideer</p>
+    </ion-card-content>
+  </ion-card>
+
+  <div class="present">
+    <h5>Presensi</h5>
+    <ion-card>
+      <ion-card-content>
+        <ion-list>
+          <ion-item>
+            <h2>Presensi</h2>
+            <p>Ugh. As if.</p>
+          </ion-item>
+          <ion-item>
+            <h2>Jam Masuk</h2>
+            <p>Ugh. As if.</p>
+          </ion-item>
+          <ion-item>
+            <h2>Akumulasi Absensi</h2>
+            <p>Ugh. As if.</p>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+  </div>
+<!-- 
   <ion-item col-8 push-2 class="input--form">
 
     <ion-select [ngModel]="profileName" col-12 (ngModelChange)="byPass($event)">
@@ -98,4 +122,6 @@
       </ion-card>
     </div>
   </div>
+ -->
+
 </ion-content>

@@ -63,6 +63,7 @@ export class HomePage {
       data.notificationTotal = this.setNotificationTotal(data.title, res);
     });
   }
+
   setNotificationTotal(title: any, res: any) {
     if (title === "PERSURATAN") return res.notification_persuratan;
 
@@ -71,8 +72,10 @@ export class HomePage {
     if (title === "APT") return res.notification_apt;
   }
 
-  pagesTo(component: any) {
-    this.navCtrl.push(component);
+  pagesTo(component: string) {
+    if (component !== '') {
+      this.navCtrl.push(component);
+    }
   }
 
   logout() {
@@ -111,8 +114,9 @@ export class HomePage {
   }
 
   async initData() {
-    const profile = await this.token.getProfile();
-    const getTotalNotif = await this.homeProvider.getTotalNotication();
+    const profile = await this.token.getProfile()
+    const getTotalNotif = await this.homeProvider.getTotalNotication()
+    const dashboard = await this.homeProvider.getDashboard()
 
     this.homeProvider.getPhotoProfile().subscribe(
       res => {

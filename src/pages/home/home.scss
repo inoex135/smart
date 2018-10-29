@@ -7,6 +7,10 @@ page-home {
     box-shadow: 0 1px 8px #dfe2e4 !important;
   }
 
+  .toolbar-background {
+    background: color($colors, 'light-white') !important;
+  }
+
   .logout-icon{
     font-size: 10px;
   }
@@ -25,7 +29,6 @@ page-home {
   }
 
   .profile-card {
-    margin-top: 75px;
 
     .label-md {
       margin: 0;
@@ -52,20 +55,42 @@ page-home {
 
     margin-top: 15px;
 
+    .mrapat-background {
+      background-image: url('../assets/svg/m-erapat.svg') !important;
+    }
+
+    .mapt-background {
+      background-image: url('../assets/svg/m-apt.svg') !important;
+    }
+
+    .mpersuratan-background {
+      background-image: url('../assets/svg/m-persuratan.svg') !important;
+    }
+
+    .mpersonal-background {
+      background-image: url('../assets/svg/m-personal.svg') !important;
+    }
+
+    .mpersonal-background, .mrapat-background, .mpersuratan-background, .mapt-background {
+      background-repeat: no-repeat !important;
+      background-size: 80px 80px !important;
+      background-position: center !important; 
+    }
+
     .img-grid ion-col {
-      background: color($colors, "light-white");
-      margin: 5px;
-      border: 0.5px color($colors, 'new-text-color-light') solid;
-      border-radius: 2px;
-      box-shadow: 3px 3px 3px 1px #e3ebf7;
-      padding: 5px;
-      img {
-        text-align: center;
-        width: 80px;
-        height: 80px;
-        display: block;
-        margin: auto;
-       }
+      //background: color($colors, "light-white");
+      //margin: 5px;
+      //border: 0.5px color($colors, 'new-text-color-light') solid;
+      //border-radius: 2px;
+      //box-shadow: 3px 3px 3px 1px #e3ebf7;
+      // img {
+      //   text-align: center;
+      //   width: 80px;
+      //   height: 80px;
+      //   display: block;
+      //   margin: auto;
+      //  }
+      min-height: 72px;
     }
     .text-grid ion-col {
       text-align: center;
@@ -76,7 +101,7 @@ page-home {
 
   ion-title .toolbar-title {
     color: color($colors, 'new-text-color-dark') !important;
-    text-transform: none;
+    text-transform: none !important;
     text-align: center;
   }
 
@@ -127,6 +152,42 @@ page-home {
   .toolbar-background-ios {
     background-image: none;
     border-bottom: 0;
+  }
+
+  .present {
+
+    h5, h2 {
+      color: color($colors, 'new-text-color-grey') !important;
+    }
+
+    h5 {
+      margin-left: 10px;
+    }
+
+    h2 {
+      float: left
+    }
+
+    p {
+      float: right;
+      text-align: right;
+      font-size: 1.6rem;
+      color: color($colors, 'new-text-color-dark');
+    }
+
+    h2, p {
+      width: 50%;
+    }
+
+    .input-wrapper, .label-md, .item-md, .item-inner {
+      margin: 0px;
+      padding: 0px !important;
+    }
+
+    ion-item:not(:last-child) {
+      border-bottom: 0.5px solid #dedede;
+    }
+
   }
 
   // avatar
