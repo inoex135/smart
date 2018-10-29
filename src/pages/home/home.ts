@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef } from "@angular/core";
-import { NavController, Platform, IonicPage } from "ionic-angular";
+import { NavController, Platform, IonicPage, Select } from "ionic-angular";
 import { UserProvider } from "../../providers/user/user";
 
 import { MenuHomeConstant } from "../../constant/menu-home";
@@ -23,6 +23,7 @@ export class HomePage {
   TAG:string = 'HomePage'
 
   @ViewChild("profileImage") image: ElementRef;
+  @ViewChild("selectUser") select: Select;
 
   menus: Array<any> = [];
   backgroundImage: string = "assets/images/bg_login.png";
@@ -155,6 +156,15 @@ export class HomePage {
         },
         err => false
       );
+    }
+  }
+
+  triggerOpenSelect() {
+    if (this.select) {
+      LogUtil.d(this.TAG, "not null")
+      this.select.open()
+    } else {
+      LogUtil.d(this.TAG, "probably null")
     }
   }
 

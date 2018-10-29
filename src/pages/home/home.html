@@ -18,7 +18,7 @@
   <ion-card class="profile-card">
     <ion-item>
       <ion-avatar item-start>
-        <img class="svg-img" src="../assets/icon/Group.png">
+        <img class="svg-img" (click)="triggerOpenSelect()" src="../assets/icon/Group.png">
       </ion-avatar>
       <ion-avatar class="avatar-center">
         <img #profileImage >
@@ -89,16 +89,19 @@
       </ion-card-content>
     </ion-card>
   </div>
-<!-- 
-  <ion-item col-8 push-2 class="input--form">
 
-    <ion-select [ngModel]="profileName" col-12 (ngModelChange)="byPass($event)">
+  <ion-item hidden col-8 push-2 class="input--form">
+
+    <ion-select #selectUser [ngModel]="profileName" col-12 (ngModelChange)="byPass($event)">
       <ion-option [value]="profile?.nip">{{profile?.nama}}</ion-option>
       <ion-option text-wrap [value]="user?.nip" *ngFor="let user of profile?.user_pengganti">
         {{user?.nama}}
       </ion-option>
     </ion-select>
   </ion-item>
+
+<!-- 
+  
 
   <div class="content-home">
     <div *ngFor="let menu of menus">
