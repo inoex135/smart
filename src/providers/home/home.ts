@@ -21,7 +21,7 @@ export class HomeProvider {
 
   getDashboard() {
     LogUtil.d(this.TAG, "get dashboard")
-    return this.apiProvider.get(" personal/notification/dashboard")
+    return this.apiProvider.get("/personal/notification/dashboard")
   }
 
 }

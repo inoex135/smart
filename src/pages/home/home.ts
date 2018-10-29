@@ -30,8 +30,17 @@ export class HomePage {
   notifications: Array<any> = [];
   profile: any = {};
   showAvatar:boolean = true;
-
   profileName: string = "";
+
+  dashboard:{} = {
+    "CT": 0,
+    "jam_masuk_hari_ini": "-",
+    "DL": 0,
+    "hari_kerja": 197,
+    "akumulasi_absen": "-",
+    "jumlah_hari_masuk": 128,
+    "jam_keluar_hari_ini": null
+}
 
   constructor(
     public navCtrl: NavController,
@@ -117,8 +126,18 @@ export class HomePage {
   async initData() {
     const profile = await this.token.getProfile()
     const getTotalNotif = await this.homeProvider.getTotalNotication()
-    const dashboard = await this.homeProvider.getDashboard()
-
+    this.homeProvider.getDashboard().subscribe(
+      res => {
+        if (res != null) {
+          LogUtil.d(this.TAG, res)
+          this.dashboard = this.dashboard
+        } 
+      },
+      error => {
+        LogUtil.d(this.TAG, error)
+      }
+    )
+    
     this.homeProvider.getPhotoProfile().subscribe(
       res => {
         if (res != null) {

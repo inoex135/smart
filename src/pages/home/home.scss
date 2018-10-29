@@ -31,7 +31,7 @@ page-home {
   .profile-card {
 
     .label-md {
-      margin: 0;
+      margin: 0 !important;
     }
 
     .logout-text {
@@ -135,9 +135,13 @@ page-home {
     margin-bottom:5%;
     margin-top:10%;
 
-    img {
-      height: 64px;
-      width: 64px;
+    text-avatar {
+      position: absolute;
+    }
+
+    ion-img, text-avatar {
+      height: 64px !important;
+      width: 64px !important;
     }
 
   }
@@ -173,6 +177,7 @@ page-home {
       text-align: right;
       font-size: 1.6rem;
       color: color($colors, 'new-text-color-dark');
+      font-weight: bold;
     }
 
     h2, p {
