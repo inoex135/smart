@@ -6,11 +6,11 @@
         <ion-row>
             <ion-col col-12>
                 <ion-list class="disposition-type">
-                    <ion-item class="item custom-ion-item" *ngIf="profile?.jenis_eselon < 4">
+                    <ion-item class="item custom-ion-item" no-lines *ngIf="profile?.jenis_eselon < 4">
                         <ion-checkbox (ionChange)="selectDisposisi('UNIT')" color="primary" [checked]="disposisiTarget?.unit" [value]="UNIT"></ion-checkbox>
                         <ion-label text-wrap>UNIT</ion-label>
                     </ion-item>
-                    <ion-item class="item custom-ion-item">
+                    <ion-item class="item custom-ion-item" no-lines>
                         <ion-checkbox (ionChange)="selectDisposisi('PERSONAL')" color="primary" [checked]="disposisiTarget?.personal" [value]="PERSONAL"></ion-checkbox>
                         <ion-label text-wrap>PERSONAL</ion-label>
                     </ion-item>
@@ -137,7 +137,7 @@
         <div class="disposisi-padding-top-form" *ngIf="isEselon4()">
             <ion-row *ngIf="component?.disposisiPersonal" class="row">
                 <div *ngFor="let pelaksana of datas?.pelaksana; let i = index" col-12 class="pelaksana">
-                    <ion-item no-lines>
+                    <ion-item no-lines class="item custom-ion-item">
                         <ion-label text-wrap>{{pelaksana?.nama}}</ion-label>
                         <ion-checkbox [checked]="pelaksana?.isChecked" (ionChange)="selectPelaksana(pelaksana, $event.checked, i)" color="primary"
                             [value]="pelaksana?.nip" name="pelaksana[i]"></ion-checkbox>
@@ -148,28 +148,7 @@
                 </div>
             </ion-row>
         </div>
-
     </div>  
-
-
-</ion-grid>
-
-
-<!-- disposisi pilih petunjuk component?.disposisiPetunjuk -->
-<ion-grid *ngIf="currentStep == arraySteps[3]">
-    <ion-card>
-        <ion-card-header class="disposisi-kepada">
-            Petunjuk
-        </ion-card-header>
-        <ion-card-content>
-            
-        </ion-card-content>
-    </ion-card>
-</ion-grid>
-
-<!-- component?.disposisiTanggal -->
-<ion-grid *ngIf="currentStep == arraySteps[4]">
-
 </ion-grid>
 
 <div class="spacer"></div>

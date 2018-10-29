@@ -293,7 +293,7 @@ export class Disposisi {
 
   nextStep(to: any = "root") {
     setTimeout(() => {
-      if (this.currentStep == 1) {
+      if (this.currentStep == 2) {
         this.component.disposisiPersonal = this.disposisiTarget.personal
         this.component.disposisiUnit = this.disposisiTarget.unit
         this.component.unitOrPersonal = this.disposisiTarget.unit && this.disposisiTarget.personal
@@ -314,7 +314,7 @@ export class Disposisi {
       this.component.unitOrPersonal = true;
       this.component.disposisiUnit = false;
       this.component.disposisiPersonal = false;
-    } else if (this.currentStep == this.arraySteps[1]) {
+    } else if (this.currentStep == this.arraySteps[2]) {
       this.component.disposisiPersonal = this.disposisiTarget.personal;
       this.component.disposisiUnit = this.disposisiTarget.unit;
     }
@@ -364,9 +364,11 @@ export class Disposisi {
   }
 
   disabledNextButton = () => {
-    LogUtil.d(this.TAG, 'disabled next button')
     if (this.currentStep == this.arraySteps[0]) {
-      return !this.isDisposisiChecked()
+      if (this.isEselon4()) {
+        return !this.isSifatSuratFilled()
+      }
+      return !this.isDisposisiChecked() || !this.isSifatSuratFilled()
     } else if (this.currentStep == this.arraySteps[2]) {
       if (this.isEselon4()) {
         return this.disposisi.personal.length == 0
@@ -379,6 +381,10 @@ export class Disposisi {
     } else {
       return false
     }
+  }
+
+  isSifatSuratFilled() {
+    return this.disposisi.sifatSurat !== ''
   }
 
   isLastStep() {
