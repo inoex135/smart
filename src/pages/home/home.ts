@@ -134,6 +134,7 @@ export class HomePage {
         } 
       },
       error => {
+        LogUtil.d(this.TAG, "error accessing API dashboard")
         LogUtil.d(this.TAG, error)
       }
     )
@@ -188,7 +189,10 @@ export class HomePage {
   }
 
   getPresensi(): string {
-    if (this.dashboard && this.dashboard.jumlah_hari_masuk && this.dashboard.hari_kerja) {
+    if (this.dashboard 
+      && this.dashboard.jumlah_hari_masuk > 0
+      && this.dashboard.hari_kerja > 0
+    ) {
       let percent = (this.dashboard.jumlah_hari_masuk / this.dashboard.hari_kerja) * 100
       return percent.toFixed(0) + "%"
     }
