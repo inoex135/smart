@@ -36,9 +36,9 @@ export class HomePage {
     "CT": 0,
     "jam_masuk_hari_ini": "-",
     "DL": 0,
-    "hari_kerja": 100,
+    "hari_kerja": 0,
     "akumulasi_absen": "-",
-    "jumlah_hari_masuk": 1,
+    "jumlah_hari_masuk": 0,
     "jam_keluar_hari_ini": null
 }
 
