@@ -32,13 +32,13 @@ export class HomePage {
   showAvatar:boolean = true;
   profileName: string = "";
 
-  dashboard:{} = {
+  dashboard:any = {
     "CT": 0,
     "jam_masuk_hari_ini": "-",
     "DL": 0,
-    "hari_kerja": 197,
+    "hari_kerja": 100,
     "akumulasi_absen": "-",
-    "jumlah_hari_masuk": 128,
+    "jumlah_hari_masuk": 1,
     "jam_keluar_hari_ini": null
 }
 
@@ -185,6 +185,14 @@ export class HomePage {
     } else {
       LogUtil.d(this.TAG, "probably null")
     }
+  }
+
+  getPresensi(): string {
+    if (this.dashboard && this.dashboard.jumlah_hari_masuk && this.dashboard.hari_kerja) {
+      let percent = (this.dashboard.jumlah_hari_masuk / this.dashboard.hari_kerja) * 100
+      return percent.toFixed(0) + "%"
+    }
+    return "-"
   }
 
   //  by pass plt/plh

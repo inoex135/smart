@@ -62,7 +62,7 @@
       </ion-row>
   </ion-grid>
 
-  <ion-card>
+  <ion-card hidden>
     <ion-card-content>
       <p>Test Slideer</p>
     </ion-card-content>
@@ -75,7 +75,7 @@
         <ion-list>
           <ion-item>
             <h2>Presensi</h2>
-            <p>Ugh. As if.</p>
+            <p>{{getPresensi()}}</p>
           </ion-item>
           <ion-item>
             <h2>Jam Masuk</h2>
@@ -83,7 +83,7 @@
           </ion-item>
           <ion-item>
             <h2>Akumulasi Absensi</h2>
-            <p>Ugh. As if.</p>
+            <p>{{dashboard?.akumulasi_absen}}</p>
           </ion-item>
         </ion-list>
       </ion-card-content>
