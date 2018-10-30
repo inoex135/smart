@@ -92,10 +92,13 @@ disposisi {
 
   }
 
-  .bordered-ion-item {
+  .bordered-ion-item, .custom-ion-item {
+    
     ion-icon {
+      margin-left: 5px;
       color: color($colors, 'new-text-color-grey') !important;
     }
+
   }
 
   .bordered-ion-item, .add-personel {
