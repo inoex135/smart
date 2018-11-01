@@ -128,9 +128,9 @@ export class HomePage {
     const getTotalNotif = await this.homeProvider.getTotalNotication()
     this.homeProvider.getDashboard().subscribe(
       res => {
-        if (res != null) {
+        if (res) {
           LogUtil.d(this.TAG, res)
-          this.dashboard = this.dashboard
+          this.dashboard = res
         } 
       },
       error => {
