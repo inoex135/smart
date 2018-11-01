@@ -11,11 +11,12 @@ import { ErrorObservable } from "rxjs/observable/ErrorObservable";
 import { ENV } from "../../config/environment";
 import { TokenProvider } from "../token/token";
 import { LogUtil } from "../../utils/logutil";
+import { TABS } from "ionic-angular/umd/navigation/nav-util";
 
 @Injectable()
 export class ApiProvider {
 
-  TAG:string = 'ApiProvider'
+  static TAG:string = 'ApiProvider'
 
   constructor(public http: HttpClient, public tokenProvider: TokenProvider) {}
 
@@ -46,6 +47,7 @@ export class ApiProvider {
 
   private extractData(res: Response) {
     let body = res;
+    LogUtil.d(ApiProvider.TAG, body)
     return body || {};
   }
 
@@ -56,7 +58,7 @@ export class ApiProvider {
   }
 
   private handleError(error: HttpErrorResponse | any) {
-    console.log(error)
+    LogUtil.d(ApiProvider.TAG, error)
     let errMsg: string;
     // check error if have custom error message from server
     if (error.error.error_code) {
@@ -80,7 +82,7 @@ export class ApiProvider {
       errMessage = errorData.data;
     }
 
-    LogUtil.d(this.TAG, errMessage)
+    LogUtil.d(ApiProvider.TAG, errMessage)
 
     if (errorFormValidasi) {
       errMessage = errorFormValidasi;

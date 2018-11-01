@@ -626,7 +626,8 @@ $searchbar-md-input-clear-icon-color: theme-colors('textColors', 'secondary');
   $toolbar-ios-button-color: theme-colors('textColors', 'accent-first');
   .toolbar {
     .toolbar-background{
-      @include gradient-accent ($color-1, $color-2);
+      //@include gradient-accent ($color-1, $color-2);
+      background: color($colors, 'light-white')
     }
     .toolbar-title {
       text-transform: uppercase;
@@ -693,3 +694,9 @@ $searchbar-md-input-clear-icon-color: theme-colors('textColors', 'secondary');
       color: theme-colors('textColors', 'accent') !important;
     }
   }
+
+ion-navbar { 
+  button .button-inner, ion-title .toolbar-title {
+    color: color($colors, 'new-text-color-grey-light') !important;
+  }
+}

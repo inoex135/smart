@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef } from "@angular/core";
-import { NavController, Platform, IonicPage } from "ionic-angular";
+import { NavController, Platform, IonicPage, Select } from "ionic-angular";
 import { UserProvider } from "../../providers/user/user";
 
 import { MenuHomeConstant } from "../../constant/menu-home";
@@ -23,14 +23,24 @@ export class HomePage {
   TAG:string = 'HomePage'
 
   @ViewChild("profileImage") image: ElementRef;
+  @ViewChild("selectUser") select: Select;
 
   menus: Array<any> = [];
   backgroundImage: string = "assets/images/bg_login.png";
   notifications: Array<any> = [];
   profile: any = {};
-  showAvatar:boolean = true;
-
+  showAvatar: boolean = true;
   profileName: string = "";
+
+  dashboard:any = {
+    "CT": 0,
+    "jam_masuk_hari_ini": "-",
+    "DL": 0,
+    "hari_kerja": 0,
+    "akumulasi_absen": "-",
+    "jumlah_hari_masuk": 0,
+    "jam_keluar_hari_ini": null
+}
 
   constructor(
     public navCtrl: NavController,
@@ -44,7 +54,8 @@ export class HomePage {
     private storage: Storage
   ) {}
 
-  ionViewDidLoad() {
+  ionViewWillEnter() {
+    LogUtil.d(this.TAG, "ionViewWillEnter")
     this.listMenu();
     this.initData();
     this.platform.ready().then(() => {
@@ -62,6 +73,7 @@ export class HomePage {
       data.notificationTotal = this.setNotificationTotal(data.title, res);
     });
   }
+
   setNotificationTotal(title: any, res: any) {
     if (title === "PERSURATAN") return res.notification_persuratan;
 
@@ -70,8 +82,10 @@ export class HomePage {
     if (title === "APT") return res.notification_apt;
   }
 
-  pagesTo(component: any) {
-    this.navCtrl.push(component);
+  pagesTo(component: string) {
+    if (component !== '') {
+      this.navCtrl.push(component);
+    }
   }
 
   logout() {
@@ -110,9 +124,21 @@ export class HomePage {
   }
 
   async initData() {
-    const profile = await this.token.getProfile();
-    const getTotalNotif = await this.homeProvider.getTotalNotication();
-
+    const profile = await this.token.getProfile()
+    const getTotalNotif = await this.homeProvider.getTotalNotication()
+    this.homeProvider.getDashboard().subscribe(
+      res => {
+        if (res != null) {
+          LogUtil.d(this.TAG, res)
+          this.dashboard = this.dashboard
+        } 
+      },
+      error => {
+        LogUtil.d(this.TAG, "error accessing API dashboard")
+        LogUtil.d(this.TAG, error)
+      }
+    )
+    
     this.homeProvider.getPhotoProfile().subscribe(
       res => {
         if (res != null) {
@@ -151,6 +177,26 @@ export class HomePage {
         err => false
       );
     }
+  }
+
+  triggerOpenSelect() {
+    if (this.select) {
+      LogUtil.d(this.TAG, "not null")
+      this.select.open()
+    } else {
+      LogUtil.d(this.TAG, "probably null")
+    }
+  }
+
+  getPresensi(): string {
+    if (this.dashboard 
+      && this.dashboard.jumlah_hari_masuk > 0
+      && this.dashboard.hari_kerja > 0
+    ) {
+      let percent = (this.dashboard.jumlah_hari_masuk / this.dashboard.hari_kerja) * 100
+      return percent.toFixed(0) + "%"
+    }
+    return "-"
   }
 
   //  by pass plt/plh

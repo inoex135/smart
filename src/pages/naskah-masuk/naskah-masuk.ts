@@ -3,7 +3,7 @@ import {
   NavController,
   NavParams,
   IonicPage,
-  ModalController
+  Modal, ModalController, ModalOptions
 } from "ionic-angular";
 import { NaskahMasukProvider } from "../../providers/naskah-masuk/naskah-masuk";
 import { LoaderHelper } from "../../helpers/loader-helper";
@@ -11,6 +11,9 @@ import remove from "lodash/remove";
 import { debounceTime, finalize } from "rxjs/operators";
 import { ToastHelper } from "../../helpers/toast-helper";
 import assign from "lodash/assign";
+import { LogUtil } from "../../utils/logutil";
+import { ModalFilterPage } from "../modal-filter/modal-filter";
+import { NaskahMasukDetailPage } from "../naskah-masuk-detail/naskah-masuk-detail";
 
 @IonicPage()
 @Component({
@@ -18,23 +21,28 @@ import assign from "lodash/assign";
   templateUrl: "naskah-masuk.html"
 })
 export class NaskahMasukPage {
+
+  TAG:string = 'NaskahMasukPage'
+
   listNaskah: any = [];
   isBulkAction: boolean = false;
 
   filter: any = {
     naskahUnit: "",
-    keyword: ""
+    naskahSifat: ""
   };
+
   naskahTerima: any[] = [];
 
   searching: boolean = false;
+  isSearchOpen: boolean = false;
 
   page: number = 0;
 
   //get param terima naskah modal
   terimaNaskahParam: any;
-  jenis :any="";
-  sifat :any="";
+  //jenis :any="";
+  //sifat :any="";
   keyword :any="";
 
   constructor(
@@ -43,15 +51,22 @@ export class NaskahMasukPage {
     private naskahProvider: NaskahMasukProvider,
     private loaderHelper: LoaderHelper,
     private toast: ToastHelper,
-    private modalController: ModalController
+    private modalController: ModalController,
+    private modal: ModalController
   ) {}
 
-  ionViewDidLoad() {
+ /*  ionViewDidLoad() {
+    LogUtil.d(this.TAG, "ionViewDidLoad")
+    this.getNaskahMasuk();
+  } */
+
+  ionViewWillEnter() {
+    LogUtil.d(this.TAG, "ionViewWillEnter")
     this.getNaskahMasuk();
   }
 
   detailNaskah(naskah: any) {
-    this.navCtrl.push("NaskahMasukDetailPage", { naskahId: naskah.id });
+    this.navCtrl.push(NaskahMasukDetailPage.TAG, { naskahId: naskah.id });
   }
 
   //proses search by type dan default search
@@ -59,21 +74,18 @@ export class NaskahMasukPage {
     let searchProvider: any;
 
     this.showLoader();
-    console.log("tipe : "+ type);
-    if (type === "type") {
+    /* if (type === "type") {
       this.jenis = params;
       //searchProvider = this.naskahProvider.searchNaskahByTipe(params);
-    } 
-    else if (type === "sifat") {
+    } else if (type === "sifat") {
       this.sifat = params;
       //searchProvider = this.naskahProvider.searchNaskahBySifat(params);
-    } 
-    else {
+    } else {
       this.keyword = params;
       //
-    }
-    console.log("keyword : "+ this.keyword);
-    searchProvider = this.naskahProvider.searchNaskahComplete(this.jenis,this.sifat,this.keyword);
+    } */
+    this.keyword = params;
+    searchProvider = this.naskahProvider.searchNaskahComplete(this.filter.naskahUnit, this.filter.naskahSifat, this.keyword);
     searchProvider
       .pipe(debounceTime(700), finalize(() => this.hideLoader()))
       .subscribe(
@@ -110,9 +122,9 @@ export class NaskahMasukPage {
 
   doInfinite(infiniteScroll) {
     this.page = this.page + 1;
-    console.log("page " + this.page);
     setTimeout(() => {
-      this.naskahProvider.searchNaskahComplete(this.jenis,this.sifat,this.keyword,this.page).subscribe(res => {
+      this.naskahProvider.searchNaskahComplete(this.filter.naskahUnit, this.filter.naskahSifat,this.keyword,this.page)
+      .subscribe(res => {
       
         for (var index = 0; index < res.response.length; index++) {
           
@@ -180,6 +192,19 @@ export class NaskahMasukPage {
     return removeNaskah;
   }
 
+  doRefresh(refresher) {
+    this.naskahProvider.getNaskahMasuk().subscribe(
+      res => {
+        this.listNaskah = res.response
+        refresher.complete()
+      },
+      err => { 
+        this.loaderHelper.dismiss()
+        refresher.complete();
+       }
+    );
+  }
+
   changeColor(status:string = '') {
     if (status.includes('Disposisi')) {
       return '#ffb600'
@@ -191,6 +216,29 @@ export class NaskahMasukPage {
       return '#26b459'
     }
     return 'default' 
+  }
+
+  backButtonClick() {
+    if (this.isSearchOpen) {
+      this.isSearchOpen = false
+    } else {
+      this.navCtrl.pop()
+    }
+  }
+
+  clickFilter() {
+    const myModalOptions: ModalOptions = {
+      enableBackdropDismiss: false
+    };
+    const myModal: Modal = this.modal.create(ModalFilterPage.TAG, { filter: this.filter }, myModalOptions);
+    myModal.present();
+    myModal.onDidDismiss(data => {
+      if (data != null) {
+        this.filter = data
+        this.searchNaskahBy('search', this.keyword);
+      }
+    });
+ 
   }
 
 }

@@ -1,6 +1,15 @@
 page-home {
+
   $transparent: transparent;
   font-family:Roboto;
+
+  ion-navbar {
+    box-shadow: 0 1px 8px #dfe2e4 !important;
+  }
+
+  .toolbar-background {
+    background: color($colors, 'light-white') !important;
+  }
 
   .logout-icon{
     font-size: 10px;
@@ -11,9 +20,89 @@ page-home {
   }
 
   ion-content {
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+    background: color($colors, 'new-background') !important;
+  }
+
+  .svg-img {
+    width: 32px !important;
+    height: 32px !important;
+  }
+
+  .profile-card {
+
+    .label-md {
+      margin: 0 !important;
+    }
+
+    .logout-text {
+      text-align: right;
+      color: color($colors, 'new-text-color-light');
+    }
+
+    ion-card-content {
+      text-align: center;
+      margin-top: 10px;
+
+      :nth-child(1) {
+        font-weight: bold;
+      }
+
+    }
+
+  }
+
+  .menu-grid {    
+
+    margin-top: 15px;
+
+    .mrapat-background {
+      background-image: url('../assets/svg/m-erapat.svg') !important;
+    }
+
+    .mapt-background {
+      background-image: url('../assets/svg/m-apt.svg') !important;
+    }
+
+    .mpersuratan-background {
+      background-image: url('../assets/svg/m-persuratan.svg') !important;
+    }
+
+    .mpersonal-background {
+      background-image: url('../assets/svg/m-personal.svg') !important;
+    }
+
+    .mpersonal-background, .mrapat-background, .mpersuratan-background, .mapt-background {
+      background-repeat: no-repeat !important;
+      background-size: 80px 80px !important;
+      background-position: center !important; 
+    }
+
+    .img-grid ion-col {
+      //background: color($colors, "light-white");
+      //margin: 5px;
+      //border: 0.5px color($colors, 'new-text-color-light') solid;
+      //border-radius: 2px;
+      //box-shadow: 3px 3px 3px 1px #e3ebf7;
+      // img {
+      //   text-align: center;
+      //   width: 80px;
+      //   height: 80px;
+      //   display: block;
+      //   margin: auto;
+      //  }
+      min-height: 72px;
+    }
+    .text-grid ion-col {
+      text-align: center;
+      color: #4a4a4a !important;
+    }
+
+  }
+
+  ion-title .toolbar-title {
+    color: color($colors, 'new-text-color-dark') !important;
+    text-transform: none !important;
+    text-align: center;
   }
 
   .toolbar-logo {
@@ -46,9 +135,13 @@ page-home {
     margin-bottom:5%;
     margin-top:10%;
 
-    img {
-      height: 64px;
-      width: 64px;
+    text-avatar {
+      position: absolute;
+    }
+
+    ion-img, text-avatar {
+      height: 64px !important;
+      width: 64px !important;
     }
 
   }
@@ -58,16 +151,48 @@ page-home {
   span {
     color: white;
   }
-  .toolbar-background,
-  ion-navbar,
-  ion-header {
-    background: $transparent !important;
-    background-color: $transparent !important;
-  }
+
   .header-md::after,
   .toolbar-background-ios {
     background-image: none;
     border-bottom: 0;
+  }
+
+  .present {
+
+    h5, h2 {
+      color: color($colors, 'new-text-color-grey') !important;
+    }
+
+    h5 {
+      margin-left: 10px;
+    }
+
+    h2 {
+      float: left
+    }
+
+    p {
+      float: right;
+      text-align: right;
+      font-size: 1.6rem;
+      color: color($colors, 'new-text-color-dark');
+      font-weight: bold;
+    }
+
+    h2, p {
+      width: 50%;
+    }
+
+    .input-wrapper, .label-md, .item-md, .item-inner {
+      margin: 0px;
+      padding: 0px !important;
+    }
+
+    ion-item:not(:last-child) {
+      border-bottom: 0.5px solid #dedede;
+    }
+
   }
 
   // avatar

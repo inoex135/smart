@@ -1,0 +1,63 @@
+<!--
+  Generated template for the ModalFilterPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Filter</ion-title>
+    <ion-buttons end>
+        <button ion-button icon-only (click)="closeModal()">
+            <ion-icon ios="ios-close" md="md-close"></ion-icon>
+        </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+    <ion-list class="list list-md">
+      <ion-list-header>
+          Pilih Tujuan Naskah
+      </ion-list-header>
+
+      <ion-item class="input--form daftar-naskah-filter">
+        <ion-select [(ngModel)]="filter.naskahUnit" placeholder="Tujuan Naskah">
+          <ion-option value="alltype">Semua</ion-option>
+          <ion-option value="unit">Naskah Unit</ion-option>
+          <ion-option value="personal">Naskah Pribadi</ion-option>
+          <ion-option value="permohonan">Naskah Permohonan</ion-option>
+        </ion-select>
+      </ion-item>
+
+    </ion-list>
+
+    <ion-list class="list list-md">
+      <ion-list-header>
+          Pilih Tujuan Naskah
+      </ion-list-header>
+      <ion-item class="input--form daftar-naskah-filter">
+          <ion-select [(ngModel)]="filter.naskahSifat" placeholder="Sifat Naskah">
+            <ion-option value="">Semua</ion-option>
+            <ion-option value="00">Biasa</ion-option>
+            <ion-option value="11">Segera</ion-option>
+            <ion-option value="12">Sangat Segera</ion-option>
+            <ion-option value="23">Kilat</ion-option>
+          </ion-select>
+        </ion-item>
+    </ion-list>
+
+</ion-content>
+
+<ion-footer>
+    <ion-buttons>
+        <button ion-button full (click)="closeWithReturn()">
+            Terapkan
+        </button>
+    </ion-buttons>
+</ion-footer>
+

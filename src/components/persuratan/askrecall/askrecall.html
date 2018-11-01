@@ -1,0 +1,33 @@
+<ion-grid padding>
+    <ion-card class="askrecall-card">
+        <ion-card-header class="askrecall-header">
+            Permintaan Recall
+        </ion-card-header>
+        <ion-card-content>
+            <ion-row wrap>
+                <ion-col col-12 col-sm-12 col-md-12 offset-lg-3 col-lg-6 offset-xl-3 col-xl-6>
+                    
+                    <!---Input field catatan selesai-->
+                    <ion-item no-padding class="textarea--form">
+                        <ion-textarea #alasan="ngModel" required placeholder="Alasan Permintaan Recall" type="text" [(ngModel)]="data.alasan"></ion-textarea>
+                    </ion-item>
+
+                    <!---Input field lokasi arsip-->
+                    
+                    <ion-item>
+                        <p color="danger" ion-text *ngFor="let err of errors">
+                            * {{err?.messages}}
+                        </p>
+                    </ion-item>
+
+                    <button *ngIf="detail?.naskahPermohonan !== 'ya'" ion-button full [disabled]="alasan.invalid"
+                        (click)="askrecall(data)" margin-top color="default-blue">Simpan</button>
+
+                   
+
+
+                </ion-col>
+            </ion-row>
+        </ion-card-content>
+    </ion-card>
+</ion-grid>

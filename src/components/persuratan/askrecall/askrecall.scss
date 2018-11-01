@@ -1,0 +1,50 @@
+askrecall {
+  font-family: Roboto;
+  $solid-border: 0.4px solid rgba(0, 0, 0, 0.2);
+
+  ion-datetime {
+    .button-inner {
+      border-bottom: $solid-border !important;
+    }
+  }
+
+  .item-input-has-focus,
+  .input-has-focus {
+    border: 0 !important;
+  }
+
+  #upload {
+    display: none !important;
+  }
+
+  ion-item.textarea--form {
+    border: 1px solid #e8e9eb !important;
+    border-radius: 5px;
+    //set heigh ion-text
+    max-height: 10em;
+    height: 10em !important;
+
+    ion-textarea {
+      max-height: 100% !important;
+      textarea {
+        margin: 2px;
+        // agar scroll di pepetkan ke kanan
+        &.text-input-md {
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  .askrecall-header{
+    background-color: #9E9E9E;
+    margin-bottom: 5%;
+    color: white;
+  }
+
+  .selesai-card{
+    margin-left:0%;
+    margin-top: 0%;
+    width: 100%;
+  }
+}

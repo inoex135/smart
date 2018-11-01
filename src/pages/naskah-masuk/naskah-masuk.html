@@ -1,11 +1,25 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>Daftar Naskah Masuk</ion-title>
+  <ion-navbar class="custom-action-bar" hideBackButton="true">
+      <ion-buttons start left>
+          <button class="custom-back-button" ion-button icon-only (click)="backButtonClick()">
+              <ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon>
+          </button>
+      </ion-buttons>
+    <ion-title *ngIf="!isSearchOpen">Daftar Naskah Masuk</ion-title>
+    <ion-searchbar *ngIf="isSearchOpen" showCancelBotton="true" (ionCancel)="isSearchOpen=false" [(ngModel)]="filter.keyword" search-bar-bcg (ionInput)="searchNaskahBy('search', $event?.target?.value)" (ionCancel)="searchNaskahBy('search', $event?.target?.value)"></ion-searchbar>
+    <ion-buttons end>
+        <button *ngIf="!isSearchOpen" ion-button icon-only (click)="isSearchOpen=true">
+            <ion-icon ios="ios-search" md="md-search"></ion-icon>
+        </button>
+        <button ion-button icon-only (click)="clickFilter()">
+            <ion-icon ios="ios-funnel" md="md-funnel"></ion-icon>
+        </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
-  <ion-list no-lines padding>
+  <!-- <ion-list no-lines padding>
     <ion-header>
       <div class="row">
           <div class="col col-50">
@@ -36,8 +50,15 @@
     <ion-item *ngIf="searching" class="spinner-container">
       <ion-spinner></ion-spinner>
     </ion-item>
-  </ion-list>
+  </ion-list> -->
 
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
 
   <ion-list class="daftar-naskah-all">
     <ion-card padding (press)="pressAndHoldSurat(naskah)" *ngFor="let naskah of listNaskah" class="naskah-list">

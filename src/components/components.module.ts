@@ -6,6 +6,7 @@ import { Disposisi } from "./persuratan/disposisi/disposisi";
 import { Teruskan } from "./persuratan/teruskan/teruskan";
 import { Selesai } from "./persuratan/selesai/selesai";
 import { RiwayatComponent } from "./persuratan/riwayat/riwayat-component";
+import { Askrecall } from "./persuratan/askrecall/askrecall";
 import {
   TimelineComponent,
   TimelineAgendaComponent
@@ -26,6 +27,7 @@ import { AptIndikatorButtonComponent } from "./apt-indikator-button/apt-indikato
 import { PipesModule } from "../pipes/pipes.module";
 import { AutoCompleteModule } from "ionic2-auto-complete";
 import { MasterPegawaiProvider } from "../providers/master-pegawai/master-pegawai";
+import { NotificationBell } from "./notification-bell/notification-bell";
 
 @NgModule({
   declarations: [
@@ -35,6 +37,7 @@ import { MasterPegawaiProvider } from "../providers/master-pegawai/master-pegawa
     RiwayatComponent,
     Selesai,
     Teruskan,
+    Askrecall,
     TimelineComponent,
     TimelineAgendaComponent,
     TextAvatarDirective,
@@ -47,7 +50,8 @@ import { MasterPegawaiProvider } from "../providers/master-pegawai/master-pegawa
     EmptyStateComponent,
     NaskahModalTerimaComponent,
     NaskahModalDownloadComponent,
-    AptIndikatorButtonComponent
+    AptIndikatorButtonComponent,
+    NotificationBell
   ],
   imports: [IonicModule, PipesModule, AutoCompleteModule],
   exports: [
@@ -57,6 +61,7 @@ import { MasterPegawaiProvider } from "../providers/master-pegawai/master-pegawa
     RiwayatComponent,
     Selesai,
     Teruskan,
+    Askrecall,
     TimelineComponent,
     TimelineAgendaComponent,
     TextAvatarDirective,
@@ -69,7 +74,8 @@ import { MasterPegawaiProvider } from "../providers/master-pegawai/master-pegawa
     EmptyStateComponent,
     NaskahModalTerimaComponent,
     NaskahModalDownloadComponent,
-    AptIndikatorButtonComponent
+    AptIndikatorButtonComponent,
+    NotificationBell
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [MasterPegawaiProvider]
