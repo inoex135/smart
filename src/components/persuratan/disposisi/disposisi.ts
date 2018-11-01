@@ -364,12 +364,13 @@ export class Disposisi {
   }
 
   disabledNextButton = () => {
-    if (this.currentStep == this.arraySteps[0]) {
-      if (this.isEselon4()) {
+    if (this.currentStep == this.arraySteps[2]) {
+      /* if (this.isEselon4()) {
         return !this.isSifatSuratFilled()
       }
-      return !this.isDisposisiChecked() || !this.isSifatSuratFilled()
-    } else if (this.currentStep == this.arraySteps[2]) {
+      return !this.isDisposisiChecked() || !this.isSifatSuratFilled() */
+      return !this.isSifatSuratFilled()
+    } else if (this.currentStep == this.arraySteps[0]) {
       if (this.isEselon4()) {
         return this.disposisi.personal.length == 0
       }

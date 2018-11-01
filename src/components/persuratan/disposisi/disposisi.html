@@ -1,7 +1,7 @@
 <!-- disposisi unit or personal component?.unitOrPersonal -->
-<ion-grid *ngIf="currentStep == arraySteps[0]">
+<ion-grid *ngIf="currentStep == arraySteps[2]">
 
-    <div *ngIf="!isEselon4()">
+    <!-- <div *ngIf="!isEselon4()">
         <h4>Disposisi Kepada</h4>
         <ion-row>
             <ion-col col-12>
@@ -17,7 +17,7 @@
                 </ion-list>
             </ion-col>
         </ion-row>
-    </div>
+    </div> -->
 
     <h4>Sifat Disposisi</h4>
     <ion-col col-12>
@@ -73,7 +73,7 @@
 </ion-grid>
 
 <!-- target disposisi untuk personal atau unit component?.disposisiUnit || component?.disposisiPersonal -->
-<ion-grid *ngIf="currentStep == arraySteps[2]">
+<ion-grid *ngIf="currentStep == arraySteps[0]">
     <!-- disposisi unit -->
     <h4>Disposisi Kepada Unit</h4>
     <h6><span class="danger-star">*</span> Jika Tujuan Disposisi Lebih dari 2, maka Lead Wajib dipilih</h6>
@@ -102,11 +102,11 @@
         </ion-col>
     </ion-row>
 
-    <!-- disposisi personal -->
-    <div *ngIf="component?.disposisiPersonal">
+    <!-- disposisi personal *ngIf="component?.disposisiPersonal" -->
+    <div >
         <h4>Disposisi Kepada Personal</h4>
         <div *ngIf="!isEselon4()">
-            <ion-row *ngIf="component?.disposisiPersonal">
+            <ion-row >
                 <ion-col col-12>
                     <ng-template #withFlags let-attrs="attrs">
                         <span>{{attrs?.data?.nip}}, {{attrs?.data?.nama}}</span>

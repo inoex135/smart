@@ -7,11 +7,7 @@
     </ion-buttons>
     <ion-title center>SMARt</ion-title>
     <ion-buttons end>
-      <button ion-button>
-        <img class="svg-img"  />
-        <!-- <span *ngIf="isNoficationExist()" class="notification-dot"></span>
-        <img class="svg-img" src="../assets/svg/Bell.svg" /> -->
-      </button>
+      <notification-bell></notification-bell>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
@@ -45,8 +41,8 @@
       </ion-col>
       <ion-col class="col mpersonal-background" (click)="pagesTo('PersonalPage')">
       </ion-col>
-      <!-- <ion-col class="col mrapat-background" (click)="pagesTo('')">
-      </ion-col> -->
+      <ion-col class="col mrapat-background" (click)="pagesTo('')">
+      </ion-col>
     </ion-row>
     <ion-row class="row text-grid">
         <ion-col class="col">
