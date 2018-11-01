@@ -13,6 +13,7 @@ import { TokenProvider } from "../../providers/token/token";
 import { ToastHelper } from "../../helpers/toast-helper";
 import { Storage } from "@ionic/storage";
 import { LogUtil } from "../../utils/logutil";
+import { NotificationBell } from "../../components/notification-bell/notification-bell";
 @IonicPage()
 @Component({
   selector: "page-home",
@@ -22,15 +23,16 @@ export class HomePage {
 
   TAG:string = 'HomePage'
 
-  @ViewChild("profileImage") image: ElementRef;
-  @ViewChild("selectUser") select: Select;
+  @ViewChild("profileImage") image: ElementRef
+  @ViewChild("selectUser") select: Select
+  @ViewChild("bell") bell: NotificationBell
 
-  menus: Array<any> = [];
-  backgroundImage: string = "assets/images/bg_login.png";
-  notifications: Array<any> = [];
-  profile: any = {};
-  showAvatar: boolean = true;
-  profileName: string = "";
+  menus: Array<any> = []
+  backgroundImage: string = "assets/images/bg_login.png"
+  notifications: Array<any> = []
+  profile: any = {}
+  showAvatar: boolean = true
+  profileName: string = ""
 
   dashboard:any = {
     "CT": 0,
@@ -61,17 +63,14 @@ export class HomePage {
     this.platform.ready().then(() => {
       this.fcmGetToken();
     });
+    if (this.bell) {
+        this.bell.updateNotification()
+    }
   }
 
   listMenu() {
     this.menus = MenuHomeConstant.getMenus();
     return this.menus;
-  }
-
-  mappingResponNotif(res?: any) {
-    return this.menus.map((data, index) => {
-      data.notificationTotal = this.setNotificationTotal(data.title, res);
-    });
   }
 
   setNotificationTotal(title: any, res: any) {
@@ -125,12 +124,11 @@ export class HomePage {
 
   async initData() {
     const profile = await this.token.getProfile()
-    const getTotalNotif = await this.homeProvider.getTotalNotication()
     this.homeProvider.getDashboard().subscribe(
       res => {
-        if (res != null) {
+        if (res) {
           LogUtil.d(this.TAG, res)
-          this.dashboard = this.dashboard
+          this.dashboard = res
         } 
       },
       error => {
@@ -157,22 +155,13 @@ export class HomePage {
     if (profile) {
       this.profile = profile;
       this.profileName = profile.nip;
-      getTotalNotif.subscribe(
-        res => this.mappingResponNotif(res),
-        err => {
-          this.userProvider.purgeAuth();
-          this.navCtrl.setRoot("LoginPage");
-        }
-      );
     } else {
       const getProfile = this.userProvider.getProfile();
 
-      Observable.zip(getProfile, getTotalNotif).subscribe(
-        ([profile, totalNotif]) => {
+      Observable.zip(getProfile).subscribe(
+        ([profile]) => {
           this.profile = profile;
           this.profileName = profile.nip;
-
-          this.mappingResponNotif(totalNotif);
         },
         err => false
       );
