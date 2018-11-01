@@ -55,26 +55,8 @@ page-home {
 
     margin-top: 15px;
 
-    .mrapat-background {
-      background-image: url('../assets/svg/m-erapat.svg') !important;
-    }
-
-    .mapt-background {
-      background-image: url('../assets/svg/m-apt.svg') !important;
-    }
-
-    .mpersuratan-background {
-      background-image: url('../assets/svg/m-persuratan.svg') !important;
-    }
-
-    .mpersonal-background {
-      background-image: url('../assets/svg/m-personal.svg') !important;
-    }
-
-    .mpersonal-background, .mrapat-background, .mpersuratan-background, .mapt-background {
-      background-repeat: no-repeat !important;
-      background-size: 80px 80px !important;
-      background-position: center !important; 
+    .home-menu-button {
+      padding: 0px !important;
     }
 
     .img-grid ion-col {
