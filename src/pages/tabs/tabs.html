@@ -1,11 +1,11 @@
 <ion-header>
-  <ion-navbar color="green-light">
+  <ion-navbar>
     <ion-title>APT</ion-title>
   </ion-navbar>
 </ion-header>
 
 
-<ion-tabs [color]="'green-light'">
+<ion-tabs>
   <ion-tab [root]="tab1Root" tabTitle="Permohonan Masuk" tabIcon="filing" [rootParams]="params?.PERMOHONAN_MASUK"></ion-tab>
   <ion-tab [root]="tab1Root" tabTitle="Dekat Batas Waktu" tabIcon="alert" [rootParams]="params?.DEKAT_BATAS_WAKTU"></ion-tab>
   <ion-tab [root]="tab1Root" tabTitle="Lewat Batas Waktu" tabIcon="speedometer" [rootParams]="params?.LEWAT_BATAS_WAKTU"></ion-tab>

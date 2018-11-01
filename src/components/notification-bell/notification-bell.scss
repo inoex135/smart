@@ -1,0 +1,35 @@
+notification-bell {
+
+  button {
+    padding: 0px !important;
+    margin: 0px !important;
+    .notification-dot {
+  
+      background-color: red;
+      width: 10px;
+      height: 10px;
+      box-sizing: content-box;
+      border-radius: 10px;
+      position: absolute;
+      top: 0.1rem;
+      left: 2.0rem;
+      opacity: 0.9;
+  
+      & ~ ion-icon {
+        margin-right: 1.2rem;
+      }
+
+    }
+
+  }
+
+  botton:hover, .botton-clear-md, 
+  .botton-clear-ios, 
+  .botton-clear-wp
+  .button-clear-ios:hover:not(.disable-hover),
+  .button-clear-wp:hover:not(.disable-hover),
+  .button-clear-md:hover:not(.disable-hover) {
+    background-color: transparent !important;
+  }
+
+}

@@ -27,6 +27,7 @@ import { AptIndikatorButtonComponent } from "./apt-indikator-button/apt-indikato
 import { PipesModule } from "../pipes/pipes.module";
 import { AutoCompleteModule } from "ionic2-auto-complete";
 import { MasterPegawaiProvider } from "../providers/master-pegawai/master-pegawai";
+import { NotificationBell } from "./notification-bell/notification-bell";
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { MasterPegawaiProvider } from "../providers/master-pegawai/master-pegawa
     EmptyStateComponent,
     NaskahModalTerimaComponent,
     NaskahModalDownloadComponent,
-    AptIndikatorButtonComponent
+    AptIndikatorButtonComponent,
+    NotificationBell
   ],
   imports: [IonicModule, PipesModule, AutoCompleteModule],
   exports: [
@@ -72,7 +74,8 @@ import { MasterPegawaiProvider } from "../providers/master-pegawai/master-pegawa
     EmptyStateComponent,
     NaskahModalTerimaComponent,
     NaskahModalDownloadComponent,
-    AptIndikatorButtonComponent
+    AptIndikatorButtonComponent,
+    NotificationBell
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [MasterPegawaiProvider]

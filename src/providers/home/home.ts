@@ -19,4 +19,9 @@ export class HomeProvider {
     return this.apiProvider.getBlob("/personal/foto");
   }
 
+  getDashboard() {
+    LogUtil.d(this.TAG, "get dashboard")
+    return this.apiProvider.get("/personal/notification/dashboard")
+  }
+
 }

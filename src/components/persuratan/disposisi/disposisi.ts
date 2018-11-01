@@ -87,7 +87,7 @@ export class Disposisi {
 
   currentStep:number = 0
 
-  arraySteps:any = [0, 1, 2, 3, 4]
+  arraySteps:any = [0, 1, 2]
 
   profile: any = "";
 
@@ -109,7 +109,6 @@ export class Disposisi {
       LogUtil.d(this.TAG, res)
       this.profile = res
       if (this.isEselon4()) {
-        this.arraySteps = [-2, 0, 1, 2, 3]
         this.component.disposisiPersonal = true
         this.disposisiTarget.personal = true
       }
@@ -294,7 +293,7 @@ export class Disposisi {
 
   nextStep(to: any = "root") {
     setTimeout(() => {
-      if (this.currentStep == 1) {
+      if (this.currentStep == 2) {
         this.component.disposisiPersonal = this.disposisiTarget.personal
         this.component.disposisiUnit = this.disposisiTarget.unit
         this.component.unitOrPersonal = this.disposisiTarget.unit && this.disposisiTarget.personal
@@ -315,7 +314,7 @@ export class Disposisi {
       this.component.unitOrPersonal = true;
       this.component.disposisiUnit = false;
       this.component.disposisiPersonal = false;
-    } else if (this.currentStep == this.arraySteps[1]) {
+    } else if (this.currentStep == this.arraySteps[2]) {
       this.component.disposisiPersonal = this.disposisiTarget.personal;
       this.component.disposisiUnit = this.disposisiTarget.unit;
     }
@@ -365,21 +364,28 @@ export class Disposisi {
   }
 
   disabledNextButton = () => {
-    LogUtil.d(this.TAG, 'disabled next button')
-    if (this.currentStep == this.arraySteps[0]) {
-      return !this.isDisposisiChecked()
-    } else if (this.currentStep == this.arraySteps[1]) {
+    if (this.currentStep == this.arraySteps[2]) {
+      /* if (this.isEselon4()) {
+        return !this.isSifatSuratFilled()
+      }
+      return !this.isDisposisiChecked() || !this.isSifatSuratFilled() */
+      return !this.isSifatSuratFilled()
+    } else if (this.currentStep == this.arraySteps[0]) {
       if (this.isEselon4()) {
         return this.disposisi.personal.length == 0
       }
       if (this.component.disposisiUnit && !this.component.disposisiPersonal) {
         return this.disposisi.unitTujuan.length == 0
       } 
-    } else if (this.currentStep == this.arraySteps[3]) {
+    } else if (this.currentStep == this.arraySteps[1]) {
       return this.disposisi.petunjuk.length == 0
     } else {
       return false
     }
+  }
+
+  isSifatSuratFilled() {
+    return this.disposisi.sifatSurat !== ''
   }
 
   isLastStep() {

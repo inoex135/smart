@@ -1,32 +1,105 @@
-<ion-content [ngStyle]="{'background-image': 'url(' + backgroundImage +')'}">
-  <ion-header>
-    <ion-navbar transparent>
-      <ion-buttons end>
-        <button ion-button (click)="logout()">
+<ion-header>
+  <ion-navbar>
+    <ion-buttons start left>
+      <button ion-button >
+        <img class="svg-img"  />
+      </button>
+    </ion-buttons>
+    <ion-title center>SMARt</ion-title>
+    <ion-buttons end>
+      <notification-bell></notification-bell>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-card class="profile-card">
+    <ion-item>
+      <ion-avatar item-start>
+        <img class="svg-img" (click)="triggerOpenSelect()" src="../assets/icon/Group.png">
+      </ion-avatar>
+      <ion-avatar class="avatar-center">
+        <img #profileImage >
+        <text-avatar [hidden]="!showAvatar" [text]="profile?.nama || ''"></text-avatar>
+      </ion-avatar>
+      <ion-avatar item-end class="logout-text" (click)="logout()">
           Logout
-        </button>
-      </ion-buttons>
-    </ion-navbar>
-  </ion-header>
+      </ion-avatar>
+    </ion-item>
+    
+    <ion-card-content>
+      <p>{{profile?.nama}}</p>
+      <p>{{profile?.nip}}</p>
+    </ion-card-content>
+  </ion-card>
 
-  <ion-item class="avatar-item" no-lines>
-    <ion-avatar class="avatar-center">
-      <img #profileImage >
-      <text-avatar [hidden]="!showAvatar" [text]="profile?.nama || ''"></text-avatar>
-     <!--   -->
-      <!-- <h4 ion-text color="light" class="title">{{profile?.nama}}</h4> -->
-    </ion-avatar>
-  </ion-item>
+  <ion-grid class="grid menu-grid">
+    <ion-row class="row img-grid">
+      <ion-col class="col mpersuratan-background" (click)="pagesTo('SuratPage')">
+      </ion-col>
+      <ion-col class="col mapt-background" (click)="pagesTo('TabsPage')">
+      </ion-col>
+      <ion-col class="col mpersonal-background" (click)="pagesTo('PersonalPage')">
+      </ion-col>
+      <ion-col class="col mrapat-background" (click)="pagesTo('')">
+      </ion-col>
+    </ion-row>
+    <ion-row class="row text-grid">
+        <ion-col class="col">
+            Persuratan
+        </ion-col>
+        <ion-col class="col">
+            APT
+        </ion-col>
+        <ion-col class="col">
+            Personal
+        </ion-col>
+        <!-- <ion-col class="col">
+            E-Rapat
+        </ion-col> -->
+      </ion-row>
+  </ion-grid>
 
-  <ion-item col-8 push-2 class="input--form">
+  <ion-card hidden>
+    <ion-card-content>
+      <p>Test Slideer</p>
+    </ion-card-content>
+  </ion-card>
 
-    <ion-select [ngModel]="profileName" col-12 (ngModelChange)="byPass($event)">
+  <div class="present">
+    <h5>Presensi</h5>
+    <ion-card>
+      <ion-card-content>
+        <ion-list>
+          <ion-item>
+            <h2>Presensi</h2>
+            <p>{{getPresensi()}}</p>
+          </ion-item>
+          <ion-item>
+            <h2>Jam Masuk</h2>
+            <p>{{dashboard?.jam_masuk_hari_ini}}</p>
+          </ion-item>
+          <ion-item>
+            <h2>Akumulasi Absensi</h2>
+            <p>{{dashboard?.akumulasi_absen}}</p>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <ion-item hidden col-8 push-2 class="input--form">
+
+    <ion-select #selectUser [ngModel]="profileName" col-12 (ngModelChange)="byPass($event)">
       <ion-option [value]="profile?.nip">{{profile?.nama}}</ion-option>
       <ion-option text-wrap [value]="user?.nip" *ngFor="let user of profile?.user_pengganti">
         {{user?.nama}}
       </ion-option>
     </ion-select>
   </ion-item>
+
+<!-- 
+  
 
   <div class="content-home">
     <div *ngFor="let menu of menus">
@@ -50,4 +123,6 @@
       </ion-card>
     </div>
   </div>
+ -->
+
 </ion-content>
