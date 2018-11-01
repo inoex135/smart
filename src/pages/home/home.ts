@@ -31,7 +31,6 @@ export class HomePage {
   profile: any = {};
   showAvatar: boolean = true;
   profileName: string = "";
-  totalNotification:number = 0
 
   dashboard:any = {
     "CT": 0,
@@ -70,17 +69,9 @@ export class HomePage {
   }
 
   mappingResponNotif(res?: any) {
-    if (res) {
-      LogUtil.d(this.TAG, "count total notifications")
-      this.totalNotification = res.notification_apt + res.notification_personal + res.notification_persuratan
-    }
     return this.menus.map((data, index) => {
       data.notificationTotal = this.setNotificationTotal(data.title, res);
     });
-  }
-
-  isNoficationExist() {
-    return this.totalNotification > 0
   }
 
   setNotificationTotal(title: any, res: any) {
