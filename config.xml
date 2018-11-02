@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 
-<widget android-versionCode="33" id="com.djkn.smart" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget android-versionCode="34" id="com.djkn.smart" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
 
     <name>SMARt</name>
     <description>SMARt Mobile</description>
