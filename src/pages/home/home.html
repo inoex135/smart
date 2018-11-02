@@ -35,25 +35,24 @@
 
   <ion-grid class="grid menu-grid">
     <ion-row class="row img-grid">
-      <img src="assets/svg/m-persuratan.svg" class="col home-menu-button" (click)="pagesTo('SuratPage')" />
-      <img src="assets/svg/m-apt.svg" class="col home-menu-button" (click)="pagesTo('TabsPage')" />
-      <img src="assets/svg/m-personal.svg" class="col home-menu-button" (click)="pagesTo('PersonalPage')" />
-      <img src="assets/svg/m-erapat.svg" class="col home-menu-button" (click)="pagesTo('')" />
+      <ion-col class="col home-menu-button" (click)="pagesTo('SuratPage')">
+        <img src="assets/svg/m-persuratan.svg" col-lg class="col home-menu-button" />
+        Persuratan
+      </ion-col>
+      <ion-col class="col home-menu-button" (click)="pagesTo('TabsPage')">
+        <img src="assets/svg/m-apt.svg" col-lg class="col home-menu-button"  />
+        APT
+      </ion-col>
+      <ion-col class="col home-menu-button" (click)="pagesTo('PersonalPage')">
+        <img src="assets/svg/m-personal.svg" col-lg class="col home-menu-button"  />
+        Personal
+      </ion-col>
+      <ion-col class="col home-menu-button" (click)="pagesTo('')">
+        <img src="assets/svg/m-erapat.svg" col-lg class="col home-menu-button"  />
+        E-Rapat
+      </ion-col>
     </ion-row>
-    <ion-row class="row text-grid">
-        <ion-col class="col">
-            Persuratan
-        </ion-col>
-        <ion-col class="col">
-            APT
-        </ion-col>
-        <ion-col class="col">
-            Personal
-        </ion-col>
-        <ion-col class="col">
-            E-Rapat
-        </ion-col>
-      </ion-row>
+
   </ion-grid>
 
   <ion-card hidden>

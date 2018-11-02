@@ -34,6 +34,12 @@ page-home {
       margin: 0 !important;
     }
 
+    ion-avatar, ion-thumbnail {
+      -webkit-filter: none;
+      -ms-filter: none;
+      filter: none;
+    }
+
     .logout-text {
       text-align: right;
       color: color($colors, 'new-text-color-light');
@@ -72,12 +78,11 @@ page-home {
       //   display: block;
       //   margin: auto;
       //  }
-      min-height: 72px;
-    }
-    .text-grid ion-col {
       text-align: center;
       color: #4a4a4a !important;
+      min-height: 72px;
     }
+
 
   }
 
