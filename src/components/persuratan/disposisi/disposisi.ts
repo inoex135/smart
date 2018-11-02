@@ -250,6 +250,7 @@ export class Disposisi {
   //   }
   // }
   addDisposisiPersonalDanPersonal(selaku: Array<any>, item: any) {
+    LogUtil.d(this.TAG, item)
     selaku.push(item);
     this.addPersonal();
 
@@ -268,7 +269,12 @@ export class Disposisi {
   }
 
   removeData(data: Array<any>, index: number) {
+    LogUtil.d(this.TAG, data)
     data.splice(index, 1);
+    if (this.disposisi.personal) {
+      this.disposisi.personal.splice(index, 1)
+    }
+    LogUtil.d(this.TAG, data)
   }
 
   next() {
@@ -345,24 +351,33 @@ export class Disposisi {
   simpan() {
     this.disposisi.sumasId = this.naskahId;
     //remove array value null, undefined, ""
+    LogUtil.d(this.TAG, this.disposisi)
     this.disposisi.selaku = compact(this.disposisi.selaku);
 
-    this.loader.createLoader();
+    this.loader.show();
+    LogUtil.d(this.TAG, this.disposisi)
     this.disposisiProvider.simpanDisposisi(this.disposisi).subscribe(
       res => {
-        this.message = res.message;
-        this.loader.dismiss();
-        this.navCtrl.pop();
-        this.toastHelper.present(this.message);
+        this.loader.dismissLoader()
+        this.message = res.message
+        this.closePageWithDelay()
       },
       err => {
-        this.loader.dismiss();
+        this.loader.dismissLoader();
         this.errorMessages = err;
         this.toastHelper.present("Terjadi Kesalahan");
       }
     );
   }
 
+  closePageWithDelay() {
+    LogUtil.d(this.TAG, "close page with delay 200")
+    setTimeout(() => {
+      this.navCtrl.pop()
+      this.toastHelper.present(this.message)
+    }, 200)
+  }
+    
   disabledNextButton = () => {
     if (this.currentStep == this.arraySteps[2]) {
       /* if (this.isEselon4()) {
