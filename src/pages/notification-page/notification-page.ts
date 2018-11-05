@@ -21,11 +21,26 @@ export class NotificationPage {
     items: [],
     meta: {
       total: {
-        all: 0,
-        notification_apt: 0,
-        notification_personal: 0,
-        notification_persuratan: 0,
-        notification_e_rapat: 0
+        all: {
+          name: 'Semua Notifikasi',
+          value: 0
+        },
+        notification_apt:  {
+          name: 'APT',
+          value: 0
+        },
+        notification_personal:  {
+          name: 'Personal',
+          value: 0
+        },
+        notification_persuratan:  {
+          name: 'Persuratan',
+          value: 0
+        },
+        notification_e_rapat:  {
+          name: 'ERapat',
+          value: 0
+        }
       }
     }
   }
@@ -38,10 +53,9 @@ export class NotificationPage {
     this.provider.getTotalNotication().subscribe(
       result => {
         if (result) {
-          this.data.meta.total.all = 0
           for (var i in result) {
-            this.data.meta.total[i] = result[i]
-            this.data.meta.total.all += result[i]
+            this.data.meta.total[i].value = result[i]
+            this.data.meta.total.all.value += result[i]
           }
         }
       },
@@ -64,6 +78,10 @@ export class NotificationPage {
       )
     }
 
+  }
+
+  doInfinite($event) {
+    
   }
 
 }

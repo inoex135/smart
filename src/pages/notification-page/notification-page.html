@@ -5,6 +5,13 @@
 </ion-header>
 
 <ion-content>
+  
+  <ion-slides>
+    <ion-slide *ngFor="let total of data?.meta?.total">
+      <ion-chip>{{ total.name }} <ion-badge>{{ total.value }}</ion-badge></ion-chip>
+    </ion-slide>
+  </ion-slides>
+
   <ion-list *ngIf="data.items.length > 0">
     <ion-item *ngFor="let notif of data.items">
       <h6 ion-text>{{notif?.nama}}</h6>
@@ -19,4 +26,5 @@
   </ion-list>
 
   <empty-state *ngIf="data.items.length == 0"></empty-state>
+
 </ion-content>

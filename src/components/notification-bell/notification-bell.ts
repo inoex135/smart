@@ -24,7 +24,10 @@ export class NotificationBell {
 
   setTotalNotification(result:any) {
     if (result) {
-      this.totalNotification = result.notification_apt + result.notification_personal + result.notification_persuratan
+      this.totalNotification = 0
+      for (var i in result) {
+        this.totalNotification += result[i]
+      }
       LogUtil.d(NotificationBell.TAG, "count total notifications: " + this.totalNotification)
     }
   }
