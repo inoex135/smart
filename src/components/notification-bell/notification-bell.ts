@@ -1,7 +1,8 @@
-import { Component, Input, EventEmitter, Output } from "@angular/core";
-import { HomeProvider } from "../../providers/home/home";
+import { Component, Input } from "@angular/core";
 import { LogUtil } from "../../utils/logutil";
-import { Flags } from "@ionic-native/file";
+import { NavController } from "ionic-angular";
+import { NotificationPage } from "../../pages/notification-page/notification-page";
+import { NotificationProvider } from "../../providers/notification/notification";
 
 @Component({
   selector: "notification-bell",
@@ -17,7 +18,7 @@ export class NotificationBell {
 
   isUpdating:boolean = false
 
-  constructor(private homeProvider: HomeProvider) {
+  constructor(private navCtrl: NavController, private provider: NotificationProvider) {
     this.updateNotification()
   }
 
@@ -32,7 +33,7 @@ export class NotificationBell {
     if (!this.isUpdating) {
       this.isUpdating = true
       LogUtil.d(NotificationBell.TAG, "updating notification...")
-      this.homeProvider.getTotalNotication().subscribe(
+      this.provider.getTotalNotication().subscribe(
         res => {
           this.setTotalNotification(res)
           this.isUpdating = false
@@ -52,7 +53,11 @@ export class NotificationBell {
   }
 
   redirectTo() {
-    console.log("redirect to")
+    LogUtil.d(NotificationBell.TAG, "redirect to: " + this.notificationType)
+    NotificationPage.KEY_TYPE
+    var data = {}
+    data[NotificationPage.KEY_TYPE] = this.notificationType
+    //this.navCtrl.push(NotificationPage.TAG, data)
   }
   
 }
