@@ -14,7 +14,7 @@
         <button *ngIf="!isSearchOpened" ion-button icon-only (click)="isSearchOpened=true">
             <ion-icon ios="ios-search" md="md-search"></ion-icon>
         </button>
-        <button ion-button icon-only>
+        <button ion-button icon-only (click)="triggerOpenSelect()">
             <ion-icon ios="ios-funnel" md="md-funnel"></ion-icon>
         </button>
         <notification-bell></notification-bell>
@@ -27,17 +27,20 @@
 <!--   <ion-list no-lines padding class="apt-head-panel">
     <ion-header>
       <pemberitahuan [redirectComponent]="redirectComponent" class="apt-notif"></pemberitahuan>
-      <ion-item class="input--form">
-        <ion-select (ionChange)="search(keyword, jenisPelayanan)" [(ngModel)]="jenisPelayanan" placeholder="Filter berdasarkan Jenis Pelayanan">
-          <ion-option [value]="pelayanan?.id" *ngFor="let pelayanan of pelayanans">
-            {{pelayanan?.nama}}
-          </ion-option>
-        </ion-select>
-      </ion-item>
-      <ion-searchbar [(ngModel)]="keyword" search-bar-bcg (ionInput)="search( $event?.target?.value, jenisPelayanan)" (ionCancel)="search( $event?.target?.value)"
-        class="apt-search"></ion-searchbar>
-    </ion-header>
+
+
   </ion-list> -->
+
+  <ion-item class="input--form" hidden>
+    <ion-select #selectService (ionChange)="search(keyword, jenisPelayanan)" [(ngModel)]="jenisPelayanan" placeholder="Filter berdasarkan Jenis Pelayanan">
+      <ion-option [value]="pelayanan?.id" *ngFor="let pelayanan of pelayanans">
+        {{pelayanan?.nama}}
+      </ion-option>
+    </ion-select>
+  </ion-item>
+  <ion-searchbar hidden [(ngModel)]="keyword" search-bar-bcg (ionInput)="search( $event?.target?.value, jenisPelayanan)" (ionCancel)="search( $event?.target?.value)"
+    class="apt-search">
+  </ion-searchbar>
 
   <ion-list class="list--apt" *ngIf="items?.length > 0">
     <ion-card (press)="isItemPressed(item?.id)" item no-margin padding *ngFor="let item of items;let i = index">
@@ -108,6 +111,15 @@
     </ion-col>
   </ion-row>
 </ion-footer>
+
+  <ion-grid class="grid tab-grid">
+    <ion-row class="row">
+      <ion-col *ngFor="let tab of tabs; let i = index" (click)="onTabClick(i)" class="col {{ (tab.isActive) ? 'active' : '' }}">
+        <ion-icon class="icon {{ tab.icon }}" ></ion-icon>
+        <p>{{ tab.name }}</p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
 <!-- <ion-footer *ngIf="!isPress" class="filter-apt">
   <ion-row>

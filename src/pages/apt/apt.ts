@@ -1,10 +1,11 @@
-import { Component } from "@angular/core";
+import { Component, ViewChild } from "@angular/core";
 import {
   NavController,
   NavParams,
   LoadingController,
   IonicPage,
-  App
+  App,
+  Select
 } from "ionic-angular";
 import { File } from "@ionic-native/file";
 import { AptProvider } from "../../providers/apt/apt";
@@ -30,6 +31,8 @@ export class AptPage {
   loader: any;
   redirectComponent: string = "AptNotifikasiPage";
 
+  @ViewChild("selectService") select: Select
+
   isPress: boolean = false;
   keyword: string = "";
   jenisPelayanan: any = "";
@@ -40,7 +43,31 @@ export class AptPage {
 
   isSearchOpened:boolean = false
 
-  page: number = 0;
+  tabs:any = [
+    {
+      name: 'Permohonan Masuk',
+      isActive: true,
+      icon: 'icon-md ion-md-filing',
+      provider: ''
+    },
+    {
+      name: 'Dekat Batas Waktu',
+      isActive: false,
+      icon: 'icon-md ion-md-alert',
+      provider: 'dekatBatasWaktu'
+    },
+    {
+      name: 'Lewat Batas Waktu',
+      isActive: false,
+      icon: 'icon-md ion-md-speedometer',
+      provider: 'lewatBatasWaktu'
+    }
+  ]
+
+  page: number = 0
+
+  type:string = ''
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -65,12 +92,11 @@ export class AptPage {
   }
 
   mappingGetData() {
-    const type = this.navParams.data;
-    if (type === "dekatBatasWaktu") {
+    if (this.type === "dekatBatasWaktu") {
       return this.getDekatBatasWaktu();
     }
 
-    if (type === "lewatBatasWaktu") {
+    if (this.type === "lewatBatasWaktu") {
       return this.getLewatiBatasWaktu();
     }
 
@@ -133,12 +159,11 @@ export class AptPage {
   }
 
   mappingInfinityScrollData() {
-    const type = this.navParams.data;
-    if (type === "dekatBatasWaktu") {
+    if (this.type === "dekatBatasWaktu") {
       return this.aptProvider.getDekatBatasWaktu(this.keyword, this.page);
     }
 
-    if (type === "lewatBatasWaktu") {
+    if (this.type === "lewatBatasWaktu") {
       return this.aptProvider.getLewatiBatasWaktu(this.keyword, this.page);
     }
 
@@ -182,8 +207,6 @@ export class AptPage {
         this.items = res
       }, err => true);
   }
-
-
 
   searchByTipe(keyword: any) {
     let searchProvider: any;
@@ -294,5 +317,23 @@ export class AptPage {
     }
   }
 
+  onTabClick(index:number) {
+    LogUtil.d(AptPage.TAG, "index: " + index)
+    this.tabs.forEach((tab, i) => {
+      tab.isActive = index == i && !tab.isActive
+    })
+    this.type = this.tabs[index].provider
+    this.getPelayananList();
+    this.mappingGetData();
+  }
+
+  triggerOpenSelect() {
+    if (this.select) {
+      LogUtil.d(AptPage.TAG, "not null")
+      this.select.open()
+    } else {
+      LogUtil.d(AptPage.TAG, "probably null")
+    }
+  }
 
 }
