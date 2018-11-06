@@ -4,7 +4,6 @@ import { NavParams, IonicPage } from "ionic-angular";
 import { LoaderHelper } from "../../helpers/loader-helper";
 import { NotificationProvider } from "../../providers/notification/notification";
 import { LogUtil } from "../../utils/logutil";
-import { timeInterval } from "rxjs/operators";
 
 @Component({
   selector: "notification-page",

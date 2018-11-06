@@ -12,6 +12,7 @@ import { LoaderHelper } from "../../helpers/loader-helper";
 import remove from "lodash/remove";
 import { debounceTime, finalize } from "rxjs/operators";
 import { ToastHelper } from "../../helpers/toast-helper";
+import { LogUtil } from "../../utils/logutil";
 
 @IonicPage()
 @Component({
@@ -19,6 +20,9 @@ import { ToastHelper } from "../../helpers/toast-helper";
   templateUrl: "apt.html"
 })
 export class AptPage {
+
+  static TAG:string = 'AptPage'
+
   params: any = {};
   items: any = [];
   pelayanans: any = [];
@@ -33,6 +37,8 @@ export class AptPage {
 
   listAptId: any[] = [];
   showAgendaButton: boolean = false;
+
+  isSearchOpened:boolean = false
 
   page: number = 0;
   constructor(
@@ -164,14 +170,20 @@ export class AptPage {
   // }
 
   search(keyword: any, layananId: number) {
+    LogUtil.d(AptPage.TAG, "keyword: " + keyword + " - service: " + layananId)
     let searchProvider: any;
     this.page = this.page + 1;
     this.showLoader();
     searchProvider = this.aptProvider.search(keyword, layananId);
     searchProvider
       .pipe(debounceTime(700), finalize(() => this.hideLoader()))
-      .subscribe(res => (this.items = res), err => true);
+      .subscribe(res => {
+        LogUtil.d(AptPage.TAG, res)
+        this.items = res
+      }, err => true);
   }
+
+
 
   searchByTipe(keyword: any) {
     let searchProvider: any;
@@ -267,4 +279,20 @@ export class AptPage {
       err => this.loaderHelper.dismiss()
     );
   }
+
+  redirectTo() {
+    this.app.getRootNav().push(AptPage.TAG);
+  }
+
+  backButtonClick() {
+    LogUtil.d(AptPage.TAG, "arrow back button clicked!")
+    if (this.isSearchOpened) {
+      this.isSearchOpened = false
+    } else {
+      LogUtil.d(AptPage.TAG, 'call navigation pop()')
+      this.navCtrl.pop()
+    }
+  }
+
+
 }

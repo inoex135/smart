@@ -1,12 +1,30 @@
 <ion-header>
-  <ion-navbar >
-    <ion-title>APT</ion-title>
+  <ion-navbar class="custom-action-bar" hideBackButton="true">
+    <ion-buttons start left>
+        <button class="custom-back-button" ion-button icon-only (click)="backButtonClick()">
+            <ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon>
+        </button>
+    </ion-buttons>
+    <ion-title *ngIf="!isSearchOpened">APT</ion-title>
+    <ion-searchbar *ngIf="isSearchOpened" [(ngModel)]="keyword" 
+    search-bar-bcg (ionInput)="search($event?.target?.value, jenisPelayanan)" 
+    (ionCancel)="search($event?.target?.value)" 
+    showCancelBotton="true"></ion-searchbar>
+    <ion-buttons end>
+        <button *ngIf="!isSearchOpened" ion-button icon-only (click)="isSearchOpened=true">
+            <ion-icon ios="ios-search" md="md-search"></ion-icon>
+        </button>
+        <button ion-button icon-only>
+            <ion-icon ios="ios-funnel" md="md-funnel"></ion-icon>
+        </button>
+        <notification-bell></notification-bell>
+    </ion-buttons>
   </ion-navbar>
-
 </ion-header>
+<ion-content>
 
 <ion-content padding>
-  <ion-list no-lines padding class="apt-head-panel">
+<!--   <ion-list no-lines padding class="apt-head-panel">
     <ion-header>
       <pemberitahuan [redirectComponent]="redirectComponent" class="apt-notif"></pemberitahuan>
       <ion-item class="input--form">
@@ -19,7 +37,7 @@
       <ion-searchbar [(ngModel)]="keyword" search-bar-bcg (ionInput)="search( $event?.target?.value, jenisPelayanan)" (ionCancel)="search( $event?.target?.value)"
         class="apt-search"></ion-searchbar>
     </ion-header>
-  </ion-list>
+  </ion-list> -->
 
   <ion-list class="list--apt" *ngIf="items?.length > 0">
     <ion-card (press)="isItemPressed(item?.id)" item no-margin padding *ngFor="let item of items;let i = index">
