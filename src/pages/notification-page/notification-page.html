@@ -5,12 +5,17 @@
 </ion-header>
 
 <ion-content>
-  
-  <ion-slides>
-    <ion-slide *ngFor="let total of data?.meta?.total">
-      <ion-chip>{{ total.name }} <ion-badge>{{ total.value }}</ion-badge></ion-chip>
-    </ion-slide>
-  </ion-slides>
+
+  <div *ngIf="showChips()" class="chip-container">
+    <div class="list-chip">
+      <div class="chip-notification" *ngFor="let total of getTotals()">
+          <ion-chip (click)="clickChip(total?.key)">
+              <ion-label>{{ total.name }} <ion-badge>{{ total.value }}</ion-badge></ion-label>
+              <div></div>
+            </ion-chip>
+      </div>
+    </div>
+  </div>
 
   <ion-list *ngIf="data.items.length > 0">
     <ion-item *ngFor="let notif of data.items">

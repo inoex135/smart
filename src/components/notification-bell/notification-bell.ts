@@ -12,7 +12,7 @@ export class NotificationBell {
 
   static TAG:string = "NotificationBell"
 
-  @Input() notificationType: string = "";
+  @Input() notificationType:string = '';
 
   totalNotification:number = 0
 
@@ -60,7 +60,7 @@ export class NotificationBell {
     NotificationPage.KEY_TYPE
     var data = {}
     data[NotificationPage.KEY_TYPE] = this.notificationType
-    //this.navCtrl.push(NotificationPage.TAG, data)
+    this.navCtrl.push(NotificationPage.TAG, data)
   }
   
 }

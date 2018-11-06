@@ -47,12 +47,13 @@ export class NotificationPage {
 
   constructor(private navParams: NavParams, private provider: NotificationProvider) {
     this.data.typeString = navParams.get(NotificationPage.KEY_TYPE)
+    LogUtil.d(NotificationPage.TAG, this.data.typeString)
   }
 
   ionViewWillEnter() {
     this.provider.getTotalNotication().subscribe(
       result => {
-        if (result) {
+        if (result && this.showChips()) {
           for (var i in result) {
             this.data.meta.total[i].value = result[i]
             this.data.meta.total.all.value += result[i]
@@ -80,8 +81,29 @@ export class NotificationPage {
 
   }
 
+  getTotals() {
+    var data = []
+    if (this.showChips()) {
+      var k = 0
+      for (var a in this.data.meta.total) {
+        data[k] = this.data.meta.total[a]
+        data[k].key = a
+        k++
+      }
+    }
+    return data
+  }
+
+  showChips() {
+    return this.data.typeString === ''
+  }
+
   doInfinite($event) {
-    
+
+  }
+
+  clickChip(key:string = '') {
+    LogUtil.d(NotificationPage.TAG, "clicked: " + key)
   }
 
 }
