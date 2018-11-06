@@ -10,20 +10,20 @@
     <div class="list-chip">
       <div class="chip-notification" *ngFor="let chip of getChips()">
           <ion-chip (click)="clickChip(chip?.key)" [color]="chip.active ? 'secondary' : 'default'">
-              <ion-label>{{ chip.name }} <ion-badge>{{ chip.value }}</ion-badge></ion-label>
-              <div></div>
-            </ion-chip>
+            <ion-label>{{ chip.name }} <ion-badge>{{ chip.value }}</ion-badge></ion-label>
+            <div></div>
+          </ion-chip>
       </div>
     </div>
   </div>
 
   <ion-list *ngIf="data.items.length > 0">
-    <ion-item *ngFor="let notif of data.items">
+    <ion-item *ngFor="let notif of data.items" [color]="notif?.is_read ? '' : ''">
       <h6 ion-text>{{notif?.nama}}</h6>
       <text-avatar [text]="notif?.nama" item-left></text-avatar>
       <p ion-text text-wrap>{{notif?.pesan}}</p>
       <p ion-text color="blue-template" text-wrap>{{ notif?.tanggal | indonesianDate:'dddd, DD MMMM YYYY' }}</p>
-      <!-- <ion-note item-end>{{statusRead(notif?.is_read)}}</ion-note> -->
+      <ion-note item-end>{{(notif?.is_read) ? 'Sudah dibaca' : 'Belum dibaca'}}</ion-note>
     </ion-item>
     <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
       <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data..."></ion-infinite-scroll-content>

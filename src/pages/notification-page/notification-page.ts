@@ -139,20 +139,20 @@ export class NotificationPage {
     LogUtil.d(NotificationPage.TAG, 'key: 0' + key)
     for (var i in this.data.meta.chips) {
       var current = this.data.meta.chips[i]
-      if (current.key === key && !current.active) {
-        LogUtil.d(NotificationPage.TAG, 'found one, and inactive set to active')
-        current.active = true
-      } else {
-        current.active = false
-      }
+      current.active = current.key === key && !current.active
     }
     this.setProvider(key)
+    this.clearItems()
     this.fillList()
   }
 
   setProvider(key:string = '') {
     this.data.provider = key !== '' ? key : this.data.typeString
     LogUtil.d(NotificationPage.TAG, "provider: " + this.data.provider)
+  }
+
+  clearItems() {
+    this.data.items = []
   }
 
 }
