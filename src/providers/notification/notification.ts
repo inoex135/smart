@@ -7,10 +7,11 @@ export class NotificationProvider {
 
     static TAG:string = 'NotificationProvider'
 
-    static TYPE_APT:string = "APT"
-    static TYPE_PERSURATAN:string = "PERSURATAN"
-    static TYPE_RAPAT:string = "RAPAT"
-    static TYPE_PERSONAL:string = "PERSONAL"
+    static TYPE_ALL:string = 'all'
+    static TYPE_APT:string = "notification_apt"
+    static TYPE_PERSURATAN:string = "notification_persuratan"
+    static TYPE_RAPAT:string = "notification_rapat"
+    static TYPE_PERSONAL:string = "notification_personal"
 
     constructor(public api: ApiProvider) {}
 

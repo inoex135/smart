@@ -4,6 +4,7 @@ import { NavParams, IonicPage } from "ionic-angular";
 import { LoaderHelper } from "../../helpers/loader-helper";
 import { NotificationProvider } from "../../providers/notification/notification";
 import { LogUtil } from "../../utils/logutil";
+import { timeInterval } from "rxjs/operators";
 
 @Component({
   selector: "notification-page",
@@ -18,36 +19,66 @@ export class NotificationPage {
 
   data:any = {
     typeString: '',
-    items: [],
+    provider: NotificationProvider.TYPE_ALL,
+    items: [
+      {
+        nama:"test", pesan:"test message", tanggal: "2018-11-06 12:54"
+      },
+      {
+        nama:"test2", pesan:"test message2", tanggal: "2018-11-06 12:54"
+      },
+      {
+        nama:"test3", pesan:"test message3", tanggal: "2018-11-06 12:54"
+      }
+    ],
     meta: {
-      total: {
-        all: {
-          name: 'Semua Notifikasi',
-          value: 0
-        },
-        notification_apt:  {
-          name: 'APT',
-          value: 0
-        },
-        notification_personal:  {
-          name: 'Personal',
-          value: 0
-        },
-        notification_persuratan:  {
-          name: 'Persuratan',
-          value: 0
-        },
-        notification_e_rapat:  {
-          name: 'ERapat',
-          value: 0
-        }
+      chips: {},
+      page: {
+        total: 0,
+        currentPage: 0
       }
     }
   }
 
   constructor(private navParams: NavParams, private provider: NotificationProvider) {
+    this.initChips()
     this.data.typeString = navParams.get(NotificationPage.KEY_TYPE)
+    if (this.data.typeString === '') {
+      LogUtil.d(NotificationPage.TAG, "set default type string to " + NotificationProvider.TYPE_ALL)
+      this.data.typeString = NotificationProvider.TYPE_ALL
+    }
     LogUtil.d(NotificationPage.TAG, this.data.typeString)
+    this.setProvider()
+  }
+
+  initChips() {
+    var data:any ={}
+    data[NotificationProvider.TYPE_ALL] = {
+      name: 'Semua Notifikasi',
+      value: 0,
+      active: true
+    }
+    data[NotificationProvider.TYPE_APT] = {
+      name: 'APT',
+      value: 0,
+      active: false
+    }
+    data[NotificationProvider.TYPE_PERSONAL] = {
+      name: 'Personal',
+      value: 0,
+      active: false
+    }
+    data[NotificationProvider.TYPE_PERSURATAN] = {
+      name: 'Persuratan',
+      value: 0,
+      active: false
+    }
+    data[NotificationProvider.TYPE_RAPAT] = {
+      name: 'E-Rapat',
+      value: 0,
+      active: false
+    }
+    this.data.meta.chips = data
   }
 
   ionViewWillEnter() {
@@ -55,8 +86,8 @@ export class NotificationPage {
       result => {
         if (result && this.showChips()) {
           for (var i in result) {
-            this.data.meta.total[i].value = result[i]
-            this.data.meta.total.all.value += result[i]
+            this.data.meta.chips[i].value = result[i]
+            this.data.meta.chips.all.value += result[i]
           }
         }
       },
@@ -64,8 +95,11 @@ export class NotificationPage {
         LogUtil.d(NotificationPage.TAG, error)
       }
     )
+    this.fillList()
+  }
 
-    const currentProvider = this.provider.switchProvider(this.data.typeString)
+  fillList() {
+    const currentProvider = this.provider.switchProvider(this.data.provider)
     if (currentProvider !== null) {
       currentProvider.subscribe(
         result => {
@@ -78,15 +112,14 @@ export class NotificationPage {
         }
       )
     }
-
   }
 
-  getTotals() {
+  getChips() {
     var data = []
     if (this.showChips()) {
       var k = 0
-      for (var a in this.data.meta.total) {
-        data[k] = this.data.meta.total[a]
+      for (var a in this.data.meta.chips) {
+        data[k] = this.data.meta.chips[a]
         data[k].key = a
         k++
       }
@@ -95,7 +128,7 @@ export class NotificationPage {
   }
 
   showChips() {
-    return this.data.typeString === ''
+    return this.data.typeString === NotificationProvider.TYPE_ALL
   }
 
   doInfinite($event) {
@@ -103,7 +136,23 @@ export class NotificationPage {
   }
 
   clickChip(key:string = '') {
-    LogUtil.d(NotificationPage.TAG, "clicked: " + key)
+    LogUtil.d(NotificationPage.TAG, 'key: 0' + key)
+    for (var i in this.data.meta.chips) {
+      var current = this.data.meta.chips[i]
+      if (current.key === key && !current.active) {
+        LogUtil.d(NotificationPage.TAG, 'found one, and inactive set to active')
+        current.active = true
+      } else {
+        current.active = false
+      }
+    }
+    this.setProvider(key)
+    this.fillList()
+  }
+
+  setProvider(key:string = '') {
+    this.data.provider = key !== '' ? key : this.data.typeString
+    LogUtil.d(NotificationPage.TAG, "provider: " + this.data.provider)
   }
 
 }

@@ -8,9 +8,9 @@
 
   <div *ngIf="showChips()" class="chip-container">
     <div class="list-chip">
-      <div class="chip-notification" *ngFor="let total of getTotals()">
-          <ion-chip (click)="clickChip(total?.key)">
-              <ion-label>{{ total.name }} <ion-badge>{{ total.value }}</ion-badge></ion-label>
+      <div class="chip-notification" *ngFor="let chip of getChips()">
+          <ion-chip (click)="clickChip(chip?.key)" [color]="chip.active ? 'secondary' : 'default'">
+              <ion-label>{{ chip.name }} <ion-badge>{{ chip.value }}</ion-badge></ion-label>
               <div></div>
             </ion-chip>
       </div>
@@ -23,7 +23,7 @@
       <text-avatar [text]="notif?.nama" item-left></text-avatar>
       <p ion-text text-wrap>{{notif?.pesan}}</p>
       <p ion-text color="blue-template" text-wrap>{{ notif?.tanggal | indonesianDate:'dddd, DD MMMM YYYY' }}</p>
-      <ion-note item-end>{{statusRead(notif?.is_read)}}</ion-note>
+      <!-- <ion-note item-end>{{statusRead(notif?.is_read)}}</ion-note> -->
     </ion-item>
     <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
       <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data..."></ion-infinite-scroll-content>

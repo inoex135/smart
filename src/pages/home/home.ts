@@ -14,6 +14,7 @@ import { ToastHelper } from "../../helpers/toast-helper";
 import { Storage } from "@ionic/storage";
 import { LogUtil } from "../../utils/logutil";
 import { NotificationBell } from "../../components/notification-bell/notification-bell";
+import { NotificationProvider } from "../../providers/notification/notification";
 @IonicPage()
 @Component({
   selector: "page-home",
@@ -42,7 +43,7 @@ export class HomePage {
     "akumulasi_absen": "-",
     "jumlah_hari_masuk": 0,
     "jam_keluar_hari_ini": null
-}
+  }
 
   constructor(
     public navCtrl: NavController,
@@ -212,4 +213,9 @@ export class HomePage {
       );
     }
   }
+
+  getNotificationType():string {
+    return NotificationProvider.TYPE_ALL
+  }
+
 }
