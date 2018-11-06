@@ -153,6 +153,10 @@ export class NotificationPage {
 
   clearItems() {
     this.data.items = []
+    this.data.meta.page = {
+      total: 0,
+      currentPage: 1
+    }
   }
 
 }
