@@ -16,6 +16,9 @@ import { UserProvider } from "../../providers/user/user";
   templateUrl: "apt-detail.html"
 })
 export class AptDetailPage {
+
+  static TAG:string = 'AptDetailPage'
+
   itemId: any;
   ACTION = AptAction;
   aptIndikator = APT_INDIKATOR;
