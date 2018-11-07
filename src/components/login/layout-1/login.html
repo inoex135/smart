@@ -1,13 +1,11 @@
 <!-- Themes Login + logo -->
-<ion-content class="transparent-header" [ngStyle]="{'background-image': 'url(' + data.backgroundImage +')'}">
+<ion-content>
 
-  <ion-header>
-    <ion-navbar>
-    </ion-navbar>
-  </ion-header>
-  <img [src]="data.logo" class="logo">
+  <div class="img-container">
+      <img [src]="data.logo" class="logo">
+  </div>
 
-  <div padding has-header>
+  <div class="form-login">
     <ion-item>
       <ion-label><ion-icon name="md-contact" class="username"></ion-icon></ion-label>
       <ion-input required type="text" [(ngModel)]="username" placeholder="Username" #username1="ngModel"></ion-input>
@@ -16,19 +14,18 @@
       <ion-label><ion-icon name="md-lock" class="username"></ion-icon></ion-label>
       <ion-input required type="password" [(ngModel)]="password" placeholder="Password" #password1="ngModel"></ion-input>
     </ion-item>
-    <button [disabled]="loginState?.isLogin || username1.invalid || password1.invalid" ion-button color="blue-template" full
+    <button class="login-button" [disabled]="loginState?.isLogin || username1.invalid || password1.invalid" ion-button full
       block (click)="onEvent('onLogin')">
       <ion-spinner name="crescent" *ngIf="!loginState?.sso && loginState?.isLogin "></ion-spinner>
       {{data.login}}
     </button>
-  </div>
 
-  <div padding>
-    <button ion-button color="danger" full block (click)="onEvent('onLoginSSO')">
+    <button outline class="login-sso-button" ion-button color="danger" full block (click)="onEvent('onLoginSSO')">
       <div>
         Login SSO
       </div>
     </button>
+
   </div>
 
   <div class="smart-footer">
