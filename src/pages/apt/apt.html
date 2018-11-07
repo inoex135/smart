@@ -17,7 +17,7 @@
         <button ion-button icon-only (click)="triggerOpenSelect()">
             <ion-icon ios="ios-funnel" md="md-funnel"></ion-icon>
         </button>
-        <notification-bell></notification-bell>
+        <notification-bell [notificationType]="getNotificationType()"></notification-bell>
     </ion-buttons>
   </ion-navbar>
 </ion-header>

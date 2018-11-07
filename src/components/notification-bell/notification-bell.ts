@@ -22,9 +22,13 @@ export class NotificationBell {
     this.updateNotification()
   }
 
-  setTotalNotification(result:any) {
+  setTotalNotification(result:any):void {
     if (result) {
-      this.totalNotification = 0
+      if (this.notificationType !== '' && this.notificationType !== NotificationProvider.TYPE_ALL) {
+          LogUtil.d(NotificationBell.TAG, "get total notifications: " + this.totalNotification + " type: " + this.notificationType)
+          this.totalNotification = result[this.notificationType]
+          return 
+      }
       for (var i in result) {
         this.totalNotification += result[i]
       }

@@ -14,6 +14,7 @@ import remove from "lodash/remove";
 import { debounceTime, finalize } from "rxjs/operators";
 import { ToastHelper } from "../../helpers/toast-helper";
 import { LogUtil } from "../../utils/logutil";
+import { NotificationProvider } from "../../providers/notification/notification";
 
 @IonicPage()
 @Component({
@@ -334,6 +335,10 @@ export class AptPage {
     } else {
       LogUtil.d(AptPage.TAG, "probably null")
     }
+  }
+
+  getNotificationType():string {
+    return NotificationProvider.TYPE_APT
   }
 
 }
