@@ -350,7 +350,7 @@ export class AptPage {
       case 'Permohonan melebihi batas waktu':
         return 'new-red-background'
       default:
-        return 'new-red-background'
+        return 'white-background'
     }
   }
 

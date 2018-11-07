@@ -19,17 +19,7 @@ export class NotificationPage {
   data:any = {
     typeString: '',
     provider: NotificationProvider.TYPE_ALL,
-    items: [
-      {
-        nama:"test", pesan:"test message", tanggal: "2018-11-06 12:54"
-      },
-      {
-        nama:"test2", pesan:"test message2", tanggal: "2018-11-06 12:54"
-      },
-      {
-        nama:"test3", pesan:"test message3", tanggal: "2018-11-06 12:54"
-      }
-    ],
+    items: [],
     meta: {
       chips: {},
       page: {
@@ -130,8 +120,33 @@ export class NotificationPage {
     return this.data.typeString === NotificationProvider.TYPE_ALL
   }
 
-  doInfinite($event) {
+  increaseCurrentPage() {
+    this.data.meta.currentPage += 1;
+  }
 
+  decreaseCurrentPage() {
+    this.data.meta.currentPage -= 1;
+  } 
+
+  doInfinite(event) {
+    this.increaseCurrentPage()
+    setTimeout(() => {
+      const resourceData = this.provider.switchProvider(this.data.provider);
+      resourceData.subscribe(
+        res => {
+          if (res.length == 0) {
+            this.decreaseCurrentPage()
+          }
+          for (var index = 0; index < res.length; index++) {
+            this.data.items.push(res[index]);
+          }
+        },
+        err => {
+          LogUtil.d(NotificationPage.TAG, err)
+        }
+      );
+      event.complete();
+    }, 1000);
   }
 
   clickChip(key:string = '') {

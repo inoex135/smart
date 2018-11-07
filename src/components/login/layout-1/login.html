@@ -1,5 +1,5 @@
 <!-- Themes Login + logo -->
-<ion-content padding class="transparent-header" [ngStyle]="{'background-image': 'url(' + data.backgroundImage +')'}">
+<ion-content class="transparent-header" [ngStyle]="{'background-image': 'url(' + data.backgroundImage +')'}">
 
   <ion-header>
     <ion-navbar>
@@ -7,7 +7,7 @@
   </ion-header>
   <img [src]="data.logo" class="logo">
 
-  <div padding has-header class="card">
+  <div padding has-header>
     <ion-item>
       <ion-label><ion-icon name="md-contact" class="username"></ion-icon></ion-label>
       <ion-input required type="text" [(ngModel)]="username" placeholder="Username" #username1="ngModel"></ion-input>
@@ -35,5 +35,7 @@
     <h1 ion-text text-center class="smart-title">SMARt</h1>
     <p ion-text text-center class="smart-subtitle">Sistem Monitoring Aktivitas Rutin</p>
     <p ion-text text-center class="smart-subtitle">Kementerian Keuangan Republik Indonesia</p>
+    <div class="group-background"></div>
   </div>
+
 </ion-content>
