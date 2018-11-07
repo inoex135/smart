@@ -341,4 +341,17 @@ export class AptPage {
     return NotificationProvider.TYPE_APT
   }
 
+  getStatusColor(status:string = ''):string {
+    switch(status) {
+      case 'Permohonan Aktif':
+        return 'new-green-background'
+      case 'Permohonan aktif mendekati batas waktu':
+        return 'new-orange-background'
+      case 'Permohonan melebihi batas waktu':
+        return 'new-red-background'
+      default:
+        return 'new-red-background'
+    }
+  }
+
 }

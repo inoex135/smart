@@ -9,10 +9,10 @@
   <div *ngIf="showChips()" class="chip-container">
     <div class="list-chip">
       <div class="chip-notification" *ngFor="let chip of getChips()">
-          <ion-chip (click)="clickChip(chip?.key)" [color]="chip.active ? 'secondary' : 'default'">
-            <ion-label>{{ chip.name }} <ion-badge>{{ chip.value }}</ion-badge></ion-label>
-            <div></div>
-          </ion-chip>
+        <ion-chip (click)="clickChip(chip?.key)" [color]="chip.active ? 'new-orange' : 'default'">
+          <ion-label>{{ chip.name }} <ion-badge>{{ chip.value }}</ion-badge></ion-label>
+          <div></div>
+        </ion-chip>
       </div>
     </div>
   </div>

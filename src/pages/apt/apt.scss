@@ -80,6 +80,54 @@ page-apt {
     margin-bottom: 40%;
   }
 
+  .col-header {
+    padding-left: 10px;
+    padding-right: 10px;
+    
+    p {
+      margin: 0;
+    }
+
+  }
+
+  .white-background {
+    background-color: #ffffff;
+    color: color($colors, 'new-text-color-grey');
+  }
+
+  .new-red-background {
+    background-color: color($colors, 'new-red');
+  }
+
+  .new-orange-background {
+    background-color: color($colors, 'new-orange');
+  }
+
+  .new-green-background {
+    background-color: color($colors, 'new-green');
+  }
+
+  .new-red-background p, .new-orange-background p, .new-green-background p {
+    color: color($colors, 'light-white');
+  }
+
+  .detail-col {
+
+    ion-col {
+
+      p:nth-child(1) {
+        color: color($colors, 'new-text-color-grey-light');
+      }
+
+      p:nth-child(2) {
+        color: color($colors, 'new-text-color-grey');
+        font-weight: bold;
+      }
+
+    }
+
+  }
+
   .tab-grid {
 
     text-align: center;
