@@ -24,9 +24,14 @@ page-apt {
 
   // list apt
   .list--apt {
-    .card.card-md {
-      width: auto;
+
+    ion-card {
+      margin: 10px 0 0;
+      border-radius: 0px;
+      width: 100%;
+      box-shadow: none;
     }
+
   }
 
   // empty data
@@ -81,8 +86,7 @@ page-apt {
   }
 
   .col-header {
-    padding-left: 10px;
-    padding-right: 10px;
+    padding: 5px 15px 5px 15px;
     
     p {
       margin: 0;
@@ -115,6 +119,8 @@ page-apt {
 
     ion-col {
 
+      padding: 0 10px 0 10px;
+
       p:nth-child(1) {
         color: color($colors, 'new-text-color-grey-light');
       }
@@ -124,41 +130,6 @@ page-apt {
         font-weight: bold;
       }
 
-    }
-
-  }
-
-  .tab-grid {
-
-    text-align: center;
-    background-color: #ffffff;
-    position: fixed;
-    margin-top: 5px;
-    padding-right: 7px;
-    padding-left: 7px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    position: fixed;
-    bottom: 0px;
-    color: color($colors, 'new-text-color-grey');
-    z-index: 1;
-
-    .active {
-      color: color($colors, 'new-text-color-light');
-    }
-
-    .col {
-      padding: 0px;
-    }
-
-    ion-icon {
-      font-size: 2.8rem;
-    }
-
-    p {
-      margin-top: 0px;
-      margin-bottom: 0px;
-      font-size: 1.2rem;
     }
 
   }

@@ -16,6 +16,9 @@ import { LoaderHelper } from "../../helpers/loader-helper";
   templateUrl: "personal-agenda-detail.html"
 })
 export class PersonalAgendaDetailPage {
+
+  static TAG:string = 'PersonalAgendaDetailPage'
+
   detailAgenda: any = [];
   constructor(
     public navCtrl: NavController,

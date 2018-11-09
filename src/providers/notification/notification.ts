@@ -50,7 +50,7 @@ export class NotificationProvider {
 
     getAllNotification(type:string) {
         LogUtil.d(NotificationProvider.TAG, "get all notification")
-        return this.api.get("/personal/notification/persuratan").map(item => {
+        return this.api.get("/personal/notification/all").map(item => {
             item.type = type
         });
     }

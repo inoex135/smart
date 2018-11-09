@@ -18,7 +18,7 @@
   </div>
 
   <ion-list *ngIf="data.items.length > 0">
-    <ion-item *ngFor="let notif of data.items">
+    <ion-item *ngFor="let notif of data.items" (click)="onItemClick(item)">
       <h6 ion-text>{{notif?.nama}}</h6>
       <text-avatar [text]="notif?.nama" item-left></text-avatar>
       <p ion-text text-wrap>{{notif?.pesan}}</p>

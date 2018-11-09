@@ -1,9 +1,11 @@
 import { Component } from "@angular/core";
-import { NavParams, IonicPage } from "ionic-angular";
+import { NavParams, IonicPage, NavController } from "ionic-angular";
 
 import { LoaderHelper } from "../../helpers/loader-helper";
 import { NotificationProvider } from "../../providers/notification/notification";
 import { LogUtil } from "../../utils/logutil";
+import { AptDetailPage } from "../apt-detail/apt-detail";
+import { NaskahMasukDetailPage } from "../naskah-masuk-detail/naskah-masuk-detail";
 
 @Component({
   selector: "notification-page",
@@ -29,7 +31,10 @@ export class NotificationPage {
     }
   }
 
-  constructor(private navParams: NavParams, private provider: NotificationProvider) {
+  constructor(
+    private navParams: NavParams, 
+    private navCtrl: NavController,
+    private provider: NotificationProvider) {
     this.initChips()
     this.data.typeString = navParams.get(NotificationPage.KEY_TYPE)
     if (this.data.typeString === '') {
@@ -125,6 +130,9 @@ export class NotificationPage {
   }
 
   decreaseCurrentPage() {
+    if (this.data.meta.currentPage == 1) {
+      return
+    }
     this.data.meta.currentPage -= 1;
   } 
 
@@ -170,6 +178,20 @@ export class NotificationPage {
     this.data.meta.page = {
       total: 0,
       currentPage: 1
+    }
+  }
+
+  onItemClick(model:any) {
+    switch (model.type) {
+      case NotificationProvider.TYPE_APT:
+        this.navCtrl.push(AptDetailPage.TAG, { itemId: model.id })
+        break
+      case NotificationProvider.TYPE_PERSURATAN:
+        this.navCtrl.push(NaskahMasukDetailPage.TAG, { naskahId: model.id })
+        break
+      case NotificationProvider.TYPE_RAPAT:
+
+        break
     }
   }
 

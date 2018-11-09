@@ -85,6 +85,7 @@
   </ion-infinite-scroll>
 
   <empty-state *ngIf="items?.length == 0"></empty-state>
+  <div *ngIf="items?.length > 0" class="tab-spacer"></div>
 </ion-content>
 
 <ion-footer *ngIf="isPress || showAgendaButton">
