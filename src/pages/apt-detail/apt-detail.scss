@@ -1,13 +1,4 @@
 page-apt-detail {
-  font-family: Roboto;
-
-  .detail-permohonan-header{
-    background-color: #81C784;
-  }
-
-  .detail-permohonan-content{
-    font-size: 12px;
-  }
 
   p.background.green {
     background-color: map-get($colors, green-bootstrap) !important;
@@ -28,4 +19,60 @@ page-apt-detail {
       font-weight: bold;
     }
   }
+
+  .apt-detail-header {
+    
+    padding: 16px;
+
+    h2 {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: color($colors, 'new-text-color-grey');
+    }
+
+    p {
+      font-size: 1.3rem;
+      color: color($colors, 'new-text-color-grey-light');
+      margin-bottom: 0;
+    }
+
+  }
+
+  .detail-permohonan-content{
+
+    font-size: 1.4rem;
+    padding: 10px;
+    background-color: #fff;
+
+    ion-row {
+      padding: 10px 0 10px;
+      border-bottom: 0.5px solid #dedede;
+    }
+
+    .content-right {
+      color: color($colors, 'new-text-color-grey');
+      font-weight: bold;
+    }
+
+    .content-left {
+      text-align: left;
+      color: color($colors, 'new-text-color-grey-light');
+    }
+
+    .content-right, .content-left {
+      font-size: 1.3rem;
+    }
+
+  }
+
+  .button-grid {
+    
+    background-color: #fff;
+
+    ion-col {
+      text-align: center;
+    }
+
+  }
+
 }

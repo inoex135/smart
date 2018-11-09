@@ -70,16 +70,6 @@ $solid-border: 0.4px solid rgba(0, 0, 0, 0.2);
 // $text-input-md-highlight-color: transparent;
 // $text-input-md-show-valid-highlight: transparent;
 
-.toolbar-background {
-  background: color($colors, 'light-white') !important;
-}
-
-ion-title .toolbar-title {
-  color: color($colors, 'new-text-color-dark') !important;
-  text-transform: none !important;
-  text-align: center;
-}
-
 ion-content {
   background: color($colors, 'new-background') !important;
 }

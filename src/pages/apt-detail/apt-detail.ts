@@ -9,6 +9,7 @@ import { File } from "@ionic-native/file";
 import { APT_INDIKATOR } from "../../constant/apt-indikator";
 import { ToastHelper } from "../../helpers/toast-helper";
 import { UserProvider } from "../../providers/user/user";
+import { AptHistoryPage } from "../apt-history/apt-history";
 
 @IonicPage()
 @Component({
@@ -52,7 +53,7 @@ export class AptDetailPage {
   }
 
   async getDetailApt() {
-    await this.loaderHelper.createLoader();
+    await this.loaderHelper.show()
 
     this.aptProvider.getDetailApt(this.itemId).subscribe(
       res => {
@@ -60,7 +61,7 @@ export class AptDetailPage {
         this.aptDetail = response.permohonan;
         this.aptVerifikasi = response.permohonanVerifikasi;
         this.readNotifikasi();
-        this.loaderHelper.dismiss();
+        this.loaderHelper.dismissLoader()
       },
       err => {
         this.loaderHelper.errorHandleLoader(err, this.navCtrl);
@@ -83,7 +84,7 @@ export class AptDetailPage {
     try {
       const targetPath = `${this.fileDirectory}/${fileApt.nomorTiket}.pdf`;
 
-      await this.loaderHelper.createLoader();
+      await this.loaderHelper.show()
 
       const checkPermission = await this.aptHelper.checkPermission();
 
@@ -95,13 +96,18 @@ export class AptDetailPage {
       this.aptProvider.download(fileApt.id, targetPath);
 
       this.toast.present("File telah di download");
-      this.loaderHelper.dismiss();
+      this.loaderHelper.dismissLoader()
 
       // open file after download
       // await this.aptHelper.openFile(targetPath);
     } catch (error) {
-      this.loaderHelper.dismiss();
+      this.loaderHelper.dismissLoader()
       this.toast.present(error);
     }
   }
+
+  openHistory() {
+    this.navCtrl.push(AptHistoryPage.TAG)
+  }
+
 }

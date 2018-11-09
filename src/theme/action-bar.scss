@@ -1,28 +1,40 @@
 .custom-action-bar {
 
-    .custom-back-button {
-      margin: 0 6px !important;
-      min-width: 44px;
-      -webkit-box-shadow: none;
-      box-shadow: none;
-    
-    }
+  .toolbar-background {
+    background: color($colors, 'light-white') !important;
+  }
   
-    ion-icon {
-      font-size: 2.4rem !important;
-    }
+  ion-title .toolbar-title {
+    color: color($colors, 'new-text-color-dark') !important;
+    text-transform: none !important;
+  }
 
-    ion-buttons {
+  .center-ion-title {
+    text-align: center;
+  }
 
-      button {
+  .custom-back-button {
+    margin: 0 6px !important;
+    min-width: 44px;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+  
+  ion-icon {
+    font-size: 2.4rem !important;
+  }
 
-        img {
-          width: 30px !important;
-          height: 30px !important;
-        }
+  ion-buttons {
 
+    button {
+
+      img {
+        width: 30px !important;
+        height: 30px !important;
       }
 
     }
-    
+
   }
+    
+}

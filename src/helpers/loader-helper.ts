@@ -47,8 +47,10 @@ export class LoaderHelper {
   }
 
   dismissLoader() {
-    this.isLoaderPresent = false
-    this.loading.dismiss()
+    if (this.isLoaderPresent) {
+      this.isLoaderPresent = false
+      this.loading.dismiss()
+    }
   }
 
   isPresent(): boolean {
