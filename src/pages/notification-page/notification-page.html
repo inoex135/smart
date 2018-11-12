@@ -17,11 +17,20 @@
     </div>
   </div>
 
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+
   <ion-list *ngIf="data.items.length > 0">
-    <ion-item *ngFor="let notif of data.items" (click)="onItemClick(item)">
+    <ion-item *ngFor="let notif of data.items" (click)="onItemClick(notif)">
       <h6 ion-text>{{notif?.nama}}</h6>
       <text-avatar [text]="notif?.nama" item-left></text-avatar>
       <p ion-text text-wrap>{{notif?.pesan}}</p>
+      <p ion-text text-wrap *ngIf="notif?.perihal">{{notif?.perihal}}</p>
       <p ion-text color="blue-template" text-wrap>{{ notif?.tanggal | indonesianDate:'dddd, DD MMMM YYYY' }}</p>
       <ion-note item-end>{{(notif?.is_read) ? 'Sudah dibaca' : 'Belum dibaca'}}</ion-note>
     </ion-item>

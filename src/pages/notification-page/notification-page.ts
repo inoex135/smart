@@ -26,7 +26,8 @@ export class NotificationPage {
       chips: {},
       page: {
         total: 0,
-        currentPage: 0
+        currentPage: 1,
+        totalPages: 0
       }
     }
   }
@@ -34,9 +35,10 @@ export class NotificationPage {
   constructor(
     private navParams: NavParams, 
     private navCtrl: NavController,
-    private provider: NotificationProvider) {
+    private provider: NotificationProvider,
+    private loaderHelper: LoaderHelper) {
     this.initChips()
-    this.data.typeString = navParams.get(NotificationPage.KEY_TYPE)
+    this.data.typeString = this.navParams.get(NotificationPage.KEY_TYPE)
     if (this.data.typeString === '') {
       LogUtil.d(NotificationPage.TAG, "set default type string to " + NotificationProvider.TYPE_ALL)
       this.data.typeString = NotificationProvider.TYPE_ALL
@@ -67,21 +69,33 @@ export class NotificationPage {
       value: 0,
       active: false
     }
-    data[NotificationProvider.TYPE_RAPAT] = {
+ /*    data[NotificationProvider.TYPE_RAPAT] = {
       name: 'E-Rapat',
       value: 0,
       active: false
-    }
+    } */
+    this.data.meta.chips = {}
     this.data.meta.chips = data
   }
 
   ionViewWillEnter() {
+    this.getTotalNotification()
+    if (this.data.items.length == 0) {
+      this.fillList()
+    }
+  }
+
+  getTotalNotification() {
+    LogUtil.d(NotificationPage.TAG, this.data.meta.chips)
     this.provider.getTotalNotication().subscribe(
       result => {
         if (result && this.showChips()) {
+          LogUtil.d(NotificationPage.TAG, result)
           for (var i in result) {
-            this.data.meta.chips[i].value = result[i]
-            this.data.meta.chips.all.value += result[i]
+            LogUtil.d(NotificationPage.TAG, "get element by key: " + i)
+            if (this.data.meta.chips[i]) {
+              this.data.meta.chips[i].value = result[i]
+            }
           }
         }
       },
@@ -89,19 +103,22 @@ export class NotificationPage {
         LogUtil.d(NotificationPage.TAG, error)
       }
     )
-    this.fillList()
   }
 
-  fillList() {
-    const currentProvider = this.provider.switchProvider(this.data.provider)
+  fillList():void {
+    this.loaderHelper.show()
+    const currentProvider = this.provider.switchProvider(this.data)
     if (currentProvider !== null) {
       currentProvider.subscribe(
-        result => {
-          if (result) {
-            this.data.items = result
+        res => {
+          this.updateMetaPage(res)
+          if (res) {
+            this.data.items = res.content
           }
+          this.loaderHelper.dismissLoader()
         },
         error => {
+          this.loaderHelper.dismissLoader()
           LogUtil.d(NotificationPage.TAG, error)
         }
       )
@@ -121,40 +138,58 @@ export class NotificationPage {
     return data
   }
 
-  showChips() {
+  showChips():boolean {
     return this.data.typeString === NotificationProvider.TYPE_ALL
   }
 
-  increaseCurrentPage() {
-    this.data.meta.currentPage += 1;
+  increaseCurrentPage():void {
+    this.data.meta.page.currentPage += 1;
   }
 
-  decreaseCurrentPage() {
-    if (this.data.meta.currentPage == 1) {
+  decreaseCurrentPage():void {
+    if (this.data.meta.page.currentPage == 1) {
       return
     }
-    this.data.meta.currentPage -= 1;
+    this.data.meta.page.currentPage -= 1;
   } 
 
+  isAllowedInfinite():boolean {
+    return this.data.meta.page.totalPages == this.data.meta.page.currentPage
+  }
+
+  updateMetaPage(res:any):void {
+    this.data.meta.page.total += res.size
+    if (res.totalPages) {
+      this.data.meta.page.totalPages = res.totalPages
+    }
+  }
+
   doInfinite(event) {
+    if (this.isAllowedInfinite()) {
+      event.complete()
+      return
+    }
     this.increaseCurrentPage()
     setTimeout(() => {
-      const resourceData = this.provider.switchProvider(this.data.provider);
+      const resourceData = this.provider.switchProvider(this.data);
       resourceData.subscribe(
         res => {
-          if (res.length == 0) {
+          this.updateMetaPage(res)
+          if (res.content.length > 0) {
+            res.content.forEach(element => {
+              this.data.items.push(element)
+            });
+          } else {
             this.decreaseCurrentPage()
-          }
-          for (var index = 0; index < res.length; index++) {
-            this.data.items.push(res[index]);
           }
         },
         err => {
+          this.decreaseCurrentPage()
           LogUtil.d(NotificationPage.TAG, err)
         }
       );
-      event.complete();
-    }, 1000);
+      event.complete()
+    }, 1000)
   }
 
   clickChip(key:string = '') {
@@ -173,15 +208,17 @@ export class NotificationPage {
     LogUtil.d(NotificationPage.TAG, "provider: " + this.data.provider)
   }
 
-  clearItems() {
+  clearItems():void {
     this.data.items = []
     this.data.meta.page = {
       total: 0,
-      currentPage: 1
+      currentPage: 1,
+      totalPages:0
     }
   }
 
   onItemClick(model:any) {
+    LogUtil.d(NotificationPage.TAG, model)
     switch (model.type) {
       case NotificationProvider.TYPE_APT:
         this.navCtrl.push(AptDetailPage.TAG, { itemId: model.id })
@@ -192,7 +229,24 @@ export class NotificationPage {
       case NotificationProvider.TYPE_RAPAT:
 
         break
+      case NotificationProvider.TYPE_PERSONAL:
+        
+        break
     }
+  }
+
+  doRefresh(refresher) {
+    this.clearItems()
+    this.provider.switchProvider(this.data).subscribe(
+      res => {
+        this.data.items = res.content
+        refresher.complete()
+      },
+      err => { 
+        this.loaderHelper.dismiss()
+        refresher.complete();
+       }
+    );
   }
 
 }

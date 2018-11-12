@@ -7,7 +7,7 @@ export class NotificationProvider {
 
     static TAG:string = 'NotificationProvider'
 
-    static TYPE_ALL:string = 'all'
+    static TYPE_ALL:string = 'notification_all'
     static TYPE_APT:string = "notification_apt"
     static TYPE_PERSURATAN:string = "notification_persuratan"
     static TYPE_RAPAT:string = "notification_rapat"
@@ -20,61 +20,69 @@ export class NotificationProvider {
         return this.api.get("/personal/notification");
     }
 
-    getAptNotification(type:string) {
+    getAptNotification(data:any) {
         LogUtil.d(NotificationProvider.TAG, "get apt notification")
-        return this.api.get("/personal/notification/apt").map(item => {
-            item.type = type
-        });
+        return this.api.get("/personal/notification/apt?page="+data.currentPage)
     }
 
-    getPersuratanNotification(type:string) {
+    getPersuratanNotification(data:any) {
         LogUtil.d(NotificationProvider.TAG, "get persuratan notification")
-        return this.api.get("/personal/notification/persuratan").map(item => {
-            item.type = type
-        });
+        return this.api.get("/personal/notification/persuratan?page="+data.currentPage)
     }
 
-    getRapatNotification(type:string) {
+    getRapatNotification(data:any) {
         LogUtil.d(NotificationProvider.TAG, "get rapat notification")
-        return this.api.get("/personal/notification/persuratan").map(item => {
-            item.type = type
-        });
+        return this.api.get("/personal/notification/persuratan?page="+data.currentPage)
     }
 
-    getPersonalNotification(type:string) {
+    getPersonalNotification(data:any) {
         LogUtil.d(NotificationProvider.TAG, "get personal notification")
-        return this.api.get("/personal/notification/persuratan").map(item => {
-            item.type = type
-        });
+        return this.api.get("/personal/notification/persuratan?page="+data.currentPage)
     }
 
-    getAllNotification(type:string) {
+    getAllNotification(data:any) {
         LogUtil.d(NotificationProvider.TAG, "get all notification")
-        return this.api.get("/personal/notification/all").map(item => {
-            item.type = type
-        });
+        return this.api.get("/personal/notification/all?page="+data.currentPage)
     }
 
-    switchProvider(type:string = '') {
-        let currentProvider = null;
-        switch(type) {
+    switchProvider(data:any) {
+        var currentProvider = null;
+        let metaPage = data.meta.page
+        LogUtil.d(NotificationProvider.TAG, metaPage)
+        switch(data.provider) {
           case NotificationProvider.TYPE_APT:
-            currentProvider = this.getAptNotification(type)
+            currentProvider = this.getAptNotification(metaPage)
             break
           case NotificationProvider.TYPE_PERSURATAN:
-            currentProvider = this.getPersuratanNotification(type)
+            currentProvider = this.getPersuratanNotification(metaPage)
             break
           case NotificationProvider.TYPE_RAPAT:
-            currentProvider = this.getRapatNotification(type)
+            currentProvider = this.getRapatNotification(metaPage)
             break
           case NotificationProvider.TYPE_PERSONAL:
-            currentProvider = this.getPersonalNotification(type)
+            currentProvider = this.getPersonalNotification(metaPage)
             break
           default:
-            currentProvider = this.getAllNotification(type)
+            currentProvider = this.getAllNotification(metaPage)
             break
         }
-        return currentProvider
+        return currentProvider.map(item => {
+            if (item.content) {
+                item.content.forEach(element => {
+                    if (data.provider != NotificationProvider.TYPE_ALL) {
+                        element.type = data.provider
+                    } else if (element.type == 1) {
+                        element.type = NotificationProvider.TYPE_PERSONAL
+                    } else if (element.type == 2) {
+                        element.type = NotificationProvider.TYPE_PERSURATAN
+                    } else if (item.type == 3) {
+                        element.type = NotificationProvider.TYPE_APT
+                    } 
+                });
+            }
+            LogUtil.d(NotificationProvider.TAG, item)
+            return item
+        })
     }
 
 }

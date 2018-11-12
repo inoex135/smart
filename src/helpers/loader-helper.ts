@@ -37,7 +37,10 @@ export class LoaderHelper {
         content: message,
         dismissOnPageChange: true
       })
-      this.loading.present()
+      this.loading.present().then(() => {
+        LogUtil.d(this.TAG, "present set to true")
+        this.isLoaderPresent = true
+      })
     }
   }
 

@@ -23,33 +23,10 @@ export class AptHistoryPage {
 
   histories:any = {
     supervisions: [
-      {
-        "catatan": "testing",
-        "tanggal": "18 Oktober 2018",
-        "status": "Dalam Proses",
-        "nama_supervisor": "RACHMAT KURNIAWAN"
-      },
-      {
-        "catatan": "testing",
-        "tanggal": "18 Oktober 2018",
-        "status": "Dalam Proses",
-        "nama_supervisor": "RACHMAT KURNIAWAN"
-      },
-      {
-        "catatan": "testing",
-        "tanggal": "18 Oktober 2018",
-        "status": "Dalam Proses",
-        "nama_supervisor": "RACHMAT KURNIAWAN"
-      }
+
     ],
     verifications: [
-      {
-        "nama_verifikator": "RACHMAT KURNIAWAN",
-        "surat_pendukung": null,
-        "tanggal_verifikasi": "7 November 2018",
-        "status_verifikasi": "Lanjut",
-        "catatan_verifikasi": "mantap, lanjutkan"
-     }
+
     ]
   }
 

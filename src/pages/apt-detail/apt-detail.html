@@ -74,8 +74,8 @@
         <button ion-button outline ion-text text-center color="default-blue" (tap)="downloadPermohonan(aptDetail)">
           <ion-icon name="md-download"></ion-icon> Unduh</button>
       </ion-col>
-      <ion-col ion-button outline *ngIf="aptDetail?.statusString == 'Belum diverifikasi'">
-        <button ion-text text-center (click)="detailAction(ACTION.VERIFIKASI,aptDetail?.id)" color="danger" *ngIf="profile?.jenis_eselon">
+      <ion-col ion-button *ngIf="aptDetail?.statusString == 'Belum diverifikasi'">
+        <button ion-text outline text-center (click)="detailAction(ACTION.VERIFIKASI,aptDetail?.id)" color="danger" *ngIf="profile?.jenis_eselon">
           <ion-icon name="md-done-all"></ion-icon> Verifikasi</button>
       </ion-col>
       <ion-col>
