@@ -1,8 +1,10 @@
-import { Component } from "@angular/core";
+import { Component, ViewChild } from "@angular/core";
 import { NavController, NavParams, IonicPage } from "ionic-angular";
 
 import { PersonalProvider } from "../../providers/personal/personal";
 import { LoaderHelper } from "../../helpers/loader-helper";
+import { NotificationProvider } from "../../providers/notification/notification";
+import { NotificationBell } from "../../components/notification-bell/notification-bell";
 
 @Component({
   selector: "page-personal",
@@ -24,12 +26,15 @@ export class PersonalPage {
     currentDate: this.selectedDay
   };
 
+  @ViewChild('bell') bell:NotificationBell
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     private personalProvider: PersonalProvider,
     private loaderHelper: LoaderHelper
-  ) {}
+  ) {
+  }
 
   onViewTitleChanged(title) {
     this.viewTitle = title;
@@ -61,6 +66,9 @@ export class PersonalPage {
 
   ionViewWillEnter() {
     this.getListEvent();
+    if (this.bell) {
+      this.bell.updateNotification()
+    }
   }
 
   onChange($event) {
@@ -108,4 +116,9 @@ export class PersonalPage {
   showAllAgenda() {
     this.navCtrl.push("PersonalAgendaPage");
   }
+
+  getNotificationType():string {
+    return NotificationProvider.TYPE_PERSONAL
+  }
+
 }
