@@ -4,16 +4,24 @@ import { FileTransfer, FileTransferObject } from "@ionic-native/file-transfer";
 import { ENV } from "../../config/environment";
 import { TokenProvider } from "../token/token";
 import { map } from "rxjs/operators/map";
+import { Storage } from "@ionic/storage";
+import { LogUtil } from "../../utils/logutil";
 
 @Injectable()
 export class AptProvider {
+
+  static TAG:string = 'AptProvider'
+
   fileTransfer: FileTransferObject;
   fileDir: string;
+
+  static KEY_PELAYANAN_CACHE:string = 'pelayanan_cache'
 
   constructor(
     public apiProvider: ApiProvider,
     transfer: FileTransfer,
-    private token: TokenProvider
+    private token: TokenProvider,
+    private storage: Storage
   ) {
     this.fileTransfer = transfer.create();
   }
@@ -25,11 +33,47 @@ export class AptProvider {
     return this.apiProvider.get(url).pipe(map(res => res.content));
   }
 
-  getPelayananList() {
-    const url = "/apt/pelayanan";
-    const data = this.apiProvider.get(url);
+  getFromCache(key:string):Promise<any> {
+    return this.storage
+    .ready()
+    .then(() => this.storage.get(key) as Promise<any>)
+    .then(pelayanan => {
+      LogUtil.d(AptProvider.TAG, pelayanan)
+      let now = Date.now()
+      LogUtil.d(AptProvider.TAG, "now: " + now)
+      if (pelayanan && pelayanan.when > 0 && now < pelayanan.when) {
+        LogUtil.d(AptProvider.TAG, "key " + key + " exist")
+        return Promise.resolve(pelayanan)
+      }
 
-    return data;
+      return Promise.resolve(null)
+    })
+  }
+
+  putCache(key:string, data:any) {
+    LogUtil.d(AptProvider.TAG, "save to cache: " + key)
+    return this.storage
+      .ready()
+      .then(() => this.storage.set(key, data) as Promise<void>);
+  }
+
+  getPelayananList() {  
+    return this.getFromCache(AptProvider.KEY_PELAYANAN_CACHE)
+    .then(pelayanan => {
+      if (pelayanan == null) {
+        LogUtil.d(AptProvider.TAG, "cache null or expired get from api instead ")
+        return this.apiProvider.get("/apt/pelayanan").map(result => {
+          var data:any = {}
+          data['response'] = result
+          if (result) {
+            data['when'] = Date.now() + (5 * 60 * 1000)
+            this.putCache(AptProvider.KEY_PELAYANAN_CACHE, data)
+          }
+          return data
+        }).toPromise()
+      }
+      return pelayanan
+    })
   }
 
   search(

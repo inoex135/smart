@@ -118,14 +118,13 @@ export class AptPage {
   }
 
   getPelayananList() {
-    this.aptProvider.getPelayananList().subscribe(
-      res => {
-        this.pelayanans = res.content;
-      },
-      err => {
-        this.loaderHelper.dismissLoader()
+    this.aptProvider.getPelayananList()
+    .then(result => {
+      LogUtil.d(AptPage.TAG, result)
+      if (result.response.content) {
+        this.pelayanans = result.response.content
       }
-    );
+    })
   }
 
   async getAptList() {
