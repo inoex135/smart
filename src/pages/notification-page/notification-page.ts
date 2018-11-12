@@ -27,7 +27,8 @@ export class NotificationPage {
       page: {
         total: 0,
         currentPage: 1,
-        totalPages: 0
+        totalPages: 0,
+        isRead: 0
       }
     }
   }
@@ -213,7 +214,8 @@ export class NotificationPage {
     this.data.meta.page = {
       total: 0,
       currentPage: 1,
-      totalPages:0
+      totalPages: 0,
+      isRead: 0
     }
   }
 
@@ -247,6 +249,14 @@ export class NotificationPage {
         refresher.complete();
        }
     );
+  }
+
+  getNotifications():Array<any> {
+    return this.data.items
+  }
+
+  isNotificationExist():boolean {
+    return this.getNotifications().length > 0
   }
 
 }

@@ -22,27 +22,35 @@ export class NotificationProvider {
 
     getAptNotification(data:any) {
         LogUtil.d(NotificationProvider.TAG, "get apt notification")
-        return this.api.get("/personal/notification/apt?page="+data.currentPage)
+        return this.api.get("/personal/notification/apt" + this.getQueryString(data))
     }
 
     getPersuratanNotification(data:any) {
         LogUtil.d(NotificationProvider.TAG, "get persuratan notification")
-        return this.api.get("/personal/notification/persuratan?page="+data.currentPage)
+        return this.api.get("/personal/notification/persuratan" + this.getQueryString(data))
     }
 
     getRapatNotification(data:any) {
         LogUtil.d(NotificationProvider.TAG, "get rapat notification")
-        return this.api.get("/personal/notification/persuratan?page="+data.currentPage)
+        return this.api.get("/personal/notification/persuratan" + this.getQueryString(data))
     }
 
     getPersonalNotification(data:any) {
         LogUtil.d(NotificationProvider.TAG, "get personal notification")
-        return this.api.get("/personal/notification/persuratan?page="+data.currentPage)
+        return this.api.get("/personal/notification/personal" + this.getQueryString(data))
     }
 
     getAllNotification(data:any) {
         LogUtil.d(NotificationProvider.TAG, "get all notification")
-        return this.api.get("/personal/notification/all?page="+data.currentPage)
+        return this.api.get("/personal/notification/all" + this.getQueryString(data))
+    }
+
+    getQueryString(data:any):string {
+        var queryString = "?page=" + data.currentPage
+        if (data.isRead < 2) {
+            queryString += "&is_read=" + data.isRead
+        }
+        return queryString
     }
 
     switchProvider(data:any) {
@@ -78,7 +86,7 @@ export class NotificationProvider {
                     } else if (item.type == 3) {
                         element.type = NotificationProvider.TYPE_APT
                     } 
-                });
+                })
             }
             LogUtil.d(NotificationProvider.TAG, item)
             return item

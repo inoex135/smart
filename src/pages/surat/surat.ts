@@ -1,4 +1,4 @@
-import { Component, ViewChildren } from "@angular/core";
+import { Component, ViewChildren, ViewChild } from "@angular/core";
 import { NavController, NavParams, IonicPage } from "ionic-angular";
 
 import { LoaderHelper } from "../../helpers/loader-helper";
@@ -13,6 +13,8 @@ import { DatepickerProvider } from "../../providers/datepicker/datepicker";
 import { MomentHelper } from "../../helpers/moment-helper";
 import { TokenProvider } from "../../providers/token/token";
 import { LogUtil } from "../../utils/logutil";
+import { NotificationProvider } from "../../providers/notification/notification";
+import { NotificationBell } from "../../components/notification-bell/notification-bell";
 
 @IonicPage()
 @Component({
@@ -26,21 +28,22 @@ export class SuratPage {
   filter: any = {
     startTime: "",
     endTime: ""
-  };
+  }
   PAGE: any = {
     NOTIFIKASI: "notifikasi",
     NASKAH: "naskah"
-  };
+  }
 
-  isSekretaris: boolean = false;
+  isSekretaris: boolean = false
 
-  totalPersuratan: any = "";
+  totalPersuratan: any = ""
 
-  redirectComponent: string = "NaskahNotifikasiPage";
+  redirectComponent: string = "NaskahNotifikasiPage"
 
-  @ViewChildren(Ng2Highcharts) allCharts;
+  @ViewChildren(Ng2Highcharts) allCharts
+  @ViewChild("bell") notificationBell:NotificationBell
 
-  chartData: any = "";
+  chartData: any = ""
 
   constructor(
     public navCtrl: NavController,
@@ -57,9 +60,12 @@ export class SuratPage {
 
   ionViewWillEnter() {
     LogUtil.d(this.TAG, "ionViewWillEnter")
-    this.setIntervalDate();
-    this.initData();
-    this.checkSekretaris();
+    this.setIntervalDate()
+    this.initData()
+    this.checkSekretaris()
+    if (this.notificationBell) {
+      this.notificationBell.updateNotification()
+    }
   }
 
   async checkSekretaris() {
@@ -166,4 +172,9 @@ export class SuratPage {
   }
   // onchange pencarian surat
   searchSurat() {}
+
+  getNotificationType() {
+    return NotificationProvider.TYPE_PERSURATAN
+  }
+
 }
