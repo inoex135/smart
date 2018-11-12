@@ -1,5 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Storage } from "@ionic/storage";
+import { AptProvider } from "../apt/apt";
+import { CacheKey } from "../../constant/cache-key";
 
 @Injectable()
 export class TokenProvider {
@@ -106,5 +108,6 @@ export class TokenProvider {
     this.destroyUser();
     this.destroyProfile();
     this.destroyPltPlh();
+    this.storage.remove(CacheKey.APT_PELAYANANS)
   }
 }

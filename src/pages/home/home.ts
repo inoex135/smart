@@ -92,11 +92,13 @@ export class HomePage {
     this.loaderHelper.createLoader();
     this.userProvider.logout().subscribe(
       () => {
+        this.homeProvider.removePhotoCache()
         this.userProvider.purgeAuth();
         this.navCtrl.setRoot("LoginPage");
         this.loaderHelper.dismiss();
       },
       err => {
+        this.homeProvider.removePhotoCache()
         this.userProvider.purgeAuth();
         this.loaderHelper.dismiss();
         this.navCtrl.setRoot("LoginPage");
@@ -138,19 +140,19 @@ export class HomePage {
       }
     )
     
-    this.homeProvider.getPhotoProfile().subscribe(
+    this.homeProvider.getPhotoProfile().then(
       res => {
         if (res != null) {
+          console.log(res)
           this.image.nativeElement.src = URL.createObjectURL(res)
           this.showAvatar = false
         } else {
           this.showAvatar = true
         }
-      },
-      err => {
-        this.showAvatar = true
       }
-    );
+    ).catch(error => {
+      this.showAvatar = true
+    })
 
     // get profile dari localStorage jika sudah ada
     if (profile) {

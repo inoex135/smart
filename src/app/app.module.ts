@@ -53,6 +53,7 @@ import { ToastHelper } from "../helpers/toast-helper";
 import { MomentHelper } from "../helpers/moment-helper";
 import { MasterUnitProvider } from "../providers/master-unit/master-unit";
 import { AutoCompleteModule } from "ionic2-auto-complete";
+import { CacheProvider } from "../providers/cache/cache";
 
 @NgModule({
   declarations: [MyApp, AptDetailActionPage],
@@ -99,7 +100,8 @@ import { AutoCompleteModule } from "ionic2-auto-complete";
     NaskahDisposisiProvider,
     ToastHelper,
     MomentHelper,
-    MasterUnitProvider
+    MasterUnitProvider,
+    CacheProvider
   ]
 })
 export class AppModule {}
