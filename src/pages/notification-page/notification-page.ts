@@ -86,6 +86,11 @@ export class NotificationPage {
     }
   }
 
+  ionViewWillLeave() {
+    LogUtil.d(NotificationPage.TAG, "view did disappear")
+    this.loaderHelper.notPresents()
+  }
+
   getTotalNotification() {
     LogUtil.d(NotificationPage.TAG, this.data.meta.chips)
     this.provider.getTotalNotication().subscribe(
@@ -107,23 +112,24 @@ export class NotificationPage {
   }
 
   fillList():void {
-    this.loaderHelper.show()
-    const currentProvider = this.provider.switchProvider(this.data)
-    if (currentProvider !== null) {
-      currentProvider.subscribe(
-        res => {
-          this.updateMetaPage(res)
-          if (res) {
-            this.data.items = res.content
+    this.loaderHelper.show().then(isPresent => {
+      const currentProvider = this.provider.switchProvider(this.data)
+      if (currentProvider !== null) {
+        currentProvider.subscribe(
+          res => {
+            this.updateMetaPage(res)
+            if (res) {
+              this.data.items = res.content
+            }
+            this.loaderHelper.dismissLoader()
+          },
+          error => {
+            this.loaderHelper.dismissLoader()
+            LogUtil.d(NotificationPage.TAG, error)
           }
-          this.loaderHelper.dismissLoader()
-        },
-        error => {
-          this.loaderHelper.dismissLoader()
-          LogUtil.d(NotificationPage.TAG, error)
-        }
-      )
-    }
+        )
+      }
+    })
   }
 
   getChips() {

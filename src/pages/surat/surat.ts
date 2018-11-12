@@ -77,24 +77,23 @@ export class SuratPage {
 
   // profile 1 adalah personal sedangkan 2 adalah sekretaris
   initData(profile: number = 1) {
-    const params = this.grafikSuratProvider.paramsStartAndEnd();
-
-    this.loaderHelper.createLoader();
-
-    Observable.zip(
-      this.grafikSuratProvider.getFilterSumasData(params, profile),
-      this.suratProvider.getTotalPersuratan(profile)
-    ).subscribe(
-      ([chartData, totalSurat]) => {
-        this.chartData = this.grafikSuratProvider.chartData(chartData);
-        this.totalPersuratan = totalSurat;
-
-        this.loaderHelper.dismiss();
-      },
-      err => {
-        this.loaderHelper.errorHandleLoader(err, this.navCtrl);
-      }
-    );
+    this.loaderHelper.show().then(isPresent =>  {
+      const params = this.grafikSuratProvider.paramsStartAndEnd()
+      Observable.zip(
+        this.grafikSuratProvider.getFilterSumasData(params, profile),
+        this.suratProvider.getTotalPersuratan(profile)
+      ).subscribe(
+        ([chartData, totalSurat]) => {
+          this.chartData = this.grafikSuratProvider.chartData(chartData)
+          this.totalPersuratan = totalSurat
+  
+          this.loaderHelper.dismissLoader()
+        },
+        err => {
+          this.loaderHelper.dismissLoader()
+        }
+      )
+    })
   }
 
   // search sumas grafik by date
@@ -140,6 +139,8 @@ export class SuratPage {
   // when page leave, stop interval date
   ionViewWillLeave() {
     clearInterval(this.setIntervalDate());
+    LogUtil.d(this.TAG, "view did disappear")
+    this.loaderHelper.notPresents()
   }
 
   setIntervalDate(): number {

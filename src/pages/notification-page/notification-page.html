@@ -9,8 +9,8 @@
   <div *ngIf="showChips()" class="chip-container">
     <div class="list-chip">
       <div class="chip-notification" *ngFor="let chip of getChips()">
-        <ion-chip (click)="clickChip(chip?.key)" [color]="chip.active ? 'new-orange' : 'default'">
-          <ion-label>{{ chip.name }} <ion-badge>{{ chip.value }}</ion-badge></ion-label>
+        <ion-chip (click)="clickChip(chip?.key)" [color]="chip.active ? 'new-text-color-light' : 'default'">
+          <ion-label>{{ chip.name }} <ion-badge color="new-red">{{ chip.value }}</ion-badge></ion-label>
           <div></div>
         </ion-chip>
       </div>
@@ -26,13 +26,13 @@
   </ion-refresher>
 
   <ion-list *ngIf="isNotificationExist()">
-    <ion-item *ngFor="let notif of getNotifications()" (click)="onItemClick(notif)">
+    <ion-item class="notification-item" *ngFor="let notif of getNotifications()" (click)="onItemClick(notif)">
       <h6 ion-text>{{notif?.nama}}</h6>
       <text-avatar [text]="notif?.nama" item-left></text-avatar>
       <p ion-text text-wrap>{{notif?.pesan}}</p>
       <p ion-text text-wrap *ngIf="notif?.perihal">{{notif?.perihal}}</p>
       <p ion-text color="blue-template" text-wrap>{{ notif?.tanggal | indonesianDate:'dddd, DD MMMM YYYY' }}</p>
-      <ion-note item-end>{{(notif?.is_read) ? 'Sudah dibaca' : 'Belum dibaca'}}</ion-note>
+      <p ion-text text-wrap>{{(notif?.is_read) ? 'Sudah dibaca' : 'Belum dibaca'}}</p>
     </ion-item>
     <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
       <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data..."></ion-infinite-scroll-content>

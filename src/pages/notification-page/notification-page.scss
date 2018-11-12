@@ -24,10 +24,21 @@ notification-page {
             padding: 3px;
             width: auto;
             height: 48px;
+
+            ion-badge {
+              border-radius: 10px;
+            }
+
         }
 
     }
 
+  }
+
+  .notification-item {
+    p {
+      margin-bottom: 0.8rem;
+    }
   }
   
 }

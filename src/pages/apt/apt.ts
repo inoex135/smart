@@ -92,6 +92,11 @@ export class AptPage {
     this.mappingGetData();
   }
 
+  ionViewWillLeave() {
+    LogUtil.d(AptPage.TAG, "view did disappear")
+    this.loaderHelper.notPresents()
+  }
+  
   mappingGetData() {
     if (this.type === "dekatBatasWaktu") {
       return this.getDekatBatasWaktu();
@@ -118,7 +123,7 @@ export class AptPage {
         this.pelayanans = res.content;
       },
       err => {
-        this.loaderHelper.errorHandleLoader(err, this.navCtrl);
+        this.loaderHelper.dismissLoader()
       }
     );
   }
@@ -131,11 +136,11 @@ export class AptPage {
         // @TODO : uncomment if data already
         this.items = res;
 
-        this.loaderHelper.dismiss();
+        this.loaderHelper.dismissLoader()
       },
       err => {
         console.log(err);
-        this.loaderHelper.errorHandleLoader(err, this.navCtrl);
+        this.loaderHelper.dismissLoader()
       }
     );
   }
@@ -280,27 +285,27 @@ export class AptPage {
 
   // get data apt yg lewati batas norma waktu
   async getDekatBatasWaktu() {
-    await this.loaderHelper.createLoader();
+    await this.loaderHelper.show()
     this.aptProvider.getDekatBatasWaktu(this.keyword, this.page).subscribe(
       res => {
-        this.loaderHelper.dismiss();
+        this.loaderHelper.dismissLoader()
         this.items = res;
       },
       err => {
-        this.loaderHelper.dismiss();
+        this.loaderHelper.dismissLoader()
       }
     );
   }
 
   // get data apt yg lewati batas norma waktu
   async getLewatiBatasWaktu() {
-    await this.loaderHelper.createLoader();
+    await this.loaderHelper.show()
     this.aptProvider.getLewatiBatasWaktu(this.keyword, this.page).subscribe(
       res => {
-        this.loaderHelper.dismiss();
+        this.loaderHelper.dismissLoader()
         this.items = res;
       },
-      err => this.loaderHelper.dismiss()
+      err => this.loaderHelper.dismissLoader()
     );
   }
 

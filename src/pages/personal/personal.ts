@@ -5,6 +5,7 @@ import { PersonalProvider } from "../../providers/personal/personal";
 import { LoaderHelper } from "../../helpers/loader-helper";
 import { NotificationProvider } from "../../providers/notification/notification";
 import { NotificationBell } from "../../components/notification-bell/notification-bell";
+import { LogUtil } from "../../utils/logutil";
 
 @Component({
   selector: "page-personal",
@@ -12,6 +13,9 @@ import { NotificationBell } from "../../components/notification-bell/notificatio
 })
 @IonicPage()
 export class PersonalPage {
+
+  TAG:string = 'PersonalPage'
+
   // date: string[] = ["2017-11-15", "2017-11-16"];
   // type: "string"; // 'string' | 'js-date' | 'moment' | 'time' | 'object'
   // readonly: boolean = true;
@@ -47,21 +51,25 @@ export class PersonalPage {
   onTimeSelected(ev) {
     this.selectedDay = ev;
   }
+
+  ionViewWillLeave() {
+    LogUtil.d(this.TAG, "view did disappear")
+    this.loaderHelper.notPresents()
+  }
+
   getListEvent() {
-    this.loaderHelper.createLoader();
-    this.personalProvider
+    this.loaderHelper.show()
+    .then(() => {
+      this.personalProvider
       .getListEvent()
       .then(res => {
-        this.eventSource = res;
-        this.loaderHelper.dismiss();
+        this.eventSource = res
+        this.loaderHelper.dismissLoader()
       })
       .catch(err => {
-        this.loaderHelper.errorHandleLoader(err.error_message, this.navCtrl);
+        this.loaderHelper.dismissLoader()
       });
-
-    // this.personalProvider
-    //   .agendaPersonal()
-    //   .subscribe(res => (this.eventSource = res), err => console.log());
+    })
   }
 
   ionViewWillEnter() {
