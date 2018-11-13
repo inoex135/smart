@@ -6,9 +6,13 @@ import { TokenProvider } from "../token/token";
 
 import { User } from "../../models/users";
 import { map } from "rxjs/operators/map";
+import { LogUtil } from "../../utils/logutil";
 
 @Injectable()
 export class UserProvider {
+
+  TAG:string = 'UserProvider'
+
   private isAuthenticatedSubject = new ReplaySubject<boolean>(1);
   public isAuthenticated = this.isAuthenticatedSubject.asObservable();
 
@@ -80,15 +84,23 @@ export class UserProvider {
     });
   }
 
-  getProfile() {
-    return this.apiProvider.get("/personal/profile").pipe(
-      map(res => {
-        if (!this.tokenProvider.latestProfile) {
-          this.setProfile(res);
-        }
-        return res;
-      })
-    );
+  getProfile(): Promise<any> {
+    LogUtil.d(this.TAG, 'get user profile')
+    return this.tokenProvider.getProfile()
+    .then(profile => {
+      if (profile == null) {
+        LogUtil.d(this.TAG, 'from api')
+        return this.apiProvider.get("/personal/profile").pipe(
+          map(res => {
+            if (!this.tokenProvider.latestProfile) {
+              this.setProfile(res);
+            }
+            return res;
+          })
+        ).toPromise()
+      }
+      return profile
+    })
   }
 
   //registrasi fcm token

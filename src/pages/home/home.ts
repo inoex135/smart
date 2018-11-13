@@ -92,13 +92,11 @@ export class HomePage {
     this.loaderHelper.createLoader();
     this.userProvider.logout().subscribe(
       () => {
-        this.homeProvider.removePhotoCache()
         this.userProvider.purgeAuth();
         this.navCtrl.setRoot("LoginPage");
         this.loaderHelper.dismiss();
       },
       err => {
-        this.homeProvider.removePhotoCache()
         this.userProvider.purgeAuth();
         this.loaderHelper.dismiss();
         this.navCtrl.setRoot("LoginPage");
@@ -126,24 +124,44 @@ export class HomePage {
   }
 
   async initData() {
-    const profile = await this.token.getProfile()
-    this.homeProvider.getDashboard().subscribe(
+    // get profile dari localStorage jika sudah ada
+    this.userProvider.getProfile()
+    .then(profile => {
+      this.profile = profile;
+      this.profileName = profile.nip;
+      return Promise.resolve(profile)
+    })
+    .then(() => {
+      this.getProfilePicture()
+    })
+    .then(() => {
+      this.getDashboard()
+    }) 
+    .catch(error => {
+      LogUtil.d(this.TAG, "i catch error here on profile")
+      LogUtil.d(this.TAG, error)
+    })
+  }
+
+  private getDashboard() {
+    this.homeProvider.getDashboard().then(
       res => {
         if (res) {
           LogUtil.d(this.TAG, res)
-          this.dashboard = res
+          this.dashboard = res.response
         } 
-      },
-      error => {
+      })
+      .catch(error => {
         LogUtil.d(this.TAG, "error accessing API dashboard")
         LogUtil.d(this.TAG, error)
       }
     )
-    
+  }
+
+  private getProfilePicture() {
     this.homeProvider.getPhotoProfile().then(
       res => {
         if (res != null) {
-          console.log(res)
           this.image.nativeElement.src = URL.createObjectURL(res)
           this.showAvatar = false
         } else {
@@ -153,22 +171,6 @@ export class HomePage {
     ).catch(error => {
       this.showAvatar = true
     })
-
-    // get profile dari localStorage jika sudah ada
-    if (profile) {
-      this.profile = profile;
-      this.profileName = profile.nip;
-    } else {
-      const getProfile = this.userProvider.getProfile();
-
-      Observable.zip(getProfile).subscribe(
-        ([profile]) => {
-          this.profile = profile;
-          this.profileName = profile.nip;
-        },
-        err => false
-      );
-    }
   }
 
   triggerOpenSelect() {

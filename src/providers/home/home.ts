@@ -2,24 +2,33 @@ import { Injectable } from "@angular/core";
 import { ApiProvider } from "../api/api";
 import { LogUtil } from "../../utils/logutil";
 import { CacheProvider } from "../cache/cache";
+import { TokenProvider } from "../token/token";
 
 @Injectable()
 export class HomeProvider {
 
   TAG:string = 'HomeProvider'
-  static KEY_PHOTO = 'photo_profile'
+  private KEY_PHOTO = 'photo_profile'
+  private KEY_DASHBOARD = 'dashboard_'
 
-  constructor(private apiProvider: ApiProvider, private cache: CacheProvider) {}
+  constructor(private apiProvider: ApiProvider, 
+    private cache: CacheProvider,
+    private token: TokenProvider
+  ) {}
 
   getPhotoProfile() {
-    LogUtil.d(this.TAG, "get personal photo")
-    return this.cache.get(HomeProvider.KEY_PHOTO)
-    .then(result => {
+    return this.token.getProfile()
+    .then(profile => {
+      let key = this.KEY_PHOTO + "_" + profile.nip
+      return Promise.all([this.cache.get(key), key])
+    })
+    .then(([result, key]) => {
+      LogUtil.d(this.TAG, "get personal photo")
       if (result == null) {
         return this.apiProvider.getBlob("/personal/foto")
         .map(item => {
           if (item) {
-            this.blobToBase64(item, base64 => this.saveToCache(base64))
+            this.blobToBase64(item, base64 => this.saveToCache(key, base64))
           }
           return item
         }).toPromise()
@@ -28,11 +37,11 @@ export class HomeProvider {
     })
   }
 
-  saveToCache(base64data) {
+  saveToCache(key, base64data) {
     var data = {}
     data['when'] = Date.now() + CacheProvider.FIVE_MINUTES
     data['response'] = base64data
-    this.cache.put(HomeProvider.KEY_PHOTO, data)
+    this.cache.put(key, data)
   }
 
   // https://stackoverflow.com/a/18650249
@@ -56,13 +65,28 @@ export class HomeProvider {
     return new Blob([ab], { type: "image/jpeg" })
   }
 
-  removePhotoCache() {
-    this.cache.remove(HomeProvider.KEY_PHOTO)
-  }
-
-  getDashboard() {
+  getDashboard():Promise<any> {
     LogUtil.d(this.TAG, "get dashboard")
-    return this.apiProvider.get("/personal/notification/dashboard")
+    return this.token.getProfile()
+    .then(profile => {
+      let key = this.KEY_DASHBOARD + profile.nip
+      return Promise.all([this.cache.get(key), key])
+    }).then(([result, key]) => {
+      if (result == null) {
+        return this.apiProvider.get("/personal/notification/dashboard")
+        .map(item => {
+          var data = {}
+          data['when'] = Date.now() + CacheProvider.ONE_MINUTES
+          data['response'] = item
+          if (item) {
+            this.cache.put(key, data)
+          }
+          return data
+        })
+        .toPromise()
+      }
+      return result
+    })
   }
 
 }

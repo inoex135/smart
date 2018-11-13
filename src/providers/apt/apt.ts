@@ -6,12 +6,12 @@ import { TokenProvider } from "../token/token";
 import { map } from "rxjs/operators/map";
 import { LogUtil } from "../../utils/logutil";
 import { CacheProvider } from "../cache/cache";
-import { CacheKey } from "../../constant/cache-key";
 
 @Injectable()
 export class AptProvider {
 
   static TAG:string = 'AptProvider'
+  private APT_PELAYANANS:string = 'pelayanans'
 
   fileTransfer: FileTransferObject;
   fileDir: string;
@@ -32,22 +32,26 @@ export class AptProvider {
     return this.apiProvider.get(url).pipe(map(res => res.content));
   }
 
-  getPelayananList() {  
-    return this.cache.get(CacheKey.APT_PELAYANANS)
-    .then(pelayanan => {
-      if (pelayanan == null) {
-        LogUtil.d(AptProvider.TAG, "cache null or expired get from api instead ")
-        return this.apiProvider.get("/apt/pelayanan").map(result => {
-          var data:any = {}
-          data['response'] = result
-          if (result) {
-            data['when'] = Date.now() + CacheProvider.FIVE_MINUTES
-            this.cache.put(CacheKey.APT_PELAYANANS, data)
-          }
-          return data
-        }).toPromise()
-      }
-      return pelayanan
+  getPelayananList() {
+    return this.token.getProfile()
+    .then(profile => {
+      let key = this.APT_PELAYANANS + "_" + profile.nip
+      return this.cache.get(key)
+      .then(pelayanan => {
+        if (pelayanan == null) {
+          LogUtil.d(AptProvider.TAG, "cache null or expired get from api instead ")
+          return this.apiProvider.get("/apt/pelayanan").map(result => {
+            var data:any = {}
+            data['response'] = result
+            if (result) {
+              data['when'] = Date.now() + CacheProvider.FIVE_MINUTES
+              this.cache.put(key, data)
+            }
+            return data
+          }).toPromise()
+        }
+        return pelayanan
+      })
     })
   }
 

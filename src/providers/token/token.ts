@@ -1,16 +1,19 @@
 import { Injectable } from "@angular/core";
 import { Storage } from "@ionic/storage";
-import { AptProvider } from "../apt/apt";
-import { CacheKey } from "../../constant/cache-key";
+import { CacheProvider } from "../cache/cache";
+import { LogUtil } from "../../utils/logutil";
 
 @Injectable()
 export class TokenProvider {
+
+  static TAG:string = 'TokenProvider'
+
   public latestToken: string;
   public latestUser: any;
   public latestProfile: any;
   public pltPlh: any;
 
-  constructor(public storage: Storage) {}
+  constructor(public storage: Storage, private cache: CacheProvider) {}
 
   getToken(): Promise<String> {
     return this.storage
@@ -33,6 +36,7 @@ export class TokenProvider {
   }
 
   getProfile(): Promise<any> {
+    LogUtil.d(TokenProvider.TAG, "get profile from cache")
     return this.storage
       .ready()
       .then(() => this.storage.get("profile") as Promise<any>)
@@ -108,6 +112,6 @@ export class TokenProvider {
     this.destroyUser();
     this.destroyProfile();
     this.destroyPltPlh();
-    this.storage.remove(CacheKey.APT_PELAYANANS)
+    this.cache.removeAll()
   }
 }
