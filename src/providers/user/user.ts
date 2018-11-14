@@ -119,11 +119,8 @@ export class UserProvider {
   // bypass digunakan untuk bisa menggunakan apps, dengan nip orang lain
   byPass(nip: string) {
     return this.apiProvider.get(`/auth/login/bypass?nip=${nip}`)
-    .map(plth => {
-      return Observable.fromPromise(this.tokenProvider.setCurrentToken(plth.token))
-    })
-    .map(data => {
-      return Observable.fromPromise(this.tokenProvider.saveTokenPltPlh(data))
+    .mergeMap(plth => {
+      return Observable.fromPromise(this.tokenProvider.setPlthUser(plth))
     })
   }
 }

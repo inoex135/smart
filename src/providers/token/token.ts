@@ -40,6 +40,28 @@ export class TokenProvider {
     return this.cache.put(this.KEY_CURRENT_TOKEN, token, false)
   }
 
+  setCurrentUserDataFirst() {
+    LogUtil.d(TokenProvider.TAG, "set current token from logged in user data")
+    return this.getLoggedInUser()
+    .then(data => {
+      if (data && data.token) {
+        return this.setCurrentToken(data.token)
+        .then(() => {
+          return this.setCurrentProfile(data.profile)
+        })
+        .then(() => {
+          return data
+        })
+      }
+      return Promise.reject(Error('missing token value'))
+    })
+  }
+
+  setCurrentProfile(data:any) {
+    LogUtil.d(TokenProvider.TAG, "set current profile")
+    return this.cache.put(this.KEY_CURRENT_PROFILE, data, false)
+  }
+
   getUser(): Promise<Object> {
     return this.storage
       .ready()
@@ -48,6 +70,10 @@ export class TokenProvider {
         this.latestUser = user;
         return user;
       });
+  }
+
+  getLoggedInUser() {
+    return this.cache.get(this.KEY_LOGGIN_USER, false)
   }
 
   getProfile(): Promise<any> {
@@ -73,14 +99,6 @@ export class TokenProvider {
       });
   }
 
-  revertTokenToOriginalUser() {
-    return this.storage.get(this.KEY_CURRENT_TOKEN)
-    .then(res => {
-      this.latestToken = res
-      return Promise.resolve(this.latestToken)
-    })
-  }
-
   saveToken(token: string): Promise<void> {
     this.latestToken = token;
     return this.storage
@@ -102,15 +120,26 @@ export class TokenProvider {
       .then(() => Promise.all([this.storage.get(this.KEY_LOGGIN_USER), this.storage.get(this.KEY_PL_TH)]))
       .then(([user, plt_plh]) => {
         LogUtil.d(TokenProvider.TAG, user)
-        if (user['name'] === profile.nip) {
+        if (user && user['user'] && user['user']['name'] === profile.nip) {
           user['profile'] = profile
           this.saveUser(user)
+          
         } else if (plt_plh && plt_plh['user'] && plt_plh['user']['name'] === profile.nip) {
           plt_plh['profile'] = profile
           this.saveTokenPltPlh(plt_plh)
         }
       })
       .then(() => {this.storage.set(this.KEY_CURRENT_PROFILE, profile)})
+  }
+
+  setPlthUser(data):Promise<any> {
+    return this.cache.put(this.KEY_PL_TH, data, false)
+    .then(() => {
+      return this.setCurrentToken(data.token)
+    })
+    .then(() => {
+      return Promise.resolve(data)
+    })
   }
 
   saveTokenPltPlh(plt_plh):Promise<any> {

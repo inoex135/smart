@@ -139,9 +139,9 @@ export class HomePage {
       return Promise.resolve(profile)
     })
     .then(profile => {
-      return this.token.getUser()
-      .then(user => {
-        if (user && profile && user['name'] == profile.nip) {
+      return this.token.getLoggedInUser()
+      .then(data => {
+        if (data && data.user && profile && data.user.name == profile.nip) {
           this.loggedInProfile = profile
           if (profile.user_pengganti) {
             this.substitutes = []
@@ -217,9 +217,9 @@ export class HomePage {
   //  by pass plt/plh
   byPass(nip: string) {
     //cek apakah nip yg di select, sama dengan currentUser
-    if (nip == this.profile.nip) {
+    if (nip == this.loggedInProfile.nip) {
       //jika ada, ubah token kembali dengan user asli/bukan plt -plh nya
-      this.token.revertTokenToOriginalUser()
+      this.token.setCurrentUserDataFirst()
       .then(() => {
         this.initData()
       })
@@ -228,6 +228,7 @@ export class HomePage {
       this.userProvider.byPass(nip)
       .subscribe(
         res => {
+          LogUtil.d(this.TAG, res)
           if (res) {
             this.initData(true)
             this.bell.updateNotification()
