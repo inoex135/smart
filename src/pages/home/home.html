@@ -28,8 +28,8 @@
     </ion-item>
     
     <ion-card-content>
-      <p>{{profile?.nama}}</p>
-      <p>{{profile?.nip}}</p>
+      <p>{{currentProfile?.name}}</p>
+      <p>{{currentProfile?.nip}}</p>
     </ion-card-content>
   </ion-card>
 
@@ -85,9 +85,9 @@
 
   <ion-item hidden col-8 push-2 class="input--form">
 
-    <ion-select #selectUser [ngModel]="profileName" col-12 (ngModelChange)="byPass($event)">
-      <ion-option [value]="profile?.nip">{{profile?.nama}}</ion-option>
-      <ion-option text-wrap [value]="user?.nip" *ngFor="let user of profile?.user_pengganti">
+    <ion-select #selectUser [ngModel]="currentProfile?.nip" col-12 (ngModelChange)="byPass($event)">
+      <ion-option [value]="loggedInProfile?.nip">{{loggedInProfile?.nama}}</ion-option>
+      <ion-option text-wrap [value]="user?.nip" *ngFor="let user of getSubstituteUsers()">
         {{user?.nama}}
       </ion-option>
     </ion-select>

@@ -8,8 +8,8 @@ import { TokenProvider } from "../token/token";
 export class HomeProvider {
 
   TAG:string = 'HomeProvider'
-  private KEY_PHOTO = 'photo_profile'
-  private KEY_DASHBOARD = 'dashboard_'
+  private KEY_PHOTO = 'D4ryu8vEbJ9Tbbp'
+  private KEY_DASHBOARD = '3NTsCdMyZVDwkfa_'
 
   constructor(private apiProvider: ApiProvider, 
     private cache: CacheProvider,

@@ -4,14 +4,12 @@ import { UserProvider } from "../../providers/user/user";
 
 import { MenuHomeConstant } from "../../constant/menu-home";
 import { HomeProvider } from "../../providers/home/home";
-import { Observable } from "rxjs/Observable";
 
 import "rxjs/add/observable/zip";
 import { LoaderHelper } from "../../helpers/loader-helper";
 import { FCM } from "@ionic-native/fcm";
 import { TokenProvider } from "../../providers/token/token";
 import { ToastHelper } from "../../helpers/toast-helper";
-import { Storage } from "@ionic/storage";
 import { LogUtil } from "../../utils/logutil";
 import { NotificationBell } from "../../components/notification-bell/notification-bell";
 import { NotificationProvider } from "../../providers/notification/notification";
@@ -32,8 +30,14 @@ export class HomePage {
   backgroundImage: string = "assets/images/bg_login.png"
   notifications: Array<any> = []
   profile: any = {}
+  loggedInProfile: any = {}
+  substitutes:any = []
   showAvatar: boolean = true
   profileName: string = ""
+  currentProfile:any = {
+    name: '',
+    nip: ''
+  }
 
   dashboard:any = {
     "CT": 0,
@@ -53,8 +57,7 @@ export class HomePage {
     private loaderHelper: LoaderHelper,
     private token: TokenProvider,
     private toast: ToastHelper,
-    private platform: Platform,
-    private storage: Storage
+    private platform: Platform
   ) {}
 
   ionViewWillEnter() {
@@ -123,20 +126,38 @@ export class HomePage {
     );
   }
 
-  async initData() {
+  async initData(force:boolean = false) {
     // get profile dari localStorage jika sudah ada
-    this.userProvider.getProfile()
+    this.userProvider.getProfile(force)
     .then(profile => {
-      this.profile = profile;
-      this.profileName = profile.nip;
+      LogUtil.d(this.TAG, "return")
+      LogUtil.d(this.TAG, profile)
+      if (this.profile) {
+        this.currentProfile.name = profile.nama
+        this.currentProfile.nip = profile.nip
+      }
       return Promise.resolve(profile)
     })
-    .then(() => {
-      this.getProfilePicture()
+    .then(profile => {
+      return this.token.getUser()
+      .then(user => {
+        if (user && profile && user['name'] == profile.nip) {
+          this.loggedInProfile = profile
+          if (profile.user_pengganti) {
+            this.substitutes = []
+            profile.user_pengganti.forEach(element => {
+              this.substitutes.push(element)
+            })
+          }
+        }
+      })
     })
     .then(() => {
-      this.getDashboard()
-    }) 
+      return this.getProfilePicture()
+    })
+    .then(() => {
+      return this.getDashboard()
+    })
     .catch(error => {
       LogUtil.d(this.TAG, "i catch error here on profile")
       LogUtil.d(this.TAG, error)
@@ -198,21 +219,24 @@ export class HomePage {
     //cek apakah nip yg di select, sama dengan currentUser
     if (nip == this.profile.nip) {
       //jika ada, ubah token kembali dengan user asli/bukan plt -plh nya
-      this.storage.get("token").then(res => {
-        this.token.latestToken = res;
-        this.initData();
-      }, err => true);
+      this.token.revertTokenToOriginalUser()
+      .then(() => {
+        this.initData()
+      })
     } else {
       this.loaderHelper.createLoader();
-      this.userProvider.byPass(nip).subscribe(
+      this.userProvider.byPass(nip)
+      .subscribe(
         res => {
-          this.token.saveTokenPltPlh(res);
-          this.initData();
-          this.loaderHelper.dismiss();
+          if (res) {
+            this.initData(true)
+            this.bell.updateNotification()
+          }
+          this.loaderHelper.dismiss()
         },
         err => {
-          this.loaderHelper.dismiss();
-          this.toast.present(err.error_message);
+          this.loaderHelper.dismiss()
+          this.toast.present(err.error_message)
         }
       );
     }
@@ -220,6 +244,10 @@ export class HomePage {
 
   getNotificationType():string {
     return NotificationProvider.TYPE_ALL
+  }
+
+  getSubstituteUsers():[] {
+    return this.substitutes
   }
 
 }

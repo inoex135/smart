@@ -62,7 +62,10 @@ export class LoginPage {
     this.loginState.isLogin = true;
 
     this.userProvider.attemptAuth(user).subscribe(
-      data => this.navCtrl.setRoot("HomePage"),
+      data => {
+        LogUtil.d(this.TAG, data)
+        this.navCtrl.setRoot("HomePage")
+      },
       err => {
         console.log(err)
         this.loginState.isLogin = false;
@@ -91,7 +94,10 @@ export class LoginPage {
 
       // login http
       this.userProvider.attemptAuthSso(user).subscribe(
-        data => this.navCtrl.setRoot("HomePage"),
+        data => { 
+          LogUtil.d(this.TAG, data)
+          this.navCtrl.setRoot("HomePage")
+        },
         err => {
           // as flag untuk hide loader spinner dan un-disable button
           this.loginState.isLogin = false;

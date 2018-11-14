@@ -11,7 +11,7 @@ import { CacheProvider } from "../cache/cache";
 export class AptProvider {
 
   static TAG:string = 'AptProvider'
-  private APT_PELAYANANS:string = 'pelayanans'
+  private APT_PELAYANANS:string = 'VEAQXDfpbmKgxhr'
 
   fileTransfer: FileTransferObject;
   fileDir: string;
