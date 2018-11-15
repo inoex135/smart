@@ -44,7 +44,7 @@ export class CacheProvider {
             if (!keys) {
                 keys = {}
             }
-            keys[key] = Date.now()
+            keys[key] = ''
             return this.storage.set(this.KEY_BANKS, keys)
         })
         .then(() => {

@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { Storage } from "@ionic/storage";
 import { CacheProvider } from "../cache/cache";
 import { LogUtil } from "../../utils/logutil";
+import { ERROR_CODES } from "../../constant/error-codes";
 
 @Injectable()
 export class TokenProvider {
@@ -44,7 +45,8 @@ export class TokenProvider {
     LogUtil.d(TokenProvider.TAG, "set current token from logged in user data")
     return this.getLoggedInUser()
     .then(data => {
-      if (data && data.token) {
+      if (data != null && data.token) {
+        LogUtil.d(TokenProvider.TAG, data)
         return this.setCurrentToken(data.token)
         .then(() => {
           return this.setCurrentProfile(data.profile)
@@ -53,13 +55,18 @@ export class TokenProvider {
           return data
         })
       }
-      return Promise.reject(Error('missing token value'))
+      LogUtil.d(TokenProvider.TAG, 'data is null throw error')
+      return Promise.reject(Error(ERROR_CODES.MISSING_TOKEN))
     })
   }
 
   setCurrentProfile(data:any) {
     LogUtil.d(TokenProvider.TAG, "set current profile")
     return this.cache.put(this.KEY_CURRENT_PROFILE, data, false)
+  }
+
+  getCurrentProfile() {
+    return this.cache.get(this.KEY_CURRENT_PROFILE, false)
   }
 
   getUser(): Promise<Object> {

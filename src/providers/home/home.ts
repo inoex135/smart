@@ -17,7 +17,7 @@ export class HomeProvider {
   ) {}
 
   getPhotoProfile() {
-    return this.token.getProfile()
+    return this.token.getCurrentProfile()
     .then(profile => {
       let key = this.KEY_PHOTO + "_" + profile.nip
       return Promise.all([this.cache.get(key), key])

@@ -13,6 +13,7 @@ import { ToastHelper } from "../../helpers/toast-helper";
 import { LogUtil } from "../../utils/logutil";
 import { NotificationBell } from "../../components/notification-bell/notification-bell";
 import { NotificationProvider } from "../../providers/notification/notification";
+import { ERROR_CODES } from "../../constant/error-codes";
 @IonicPage()
 @Component({
   selector: "page-home",
@@ -160,7 +161,8 @@ export class HomePage {
     })
     .catch(error => {
       LogUtil.d(this.TAG, "i catch error here on profile")
-      LogUtil.d(this.TAG, error)
+      LogUtil.e(this.TAG, error)
+      this.redirectToLogIn(error)
     })
   }
 
@@ -222,6 +224,8 @@ export class HomePage {
       this.token.setCurrentUserDataFirst()
       .then(() => {
         this.initData()
+      }).catch(error => {
+        this.redirectToLogIn(error)
       })
     } else {
       this.loaderHelper.createLoader();
@@ -237,7 +241,6 @@ export class HomePage {
         },
         err => {
           this.loaderHelper.dismiss()
-          this.toast.present(err.error_message)
         }
       );
     }
@@ -247,8 +250,16 @@ export class HomePage {
     return NotificationProvider.TYPE_ALL
   }
 
-  getSubstituteUsers():[] {
+  getSubstituteUsers() {
     return this.substitutes
+  }
+
+  private redirectToLogIn(error):void {
+    LogUtil.e(this.TAG, error)
+    if (error.message.includes(ERROR_CODES.MISSING_TOKEN)) {
+      this.userProvider.purgeAuth();
+      this.navCtrl.setRoot("LoginPage");
+    }
   }
 
 }

@@ -11,8 +11,8 @@ import { ErrorObservable } from "rxjs/observable/ErrorObservable";
 import { ENV } from "../../config/environment";
 import { TokenProvider } from "../token/token";
 import { LogUtil } from "../../utils/logutil";
-import { TABS } from "ionic-angular/umd/navigation/nav-util";
 import { Observable } from "rxjs";
+import { ERROR_CODES } from "../../constant/error-codes";
 
 @Injectable()
 export class ApiProvider {
@@ -73,6 +73,10 @@ export class ApiProvider {
       errMsg = `${error.error.error_message || ""}`;
     } else {
       errMsg = error.message ? error.message : error.toString();
+    }
+
+    if (errMsg.includes('Token not found')) {
+      errMsg = ERROR_CODES.MISSING_TOKEN
     }
 
     return ErrorObservable.create(errMsg);

@@ -66,16 +66,18 @@ export class MyApp {
   }
 
   initHomePage(): void {
+    LogUtil.d('App', 'set user data')
     this.token.setCurrentUserDataFirst()
     .then(token => {
       if (token) {
         this.rootPage = "HomePage"
-        // this.userProvider.populate();
       } else {
         this.rootPage = "LoginPage"
       }
-    }).catch(error => {
-      LogUtil.d('App', error)
+    })
+    .catch(error => {
+      LogUtil.d('App', 'catch error here')
+      LogUtil.e('App', error)
       this.rootPage = "LoginPage"
     })
   }

@@ -5,7 +5,6 @@ import { ApiProvider } from "../api/api";
 import { TokenProvider } from "../token/token";
 
 import { User } from "../../models/users";
-import { map } from "rxjs/operators/map";
 import { LogUtil } from "../../utils/logutil";
 import { Observable } from "rxjs";
 

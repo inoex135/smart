@@ -47,7 +47,8 @@ export class AptDetailPage {
   }
 
   getProfile() {
-    this.userProvider.getProfile().subscribe(res => {
+    this.userProvider.getProfile()
+    .then(res => {
       this.profile = res;
     });
   }

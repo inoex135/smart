@@ -117,12 +117,14 @@ export class Disposisi {
   }
 
   init() {
+
     const petunjuk = this.disposisiProvider.getPetunjuk();
     const unitDisposisi = this.disposisiProvider.getUnitDisposisi();
     const sifatSurat = this.disposisiProvider.getSifatSurat();
     const pelaksana = this.disposisiProvider.getPelaksana();
 
-    Observable.zip(petunjuk, unitDisposisi, sifatSurat, pelaksana).subscribe(
+    Observable.zip(petunjuk, unitDisposisi, sifatSurat, pelaksana)
+    .subscribe(
       ([petunjuk, unitDisposisi, sifatSurat, pelaksana]) => {
         this.datas.jabatan = unitDisposisi;
         this.datas.petunjuk = this.mappingPetunjuk(petunjuk);
