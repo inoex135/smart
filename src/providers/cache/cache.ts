@@ -13,12 +13,12 @@ export class CacheProvider {
 
     constructor(private storage: Storage) {}
 
-    get(key:string, cached:boolean = true):Promise<any> {
+    get(key:string, recorded:boolean = true):Promise<any> {
         return this.storage
         .ready()
         .then(() => this.storage.get(key) as Promise<any>)
         .then(result => {
-          if (!cached) {
+          if (!recorded) {
             return result
           }  
           let now = Date.now()
@@ -32,13 +32,13 @@ export class CacheProvider {
         })
     }
     
-    put(key:string, data:any, record:boolean = true):Promise<any> {
+    put(key:string, data:any, recorded:boolean = true):Promise<any> {
     LogUtil.d(CacheProvider.TAG, "save to cache: " + key)
     return this.storage
         .ready()
         .then(() => this.storage.get(this.KEY_BANKS) as Promise<any>)
         .then(keys => {
-            if (!record) {
+            if (!recorded) {
                 return Promise.resolve(1)
             }
             if (!keys) {

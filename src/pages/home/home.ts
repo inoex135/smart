@@ -140,18 +140,18 @@ export class HomePage {
       return Promise.resolve(profile)
     })
     .then(profile => {
-      return this.token.getLoggedInUser()
-      .then(data => {
-        if (data && data.user && profile && data.user.name == profile.nip) {
-          this.loggedInProfile = profile
-          if (profile.user_pengganti) {
-            this.substitutes = []
-            profile.user_pengganti.forEach(element => {
-              this.substitutes.push(element)
-            })
-          }
+      return Promise.all([this.token.getLoggedInUser(), profile])
+    })
+    .then(([data, profile]) => {
+      if (data && data.user && profile && data.user.name == profile.nip) {
+        this.loggedInProfile = profile
+        if (profile.user_pengganti) {
+          this.substitutes = []
+          profile.user_pengganti.forEach(element => {
+            this.substitutes.push(element)
+          })
         }
-      })
+      }
     })
     .then(() => {
       return this.getProfilePicture()

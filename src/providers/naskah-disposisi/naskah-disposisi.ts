@@ -5,17 +5,16 @@ import { Observable } from "rxjs";
 import { of } from "rxjs/observable/of";
 import { TokenProvider } from "../token/token";
 import { LogUtil } from "../../utils/logutil";
-import { NaskahDetailActionPageModule } from "../../pages/naskah-detail-action/naskah-detail-action.module";
 
 @Injectable()
 export class NaskahDisposisiProvider {
 
   static TAG:string = 'NaskahDisposisiProvider'
 
-  private KEY_UNIT:string = 'uJlRCv54LJ_'
-  private KEY_SURAT:string = 's76zk9GzoM_'
-  private KEY_SIFAT:string = 'd1Q7NfNk3t_'
-  private KEY_PELAKSANA:string = 'BaCXfq6Fy3_'
+  private KEY_UNIT:string = 'uPj3xYLd8esUVfE_'
+  private KEY_SURAT:string = 'do3Yi5cNdMLwNdb_'
+  private KEY_SIFAT:string = 'e02POEjBrQYouv3_'
+  private KEY_PELAKSANA:string = 'ffvufK9BW25EoX5_'
 
   constructor(public api: ApiProvider, private token: TokenProvider, private cache: CacheProvider) {}
   // search pegawai/user
