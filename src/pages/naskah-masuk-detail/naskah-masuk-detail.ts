@@ -92,22 +92,28 @@ export class NaskahMasukDetailPage {
     // this.updateNotification();
   }
 
-  async getDetailNaskah() {
-    await this.loaderHelper.show();
+  ionViewWillLeave() {
+    LogUtil.d(NaskahMasukDetailPage.TAG, "view did disappear")
+    this.loaderHelper.notPresents()
+  }
 
-    this.naskahProvider.getDetailNaskah(this.naskahId).subscribe(
-      res => {
-        this.detail = res;
-        this.showModal();
-        this.loaderHelper.dismissLoader();
-        this.naskahNotifikasi
-          .readNotifikasi(this.naskahId)
-          .subscribe(res => true, err => false);
-      },
-      err => {
-        this.loaderHelper.errorHandleLoader(err.error_message, this.navCtrl);
-      }
-    );
+  async getDetailNaskah() {
+    this.loaderHelper.show()
+    .then(isPresent => {
+      this.naskahProvider.getDetailNaskah(this.naskahId).subscribe(
+        res => {
+          this.detail = res;
+          this.showModal();
+          this.loaderHelper.dismissLoader()
+          this.naskahNotifikasi
+            .readNotifikasi(this.naskahId)
+            .subscribe(res => true, err => false)
+        },
+        err => {
+          this.loaderHelper.dismissLoader()
+        }
+      )
+    })
   }
 
   updateNotification() {

@@ -10,6 +10,7 @@ import { APT_INDIKATOR } from "../../constant/apt-indikator";
 import { ToastHelper } from "../../helpers/toast-helper";
 import { UserProvider } from "../../providers/user/user";
 import { AptHistoryPage } from "../apt-history/apt-history";
+import { LogUtil } from "../../utils/logutil";
 
 @IonicPage()
 @Component({
@@ -46,6 +47,11 @@ export class AptDetailPage {
     this.getProfile();
   }
 
+  ionViewWillLeave() {
+    LogUtil.d(AptDetailPage.TAG, "view did disappear")
+    this.loaderHelper.notPresents()
+  }
+
   getProfile() {
     this.userProvider.getProfile()
     .then(res => {
@@ -54,8 +60,8 @@ export class AptDetailPage {
   }
 
   async getDetailApt() {
-    await this.loaderHelper.show()
-
+    this.loaderHelper.show()
+    .then(present => {
     this.aptProvider.getDetailApt(this.itemId).subscribe(
       res => {
         const response = res.response;
@@ -67,7 +73,8 @@ export class AptDetailPage {
       err => {
         this.loaderHelper.errorHandleLoader(err, this.navCtrl);
       }
-    );
+    )
+    })
   }
 
   detailAction(action: string, itemId: any) {

@@ -76,8 +76,9 @@ export class SuratPage {
   // set first data when load page for total surat + filter sumas grafik
 
   // profile 1 adalah personal sedangkan 2 adalah sekretaris
-  initData(profile: number = 1) {
-    this.loaderHelper.show().then(isPresent =>  {
+  async initData(profile: number = 1) {
+    this.loaderHelper.show()
+    .then(isPresent =>  {
       const params = this.grafikSuratProvider.paramsStartAndEnd()
       Observable.zip(
         this.grafikSuratProvider.getFilterSumasData(params, profile),

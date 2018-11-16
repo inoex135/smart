@@ -80,11 +80,6 @@ export class AptPage {
     private app: App
   ) {
     this.fileDirectory = file.externalRootDirectory + "Download";
-
-    this.loader = this.loadingCtrl.create({
-      content: "Wait download....",
-      spinner: "dots"
-    });
   }
 
   ionViewDidLoad() {
@@ -128,20 +123,20 @@ export class AptPage {
   }
 
   async getAptList() {
-    await this.loaderHelper.createLoader();
-
-    this.aptProvider.getPermohonanList().subscribe(
-      res => {
-        // @TODO : uncomment if data already
-        this.items = res;
-
-        this.loaderHelper.dismissLoader()
-      },
-      err => {
-        console.log(err);
-        this.loaderHelper.dismissLoader()
-      }
-    );
+    this.loaderHelper.show()
+    .then(present => { 
+      this.aptProvider.getPermohonanList().subscribe(
+        res => {
+          // @TODO : uncomment if data already
+          this.items = res
+          this.loaderHelper.dismissLoader()
+        },
+        err => {
+          LogUtil.e(AptPage.TAG, err)
+          this.loaderHelper.dismissLoader()
+        }
+      )
+    })
   }
 
   doInfinite(infiniteScroll) {
@@ -284,28 +279,33 @@ export class AptPage {
 
   // get data apt yg lewati batas norma waktu
   async getDekatBatasWaktu() {
-    await this.loaderHelper.show()
-    this.aptProvider.getDekatBatasWaktu(this.keyword, this.page).subscribe(
-      res => {
-        this.loaderHelper.dismissLoader()
-        this.items = res;
-      },
-      err => {
-        this.loaderHelper.dismissLoader()
-      }
-    );
+    this.loaderHelper.show()
+    .then(present => {
+      this.aptProvider.getDekatBatasWaktu(this.keyword, this.page).subscribe(
+        res => {
+          this.loaderHelper.dismissLoader()
+          this.items = res
+        },
+        err => {
+          LogUtil.e(AptPage.TAG, err)
+          this.loaderHelper.dismissLoader()
+        }
+      )
+    })
   }
 
   // get data apt yg lewati batas norma waktu
   async getLewatiBatasWaktu() {
-    await this.loaderHelper.show()
-    this.aptProvider.getLewatiBatasWaktu(this.keyword, this.page).subscribe(
-      res => {
-        this.loaderHelper.dismissLoader()
-        this.items = res;
-      },
-      err => this.loaderHelper.dismissLoader()
-    );
+    this.loaderHelper.show()
+    .then(present => {
+      this.aptProvider.getLewatiBatasWaktu(this.keyword, this.page).subscribe(
+        res => {
+          this.loaderHelper.dismissLoader()
+          this.items = res
+        },
+        err => this.loaderHelper.dismissLoader()
+      )
+    })
   }
 
   redirectTo() {

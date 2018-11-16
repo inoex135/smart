@@ -56,15 +56,19 @@ export class LoaderHelper {
   }
 
   dismissLoader() {
-    LogUtil.d(this.TAG, "dismiss loader")
-    if (this.isPresent()) {
-      this.newLoading.dismiss().then(() => {
-        this.isLoaderPresent = false
-      }).catch(e => {
-        LogUtil.d(this.TAG, "catch error here")
-        LogUtil.d(this.TAG, e)
-      })
-    }
+    setTimeout(() => {
+      LogUtil.d(this.TAG, "dismiss loader")
+      if (this.isPresent()) {
+        this.newLoading.dismiss()
+        .then(() => {
+          this.isLoaderPresent = false
+        })
+        .catch(e => {
+          LogUtil.d(this.TAG, "catch error here")
+          LogUtil.d(this.TAG, e)
+        })
+      }
+    }, 200);
   }
 
   notPresents() {

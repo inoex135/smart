@@ -356,20 +356,21 @@ export class Disposisi {
     LogUtil.d(this.TAG, this.disposisi)
     this.disposisi.selaku = compact(this.disposisi.selaku);
 
-    this.loader.show();
-    LogUtil.d(this.TAG, this.disposisi)
-    this.disposisiProvider.simpanDisposisi(this.disposisi).subscribe(
-      res => {
-        this.loader.dismissLoader()
-        this.message = res.message
-        this.closePageWithDelay()
-      },
-      err => {
-        this.loader.dismissLoader();
-        this.errorMessages = err;
-        this.toastHelper.present("Terjadi Kesalahan");
-      }
-    );
+    this.loader.show().then(isPresent => {
+      LogUtil.d(this.TAG, this.disposisi)
+      this.disposisiProvider.simpanDisposisi(this.disposisi).subscribe(
+        res => {
+          this.loader.dismissLoader()
+          this.message = res.message
+          this.closePageWithDelay()
+        },
+        err => {
+          this.loader.dismissLoader()
+          this.errorMessages = err
+          this.toastHelper.present("Terjadi Kesalahan")
+        }
+      )
+    })
   }
 
   closePageWithDelay() {
