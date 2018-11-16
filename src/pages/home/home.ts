@@ -5,15 +5,14 @@ import { UserProvider } from "../../providers/user/user";
 import { MenuHomeConstant } from "../../constant/menu-home";
 import { HomeProvider } from "../../providers/home/home";
 
-import "rxjs/add/observable/zip";
 import { LoaderHelper } from "../../helpers/loader-helper";
 import { FCM } from "@ionic-native/fcm";
 import { TokenProvider } from "../../providers/token/token";
-import { ToastHelper } from "../../helpers/toast-helper";
 import { LogUtil } from "../../utils/logutil";
 import { NotificationBell } from "../../components/notification-bell/notification-bell";
 import { NotificationProvider } from "../../providers/notification/notification";
 import { ERROR_CODES } from "../../constant/error-codes";
+
 @IonicPage()
 @Component({
   selector: "page-home",
@@ -57,7 +56,6 @@ export class HomePage {
     private homeProvider: HomeProvider,
     private loaderHelper: LoaderHelper,
     private token: TokenProvider,
-    private toast: ToastHelper,
     private platform: Platform
   ) {}
 
