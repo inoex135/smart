@@ -112,7 +112,8 @@ export class NotificationPage {
   }
 
   fillList():void {
-    this.loaderHelper.show().then(isPresent => {
+    this.loaderHelper.show()
+    .then(isPresent => {
       const currentProvider = this.provider.switchProvider(this.data)
       if (currentProvider !== null) {
         currentProvider.subscribe(
@@ -150,14 +151,14 @@ export class NotificationPage {
   }
 
   increaseCurrentPage():void {
-    this.data.meta.page.currentPage += 1;
+    this.data.meta.page.currentPage += 1
   }
 
   decreaseCurrentPage():void {
     if (this.data.meta.page.currentPage == 1) {
       return
     }
-    this.data.meta.page.currentPage -= 1;
+    this.data.meta.page.currentPage -= 1
   } 
 
   isAllowedInfinite():boolean {

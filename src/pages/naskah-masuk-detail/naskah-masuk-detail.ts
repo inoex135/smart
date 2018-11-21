@@ -100,7 +100,8 @@ export class NaskahMasukDetailPage {
   async getDetailNaskah() {
     this.loaderHelper.show()
     .then(isPresent => {
-      this.naskahProvider.getDetailNaskah(this.naskahId).subscribe(
+      this.naskahProvider.getDetailNaskah(this.naskahId)
+      .subscribe(
         res => {
           this.detail = res;
           this.showModal();

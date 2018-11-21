@@ -34,35 +34,35 @@
   </ion-list>
 
   <ion-list class="list-apt-history" *ngIf="items?.length > 0 && isVerification()">
-      <ion-card item *ngFor="let item of items;let i = index">
-        <ion-row>
-          <ion-col>
-            <ion-row>
-              <ion-col col-12>
-                <p ion-text>Tanggal Verifikasi</p>
-                <p ion-text> {{item?.tanggal_verifikasi}}</p>
-              </ion-col>
-              <ion-col col-12>
-                <p ion-text>Surat Pendukung</p>
-                <p ion-text text-wrap>{{item?.surat_pendukung}}</p>
-              </ion-col>
-              <ion-col col-12>
-                <p ion-text>Nama Verifikator</p>
-                <p ion-text text-wrap>{{item?.nama_verifikator}}</p>
-              </ion-col>
-              <ion-col col-12>
-                <p ion-text>Status Verifikasi</p>
-                <p ion-text class="{{ currentTextColor }}">{{item?.status_verifikasi}}</p>
-              </ion-col>
-              <ion-col col-12>
-                <p ion-text>Catatan Verifikasi</p>
-                <p ion-text>{{item?.catatan_verifikasi}}</p>
-              </ion-col>
-            </ion-row>
-          </ion-col>
-        </ion-row>
-      </ion-card>
-    </ion-list>
+    <ion-card item *ngFor="let item of items;let i = index">
+      <ion-row>
+        <ion-col>
+          <ion-row>
+            <ion-col col-12>
+              <p ion-text>Tanggal Verifikasi</p>
+              <p ion-text> {{item?.tanggal_verifikasi}}</p>
+            </ion-col>
+            <ion-col col-12>
+              <p ion-text>Surat Pendukung</p>
+              <p ion-text text-wrap>{{item?.surat_pendukung}}</p>
+            </ion-col>
+            <ion-col col-12>
+              <p ion-text>Nama Verifikator</p>
+              <p ion-text text-wrap>{{item?.nama_verifikator}}</p>
+            </ion-col>
+            <ion-col col-12>
+              <p ion-text>Status Verifikasi</p>
+              <p ion-text class="{{ currentTextColor }}">{{item?.status_verifikasi}}</p>
+            </ion-col>
+            <ion-col col-12>
+              <p ion-text>Catatan Verifikasi</p>
+              <p ion-text>{{item?.catatan_verifikasi}}</p>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+  </ion-list>
 
     <empty-state *ngIf="!isHistoryExist()"></empty-state>
     <div class="tab-spacer"></div>

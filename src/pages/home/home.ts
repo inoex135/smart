@@ -27,7 +27,6 @@ export class HomePage {
   @ViewChild("bell") bell: NotificationBell
 
   menus: Array<any> = []
-  backgroundImage: string = "assets/images/bg_login.png"
   notifications: Array<any> = []
   profile: any = {}
   loggedInProfile: any = {}
@@ -106,10 +105,6 @@ export class HomePage {
     );
   }
 
-  private assets(name: string) {
-    return `assets/icon/${name}.png`;
-  }
-
   fcmGetToken() {
     this.fcm.getToken().then(
       token => {
@@ -180,7 +175,8 @@ export class HomePage {
   }
 
   private getProfilePicture() {
-    this.homeProvider.getPhotoProfile().then(
+    this.homeProvider.getPhotoProfile()
+    .then(
       res => {
         if (res != null) {
           this.image.nativeElement.src = URL.createObjectURL(res)

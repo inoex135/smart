@@ -40,20 +40,18 @@ export class MyApp {
       // set backButton hardware android
       this.registerBackButton();
 
-      // this.fcmTesting();
+      this.fcmTesting();
     });
   }
+
   fcmTesting() {
-    if (this.platform.is("android")) {
+    if (this.platform.is("android") || this.platform.is("ios")) {
       this.fcm.onNotification().subscribe(data => {
-        if (data.wasTapped) {
-          alert("Received in background");
-        } else {
-          alert("Received in foreground");
-        }
-      });
+        LogUtil.d('APP', data)
+      })
     }
   }
+
   registerBackButton(): void {
     document.addEventListener("backbutton", () => {
       let nav: NavController = this.nav;
