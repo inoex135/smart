@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
 import { NavParams, NavController, IonicPage, Item } from "ionic-angular";
+import { LogUtil } from "../../utils/logutil";
 
 @Component({
   selector: "page-apt-history",
@@ -9,6 +10,8 @@ import { NavParams, NavController, IonicPage, Item } from "ionic-angular";
 export class AptHistoryPage {
 
   static TAG:string = 'AptHistoryPage'
+  static KEY_DATA:string = 'detail_data'
+
   TYPE_SUPERVISION:string = 'supervisions'
   TYPE_VERIFICATION:string = 'verifications'
 
@@ -45,7 +48,18 @@ export class AptHistoryPage {
     }
   ]
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.apt = navParams.get(AptHistoryPage.KEY_DATA)
+    LogUtil.d(AptHistoryPage.TAG, this.apt)
+    if (this.apt) {
+      if (this.apt.supervisi) {
+        this.histories.supervisions = this.apt.supervisi
+      }
+      if (this.apt.Verifikasi) {
+        this.histories.verifikasi = this.apt.verifikasi
+      }
+    }
+  }
 
   ionViewDidLoad() {
     this.apt = this.navParams.get('apt')
