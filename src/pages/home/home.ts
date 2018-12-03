@@ -12,6 +12,7 @@ import { LogUtil } from "../../utils/logutil";
 import { NotificationBell } from "../../components/notification-bell/notification-bell";
 import { NotificationProvider } from "../../providers/notification/notification";
 import { ERROR_CODES } from "../../constant/error-codes";
+import { PaymentHistoryPage } from "../payment-history/payment-history";
 
 @IonicPage()
 @Component({
@@ -254,6 +255,10 @@ export class HomePage {
       this.userProvider.purgeAuth();
       this.navCtrl.setRoot("LoginPage");
     }
+  }
+
+  historyPage() {
+    this.navCtrl.push(PaymentHistoryPage.TAG)
   }
 
 }

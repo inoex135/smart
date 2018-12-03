@@ -59,7 +59,12 @@ export class NotificationPage {
       name: 'APT',
       value: 0,
       active: false
-    }
+    },
+    data[NotificationProvider.TYPE_RAPAT] = {
+      name: 'E-Rapat',
+      value: 0,
+      active: false
+    },
     data[NotificationProvider.TYPE_PERSONAL] = {
       name: 'Personal',
       value: 0,
@@ -70,11 +75,6 @@ export class NotificationPage {
       value: 0,
       active: false
     }
- /*    data[NotificationProvider.TYPE_RAPAT] = {
-      name: 'E-Rapat',
-      value: 0,
-      active: false
-    } */
     this.data.meta.chips = {}
     this.data.meta.chips = data
   }

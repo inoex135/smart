@@ -83,6 +83,12 @@
     </ion-card>
   </div>
 
+  <ion-card (click)="historyPage()">
+    <ion-card-content center>
+      <p>Riwayat Pembayaran</p>
+    </ion-card-content>
+  </ion-card>
+
   <ion-item hidden col-8 push-2 class="input--form">
 
     <ion-select #selectUser [ngModel]="currentProfile?.nip" col-12 (ngModelChange)="byPass($event)">
