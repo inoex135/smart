@@ -2,12 +2,12 @@ import { NgModule } from "@angular/core";
 import { IonicPageModule } from "ionic-angular";
 import { ComponentsModule } from "../../components/components.module";
 import { PipesModule } from "../../pipes/pipes.module";
-import { MeetingListPage } from "./meeting-list";
+import { MeetingDetailPage } from "./meeting-detail";
 
 @NgModule({
-  declarations: [MeetingListPage],
+  declarations: [MeetingDetailPage],
   imports: [
-    IonicPageModule.forChild(MeetingListPage),
+    IonicPageModule.forChild(MeetingDetailPage),
     ComponentsModule,
     PipesModule
   ]

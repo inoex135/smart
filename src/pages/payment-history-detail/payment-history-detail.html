@@ -1,0 +1,25 @@
+<ion-header>
+    <ion-navbar class="custom-action-bar">
+        <ion-title>Detil Riwayat Penghasilan</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <div class="detail-header-payment">
+        <h2>{{getModel().header.monthName}} {{getModel().header.tahun}}</h2>
+        <h2>{{getModel().header.total | currency:'Rp':true:'1.2-2'}}</h2>
+        <br>
+    </div>
+    <div class="detail-content">
+        <ion-grid>
+          <ion-row *ngFor="let payment of getModel().detail">
+            <ion-col class="content-left">
+              {{payment.label}}
+            </ion-col>
+            <ion-col class="content-right">
+              {{payment.value | currency:'Rp':true:'1.2-2'}}
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+    </div>
+</ion-content>

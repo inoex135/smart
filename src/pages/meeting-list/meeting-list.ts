@@ -1,6 +1,5 @@
 import { Component } from "@angular/core";
 import { IonicPage, NavController } from "ionic-angular";
-import { PaymentHistoryDetailPage } from "../payment-history-detail/payment-history-detail";
 
 @Component({
     selector: "meeting-list",
@@ -15,10 +14,5 @@ export class MeetingListPage {
 
     }
 
-    detail(model:any) {
-        var data = {}
-        data[PaymentHistoryDetailPage.TAG] = model
-        this.navCtrl.push(PaymentHistoryDetailPage.TAG, data)
-    }
 
 }

@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
-import { IonicPage, NavParams } from "ionic-angular";
+import { IonicPage, NavParams, Header } from "ionic-angular";
+import { CurrencyPipe } from "@angular/common";
 
 @Component({
     selector: "payment-history-detail",
@@ -21,26 +22,32 @@ export class PaymentHistoryDetailPage {
         UL_bruto: "Uang Lembur Bruto",
         UL_pot: "Potongan Uang Lembur",
         Tukin_bruto: "Tukin Bruto",
-        Tukin_pot: "Potongan Tukin"
+        Tukin_pot: "Potongan Tukin",
+        total: "total",
+        bulan: "bulan",
+        tahun: "tahun",
+        monthName: "monthName"
     }
 
-    model:any = {
-        "bulan": "11",
-        "tahun": "2018",
-        "Gaji_bruto": "6247471",
-        "Gaji_pot": "479771",
-        "Kek_bruto": "0",
-        "Kek_pot": "0",
-        "UM_bruto": "0",
-        "UM_pot": "0",
-        "UL_bruto": "0",
-        "UL_pot": "0",
-        "Tukin_bruto": "29745467",
-        "Tukin_pot": "3925467"
-    }
+    model:any = {}
 
     constructor(private navParams: NavParams) {
         this.model = navParams.get(PaymentHistoryDetailPage.KEY_MODEL)
+    }
+
+    private getModel(): any {
+        var newModel: any = {
+            header:{},
+            detail: []
+        }
+        for (var l in this.labels) {
+            if (l !== 'total' && l !== 'bulan' && l !== 'monthName' && l !== 'tahun') {
+                newModel.detail.push({label: this.labels[l], value: this.model[l]})
+            } else {
+                newModel.header[l] = this.model[l]
+            }
+        }
+        return newModel
     }
 
 }

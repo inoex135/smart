@@ -1,24 +1,21 @@
 import { Component } from "@angular/core";
 import { IonicPage, NavController } from "ionic-angular";
-import { PaymentHistoryDetailPage } from "../payment-history-detail/payment-history-detail";
 
 @Component({
-    selector: "meeting-list",
-    templateUrl: "meeting-list.html"
+    selector: "meeting-detail",
+    templateUrl: "meeting-detail.html"
   })
 @IonicPage()
-export class MeetingListPage {
+export class MeetingDetailPage {
 
-    static TAG:string = 'MeetingListPage'
+    static TAG:string = 'MeetingDetailPage'
 
     constructor(private navCtrl:NavController) {
 
     }
 
     detail(model:any) {
-        var data = {}
-        data[PaymentHistoryDetailPage.TAG] = model
-        this.navCtrl.push(PaymentHistoryDetailPage.TAG, data)
+
     }
 
 }

@@ -1,11 +1,15 @@
 <ion-header>
     <ion-navbar class="custom-action-bar">
-        <ion-title >Riwayat Pembayaran</ion-title>
+        <ion-title>{{title}}</ion-title>
     </ion-navbar>
 </ion-header>
 
 <ion-content>
-    <
+    <ion-item *ngFor="let model of getItems()" (click)="detail(model)">
+        <h6 ion-text>{{model?.monthName}} {{model.tahun}}</h6>
+        <p ion-text text-wrap>{{model?.total | currency:'Rp':true:'1.2-2'}}</p>
+    </ion-item>
+    <div *ngIf="getItems()?.length > 0" class="tab-spacer"></div>
 </ion-content>
 
 <ion-grid class="grid tab-grid">
