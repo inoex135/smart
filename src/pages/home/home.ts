@@ -13,6 +13,11 @@ import { NotificationBell } from "../../components/notification-bell/notificatio
 import { NotificationProvider } from "../../providers/notification/notification";
 import { ERROR_CODES } from "../../constant/error-codes";
 import { PaymentHistoryPage } from "../payment-history/payment-history";
+import { NaskahMasukPage } from "../naskah-masuk/naskah-masuk";
+import { SuratPage } from "../surat/surat";
+import { AptPage } from "../apt/apt";
+import { PersonalPage } from "../personal/personal";
+import { MeetingListPage } from "../meeting-list/meeting-list";
 
 @IonicPage()
 @Component({
@@ -49,6 +54,29 @@ export class HomePage {
     "jam_keluar_hari_ini": null
   }
 
+  buttons:Array<any> = [
+    {
+      title: 'Persuratan',
+      page: SuratPage.TAG,
+      icon: 'm-persuratan.svg'
+    },
+    {
+      title: 'Persuratan',
+      page: AptPage.TAG,
+      icon: 'm-apt.svg'
+    },
+    {
+      title: 'Personal',
+      page: PersonalPage.TAG,
+      icon: 'm-personal.svg'
+    },
+    {
+      title: 'E-Rapat',
+      page: MeetingListPage.TAG,
+      icon: 'm-erapat.svg'
+    }
+  ]
+
   constructor(
     public navCtrl: NavController,
     public userProvider: UserProvider,
@@ -84,9 +112,9 @@ export class HomePage {
     if (title === "APT") return res.notification_apt;
   }
 
-  pagesTo(component: string) {
+  pagesTo(component:any) {
     if (component !== '') {
-      this.navCtrl.push(component);
+      this.navCtrl.push(component.page);
     }
   }
 

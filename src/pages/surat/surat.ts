@@ -23,7 +23,7 @@ import { NotificationBell } from "../../components/notification-bell/notificatio
 })
 export class SuratPage {
 
-  TAG:string = 'SuratPage'
+  static TAG:string = 'SuratPage'
 
   filter: any = {
     startTime: "",
@@ -59,7 +59,7 @@ export class SuratPage {
   }
 
   ionViewWillEnter() {
-    LogUtil.d(this.TAG, "ionViewWillEnter")
+    LogUtil.d(SuratPage.TAG, "ionViewWillEnter")
     this.setIntervalDate()
     this.initData()
     this.checkSekretaris()
@@ -140,7 +140,7 @@ export class SuratPage {
   // when page leave, stop interval date
   ionViewWillLeave() {
     clearInterval(this.setIntervalDate());
-    LogUtil.d(this.TAG, "view did disappear")
+    LogUtil.d(SuratPage.TAG, "view did disappear")
     this.loaderHelper.notPresents()
   }
 

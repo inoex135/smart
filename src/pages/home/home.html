@@ -35,24 +35,11 @@
 
   <ion-grid class="grid menu-grid">
     <ion-row class="row img-grid">
-      <ion-col class="col home-menu-button" (click)="pagesTo('SuratPage')">
-        <img src="assets/svg/m-persuratan.svg" col-lg class="col home-menu-button" />
-        Persuratan
-      </ion-col>
-      <ion-col class="col home-menu-button" (click)="pagesTo('AptPage')">
-        <img src="assets/svg/m-apt.svg" col-lg class="col home-menu-button"  />
-        APT
-      </ion-col>
-      <ion-col class="col home-menu-button" (click)="pagesTo('PersonalPage')">
-        <img src="assets/svg/m-personal.svg" col-lg class="col home-menu-button"  />
-        Personal
-      </ion-col>
-      <ion-col class="col home-menu-button" (click)="pagesTo('MeetingListPage')">
-        <img src="assets/svg/m-erapat.svg" col-lg class="col home-menu-button"  />
-        E-Rapat
+      <ion-col class="col home-menu-button" *ngFor="let button of buttons" (click)="pagesTo(button)">
+        <img src="assets/svg/{{button.icon}}" col-lg class="col home-menu-button" />
+        {{button.title}}
       </ion-col>
     </ion-row>
-
   </ion-grid>
 
   <ion-card hidden>

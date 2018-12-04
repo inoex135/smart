@@ -14,7 +14,7 @@ import { LogUtil } from "../../utils/logutil";
 @IonicPage()
 export class PersonalPage {
 
-  TAG:string = 'PersonalPage'
+  static TAG:string = 'PersonalPage'
 
   // date: string[] = ["2017-11-15", "2017-11-16"];
   // type: "string"; // 'string' | 'js-date' | 'moment' | 'time' | 'object'
@@ -53,7 +53,7 @@ export class PersonalPage {
   }
 
   ionViewWillLeave() {
-    LogUtil.d(this.TAG, "view did disappear")
+    LogUtil.d(PersonalPage.TAG, "view did disappear")
     this.loaderHelper.notPresents()
   }
 
