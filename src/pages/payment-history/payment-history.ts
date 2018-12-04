@@ -31,7 +31,7 @@ export class PaymentHistoryPage {
         }
     ]
 
-    items:any = []
+    items: Array<any> = []
 
     type:string = PaymentProvider.KEY_PAYMENT_INCOME
     title:string = PaymentHistoryPage.TITLE_INCOME
@@ -48,7 +48,11 @@ export class PaymentHistoryPage {
         this.payment.getPaymentsByProvider(this.type)
         .subscribe(res => {
             LogUtil.d(PaymentHistoryPage.TAG, res)
-          //  this.items = res
+            if (res) {
+                this.items = res
+            }
+        }, error => {
+            this.items = []
         }) 
     }
 
@@ -72,8 +76,8 @@ export class PaymentHistoryPage {
         this.fillList()
     }
 
-    getItems(): any {
-        return this.payment.getTestItems()
+    getItems(): Array<any> {
+        return this.items
     }
 
     public isIncome(): boolean {
@@ -82,6 +86,14 @@ export class PaymentHistoryPage {
 
     public isNonIncome(): boolean {
         return this.type === PaymentProvider.KEY_PAYMENT_NON_INCOME
+    }
+
+    public isIncomeExist() {
+        return this.isIncome() && this.getItems().length > 0
+    }
+
+    public isNonIncomeExist() {
+        return this.isNonIncome() && this.getItems().length > 0
     }
 
 }

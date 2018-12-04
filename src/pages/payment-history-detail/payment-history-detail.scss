@@ -4,8 +4,11 @@ payment-history-detail {
         padding: 16px;
       
         h2 {
-            text-align: center;
             font-size: 1.8rem;
+        }
+
+        h2, h1 {
+            text-align: center;
             font-weight: bold;
             color: color($colors, 'new-text-color-grey');
             margin-bottom: 0;

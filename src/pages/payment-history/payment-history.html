@@ -5,10 +5,47 @@
 </ion-header>
 
 <ion-content>
-    <ion-item *ngFor="let model of getItems()" (click)="detail(model)">
-        <h6 ion-text>{{model?.monthName}} {{model.tahun}}</h6>
-        <p ion-text text-wrap>{{model?.total | currency:'Rp':true:'1.2-2'}}</p>
-    </ion-item>
+    <div *ngIf="isIncomeExist()">
+        <ion-item *ngFor="let model of getItems()" (click)="detail(model)">
+            <h6 ion-text>{{model?.monthName}} {{model.tahun}}</h6>
+            <p ion-text text-wrap>{{model?.total | currency:'Rp':true:'1.2-2'}}</p>
+        </ion-item>
+    </div>
+    <div *ngIf="isNonIncomeExist()">
+        <ion-list>
+            <ion-card item *ngFor="let model of getItems()">
+                <ion-row>
+                <ion-col class="detail-col">
+                    <ion-row>
+                        <ion-col col-12 class="with-label">
+                            <p ion-text right>{{ model?.tgl | indonesianDate:'dddd, DD MMMM YYYY' }}</p>
+                        </ion-col>
+                        <ion-col col-12 class="description">
+                            <p ion-text text-wrap>{{model?.uraian}}</p>
+                        </ion-col>
+                        <ion-col class="with-label" col-12>
+                            <p ion-text>Jumlah Bruto</p>
+                            <p ion-text>{{model?.bruto | currency:'Rp':true:'1.2-2'}}</p>
+                        </ion-col>
+                        <ion-col class="with-label" col-6>
+                            <p ion-text>Jumlah Potongan</p>
+                            <p ion-text>{{model?.pot | currency:'Rp':true:'1.2-2'}}</p>
+                        </ion-col>
+                        <ion-col col-6 class="with-label right-content">
+                            <p ion-text right>Jumlah Netto</p>
+                            <p class="added-size" ion-text right>{{model?.netto | currency:'Rp':true:'1.2-2'}}</p>
+                        </ion-col>
+                    </ion-row>
+                </ion-col>
+                </ion-row>
+                <ion-row>
+                <ion-col>
+                    <apt-indikator-button [status]="item?.statusString"></apt-indikator-button>
+                </ion-col>
+                </ion-row>
+            </ion-card>
+        </ion-list>
+    </div>
     <div *ngIf="getItems()?.length > 0" class="tab-spacer"></div>
 </ion-content>
 
