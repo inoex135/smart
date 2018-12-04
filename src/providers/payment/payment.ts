@@ -4,7 +4,6 @@ import { CacheProvider } from "../cache/cache";
 import { Observable } from "rxjs";
 import { of } from "rxjs/observable/of";
 import { TokenProvider } from "../token/token";
-import { LogUtil } from "../../utils/logutil";
 
 @Injectable()
 export class PaymentProvider {
