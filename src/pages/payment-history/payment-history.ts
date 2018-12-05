@@ -15,7 +15,6 @@ export class PaymentHistoryPage {
     static TITLE_INCOME = 'Riwayat Pembayaran'
     static TITLE_NON_INCOME = 'Riwayat Non Pembayaran'
 
-
     tabs:any = [
         {
             name: 'Penghasilan',
@@ -41,6 +40,9 @@ export class PaymentHistoryPage {
     }
 
     ionViewWillEnter() {
+        if (this.isItemExist()) {
+            this.items = []
+        }
         this.fillList()
     } 
 
@@ -89,11 +91,15 @@ export class PaymentHistoryPage {
     }
 
     public isIncomeExist() {
-        return this.isIncome() && this.getItems().length > 0
+        return this.isIncome() && this.isItemExist()
     }
 
     public isNonIncomeExist() {
-        return this.isNonIncome() && this.getItems().length > 0
+        return this.isNonIncome() && this.isItemExist()
+    }
+
+    private isItemExist():boolean {
+        return this.getItems().length > 0
     }
 
 }

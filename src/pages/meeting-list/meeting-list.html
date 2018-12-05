@@ -1,9 +1,33 @@
 <ion-header>
     <ion-navbar class="custom-action-bar">
         <ion-title >E-Rapat</ion-title>
+        <ion-buttons end>
+            <notification-bell #bell [notificationType]="getNotificationType()"></notification-bell>
+        </ion-buttons>
     </ion-navbar>
 </ion-header>
 
 <ion-content>
-
+    <ion-list *ngIf="isItemExist()">
+        <ion-card item *ngFor="let model of getItems()" (click)="detail(model)">
+            <ion-row>
+                <ion-col class="detail-col meeting-list-item">
+                    <ion-row>
+                        <ion-col col-12>
+                            <p ion-text>Nama Rapat</p>
+                            <p ion-text>{{model?.agenda?.nama_agenda}}</p>
+                        </ion-col>
+                        <ion-col col-12>
+                            <p ion-text>Status</p>
+                            <p ion-text>{{model?.agenda?.status_nama}}</p>
+                        </ion-col>
+                        <ion-col col-12>
+                            <p ion-text>Naskah UND</p>
+                            <p ion-text>{{model?.agenda?.naskah_undangan}}</p>
+                        </ion-col>
+                    </ion-row>
+                </ion-col>
+            </ion-row>
+        </ion-card>
+    </ion-list>
 </ion-content>

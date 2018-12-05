@@ -9,6 +9,7 @@ import { IonicPage, NavController } from "ionic-angular";
 export class MeetingDetailPage {
 
     static TAG:string = 'MeetingDetailPage'
+    static KEY_MODEL:string = 'model'
 
     constructor(private navCtrl:NavController) {
 
