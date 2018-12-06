@@ -24,21 +24,6 @@ export class MeetingListPage {
         type: 'today'
     }
 
-    filterTime:any = [
-        {
-            key: 'today',
-            value: 'Hari ini'
-        },
-        {
-            key: 'weekend',
-            value: 'Akhir Pekan'
-        },
-        {
-            key: 'arsip',
-            value: 'Arsip'
-        }
-    ]
-
     isInfiniteLoading:boolean = false
 
     constructor(private navCtrl: NavController, private api: MeetingProvider) {

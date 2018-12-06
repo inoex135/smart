@@ -1,7 +1,9 @@
 import { Component } from "@angular/core";
-import { IonicPage, NavController } from "ionic-angular";
+import { IonicPage, NavController, ModalOptions, Modal, ModalController } from "ionic-angular";
 import { MeetingDetailAgendaPage } from "../meeting-agenda/meeting-detail-agenda";
 import { MeetingProvider } from "../../providers/meeting/meeting";
+import { LogUtil } from "../../utils/logutil";
+import { ModalFilterMeetingPage } from "../modal-filter-meeting/modal-filter-meeting";
 
 @Component({
     selector: "meeting-detail",
@@ -147,12 +149,18 @@ export class MeetingDetailPage {
     model:any = {
         keyword: '',
         page: 1,
-        size: 10
+        size: 10,
+        type: 'today',
+        year: 2018,
+        month: 12,
+        unit: ''
     }
 
     isInfiniteLoading:boolean = false
 
-    constructor(private navCtrl: NavController, private api: MeetingProvider) {
+    constructor(private navCtrl: NavController, 
+        private api: MeetingProvider,
+        private modal: ModalController) {
 
     }
 
@@ -182,7 +190,7 @@ export class MeetingDetailPage {
         this.isInfiniteLoading = true
         this.model.page++
         setTimeout(() => {
-          this.api.getMeetings(this.model).subscribe(
+          this.api.getDetailMeeting(this.model).subscribe(
             res => {
                 this.isInfiniteLoading = false
                 if (res && res.content && res.content.length > 0) {
@@ -214,6 +222,34 @@ export class MeetingDetailPage {
         var data = {}
         data[MeetingDetailAgendaPage.KEY_MODEL] = model
         this.navCtrl.push(MeetingDetailAgendaPage.TAG, data)
+    }
+
+    
+    private search(keyword: any): void {
+        LogUtil.d(MeetingDetailPage.TAG, "keyword: " + keyword)
+        this.model.keyword = keyword
+        this.updateList()
+    }
+
+    private updateList(): void {
+        this.model.page = 1
+        this.items = []
+        this.fillList()
+    }
+
+    clickFilter() {
+        const myModalOptions: ModalOptions = {
+          enableBackdropDismiss: false
+        };
+        const myModal: Modal = this.modal.create(ModalFilterMeetingPage.TAG, { filter: this.model }, myModalOptions);
+        myModal.present();
+        myModal.onDidDismiss(data => {
+          if (data != null) {
+            this.model = data
+            this.updateList()
+          }
+        });
+     
     }
 
 }

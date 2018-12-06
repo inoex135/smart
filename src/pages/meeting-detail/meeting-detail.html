@@ -1,11 +1,23 @@
 <ion-header>
     <ion-navbar class="custom-action-bar">
-        <ion-title >Detail E-Rapat</ion-title>
+        <ion-title *ngIf="!isSearchOpened">Detail E-Rapat</ion-title>
+        <ion-searchbar *ngIf="isSearchOpened" [(ngModel)]="keyword" 
+        search-bar-bcg (ionInput)="search($event?.target?.value)" 
+        (ionCancel)="search($event?.target?.value)" 
+        showCancelBotton="true"></ion-searchbar>
+        <ion-buttons end>
+            <button *ngIf="!isSearchOpened" ion-button icon-only (click)="isSearchOpened=true">
+                <img src="assets/svg/Search.svg" />
+            </button>
+            <button ion-button icon-only (click)="clickFilter()">
+                <img src="assets/svg/Filter.svg" />
+            </button>
+        </ion-buttons>
     </ion-navbar>
 </ion-header>
 
 <ion-content>
-    <ion-list *ngIf="isItemExist()">
+    <ion-list class="list-custom" *ngIf="isItemExist()">
         <ion-card item *ngFor="let model of getItems()" (click)="detail(model)">
             <ion-row>
                 <ion-col class="detail-col meeting-list-item">
