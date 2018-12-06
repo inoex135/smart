@@ -167,3 +167,35 @@ ion-content {
   }
 
 }
+
+.detail-col {
+
+  ion-col {
+
+    margin-bottom: 0.8rem;
+    padding: 0 10px 0 10px;
+
+    p:nth-child(1) {
+      color: color($colors, 'new-text-color-grey-light');
+    }
+
+    p:nth-child(2) {
+      color: color($colors, 'new-text-color-grey');
+      font-weight: bold;
+    }
+
+  }
+
+}
+
+ // list apt
+ .list {
+
+  ion-card {
+    margin: 10px 0 0 !important;
+    border-radius: 0px;
+    width: 100%;
+    box-shadow: none;
+  }
+
+}

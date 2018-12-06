@@ -22,18 +22,6 @@ page-apt {
     padding-left: 0;
   }
 
-  // list apt
-  .list--apt {
-
-    ion-card {
-      margin: 10px 0 0;
-      border-radius: 0px;
-      width: 100%;
-      box-shadow: none;
-    }
-
-  }
-
   // empty data
   .empty-stage {
     color: #d8d9da;
@@ -113,26 +101,6 @@ page-apt {
 
   .new-red-background p, .new-orange-background p, .new-green-background p {
     color: color($colors, 'light-white');
-  }
-
-  .detail-col {
-
-    ion-col {
-
-      margin-bottom: 0.8rem;
-      padding: 0 10px 0 10px;
-
-      p:nth-child(1) {
-        color: color($colors, 'new-text-color-grey-light');
-      }
-
-      p:nth-child(2) {
-        color: color($colors, 'new-text-color-grey');
-        font-weight: bold;
-      }
-
-    }
-
   }
 
 }

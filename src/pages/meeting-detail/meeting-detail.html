@@ -1,9 +1,38 @@
 <ion-header>
     <ion-navbar class="custom-action-bar">
-        <ion-title >E-Rapat</ion-title>
+        <ion-title >Detail E-Rapat</ion-title>
     </ion-navbar>
 </ion-header>
 
 <ion-content>
-
+    <ion-list *ngIf="isItemExist()">
+        <ion-card item *ngFor="let model of getItems()" (click)="detail(model)">
+            <ion-row>
+                <ion-col class="detail-col meeting-list-item">
+                    <ion-row>
+                        <ion-col col-12>
+                            <p ion-text>Agenda</p>
+                            <p ion-text>{{model?.nama}}</p>
+                        </ion-col>
+                        <ion-col col-12>
+                            <p ion-text>Tanggal</p>
+                            <p ion-text>{{model?.agenda?.status_nama}}</p>
+                        </ion-col>
+                        <ion-col col-12>
+                            <p ion-text>Waktu</p>
+                            <p ion-text>{{model?.agenda?.naskah_undangan}}</p>
+                        </ion-col>
+                        <ion-col col-12>
+                            <p ion-text>Ruang</p>
+                            <p ion-text>{{model?.agenda?.naskah_undangan}}</p>
+                        </ion-col>
+                    </ion-row>
+                </ion-col>
+            </ion-row>
+        </ion-card>
+    </ion-list>
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data..."></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
 </ion-content>
+ 

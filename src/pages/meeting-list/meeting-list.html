@@ -8,26 +8,29 @@
 </ion-header>
 
 <ion-content>
-    <ion-list *ngIf="isItemExist()">
+    <ion-list class="list">
         <ion-card item *ngFor="let model of getItems()" (click)="detail(model)">
             <ion-row>
                 <ion-col class="detail-col meeting-list-item">
                     <ion-row>
                         <ion-col col-12>
                             <p ion-text>Nama Rapat</p>
-                            <p ion-text>{{model?.agenda?.nama_agenda}}</p>
+                            <p ion-text>{{model?.nama}}</p>
                         </ion-col>
                         <ion-col col-12>
                             <p ion-text>Status</p>
-                            <p ion-text>{{model?.agenda?.status_nama}}</p>
+                            <p ion-text>{{model?.status_name}}</p>
                         </ion-col>
                         <ion-col col-12>
                             <p ion-text>Naskah UND</p>
-                            <p ion-text>{{model?.agenda?.naskah_undangan}}</p>
+                            <p ion-text>{{model?.naskah_undangan}}</p>
                         </ion-col>
                     </ion-row>
                 </ion-col>
             </ion-row>
         </ion-card>
     </ion-list>
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data..."></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
 </ion-content>

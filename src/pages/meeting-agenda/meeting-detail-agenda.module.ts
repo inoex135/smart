@@ -2,14 +2,14 @@ import { NgModule } from "@angular/core";
 import { IonicPageModule } from "ionic-angular";
 import { ComponentsModule } from "../../components/components.module";
 import { PipesModule } from "../../pipes/pipes.module";
-import { MeetingDetailPage } from "./meeting-detail";
+import { MeetingDetailAgendaPage } from "./meeting-detail-agenda";
 
 @NgModule({
-  declarations: [MeetingDetailPage],
+  declarations: [MeetingDetailAgendaPage],
   imports: [
-    IonicPageModule.forChild(MeetingDetailPage),
+    IonicPageModule.forChild(MeetingDetailAgendaPage),
     ComponentsModule,
     PipesModule
   ]
 })
-export class MeetingDetailPageModule {}
+export class MeetingDetailAgendaPageModule {}
