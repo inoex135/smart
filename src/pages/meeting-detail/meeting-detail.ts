@@ -176,6 +176,7 @@ export class MeetingDetailPage {
 
     private doInfinite(infiniteScroll) {
         if (this.isInfiniteLoading) {
+            infiniteScroll.complete()
             return
         }
         this.isInfiniteLoading = true
@@ -184,7 +185,7 @@ export class MeetingDetailPage {
           this.api.getMeetings(this.model).subscribe(
             res => {
                 this.isInfiniteLoading = false
-                if (res && res.content) {
+                if (res && res.content && res.content.length > 0) {
                     res.content.forEach(element => {
                         this.items.push(element)
                     })
@@ -196,9 +197,9 @@ export class MeetingDetailPage {
                 this.isInfiniteLoading = false
                 this.model.page--
             }
-          );
-          infiniteScroll.complete();
-        }, 500);
+          )
+          infiniteScroll.complete()
+        }, 500)
     }
 
     private getItems(): Array<any> {

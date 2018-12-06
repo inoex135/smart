@@ -1,13 +1,30 @@
 <ion-header>
     <ion-navbar class="custom-action-bar">
-        <ion-title >E-Rapat</ion-title>
+        <ion-title *ngIf="!isSearchOpened">E-Rapat</ion-title>
+        <ion-searchbar *ngIf="isSearchOpened" [(ngModel)]="keyword" 
+        search-bar-bcg (ionInput)="search($event?.target?.value)" 
+        (ionCancel)="search($event?.target?.value)" 
+        showCancelBotton="true"></ion-searchbar>
         <ion-buttons end>
+            <button *ngIf="!isSearchOpened" ion-button icon-only (click)="isSearchOpened=true">
+                <img src="assets/svg/Search.svg" />
+            </button>
+            <button ion-button icon-only (click)="triggerOpenSelect()">
+                <img src="assets/svg/Filter.svg" />
+            </button>
             <notification-bell #bell [notificationType]="getNotificationType()"></notification-bell>
         </ion-buttons>
     </ion-navbar>
 </ion-header>
 
 <ion-content>
+    <ion-item class="input--form" hidden>
+        <ion-select #selectType (ionChange)="onSelectChange()" [(ngModel)]="model.type" >
+            <ion-option [value]="f?.key" *ngFor="let f of filterTime">
+                {{f?.value}}
+            </ion-option>
+        </ion-select>
+    </ion-item>
     <ion-list class="list">
         <ion-card item *ngFor="let model of getItems()" (click)="detail(model)">
             <ion-row>
