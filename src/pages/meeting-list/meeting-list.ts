@@ -27,7 +27,7 @@ export class MeetingListPage {
     isInfiniteLoading:boolean = false
 
     constructor(private navCtrl: NavController, private api: MeetingProvider) {
-
+        
     }
 
     ionViewWillEnter() {
