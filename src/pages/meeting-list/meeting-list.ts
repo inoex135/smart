@@ -4,6 +4,7 @@ import { MeetingDetailPage } from "../meeting-detail/meeting-detail";
 import { NotificationProvider } from "../../providers/notification/notification";
 import { MeetingProvider } from "../../providers/meeting/meeting";
 import { LogUtil } from "../../utils/logutil";
+import { LoaderHelper } from "../../helpers/loader-helper";
 
 @Component({
     selector: "meeting-list-page",
@@ -26,26 +27,39 @@ export class MeetingListPage {
 
     isInfiniteLoading:boolean = false
 
-    constructor(private navCtrl: NavController, private api: MeetingProvider) {
+    constructor(private navCtrl: NavController, private api: MeetingProvider, private loader: LoaderHelper) {
         
     }
 
     ionViewWillEnter() {
-        this.fillList()
+        this.fillList(true)
     }
 
-    private fillList() {
-        this.api.getMeetings(this.model)
-        .subscribe(
-            res => {
-                if (res && res.content) {
-                    this.items = res.content
+    private fillList(loading:boolean = false) {
+        var load = Promise.resolve(loading)
+        if (loading) {
+            this.loader.show()
+        }
+        
+        load.then(() => {
+            this.api.getMeetings(this.model)
+            .subscribe(
+                res => {
+                    if (loading) {
+                        this.loader.dismissLoader()
+                    }
+                    if (res && res.content) {
+                        this.items = res.content
+                    }
+                },
+                err => {
+                    if (loading) {
+                        this.loader.dismissLoader()
+                    }
+                    LogUtil.e(MeetingListPage.TAG, err)
                 }
-            },
-            err => {
-                LogUtil.e(MeetingListPage.TAG, err)
-            }
-        )
+            )
+        })
     }
 
     private doInfinite(infiniteScroll) {
@@ -56,7 +70,7 @@ export class MeetingListPage {
         this.isInfiniteLoading = true
         this.model.page++
         setTimeout(() => {
-          this.api.getDetailMeeting(this.model).subscribe(
+          this.api.getMeetings(this.model).subscribe(
             res => {
                 this.isInfiniteLoading = false
                 if (res && res.content && res.content.length > 0) {

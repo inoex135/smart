@@ -137,7 +137,7 @@ export class NaskahMasukPage {
         }
       });
       infiniteScroll.complete();
-    }, 1000);
+    }, 500);
   }
 
   // event press and hold for bulk terima naskah

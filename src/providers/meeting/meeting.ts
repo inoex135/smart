@@ -5,6 +5,7 @@ import { TokenProvider } from "../token/token";
 import { fromPromise } from "rxjs/observable/fromPromise";
 import { Observable } from "rxjs";
 import { LogUtil } from "../../utils/logutil";
+import { of } from "rxjs/observable/of";
 
 
 @Injectable()
@@ -29,6 +30,234 @@ export class MeetingProvider {
         }
     ]
 
+    dummyDetail:any = {  
+        "is_deleted":0,
+        "id":915,
+        "nama":"Tes perihal",
+        "nomor_tiket":"RE20183",
+        "jenis_rapat":2,
+        "status":0,
+        "naskah_undangan":"UAT E-Rapat",
+        "tanggal_awal":"2018-12-07T00:00:00.000+0700",
+        "created_by":"198604122007101001",
+        "created_date":"2018-12-06T11:43:49.514+0700",
+        "updated_by":null,
+        "updated_date":null,
+        "agenda":[  
+           {  
+              "is_deleted":0,
+              "id":884,
+              "nama_agenda":"UAT Hari ke-1",
+              "created_by":"198604122007101001",
+              "created_date":"2018-12-06T11:43:49.515+0700",
+              "updated_by":null,
+              "updated_date":null,
+              "waktu":[  
+                 {  
+                    "is_deleted":0,
+                    "id":916,
+                    "ruang":null,
+                    "tanggal":"07-12-2018",
+                    "jam_mulai":"08:00",
+                    "jam_akhir":"10:30",
+                    "ruang_eksternal":"Hotel A",
+                    "jumlah_peserta":null,
+                    "keterangan":null,
+                    "catatan":null,
+                    "status":null,
+                    "notulen":null,
+                    "nama_notulen":null,
+                    "pimpinan_rapat":null,
+                    "nama_pimpinan":null,
+                    "tanggal_pesan":null,
+                    "sekretaris":null,
+                    "nama_sekretaris":null,
+                    "status_rapat":null,
+                    "durasi":null,
+                    "pic":[  
+     
+                    ],
+                    "peserta":[  
+                       {  
+                          "is_deleted":0,
+                          "id":1145,
+                          "nip_tujuan":null,
+                          "kode_unit_tujuan":null,
+                          "nama_unit_tujuan":null,
+                          "selaku":null,
+                          "jenis_tujuan":"salinan",
+                          "tipe_tujuan":"personal",
+                          "asal_tujuan":1,
+                          "nama_penerima":null,
+                          "jabatan":null,
+                          "alamat":null,
+                          "telepon":null,
+                          "email":null,
+                          "jenis_eselon":null,
+                          "perusahaan":null,
+                          "absensi":null,
+                          "keluar":null,
+                          "jam_mulai":null,
+                          "jam_akhir":null,
+                          "konfirmasi_hadir":null,
+                          "keterangan":null
+                       },
+                       {  
+                          "is_deleted":0,
+                          "id":1143,
+                          "nip_tujuan":"198611162015021002",
+                          "kode_unit_tujuan":null,
+                          "nama_unit_tujuan":null,
+                          "selaku":"Pelaksana",
+                          "jenis_tujuan":"asli",
+                          "tipe_tujuan":"personal",
+                          "asal_tujuan":1,
+                          "nama_penerima":"NORMANSYAH",
+                          "jabatan":null,
+                          "alamat":null,
+                          "telepon":null,
+                          "email":null,
+                          "jenis_eselon":null,
+                          "perusahaan":null,
+                          "absensi":null,
+                          "keluar":null,
+                          "jam_mulai":null,
+                          "jam_akhir":null,
+                          "konfirmasi_hadir":null,
+                          "keterangan":null
+                       },
+                       {  
+                          "is_deleted":0,
+                          "id":1144,
+                          "nip_tujuan":null,
+                          "kode_unit_tujuan":null,
+                          "nama_unit_tujuan":null,
+                          "selaku":null,
+                          "jenis_tujuan":"tembusan",
+                          "tipe_tujuan":"personal",
+                          "asal_tujuan":1,
+                          "nama_penerima":null,
+                          "jabatan":null,
+                          "alamat":null,
+                          "telepon":null,
+                          "email":null,
+                          "jenis_eselon":null,
+                          "perusahaan":null,
+                          "absensi":null,
+                          "keluar":null,
+                          "jam_mulai":null,
+                          "jam_akhir":null,
+                          "konfirmasi_hadir":null,
+                          "keterangan":null
+                       }
+                    ]
+                 },
+                 {  
+                    "is_deleted":0,
+                    "id":917,
+                    "ruang":null,
+                    "tanggal":"08-12-2018",
+                    "jam_mulai":"08:00",
+                    "jam_akhir":"10:00",
+                    "ruang_eksternal":"Ruang B",
+                    "jumlah_peserta":null,
+                    "keterangan":null,
+                    "catatan":null,
+                    "status":null,
+                    "notulen":null,
+                    "nama_notulen":null,
+                    "pimpinan_rapat":null,
+                    "nama_pimpinan":null,
+                    "tanggal_pesan":null,
+                    "sekretaris":null,
+                    "nama_sekretaris":null,
+                    "status_rapat":null,
+                    "durasi":null,
+                    "pic":[  
+     
+                    ],
+                    "peserta":[  
+                       {  
+                          "is_deleted":0,
+                          "id":1148,
+                          "nip_tujuan":null,
+                          "kode_unit_tujuan":null,
+                          "nama_unit_tujuan":null,
+                          "selaku":null,
+                          "jenis_tujuan":"salinan",
+                          "tipe_tujuan":"personal",
+                          "asal_tujuan":1,
+                          "nama_penerima":null,
+                          "jabatan":null,
+                          "alamat":null,
+                          "telepon":null,
+                          "email":null,
+                          "jenis_eselon":null,
+                          "perusahaan":null,
+                          "absensi":null,
+                          "keluar":null,
+                          "jam_mulai":null,
+                          "jam_akhir":null,
+                          "konfirmasi_hadir":null,
+                          "keterangan":null
+                       },
+                       {  
+                          "is_deleted":0,
+                          "id":1147,
+                          "nip_tujuan":"197611132000011001",
+                          "kode_unit_tujuan":null,
+                          "nama_unit_tujuan":null,
+                          "selaku":"Kepala Seksi Pengelolaan Kekayaan Negara I",
+                          "jenis_tujuan":"tembusan",
+                          "tipe_tujuan":"personal",
+                          "asal_tujuan":1,
+                          "nama_penerima":"NOVIAN FATCKUR ROCHMAN",
+                          "jabatan":null,
+                          "alamat":null,
+                          "telepon":null,
+                          "email":null,
+                          "jenis_eselon":null,
+                          "perusahaan":null,
+                          "absensi":null,
+                          "keluar":null,
+                          "jam_mulai":null,
+                          "jam_akhir":null,
+                          "konfirmasi_hadir":null,
+                          "keterangan":null
+                       },
+                       {  
+                          "is_deleted":0,
+                          "id":1146,
+                          "nip_tujuan":"199111182015022003",
+                          "kode_unit_tujuan":null,
+                          "nama_unit_tujuan":null,
+                          "selaku":"Pelaksana",
+                          "jenis_tujuan":"asli",
+                          "tipe_tujuan":"personal",
+                          "asal_tujuan":1,
+                          "nama_penerima":"NOVERVA PRADINA PRAMESTI",
+                          "jabatan":null,
+                          "alamat":null,
+                          "telepon":null,
+                          "email":null,
+                          "jenis_eselon":null,
+                          "perusahaan":null,
+                          "absensi":null,
+                          "keluar":null,
+                          "jam_mulai":null,
+                          "jam_akhir":null,
+                          "konfirmasi_hadir":null,
+                          "keterangan":null
+                       }
+                    ]
+                 }
+              ]
+           }
+        ],
+        "status_name":"DRAFT",
+        "internal":false
+     }
+
     public getFilterTime(): Array<any> {
         return this.filterTime
     }
@@ -38,8 +267,12 @@ export class MeetingProvider {
     }
 
     public getDetailMeeting(id:any) {
-        var resource = Observable.zip(this.api.get(`/rapat/${id}`), fromPromise(this.token.getCurrentProfile()))
-        return resource.map(([result, profile]) => {
+        var resource = this.api.get(`/rapat/${id}`)
+        if (ENV.API_URL) {
+            resource = of(this.dummyDetail)
+        }
+        return Observable.zip(resource, fromPromise(this.token.getCurrentProfile()))
+        .map(([result, profile]) => {
             LogUtil.d(MeetingProvider.TAG, profile)
             if (result && result.agenda) {
                 result['new_list'] = []

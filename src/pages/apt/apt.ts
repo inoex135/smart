@@ -155,7 +155,7 @@ export class AptPage {
         }
       );
       infiniteScroll.complete();
-    }, 1000);
+    }, 500);
   }
 
   mappingInfinityScrollData() {

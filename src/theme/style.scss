@@ -198,3 +198,75 @@ ion-content {
   }
 
 }
+
+.new-form {
+  h4 {
+    font-size: 1.3rem;
+  }
+
+  h4, h6 {
+    margin-left: 6px;
+  }
+
+  h6 {
+    font-size: 1.2rem;
+    color: #c8cacb;
+    margin-top: 5px !important;
+    margin-bottom: 5px !important;
+  }
+  .custom-ion-item {
+    border: 1px solid #E0E0E0 !important;
+    box-sizing: border-box !important;
+    border-radius: 2px !important;
+    margin-bottom: 5px !important;
+    margin-top: 0px !important;
+  }
+
+  .add-personel {
+    margin-bottom: 20px !important;
+    text-align: center;
+
+    .label-md {
+      margin: 0px !important;
+    }
+
+    .botton-md {
+      text-transform: none !important;
+    }
+
+  }
+
+  .as-list {
+    .label-md {
+      margin: 10px 8px 10px 0;
+    }
+  }
+
+  
+  .label-md {
+    color: color($colors, 'new-text-color-grey') !important;
+  }
+
+  ion-auto-complete {
+    width: 100vw;
+  }
+
+  .bordered-ion-item, .custom-ion-item {
+    
+    ion-icon {
+      margin-left: 5px;
+      color: color($colors, 'new-text-color-grey') !important;
+    }
+
+  }
+
+  .bordered-ion-item, .add-personel {
+    border-bottom: 0.5px solid #dedede !important;
+    background-color: transparent !important;
+  }
+
+  .danger-star {
+    color: color($colors, 'red-default');
+  }
+
+}

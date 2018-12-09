@@ -4,58 +4,49 @@
     </ion-navbar>
 </ion-header>
 
-<ion-content>
-    <div class="detail-content">
-        <ion-grid>
-          <ion-row>
-            <ion-col class="content-left">
-              Agenda
-            </ion-col>
-            <ion-col class="content-right">
-              {{getModel()?.agenda_name}}
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col class="content-left">
-              Tanggal
-            </ion-col>
-            <ion-col class="content-right">
-              {{getModel()?.date | indonesianDate:'DD MMMM YYYY'}}
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col class="content-left">
-              Waktu
-            </ion-col>
-            <ion-col class="content-right">
-              {{getModel()?.start_time}} - {{getModel()?.finish_time}}
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col class="content-left">
-              Gedung
-            </ion-col>
-            <ion-col class="content-right">
-              {{getModel()?.building }} 
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col class="content-left">
-              Tempat
-            </ion-col>
-            <ion-col class="content-right">
-              {{getModel()?.place}} 
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col class="content-left">
-              Jumlah Peserta
-            </ion-col>
-            <ion-col class="content-right">
-              {{getModel()?.total_participant}} 
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </div>
+<ion-content class="new-form">
+  <h4>Catatan</h4>
+  <ion-row>
+      <ion-col col-12>
+          <ion-item margin-top no-padding class="textarea--form custom-ion-item">
+              <ion-textarea placeholder="Catatan" type="text" [(ngModel)]="getPostModel().catatan"></ion-textarea>
+          </ion-item>
+      </ion-col>
+  </ion-row>
+  <ion-row >
+    <ion-col col-12>
+      <ng-template #withFlags let-attrs="attrs">
+        <span>{{attrs?.data?.nip}}, {{attrs?.data?.nama}}</span>
+      </ng-template>
+      <ion-auto-complete [dataProvider]="masterPegawai" #searchbar [template]="withFlags"></ion-auto-complete>
+
+      <ion-item class="input--form custom-ion-item">
+        <ion-input type="text" placeholder="Selaku" [(ngModel)]="selaku"></ion-input>
+      </ion-item>
+
+      <ion-item class="add-personel" no-lines center item-center>
+        <button clear [disabled]="getSearchSelection() == null" ion-button small color="default-blue" (tap)="addParticipant()">
+          <ion-icon name="add"></ion-icon> Tambah Personil
+        </button>
+      </ion-item>
+
+      <ion-item no-lines class="as-list bordered-ion-item" *ngFor="let peserta of getParticipants(); let i = index;">
+        <h2 text-wrap>Nama: {{peserta?.nama_penerima}}</h2>
+        <p>Selaku: {{peserta?.selaku}}</p>
+        <button clear (click)="removeParticipant(i)" ion-button color="light" item-end>
+          <ion-icon name="trash"></ion-icon>
+        </button>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+  
 </ion-content>
+
+<ion-footer>
+    <ion-buttons>
+        <button ion-button full (click)="save()">
+            Simpan
+        </button>
+    </ion-buttons>
+</ion-footer>
  

@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from "ionic-angular";
 import { MeetingDetailAgendaPage } from "../meeting-agenda/meeting-detail-agenda";
 import { MeetingProvider } from "../../providers/meeting/meeting";
 import { LogUtil } from "../../utils/logutil";
+import { LoaderHelper } from "../../helpers/loader-helper";
 
 @Component({
     selector: "meeting-detail",
@@ -34,7 +35,8 @@ export class MeetingDetailPage {
 
     constructor(private navCtrl: NavController, 
         private api: MeetingProvider,
-        private navParams: NavParams) {
+        private navParams: NavParams,
+        private loader: LoaderHelper) {
         this.model.detail = this.navParams.get(MeetingDetailPage.KEY_MODEL)
     }
 
@@ -43,18 +45,22 @@ export class MeetingDetailPage {
     }
 
     private fillList() {
-        this.api.getDetailMeeting(this.model.detail.id)
-        .subscribe(
-            res => {
-                LogUtil.d(MeetingDetailPage.TAG, res)
-                if (res) {
-                    this.items = res
+        this.loader.show()
+        .then(() => {
+            this.api.getDetailMeeting(this.model.detail.id)
+            .subscribe(
+                res => {
+                    this.loader.dismissLoader()
+                    LogUtil.d(MeetingDetailPage.TAG, res)
+                    if (res) {
+                        this.items = res
+                    }
+                },
+                err => {
+                    this.loader.dismissLoader()
                 }
-            },
-            err => {
-
-            }
-        )
+            )
+        })
     }
 
     private doInfinite(infiniteScroll) {

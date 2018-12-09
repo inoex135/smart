@@ -1,15 +1,14 @@
 import { NgModule } from "@angular/core";
 import { IonicPageModule } from "ionic-angular";
-import { ComponentsModule } from "../../components/components.module";
-import { PipesModule } from "../../pipes/pipes.module";
 import { MeetingDelegationPage } from "./meeting-delegation";
+import { AutoCompleteModule } from "ionic2-auto-complete";
 
 @NgModule({
   declarations: [MeetingDelegationPage],
   imports: [
     IonicPageModule.forChild(MeetingDelegationPage),
-    ComponentsModule,
-    PipesModule
-  ]
+    AutoCompleteModule
+  ],
+  exports: [MeetingDelegationPage]
 })
 export class MeetingDelegationPageModule {}

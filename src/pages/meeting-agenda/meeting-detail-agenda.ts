@@ -13,9 +13,24 @@ export class MeetingDetailAgendaPage {
     static TAG:string = 'MeetingDetailAgendaPage'
     static KEY_MODEL:string = 'model'
 
-    model:any = {
-        files: []
+    private model:any = {
+        confirm_to_attend: false,
     }
+
+    private files:Array<any> = [
+        {
+            name: 'Test File',
+            id: 123
+        },
+        {
+            name: 'Test File',
+            id: 123
+        },
+        {
+            name: 'Test File',
+            id: 123
+        }
+    ]
 
     constructor(private navCtrl: NavController, private navParams: NavParams, private api: MeetingProvider) {
         this.model = this.navParams.get(MeetingDetailAgendaPage.KEY_MODEL)
@@ -30,7 +45,7 @@ export class MeetingDetailAgendaPage {
         .subscribe(
             res => {
                 if (res) {
-                    this.model.files = res
+                //    this.files = res
                 }
             }, 
             err => {
@@ -47,6 +62,14 @@ export class MeetingDetailAgendaPage {
         var data = {}
         data[MeetingDelegationPage.KEY_MODEL] = this.getModel()
         this.navCtrl.push(MeetingDelegationPage.TAG, data)
+    }
+
+    private getFiles(): Array<any> {
+        return this.files
+    }
+
+    private fileOptions(index: number) {
+        
     }
 
 }

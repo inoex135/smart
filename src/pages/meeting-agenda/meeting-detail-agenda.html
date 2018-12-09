@@ -1,6 +1,11 @@
 <ion-header>
     <ion-navbar class="custom-action-bar">
         <ion-title >Detail E-Rapat</ion-title>
+        <ion-buttons end>
+            <button ion-button (click)="delegation()">
+              Delegasi
+            </button>
+          </ion-buttons>
     </ion-navbar>
 </ion-header>
 
@@ -55,7 +60,26 @@
               {{getModel()?.total_participant}} 
             </ion-col>
           </ion-row>
+
+          <ion-row>
+            <ion-col style="margin-top: 8px" class="content-left">
+              Akan Menghadiri
+            </ion-col>
+            <ion-col>
+                <ion-toggle [(ngModel)]="getModel().confirm_to_attend"></ion-toggle>
+            </ion-col>
+          </ion-row>
         </ion-grid>
       </div>
+
+    <div class="new-form">
+        <h2 style="margin-left: 16px">Files</h2>
+        <ion-item no-lines class="as-list bordered-ion-item" *ngFor="let file of getFiles(); let i = index;">
+            <h2 text-wrap>{{file?.name}}</h2>
+            <button clear (click)="fileOptions(i)" ion-button color="light" item-end>
+                <ion-icon name="more"></ion-icon>
+            </button>
+        </ion-item>
+    </div>
 </ion-content>
  
