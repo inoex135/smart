@@ -26,8 +26,6 @@ export class MeetingDetailPage {
         page: 1,
         size: 10,
         type: 'today',
-        year: 2018,
-        month: 12,
         unit: ''
     }
 

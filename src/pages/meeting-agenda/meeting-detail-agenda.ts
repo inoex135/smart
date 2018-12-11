@@ -156,13 +156,13 @@ export class MeetingDetailAgendaPage {
             this.api.confirm(postModel).subscribe(res => {
                 this.loader.dismissLoader()
                 if (res) {
-                    this.toast.present('Berhasil melakukan confirmasi')
+                    this.toast.present('Berhasil melakukan konfirmasi kehadiran.')
                 } else {
-                    this.toast.present('Gagal melakukan confirmasi')
+                    this.toast.present('Gagal melakukan confirmasi!')
                 }
             }, err => {
                 this.loader.dismissLoader()
-                this.toast.present('Gagal melakukan confirmasi')
+                this.toast.present('Gagal melakukan confirmasi!')
             })
         })
     }

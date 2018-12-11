@@ -4,6 +4,7 @@ import { TokenProvider } from "../token/token";
 import { fromPromise } from "rxjs/observable/fromPromise";
 import { Observable } from "rxjs";
 import { LogUtil } from "../../utils/logutil";
+import { ENV } from "../../config/environment";
 
 
 @Injectable()
@@ -91,7 +92,7 @@ export class MeetingProvider {
     }
 
     public downloadFile(model:any): string {
-        return `/api/agenda-waktu/${model.time_id}/dokumen/${model.file_id}/download`
+        return  `${ENV.API_URL}/agenda-waktu/${model.time_id}/dokumen/${model.file_id}/download`
     }
 
     public confirm(model:any) {
