@@ -66,8 +66,8 @@ export class MeetingProvider {
                                 time.peserta.forEach(peserta => {
                                     if (peserta.nip_tujuan === profile.nip) {
                                         model['allow_participant_confirmation'] = true
+                                        model['confirm_to_attend'] = peserta.konfirmasi_hadir
                                     }
-                                    model['confirm_to_attend'] = peserta.konfirmasi_hadir
                                 })
                             }
                             result['new_list'].push(model)
