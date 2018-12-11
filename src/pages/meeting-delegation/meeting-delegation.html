@@ -44,7 +44,7 @@
 
 <ion-footer>
     <ion-buttons>
-        <button ion-button full (click)="save()">
+        <button [disabled]="!isAllowedToSave()" ion-button full (click)="save()">
             Simpan
         </button>
     </ion-buttons>

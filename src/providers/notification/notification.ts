@@ -93,4 +93,27 @@ export class NotificationProvider {
         })
     }
 
+    /* 
+    1 = agenda personal; 
+2 = surat disposisi, 
+3 = permohonan, 
+4= agenda rapat
+    */
+
+    readMeeting(modelId: any) {
+        return this.read(modelId, '4')
+    }
+
+    readPersonalAgenda(modelId: any) {
+        return this.read(modelId, '1')
+    }
+
+    public read(modelId, type:string) {
+        let formData = new FormData();
+        formData.append("idList", modelId);
+        formData.append("tipe", type);
+    
+        return this.api.postForm("/personal/notification/read/", formData); 
+    }
+
 }

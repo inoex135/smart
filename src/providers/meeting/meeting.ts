@@ -56,6 +56,9 @@ export class MeetingProvider {
                                 model['place']['room'] = time.ruang.nama
                                 model['place']['building'] = time.ruang.gedung
                             }
+                            if (time.ruang_eksternal) {
+                                model['place']['room'] = time.ruang_eksternal
+                            }
                             model['date'] = time.tanggal
                             model['start_time'] = time.jam_mulai
                             model['finish_time'] = time.jam_akhir

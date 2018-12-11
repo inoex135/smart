@@ -79,6 +79,10 @@ export class MeetingDelegationPage {
         this.searchbar.clearValue()
     }
 
+    private isAllowedToSave() {
+        return this.postModel.peserta.length > 0 && this.postModel.id_agenda_waktu
+    }
+
     private save() {
         LogUtil.d(MeetingDelegationPage.TAG, this.postModel)
         this.loader.show().then(() => {

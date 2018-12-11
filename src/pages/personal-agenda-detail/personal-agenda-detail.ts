@@ -9,6 +9,7 @@ import {
 import { PersonalAgendaDetailProvider } from "../../providers/personal-agenda-detail/personal-agenda-detail";
 import { ToastHelper } from "../../helpers/toast-helper";
 import { LoaderHelper } from "../../helpers/loader-helper";
+import { NotificationProvider } from "../../providers/notification/notification";
 
 @IonicPage()
 @Component({
@@ -29,7 +30,8 @@ export class PersonalAgendaDetailPage {
     private modalController: ModalController,
     private alertController: AlertController,
     private toastHelper: ToastHelper,
-    private loader: LoaderHelper
+    private loader: LoaderHelper,
+    private notifaction: NotificationProvider
   ) {
     this.agendaId = this.navParams.get(PersonalAgendaDetailPage.KEY_AGENDA_ID)
   }
@@ -43,6 +45,7 @@ export class PersonalAgendaDetailPage {
           res => {
             this.detailAgenda = res
             this.loader.dismissLoader()
+            this.readNotification()
           },
           err => {
             this.navCtrl.pop()
@@ -53,6 +56,11 @@ export class PersonalAgendaDetailPage {
     } else {
       this.getDetailAgenda();
     }
+  }
+
+  private async readNotification() {
+    this.notifaction.readPersonalAgenda(this.agendaId)
+    .subscribe(res => {}, error => {})
   }
 
   getDetailAgenda() {
