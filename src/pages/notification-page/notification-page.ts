@@ -205,7 +205,7 @@ export class NotificationPage {
     LogUtil.d(NotificationPage.TAG, 'key: 0' + key)
     for (var i in this.data.meta.chips) {
       var current = this.data.meta.chips[i]
-      current.active = current.key === key && !current.active
+      current.active = current.key === key
     }
     this.setProvider(key)
     this.clearItems()
