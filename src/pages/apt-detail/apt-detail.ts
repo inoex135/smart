@@ -91,7 +91,7 @@ export class AptDetailPage {
 
   async downloadPermohonan(fileApt) {
     try {
-      const targetPath = `${this.fileDirectory}/${fileApt.nomorTiket}.pdf`;
+      const targetPath = `${this.fileDirectory}/${fileApt.nomor_tiket}.pdf`;
 
       await this.loaderHelper.show()
 

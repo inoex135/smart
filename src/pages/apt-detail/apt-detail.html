@@ -9,7 +9,7 @@
     <h2>
       {{aptDetail?.pelayanan?.nama}}
     </h2>
-    <p>{{aptDetail?.pelayananSub?.nama}}</p><br>
+    <p>{{aptDetail?.pelayanan_sub?.nama}}</p><br>
   </div>
 
   <div class="detail-content">
@@ -70,11 +70,11 @@
       <ion-col>
         <button ion-button (click)="detailAction(ACTION.PRATINJAU,aptDetail?.id)" color="default-blue"><ion-icon name="md-eye"></ion-icon> Pratinjau</button>
       </ion-col>
-      <ion-col *ngIf="aptDetail?.statusString != 'Belum diverifikasi'">
+      <ion-col *ngIf="aptDetail?.status_string != 'Belum diverifikasi'">
         <button ion-button outline ion-text text-center color="default-blue" (tap)="downloadPermohonan(aptDetail)">
           <ion-icon name="md-download"></ion-icon> Unduh</button>
       </ion-col>
-      <ion-col ion-button *ngIf="aptDetail?.statusString == 'Belum diverifikasi'">
+      <ion-col ion-button *ngIf="aptDetail?.status_string == 'Belum diverifikasi'">
         <button ion-text outline text-center (click)="detailAction(ACTION.VERIFIKASI,aptDetail?.id)" color="danger" *ngIf="profile?.jenis_eselon">
           <ion-icon name="md-done-all"></ion-icon> Verifikasi</button>
       </ion-col>
