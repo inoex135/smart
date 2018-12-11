@@ -1,6 +1,5 @@
 import { Component } from "@angular/core";
-import { IonicPage, NavParams, Header } from "ionic-angular";
-import { CurrencyPipe } from "@angular/common";
+import { IonicPage, NavParams } from "ionic-angular";
 
 @Component({
     selector: "payment-history-detail",
