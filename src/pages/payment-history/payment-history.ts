@@ -40,9 +40,6 @@ export class PaymentHistoryPage {
     }
 
     ionViewWillEnter() {
-        if (this.isItemExist()) {
-            this.items = []
-        }
         this.fillList()
     } 
 
@@ -73,6 +70,7 @@ export class PaymentHistoryPage {
         })
         let tab = this.tabs[index]
         this.type = tab.provider
+        LogUtil.d(PaymentHistoryPage.TAG, "provider: " + this.type)
         this.title = tab.title
         this.items = []
         this.fillList()

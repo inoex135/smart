@@ -4,13 +4,14 @@ import { CacheProvider } from "../cache/cache";
 import { Observable } from "rxjs";
 import { of } from "rxjs/observable/of";
 import { TokenProvider } from "../token/token";
+import { LogUtil } from "../../utils/logutil";
 
 @Injectable()
 export class PaymentProvider {
 
     static TAG:string = 'PaymentProvider'
-    static KEY_PAYMENT_INCOME = 'income_'
-    static KEY_PAYMENT_NON_INCOME = 'non_income_'
+    static KEY_PAYMENT_INCOME = 'NYDThw2sNBWjI7Q_'
+    static KEY_PAYMENT_NON_INCOME = 'NFkt4gh3XccUxW4S_'
 
     static MONTHS:any = {
         "01": 'Januari',
@@ -26,7 +27,7 @@ export class PaymentProvider {
         "11": 'November',
         "12": 'Desember'
     }
- 
+
     constructor(public api: ApiProvider, public token: TokenProvider, public cache: CacheProvider) {}
 
     private getCache(prefix): Promise<any> {
@@ -46,13 +47,16 @@ export class PaymentProvider {
     }
 
     public getPaymentsByProvider(provider:string): Observable<any> {
+        LogUtil.d(PaymentProvider.TAG, "provider: " + provider)
         return Observable.fromPromise(this.getCache(provider))
             .mergeMap(([data, nip, key]) => {
                 if (data == null) {
                     var api = this.getIncomes(nip)
                     if (provider === PaymentProvider.KEY_PAYMENT_NON_INCOME) {
+                        LogUtil.d(PaymentProvider.TAG, "get non income")
                         api = this.getNonIncomes(nip)
                     }
+
                     return api
                         .map(response => {
                             var result = []
@@ -61,17 +65,18 @@ export class PaymentProvider {
                             } else {
                                 result = response.lainnya.reverse()
                             }
-                            if (response.bulanan.length > 0) {
+                            if (result.length) {
                                 this.cache.put(key, {when: Date.now() + CacheProvider.FIVE_MINUTES, response: result})
                             }
                             return result
                         })
                 }
-                return of(data)
+                return of(data.response)
             })
     }
 
     private reconstructArray(items:any = []): Array<any> {
+        var arr = []
         if (items.length > 0) {
             items.forEach(model => {
                 model['monthName'] = PaymentProvider.MONTHS[model['bulan']]
@@ -80,9 +85,10 @@ export class PaymentProvider {
                 + (Number(model['UM_bruto']) - Number(model['UM_pot'])) 
                 + (Number(model['UL_bruto']) - Number(model['UL_pot'])) 
                 + (Number(model['Tukin_bruto']) - Number(model['Tukin_pot']))
+                arr.push(model)
             })
         }
-        return items.reverse()
+        return arr.reverse()
     }
 
 }

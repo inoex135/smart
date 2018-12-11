@@ -198,7 +198,7 @@ export class NotificationPage {
         }
       );
       event.complete()
-    }, 1000)
+    }, 500)
   }
 
   clickChip(key:string = '') {
