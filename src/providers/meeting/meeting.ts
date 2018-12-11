@@ -95,7 +95,7 @@ export class MeetingProvider {
     }
 
     public downloadFile(model:any): string {
-        return  `${ENV.API_URL}/agenda-waktu/${model.time_id}/dokumen/${model.file_id}/download`
+        return `${ENV.API_URL}/agenda-waktu/${model.time_id}/dokumen/${model.file_id}/download`
     }
 
     public confirm(model:any) {

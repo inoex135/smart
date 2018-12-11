@@ -93,22 +93,16 @@ export class NotificationProvider {
         })
     }
 
-    /* 
-    1 = agenda personal; 
-2 = surat disposisi, 
-3 = permohonan, 
-4= agenda rapat
-    */
-
-    readMeeting(modelId: any) {
-        return this.read(modelId, '4')
+    public readMeeting(modelId: any) {
+        return this.read(modelId, 'agenda rapat')
     }
 
-    readPersonalAgenda(modelId: any) {
-        return this.read(modelId, '1')
+    public readPersonalAgenda(modelId: any) {
+        return this.read(modelId, 'agenda personal')
     }
 
     public read(modelId, type:string) {
+        LogUtil.d(NotificationProvider.TAG, "read notification: " + type)
         let formData = new FormData();
         formData.append("idList", modelId);
         formData.append("tipe", type);

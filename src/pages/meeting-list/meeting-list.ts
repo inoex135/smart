@@ -40,16 +40,15 @@ export class MeetingListPage {
         if (loading) {
             this.loader.show()
         }
-        
         load.then(() => {
             this.api.getMeetings(this.model)
             .subscribe(
                 res => {
-                    if (loading) {
-                        this.loader.dismissLoader()
-                    }
                     if (res && res.content) {
                         this.items = res.content
+                    }
+                    if (loading) {
+                        this.loader.dismissLoader()
                     }
                 },
                 err => {

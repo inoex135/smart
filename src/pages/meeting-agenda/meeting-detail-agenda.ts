@@ -71,11 +71,8 @@ export class MeetingDetailAgendaPage {
         return this.getFiles()[index]
     }
 
-    private deleteFile(index: number, model: any) {
+    private deleteFile(index: number, payload: any) {
         this.loader.show().then(() => {
-            var payload = {}
-            payload['time_id'] = model.time_id
-            payload['file_id'] = model.id
             this.api.deleteFile(payload)
             .subscribe(res => {
                 this.loader.dismissLoader()
@@ -92,13 +89,11 @@ export class MeetingDetailAgendaPage {
         })
     }
 
-    private async downloadFile(model: any) {
+    private async downloadFile(payload: any, file: any) {
         try {
-            const targetPath = this.fileHelper.getDownloadDirectory() + '/' + model.filename
-            var payload = {}
-            payload['time_id'] = model.time_id
-            payload['file_id'] = model.id
+            const targetPath = this.fileHelper.getDownloadDirectory() + '/' + file.filename
             const url = this.api.downloadFile(payload)
+            LogUtil.d(MeetingDetailAgendaPage.TAG, "url: " + url)
             await this.loader.show()
       
             const checkPermission = await this.fileHelper.checkPermission();
@@ -108,7 +103,6 @@ export class MeetingDetailAgendaPage {
             }
 
             this.fileHelper.download(url, targetPath)
-      
             this.toast.present("File telah di download");
             this.loader.dismissLoader()
       
@@ -119,21 +113,24 @@ export class MeetingDetailAgendaPage {
     }
 
     private fileOptions(index: number): void {
+        let file = this.getFileByIndex(index)
+        var payload = {}
+        payload['time_id'] = this.model.time_id
+        payload['file_id'] = file.id
+        LogUtil.d(MeetingDetailAgendaPage.TAG, payload)
         let actionSheet = this.sheet.create({
             title: 'Action',
             buttons: [
               {
                 text: 'Unduh',
                 handler: () => {
-                  let file = this.getFileByIndex(index)
-                  this.downloadFile(file)
+                    this.downloadFile(payload, file)
                 }
               },
               {
                 text: 'Hapus',
                 handler: () => {
-                    let file = this.getFileByIndex(index)
-                    this.deleteFile(index, file)
+                    this.deleteFile(index, payload)
                 }
               },
               {

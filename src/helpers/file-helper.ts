@@ -4,10 +4,14 @@ import { AndroidPermissions } from "@ionic-native/android-permissions";
 import { File } from "@ionic-native/file";
 import { FileTransfer, FileTransferObject } from "@ionic-native/file-transfer";
 import { TokenProvider } from "../providers/token/token";
+import { LogUtil } from "../utils/logutil";
 
 @Injectable()
 export class FileHelper {
-  mime: string = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+
+    static TAG:string = 'FileHelper'
+    
+    mime: string = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
 
     fileTransfer: FileTransferObject
 
@@ -68,13 +72,17 @@ export class FileHelper {
       httpMethod: "GET"
     };
 
+    this.fileTransfer.onProgress(res => {
+      LogUtil.d(FileHelper.TAG, res)
+    })
+
     return this.fileTransfer
       .download(url, targetPath, false, options)
       .then(res => {
-        return res;
+        return res
       })
       .catch(err => {
-        return err;
+        return err
       });
   }
 

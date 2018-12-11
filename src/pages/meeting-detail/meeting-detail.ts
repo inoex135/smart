@@ -51,12 +51,11 @@ export class MeetingDetailPage {
             this.api.getDetailMeeting(this.model.detailId)
             .subscribe(
                 res => {
-                    this.loader.dismissLoader()
-                    LogUtil.d(MeetingDetailPage.TAG, res)
                     if (res) {
                         this.items = res
                     }
                     this.readNotification()
+                    this.loader.dismissLoader()
                 },
                 err => {
                     this.loader.dismissLoader()
