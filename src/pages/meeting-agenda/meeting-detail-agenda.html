@@ -36,7 +36,7 @@
               {{getModel()?.start_time}} - {{getModel()?.finish_time}}
             </ion-col>
           </ion-row>
-          <ion-row>
+          <ion-row *ngIf="getModel()?.place?.building">
             <ion-col class="content-left">
               Gedung
             </ion-col>
