@@ -349,9 +349,9 @@ export class AptPage {
     switch(status) {
       case 'Permohonan Aktif':
         return 'new-green-background'
-      case 'Permohonan aktif mendekati batas waktu':
+      case 'Permohonan Aktif Mendekati Batas Waktu':
         return 'new-orange-background'
-      case 'Permohonan melebihi batas waktu':
+      case 'Permohonan Melebih Batas Waktu':
         return 'new-red-background'
       default:
         return 'white-background'

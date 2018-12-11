@@ -39,7 +39,7 @@ export class ModalFilterMeetingPage {
   }
 
   closeWithReturn() {
-    this.view.dismiss(this.filter);
+    this.view.dismiss(this.filter)
   }
 
 }

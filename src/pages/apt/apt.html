@@ -36,7 +36,7 @@
     <ion-card (press)="isItemPressed(item?.id)" item *ngFor="let item of items;let i = index">
       <ion-row>
         <ion-col col-12 class="col-header {{ getStatusColor(item?.status_norma) }}">
-          <p ion-text>Tanggal : {{item?.tanggalString}}</p>
+          <p ion-text>Tanggal : {{item?.tanggal_string}}</p>
         </ion-col>
         <ion-col col-1 margin-right *ngIf="isPress" class="checkbox-input">
           <ion-checkbox *ngIf="item?.statusString == 'Belum diverifikasi'" color="green-light" (ionChange)="selectedApt(item?.id, $event)"></ion-checkbox>
@@ -55,19 +55,19 @@
             </ion-col>
             <ion-col col-6>
               <p ion-text>Nama Pemohon</p>
-              <p ion-text text-wrap>{{item?.namaPemohon}}</p>
+              <p ion-text text-wrap>{{item?.nama_pemohon}}</p>
             </ion-col>
             <ion-col col-6>
               <p ion-text>Nomor Tiket</p>
-              <p ion-text>{{item?.nomorTiket}}</p>
+              <p ion-text>{{item?.nomor_tiket}}</p>
             </ion-col>
             <ion-col col-6>
               <p ion-text>Nomor Naskah</p>
-              <p ion-text>{{item?.nomorSurat}}</p>
+              <p ion-text>{{item?.nomor_surat}}</p>
             </ion-col>
             <ion-col col-6>
               <p ion-text>Norma Waktu</p>
-              <p ion-text>{{item?.normaWaktu}} Hari</p>
+              <p ion-text>{{item?.norma_waktu}} Hari</p>
             </ion-col>
           </ion-row>
         </ion-col>

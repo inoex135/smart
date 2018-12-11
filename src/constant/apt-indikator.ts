@@ -4,6 +4,6 @@ export const APT_INDIKATOR = {
   TIDAK_DIAGENDAKAN: "Tidak diagendakan",
   DISETUJUI: "Disetujui",
   DITOLAK: "Ditolak",
-  DIPROSES: "Diproses",
+  DIPROSES: "Dalam Proses",
   TIDAK_DIPROSES: "Tidak Di proses"
 };

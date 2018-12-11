@@ -96,7 +96,7 @@ export class MeetingListPage {
 
     private detail(model: any): void {
         var data = {}
-        data[MeetingDetailPage.KEY_MODEL] = model
+        data[MeetingDetailPage.KEY_DETAIL_ID] = model.id
         this.navCtrl.push(MeetingDetailPage.TAG, data)
     }
 

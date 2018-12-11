@@ -41,7 +41,7 @@
               Gedung
             </ion-col>
             <ion-col class="content-right">
-              {{getModel()?.building }} 
+              {{getModel()?.place?.building}} 
             </ion-col>
           </ion-row>
           <ion-row>
@@ -49,7 +49,7 @@
               Tempat
             </ion-col>
             <ion-col class="content-right">
-              {{getModel()?.place}} 
+              {{getModel()?.place?.room}} 
             </ion-col>
           </ion-row>
           <ion-row>
@@ -66,7 +66,7 @@
               Akan Menghadiri
             </ion-col>
             <ion-col>
-                <ion-toggle [(ngModel)]="getModel().confirm_to_attend"></ion-toggle>
+                <ion-toggle [(ngModel)]="getModel().confirm_to_attend" (ionChange)="confirm()"></ion-toggle>
             </ion-col>
           </ion-row>
         </ion-grid>

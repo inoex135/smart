@@ -61,7 +61,7 @@ export class HomePage {
       icon: 'm-persuratan.svg'
     },
     {
-      title: 'Persuratan',
+      title: 'APT',
       page: AptPage.TAG,
       icon: 'm-apt.svg'
     },

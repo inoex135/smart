@@ -19,7 +19,7 @@
           Nama Pemohon
         </ion-col>
         <ion-col class="content-right">
-          {{aptDetail?.namaPengirim}}
+          {{aptDetail?.nama_pengirim}}
         </ion-col>
       </ion-row>
       <ion-row>
@@ -27,7 +27,7 @@
           Telepon Pengirim
         </ion-col>
         <ion-col class="content-right">
-          {{aptDetail?.teleponPengirim}}
+          {{aptDetail?.telepon_pengirim}}
         </ion-col>
       </ion-row>
       <ion-row>
@@ -35,7 +35,7 @@
           Nomor Tiket
         </ion-col>
         <ion-col class="content-right">
-          {{aptDetail?.nomorTiket}}
+          {{aptDetail?.nomor_tiket}}
         </ion-col>
       </ion-row>
       <ion-row>
@@ -43,7 +43,7 @@
           Tanggal Surat
         </ion-col>
         <ion-col class="content-right">
-          {{aptDetail?.dateCreated | customDate}} 
+          {{aptDetail?.date_created | indonesianDate:'YYYY'}} 
         </ion-col>
       </ion-row>
       <ion-row>
@@ -51,7 +51,7 @@
           Tanggal Terima
         </ion-col>
         <ion-col class="content-right">
-          {{aptVerifikasi?.tanggal | customDate}} 
+          {{aptVerifikasi?.tanggal | indonesianDate:'DD MMMM YYYY'}} 
         </ion-col>
       </ion-row>   
       <ion-row>
@@ -59,7 +59,7 @@
           Status Permohonan
         </ion-col>
         <ion-col class="content-right">
-          <apt-indikator-button [status]="aptDetail?.statusString"></apt-indikator-button>
+          <apt-indikator-button [status]="aptDetail?.status_string"></apt-indikator-button>
         </ion-col>
       </ion-row>  
     </ion-grid>

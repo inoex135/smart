@@ -6,6 +6,7 @@ import { NotificationProvider } from "../../providers/notification/notification"
 import { LogUtil } from "../../utils/logutil";
 import { AptDetailPage } from "../apt-detail/apt-detail";
 import { NaskahMasukDetailPage } from "../naskah-masuk-detail/naskah-masuk-detail";
+import { MeetingDetailPage } from "../meeting-detail/meeting-detail";
 
 @Component({
   selector: "notification-page",
@@ -228,6 +229,7 @@ export class NotificationPage {
 
   onItemClick(model:any) {
     LogUtil.d(NotificationPage.TAG, model)
+    var data = {}
     switch (model.type) {
       case NotificationProvider.TYPE_APT:
         this.navCtrl.push(AptDetailPage.TAG, { itemId: model.id })
@@ -236,7 +238,8 @@ export class NotificationPage {
         this.navCtrl.push(NaskahMasukDetailPage.TAG, { naskahId: model.id })
         break
       case NotificationProvider.TYPE_RAPAT:
-
+        data[MeetingDetailPage.KEY_DETAIL_ID] = model.id
+        this.navCtrl.push(MeetingDetailPage.TAG, data)
         break
       case NotificationProvider.TYPE_PERSONAL:
         

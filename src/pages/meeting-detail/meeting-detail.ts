@@ -13,7 +13,7 @@ import { LoaderHelper } from "../../helpers/loader-helper";
 export class MeetingDetailPage {
 
     static TAG:string = 'MeetingDetailPage'
-    static KEY_MODEL:string = 'model'
+    static KEY_DETAIL_ID:string = 'detail_id'
 
     items:any = {
         agenda: [],
@@ -21,7 +21,7 @@ export class MeetingDetailPage {
     }
 
     model:any = {
-        detail: '',
+        detailId: '',
         keyword: '',
         page: 1,
         size: 10,
@@ -37,7 +37,7 @@ export class MeetingDetailPage {
         private api: MeetingProvider,
         private navParams: NavParams,
         private loader: LoaderHelper) {
-        this.model.detail = this.navParams.get(MeetingDetailPage.KEY_MODEL)
+        this.model.detailId = this.navParams.get(MeetingDetailPage.KEY_DETAIL_ID)
     }
 
     ionViewWillEnter() {
@@ -47,7 +47,7 @@ export class MeetingDetailPage {
     private fillList() {
         this.loader.show()
         .then(() => {
-            this.api.getDetailMeeting(this.model.detail.id)
+            this.api.getDetailMeeting(this.model.detailId)
             .subscribe(
                 res => {
                     this.loader.dismissLoader()

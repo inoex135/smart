@@ -27,7 +27,7 @@ export class AptDetailPage {
   aptDetail: any = {};
   fileDirectory: any;
   profile: any;
-  aptVerifikasi: any;
+  aptVerifikasi: any = {};
   constructor(
     private navParams: NavParams,
     private navCtrl: NavController,
@@ -59,10 +59,11 @@ export class AptDetailPage {
     });
   }
 
-  async getDetailApt() {
+  private getDetailApt() {
     this.loaderHelper.show()
-    .then(present => {
-    this.aptProvider.getDetailApt(this.itemId).subscribe(
+    .then(() => {
+    this.aptProvider.getDetailApt(this.itemId)
+    .subscribe(
       res => {
         const response = res.response;
         this.aptDetail = response.permohonan;
@@ -71,7 +72,7 @@ export class AptDetailPage {
         this.loaderHelper.dismissLoader()
       },
       err => {
-        this.loaderHelper.errorHandleLoader(err, this.navCtrl);
+        this.loaderHelper.dismissLoader()
       }
     )
     })
@@ -82,7 +83,7 @@ export class AptDetailPage {
   }
 
   //read notifikasi
-  readNotifikasi() {
+  async readNotifikasi() {
     this.aptProvider
       .readNotifikasi(this.itemId)
       .subscribe(res => true, err => true);

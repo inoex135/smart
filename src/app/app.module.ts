@@ -56,6 +56,7 @@ import { AutoCompleteModule } from "ionic2-auto-complete";
 import { CacheProvider } from "../providers/cache/cache";
 import { PaymentProvider } from "../providers/payment/payment";
 import { MeetingProvider } from "../providers/meeting/meeting";
+import { FileHelper } from "../helpers/file-helper";
 
 @NgModule({
   declarations: [MyApp, AptDetailActionPage],
@@ -105,7 +106,8 @@ import { MeetingProvider } from "../providers/meeting/meeting";
     MasterUnitProvider,
     CacheProvider,
     PaymentProvider,
-    MeetingProvider
+    MeetingProvider,
+    FileHelper
   ]
 })
 export class AppModule {}
