@@ -42,9 +42,13 @@
     </ion-row>
   </ion-grid>
 
-  <ion-card hidden>
-    <ion-card-content>
-      <p>Test Slideer</p>
+  <ion-card >
+    <ion-card-content style="height: 100px">
+      <ion-slides *ngIf="dashboard?.pengumuman.length" initialSlide="0" autoplay="5000" loop="true" speed="500" pager="true">
+        <ion-slide *ngFor="let slide of dashboard?.pengumuman">
+          <h3>{{slide?.teks}}</h3>
+        </ion-slide>
+      </ion-slides>
     </ion-card-content>
   </ion-card>
 
@@ -76,7 +80,6 @@
         <span>Riwayat Pembayaran</span></div>
     </ion-card-content>
   </ion-card>
-
 
   <ion-item hidden col-8 push-2 class="input--form">
 

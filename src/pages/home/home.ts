@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef } from "@angular/core";
-import { NavController, Platform, IonicPage, Select } from "ionic-angular";
+import { NavController, Platform, IonicPage, Select, Slides } from "ionic-angular";
 import { UserProvider } from "../../providers/user/user";
 
 import { MenuHomeConstant } from "../../constant/menu-home";
@@ -13,7 +13,6 @@ import { NotificationBell } from "../../components/notification-bell/notificatio
 import { NotificationProvider } from "../../providers/notification/notification";
 import { ERROR_CODES } from "../../constant/error-codes";
 import { PaymentHistoryPage } from "../payment-history/payment-history";
-import { NaskahMasukPage } from "../naskah-masuk/naskah-masuk";
 import { SuratPage } from "../surat/surat";
 import { AptPage } from "../apt/apt";
 import { PersonalPage } from "../personal/personal";
@@ -31,6 +30,7 @@ export class HomePage {
   @ViewChild("profileImage") image: ElementRef
   @ViewChild("selectUser") select: Select
   @ViewChild("bell") bell: NotificationBell
+  @ViewChild(Slides) slides: Slides;
 
   menus: Array<any> = []
   notifications: Array<any> = []
@@ -45,13 +45,14 @@ export class HomePage {
   }
 
   dashboard:any = {
-    "CT": 0,
-    "jam_masuk_hari_ini": "-",
-    "DL": 0,
-    "hari_kerja": 0,
-    "akumulasi_absen": "-",
-    "jumlah_hari_masuk": 0,
-    "jam_keluar_hari_ini": null
+    CT: 0,
+    jam_masuk_hari_ini: "-",
+    DL: 0,
+    hari_kerja: 0,
+    akumulasi_absen: "-",
+    jumlah_hari_masuk: 0,
+    jam_keluar_hari_ini: null,
+    pengumuman: []
   }
 
   buttons:Array<any> = [
