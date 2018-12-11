@@ -7,6 +7,7 @@ import { LogUtil } from "../../utils/logutil";
 import { AptDetailPage } from "../apt-detail/apt-detail";
 import { NaskahMasukDetailPage } from "../naskah-masuk-detail/naskah-masuk-detail";
 import { MeetingDetailPage } from "../meeting-detail/meeting-detail";
+import { PersonalAgendaDetailPage } from "../personal-agenda-detail/personal-agenda-detail";
 
 @Component({
   selector: "notification-page",
@@ -242,7 +243,8 @@ export class NotificationPage {
         this.navCtrl.push(MeetingDetailPage.TAG, data)
         break
       case NotificationProvider.TYPE_PERSONAL:
-        
+        data[PersonalAgendaDetailPage.KEY_AGENDA_ID] = model.id
+        this.navCtrl.push(PersonalAgendaDetailPage.TAG, data)
         break
     }
   }

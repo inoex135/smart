@@ -18,8 +18,10 @@ import { LoaderHelper } from "../../helpers/loader-helper";
 export class PersonalAgendaDetailPage {
 
   static TAG:string = 'PersonalAgendaDetailPage'
+  static KEY_AGENDA_ID = 'agenda_id'
 
   detailAgenda: any = [];
+  private agendaId: any = undefined
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -28,29 +30,48 @@ export class PersonalAgendaDetailPage {
     private alertController: AlertController,
     private toastHelper: ToastHelper,
     private loader: LoaderHelper
-  ) {}
+  ) {
+    this.agendaId = this.navParams.get(PersonalAgendaDetailPage.KEY_AGENDA_ID)
+  }
 
   ionViewDidLoad() {
-    this.getDetailAgenda();
+    if (this.agendaId) {
+      this.loader.show()
+      .then(() => {
+        this.agendaProvider.getDetail(this.agendaId)
+        .subscribe(
+          res => {
+            this.detailAgenda = res
+            this.loader.dismissLoader()
+          },
+          err => {
+            this.navCtrl.pop()
+            this.loader.dismissLoader()
+          }
+        )
+      })
+    } else {
+      this.getDetailAgenda();
+    }
   }
 
   getDetailAgenda() {
     const date = this.navParams.get("date");
 
-    this.loader.createLoader();
-
-    const agenda = this.agendaProvider.getDetailAgenda(date);
-
-    agenda.subscribe(
-      res => {
-        this.detailAgenda = res;
-        this.loader.dismiss();
-      },
-      err => {
-        this.navCtrl.pop();
-        this.loader.dismiss();
-      }
-    );
+    this.loader.show()
+    .then(() => {
+      this.agendaProvider.getDetailAgenda(date)
+      .subscribe(
+        res => {
+          this.detailAgenda = res
+          this.loader.dismissLoader()
+        },
+        err => {
+          this.navCtrl.pop()
+          this.loader.dismissLoader()
+        }
+      )
+    })
   }
 
   edit(agendaId: number) {
