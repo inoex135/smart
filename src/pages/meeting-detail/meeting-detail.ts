@@ -16,10 +16,7 @@ export class MeetingDetailPage {
     static TAG:string = 'MeetingDetailPage'
     static KEY_DETAIL_ID:string = 'detail_id'
 
-    items:any = {
-        agenda: [],
-        new_list: []
-    }
+    items:any = []
 
     model:any = {
         detailId: '',
@@ -98,7 +95,7 @@ export class MeetingDetailPage {
     }
 
     private getItems(): Array<any> {
-        return this.items.new_list
+        return this.items
     }
 
     private isItemExist(): boolean {
