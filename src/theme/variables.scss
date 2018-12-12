@@ -50,7 +50,11 @@ $colors: (
   new-text-color-dark: #365d98,
   new-text-color-light: #4583f1,
   new-text-color-grey: #4A4A4A,
-  new-text-color-grey-light: #7A8287
+  new-text-color-grey-light: #7A8287,
+  new-green: #27D3B7,
+  new-orange: #F69651,
+  new-red: #DA2E2E,
+  money-green: #0a9183
 );
 // App iOS Variables
 // --------------------------------------------------
@@ -98,3 +102,5 @@ $card-md-box-shadow: 0 2px 2px 0 rgba(7, 7, 7, 0.14),
 @import "ionic-timeline";
 // Tabs Setting
 $tabs-background: map-get($colors, "green-light") !important;
+
+@import "action-bar"

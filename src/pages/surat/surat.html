@@ -1,12 +1,15 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>surat</ion-title>
+  <ion-navbar class="custom-action-bar">
+    <ion-title>Surat</ion-title>
+    <ion-buttons end>
+        <notification-bell #bell [notificationType]="getNotificationType()"></notification-bell>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content no-padding>
   <ion-card class="card-transparent">
-    <pemberitahuan [redirectComponent]="redirectComponent"></pemberitahuan>
+    <!-- <pemberitahuan [redirectComponent]="redirectComponent"></pemberitahuan> -->
 
     <button ion-button block icon-left margin-top color="blue-light" style="width:100%; height:50px;" (click)="openPage('naskah')">
         <ion-icon name="copy"></ion-icon>

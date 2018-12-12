@@ -1,7 +1,8 @@
-import { Component, Input, EventEmitter, Output } from "@angular/core";
-import { HomeProvider } from "../../providers/home/home";
+import { Component, Input } from "@angular/core";
 import { LogUtil } from "../../utils/logutil";
-import { Flags } from "@ionic-native/file";
+import { NavController } from "ionic-angular";
+import { NotificationPage } from "../../pages/notification-page/notification-page";
+import { NotificationProvider } from "../../providers/notification/notification";
 
 @Component({
   selector: "notification-bell",
@@ -11,19 +12,26 @@ export class NotificationBell {
 
   static TAG:string = "NotificationBell"
 
-  @Input() notificationType: string = "";
+  @Input() notificationType:string = '';
 
   totalNotification:number = 0
 
   isUpdating:boolean = false
 
-  constructor(private homeProvider: HomeProvider) {
+  constructor(private navCtrl: NavController, private provider: NotificationProvider) {
     this.updateNotification()
   }
 
-  setTotalNotification(result:any) {
+  setTotalNotification(result:any):void {
     if (result) {
-      this.totalNotification = result.notification_apt + result.notification_personal + result.notification_persuratan
+      if (this.notificationType !== '' && this.notificationType !== NotificationProvider.TYPE_ALL) {
+          LogUtil.d(NotificationBell.TAG, "get total notifications: " + this.totalNotification + " type: " + this.notificationType)
+          this.totalNotification = result[this.notificationType]
+          return 
+      }
+      for (var i in result) {
+        this.totalNotification += result[i]
+      }
       LogUtil.d(NotificationBell.TAG, "count total notifications: " + this.totalNotification)
     }
   }
@@ -32,7 +40,7 @@ export class NotificationBell {
     if (!this.isUpdating) {
       this.isUpdating = true
       LogUtil.d(NotificationBell.TAG, "updating notification...")
-      this.homeProvider.getTotalNotication().subscribe(
+      this.provider.getTotalNotication().subscribe(
         res => {
           this.setTotalNotification(res)
           this.isUpdating = false
@@ -52,7 +60,11 @@ export class NotificationBell {
   }
 
   redirectTo() {
-    console.log("redirect to")
+    LogUtil.d(NotificationBell.TAG, "redirect to: " + this.notificationType)
+    NotificationPage.KEY_TYPE
+    var data = {}
+    data[NotificationPage.KEY_TYPE] = this.notificationType
+    this.navCtrl.push(NotificationPage.TAG, data)
   }
   
 }

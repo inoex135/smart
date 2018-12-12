@@ -5,10 +5,14 @@ import { ApiProvider } from "../api/api";
 import { TokenProvider } from "../token/token";
 
 import { User } from "../../models/users";
-import { map } from "rxjs/operators/map";
+import { LogUtil } from "../../utils/logutil";
+import { Observable } from "rxjs";
 
 @Injectable()
 export class UserProvider {
+
+  TAG:string = 'UserProvider'
+
   private isAuthenticatedSubject = new ReplaySubject<boolean>(1);
   public isAuthenticated = this.isAuthenticatedSubject.asObservable();
 
@@ -32,9 +36,10 @@ export class UserProvider {
   // }
 
   setAuth(data: any) {
-    this.tokenProvider.saveToken(data.token);
-    this.tokenProvider.saveUser(data.user);
-    // this.isAuthenticatedSubject.next(true);
+    return this.tokenProvider.setCurrentToken(data.token as string)
+    .then(() => {
+      return this.tokenProvider.saveUser(data)
+    })
   }
 
   setProfile(data: any) {
@@ -55,10 +60,10 @@ export class UserProvider {
     formData.append("username", credentials.username);
     formData.append("password", credentials.password);
 
-    return this.apiProvider.postForm("/auth/login", formData).map(data => {
-      this.setAuth(data);
-      return data;
-    });
+    return this.apiProvider.postForm("/auth/login", formData)
+    .mergeMap(data => {
+      return Observable.fromPromise(this.setAuth(data))
+    })
   }
 
   attemptAuthSso(credentials: User) {
@@ -67,28 +72,35 @@ export class UserProvider {
     formData.append("username", credentials.username);
     formData.append("password", credentials.password);
 
-    return this.apiProvider.postForm("/auth/sso", formData).map(data => {
-      this.setAuth(data);
-      return data;
+    return this.apiProvider.postForm("/auth/sso", formData)
+    .mergeMap(data => {
+      return Observable.fromPromise(this.setAuth(data))
     });
   }
 
   attemptAuthSsoCode(code: string) {
     return this.apiProvider.get("/auth/sso?code=" + code).map(data => {
-      this.setAuth(data);
-      return data;
+      return this.setAuth(data);
     });
   }
 
-  getProfile() {
-    return this.apiProvider.get("/personal/profile").pipe(
-      map(res => {
-        if (!this.tokenProvider.latestProfile) {
-          this.setProfile(res);
-        }
-        return res;
-      })
-    );
+  getProfile(force:boolean = false): Promise<any> {
+    LogUtil.d(this.TAG, 'get user profile')
+    return this.tokenProvider.getProfile()
+    .then(profile => {
+      LogUtil.d(this.TAG, 'is force update? ' + force)
+      if (profile == null || force) {
+        LogUtil.d(this.TAG, 'from api')
+        return this.apiProvider.get("/personal/profile").toPromise()
+        .then(res => {
+          if (res) {
+            this.setProfile(res);
+          }
+          return res;
+        })
+      }
+      return profile
+    })
   }
 
   //registrasi fcm token
@@ -105,6 +117,9 @@ export class UserProvider {
 
   // bypass digunakan untuk bisa menggunakan apps, dengan nip orang lain
   byPass(nip: string) {
-    return this.apiProvider.get(`/auth/login/bypass?nip=${nip}`);
+    return this.apiProvider.get(`/auth/login/bypass?nip=${nip}`)
+    .mergeMap(plth => {
+      return Observable.fromPromise(this.tokenProvider.setPlthUser(plth))
+    })
   }
 }

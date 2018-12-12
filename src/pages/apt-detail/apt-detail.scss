@@ -1,13 +1,4 @@
 page-apt-detail {
-  font-family: Roboto;
-
-  .detail-permohonan-header{
-    background-color: #81C784;
-  }
-
-  .detail-permohonan-content{
-    font-size: 12px;
-  }
 
   p.background.green {
     background-color: map-get($colors, green-bootstrap) !important;
@@ -28,4 +19,15 @@ page-apt-detail {
       font-weight: bold;
     }
   }
+
+  .button-grid {
+    
+    background-color: #fff;
+
+    ion-col {
+      text-align: center;
+    }
+
+  }
+
 }

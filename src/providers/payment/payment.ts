@@ -39,11 +39,19 @@ export class PaymentProvider {
     }
 
     private getIncomes(nip:string): Observable<any>  {
+<<<<<<< HEAD
         return this.api.get('http://alika.djkn.or.id/penghasilan/bulanan?code=p0rt4lk3u4ng4n&nip=' + nip)
     }
 
     private getNonIncomes(nip:string): Observable<any>  {
         return this.api.get('http://alika.djkn.or.id/penghasilan/lainnya?code=p0rt4lk3u4ng4n&nip=' + nip)
+=======
+        return this.api.get('/personal/riwayat-penghasilan?nip=' + nip)
+    }
+
+    private getNonIncomes(nip:string): Observable<any>  {
+        return this.api.get('/personal/riwayat-nonpenghasilan?nip=' + nip)
+>>>>>>> ae6ba13c1135be994c5d93f7349a0a4370b9e6fd
     }
 
     public getPaymentsByProvider(provider:string): Observable<any> {
@@ -61,7 +69,11 @@ export class PaymentProvider {
                         .map(response => {
                             var result = []
                             if (provider === PaymentProvider.KEY_PAYMENT_INCOME) {
+<<<<<<< HEAD
                                 result = this.reconstructArray(response.bulanan)
+=======
+                                result = response.bulanan.reverse()
+>>>>>>> ae6ba13c1135be994c5d93f7349a0a4370b9e6fd
                             } else {
                                 result = response.lainnya.reverse()
                             }

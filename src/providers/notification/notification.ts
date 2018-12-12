@@ -32,7 +32,11 @@ export class NotificationProvider {
 
     getRapatNotification(data:any) {
         LogUtil.d(NotificationProvider.TAG, "get rapat notification")
+<<<<<<< HEAD
         return this.api.get("/personal/notification/persuratan" + this.getQueryString(data))
+=======
+        return this.api.get("/personal/notification/rapat" + this.getQueryString(data))
+>>>>>>> ae6ba13c1135be994c5d93f7349a0a4370b9e6fd
     }
 
     getPersonalNotification(data:any) {
@@ -85,6 +89,11 @@ export class NotificationProvider {
                         element.type = NotificationProvider.TYPE_PERSURATAN
                     } else if (item.type == 3) {
                         element.type = NotificationProvider.TYPE_APT
+<<<<<<< HEAD
+=======
+                    } else if (item.type == 4) {
+                        element.type = NotificationProvider.TYPE_RAPAT
+>>>>>>> ae6ba13c1135be994c5d93f7349a0a4370b9e6fd
                     } 
                 })
             }
