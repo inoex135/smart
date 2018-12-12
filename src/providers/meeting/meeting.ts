@@ -49,18 +49,17 @@ export class MeetingProvider {
     }
 
     public getDetailMeeting(id:any) {
-        //var resource = 
         return Observable.fromPromise(this.getDetailCache(id))
         .mergeMap(([data, profile, key]) => {
             LogUtil.d(MeetingProvider.TAG, profile)
             if (data == null) {
-                return this.executeDetailRequest(id, profile)
+                return this.executeDetailRequest(id, profile, key)
             }
             return of(data.response)
         })
     }
 
-    private executeDetailRequest(id, profile) {
+    private executeDetailRequest(id, profile, key) {
         return this.api.get(`/rapat/${id}`)
         .map(result => {
             var arr = []
@@ -97,10 +96,18 @@ export class MeetingProvider {
                     })
                 }
             })
-          //  if (arr.length) {
-            //    this.cache.put(key, {when: Date.now() + CacheProvider.FIVE_MINUTES, response: arr})
-           // }
+            if (arr.length) {
+                this.cache.put(key, {when: Date.now() + CacheProvider.FIVE_MINUTES, response: arr})
+            }
             return arr
+        })
+    }
+
+    public removeCache(id) {
+        return this.token.getCurrentProfile()
+        .then(profile => {
+            let key = MeetingProvider.CACHE_KEY + profile.nip + '_' + id
+            return this.cache.remove(key)
         })
     }
 
@@ -127,7 +134,7 @@ export class MeetingProvider {
     public confirm(model:any) {
         var data = {}
         data['konfirmasi_hadir'] = model.confirm_to_attend
-        return this.api.post(`/agenda-waktu/${model.time_id}/konfirmasi`, model)
+        return this.api.post(`/agenda-waktu/${model.time_id}/konfirmasi`, data)
     }
 
 }

@@ -150,10 +150,12 @@ export class MeetingDetailAgendaPage {
             var postModel = {}
             postModel['confirm_to_attend'] = this.getModel().confirm_to_attend
             postModel['time_id'] = this.getModel().time_id
-            this.api.confirm(postModel).subscribe(res => {
+            this.api.confirm(postModel)
+            .subscribe(res => {
                 this.loader.dismissLoader()
                 if (res) {
                     this.toast.present('Berhasil melakukan konfirmasi kehadiran.')
+                    this.api.removeCache(this.getModel().id)
                 } else {
                     this.toast.present('Gagal melakukan confirmasi!')
                 }
