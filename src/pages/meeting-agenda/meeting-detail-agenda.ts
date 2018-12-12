@@ -17,6 +17,8 @@ export class MeetingDetailAgendaPage {
 
     static TAG:string = 'MeetingDetailAgendaPage'
     static KEY_MODEL:string = 'model'
+    static KEY_AGENDA_ID:string = 'agenda_id'
+    static KEY_TIME_ID:string = 'time_id'
 
     private model:any = {
         confirm_to_attend: false,

@@ -8,6 +8,7 @@ import { AptDetailPage } from "../apt-detail/apt-detail";
 import { NaskahMasukDetailPage } from "../naskah-masuk-detail/naskah-masuk-detail";
 import { MeetingDetailPage } from "../meeting-detail/meeting-detail";
 import { PersonalAgendaDetailPage } from "../personal-agenda-detail/personal-agenda-detail";
+import { MeetingDetailAgendaPage } from "../meeting-agenda/meeting-detail-agenda";
 
 @Component({
   selector: "notification-page",
@@ -239,7 +240,8 @@ export class NotificationPage {
         this.navCtrl.push(NaskahMasukDetailPage.TAG, { naskahId: model.id })
         break
       case NotificationProvider.TYPE_RAPAT:
-        data[MeetingDetailPage.KEY_DETAIL_ID] = model.id
+        data[MeetingDetailAgendaPage.KEY_AGENDA_ID] = model.id
+        data[MeetingDetailAgendaPage.KEY_TIME_ID] = model.model_id
         this.navCtrl.push(MeetingDetailPage.TAG, data)
         break
       case NotificationProvider.TYPE_PERSONAL:
