@@ -92,6 +92,7 @@ export class MeetingDelegationPage {
                     this.loader.dismissLoader()
                     if (res) {
                         this.toast.present('Berhasil melakukan delegasi.')
+                        this.api.removeCache(this.model.id)
                         this.navCtrl.pop()
                     } else {
                         this.toast.present('Terjadi kegagalan!')

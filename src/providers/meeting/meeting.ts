@@ -107,7 +107,9 @@ export class MeetingProvider {
         return this.token.getCurrentProfile()
         .then(profile => {
             let key = MeetingProvider.CACHE_KEY + profile.nip + '_' + id
-            return this.cache.remove(key)
+            return this.cache.remove(key).then(() => {
+                LogUtil.d(MeetingProvider.TAG, 'removed cache: ' + key)
+            })
         })
     }
 
