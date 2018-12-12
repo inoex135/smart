@@ -61,7 +61,7 @@ export class PaymentProvider {
                         .map(response => {
                             var result = []
                             if (provider === PaymentProvider.KEY_PAYMENT_INCOME) {
-                                result = this.reconstructArray(response.bulanan)
+                                result = response.bulanan.reverse()
                             } else {
                                 result = response.lainnya.reverse()
                             }
