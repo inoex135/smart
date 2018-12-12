@@ -4,7 +4,6 @@ import { MeetingDetailAgendaPage } from "../meeting-agenda/meeting-detail-agenda
 import { MeetingProvider } from "../../providers/meeting/meeting";
 import { LogUtil } from "../../utils/logutil";
 import { LoaderHelper } from "../../helpers/loader-helper";
-import { NotificationProvider } from "../../providers/notification/notification";
 
 @Component({
     selector: "meeting-detail",
@@ -32,8 +31,7 @@ export class MeetingDetailPage {
     constructor(private navCtrl: NavController, 
         private api: MeetingProvider,
         private navParams: NavParams,
-        private loader: LoaderHelper,
-        private notification: NotificationProvider
+        private loader: LoaderHelper
     ) {
         this.model.detailId = this.navParams.get(MeetingDetailPage.KEY_DETAIL_ID)
     }
@@ -51,7 +49,6 @@ export class MeetingDetailPage {
                     if (res) {
                         this.items = res
                     }
-                    this.readNotification()
                     this.loader.dismissLoader()
                 },
                 err => {
@@ -59,11 +56,6 @@ export class MeetingDetailPage {
                 }
             )
         })
-    }
-
-    private async readNotification() {
-        this.notification.readMeeting(this.model.detailId)
-        .subscribe(res => {}, error => {})
     }
 
     private doInfinite(infiniteScroll) {
@@ -104,7 +96,8 @@ export class MeetingDetailPage {
 
     private detail(model): void {
         var data = {}
-        data[MeetingDetailAgendaPage.KEY_MODEL] = model
+        data[MeetingDetailAgendaPage.KEY_AGENDA_ID] = model.agenda_id
+        data[MeetingDetailAgendaPage.KEY_TIME_ID] = model.time_id
         this.navCtrl.push(MeetingDetailAgendaPage.TAG, data)
     }
 

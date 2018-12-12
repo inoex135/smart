@@ -29,7 +29,12 @@
     <ion-item class="notification-item" *ngFor="let notif of getNotifications()" (click)="onItemClick(notif)">
       <h6 ion-text>{{notif?.nama}}</h6>
       <text-avatar [text]="notif?.nama" item-left></text-avatar>
-      <p ion-text text-wrap>{{notif?.pesan}}</p>
+      
+      <p *ngIf="notif?.pesan" ion-text text-wrap>{{notif?.pesan}}</p>
+      <p *ngIf="notif?.nama_rapat && notif?.nama_agenda">{{notif?.nama_rapat}} - {{notif?.nama_agenda}}</p>
+      <p *ngIf="notif?.waktu_mulai && notif?.waktu_akhir">{{notif?.waktu_mulai}} - {{notif?.waktu_akhir}}</p>
+      <p *ngIf="notif?.gedung && notif?.tempat">{{notif?.gedung}} - {{notif?.tempat}}</p>
+
       <p ion-text text-wrap *ngIf="notif?.perihal">{{notif?.perihal}}</p>
       <p ion-text color="blue-template" text-wrap>{{ notif?.tanggal | indonesianDate:'dddd, DD MMMM YYYY' }}</p>
       <p ion-text text-wrap>{{(notif?.is_read) ? 'Sudah dibaca' : 'Belum dibaca'}}</p>

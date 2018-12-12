@@ -32,7 +32,7 @@ export class NotificationProvider {
 
     getRapatNotification(data:any) {
         LogUtil.d(NotificationProvider.TAG, "get rapat notification")
-        return this.api.get("/personal/notification/persuratan" + this.getQueryString(data))
+        return this.api.get("/personal/notification/rapat" + this.getQueryString(data))
     }
 
     getPersonalNotification(data:any) {

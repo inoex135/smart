@@ -6,12 +6,14 @@ import { LogUtil } from "../../utils/logutil";
 import { LoaderHelper } from "../../helpers/loader-helper";
 import { ToastHelper } from "../../helpers/toast-helper";
 import { FileHelper } from "../../helpers/file-helper";
+import { zip } from "rxjs/observable/zip";
+import { NotificationProvider } from "../../providers/notification/notification";
 
 
 @Component({
     selector: "meeting-detail-agenda",
     templateUrl: "meeting-detail-agenda.html"
-  })
+})
 @IonicPage()
 export class MeetingDetailAgendaPage {
 
@@ -21,7 +23,9 @@ export class MeetingDetailAgendaPage {
     static KEY_TIME_ID:string = 'time_id'
 
     private model:any = {
-        confirm_to_attend: false,
+        time_id: 0,
+        agenda_id: 0,
+        confirm_to_attend: false
     }
 
     private files:Array<any> = []
@@ -32,9 +36,11 @@ export class MeetingDetailAgendaPage {
         private loader: LoaderHelper, 
         private toast: ToastHelper,
         private sheet: ActionSheetController,
-        private fileHelper: FileHelper
+        private fileHelper: FileHelper,
+        private notification: NotificationProvider
     ) {
-        this.model = this.navParams.get(MeetingDetailAgendaPage.KEY_MODEL)
+        this.model.agenda_id = this.navParams.get(MeetingDetailAgendaPage.KEY_AGENDA_ID)
+        this.model.time_id = this.navParams.get(MeetingDetailAgendaPage.KEY_TIME_ID)
     }
 
     ionViewWillEnter() {
@@ -42,17 +48,28 @@ export class MeetingDetailAgendaPage {
     }
 
     private fillList(): void {
-        this.api.getFiles(this.model.time_id)
-        .subscribe(
-            res => {
-                if (res && res.content) {
-                    this.files = res.content
+        this.loader.show()
+        .then(() => {
+            zip(this.api.getFiles(this.getModel().time_id), this.api.getDetailAgenda(this.getModel()))
+            .subscribe(([files, time]) => {
+                if (time) {
+                    this.model = time
                 }
-            }, 
-            err => {
+                if (files && files.content.length) {
+                    this.files = files.content
+                }
+                this.loader.dismissLoader()
+                this.readNotification()
+            }, err => {
+                this.toast.present('Oops.. terjadi kesalahan!')
+                this.loader.dismissLoader()
+            })
+        })
+    }
 
-            }
-        )
+    private async readNotification() {
+        this.notification.readMeeting(this.getModel().agenda_id)
+        .subscribe(res => {}, error => {})
     }
 
     private getModel(): any {
@@ -117,7 +134,7 @@ export class MeetingDetailAgendaPage {
     private fileOptions(index: number): void {
         let file = this.getFileByIndex(index)
         var payload = {}
-        payload['time_id'] = this.model.time_id
+        payload['time_id'] = this.getModel().time_id
         payload['file_id'] = file.id
         LogUtil.d(MeetingDetailAgendaPage.TAG, payload)
         let actionSheet = this.sheet.create({
@@ -146,7 +163,7 @@ export class MeetingDetailAgendaPage {
     }
 
     private confirm(): void {
-        LogUtil.d(MeetingDetailAgendaPage.TAG, this.model)
+        LogUtil.d(MeetingDetailAgendaPage.TAG, this.getModel())
         this.loader.show()
         .then(() => {
             var postModel = {}
@@ -157,7 +174,7 @@ export class MeetingDetailAgendaPage {
                 this.loader.dismissLoader()
                 if (res) {
                     this.toast.present('Berhasil melakukan konfirmasi kehadiran.')
-                    this.api.removeCache(this.getModel().id)
+                    this.api.removeCache(this.getModel().agenda_id)
                 } else {
                     this.toast.present('Gagal melakukan confirmasi!')
                 }
