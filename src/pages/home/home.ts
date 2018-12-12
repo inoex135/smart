@@ -1,19 +1,23 @@
 import { Component, ViewChild, ElementRef } from "@angular/core";
-import { NavController, Platform, IonicPage, Select } from "ionic-angular";
+import { NavController, Platform, IonicPage, Select, Slides } from "ionic-angular";
 import { UserProvider } from "../../providers/user/user";
 
 import { MenuHomeConstant } from "../../constant/menu-home";
 import { HomeProvider } from "../../providers/home/home";
-import { Observable } from "rxjs/Observable";
 
-import "rxjs/add/observable/zip";
 import { LoaderHelper } from "../../helpers/loader-helper";
 import { FCM } from "@ionic-native/fcm";
 import { TokenProvider } from "../../providers/token/token";
-import { ToastHelper } from "../../helpers/toast-helper";
-import { Storage } from "@ionic/storage";
 import { LogUtil } from "../../utils/logutil";
 import { NotificationBell } from "../../components/notification-bell/notification-bell";
+import { NotificationProvider } from "../../providers/notification/notification";
+import { ERROR_CODES } from "../../constant/error-codes";
+import { PaymentHistoryPage } from "../payment-history/payment-history";
+import { SuratPage } from "../surat/surat";
+import { AptPage } from "../apt/apt";
+import { PersonalPage } from "../personal/personal";
+import { MeetingListPage } from "../meeting-list/meeting-list";
+
 @IonicPage()
 @Component({
   selector: "page-home",
@@ -26,23 +30,53 @@ export class HomePage {
   @ViewChild("profileImage") image: ElementRef
   @ViewChild("selectUser") select: Select
   @ViewChild("bell") bell: NotificationBell
+  @ViewChild(Slides) slides: Slides;
 
   menus: Array<any> = []
-  backgroundImage: string = "assets/images/bg_login.png"
   notifications: Array<any> = []
   profile: any = {}
+  loggedInProfile: any = {}
+  substitutes:any = []
   showAvatar: boolean = true
   profileName: string = ""
+  currentProfile:any = {
+    name: '',
+    nip: ''
+  }
 
   dashboard:any = {
-    "CT": 0,
-    "jam_masuk_hari_ini": "-",
-    "DL": 0,
-    "hari_kerja": 0,
-    "akumulasi_absen": "-",
-    "jumlah_hari_masuk": 0,
-    "jam_keluar_hari_ini": null
-}
+    CT: 0,
+    jam_masuk_hari_ini: "-",
+    DL: 0,
+    hari_kerja: 0,
+    akumulasi_absen: "-",
+    jumlah_hari_masuk: 0,
+    jam_keluar_hari_ini: null,
+    pengumuman: []
+  }
+
+  buttons:Array<any> = [
+    {
+      title: 'Persuratan',
+      page: SuratPage.TAG,
+      icon: 'm-persuratan.svg'
+    },
+    {
+      title: 'APT',
+      page: AptPage.TAG,
+      icon: 'm-apt.svg'
+    },
+    {
+      title: 'Personal',
+      page: PersonalPage.TAG,
+      icon: 'm-personal.svg'
+    },
+    {
+      title: 'E-Rapat',
+      page: MeetingListPage.TAG,
+      icon: 'm-erapat.svg'
+    }
+  ]
 
   constructor(
     public navCtrl: NavController,
@@ -51,9 +85,7 @@ export class HomePage {
     private homeProvider: HomeProvider,
     private loaderHelper: LoaderHelper,
     private token: TokenProvider,
-    private toast: ToastHelper,
-    private platform: Platform,
-    private storage: Storage
+    private platform: Platform
   ) {}
 
   ionViewWillEnter() {
@@ -81,9 +113,9 @@ export class HomePage {
     if (title === "APT") return res.notification_apt;
   }
 
-  pagesTo(component: string) {
+  pagesTo(component:any) {
     if (component !== '') {
-      this.navCtrl.push(component);
+      this.navCtrl.push(component.page);
     }
   }
 
@@ -103,10 +135,6 @@ export class HomePage {
     );
   }
 
-  private assets(name: string) {
-    return `assets/icon/${name}.png`;
-  }
-
   fcmGetToken() {
     this.fcm.getToken().then(
       token => {
@@ -122,22 +150,63 @@ export class HomePage {
     );
   }
 
-  async initData() {
-    const profile = await this.token.getProfile()
-    this.homeProvider.getDashboard().subscribe(
+  async initData(force:boolean = false) {
+    // get profile dari localStorage jika sudah ada
+    this.userProvider.getProfile(force)
+    .then(profile => {
+      LogUtil.d(this.TAG, "return")
+      LogUtil.d(this.TAG, profile)
+      if (this.profile) {
+        this.currentProfile.name = profile.nama
+        this.currentProfile.nip = profile.nip
+      }
+      return Promise.resolve(profile)
+    })
+    .then(profile => {
+      return Promise.all([this.token.getLoggedInUser(), profile])
+    })
+    .then(([data, profile]) => {
+      if (data && data.user && profile && data.user.name == profile.nip) {
+        this.loggedInProfile = profile
+        if (profile.user_pengganti) {
+          this.substitutes = []
+          profile.user_pengganti.forEach(element => {
+            this.substitutes.push(element)
+          })
+        }
+      }
+    })
+    .then(() => {
+      return this.getProfilePicture()
+    })
+    .then(() => {
+      return this.getDashboard()
+    })
+    .catch(error => {
+      LogUtil.d(this.TAG, "i catch error here on profile")
+      LogUtil.e(this.TAG, error)
+      this.redirectToLogIn(error)
+    })
+  }
+
+  private getDashboard() {
+    this.homeProvider.getDashboard().then(
       res => {
         if (res) {
           LogUtil.d(this.TAG, res)
-          this.dashboard = res
+          this.dashboard = res.response
         } 
-      },
-      error => {
+      })
+      .catch(error => {
         LogUtil.d(this.TAG, "error accessing API dashboard")
         LogUtil.d(this.TAG, error)
       }
     )
-    
-    this.homeProvider.getPhotoProfile().subscribe(
+  }
+
+  private getProfilePicture() {
+    this.homeProvider.getPhotoProfile()
+    .then(
       res => {
         if (res != null) {
           this.image.nativeElement.src = URL.createObjectURL(res)
@@ -145,27 +214,10 @@ export class HomePage {
         } else {
           this.showAvatar = true
         }
-      },
-      err => {
-        this.showAvatar = true
       }
-    );
-
-    // get profile dari localStorage jika sudah ada
-    if (profile) {
-      this.profile = profile;
-      this.profileName = profile.nip;
-    } else {
-      const getProfile = this.userProvider.getProfile();
-
-      Observable.zip(getProfile).subscribe(
-        ([profile]) => {
-          this.profile = profile;
-          this.profileName = profile.nip;
-        },
-        err => false
-      );
-    }
+    ).catch(error => {
+      this.showAvatar = true
+    })
   }
 
   triggerOpenSelect() {
@@ -191,25 +243,51 @@ export class HomePage {
   //  by pass plt/plh
   byPass(nip: string) {
     //cek apakah nip yg di select, sama dengan currentUser
-    if (nip == this.profile.nip) {
+    if (nip == this.loggedInProfile.nip) {
       //jika ada, ubah token kembali dengan user asli/bukan plt -plh nya
-      this.storage.get("token").then(res => {
-        this.token.latestToken = res;
-        this.initData();
-      }, err => true);
+      this.token.setCurrentUserDataFirst()
+      .then(() => {
+        this.initData()
+      }).catch(error => {
+        this.redirectToLogIn(error)
+      })
     } else {
       this.loaderHelper.createLoader();
-      this.userProvider.byPass(nip).subscribe(
+      this.userProvider.byPass(nip)
+      .subscribe(
         res => {
-          this.token.saveTokenPltPlh(res);
-          this.initData();
-          this.loaderHelper.dismiss();
+          LogUtil.d(this.TAG, res)
+          if (res) {
+            this.initData(true)
+            this.bell.updateNotification()
+          }
+          this.loaderHelper.dismiss()
         },
         err => {
-          this.loaderHelper.dismiss();
-          this.toast.present(err.error_message);
+          this.loaderHelper.dismiss()
         }
       );
     }
   }
+
+  getNotificationType():string {
+    return NotificationProvider.TYPE_ALL
+  }
+
+  getSubstituteUsers() {
+    return this.substitutes
+  }
+
+  private redirectToLogIn(error):void {
+    LogUtil.e(this.TAG, error)
+    if (error.message.includes(ERROR_CODES.MISSING_TOKEN)) {
+      this.userProvider.purgeAuth();
+      this.navCtrl.setRoot("LoginPage");
+    }
+  }
+
+  historyPage() {
+    this.navCtrl.push(PaymentHistoryPage.TAG)
+  }
+
 }

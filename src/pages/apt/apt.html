@@ -1,66 +1,73 @@
 <ion-header>
-  <ion-navbar >
-    <ion-title>APT</ion-title>
+  <ion-navbar class="custom-action-bar" hideBackButton="true">
+    <ion-buttons start left>
+        <button class="custom-back-button" ion-button icon-only (click)="backButtonClick()">
+          <ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon>
+        </button>
+    </ion-buttons>
+    <ion-title *ngIf="!isSearchOpened">APT</ion-title>
+    <ion-searchbar *ngIf="isSearchOpened" [(ngModel)]="keyword" 
+    search-bar-bcg (ionInput)="search($event?.target?.value, jenisPelayanan)" 
+    (ionCancel)="search($event?.target?.value)" 
+    showCancelBotton="true"></ion-searchbar>
+    <ion-buttons end>
+      <button *ngIf="!isSearchOpened" ion-button icon-only (click)="isSearchOpened=true">
+        <img src="assets/svg/Search.svg" />
+      </button>
+      <button ion-button icon-only (click)="triggerOpenSelect()">
+        <img src="assets/svg/Filter.svg" />
+      </button>
+      <notification-bell [notificationType]="getNotificationType()"></notification-bell>
+    </ion-buttons>
   </ion-navbar>
-
 </ion-header>
 
-<ion-content padding>
-  <ion-list no-lines padding class="apt-head-panel">
-    <ion-header>
-      <pemberitahuan [redirectComponent]="redirectComponent" class="apt-notif"></pemberitahuan>
-      <ion-item class="input--form">
-        <ion-select (ionChange)="search(keyword, jenisPelayanan)" [(ngModel)]="jenisPelayanan" placeholder="Filter berdasarkan Jenis Pelayanan">
-          <ion-option [value]="pelayanan?.id" *ngFor="let pelayanan of pelayanans">
-            {{pelayanan?.nama}}
-          </ion-option>
-        </ion-select>
-      </ion-item>
-      <ion-searchbar [(ngModel)]="keyword" search-bar-bcg (ionInput)="search( $event?.target?.value, jenisPelayanan)" (ionCancel)="search( $event?.target?.value)"
-        class="apt-search"></ion-searchbar>
-    </ion-header>
-  </ion-list>
+<ion-content>
 
-  <ion-list class="list--apt" *ngIf="items?.length > 0">
-    <ion-card (press)="isItemPressed(item?.id)" item no-margin padding *ngFor="let item of items;let i = index">
+  <ion-item class="input--form" hidden>
+    <ion-select #selectService (ionChange)="search(keyword, jenisPelayanan)" [(ngModel)]="jenisPelayanan" placeholder="Filter berdasarkan Jenis Pelayanan">
+      <ion-option [value]="pelayanan?.id" *ngFor="let pelayanan of pelayanans">
+        {{pelayanan?.nama}}
+      </ion-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-list class="list-custom" *ngIf="items?.length > 0">
+    <ion-card (press)="isItemPressed(item?.id)" item *ngFor="let item of items;let i = index">
       <ion-row>
+        <ion-col col-12 class="col-header {{ getStatusColor(item?.status_norma) }}">
+          <p ion-text>Tanggal : {{item?.tanggal_string}}</p>
+        </ion-col>
         <ion-col col-1 margin-right *ngIf="isPress" class="checkbox-input">
           <ion-checkbox *ngIf="item?.statusString == 'Belum diverifikasi'" color="green-light" (ionChange)="selectedApt(item?.id, $event)"></ion-checkbox>
         </ion-col>
-        <ion-col (tap)="detailApt(item)">
+        <ion-col (tap)="detailApt(item)" class="detail-col">
           <ion-row>
-            <ion-col col-6>
-              <b ion-text>Tanggal</b>
-              <p ion-text>{{item?.tanggalString}}</p>
-            </ion-col>
             <ion-col col-12>
-              <b ion-text>Pelayanan</b>
+              <p ion-text>Pelayanan</p>
               <p ion-text item-start text-wrap text-left>
                 {{item?.pelayanan?.nama}}
               </p>
             </ion-col>
             <ion-col col-12>
-              <b ion-text>Sub Pelayanan</b>
+              <p ion-text>Sub Pelayanan</p>
               <p ion-text> {{item?.pelayananSub?.nama}}</p>
             </ion-col>
-
             <ion-col col-6>
-              <b ion-text>Nama Pemohon</b>
-              <p ion-text text-wrap>{{item?.namaPemohon}}</p>
+              <p ion-text>Nama Pemohon</p>
+              <p ion-text text-wrap>{{item?.nama_pemohon}}</p>
             </ion-col>
             <ion-col col-6>
-              <b ion-text text-right>Nomor Tiket</b>
-              <p ion-text>{{item?.nomorTiket}}</p>
+              <p ion-text>Nomor Tiket</p>
+              <p ion-text>{{item?.nomor_tiket}}</p>
             </ion-col>
-
             <ion-col col-6>
-              <b ion-text>Nomor Naskah</b>
-              <p ion-text>{{item?.nomorSurat}}</p>
+              <p ion-text>Nomor Naskah</p>
+              <p ion-text>{{item?.nomor_surat}}</p>
             </ion-col>
-
             <ion-col col-6>
-              <b ion-text>Norma Waktu</b>
-              <p ion-text>{{item?.normaWaktu}} Hari</p>
+              <p ion-text>Norma Waktu</p>
+              <p ion-text>{{item?.norma_waktu}} Hari</p>
             </ion-col>
           </ion-row>
         </ion-col>
@@ -78,6 +85,7 @@
   </ion-infinite-scroll>
 
   <empty-state *ngIf="items?.length == 0"></empty-state>
+  <div *ngIf="items?.length > 0" class="tab-spacer"></div>
 </ion-content>
 
 <ion-footer *ngIf="isPress || showAgendaButton">
@@ -90,6 +98,15 @@
     </ion-col>
   </ion-row>
 </ion-footer>
+
+<ion-grid class="grid tab-grid">
+  <ion-row class="row">
+    <ion-col *ngFor="let tab of tabs; let i = index" (click)="onTabClick(i)" class="col {{ (tab.isActive) ? 'active' : '' }}">
+      <ion-icon class="icon {{ tab.icon }}" ></ion-icon>
+      <p>{{ tab.name }}</p>
+    </ion-col>
+  </ion-row>
+</ion-grid>
 
 <!-- <ion-footer *ngIf="!isPress" class="filter-apt">
   <ion-row>

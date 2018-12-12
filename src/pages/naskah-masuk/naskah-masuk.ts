@@ -65,6 +65,11 @@ export class NaskahMasukPage {
     this.getNaskahMasuk();
   }
 
+  ionViewWillLeave() {
+    LogUtil.d(this.TAG, "view did disappear")
+    this.loaderHelper.notPresents()
+  }
+
   detailNaskah(naskah: any) {
     this.navCtrl.push(NaskahMasukDetailPage.TAG, { naskahId: naskah.id });
   }
@@ -107,17 +112,17 @@ export class NaskahMasukPage {
 
   async getNaskahMasuk() {
     // create loader
-    await this.loaderHelper.createLoader();
-
+    this.loaderHelper.show()
+    .then(isPresent => {
+      return this.naskahProvider.getNaskahMasuk().subscribe(
+        res => {
+          this.listNaskah = res.response
+          this.loaderHelper.dismissLoader()
+        },
+        err => this.loaderHelper.dismissLoader()
+      )
+    })
     // show naskah from API
-    this.naskahProvider.getNaskahMasuk().subscribe(
-      res => {
-        this.listNaskah = res.response;
-
-        this.loaderHelper.dismiss();
-      },
-      err => this.loaderHelper.dismiss()
-    );
   }
 
   doInfinite(infiniteScroll) {
@@ -132,7 +137,7 @@ export class NaskahMasukPage {
         }
       });
       infiniteScroll.complete();
-    }, 1000);
+    }, 500);
   }
 
   // event press and hold for bulk terima naskah
@@ -193,13 +198,13 @@ export class NaskahMasukPage {
   }
 
   doRefresh(refresher) {
-    this.naskahProvider.getNaskahMasuk().subscribe(
+    this.naskahProvider.getNaskahMasuk()
+    .subscribe(
       res => {
         this.listNaskah = res.response
         refresher.complete()
       },
       err => { 
-        this.loaderHelper.dismiss()
         refresher.complete();
        }
     );

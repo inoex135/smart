@@ -28,6 +28,7 @@ import { PipesModule } from "../pipes/pipes.module";
 import { AutoCompleteModule } from "ionic2-auto-complete";
 import { MasterPegawaiProvider } from "../providers/master-pegawai/master-pegawai";
 import { NotificationBell } from "./notification-bell/notification-bell";
+import { NotificationProvider } from "../providers/notification/notification";
 
 @NgModule({
   declarations: [
@@ -78,6 +79,6 @@ import { NotificationBell } from "./notification-bell/notification-bell";
     NotificationBell
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [MasterPegawaiProvider]
+  providers: [MasterPegawaiProvider, NotificationProvider]
 })
 export class ComponentsModule {}

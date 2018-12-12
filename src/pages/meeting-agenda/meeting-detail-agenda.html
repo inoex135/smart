@@ -1,0 +1,89 @@
+<ion-header>
+    <ion-navbar class="custom-action-bar">
+<<<<<<< HEAD
+        <ion-title >Detail E-Rapat</ion-title>
+=======
+        <ion-title >Detail Agenda E-Rapat</ion-title>
+>>>>>>> ae6ba13c1135be994c5d93f7349a0a4370b9e6fd
+        <ion-buttons end>
+            <button ion-button (click)="delegation()">
+              Delegasi
+            </button>
+          </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <div class="detail-content">
+        <ion-grid>
+          <ion-row>
+            <ion-col class="content-left">
+              Agenda
+            </ion-col>
+            <ion-col class="content-right">
+              {{getModel()?.agenda_name}}
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col class="content-left">
+              Tanggal
+            </ion-col>
+            <ion-col class="content-right">
+              {{getModel()?.date | indonesianDate:'DD MMMM YYYY'}}
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col class="content-left">
+              Waktu
+            </ion-col>
+            <ion-col class="content-right">
+              {{getModel()?.start_time}} - {{getModel()?.finish_time}}
+            </ion-col>
+          </ion-row>
+          <ion-row *ngIf="getModel()?.place?.building">
+            <ion-col class="content-left">
+              Gedung
+            </ion-col>
+            <ion-col class="content-right">
+              {{getModel()?.place?.building}} 
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col class="content-left">
+              Tempat
+            </ion-col>
+            <ion-col class="content-right">
+              {{getModel()?.place?.room}} 
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col class="content-left">
+              Jumlah Peserta
+            </ion-col>
+            <ion-col class="content-right">
+              {{getModel()?.total_participant}} 
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col style="margin-top: 8px" class="content-left">
+              Akan Menghadiri
+            </ion-col>
+            <ion-col>
+                <ion-toggle [(ngModel)]="getModel().confirm_to_attend" (ionChange)="confirm()"></ion-toggle>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+
+    <div class="new-form">
+        <h2 style="margin-left: 16px">Files</h2>
+        <ion-item no-lines class="as-list bordered-ion-item" *ngFor="let file of getFiles(); let i = index;">
+            <h2 text-wrap>{{file?.filename}}</h2>
+            <button clear (click)="fileOptions(i)" ion-button color="light" item-end>
+                <ion-icon name="more"></ion-icon>
+            </button>
+        </ion-item>
+    </div>
+</ion-content>
+ 

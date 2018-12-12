@@ -1,10 +1,11 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar class="custom-action-bar">
     <ion-title>Personal</ion-title>
+    <ion-buttons end>
+        <notification-bell #bell [notificationType]="getNotificationType()"></notification-bell>
+    </ion-buttons>
   </ion-navbar>
-
 </ion-header>
-
 
 <ion-content>
   <ion-card>

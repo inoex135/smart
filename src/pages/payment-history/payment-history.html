@@ -1,0 +1,70 @@
+<ion-header>
+    <ion-navbar class="custom-action-bar">
+        <ion-title>{{title}}</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <div *ngIf="isIncomeExist()">
+        <ion-item *ngFor="let model of getItems()" (click)="detail(model)">
+            <h6 ion-text>{{model?.monthName}} {{model.tahun}}</h6>
+<<<<<<< HEAD
+            <p ion-text text-wrap>{{model?.total | currency:'Rp':true:'1.2-2'}}</p>
+=======
+            <p ion-text text-wrap>{{model?.total}}</p>
+>>>>>>> ae6ba13c1135be994c5d93f7349a0a4370b9e6fd
+        </ion-item>
+    </div>
+    <div *ngIf="isNonIncomeExist()">
+        <ion-list>
+            <ion-card item *ngFor="let model of getItems()">
+                <ion-row>
+                    <ion-col class="detail-col">
+                        <ion-row>
+                            <ion-col col-12 class="with-label">
+                                <p ion-text right>{{ model?.tgl | indonesianDate:'dddd, DD MMMM YYYY' }}</p>
+                            </ion-col>
+                            <ion-col col-12 class="description">
+                                <p ion-text text-wrap>{{model?.uraian}}</p>
+                            </ion-col>
+                            <ion-col class="with-label" col-12>
+                                <p ion-text>Jumlah Bruto</p>
+<<<<<<< HEAD
+                                <p ion-text>{{model?.bruto | currency:'Rp':true:'1.2-2'}}</p>
+                            </ion-col>
+                            <ion-col class="with-label" col-6>
+                                <p ion-text>Jumlah Potongan</p>
+                                <p ion-text>{{model?.pot | currency:'Rp':true:'1.2-2'}}</p>
+                            </ion-col>
+                            <ion-col col-6 class="with-label right-content">
+                                <p ion-text right>Jumlah Netto</p>
+                                <p class="added-size" ion-text right>{{model?.netto | currency:'Rp':true:'1.2-2'}}</p>
+=======
+                                <p ion-text>{{model?.bruto}}</p>
+                            </ion-col>
+                            <ion-col class="with-label" col-6>
+                                <p ion-text>Jumlah Potongan</p>
+                                <p ion-text>{{model?.pot}}</p>
+                            </ion-col>
+                            <ion-col col-6 class="with-label right-content">
+                                <p ion-text right>Jumlah Netto</p>
+                                <p class="added-size" ion-text right>{{model?.netto}}</p>
+>>>>>>> ae6ba13c1135be994c5d93f7349a0a4370b9e6fd
+                            </ion-col>
+                        </ion-row>
+                    </ion-col>
+                </ion-row>
+            </ion-card>
+        </ion-list>
+    </div>
+    <div *ngIf="getItems()?.length > 0" class="tab-spacer"></div>
+</ion-content>
+
+<ion-grid class="grid tab-grid">
+    <ion-row class="row">
+        <ion-col *ngFor="let tab of tabs; let i = index" (click)="onTabClick(i)" class="col {{ (tab.isActive) ? 'active' : '' }} added-height">
+            <p>{{ tab.name }}</p>
+        </ion-col>
+    </ion-row>
+</ion-grid>
+  

@@ -2,6 +2,7 @@ import { Component } from "@angular/core";
 import { NavController, IonicPage } from "ionic-angular";
 import { NaskahNotifikasiProvider } from "../../providers/naskah-notifikasi/naskah-notifikasi";
 import { LoaderHelper } from "../../helpers/loader-helper";
+import { NaskahMasukDetailPage } from "../naskah-masuk-detail/naskah-masuk-detail";
 
 @IonicPage()
 @Component({
@@ -52,6 +53,6 @@ export class NaskahNotifikasiPage {
   }
 
   detailNotifikasi(naskahId: number) {
-    this.navCtrl.push("NaskahMasukDetailPage", { naskahId: naskahId });
+    this.navCtrl.push(NaskahMasukDetailPage.TAG, { naskahId: naskahId });
   }
 }

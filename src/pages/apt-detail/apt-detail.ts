@@ -9,6 +9,8 @@ import { File } from "@ionic-native/file";
 import { APT_INDIKATOR } from "../../constant/apt-indikator";
 import { ToastHelper } from "../../helpers/toast-helper";
 import { UserProvider } from "../../providers/user/user";
+import { AptHistoryPage } from "../apt-history/apt-history";
+import { LogUtil } from "../../utils/logutil";
 
 @IonicPage()
 @Component({
@@ -16,13 +18,16 @@ import { UserProvider } from "../../providers/user/user";
   templateUrl: "apt-detail.html"
 })
 export class AptDetailPage {
+
+  static TAG:string = 'AptDetailPage'
+
   itemId: any;
   ACTION = AptAction;
   aptIndikator = APT_INDIKATOR;
   aptDetail: any = {};
   fileDirectory: any;
   profile: any;
-  aptVerifikasi: any;
+  aptVerifikasi: any = {};
   constructor(
     private navParams: NavParams,
     private navCtrl: NavController,
@@ -42,27 +47,35 @@ export class AptDetailPage {
     this.getProfile();
   }
 
+  ionViewWillLeave() {
+    LogUtil.d(AptDetailPage.TAG, "view did disappear")
+    this.loaderHelper.notPresents()
+  }
+
   getProfile() {
-    this.userProvider.getProfile().subscribe(res => {
+    this.userProvider.getProfile()
+    .then(res => {
       this.profile = res;
     });
   }
 
-  async getDetailApt() {
-    await this.loaderHelper.createLoader();
-
-    this.aptProvider.getDetailApt(this.itemId).subscribe(
+  private getDetailApt() {
+    this.loaderHelper.show()
+    .then(() => {
+    this.aptProvider.getDetailApt(this.itemId)
+    .subscribe(
       res => {
         const response = res.response;
         this.aptDetail = response.permohonan;
         this.aptVerifikasi = response.permohonanVerifikasi;
         this.readNotifikasi();
-        this.loaderHelper.dismiss();
+        this.loaderHelper.dismissLoader()
       },
       err => {
-        this.loaderHelper.errorHandleLoader(err, this.navCtrl);
+        this.loaderHelper.dismissLoader()
       }
-    );
+    )
+    })
   }
 
   detailAction(action: string, itemId: any) {
@@ -70,7 +83,7 @@ export class AptDetailPage {
   }
 
   //read notifikasi
-  readNotifikasi() {
+  async readNotifikasi() {
     this.aptProvider
       .readNotifikasi(this.itemId)
       .subscribe(res => true, err => true);
@@ -78,9 +91,9 @@ export class AptDetailPage {
 
   async downloadPermohonan(fileApt) {
     try {
-      const targetPath = `${this.fileDirectory}/${fileApt.nomorTiket}.pdf`;
+      const targetPath = `${this.fileDirectory}/${fileApt.nomor_tiket}.pdf`;
 
-      await this.loaderHelper.createLoader();
+      await this.loaderHelper.show()
 
       const checkPermission = await this.aptHelper.checkPermission();
 
@@ -92,13 +105,20 @@ export class AptDetailPage {
       this.aptProvider.download(fileApt.id, targetPath);
 
       this.toast.present("File telah di download");
-      this.loaderHelper.dismiss();
+      this.loaderHelper.dismissLoader()
 
       // open file after download
       // await this.aptHelper.openFile(targetPath);
     } catch (error) {
-      this.loaderHelper.dismiss();
+      this.loaderHelper.dismissLoader()
       this.toast.present(error);
     }
   }
+
+  openHistory() {
+    var data = {}
+    data[AptHistoryPage.KEY_DATA] = this.aptDetail
+    this.navCtrl.push(AptHistoryPage.TAG, data)
+  }
+
 }

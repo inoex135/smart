@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-navbar class="custom-action-bar">
+    <ion-title >Notifikasi</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <div *ngIf="showChips()" class="chip-container">
+    <div class="list-chip">
+      <div class="chip-notification" *ngFor="let chip of getChips()">
+        <ion-chip (click)="clickChip(chip?.key)" [color]="chip.active ? 'new-text-color-light' : 'default'">
+          <ion-label>{{ chip.name }} <ion-badge color="new-red">{{ chip.value }}</ion-badge></ion-label>
+          <div></div>
+        </ion-chip>
+      </div>
+    </div>
+  </div>
+
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <ion-list *ngIf="isNotificationExist()">
+    <ion-item class="notification-item" *ngFor="let notif of getNotifications()" (click)="onItemClick(notif)">
+      <h6 ion-text>{{notif?.nama}}</h6>
+      <text-avatar [text]="notif?.nama" item-left></text-avatar>
+<<<<<<< HEAD
+      <p ion-text text-wrap>{{notif?.pesan}}</p>
+=======
+      
+      <p *ngIf="notif?.pesan" ion-text text-wrap>{{notif?.pesan}}</p>
+      <p *ngIf="notif?.nama_rapat && notif?.nama_agenda">{{notif?.nama_rapat}} - {{notif?.nama_agenda}}</p>
+      <p *ngIf="notif?.waktu_mulai && notif?.waktu_akhir">{{notif?.waktu_mulai}} - {{notif?.waktu_akhir}}</p>
+      <p *ngIf="notif?.gedung && notif?.tempat">{{notif?.gedung}} - {{notif?.tempat}}</p>
+
+>>>>>>> ae6ba13c1135be994c5d93f7349a0a4370b9e6fd
+      <p ion-text text-wrap *ngIf="notif?.perihal">{{notif?.perihal}}</p>
+      <p ion-text color="blue-template" text-wrap>{{ notif?.tanggal | indonesianDate:'dddd, DD MMMM YYYY' }}</p>
+      <p ion-text text-wrap>{{(notif?.is_read) ? 'Sudah dibaca' : 'Belum dibaca'}}</p>
+    </ion-item>
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data..."></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </ion-list>
+
+  <empty-state *ngIf="!isNotificationExist()"></empty-state>
+
+</ion-content>

@@ -1,4 +1,4 @@
-import { Component, ViewChildren } from "@angular/core";
+import { Component, ViewChildren, ViewChild } from "@angular/core";
 import { NavController, NavParams, IonicPage } from "ionic-angular";
 
 import { LoaderHelper } from "../../helpers/loader-helper";
@@ -13,6 +13,8 @@ import { DatepickerProvider } from "../../providers/datepicker/datepicker";
 import { MomentHelper } from "../../helpers/moment-helper";
 import { TokenProvider } from "../../providers/token/token";
 import { LogUtil } from "../../utils/logutil";
+import { NotificationProvider } from "../../providers/notification/notification";
+import { NotificationBell } from "../../components/notification-bell/notification-bell";
 
 @IonicPage()
 @Component({
@@ -21,26 +23,27 @@ import { LogUtil } from "../../utils/logutil";
 })
 export class SuratPage {
 
-  TAG:string = 'SuratPage'
+  static TAG:string = 'SuratPage'
 
   filter: any = {
     startTime: "",
     endTime: ""
-  };
+  }
   PAGE: any = {
     NOTIFIKASI: "notifikasi",
     NASKAH: "naskah"
-  };
+  }
 
-  isSekretaris: boolean = false;
+  isSekretaris: boolean = false
 
-  totalPersuratan: any = "";
+  totalPersuratan: any = ""
 
-  redirectComponent: string = "NaskahNotifikasiPage";
+  redirectComponent: string = "NaskahNotifikasiPage"
 
-  @ViewChildren(Ng2Highcharts) allCharts;
+  @ViewChildren(Ng2Highcharts) allCharts
+  @ViewChild("bell") notificationBell:NotificationBell
 
-  chartData: any = "";
+  chartData: any = ""
 
   constructor(
     public navCtrl: NavController,
@@ -56,10 +59,13 @@ export class SuratPage {
   }
 
   ionViewWillEnter() {
-    LogUtil.d(this.TAG, "ionViewWillEnter")
-    this.setIntervalDate();
-    this.initData();
-    this.checkSekretaris();
+    LogUtil.d(SuratPage.TAG, "ionViewWillEnter")
+    this.setIntervalDate()
+    this.initData()
+    this.checkSekretaris()
+    if (this.notificationBell) {
+      this.notificationBell.updateNotification()
+    }
   }
 
   async checkSekretaris() {
@@ -70,25 +76,25 @@ export class SuratPage {
   // set first data when load page for total surat + filter sumas grafik
 
   // profile 1 adalah personal sedangkan 2 adalah sekretaris
-  initData(profile: number = 1) {
-    const params = this.grafikSuratProvider.paramsStartAndEnd();
-
-    this.loaderHelper.createLoader();
-
-    Observable.zip(
-      this.grafikSuratProvider.getFilterSumasData(params, profile),
-      this.suratProvider.getTotalPersuratan(profile)
-    ).subscribe(
-      ([chartData, totalSurat]) => {
-        this.chartData = this.grafikSuratProvider.chartData(chartData);
-        this.totalPersuratan = totalSurat;
-
-        this.loaderHelper.dismiss();
-      },
-      err => {
-        this.loaderHelper.errorHandleLoader(err, this.navCtrl);
-      }
-    );
+  async initData(profile: number = 1) {
+    this.loaderHelper.show()
+    .then(isPresent =>  {
+      const params = this.grafikSuratProvider.paramsStartAndEnd()
+      Observable.zip(
+        this.grafikSuratProvider.getFilterSumasData(params, profile),
+        this.suratProvider.getTotalPersuratan(profile)
+      ).subscribe(
+        ([chartData, totalSurat]) => {
+          this.chartData = this.grafikSuratProvider.chartData(chartData)
+          this.totalPersuratan = totalSurat
+  
+          this.loaderHelper.dismissLoader()
+        },
+        err => {
+          this.loaderHelper.dismissLoader()
+        }
+      )
+    })
   }
 
   // search sumas grafik by date
@@ -134,6 +140,8 @@ export class SuratPage {
   // when page leave, stop interval date
   ionViewWillLeave() {
     clearInterval(this.setIntervalDate());
+    LogUtil.d(SuratPage.TAG, "view did disappear")
+    this.loaderHelper.notPresents()
   }
 
   setIntervalDate(): number {
@@ -166,4 +174,9 @@ export class SuratPage {
   }
   // onchange pencarian surat
   searchSurat() {}
+
+  getNotificationType() {
+    return NotificationProvider.TYPE_PERSURATAN
+  }
+
 }

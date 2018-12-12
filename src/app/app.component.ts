@@ -6,6 +6,7 @@ import { SplashScreen } from "@ionic-native/splash-screen";
 import { UserProvider } from "../providers/user/user";
 import { TokenProvider } from "../providers/token/token";
 import { FCM } from "@ionic-native/fcm";
+import { LogUtil } from "../utils/logutil";
 
 @Component({
   templateUrl: "app.html"
@@ -39,20 +40,18 @@ export class MyApp {
       // set backButton hardware android
       this.registerBackButton();
 
-      // this.fcmTesting();
+      this.fcmTesting();
     });
   }
+
   fcmTesting() {
-    if (this.platform.is("android")) {
+    if (this.platform.is("android") || this.platform.is("ios")) {
       this.fcm.onNotification().subscribe(data => {
-        if (data.wasTapped) {
-          alert("Received in background");
-        } else {
-          alert("Received in foreground");
-        }
-      });
+        LogUtil.d('APP', data)
+      })
     }
   }
+
   registerBackButton(): void {
     document.addEventListener("backbutton", () => {
       let nav: NavController = this.nav;
@@ -65,13 +64,19 @@ export class MyApp {
   }
 
   initHomePage(): void {
-    this.token.getToken().then(token => {
+    LogUtil.d('App', 'set user data')
+    this.token.setCurrentUserDataFirst()
+    .then(token => {
       if (token) {
-        this.rootPage = "HomePage";
-        // this.userProvider.populate();
+        this.rootPage = "HomePage"
       } else {
-        this.rootPage = "LoginPage";
+        this.rootPage = "LoginPage"
       }
-    });
+    })
+    .catch(error => {
+      LogUtil.d('App', 'catch error here')
+      LogUtil.e('App', error)
+      this.rootPage = "LoginPage"
+    })
   }
 }

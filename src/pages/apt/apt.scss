@@ -22,13 +22,6 @@ page-apt {
     padding-left: 0;
   }
 
-  // list apt
-  .list--apt {
-    .card.card-md {
-      width: auto;
-    }
-  }
-
   // empty data
   .empty-stage {
     color: #d8d9da;
@@ -79,4 +72,35 @@ page-apt {
     background-color: white;
     margin-bottom: 40%;
   }
+
+  .col-header {
+    padding: 5px 15px 5px 15px;
+    
+    p {
+      margin: 0;
+    }
+
+  }
+
+  .white-background {
+    background-color: #ffffff;
+    color: color($colors, 'new-text-color-grey');
+  }
+
+  .new-red-background {
+    background-color: color($colors, 'new-red');
+  }
+
+  .new-orange-background {
+    background-color: color($colors, 'new-orange');
+  }
+
+  .new-green-background {
+    background-color: color($colors, 'new-green');
+  }
+
+  .new-red-background p, .new-orange-background p, .new-green-background p {
+    color: color($colors, 'light-white');
+  }
+
 }

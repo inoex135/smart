@@ -1,10 +1,11 @@
-import { Component } from "@angular/core";
+import { Component, ViewChild } from "@angular/core";
 import {
   NavController,
   NavParams,
   LoadingController,
   IonicPage,
-  App
+  App,
+  Select
 } from "ionic-angular";
 import { File } from "@ionic-native/file";
 import { AptProvider } from "../../providers/apt/apt";
@@ -12,6 +13,8 @@ import { LoaderHelper } from "../../helpers/loader-helper";
 import remove from "lodash/remove";
 import { debounceTime, finalize } from "rxjs/operators";
 import { ToastHelper } from "../../helpers/toast-helper";
+import { LogUtil } from "../../utils/logutil";
+import { NotificationProvider } from "../../providers/notification/notification";
 
 @IonicPage()
 @Component({
@@ -19,12 +22,17 @@ import { ToastHelper } from "../../helpers/toast-helper";
   templateUrl: "apt.html"
 })
 export class AptPage {
+
+  static TAG:string = 'AptPage'
+
   params: any = {};
   items: any = [];
   pelayanans: any = [];
   fileDirectory: any;
   loader: any;
   redirectComponent: string = "AptNotifikasiPage";
+
+  @ViewChild("selectService") select: Select
 
   isPress: boolean = false;
   keyword: string = "";
@@ -34,7 +42,33 @@ export class AptPage {
   listAptId: any[] = [];
   showAgendaButton: boolean = false;
 
-  page: number = 0;
+  isSearchOpened:boolean = false
+
+  tabs:any = [
+    {
+      name: 'Permohonan Masuk',
+      isActive: true,
+      icon: 'icon-md ion-md-filing',
+      provider: ''
+    },
+    {
+      name: 'Dekat Batas Waktu',
+      isActive: false,
+      icon: 'icon-md ion-md-alert',
+      provider: 'dekatBatasWaktu'
+    },
+    {
+      name: 'Lewat Batas Waktu',
+      isActive: false,
+      icon: 'icon-md ion-md-speedometer',
+      provider: 'lewatBatasWaktu'
+    }
+  ]
+
+  page: number = 0
+
+  type:string = ''
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -46,11 +80,6 @@ export class AptPage {
     private app: App
   ) {
     this.fileDirectory = file.externalRootDirectory + "Download";
-
-    this.loader = this.loadingCtrl.create({
-      content: "Wait download....",
-      spinner: "dots"
-    });
   }
 
   ionViewDidLoad() {
@@ -58,13 +87,17 @@ export class AptPage {
     this.mappingGetData();
   }
 
+  ionViewWillLeave() {
+    LogUtil.d(AptPage.TAG, "view did disappear")
+    this.loaderHelper.notPresents()
+  }
+  
   mappingGetData() {
-    const type = this.navParams.data;
-    if (type === "dekatBatasWaktu") {
+    if (this.type === "dekatBatasWaktu") {
       return this.getDekatBatasWaktu();
     }
 
-    if (type === "lewatBatasWaktu") {
+    if (this.type === "lewatBatasWaktu") {
       return this.getLewatiBatasWaktu();
     }
 
@@ -80,31 +113,30 @@ export class AptPage {
   }
 
   getPelayananList() {
-    this.aptProvider.getPelayananList().subscribe(
-      res => {
-        this.pelayanans = res.content;
-      },
-      err => {
-        this.loaderHelper.errorHandleLoader(err, this.navCtrl);
+    this.aptProvider.getPelayananList()
+    .then(result => {
+      LogUtil.d(AptPage.TAG, result)
+      if (result.response.content) {
+        this.pelayanans = result.response.content
       }
-    );
+    })
   }
 
   async getAptList() {
-    await this.loaderHelper.createLoader();
-
-    this.aptProvider.getPermohonanList().subscribe(
-      res => {
-        // @TODO : uncomment if data already
-        this.items = res;
-
-        this.loaderHelper.dismiss();
-      },
-      err => {
-        console.log(err);
-        this.loaderHelper.errorHandleLoader(err, this.navCtrl);
-      }
-    );
+    this.loaderHelper.show()
+    .then(present => { 
+      this.aptProvider.getPermohonanList().subscribe(
+        res => {
+          // @TODO : uncomment if data already
+          this.items = res
+          this.loaderHelper.dismissLoader()
+        },
+        err => {
+          LogUtil.e(AptPage.TAG, err)
+          this.loaderHelper.dismissLoader()
+        }
+      )
+    })
   }
 
   doInfinite(infiniteScroll) {
@@ -123,16 +155,15 @@ export class AptPage {
         }
       );
       infiniteScroll.complete();
-    }, 1000);
+    }, 500);
   }
 
   mappingInfinityScrollData() {
-    const type = this.navParams.data;
-    if (type === "dekatBatasWaktu") {
+    if (this.type === "dekatBatasWaktu") {
       return this.aptProvider.getDekatBatasWaktu(this.keyword, this.page);
     }
 
-    if (type === "lewatBatasWaktu") {
+    if (this.type === "lewatBatasWaktu") {
       return this.aptProvider.getLewatiBatasWaktu(this.keyword, this.page);
     }
 
@@ -164,13 +195,17 @@ export class AptPage {
   // }
 
   search(keyword: any, layananId: number) {
+    LogUtil.d(AptPage.TAG, "keyword: " + keyword + " - service: " + layananId)
     let searchProvider: any;
     this.page = this.page + 1;
     this.showLoader();
     searchProvider = this.aptProvider.search(keyword, layananId);
     searchProvider
       .pipe(debounceTime(700), finalize(() => this.hideLoader()))
-      .subscribe(res => (this.items = res), err => true);
+      .subscribe(res => {
+        LogUtil.d(AptPage.TAG, res)
+        this.items = res
+      }, err => true);
   }
 
   searchByTipe(keyword: any) {
@@ -244,27 +279,83 @@ export class AptPage {
 
   // get data apt yg lewati batas norma waktu
   async getDekatBatasWaktu() {
-    await this.loaderHelper.createLoader();
-    this.aptProvider.getDekatBatasWaktu(this.keyword, this.page).subscribe(
-      res => {
-        this.loaderHelper.dismiss();
-        this.items = res;
-      },
-      err => {
-        this.loaderHelper.dismiss();
-      }
-    );
+    this.loaderHelper.show()
+    .then(present => {
+      this.aptProvider.getDekatBatasWaktu(this.keyword, this.page).subscribe(
+        res => {
+          this.loaderHelper.dismissLoader()
+          this.items = res
+        },
+        err => {
+          LogUtil.e(AptPage.TAG, err)
+          this.loaderHelper.dismissLoader()
+        }
+      )
+    })
   }
 
   // get data apt yg lewati batas norma waktu
   async getLewatiBatasWaktu() {
-    await this.loaderHelper.createLoader();
-    this.aptProvider.getLewatiBatasWaktu(this.keyword, this.page).subscribe(
-      res => {
-        this.loaderHelper.dismiss();
-        this.items = res;
-      },
-      err => this.loaderHelper.dismiss()
-    );
+    this.loaderHelper.show()
+    .then(present => {
+      this.aptProvider.getLewatiBatasWaktu(this.keyword, this.page).subscribe(
+        res => {
+          this.loaderHelper.dismissLoader()
+          this.items = res
+        },
+        err => this.loaderHelper.dismissLoader()
+      )
+    })
   }
+
+  redirectTo() {
+    this.app.getRootNav().push(AptPage.TAG);
+  }
+
+  backButtonClick() {
+    LogUtil.d(AptPage.TAG, "arrow back button clicked!")
+    if (this.isSearchOpened) {
+      this.isSearchOpened = false
+    } else {
+      LogUtil.d(AptPage.TAG, 'call navigation pop()')
+      this.navCtrl.pop()
+    }
+  }
+
+  onTabClick(index:number) {
+    LogUtil.d(AptPage.TAG, "index: " + index)
+    this.tabs.forEach((tab, i) => {
+      tab.isActive = index == i && !tab.isActive
+    })
+    this.type = this.tabs[index].provider
+    this.getPelayananList();
+    this.mappingGetData();
+  }
+
+  triggerOpenSelect() {
+    if (this.select) {
+      LogUtil.d(AptPage.TAG, "not null")
+      this.select.open()
+    } else {
+      LogUtil.d(AptPage.TAG, "probably null")
+    }
+  }
+
+  getNotificationType():string {
+    return NotificationProvider.TYPE_APT
+  }
+
+  getStatusColor(status:string = ''):string {
+    switch(status) {
+      case 'Permohonan Aktif':
+        return 'new-green-background'
+      case 'Permohonan Aktif Mendekati Batas Waktu':
+        return 'new-orange-background'
+      case 'Permohonan Melebih Batas Waktu':
+        return 'new-red-background'
+      default:
+        return 'white-background'
+    }
+  }
+
 }

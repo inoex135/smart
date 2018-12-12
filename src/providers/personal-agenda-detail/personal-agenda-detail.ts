@@ -42,4 +42,9 @@ export class PersonalAgendaDetailProvider {
   edit(agendaId: number) {
     return this.api.get(`/personal/agenda/edit/${agendaId}`);
   }
+
+  public getDetail(agendaId) {
+    return this.api.get(`/personal/agenda/${agendaId}`)
+  }
+
 }

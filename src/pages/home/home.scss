@@ -7,20 +7,12 @@ page-home {
     box-shadow: 0 1px 8px #dfe2e4 !important;
   }
 
-  .toolbar-background {
-    background: color($colors, 'light-white') !important;
-  }
-
   .logout-icon{
     font-size: 10px;
   }
 
   .select--plt {
     max-height: 100%;
-  }
-
-  ion-content {
-    background: color($colors, 'new-background') !important;
   }
 
   .svg-img {
@@ -84,12 +76,6 @@ page-home {
     }
 
 
-  }
-
-  ion-title .toolbar-title {
-    color: color($colors, 'new-text-color-dark') !important;
-    text-transform: none !important;
-    text-align: center;
   }
 
   .toolbar-logo {
@@ -226,4 +212,30 @@ page-home {
   .menu-bottom-text {
     font-weight: bold;
   }
+
+  .money {
+    background-color: color($colors, 'money-green');
+    text-align: center;
+
+    div {
+      margin-bottom: 10px;
+      align-items: center;
+      img {
+        width: 32px;
+        height: 32px;
+      }
+  
+      span {
+        color: color($colors, 'light');
+        vertical-align: middle;
+        display: inline-block;
+      }
+    }
+
+    .card-content {
+      padding: 0;
+    }
+
+  }
+
 }

@@ -1,13 +1,13 @@
-<ion-header>
+<ion-header class="custom-action-bar">
   <ion-navbar>
     <ion-buttons start left>
       <button ion-button clear style="width:32px;" >
         
       </button>
     </ion-buttons>
-    <ion-title center>SMARt</ion-title>
+    <ion-title class="center-ion-title">SMARt</ion-title>
     <ion-buttons end>
-      <notification-bell #bell ></notification-bell>
+      <notification-bell #bell [notificationType]="getNotificationType()" ></notification-bell>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
@@ -28,36 +28,27 @@
     </ion-item>
     
     <ion-card-content>
-      <p>{{profile?.nama}}</p>
-      <p>{{profile?.nip}}</p>
+      <p>{{currentProfile?.name}}</p>
+      <p>{{currentProfile?.nip}}</p>
     </ion-card-content>
   </ion-card>
 
   <ion-grid class="grid menu-grid">
     <ion-row class="row img-grid">
-      <ion-col class="col home-menu-button" (click)="pagesTo('SuratPage')">
-        <img src="assets/svg/m-persuratan.svg" col-lg class="col home-menu-button" />
-        Persuratan
-      </ion-col>
-      <ion-col class="col home-menu-button" (click)="pagesTo('TabsPage')">
-        <img src="assets/svg/m-apt.svg" col-lg class="col home-menu-button"  />
-        APT
-      </ion-col>
-      <ion-col class="col home-menu-button" (click)="pagesTo('PersonalPage')">
-        <img src="assets/svg/m-personal.svg" col-lg class="col home-menu-button"  />
-        Personal
-      </ion-col>
-      <ion-col class="col home-menu-button" (click)="pagesTo('')">
-        <img src="assets/svg/m-erapat.svg" col-lg class="col home-menu-button"  />
-        E-Rapat
+      <ion-col class="col home-menu-button" *ngFor="let button of buttons" (click)="pagesTo(button)">
+        <img src="assets/svg/{{button.icon}}" col-lg class="col home-menu-button" />
+        {{button.title}}
       </ion-col>
     </ion-row>
-
   </ion-grid>
 
-  <ion-card hidden>
-    <ion-card-content>
-      <p>Test Slideer</p>
+  <ion-card >
+    <ion-card-content style="height: 100px">
+      <ion-slides *ngIf="dashboard?.pengumuman.length" initialSlide="0" autoplay="5000" loop="true" speed="500" pager="true">
+        <ion-slide *ngFor="let slide of dashboard?.pengumuman">
+          <h3>{{slide?.teks}}</h3>
+        </ion-slide>
+      </ion-slides>
     </ion-card-content>
   </ion-card>
 
@@ -83,11 +74,18 @@
     </ion-card>
   </div>
 
+  <ion-card class="profile-card money" (click)="historyPage()">
+    <ion-card-content>
+      <div>
+        <span>Riwayat Pembayaran</span></div>
+    </ion-card-content>
+  </ion-card>
+
   <ion-item hidden col-8 push-2 class="input--form">
 
-    <ion-select #selectUser [ngModel]="profileName" col-12 (ngModelChange)="byPass($event)">
-      <ion-option [value]="profile?.nip">{{profile?.nama}}</ion-option>
-      <ion-option text-wrap [value]="user?.nip" *ngFor="let user of profile?.user_pengganti">
+    <ion-select #selectUser [ngModel]="currentProfile?.nip" col-12 (ngModelChange)="byPass($event)">
+      <ion-option [value]="loggedInProfile?.nip">{{loggedInProfile?.nama}}</ion-option>
+      <ion-option text-wrap [value]="user?.nip" *ngFor="let user of getSubstituteUsers()">
         {{user?.nama}}
       </ion-option>
     </ion-select>

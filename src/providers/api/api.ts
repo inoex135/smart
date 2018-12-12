@@ -11,7 +11,8 @@ import { ErrorObservable } from "rxjs/observable/ErrorObservable";
 import { ENV } from "../../config/environment";
 import { TokenProvider } from "../token/token";
 import { LogUtil } from "../../utils/logutil";
-import { TABS } from "ionic-angular/umd/navigation/nav-util";
+import { Observable } from "rxjs";
+import { ERROR_CODES } from "../../constant/error-codes";
 
 @Injectable()
 export class ApiProvider {
@@ -20,29 +21,36 @@ export class ApiProvider {
 
   constructor(public http: HttpClient, public tokenProvider: TokenProvider) {}
 
-  private setHeaders() {
-    // set header
-    if (this.tokenProvider.latestToken) {
-      return new HttpHeaders()
-        .set("Content-Type", "application/json")
-        .set("Authorization", "smartdjkn2017mobile")
-        .set("token", this.tokenProvider.latestToken);
-    }
-
-    return new HttpHeaders()
-      .set("Content-Type", "application/json")
-      .set("Authorization", "smartdjkn2017mobile");
+  private getObservableHeaderForm() {
+    return Observable.fromPromise(this.tokenProvider.getCurrentToken())
+    .map(token => {
+      LogUtil.d(ApiProvider.TAG, 'getObservableHeader token: ' + token)
+      if (token) {
+        return new HttpHeaders()
+          .set("token", token)
+          .set("Authorization", "smartdjkn2017mobile");
+      }
+  
+      return new HttpHeaders().set("Authorization", "smartdjkn2017mobile");
+    })
   }
 
-  // set header for FormData in login
-  private setHeadersForm() {
-    if (this.tokenProvider.latestToken) {
+  private getObservableHeader():Observable<any> {
+    return Observable.fromPromise(this.tokenProvider.getCurrentToken())
+    .map(token => {
+      LogUtil.d(ApiProvider.TAG, 'getObservableHeader token: ' + token)
+      if (token) {
+        LogUtil.d(ApiProvider.TAG, "current token: " + token)
+        return new HttpHeaders()
+          .set("Content-Type", "application/json")
+          .set("Authorization", "smartdjkn2017mobile")
+          .set("token", token);
+      }
+  
       return new HttpHeaders()
-        .set("token", this.tokenProvider.latestToken)
+        .set("Content-Type", "application/json")
         .set("Authorization", "smartdjkn2017mobile");
-    }
-
-    return new HttpHeaders().set("Authorization", "smartdjkn2017mobile");
+    })
   }
 
   private extractData(res: Response) {
@@ -65,6 +73,10 @@ export class ApiProvider {
       errMsg = `${error.error.error_message || ""}`;
     } else {
       errMsg = error.message ? error.message : error.toString();
+    }
+
+    if (errMsg.includes('Token not found')) {
+      errMsg = ERROR_CODES.MISSING_TOKEN
     }
 
     return ErrorObservable.create(errMsg);
@@ -97,46 +109,70 @@ export class ApiProvider {
   }
 
   get(path: string) {
-    return this.http
-      .get(`${ENV.API_URL}${path}`, { headers: this.setHeaders() })
-      .pipe(map(this.extractData), catchError(this.handleError));
+    return this.getObservableHeader()
+    .mergeMap(header => {
+      LogUtil.d(ApiProvider.TAG, header)
+      return this.http.get(`${ENV.API_URL}${path}`, { headers: header })
+      .pipe(map(this.extractData), catchError(this.handleError))
+    })
   }
 
   getBlob(path: string) {
-    return this.http
-    .get(`${ENV.API_URL}${path}`, { 
-      headers: this.setHeaders().set("Content-Type", "application/octet-stream"),
-      responseType: "blob"
+    return this.getObservableHeader()
+    .mergeMap(header => {
+      return this.http
+      .get(`${ENV.API_URL}${path}`, { 
+        headers: header.set("Content-Type", "application/octet-stream"),
+        responseType: "blob"
+      })
+      .pipe(map(this.extractBlob), catchError(this.handleError));
     })
-    .pipe(map(this.extractBlob), catchError(this.handleError));
   }
 
   put(path: string, body: Object = {}) {
-    return this.http
+    return this.getObservableHeader()
+    .mergeMap(header => {
+      return this.http
       .put(`${ENV.API_URL}${path}`, JSON.stringify(body), {
-        headers: this.setHeaders()
+        headers: header
       })
       .pipe(map(this.extractData), catchError(this.handleError));
+    })
   }
 
   post(path: string, body: Object = {}) {
-    return this.http
-      .post(`${ENV.API_URL}${path}`, body, { headers: this.setHeaders() })
+    return this.getObservableHeader()
+    .mergeMap(header => {
+      return this.http
+      .post(`${ENV.API_URL}${path}`, body, { headers: header })
       .pipe(map(this.extractData), catchError(this.handleError));
+    })
   }
 
   delete(path: string) {
-    return this.http
-      .delete(`${ENV.API_URL}${path}`, { headers: this.setHeaders() })
+    return this.getObservableHeader()
+    .mergeMap(header => {
+      return this.http
+      .delete(`${ENV.API_URL}${path}`, { headers: header })
       .pipe(map(this.extractData), catchError(this.handleError));
+    })
   }
 
   // POST data as FormData
   postForm(path: string, body: Object = {}) {
-    return this.http
+    return this.getObservableHeaderForm()
+    .mergeMap(header => {
+      return this.http
       .post(`${ENV.API_URL}${path}`, body, {
-        headers: this.setHeadersForm()
+        headers: header
       })
-      .pipe(map(this.extractData), catchError(this.handleErrorForm));
+      .pipe(map(this.extractData), catchError(this.handleErrorForm))
+    })
   }
+
+  getByUrl(path: string) {
+    return this.http.get(path)
+      .pipe(map(this.extractData), catchError(this.handleError))
+  }
+
 }
