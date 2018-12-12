@@ -43,7 +43,7 @@ export class PaymentProvider {
     }
 
     private getNonIncomes(nip:string): Observable<any>  {
-        return this.api.get('/personal/riwayat-nonpenghasilan?nip' + nip)
+        return this.api.get('/personal/riwayat-nonpenghasilan?nip=' + nip)
     }
 
     public getPaymentsByProvider(provider:string): Observable<any> {
