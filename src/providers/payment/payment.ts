@@ -39,15 +39,11 @@ export class PaymentProvider {
     }
 
     private getIncomes(nip:string): Observable<any>  {
-        let url = 'http://alika.djkn.or.id/penghasilan/bulanan?code=p0rt4lk3u4ng4n&nip=' + nip
-        LogUtil.d(PaymentProvider.TAG, url)
-        return this.api.getByUrl(url)
+        return this.api.get('/personal/riwayat-penghasilan?nip=' + nip)
     }
 
     private getNonIncomes(nip:string): Observable<any>  {
-        let url = 'http://alika.djkn.or.id/penghasilan/lainnya?code=p0rt4lk3u4ng4n&nip=' + nip
-        LogUtil.d(PaymentProvider.TAG, url)
-        return this.api.getByUrl(url)
+        return this.api.get('/personal/riwayat-nonpenghasilan?nip' + nip)
     }
 
     public getPaymentsByProvider(provider:string): Observable<any> {
