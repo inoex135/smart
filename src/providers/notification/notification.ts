@@ -85,6 +85,8 @@ export class NotificationProvider {
                         element.type = NotificationProvider.TYPE_PERSURATAN
                     } else if (item.type == 3) {
                         element.type = NotificationProvider.TYPE_APT
+                    } else if (item.type == 4) {
+                        element.type = NotificationProvider.TYPE_RAPAT
                     } 
                 })
             }
