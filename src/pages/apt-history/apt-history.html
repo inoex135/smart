@@ -1,0 +1,80 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Riwayat Permohonan</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  
+  <ion-list class="list-apt-history" *ngIf="items?.length > 0 && isSupervision()">
+    <ion-card item *ngFor="let item of items;let i = index">
+      <ion-row>
+        <ion-col>
+          <ion-row>
+            <ion-col col-12>
+              <p ion-text>Tanggal Diagendakan</p>
+              <p ion-text> {{item?.tanggal}}</p>
+            </ion-col>
+            <ion-col col-12>
+              <p ion-text>Yang Melakukan Supervisi</p>
+              <p ion-text text-wrap>{{item?.nama_supervisor}}</p>
+            </ion-col>
+            <ion-col col-12>
+              <p ion-text>Status</p>
+              <p ion-text class="{{ currentTextColor }}">{{item?.status}}</p>
+            </ion-col>
+            <ion-col col-12>
+              <p ion-text>Catatan Supervisi</p>
+              <p ion-text>{{item?.catatan}}</p>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+  </ion-list>
+
+  <ion-list class="list-apt-history" *ngIf="items?.length > 0 && isVerification()">
+    <ion-card item *ngFor="let item of items;let i = index">
+      <ion-row>
+        <ion-col>
+          <ion-row>
+            <ion-col col-12>
+              <p ion-text>Tanggal Verifikasi</p>
+              <p ion-text> {{item?.tanggal_verifikasi}}</p>
+            </ion-col>
+            <ion-col col-12>
+              <p ion-text>Surat Pendukung</p>
+              <p ion-text text-wrap>{{item?.surat_pendukung}}</p>
+            </ion-col>
+            <ion-col col-12>
+              <p ion-text>Nama Verifikator</p>
+              <p ion-text text-wrap>{{item?.nama_verifikator}}</p>
+            </ion-col>
+            <ion-col col-12>
+              <p ion-text>Status Verifikasi</p>
+              <p ion-text class="{{ currentTextColor }}">{{item?.status_verifikasi}}</p>
+            </ion-col>
+            <ion-col col-12>
+              <p ion-text>Catatan Verifikasi</p>
+              <p ion-text>{{item?.catatan_verifikasi}}</p>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+  </ion-list>
+
+    <empty-state *ngIf="!isHistoryExist()"></empty-state>
+    <div class="tab-spacer"></div>
+
+</ion-content>
+
+<ion-grid class="grid tab-grid">
+  <ion-row class="row">
+    <ion-col *ngFor="let tab of tabs; let i = index" (click)="onTabClick(i)" class="col {{ (tab.isActive) ? 'active' : '' }}">
+      <ion-icon class="icon" name="{{ tab.icon }}" ></ion-icon>
+      <p>{{ tab.name }}</p>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+

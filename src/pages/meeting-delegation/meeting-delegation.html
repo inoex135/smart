@@ -1,0 +1,52 @@
+<ion-header>
+    <ion-navbar class="custom-action-bar">
+        <ion-title >Delegasi E-Rapat</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class="new-form">
+  <h4>Catatan</h4>
+  <ion-row>
+      <ion-col col-12>
+          <ion-item margin-top no-padding class="textarea--form custom-ion-item">
+              <ion-textarea placeholder="Catatan" type="text" [(ngModel)]="getPostModel().catatan"></ion-textarea>
+          </ion-item>
+      </ion-col>
+  </ion-row>
+  <ion-row >
+    <ion-col col-12>
+      <ng-template #withFlags let-attrs="attrs">
+        <span>{{attrs?.data?.nip}}, {{attrs?.data?.nama}}</span>
+      </ng-template>
+      <ion-auto-complete [dataProvider]="masterPegawai" #searchbar [template]="withFlags"></ion-auto-complete>
+
+      <ion-item class="input--form custom-ion-item">
+        <ion-input type="text" placeholder="Selaku" [(ngModel)]="selaku"></ion-input>
+      </ion-item>
+
+      <ion-item class="add-personel" no-lines center item-center>
+        <button clear [disabled]="getSearchSelection() == null" ion-button small color="default-blue" (tap)="addParticipant()">
+          <ion-icon name="add"></ion-icon> Tambah Personil
+        </button>
+      </ion-item>
+
+      <ion-item no-lines class="as-list bordered-ion-item" *ngFor="let peserta of getParticipants(); let i = index;">
+        <h2 text-wrap>Nama: {{peserta?.nama_penerima}}</h2>
+        <p>Selaku: {{peserta?.selaku}}</p>
+        <button clear (click)="removeParticipant(i)" ion-button color="light" item-end>
+          <ion-icon name="trash"></ion-icon>
+        </button>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+  
+</ion-content>
+
+<ion-footer>
+    <ion-buttons>
+        <button [disabled]="!isAllowedToSave()" ion-button full (click)="save()">
+            Simpan
+        </button>
+    </ion-buttons>
+</ion-footer>
+ 

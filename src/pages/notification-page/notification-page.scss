@@ -1,0 +1,44 @@
+notification-page {
+
+  ion-content {
+    background-color: color($colors, 'new-background') !important;
+  }
+
+  .chip-container {
+
+    ::-webkit-scrollbar { 
+      display: none; 
+    }
+
+    margin-top: 5px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+
+    .list-chip {
+
+        height: 100%;
+        white-space: nowrap;
+
+        .chip-notification {
+            display: inline-block;
+            padding: 3px;
+            width: auto;
+            height: 48px;
+
+            ion-badge {
+              border-radius: 10px;
+            }
+
+        }
+
+    }
+
+  }
+
+  .notification-item {
+    p {
+      margin-bottom: 0.8rem;
+    }
+  }
+  
+}
