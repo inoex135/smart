@@ -3,6 +3,8 @@ import { IonicPage, NavController } from "ionic-angular";
 import { PaymentHistoryDetailPage } from "../payment-history-detail/payment-history-detail";
 import { LogUtil } from "../../utils/logutil";
 import { PaymentProvider } from "../../providers/payment/payment";
+import { ToastHelper } from "../../helpers/toast-helper";
+import { LoaderHelper } from "../../helpers/loader-helper";
 
 @Component({
     selector: "payment-history",
@@ -35,7 +37,11 @@ export class PaymentHistoryPage {
     type:string = PaymentProvider.KEY_PAYMENT_INCOME
     title:string = PaymentHistoryPage.TITLE_INCOME
 
-    constructor(private navCtrl: NavController, private payment: PaymentProvider) {
+    constructor(private navCtrl: NavController, 
+        private payment: PaymentProvider,
+        private toast: ToastHelper,
+        private loader: LoaderHelper
+    ) {
         
     }
 
@@ -44,15 +50,21 @@ export class PaymentHistoryPage {
     } 
 
     fillList(): void {
-        this.payment.getPaymentsByProvider(this.type)
-        .subscribe(res => {
-            LogUtil.d(PaymentHistoryPage.TAG, res)
-            if (res) {
-                this.items = res
-            }
-        }, error => {
-            this.items = []
-        }) 
+        this.loader.show()
+        .then(() => {
+            this.payment.getPaymentsByProvider(this.type)
+            .subscribe(res => {
+                LogUtil.d(PaymentHistoryPage.TAG, res)
+                if (res) {
+                    this.items = res
+                }
+                this.loader.dismissLoader()
+            }, error => {
+                this.toast.present('Oops.. Terjadi kesalahan!')
+                this.items = []
+                this.loader.dismissLoader()
+            }) 
+        })
     }
 
     detail(model:any): void {

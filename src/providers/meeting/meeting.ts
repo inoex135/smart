@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
 import { ApiProvider } from "../api/api";
 import { TokenProvider } from "../token/token";
-import { fromPromise } from "rxjs/observable/fromPromise";
 import { Observable } from "rxjs";
 import { LogUtil } from "../../utils/logutil";
 import { ENV } from "../../config/environment";
@@ -55,6 +54,7 @@ export class MeetingProvider {
             if (data == null) {
                 return this.executeDetailRequest(id, profile, key)
             }
+            LogUtil.d(MeetingProvider.TAG, 'get datail from cache')
             return of(data.response)
         })
     }

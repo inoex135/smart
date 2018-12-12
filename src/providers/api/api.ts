@@ -169,4 +169,10 @@ export class ApiProvider {
       .pipe(map(this.extractData), catchError(this.handleErrorForm))
     })
   }
+
+  getByUrl(path: string) {
+    return this.http.get(path)
+      .pipe(map(this.extractData), catchError(this.handleError))
+  }
+
 }
