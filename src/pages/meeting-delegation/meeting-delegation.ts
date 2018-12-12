@@ -86,11 +86,12 @@ export class MeetingDelegationPage {
     private save() {
         LogUtil.d(MeetingDelegationPage.TAG, this.postModel)
         this.loader.show().then(() => {
-            this.api.confirm(this.postModel)
+            this.api.saveDelegation(this.postModel)
             .subscribe(
                 res => {
                     this.loader.dismissLoader()
                     if (res) {
+                        this.toast.present('Berhasil melakukan delegasi.')
                         this.navCtrl.pop()
                     } else {
                         this.toast.present('Terjadi kegagalan!')

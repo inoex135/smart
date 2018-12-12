@@ -137,4 +137,8 @@ export class MeetingProvider {
         return this.api.post(`/agenda-waktu/${model.time_id}/konfirmasi`, data)
     }
 
+    public saveDelegation(model:any) {
+        return this.api.post(`/rapat/delegasi`, model)
+    }
+
 }
