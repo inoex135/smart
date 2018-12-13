@@ -6,7 +6,6 @@ import { LogUtil } from "../../utils/logutil";
 import { ENV } from "../../config/environment";
 import { CacheProvider } from "../cache/cache";
 import { of } from "rxjs/observable/of";
-import { zip } from "rxjs/observable/zip";
 import { fromPromise } from "rxjs/observable/fromPromise";
 
 
