@@ -18,40 +18,38 @@
 </ion-header>
 
 <ion-content>
-    <div *ngIf="isItemExist()">
-        <ion-item class="input--form" hidden>
-            <ion-select #selectTime (ionChange)="onSelectChange()" [(ngModel)]="model.type" >
-                <ion-option [value]="f?.key" *ngFor="let f of api.getFilterTime()">
-                    {{f?.value}}
-                </ion-option>
-            </ion-select>
-        </ion-item>
-        <ion-list class="list-custom">
-            <ion-card item *ngFor="let item of getItems()" (click)="detail(item)">
-                <ion-row>
-                    <ion-col class="detail-col meeting-list-item">
-                        <ion-row>
-                            <ion-col col-12>
-                                <p ion-text>Nama Rapat</p>
-                                <p ion-text>{{item?.nama}}</p>
-                            </ion-col>
-                            <ion-col col-12>
-                                <p ion-text>Status</p>
-                                <p ion-text>{{item?.status_name}}</p>
-                            </ion-col>
-                            <ion-col col-12>
-                                <p ion-text>Naskah UND</p>
-                                <p ion-text>{{item?.naskah_undangan}}</p>
-                            </ion-col>
-                        </ion-row>
-                    </ion-col>
-                </ion-row>
-            </ion-card>
-        </ion-list>
-        <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
-            <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data..."></ion-infinite-scroll-content>
-        </ion-infinite-scroll>
-    </div>
+    <ion-item class="input--form" hidden>
+        <ion-select #selectTime (ionChange)="onSelectChange()" [(ngModel)]="model.type" >
+            <ion-option [value]="f?.key" *ngFor="let f of api.getFilterTime()">
+                {{f?.value}}
+            </ion-option>
+        </ion-select>
+    </ion-item>
+    <ion-list class="list-custom">
+        <ion-card item *ngFor="let item of getItems()" (click)="detail(item)">
+            <ion-row>
+                <ion-col class="detail-col meeting-list-item">
+                    <ion-row>
+                        <ion-col col-12>
+                            <p ion-text>Nama Rapat</p>
+                            <p ion-text>{{item?.nama}}</p>
+                        </ion-col>
+                        <ion-col col-12>
+                            <p ion-text>Status</p>
+                            <p ion-text>{{item?.status_name}}</p>
+                        </ion-col>
+                        <ion-col col-12>
+                            <p ion-text>Naskah UND</p>
+                            <p ion-text>{{item?.naskah_undangan}}</p>
+                        </ion-col>
+                    </ion-row>
+                </ion-col>
+            </ion-row>
+        </ion-card>
+    </ion-list>
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data..."></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
 
     <empty-state *ngIf="!isItemExist()"></empty-state>
 

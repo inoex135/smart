@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content>
-    <ion-list class="list-custom" *ngIf="isItemExist()">
+    <ion-list class="list-custom">
         <ion-card item *ngFor="let model of getItems()" (click)="detail(model)">
             <ion-row>
                 <ion-col class="detail-col meeting-list-item">

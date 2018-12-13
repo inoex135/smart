@@ -175,6 +175,7 @@ export class MeetingDetailAgendaPage {
                 if (res) {
                     this.toast.present('Berhasil melakukan konfirmasi kehadiran.')
                     this.api.removeCache(this.getModel().agenda_id)
+                    this.api.updateCacheDetailAgenda(this.getModel())
                 } else {
                     this.toast.present('Gagal melakukan confirmasi!')
                 }

@@ -25,7 +25,7 @@
     </ion-refresher-content>
   </ion-refresher>
 
-  <ion-list *ngIf="isNotificationExist()">
+  <ion-list>
     <ion-item class="notification-item" *ngFor="let notif of getNotifications()" (click)="onItemClick(notif)">
       <h6 ion-text>{{notif?.nama}}</h6>
       <text-avatar [text]="notif?.nama" item-left></text-avatar>

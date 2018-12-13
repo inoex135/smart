@@ -39,7 +39,7 @@ export class MeetingProvider {
     }
 
     public getMeetings(model:any) {
-        return this.api.get(`/rapat?size=${model.size}&jenis_waktu=${model.type}&status=0`)
+        return this.api.get(`/rapat?keyword=${model.keyword}&page=${model.page}&size=${model.size}&jenis_waktu=${model.type}&status=0`)
     }
 
     private getDetailCache(id:any, prefix): Promise<any> {
@@ -147,10 +147,10 @@ export class MeetingProvider {
         })
     }
 
-    public updateCacheDetailAgenda(timeId, model) {
+    public updateCacheDetailAgenda(model) {
         return this.token.getCurrentProfile()
         .then(profile => {
-            let key = MeetingProvider.CACHE_KEY_DETAIL + profile.nip + '_' + timeId
+            let key = MeetingProvider.CACHE_KEY_DETAIL + profile.nip + '_' + model.time_id
             return this.cache.put(key, {when: Date.now() + CacheProvider.FIVE_MINUTES, response: model}).then(() => {
                 LogUtil.d(MeetingProvider.TAG, 'removed cache: ' + key)
             })
