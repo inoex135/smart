@@ -6,11 +6,7 @@
 
 <ion-content>
   
-<<<<<<< HEAD
-  <ion-list class="list-apt-history" *ngIf="items?.length > 0 && isSupervision()">
-=======
   <ion-list class="list-apt-history" *ngIf="items?.length && isSupervision()">
->>>>>>> ae6ba13c1135be994c5d93f7349a0a4370b9e6fd
     <ion-card item *ngFor="let item of items;let i = index">
       <ion-row>
         <ion-col>
@@ -37,11 +33,7 @@
     </ion-card>
   </ion-list>
 
-<<<<<<< HEAD
-  <ion-list class="list-apt-history" *ngIf="items?.length > 0 && isVerification()">
-=======
   <ion-list class="list-apt-history" *ngIf="items?.length && isVerification()">
->>>>>>> ae6ba13c1135be994c5d93f7349a0a4370b9e6fd
     <ion-card item *ngFor="let item of items;let i = index">
       <ion-row>
         <ion-col>
@@ -60,11 +52,7 @@
             </ion-col>
             <ion-col col-12>
               <p ion-text>Status Verifikasi</p>
-<<<<<<< HEAD
-              <p ion-text class="{{ currentTextColor }}">{{item?.status_verifikasi}}</p>
-=======
               <p ion-text>{{item?.status_verifikasi}}</p>
->>>>>>> ae6ba13c1135be994c5d93f7349a0a4370b9e6fd
             </ion-col>
             <ion-col col-12>
               <p ion-text>Catatan Verifikasi</p>
