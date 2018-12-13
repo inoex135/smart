@@ -23,10 +23,7 @@ export class PaymentHistoryDetailPage {
         Tukin_bruto: "Tukin Bruto",
         Tukin_pot: "Potongan Tukin",
         total: "total",
-<<<<<<< HEAD
-=======
         Total: "Total",
->>>>>>> ae6ba13c1135be994c5d93f7349a0a4370b9e6fd
         bulan: "bulan",
         tahun: "tahun",
         monthName: "monthName"
@@ -44,11 +41,7 @@ export class PaymentHistoryDetailPage {
             detail: []
         }
         for (var l in this.labels) {
-<<<<<<< HEAD
-            if (l !== 'total' && l !== 'bulan' && l !== 'monthName' && l !== 'tahun') {
-=======
             if (l !== 'total' && l !== 'Total' && l !== 'bulan' && l !== 'monthName' && l !== 'tahun') {
->>>>>>> ae6ba13c1135be994c5d93f7349a0a4370b9e6fd
                 newModel.detail.push({label: this.labels[l], value: this.model[l]})
             } else {
                 newModel.header[l] = this.model[l]

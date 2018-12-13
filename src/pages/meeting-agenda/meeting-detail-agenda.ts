@@ -6,31 +6,19 @@ import { LogUtil } from "../../utils/logutil";
 import { LoaderHelper } from "../../helpers/loader-helper";
 import { ToastHelper } from "../../helpers/toast-helper";
 import { FileHelper } from "../../helpers/file-helper";
-<<<<<<< HEAD
-=======
 import { zip } from "rxjs/observable/zip";
 import { NotificationProvider } from "../../providers/notification/notification";
->>>>>>> ae6ba13c1135be994c5d93f7349a0a4370b9e6fd
 
 
 @Component({
     selector: "meeting-detail-agenda",
     templateUrl: "meeting-detail-agenda.html"
-<<<<<<< HEAD
-  })
-=======
 })
->>>>>>> ae6ba13c1135be994c5d93f7349a0a4370b9e6fd
 @IonicPage()
 export class MeetingDetailAgendaPage {
 
     static TAG:string = 'MeetingDetailAgendaPage'
     static KEY_MODEL:string = 'model'
-<<<<<<< HEAD
-
-    private model:any = {
-        confirm_to_attend: false,
-=======
     static KEY_AGENDA_ID:string = 'agenda_id'
     static KEY_TIME_ID:string = 'time_id'
 
@@ -38,7 +26,6 @@ export class MeetingDetailAgendaPage {
         time_id: 0,
         agenda_id: 0,
         confirm_to_attend: false
->>>>>>> ae6ba13c1135be994c5d93f7349a0a4370b9e6fd
     }
 
     private files:Array<any> = []
@@ -49,17 +36,11 @@ export class MeetingDetailAgendaPage {
         private loader: LoaderHelper, 
         private toast: ToastHelper,
         private sheet: ActionSheetController,
-<<<<<<< HEAD
-        private fileHelper: FileHelper
-    ) {
-        this.model = this.navParams.get(MeetingDetailAgendaPage.KEY_MODEL)
-=======
         private fileHelper: FileHelper,
         private notification: NotificationProvider
     ) {
         this.model.agenda_id = this.navParams.get(MeetingDetailAgendaPage.KEY_AGENDA_ID)
         this.model.time_id = this.navParams.get(MeetingDetailAgendaPage.KEY_TIME_ID)
->>>>>>> ae6ba13c1135be994c5d93f7349a0a4370b9e6fd
     }
 
     ionViewWillEnter() {
@@ -67,19 +48,6 @@ export class MeetingDetailAgendaPage {
     }
 
     private fillList(): void {
-<<<<<<< HEAD
-        this.api.getFiles(this.model.time_id)
-        .subscribe(
-            res => {
-                if (res && res.content) {
-                    this.files = res.content
-                }
-            }, 
-            err => {
-
-            }
-        )
-=======
         this.loader.show()
         .then(() => {
             zip(this.api.getFiles(this.getModel().time_id), this.api.getDetailAgenda(this.getModel()))
@@ -102,7 +70,6 @@ export class MeetingDetailAgendaPage {
     private async readNotification() {
         this.notification.readMeeting(this.getModel().agenda_id)
         .subscribe(res => {}, error => {})
->>>>>>> ae6ba13c1135be994c5d93f7349a0a4370b9e6fd
     }
 
     private getModel(): any {
@@ -167,11 +134,7 @@ export class MeetingDetailAgendaPage {
     private fileOptions(index: number): void {
         let file = this.getFileByIndex(index)
         var payload = {}
-<<<<<<< HEAD
-        payload['time_id'] = this.model.time_id
-=======
         payload['time_id'] = this.getModel().time_id
->>>>>>> ae6ba13c1135be994c5d93f7349a0a4370b9e6fd
         payload['file_id'] = file.id
         LogUtil.d(MeetingDetailAgendaPage.TAG, payload)
         let actionSheet = this.sheet.create({
@@ -200,29 +163,18 @@ export class MeetingDetailAgendaPage {
     }
 
     private confirm(): void {
-<<<<<<< HEAD
-        LogUtil.d(MeetingDetailAgendaPage.TAG, this.model)
-=======
         LogUtil.d(MeetingDetailAgendaPage.TAG, this.getModel())
->>>>>>> ae6ba13c1135be994c5d93f7349a0a4370b9e6fd
         this.loader.show()
         .then(() => {
             var postModel = {}
             postModel['confirm_to_attend'] = this.getModel().confirm_to_attend
             postModel['time_id'] = this.getModel().time_id
-<<<<<<< HEAD
-            this.api.confirm(postModel).subscribe(res => {
-                this.loader.dismissLoader()
-                if (res) {
-                    this.toast.present('Berhasil melakukan konfirmasi kehadiran.')
-=======
             this.api.confirm(postModel)
             .subscribe(res => {
                 this.loader.dismissLoader()
                 if (res) {
                     this.toast.present('Berhasil melakukan konfirmasi kehadiran.')
                     this.api.removeCache(this.getModel().agenda_id)
->>>>>>> ae6ba13c1135be994c5d93f7349a0a4370b9e6fd
                 } else {
                     this.toast.present('Gagal melakukan confirmasi!')
                 }

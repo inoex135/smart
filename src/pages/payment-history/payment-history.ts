@@ -3,11 +3,8 @@ import { IonicPage, NavController } from "ionic-angular";
 import { PaymentHistoryDetailPage } from "../payment-history-detail/payment-history-detail";
 import { LogUtil } from "../../utils/logutil";
 import { PaymentProvider } from "../../providers/payment/payment";
-<<<<<<< HEAD
-=======
 import { ToastHelper } from "../../helpers/toast-helper";
 import { LoaderHelper } from "../../helpers/loader-helper";
->>>>>>> ae6ba13c1135be994c5d93f7349a0a4370b9e6fd
 
 @Component({
     selector: "payment-history",
@@ -40,15 +37,11 @@ export class PaymentHistoryPage {
     type:string = PaymentProvider.KEY_PAYMENT_INCOME
     title:string = PaymentHistoryPage.TITLE_INCOME
 
-<<<<<<< HEAD
-    constructor(private navCtrl: NavController, private payment: PaymentProvider) {
-=======
     constructor(private navCtrl: NavController, 
         private payment: PaymentProvider,
         private toast: ToastHelper,
         private loader: LoaderHelper
     ) {
->>>>>>> ae6ba13c1135be994c5d93f7349a0a4370b9e6fd
         
     }
 
@@ -57,17 +50,6 @@ export class PaymentHistoryPage {
     } 
 
     fillList(): void {
-<<<<<<< HEAD
-        this.payment.getPaymentsByProvider(this.type)
-        .subscribe(res => {
-            LogUtil.d(PaymentHistoryPage.TAG, res)
-            if (res) {
-                this.items = res
-            }
-        }, error => {
-            this.items = []
-        }) 
-=======
         this.loader.show()
         .then(() => {
             this.payment.getPaymentsByProvider(this.type)
@@ -83,7 +65,6 @@ export class PaymentHistoryPage {
                 this.loader.dismissLoader()
             }) 
         })
->>>>>>> ae6ba13c1135be994c5d93f7349a0a4370b9e6fd
     }
 
     detail(model:any): void {

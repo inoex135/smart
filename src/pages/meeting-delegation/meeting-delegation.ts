@@ -86,20 +86,13 @@ export class MeetingDelegationPage {
     private save() {
         LogUtil.d(MeetingDelegationPage.TAG, this.postModel)
         this.loader.show().then(() => {
-<<<<<<< HEAD
-            this.api.confirm(this.postModel)
-=======
             this.api.saveDelegation(this.postModel)
->>>>>>> ae6ba13c1135be994c5d93f7349a0a4370b9e6fd
             .subscribe(
                 res => {
                     this.loader.dismissLoader()
                     if (res) {
-<<<<<<< HEAD
-=======
                         this.toast.present('Berhasil melakukan delegasi.')
                         this.api.removeCache(this.model.agenda_id)
->>>>>>> ae6ba13c1135be994c5d93f7349a0a4370b9e6fd
                         this.navCtrl.pop()
                     } else {
                         this.toast.present('Terjadi kegagalan!')

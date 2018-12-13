@@ -1,12 +1,6 @@
 import { Injectable } from "@angular/core";
 import { ApiProvider } from "../api/api";
 import { TokenProvider } from "../token/token";
-<<<<<<< HEAD
-import { fromPromise } from "rxjs/observable/fromPromise";
-import { Observable } from "rxjs";
-import { LogUtil } from "../../utils/logutil";
-import { ENV } from "../../config/environment";
-=======
 import { Observable } from "rxjs";
 import { LogUtil } from "../../utils/logutil";
 import { ENV } from "../../config/environment";
@@ -14,21 +8,15 @@ import { CacheProvider } from "../cache/cache";
 import { of } from "rxjs/observable/of";
 import { zip } from "rxjs/observable/zip";
 import { fromPromise } from "rxjs/observable/fromPromise";
->>>>>>> ae6ba13c1135be994c5d93f7349a0a4370b9e6fd
 
 
 @Injectable()
 export class MeetingProvider {
 
     static TAG:string = 'MeetingProvider'
-<<<<<<< HEAD
-
-    constructor(private api: ApiProvider, private token: TokenProvider) {}
-=======
     static CACHE_KEY:string = 'JhdjVIBfh26y9kIM_'
 
     constructor(private api: ApiProvider, private cache: CacheProvider, private token: TokenProvider) {}
->>>>>>> ae6ba13c1135be994c5d93f7349a0a4370b9e6fd
 
     public filterTime:Array<any> = [
         {
@@ -53,50 +41,6 @@ export class MeetingProvider {
         return this.api.get(`/rapat?keyword=${model.keyword}&page=${model.page}&size=${model.size}&jenis_waktu=${model.type}`)
     }
 
-<<<<<<< HEAD
-    public getDetailMeeting(id:any) {
-        var resource = this.api.get(`/rapat/${id}`)
-        return Observable.zip(resource, fromPromise(this.token.getCurrentProfile()))
-        .map(([result, profile]) => {
-            LogUtil.d(MeetingProvider.TAG, profile)
-            if (result && result.agenda) {
-                result['new_list'] = []
-                result.agenda.forEach(element => {
-                    if (element.waktu.length > 0) {
-                        element.waktu.forEach(time => {
-                            var model:any = {}
-                            model['agenda_id'] = element.id
-                            model['agenda_name'] = element.nama_agenda
-                            model['time_id'] = time.id
-                            model['place'] = {}
-                            if (time.ruang) {
-                                model['place']['room'] = time.ruang.nama
-                                model['place']['building'] = time.ruang.gedung
-                            }
-                            if (time.ruang_eksternal) {
-                                model['place']['room'] = time.ruang_eksternal
-                            }
-                            model['date'] = time.tanggal
-                            model['start_time'] = time.jam_mulai
-                            model['finish_time'] = time.jam_akhir
-                            model['total_participant'] = time.peserta.length
-                            model['confirm_to_attend'] = false
-                            model['allow_participant_confirmation'] = false
-                            if (time.peserta.length > 0) {
-                                time.peserta.forEach(peserta => {
-                                    if (peserta.nip_tujuan === profile.nip) {
-                                        model['allow_participant_confirmation'] = true
-                                        model['confirm_to_attend'] = peserta.konfirmasi_hadir
-                                    }
-                                })
-                            }
-                            result['new_list'].push(model)
-                        })
-                    }
-                })
-            }
-            return result
-=======
     private getDetailCache(id:any): Promise<any> {
         return this.token.getCurrentProfile()
         .then(profile => {
@@ -193,7 +137,6 @@ export class MeetingProvider {
                 agenda = this.reconstructModel(res.agenda, res, profile)
             }
             return agenda
->>>>>>> ae6ba13c1135be994c5d93f7349a0a4370b9e6fd
         })
     }
 
@@ -216,15 +159,11 @@ export class MeetingProvider {
     public confirm(model:any) {
         var data = {}
         data['konfirmasi_hadir'] = model.confirm_to_attend
-<<<<<<< HEAD
-        return this.api.post(`/agenda-waktu/${model.time_id}/konfirmasi`, model)
-=======
         return this.api.post(`/agenda-waktu/${model.time_id}/konfirmasi`, data)
     }
 
     public saveDelegation(model:any) {
         return this.api.post(`/rapat/delegasi`, model)
->>>>>>> ae6ba13c1135be994c5d93f7349a0a4370b9e6fd
     }
 
 }
