@@ -9,7 +9,7 @@
             <button *ngIf="!isSearchOpened" ion-button icon-only (click)="isSearchOpened=true">
                 <img src="assets/svg/Search.svg" />
             </button>
-            <button ion-button icon-only (click)="triggerOpenSelect()">
+            <button *ngIf="isSelectExist()" ion-button icon-only (click)="triggerOpenSelect()">
                 <img src="assets/svg/Filter.svg" />
             </button>
             <notification-bell #bell [notificationType]="getNotificationType()"></notification-bell>
@@ -20,7 +20,7 @@
 <ion-content>
     <div *ngIf="isItemExist()">
         <ion-item class="input--form" hidden>
-            <ion-select #selectType (ionChange)="onSelectChange()" [(ngModel)]="model.type" >
+            <ion-select #selectTime (ionChange)="onSelectChange()" [(ngModel)]="model.type" >
                 <ion-option [value]="f?.key" *ngFor="let f of api.getFilterTime()">
                     {{f?.value}}
                 </ion-option>
@@ -52,7 +52,6 @@
             <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data..."></ion-infinite-scroll-content>
         </ion-infinite-scroll>
     </div>
-
 
     <empty-state *ngIf="!isItemExist()"></empty-state>
 

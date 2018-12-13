@@ -96,11 +96,11 @@ export class NotificationProvider {
     }
 
     public readMeeting(modelId: any) {
-        return this.read(modelId, 'agenda rapat')
+        return this.read(modelId, '4')
     }
 
     public readPersonalAgenda(modelId: any) {
-        return this.read(modelId, 'agenda personal')
+        return this.read(modelId, '1')
     }
 
     public read(modelId, type:string) {

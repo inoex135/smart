@@ -15,6 +15,7 @@ export class MeetingProvider {
 
     static TAG:string = 'MeetingProvider'
     static CACHE_KEY:string = 'JhdjVIBfh26y9kIM_'
+    static CACHE_KEY_DETAIL:string = 'D0djVLKfh26y9nIM_'
 
     constructor(private api: ApiProvider, private cache: CacheProvider, private token: TokenProvider) {}
 
@@ -38,19 +39,19 @@ export class MeetingProvider {
     }
 
     public getMeetings(model:any) {
-        return this.api.get(`/rapat?keyword=${model.keyword}&page=${model.page}&size=${model.size}&jenis_waktu=${model.type}`)
+        return this.api.get(`/rapat?size=${model.size}&jenis_waktu=${model.type}&status=0`)
     }
 
-    private getDetailCache(id:any): Promise<any> {
+    private getDetailCache(id:any, prefix): Promise<any> {
         return this.token.getCurrentProfile()
         .then(profile => {
-            let key = MeetingProvider.CACHE_KEY + profile.nip + '_' + id
+            let key = prefix + profile.nip + '_' + id
             return Promise.all([this.cache.get(key), profile, key])
         })
     }
 
     public getDetailMeeting(id:any) {
-        return Observable.fromPromise(this.getDetailCache(id))
+        return Observable.fromPromise(this.getDetailCache(id, MeetingProvider.CACHE_KEY))
         .mergeMap(([data, profile, key]) => {
             LogUtil.d(MeetingProvider.TAG, profile)
             if (data == null) {
@@ -129,14 +130,30 @@ export class MeetingProvider {
     }
 
     public getDetailAgenda(model:any) {
-        var resource = this.api.get(`/agenda-rapat/${model.agenda_id}/waktu/${model.time_id}`)
-        return zip(resource, fromPromise(this.token.getCurrentProfile()))
-        .map(([res, profile]) => {
-            var agenda = {}
-            if (res) {
-                agenda = this.reconstructModel(res.agenda, res, profile)
+        return fromPromise(this.getDetailCache(model.time_id, MeetingProvider.CACHE_KEY_DETAIL))
+        .mergeMap(([data, profile, key]) => {
+            if (data == null) {
+                return this.api.get(`/agenda-rapat/${model.agenda_id}/waktu/${model.time_id}`)
+                .map(res => {
+                    var agenda = {}
+                    if (res) {
+                        agenda = this.reconstructModel(res.agenda, res, profile)
+                        this.cache.put(key, {when: Date.now() + CacheProvider.FIVE_MINUTES, response: agenda})
+                    }
+                    return agenda
+                })
             }
-            return agenda
+            return of(data.response)
+        })
+    }
+
+    public updateCacheDetailAgenda(timeId, model) {
+        return this.token.getCurrentProfile()
+        .then(profile => {
+            let key = MeetingProvider.CACHE_KEY_DETAIL + profile.nip + '_' + timeId
+            return this.cache.put(key, {when: Date.now() + CacheProvider.FIVE_MINUTES, response: model}).then(() => {
+                LogUtil.d(MeetingProvider.TAG, 'removed cache: ' + key)
+            })
         })
     }
 
