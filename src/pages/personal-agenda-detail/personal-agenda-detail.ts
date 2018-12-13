@@ -20,9 +20,14 @@ export class PersonalAgendaDetailPage {
 
   static TAG:string = 'PersonalAgendaDetailPage'
   static KEY_AGENDA_ID = 'agenda_id'
+  static KEY_MODEL = 'model'
+
 
   detailAgenda: any = [];
   private agendaId: any = undefined
+  detail:any = {}
+  notificationModel:any = {}
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -34,6 +39,7 @@ export class PersonalAgendaDetailPage {
     private notifaction: NotificationProvider
   ) {
     this.agendaId = this.navParams.get(PersonalAgendaDetailPage.KEY_AGENDA_ID)
+    this.notificationModel = this.navParams.get(PersonalAgendaDetailPage.KEY_MODEL)
   }
 
   ionViewDidLoad() {
@@ -43,7 +49,12 @@ export class PersonalAgendaDetailPage {
         this.agendaProvider.getDetail(this.agendaId)
         .subscribe(
           res => {
-            this.detailAgenda = res
+            if (res) {
+              this.detail = res
+              if (this.notificationModel) {
+                this.detail['title'] = this.notificationModel.title
+              }
+            }
             this.loader.dismissLoader()
             this.readNotification()
           },
@@ -54,7 +65,7 @@ export class PersonalAgendaDetailPage {
         )
       })
     } else {
-      this.getDetailAgenda();
+      this.getDetailAgenda()
     }
   }
 
@@ -119,6 +130,14 @@ export class PersonalAgendaDetailPage {
       ]
     });
     alert.present();
+  }
+
+  private getDetail():any {
+    return this.detail
+  }
+
+  private fromNotification():boolean {
+    return this.agendaId !== undefined || this.agendaId !== null
   }
 
   showToast(message: string) {

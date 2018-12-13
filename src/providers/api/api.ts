@@ -60,7 +60,7 @@ export class ApiProvider {
   }
 
   private extractBlob(res: Blob) {
-    console.log(res)
+    LogUtil.d(ApiProvider.TAG, res)
     let body = res
     return body || null
   }

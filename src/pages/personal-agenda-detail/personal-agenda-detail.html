@@ -6,31 +6,46 @@
 
 
 <ion-content padding>
-  <div *ngIf="detailAgenda?.length > 0">
-    <div *ngFor="let detail of detailAgenda">
-      <ion-card class="agenda-detail">
-        <img src="../../assets/images/cover_agenda.jpg">
-        <ion-card-content>
-          <h2 ion-text>{{detail?.title}}</h2><br/>
-          <p ion-text class="detail-color">
-            <ion-icon color="silver" name="md-calendar"></ion-icon> {{detail?.startDateLabel | indonesianDate: 'dddd, DD MMMM YYYY'}}</p>
-          <p ion-text class="detail-color">
-            <ion-icon color="silver" name="ios-clock-outline"></ion-icon> {{detail?.timeStart}} - {{detail?.timeEnd}}</p>
-          <!-- <p ion-text>{{detail?.uraian}}</p> -->
-          <p ion-text class="detail-color">
-            <ion-icon color="silver" name="md-pin"></ion-icon> {{detail?.lokasi}}</p>
-          <p ion-text class="detail-color">
-            <ion-icon color="silver" name="people"></ion-icon> {{detail?.type}}</p>
-        </ion-card-content>
-        <ion-item item-end *ngIf="detail?.edit">
-          <button color="default-blue" item-right clear ion-button (click)="edit(detail?.id)">
-            <ion-icon name="md-create"></ion-icon> Edit</button>
-          <button color="danger" item-right clear ion-button (click)="delete(detail?.id)">
-            <ion-icon name="trash"></ion-icon>Delete</button>
-        </ion-item>
-      </ion-card>
+  <div *ngIf="!fromNotification()">
+    <div *ngIf="detailAgenda?.length > 0">
+      <div *ngFor="let detail of detailAgenda">
+        <ion-card class="agenda-detail">
+          <img src="../../assets/images/cover_agenda.jpg">
+          <ion-card-content>
+            <h2 ion-text>{{detail?.title}}</h2><br/>
+            <p ion-text class="detail-color">
+              <ion-icon color="silver" name="md-calendar"></ion-icon> {{detail?.startDateLabel | indonesianDate: 'dddd, DD MMMM YYYY'}}</p>
+            <p ion-text class="detail-color">
+              <ion-icon color="silver" name="ios-clock-outline"></ion-icon> {{detail?.timeStart}} - {{detail?.timeEnd}}</p>
+            <!-- <p ion-text>{{detail?.uraian}}</p> -->
+            <p ion-text class="detail-color">
+              <ion-icon color="silver" name="md-pin"></ion-icon> {{detail?.lokasi}}</p>
+            <p ion-text class="detail-color">
+              <ion-icon color="silver" name="people"></ion-icon> {{detail?.type}}</p>
+          </ion-card-content>
+          <ion-item item-end *ngIf="detail?.edit">
+            <button color="default-blue" item-right clear ion-button (click)="edit(detail?.id)">
+              <ion-icon name="md-create"></ion-icon> Edit</button>
+            <button color="danger" item-right clear ion-button (click)="delete(detail?.id)">
+              <ion-icon name="trash"></ion-icon>Delete</button>
+          </ion-item>
+        </ion-card>
+      </div>
     </div>
-
+    <empty-state *ngIf="detailAgenda?.length == 0"></empty-state>
   </div>
-  <empty-state *ngIf="detailAgenda?.length == 0"></empty-state>
+  <div *ngIf="fromNotification()">
+    <ion-card class="agenda-detail">
+      <img src="../../assets/images/cover_agenda.jpg">
+      <ion-card-content>
+        <h2 ion-text>{{getDetail()?.title}}</h2><br/>
+        <p ion-text class="detail-color">
+          <ion-icon color="silver" name="md-calendar"></ion-icon> {{getDetail()?.tanggal_mulai | indonesianDate: 'dddd, DD MMMM YYYY'}}</p>
+        <p ion-text class="detail-color">
+          <ion-icon color="silver" name="ios-clock-outline"></ion-icon> {{getDetail()?.waktu_mulai | customDate:'h:m'}} - {{getDetail()?.waktu_akhir | customDate:'h:m'}}</p>
+        <p ion-text class="detail-color">
+          <ion-icon color="silver" name="md-pin"></ion-icon> {{getDetail()?.lokasi}}</p>
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>

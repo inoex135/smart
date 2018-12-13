@@ -246,6 +246,7 @@ export class NotificationPage {
         break
       case NotificationProvider.TYPE_PERSONAL:
         data[PersonalAgendaDetailPage.KEY_AGENDA_ID] = model.id
+        data[PersonalAgendaDetailPage.KEY_MODEL] = model
         this.navCtrl.push(PersonalAgendaDetailPage.TAG, data)
         break
     }

@@ -157,9 +157,10 @@ export class MeetingProvider {
     }
 
     public confirm(model:any) {
-        var data = {}
-        data['konfirmasi_hadir'] = model.confirm_to_attend
-        return this.api.post(`/agenda-waktu/${model.time_id}/konfirmasi`, data)
+        var data = new FormData()
+        data.append('konfirmasi_hadir', (model.confirm_to_attend ? 1 : 0).toString())
+        LogUtil.d(MeetingProvider.TAG, data)
+        return this.api.postForm(`/agenda-waktu/${model.time_id}/konfirmasi`, data)
     }
 
     public saveDelegation(model:any) {
