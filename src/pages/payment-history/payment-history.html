@@ -8,7 +8,7 @@
     <div *ngIf="isIncomeExist()">
         <ion-item *ngFor="let model of getItems()" (click)="detail(model)">
             <h6 ion-text>{{model?.monthName}} {{model.tahun}}</h6>
-            <p ion-text text-wrap>{{model?.total}}</p>
+            <p ion-text text-wrap>{{model?.Total}}</p>
         </ion-item>
     </div>
     <div *ngIf="isNonIncomeExist()">
