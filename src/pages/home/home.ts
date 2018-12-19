@@ -59,22 +59,26 @@ export class HomePage {
     {
       title: 'Persuratan',
       page: SuratPage.TAG,
-      icon: 'm-persuratan.svg'
+      icon: 'm-persuratan.svg',
+      enabled: true
     },
     {
       title: 'APT',
       page: AptPage.TAG,
-      icon: 'm-apt.svg'
+      icon: 'm-apt.svg',
+      enabled: true
     },
     {
       title: 'Personal',
       page: PersonalPage.TAG,
-      icon: 'm-personal.svg'
+      icon: 'm-personal.svg',
+      enabled: true
     },
     {
       title: 'E-Rapat',
       page: MeetingListPage.TAG,
-      icon: 'm-erapat.svg'
+      icon: 'm-erapat.svg',
+      enabled: false
     }
   ]
 
@@ -114,7 +118,7 @@ export class HomePage {
   }
 
   pagesTo(component:any) {
-    if (component !== '') {
+    if (component !== '' && component.enabled) {
       this.navCtrl.push(component.page);
     }
   }

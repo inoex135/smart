@@ -35,7 +35,7 @@
 
   <ion-grid class="grid menu-grid">
     <ion-row class="row img-grid">
-      <ion-col class="col home-menu-button" *ngFor="let button of buttons" (click)="pagesTo(button)">
+      <ion-col class="col home-menu-button {{button.enabled ? '' : 'grey-out'}}" *ngFor="let button of buttons" (click)="pagesTo(button)">
         <img src="assets/svg/{{button.icon}}" col-lg class="col home-menu-button" />
         {{button.title}}
       </ion-col>

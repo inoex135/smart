@@ -238,4 +238,10 @@ page-home {
 
   }
 
+  .grey-out {
+    -webkit-filter: grayscale(80%);
+    -ms-filter: grayscale(80%);
+    filter: grayscale(80%);
+  }
+
 }
