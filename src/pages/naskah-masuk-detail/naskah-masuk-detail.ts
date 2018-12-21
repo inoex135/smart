@@ -3,7 +3,8 @@ import {
   NavController,
   NavParams,
   IonicPage,
-  ModalController
+  ModalController,
+  Platform
 } from "ionic-angular";
 
 import { NaskahMasukProvider } from "../../providers/naskah-masuk/naskah-masuk";
@@ -23,6 +24,8 @@ import assign from "lodash/assign";
 import { NaskahNotifikasiProvider } from "../../providers/naskah-notifikasi/naskah-notifikasi";
 import { LogUtil } from "../../utils/logutil";
 import { NaskahDetailActionPage } from "../naskah-detail-action/naskah-detail-action";
+import { WebIntent } from '@ionic-native/web-intent';
+
 @IonicPage()
 @Component({
   selector: "page-naskah-masuk-detail",
@@ -62,7 +65,9 @@ export class NaskahMasukDetailPage {
     userProvider: UserProvider,
     private token: TokenProvider,
     private modalController: ModalController,
-    private naskahNotifikasi: NaskahNotifikasiProvider
+    private naskahNotifikasi: NaskahNotifikasiProvider,
+    private webIntent: WebIntent,
+    private platform: Platform
   ) {
     this.naskahId = this.navParams.get("naskahId");
     this.fileDirectory = file.externalRootDirectory + "Download";
@@ -181,7 +186,23 @@ export class NaskahMasukDetailPage {
       // alert(openFile.message);
 
       this.loaderHelper.dismissLoader()
-      this.toast.present("File telah di download");
+      this.toast.present("File telah di download")
+      if (this.platform.is('android')) {
+        const options = {
+          action: this.webIntent.ACTION_VIEW,
+          url: targetPath,
+          type: 'application/pdf'
+        }
+        
+        this.webIntent.startActivity(options)
+        .then(
+          onSuccess => {
+
+          }, 
+          onError => {
+
+          })
+      }
     } catch (error) {
       this.loaderHelper.dismissLoader()
       LogUtil.e(NaskahMasukDetailPage.TAG, error)
