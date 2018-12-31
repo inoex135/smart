@@ -74,7 +74,7 @@
     </ion-card>
   </div>
 
-  <ion-card class="profile-card money" (click)="historyPage()">
+  <ion-card class="profile-card money" *ngIf="isAllowToSeePaymentHistory()" (click)="historyPage()">
     <ion-card-content>
       <div>
         <span>Riwayat Pembayaran</span></div>

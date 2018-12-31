@@ -44,6 +44,8 @@ export class HomePage {
     nip: ''
   }
 
+  allowToSeePaymentHistory: boolean = true
+
   dashboard:any = {
     CT: 0,
     jam_masuk_hari_ini: "-",
@@ -193,8 +195,12 @@ export class HomePage {
     })
   }
 
-  private getDashboard() {
-    this.homeProvider.getDashboard().then(
+  private getDashboard():any {
+    if (!this.isCurrentUserEqualToLoggedInUser()) {
+      return this.resetDashboard()
+    }
+    return this.homeProvider.getDashboard()
+    .then(
       res => {
         if (res) {
           LogUtil.d(this.TAG, res)
@@ -252,15 +258,17 @@ export class HomePage {
       this.token.setCurrentUserDataFirst()
       .then(() => {
         this.initData()
+        this.enabledPaymentHistory()
       }).catch(error => {
         this.redirectToLogIn(error)
       })
     } else {
-      this.loaderHelper.createLoader();
+      this.loaderHelper.createLoader()
       this.userProvider.byPass(nip)
       .subscribe(
         res => {
           LogUtil.d(this.TAG, res)
+          this.disabledPaymentHistory()
           if (res) {
             this.initData(true)
             this.bell.updateNotification()
@@ -292,6 +300,33 @@ export class HomePage {
 
   historyPage() {
     this.navCtrl.push(PaymentHistoryPage.TAG)
+  }
+
+  private resetDashboard():boolean {
+    this.dashboard.CT = 0
+    this.dashboard.jam_masuk_hari_ini = "-"
+    this.dashboard.DL = 0
+    this.dashboard.hari_kerja = 0
+    this.dashboard.akumulasi_absen = "-"
+    this.dashboard.jumlah_hari_masuk = 0
+    this.dashboard.jam_keluar_hari_ini = null
+    return true
+  }
+
+  private isCurrentUserEqualToLoggedInUser():boolean {
+    return this.loggedInProfile.nip = this.currentProfile.nip
+  }
+
+  isAllowToSeePaymentHistory():boolean {
+    return this.allowToSeePaymentHistory
+  }
+
+  private disabledPaymentHistory():void {
+    this.allowToSeePaymentHistory = false
+  }
+
+  private enabledPaymentHistory():void {
+    this.allowToSeePaymentHistory = true
   }
 
 }
