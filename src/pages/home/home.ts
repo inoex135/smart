@@ -194,7 +194,7 @@ export class HomePage {
       this.redirectToLogIn(error)
     })
   }
-
+  
   private getDashboard():any {
     if (!this.isCurrentUserEqualToLoggedInUser()) {
       return this.resetDashboard()
@@ -314,7 +314,7 @@ export class HomePage {
   }
 
   private isCurrentUserEqualToLoggedInUser():boolean {
-    return this.loggedInProfile.nip = this.currentProfile.nip
+    return this.loggedInProfile.nip == this.currentProfile.nip
   }
 
   isAllowToSeePaymentHistory():boolean {
