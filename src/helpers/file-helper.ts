@@ -5,6 +5,7 @@ import { File } from "@ionic-native/file";
 import { FileTransfer, FileTransferObject } from "@ionic-native/file-transfer";
 import { TokenProvider } from "../providers/token/token";
 import { LogUtil } from "../utils/logutil";
+import { Platform } from "ionic-angular";
 
 @Injectable()
 export class FileHelper {
@@ -20,9 +21,13 @@ export class FileHelper {
         private androidPermissions: AndroidPermissions,
         private storage: File,
         private transfer: FileTransfer,
-        private token: TokenProvider
+        private token: TokenProvider,
+        private platform: Platform
     ) {
-        this.fileTransfer = transfer.create();
+        this.fileTransfer = transfer.create()
+        if (this.platform.is("android") || this.platform.is("ios")) {
+          this.createCacheDownloadDirectory()
+        }
     }
 
   openFile(directory, mime = this.mime) {
@@ -58,8 +63,29 @@ export class FileHelper {
     return res;
   }
 
-  public getDownloadDirectory() {
-    return this.storage.externalRootDirectory + "Download";
+  public getBaseFileDirectory(): string {
+    const path = this.storage.cacheDirectory
+    LogUtil.d(FileHelper.TAG, path)
+    return path
+  }
+
+  public getDownloadDirectory(): string {
+    return this.getBaseFileDirectory() + "download";
+  }
+
+  public createCacheDownloadDirectory() {
+    LogUtil.d(FileHelper.TAG, "create cache download directory")
+    return this.storage.createDir(this.getBaseFileDirectory(), "download", false)
+    .then(dirEntry => {
+      LogUtil.d(FileHelper.TAG, dirEntry)
+    })
+    .catch(err => {
+      LogUtil.e(FileHelper.TAG, err)
+    })
+  }
+
+  public isFileExist(filename):Promise<boolean> {
+    return this.storage.checkFile(this.getDownloadDirectory(), filename)
   }
 
   public async download(url: string, targetPath) {

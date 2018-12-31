@@ -3,8 +3,7 @@ import {
   NavController,
   NavParams,
   IonicPage,
-  ModalController,
-  Platform
+  ModalController
 } from "ionic-angular";
 
 import { NaskahMasukProvider } from "../../providers/naskah-masuk/naskah-masuk";
@@ -14,7 +13,6 @@ import { NaskahAction } from "../../constant/naskah-action";
 
 import { NaskahModalDownloadComponent } from "../../components/naskah-modal-download/naskah-modal-download";
 
-import { File } from "@ionic-native/file";
 import { AptHelper } from "../../helpers/apt-helper";
 import { ToastHelper } from "../../helpers/toast-helper";
 import { UserProvider } from "../../providers/user/user";
@@ -24,7 +22,8 @@ import assign from "lodash/assign";
 import { NaskahNotifikasiProvider } from "../../providers/naskah-notifikasi/naskah-notifikasi";
 import { LogUtil } from "../../utils/logutil";
 import { NaskahDetailActionPage } from "../naskah-detail-action/naskah-detail-action";
-import { WebIntent } from '@ionic-native/web-intent';
+import { FileHelper } from "../../helpers/file-helper";
+import { DocumentViewer } from "@ionic-native/document-viewer";
 
 @IonicPage()
 @Component({
@@ -36,8 +35,6 @@ export class NaskahMasukDetailPage {
   static TAG:string = 'NaskahMasukDetailPage'
 
   //file dir transfer for download
-  fileDirectory: any;
-
   private detail: any = {};
   private naskahId: string = "";
   sizeDetail: number = 0;
@@ -59,18 +56,16 @@ export class NaskahMasukDetailPage {
     public navParams: NavParams,
     private naskahProvider: NaskahMasukProvider,
     private loaderHelper: LoaderHelper,
-    file: File,
     private aptHelper: AptHelper,
     private toast: ToastHelper,
     userProvider: UserProvider,
     private token: TokenProvider,
     private modalController: ModalController,
     private naskahNotifikasi: NaskahNotifikasiProvider,
-    private webIntent: WebIntent,
-    private platform: Platform
+    private fileHelper: FileHelper,
+    private docViewer: DocumentViewer
   ) {
     this.naskahId = this.navParams.get("naskahId");
-    this.fileDirectory = file.externalRootDirectory + "Download";
     this.token.getProfile().then(res => (this.profile = res), err => true);
   }
 
@@ -170,7 +165,7 @@ export class NaskahMasukDetailPage {
     await this.loaderHelper.show();
     try {
       LogUtil.d(NaskahMasukDetailPage.TAG, fileData)
-      const targetPath = this.fileDirectory + "/" + fileData.namaFile;
+      const targetPath = this.fileHelper.getDownloadDirectory() + "/" + fileData.namaFile;
       LogUtil.d(NaskahMasukDetailPage.TAG, targetPath)
 
       const checkPermission = await this.aptHelper.checkPermission();
@@ -187,7 +182,8 @@ export class NaskahMasukDetailPage {
 
       this.loaderHelper.dismissLoader()
       this.toast.present("File telah di download")
-      if (this.platform.is('android')) {
+      await this.docViewer.viewDocument(targetPath, 'application/pdf', {title: fileData.namaFile})
+/*       if (this.platform.is('android')) {
         const options = {
           action: this.webIntent.ACTION_VIEW,
           url: targetPath,
@@ -202,7 +198,7 @@ export class NaskahMasukDetailPage {
           onError => {
 
           })
-      }
+      } */
     } catch (error) {
       this.loaderHelper.dismissLoader()
       LogUtil.e(NaskahMasukDetailPage.TAG, error)

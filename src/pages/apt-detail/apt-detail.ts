@@ -11,6 +11,8 @@ import { ToastHelper } from "../../helpers/toast-helper";
 import { UserProvider } from "../../providers/user/user";
 import { AptHistoryPage } from "../apt-history/apt-history";
 import { LogUtil } from "../../utils/logutil";
+import { FileHelper } from "../../helpers/file-helper";
+import { DocumentViewer } from '@ionic-native/document-viewer';
 
 @IonicPage()
 @Component({
@@ -25,7 +27,6 @@ export class AptDetailPage {
   ACTION = AptAction;
   aptIndikator = APT_INDIKATOR;
   aptDetail: any = {};
-  fileDirectory: any;
   profile: any;
   aptVerifikasi: any = {};
   constructor(
@@ -36,9 +37,11 @@ export class AptDetailPage {
     file: File,
     private aptHelper: AptHelper,
     private toast: ToastHelper,
-    private userProvider: UserProvider
+    private userProvider: UserProvider,
+    private fileHelper: FileHelper,
+    private docViewer: DocumentViewer
   ) {
-    this.fileDirectory = file.externalRootDirectory + "Download";
+    
   }
 
   ionViewWillEnter() {
@@ -91,7 +94,8 @@ export class AptDetailPage {
 
   async downloadPermohonan(fileApt) {
     try {
-      const targetPath = `${this.fileDirectory}/${fileApt.nomor_tiket}.pdf`;
+      const filename = fileApt.nomor_tiket + '.pdf'
+      const targetPath = `${this.fileHelper.getDownloadDirectory()}/${filename}`;
 
       await this.loaderHelper.show()
 
@@ -102,9 +106,13 @@ export class AptDetailPage {
         await this.aptHelper.requestPermission();
       }
 
-      this.aptProvider.download(fileApt.id, targetPath);
+      await this.aptProvider.download(fileApt.id, targetPath);
 
       this.toast.present("File telah di download");
+      const fileExist = await this.fileHelper.isFileExist(filename)
+      if (fileExist) {
+        this.docViewer.viewDocument(targetPath, 'application/pdf', {title: filename})
+      }
       this.loaderHelper.dismissLoader()
 
       // open file after download

@@ -196,7 +196,7 @@ export class HomePage {
   }
   
   private getDashboard():any {
-    if (!this.isCurrentUserEqualToLoggedInUser()) {
+    if (!this.isCurrentUserEqualsToLoggedInUser()) {
       return this.resetDashboard()
     }
     return this.homeProvider.getDashboard()
@@ -313,7 +313,7 @@ export class HomePage {
     return true
   }
 
-  private isCurrentUserEqualToLoggedInUser():boolean {
+  private isCurrentUserEqualsToLoggedInUser():boolean {
     return this.loggedInProfile.nip == this.currentProfile.nip
   }
 

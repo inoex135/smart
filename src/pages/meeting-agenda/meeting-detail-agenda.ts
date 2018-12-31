@@ -9,7 +9,6 @@ import { FileHelper } from "../../helpers/file-helper";
 import { zip } from "rxjs/observable/zip";
 import { NotificationProvider } from "../../providers/notification/notification";
 
-
 @Component({
     selector: "meeting-detail-agenda",
     templateUrl: "meeting-detail-agenda.html"
