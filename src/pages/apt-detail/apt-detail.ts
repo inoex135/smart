@@ -94,7 +94,7 @@ export class AptDetailPage {
 
   async downloadPermohonan(fileApt) {
     try {
-      const filename = fileApt.nomor_tiket + '.pdf'
+      const filename = fileApt.nomor_tiket + FileHelper.PDF_MIME.extension
       const targetPath = `${this.fileHelper.getDownloadDirectory()}/${filename}`;
 
       await this.loaderHelper.show()
@@ -106,14 +106,12 @@ export class AptDetailPage {
         await this.aptHelper.requestPermission();
       }
 
-      await this.aptProvider.download(fileApt.id, targetPath);
+      await this.aptProvider.download(fileApt.id, targetPath)
 
-      this.toast.present("File telah di download");
-      const fileExist = await this.fileHelper.isFileExist(filename)
-      if (fileExist) {
-        this.docViewer.viewDocument(targetPath, 'application/pdf', {title: filename})
-      }
+      this.toast.present("File telah di download")
+
       this.loaderHelper.dismissLoader()
+      this.fileHelper.openFileWindow(filename)
 
       // open file after download
       // await this.aptHelper.openFile(targetPath);

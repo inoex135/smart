@@ -177,28 +177,12 @@ export class NaskahMasukDetailPage {
       await this.naskahProvider.downloadFileSurat(fileData.id, targetPath);
 
       // open file after download
-      await this.aptHelper.openFile(targetPath, "application/pdf");
+     // await this.aptHelper.openFile(targetPath, "application/pdf");
       // alert(openFile.message);
 
       this.loaderHelper.dismissLoader()
       this.toast.present("File telah di download")
-      await this.docViewer.viewDocument(targetPath, 'application/pdf', {title: fileData.namaFile})
-/*       if (this.platform.is('android')) {
-        const options = {
-          action: this.webIntent.ACTION_VIEW,
-          url: targetPath,
-          type: 'application/pdf'
-        }
-        
-        this.webIntent.startActivity(options)
-        .then(
-          onSuccess => {
-
-          }, 
-          onError => {
-
-          })
-      } */
+      this.fileHelper.openFileWindow(fileData.namaFile)
     } catch (error) {
       this.loaderHelper.dismissLoader()
       LogUtil.e(NaskahMasukDetailPage.TAG, error)

@@ -1,11 +1,11 @@
 import { Injectable } from "@angular/core";
 import { ApiProvider } from "../api/api";
-import { FileTransfer, FileTransferObject } from "@ionic-native/file-transfer";
 import { ENV } from "../../config/environment";
 import { TokenProvider } from "../token/token";
 import { map } from "rxjs/operators/map";
 import { LogUtil } from "../../utils/logutil";
 import { CacheProvider } from "../cache/cache";
+import { FileHelper } from "../../helpers/file-helper";
 
 @Injectable()
 export class AptProvider {
@@ -13,16 +13,15 @@ export class AptProvider {
   static TAG:string = 'AptProvider'
   private APT_PELAYANANS:string = 'VEAQXDfpbmKgxhr'
 
-  fileTransfer: FileTransferObject;
   fileDir: string;
 
   constructor(
     public apiProvider: ApiProvider,
-    transfer: FileTransfer,
     private token: TokenProvider,
-    private cache: CacheProvider
+    private cache: CacheProvider,
+    private fileHelper: FileHelper
   ) {
-    this.fileTransfer = transfer.create();
+
   }
 
   // get daftar permohonan apt
@@ -117,37 +116,25 @@ export class AptProvider {
 
   download(fileId: number, targetPath) {
     // @todo : dummy url, change when api already
-    // const url = `http://www.lkpp.go.id/v3/files/attachments/5_fWwUnTrpMTbexDEmAMSCNDzObHttIcYl.pdf`;
+     const url = 'http://inaproc.id/files/2757/Eskalasi%20Permasalahan%20LPSE.pdf';
 
-    const url = `${ENV.API_URL}/apt/permohonan/download/${fileId}`;
+    //const url = `${ENV.API_URL}/apt/permohonan/download/${fileId}`;
 
     // const filename = url.split("/").pop();
 
     // this.fileDir = this.file.externalRootDirectory + "Download" + 'smart.xlsx';
     // console.log(filename);
 
-    const options = {
-      headers: {
-        Authorization: "smartdjkn2017mobile",
-        token: this.token.latestToken
-      },
-      httpMethod: "GET"
-    };
-
-    return this.fileTransfer
-      .download(url, targetPath, false, options)
+    return this.fileHelper.baseDownload({
+      url: url,
+      targetPath: targetPath
+    })
       .then(res => {
         return res;
       })
       .catch(err => {
         return err;
       });
-  }
-
-  downloadProgress() {
-    this.fileTransfer.onProgress(res => {
-      console.log(res);
-    });
   }
 
   getDekatBatasWaktu(keyword: string, page: number = 0, size: number = 10) {
