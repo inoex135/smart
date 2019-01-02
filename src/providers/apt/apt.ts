@@ -116,9 +116,9 @@ export class AptProvider {
 
   download(fileId: number, targetPath) {
     // @todo : dummy url, change when api already
-     const url = 'http://inaproc.id/files/2757/Eskalasi%20Permasalahan%20LPSE.pdf';
+    // const url = 'http://inaproc.id/files/2757/Eskalasi%20Permasalahan%20LPSE.pdf';
 
-    //const url = `${ENV.API_URL}/apt/permohonan/download/${fileId}`;
+    const url = `${ENV.API_URL}/apt/permohonan/download/${fileId}`
 
     // const filename = url.split("/").pop();
 
@@ -130,11 +130,11 @@ export class AptProvider {
       targetPath: targetPath
     })
       .then(res => {
-        return res;
+        return res
       })
       .catch(err => {
-        return err;
-      });
+        return err
+      })
   }
 
   getDekatBatasWaktu(keyword: string, page: number = 0, size: number = 10) {
