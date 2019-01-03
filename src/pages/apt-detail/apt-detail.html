@@ -7,9 +7,9 @@
 <ion-content>
   <div class="detail-header">
     <h2>
-      {{aptDetail?.pelayanan?.nama}}
+      {{aptDetail?.pelayanan}}
     </h2>
-    <p>{{aptDetail?.pelayanan_sub?.nama}}</p><br>
+    <p>{{aptDetail?.sub_pelayanan}}</p><br>
   </div>
 
   <div class="detail-content">
@@ -43,7 +43,7 @@
           Tanggal Surat
         </ion-col>
         <ion-col class="content-right">
-          {{aptDetail?.date_created | indonesianDate:'DD MMMM YYYY'}} 
+          {{aptDetail?.tanggal_surat | indonesianDate:'DD MMMM YYYY'}} 
         </ion-col>
       </ion-row>
       <ion-row>
@@ -51,7 +51,7 @@
           Tanggal Terima
         </ion-col>
         <ion-col class="content-right">
-          {{aptVerifikasi?.tanggal | indonesianDate:'DD MMMM YYYY'}} 
+          {{aptDetail?.supervisi?.tanggal}} 
         </ion-col>
       </ion-row>   
       <ion-row>
@@ -59,7 +59,7 @@
           Status Permohonan
         </ion-col>
         <ion-col class="content-right">
-          {{aptDetail?.status_string}}
+          {{aptDetail?.supervisi?.status}}
         </ion-col>
       </ion-row>  
     </ion-grid>

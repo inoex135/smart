@@ -28,7 +28,6 @@ export class AptDetailPage {
   aptIndikator = APT_INDIKATOR;
   aptDetail: any = {};
   profile: any;
-  aptVerifikasi: any = {};
   constructor(
     private navParams: NavParams,
     private navCtrl: NavController,
@@ -45,9 +44,9 @@ export class AptDetailPage {
   }
 
   ionViewWillEnter() {
-    this.itemId = this.navParams.get("itemId");
-    this.getDetailApt();
-    this.getProfile();
+    this.itemId = this.navParams.get("itemId")
+    this.getDetailApt()
+    this.getProfile()
   }
 
   ionViewWillLeave() {
@@ -68,9 +67,8 @@ export class AptDetailPage {
     this.aptProvider.getDetailApt(this.itemId)
     .subscribe(
       res => {
-        this.aptDetail = res;
-        this.aptVerifikasi = res.verifikasi;
-        this.readNotifikasi();
+        this.aptDetail = res
+        this.readNotifikasi()
         this.loaderHelper.dismissLoader()
       },
       err => {
