@@ -68,9 +68,8 @@ export class AptDetailPage {
     this.aptProvider.getDetailApt(this.itemId)
     .subscribe(
       res => {
-        const response = res.response;
-        this.aptDetail = response.permohonan;
-        this.aptVerifikasi = response.permohonanVerifikasi;
+        this.aptDetail = res;
+        this.aptVerifikasi = res.verifikasi;
         this.readNotifikasi();
         this.loaderHelper.dismissLoader()
       },

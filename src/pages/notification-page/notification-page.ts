@@ -29,7 +29,7 @@ export class NotificationPage {
       chips: {},
       page: {
         total: 0,
-        currentPage: 1,
+        currentPage: 0,
         totalPages: 0,
         isRead: 0
       }
@@ -158,7 +158,7 @@ export class NotificationPage {
   }
 
   decreaseCurrentPage():void {
-    if (this.data.meta.page.currentPage == 1) {
+    if (this.data.meta.page.currentPage == 0) {
       return
     }
     this.data.meta.page.currentPage -= 1
@@ -223,7 +223,7 @@ export class NotificationPage {
     this.data.items = []
     this.data.meta.page = {
       total: 0,
-      currentPage: 1,
+      currentPage: 0,
       totalPages: 0,
       isRead: 0
     }

@@ -91,7 +91,7 @@ export class AptProvider {
 
   // get detail apt
   getDetailApt(aptId: number) {
-    return this.apiProvider.get(`/apt/permohonan/detail/${aptId}`);
+    return this.apiProvider.get(`/interkoneksi/permohonan/detail/${aptId}`);
   }
 
   agendakanApt(params: any) {

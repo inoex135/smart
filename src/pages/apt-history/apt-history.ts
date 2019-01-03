@@ -53,10 +53,12 @@ export class AptHistoryPage {
     LogUtil.d(AptHistoryPage.TAG, this.apt)
     if (this.apt) {
       if (this.apt.supervisi) {
-        this.histories.supervisions = this.apt.supervisi
+        this.histories.supervisions.push(this.apt.supervisi)
       }
-      if (this.apt.Verifikasi) {
-        this.histories.verifikasi = this.apt.verifikasi
+      if (this.apt.verifikasi && this.apt.verifikasi.length) {
+        this.apt.verifikasi.forEach(item => {
+          this.histories.verifications.push(item)
+        })
       }
     }
   }
