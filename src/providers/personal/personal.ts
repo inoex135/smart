@@ -24,11 +24,11 @@ export class PersonalProvider {
       .get(url)
       .map(res => {
         // mapping datetime for calender format
-        const data = res.map(datas => {
-          datas.startTime = this.convertDateForCalendar(datas.startTime);
-          datas.endTime = this.convertDateForCalendar(datas.endTime);
+        const data = res.map(event => {
+          event.startTime = this.convertDateForCalendar(event.start_time);
+          event.endTime = this.convertDateForCalendar(event.end_time);
 
-          return datas;
+          return event;
         });
 
         return data;

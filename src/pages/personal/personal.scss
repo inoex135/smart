@@ -49,4 +49,9 @@ page-personal {
     font-weight: bolder;
     color: #fff;
   }
+
+  .detail-event p {
+    color: color($colors, 'light-white');
+  }
+
 }

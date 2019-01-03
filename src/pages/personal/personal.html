@@ -18,15 +18,12 @@
 
       <ng-template #template let-showEventDetail="showEventDetail" let-selectedDate="selectedDay" let-noEventsLabel="noEventsLabel">
         <ion-card *ngFor="let event of selectedDay.events" [class]="setLabelColorCalendarDetail(event?.type)">
-          <ion-card-content>
+          <ion-card-content class="detail-event">
             <ion-row>
-              <ion-col col-4>
-                <ion-icon name="ios-clock-outline"></ion-icon>
-                <p ion-text>{{event?.timeStart }} - {{event?.timeEnd }}</p>
-              </ion-col>
-              <ion-col col-8>
-                <p ion-text class="calendar-event-title">{{event?.title}}</p>
-                <p ion-text>{{event?.type}}</p>
+              <ion-col col-12>
+                  <p ion-text><ion-icon name="ios-clock-outline"></ion-icon> {{event?.start_date_label | indonesianDate:'DD MMMM YYYY'}} - {{event?.end_date_label | indonesianDate:'DD MMMM YYYY'}}</p>
+                  <p ion-text class="calendar-event-title">{{event?.title}}</p>
+                  <p ion-text>{{event?.type}}</p>
               </ion-col>
             </ion-row>
           </ion-card-content>
