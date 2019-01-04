@@ -131,7 +131,7 @@ export class NaskahMasukPage {
       this.naskahProvider.searchNaskahComplete(this.filter.naskahUnit, this.filter.naskahSifat,this.keyword,this.page)
       .subscribe(res => {
       
-        for (var index = 0; index < res.response.length; index++) {
+        for (let index = 0; index < res.response.length; index++) {
           
           this.listNaskah.push(res.response[index]);
         }

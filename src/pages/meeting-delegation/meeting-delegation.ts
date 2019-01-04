@@ -65,10 +65,10 @@ export class MeetingDelegationPage {
     }
 
     private addParticipant(): void {
-        var participant = this.getSearchSelection()
+        let participant = this.getSearchSelection()
         LogUtil.d(MeetingDelegationPage.TAG, participant)
         if (participant) {
-            var model:any = {}
+            let model:any = {}
             model['nip_tujuan'] = participant.nip
             model['selaku'] = this.getSelaku()
             model['nama_penerima'] = participant.nama

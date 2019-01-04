@@ -39,7 +39,7 @@ export class MeetingListPage {
     }
 
     private fillList(loading:boolean = false) {
-        var load = Promise.resolve(loading)
+        let load = Promise.resolve(loading)
         if (loading) {
             this.loader.show()
         }
@@ -99,7 +99,7 @@ export class MeetingListPage {
     }
 
     private detail(model: any): void {
-        var data = {}
+        let data = {}
         data[MeetingDetailPage.KEY_DETAIL_ID] = model.id
         this.navCtrl.push(MeetingDetailPage.TAG, data)
     }

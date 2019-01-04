@@ -52,7 +52,7 @@ export class NotificationPage {
   }
 
   initChips() {
-    var data:any ={}
+    let data:any ={}
     data[NotificationProvider.TYPE_ALL] = {
       name: 'Semua Notifikasi',
       value: 0,
@@ -100,7 +100,7 @@ export class NotificationPage {
       result => {
         if (result && this.showChips()) {
           LogUtil.d(NotificationPage.TAG, result)
-          for (var i in result) {
+          for (let i in result) {
             LogUtil.d(NotificationPage.TAG, "get element by key: " + i)
             if (this.data.meta.chips[i]) {
               this.data.meta.chips[i].value = result[i]
@@ -137,10 +137,10 @@ export class NotificationPage {
   }
 
   getChips() {
-    var data = []
+    let data = []
     if (this.showChips()) {
-      var k = 0
-      for (var a in this.data.meta.chips) {
+      let k = 0
+      for (let a in this.data.meta.chips) {
         data[k] = this.data.meta.chips[a]
         data[k].key = a
         k++
@@ -205,8 +205,8 @@ export class NotificationPage {
 
   clickChip(key:string = '') {
     LogUtil.d(NotificationPage.TAG, 'key: 0' + key)
-    for (var i in this.data.meta.chips) {
-      var current = this.data.meta.chips[i]
+    for (let i in this.data.meta.chips) {
+      let current = this.data.meta.chips[i]
       current.active = current.key === key
     }
     this.setProvider(key)
@@ -231,7 +231,7 @@ export class NotificationPage {
 
   onItemClick(model:any) {
     LogUtil.d(NotificationPage.TAG, model)
-    var data = {}
+    let data = {}
     switch (model.type) {
       case NotificationProvider.TYPE_APT:
         this.navCtrl.push(AptDetailPage.TAG, { itemId: model.id })

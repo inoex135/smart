@@ -51,7 +51,7 @@ export class PaymentProvider {
         return Observable.fromPromise(this.getCache(provider))
             .mergeMap(([data, nip, key]) => {
                 if (data == null) {
-                    var api = this.getIncomes(nip)
+                    let api = this.getIncomes(nip)
                     if (provider === PaymentProvider.KEY_PAYMENT_NON_INCOME) {
                         LogUtil.d(PaymentProvider.TAG, "get non income")
                         api = this.getNonIncomes(nip)
@@ -59,7 +59,7 @@ export class PaymentProvider {
 
                     return api
                         .map(response => {
-                            var result = []
+                            let result = []
                             if (provider === PaymentProvider.KEY_PAYMENT_INCOME) {
                                 result = this.reconstructArray(response.bulanan)
                             } else {
@@ -76,7 +76,7 @@ export class PaymentProvider {
     }
 
     private reconstructArray(items:any = []): any {
-        var arr = []
+        let arr = []
         if (items.length > 0) {
             items.forEach(model => {
                 model['monthName'] = PaymentProvider.MONTHS[model['bulan']]

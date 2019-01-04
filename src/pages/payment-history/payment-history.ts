@@ -69,7 +69,7 @@ export class PaymentHistoryPage {
 
     detail(model:any): void {
         if (this.type === PaymentProvider.KEY_PAYMENT_INCOME) {
-            var data = {}
+            let data = {}
             data[PaymentHistoryDetailPage.KEY_MODEL] = model
             this.navCtrl.push(PaymentHistoryDetailPage.TAG, data)
         }

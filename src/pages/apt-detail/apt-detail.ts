@@ -119,7 +119,7 @@ export class AptDetailPage {
   }
 
   openHistory() {
-    var data = {}
+    let data = {}
     data[AptHistoryPage.KEY_DATA] = this.aptDetail
     this.navCtrl.push(AptHistoryPage.TAG, data)
   }

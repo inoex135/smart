@@ -36,11 +36,11 @@ export class PaymentHistoryDetailPage {
     }
 
     private getModel(): any {
-        var newModel: any = {
+        let newModel: any = {
             header:{},
             detail: []
         }
-        for (var l in this.labels) {
+        for (let l in this.labels) {
             if (l !== 'total' && l !== 'Total' && l !== 'bulan' && l !== 'monthName' && l !== 'tahun') {
                 newModel.detail.push({label: this.labels[l], value: this.model[l]})
             } else {
