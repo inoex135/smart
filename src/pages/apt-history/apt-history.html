@@ -40,23 +40,23 @@
           <ion-row>
             <ion-col col-12>
               <p ion-text>Tanggal Verifikasi</p>
-              <p ion-text> {{item?.tanggal_verifikasi}}</p>
+              <p ion-text> {{item?.getTanggal()}}</p>
             </ion-col>
             <ion-col col-12>
               <p ion-text>Surat Pendukung</p>
-              <p ion-text text-wrap>{{item?.surat_pendukung}}</p>
+              <p ion-text text-wrap>{{item?.getSuratPendukung()}}</p>
             </ion-col>
             <ion-col col-12>
               <p ion-text>Nama Verifikator</p>
-              <p ion-text text-wrap>{{item?.nama_verifikator}}</p>
+              <p ion-text text-wrap>{{item?.getNama()}}</p>
             </ion-col>
             <ion-col col-12>
               <p ion-text>Status Verifikasi</p>
-              <p ion-text>{{item?.status_verifikasi}}</p>
+              <p ion-text>{{item?.getStatus()}}</p>
             </ion-col>
             <ion-col col-12>
               <p ion-text>Catatan Verifikasi</p>
-              <p ion-text>{{item?.catatan_verifikasi}}</p>
+              <p ion-text>{{item?.getCatatan()}}</p>
             </ion-col>
           </ion-row>
         </ion-col>
