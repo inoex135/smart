@@ -2,7 +2,6 @@ import { Component, ViewChild } from "@angular/core";
 import {
   NavController,
   NavParams,
-  LoadingController,
   IonicPage,
   App,
   Select
@@ -73,7 +72,6 @@ export class AptPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     private aptProvider: AptProvider,
-    private loadingCtrl: LoadingController,
     file: File,
     private loaderHelper: LoaderHelper,
     private toastHelper: ToastHelper,
