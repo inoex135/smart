@@ -3,10 +3,10 @@ import { BaseModel } from "../../../models/base-model";
 
 export class Supervisi extends BaseModel implements SupervisiContract {
 
-    readonly catatan?: string   
-    readonly tanggal?: string
-    readonly status?: string
-    readonly nama_supervisor?: string
+    private readonly catatan?: string   
+    private readonly tanggal?: string
+    private readonly status?: string
+    private readonly nama_supervisor?: string
 
     constructor(data:any) {
         super(data)
@@ -19,7 +19,7 @@ export class Supervisi extends BaseModel implements SupervisiContract {
         return this.tanggal
     }
     getStatus(): string {
-        return status
+        return this.status
     }
     getNama(): string {
         return this.nama_supervisor

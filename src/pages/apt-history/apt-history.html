@@ -13,19 +13,19 @@
           <ion-row>
             <ion-col col-12>
               <p ion-text>Tanggal Diagendakan</p>
-              <p ion-text> {{item?.tanggal}}</p>
+              <p ion-text> {{item?.getTanggal()}}</p>
             </ion-col>
             <ion-col col-12>
               <p ion-text>Yang Melakukan Supervisi</p>
-              <p ion-text text-wrap>{{item?.nama_supervisor}}</p>
+              <p ion-text text-wrap>{{item?.getNama()}}</p>
             </ion-col>
             <ion-col col-12>
               <p ion-text>Status</p>
-              <p ion-text>{{item?.status}}</p>
+              <p ion-text>{{item?.getStatus()}}</p>
             </ion-col>
             <ion-col col-12>
               <p ion-text>Catatan Supervisi</p>
-              <p ion-text>{{item?.catatan}}</p>
+              <p ion-text>{{item?.getCatatan()}}</p>
             </ion-col>
           </ion-row>
         </ion-col>
