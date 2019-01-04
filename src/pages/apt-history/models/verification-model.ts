@@ -3,11 +3,11 @@ import { BaseModel } from "../../../models/base-model";
 
 export class Verification extends BaseModel implements VerifikasiContract {
 
-    readonly tanggal_verifikasi?:string
-    readonly surat_pendukung?:string
-    readonly nama_verifikator?:string
-    readonly status_verifikasi?:string
-    readonly catatan_verifikasi?:string
+    private readonly tanggal_verifikasi?:string
+    private readonly surat_pendukung?:string
+    private readonly nama_verifikator?:string
+    private readonly status_verifikasi?:string
+    private readonly catatan_verifikasi?:string
 
     constructor(data:any) {
         super(data)

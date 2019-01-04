@@ -14,7 +14,7 @@ export class CustomDatePipe implements PipeTransform {
    */
   transform(value: Array<any>, ...args) {
     if (value) {
-      return moment(value[2] + "-" + value[1] + "-" + value[0], "DD-MM-YYYY")
+      return moment(value, "DD-MM-YYYY")
         .locale("ID_id")
         .format("DD MMMM YYYY");
     }
