@@ -13,7 +13,7 @@ export class IndonesianDatePipe implements PipeTransform {
     parse = "DD-MM-YYYY"
   ) {
     if (value) {
-      const newDate = moment(value, parse)
+      const newDate = moment(value)
         .locale("ID_id")
         .format(args);
 
