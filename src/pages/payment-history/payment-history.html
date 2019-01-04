@@ -15,8 +15,9 @@
     </div>
 
     <div *ngIf="isNonIncomeExist()">
+            <h4 class="payment-title">Riwayat Non Penghasilan</h4>
         <ion-list>
-            <ion-card item *ngFor="let model of getItems()">
+            <ion-card item *ngFor="let model of getItems()" class="non-payment-item">
                 <ion-row>
                     <ion-col class="detail-col">
                         <ion-row>
@@ -24,7 +25,7 @@
                                 <p ion-text right>{{ model?.tgl | indonesianDate:'dddd, DD MMMM YYYY' }}</p>
                             </ion-col>
                             <ion-col col-12 class="description">
-                                <p ion-text text-wrap>{{model?.uraian}}</p>
+                                <p ion-text text-wrap class="non-payment-desc" style="color:white;">{{model?.uraian}}</p>
                             </ion-col>
                             <ion-col class="with-label" col-12>
                                 <p ion-text>Jumlah Bruto</p>
