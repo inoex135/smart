@@ -42,7 +42,7 @@
       <p *ngIf="notif?.uraian" text-wrap>{{notif?.uraian}}</p>
 
       <p ion-text text-wrap *ngIf="notif?.perihal">{{notif?.perihal}}</p>
-      <p ion-text color="blue-template" text-wrap>{{ notif?.tanggal | indonesianDate:'dddd, DD MMMM YYYY' }}</p>
+      <p ion-text color="blue-template" text-wrap>{{ notif?.tanggal | customDate:'DD MMMM YYYY' }}</p>
       <p ion-text text-wrap>{{(notif?.is_read) ? 'Sudah dibaca' : 'Belum dibaca'}}</p>
     </ion-item>
     <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
