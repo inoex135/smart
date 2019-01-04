@@ -6,11 +6,14 @@
 
 <ion-content>
     <div *ngIf="isIncomeExist()">
-        <ion-item *ngFor="let model of getItems()" (click)="detail(model)">
+        <h4 class="payment-title">Riwayat Penghasilan</h4>
+        <ion-card *ngFor="let model of getItems()" (click)="detail(model)" class="payment-item">
             <h6 ion-text>{{model?.monthName}} {{model.tahun}}</h6>
-            <p ion-text text-wrap>{{model?.Total}}</p>
-        </ion-item>
+            <p ion-text text-wrap class="payment-total">{{model?.Total}}</p>
+            <p ion-text text-wrap class="payment-tap">tap untuk melihat detail</p>
+        </ion-card>
     </div>
+
     <div *ngIf="isNonIncomeExist()">
         <ion-list>
             <ion-card item *ngFor="let model of getItems()">
