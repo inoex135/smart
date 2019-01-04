@@ -24,4 +24,40 @@ payment-history {
         text-align: right;
     }
 
+    .payment-item {
+        /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#2f81ed+0,7500d6+100 */
+        background: #2f81ed; /* Old browsers */
+        background: -moz-linear-gradient(left, #2f81ed 0%, #7500d6 100%); /* FF3.6-15 */
+        background: -webkit-linear-gradient(left, #2f81ed 0%,#7500d6 100%); /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(to right, #2f81ed 0%,#7500d6 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2f81ed', endColorstr='#7500d6',GradientType=1 ); /* IE6-9 */
+        color: white;
+        margin-top: 5px;
+        padding: 10px;
+    }
+
+    .payment-item h6 {
+        color: white;
+    }
+
+    .payment-total {
+        float: right;
+        color: white;
+        font-size: 20px;
+        font-weight: bolder;
+    }
+
+    .payment-tap {
+        float: left;
+        color: white;
+        font-size: 10px;
+        margin-top: 30px;
+    }
+
+    .payment-title {
+        margin-left: 10px;
+        font-weight: bold;
+        color: darkgrey;
+        font-size: 16px;
+    }
 }
