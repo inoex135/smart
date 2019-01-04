@@ -28,12 +28,18 @@
   <ion-list>
     <ion-item class="notification-item" *ngFor="let notif of getNotifications()" (click)="onItemClick(notif)">
       <h6 ion-text>{{notif?.nama}}</h6>
-      <text-avatar [text]="notif?.nama" item-left></text-avatar>
+      <text-avatar *ngIf="notif?.nama" [text]="notif?.nama" item-left></text-avatar>
+      <text-avatar *ngIf="notif?.title" [text]="notif?.title" item-left></text-avatar>
       
       <p *ngIf="notif?.pesan" ion-text text-wrap>{{notif?.pesan}}</p>
+      <p *ngIf="notif?.title" ion-text text-wrap>{{notif?.title}}</p>
+
       <p *ngIf="notif?.nama_rapat && notif?.nama_agenda">{{notif?.nama_rapat}} - {{notif?.nama_agenda}}</p>
       <p *ngIf="notif?.waktu_mulai && notif?.waktu_akhir">{{notif?.waktu_mulai}} - {{notif?.waktu_akhir}}</p>
       <p *ngIf="notif?.gedung && notif?.tempat">{{notif?.gedung}} - {{notif?.tempat}}</p>
+      <p *ngIf="notif?.lokasi">{{notif?.gedung}}</p>
+      <p *ngIf="notif?.jam">{{notif?.jam}}</p>
+      <p *ngIf="notif?.uraian" text-wrap>{{notif?.uraian}}</p>
 
       <p ion-text text-wrap *ngIf="notif?.perihal">{{notif?.perihal}}</p>
       <p ion-text color="blue-template" text-wrap>{{ notif?.tanggal | indonesianDate:'dddd, DD MMMM YYYY' }}</p>

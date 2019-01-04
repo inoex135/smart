@@ -53,6 +53,7 @@ export class PersonalAgendaDetailPage {
               this.detail = res
               if (this.notificationModel) {
                 this.detail['title'] = this.notificationModel.title
+                this.detail['jam'] = this.notificationModel.jam
               }
             }
             this.loader.dismissLoader()
