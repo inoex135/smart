@@ -17,6 +17,9 @@ import { SuratPage } from "../surat/surat";
 import { AptPage } from "../apt/apt";
 import { PersonalPage } from "../personal/personal";
 import { MeetingListPage } from "../meeting-list/meeting-list";
+import { Dashboard } from "./models/dashboard";
+import { deserialize } from "serializer.ts/Serializer";
+import { DashboardContract } from "./models/dashboard-contract";
 
 @IonicPage()
 @Component({
@@ -46,16 +49,7 @@ export class HomePage {
 
   allowToSeePaymentHistory: boolean = true
 
-  dashboard:any = {
-    CT: 0,
-    jam_masuk_hari_ini: "-",
-    DL: 0,
-    hari_kerja: 0,
-    akumulasi_absen: "-",
-    jumlah_hari_masuk: 0,
-    jam_keluar_hari_ini: null,
-    pengumuman: []
-  }
+  dashboard: DashboardContract
 
   buttons:Array<any> = [
     {
@@ -195,7 +189,7 @@ export class HomePage {
     })
   }
   
-  private getDashboard():any {
+  private getDashboard(): any {
     if (!this.isCurrentUserEqualsToLoggedInUser()) {
       return this.resetDashboard()
     }
@@ -204,12 +198,13 @@ export class HomePage {
       res => {
         if (res) {
           LogUtil.d(this.TAG, res)
-          this.dashboard = res.response
+          this.dashboard = deserialize<Dashboard>(Dashboard, res.response)
         } 
       })
       .catch(error => {
         LogUtil.d(this.TAG, "error accessing API dashboard")
         LogUtil.d(this.TAG, error)
+        this.redirectToLogIn(error)
       }
     )
   }
@@ -227,6 +222,7 @@ export class HomePage {
       }
     ).catch(error => {
       this.showAvatar = true
+      this.redirectToLogIn(error)
     })
   }
 
@@ -237,17 +233,6 @@ export class HomePage {
     } else {
       LogUtil.d(this.TAG, "probably null")
     }
-  }
-
-  getPresensi(): string {
-    if (this.dashboard 
-      && this.dashboard.jumlah_hari_masuk > 0
-      && this.dashboard.hari_kerja > 0
-    ) {
-      let percent = (this.dashboard.jumlah_hari_masuk / this.dashboard.hari_kerja) * 100
-      return percent.toFixed(0) + "%"
-    }
-    return "-"
   }
 
   //  by pass plt/plh
@@ -282,7 +267,7 @@ export class HomePage {
     }
   }
 
-  getNotificationType():string {
+  getNotificationType(): string {
     return NotificationProvider.TYPE_ALL
   }
 
@@ -290,7 +275,7 @@ export class HomePage {
     return this.substitutes
   }
 
-  private redirectToLogIn(error):void {
+  private redirectToLogIn(error): void {
     LogUtil.e(this.TAG, error)
     if (error.message.includes(ERROR_CODES.MISSING_TOKEN)) {
       this.userProvider.purgeAuth();
@@ -302,30 +287,26 @@ export class HomePage {
     this.navCtrl.push(PaymentHistoryPage.TAG)
   }
 
-  private resetDashboard():boolean {
-    this.dashboard.CT = 0
-    this.dashboard.jam_masuk_hari_ini = "-"
-    this.dashboard.DL = 0
-    this.dashboard.hari_kerja = 0
-    this.dashboard.akumulasi_absen = "-"
-    this.dashboard.jumlah_hari_masuk = 0
-    this.dashboard.jam_keluar_hari_ini = null
+  private resetDashboard(): boolean {
+    const notices = this.dashboard.getNotices()
+    this.dashboard = new Dashboard()
+    this.dashboard.setNotices(notices)
     return true
   }
 
-  private isCurrentUserEqualsToLoggedInUser():boolean {
+  private isCurrentUserEqualsToLoggedInUser(): boolean {
     return this.loggedInProfile.nip == this.currentProfile.nip
   }
 
-  isAllowToSeePaymentHistory():boolean {
+  isAllowToSeePaymentHistory(): boolean {
     return this.allowToSeePaymentHistory
   }
 
-  private disabledPaymentHistory():void {
+  private disabledPaymentHistory(): void {
     this.allowToSeePaymentHistory = false
   }
 
-  private enabledPaymentHistory():void {
+  private enabledPaymentHistory(): void {
     this.allowToSeePaymentHistory = true
   }
 

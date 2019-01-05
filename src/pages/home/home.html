@@ -44,8 +44,8 @@
 
   <ion-card >
     <ion-card-content style="height: 100px">
-      <ion-slides *ngIf="dashboard?.pengumuman.length" initialSlide="0" autoplay="5000" loop="true" speed="500" pager="true">
-        <ion-slide *ngFor="let slide of dashboard?.pengumuman">
+      <ion-slides *ngIf="dashboard?.getNotices().length" initialSlide="0" autoplay="5000" loop="true" speed="500" pager="true">
+        <ion-slide *ngFor="let slide of dashboard?.getNotices()">
           <h3>{{slide?.teks}}</h3>
         </ion-slide>
       </ion-slides>
@@ -59,15 +59,15 @@
         <ion-list>
           <ion-item>
             <h2>Presensi</h2>
-            <p>{{getPresensi()}}</p>
+            <p>{{dashboard?.getPresentAccumulation()}}</p>
           </ion-item>
           <ion-item>
             <h2>Jam Masuk</h2>
-            <p>{{dashboard?.jam_masuk_hari_ini}}</p>
+            <p>{{dashboard?.getTodayCheckIn()}}</p>
           </ion-item>
           <ion-item>
             <h2>Akumulasi Absensi</h2>
-            <p>{{dashboard?.akumulasi_absen}}</p>
+            <p>{{dashboard?.getAbsence()}}</p>
           </ion-item>
         </ion-list>
       </ion-card-content>
