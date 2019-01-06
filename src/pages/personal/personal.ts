@@ -40,15 +40,24 @@ export class PersonalPage {
   ) {
   }
 
+  ionViewWillEnter() {
+    this.getListEvent();
+    if (this.bell) {
+      this.bell.updateNotification()
+    }
+  }
+
   onViewTitleChanged(title) {
     this.viewTitle = title;
   }
   //func when date is click
   onEventSelected(event) {
+    LogUtil.d(PersonalPage.TAG, event)
     this.selectedDay = event;
   }
 
   onTimeSelected(ev) {
+    LogUtil.d(PersonalPage.TAG, ev)
     this.selectedDay = ev;
   }
 
@@ -70,13 +79,6 @@ export class PersonalPage {
         this.loaderHelper.dismissLoader()
       });
     })
-  }
-
-  ionViewWillEnter() {
-    this.getListEvent();
-    if (this.bell) {
-      this.bell.updateNotification()
-    }
   }
 
   onChange($event) {

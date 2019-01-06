@@ -19,26 +19,26 @@ export class PersonalAgendaPage {
     private personalProvider: PersonalProvider,
     private loaderHelper: LoaderHelper
   ) {
-    this.type = TimelineType.AGENDA;
+    this.type = TimelineType.AGENDA
   }
 
-  ionViewDidLoad() {
-    this.getDataList();
+  ionViewWillEnter() {
+    this.getDataList()
   }
 
-  async getDataList() {
-    await this.loaderHelper.createLoader();
-
-    this.personalProvider.listAgenda().subscribe(
-      res => {
-        this.items = res;
-
-        this.loaderHelper.dismiss();
-      },
-      err => {
-        this.loaderHelper.errorHandleLoader(err.error_code, this.navCtrl);
-      }
-    );
+  getDataList() {
+    this.loaderHelper.show()
+    .then(() => {
+      this.personalProvider.listAgenda().subscribe(
+        res => {
+          this.items = res
+          this.loaderHelper.dismissLoader()
+        },
+        err => {
+          this.loaderHelper.dismissLoader()
+        }
+      )
+    })
   }
 
   detailAgenda(date: any) {

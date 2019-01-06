@@ -46,7 +46,7 @@ export class NotificationProvider {
     }
 
     getQueryString(data:any):string {
-        var queryString = "?page=" + data.currentPage
+        let queryString = "?page=" + data.currentPage
         if (data.isRead < 2) {
             queryString += "&is_read=" + data.isRead
         }
@@ -54,7 +54,7 @@ export class NotificationProvider {
     }
 
     switchProvider(data:any) {
-        var currentProvider = null;
+        let currentProvider = null;
         let metaPage = data.meta.page
         LogUtil.d(NotificationProvider.TAG, metaPage)
         switch(data.provider) {
@@ -96,11 +96,11 @@ export class NotificationProvider {
     }
 
     public readMeeting(modelId: any) {
-        return this.read(modelId, 'agenda rapat')
+        return this.read(modelId, '4')
     }
 
     public readPersonalAgenda(modelId: any) {
-        return this.read(modelId, 'agenda personal')
+        return this.read(modelId, '1')
     }
 
     public read(modelId, type:string) {

@@ -95,7 +95,7 @@ export class MeetingDetailPage {
     }
 
     private detail(model): void {
-        var data = {}
+        let data = {}
         data[MeetingDetailAgendaPage.KEY_AGENDA_ID] = model.agenda_id
         data[MeetingDetailAgendaPage.KEY_TIME_ID] = model.time_id
         this.navCtrl.push(MeetingDetailAgendaPage.TAG, data)

@@ -14,8 +14,8 @@ import { LoaderHelper } from "../../helpers/loader-helper";
 export class PaymentHistoryPage {
 
     static TAG:string = 'PaymentHistoryPage'
-    static TITLE_INCOME = 'Riwayat Pembayaran'
-    static TITLE_NON_INCOME = 'Riwayat Non Pembayaran'
+    static TITLE_INCOME = 'Riwayat Penghasilan'
+    static TITLE_NON_INCOME = 'Riwayat Non Penghasilan'
 
     tabs:any = [
         {
@@ -69,7 +69,7 @@ export class PaymentHistoryPage {
 
     detail(model:any): void {
         if (this.type === PaymentProvider.KEY_PAYMENT_INCOME) {
-            var data = {}
+            let data = {}
             data[PaymentHistoryDetailPage.KEY_MODEL] = model
             this.navCtrl.push(PaymentHistoryDetailPage.TAG, data)
         }

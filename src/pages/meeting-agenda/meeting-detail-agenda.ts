@@ -9,7 +9,6 @@ import { FileHelper } from "../../helpers/file-helper";
 import { zip } from "rxjs/observable/zip";
 import { NotificationProvider } from "../../providers/notification/notification";
 
-
 @Component({
     selector: "meeting-detail-agenda",
     templateUrl: "meeting-detail-agenda.html"
@@ -77,7 +76,7 @@ export class MeetingDetailAgendaPage {
     }
 
     private delegation():void {
-        var data = {}
+        let data = {}
         data[MeetingDelegationPage.KEY_MODEL] = this.getModel()
         this.navCtrl.push(MeetingDelegationPage.TAG, data)
     }
@@ -133,7 +132,7 @@ export class MeetingDetailAgendaPage {
 
     private fileOptions(index: number): void {
         let file = this.getFileByIndex(index)
-        var payload = {}
+        let payload = {}
         payload['time_id'] = this.getModel().time_id
         payload['file_id'] = file.id
         LogUtil.d(MeetingDetailAgendaPage.TAG, payload)
@@ -166,7 +165,7 @@ export class MeetingDetailAgendaPage {
         LogUtil.d(MeetingDetailAgendaPage.TAG, this.getModel())
         this.loader.show()
         .then(() => {
-            var postModel = {}
+            let postModel = {}
             postModel['confirm_to_attend'] = this.getModel().confirm_to_attend
             postModel['time_id'] = this.getModel().time_id
             this.api.confirm(postModel)
@@ -175,6 +174,7 @@ export class MeetingDetailAgendaPage {
                 if (res) {
                     this.toast.present('Berhasil melakukan konfirmasi kehadiran.')
                     this.api.removeCache(this.getModel().agenda_id)
+                    this.api.updateCacheDetailAgenda(this.getModel())
                 } else {
                     this.toast.present('Gagal melakukan confirmasi!')
                 }

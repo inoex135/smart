@@ -19,6 +19,7 @@ export class LogUtil {
 
     static e(TAG:string, error) {
         if (ENV.DEV) {
+            this.d(TAG, error.message)
             console.error(TAG + " - message: " + error.message, error)
         }
     }

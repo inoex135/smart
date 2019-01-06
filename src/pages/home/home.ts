@@ -17,6 +17,9 @@ import { SuratPage } from "../surat/surat";
 import { AptPage } from "../apt/apt";
 import { PersonalPage } from "../personal/personal";
 import { MeetingListPage } from "../meeting-list/meeting-list";
+import { Dashboard } from "./models/dashboard";
+import { deserialize } from "serializer.ts/Serializer";
+import { DashboardContract } from "./models/dashboard-contract";
 
 @IonicPage()
 @Component({
@@ -44,37 +47,34 @@ export class HomePage {
     nip: ''
   }
 
-  dashboard:any = {
-    CT: 0,
-    jam_masuk_hari_ini: "-",
-    DL: 0,
-    hari_kerja: 0,
-    akumulasi_absen: "-",
-    jumlah_hari_masuk: 0,
-    jam_keluar_hari_ini: null,
-    pengumuman: []
-  }
+  allowToSeePaymentHistory: boolean = true
+
+  dashboard: DashboardContract
 
   buttons:Array<any> = [
     {
       title: 'Persuratan',
       page: SuratPage.TAG,
-      icon: 'm-persuratan.svg'
+      icon: 'm-persuratan.svg',
+      enabled: true
     },
     {
       title: 'APT',
       page: AptPage.TAG,
-      icon: 'm-apt.svg'
+      icon: 'm-apt.svg',
+      enabled: true
     },
     {
       title: 'Personal',
       page: PersonalPage.TAG,
-      icon: 'm-personal.svg'
+      icon: 'm-personal.svg',
+      enabled: true
     },
     {
       title: 'E-Rapat',
       page: MeetingListPage.TAG,
-      icon: 'm-erapat.svg'
+      icon: 'm-erapat.svg',
+      enabled: true
     }
   ]
 
@@ -114,7 +114,7 @@ export class HomePage {
   }
 
   pagesTo(component:any) {
-    if (component !== '') {
+    if (component !== '' && component.enabled) {
       this.navCtrl.push(component.page);
     }
   }
@@ -188,18 +188,23 @@ export class HomePage {
       this.redirectToLogIn(error)
     })
   }
-
-  private getDashboard() {
-    this.homeProvider.getDashboard().then(
+  
+  private getDashboard(): any {
+    if (!this.isCurrentUserEqualsToLoggedInUser()) {
+      return this.resetDashboard()
+    }
+    return this.homeProvider.getDashboard()
+    .then(
       res => {
         if (res) {
           LogUtil.d(this.TAG, res)
-          this.dashboard = res.response
+          this.dashboard = deserialize<Dashboard>(Dashboard, res.response)
         } 
       })
       .catch(error => {
         LogUtil.d(this.TAG, "error accessing API dashboard")
         LogUtil.d(this.TAG, error)
+        this.redirectToLogIn(error)
       }
     )
   }
@@ -217,6 +222,7 @@ export class HomePage {
       }
     ).catch(error => {
       this.showAvatar = true
+      this.redirectToLogIn(error)
     })
   }
 
@@ -229,17 +235,6 @@ export class HomePage {
     }
   }
 
-  getPresensi(): string {
-    if (this.dashboard 
-      && this.dashboard.jumlah_hari_masuk > 0
-      && this.dashboard.hari_kerja > 0
-    ) {
-      let percent = (this.dashboard.jumlah_hari_masuk / this.dashboard.hari_kerja) * 100
-      return percent.toFixed(0) + "%"
-    }
-    return "-"
-  }
-
   //  by pass plt/plh
   byPass(nip: string) {
     //cek apakah nip yg di select, sama dengan currentUser
@@ -248,15 +243,17 @@ export class HomePage {
       this.token.setCurrentUserDataFirst()
       .then(() => {
         this.initData()
+        this.enabledPaymentHistory()
       }).catch(error => {
         this.redirectToLogIn(error)
       })
     } else {
-      this.loaderHelper.createLoader();
+      this.loaderHelper.createLoader()
       this.userProvider.byPass(nip)
       .subscribe(
         res => {
           LogUtil.d(this.TAG, res)
+          this.disabledPaymentHistory()
           if (res) {
             this.initData(true)
             this.bell.updateNotification()
@@ -270,7 +267,7 @@ export class HomePage {
     }
   }
 
-  getNotificationType():string {
+  getNotificationType(): string {
     return NotificationProvider.TYPE_ALL
   }
 
@@ -278,7 +275,7 @@ export class HomePage {
     return this.substitutes
   }
 
-  private redirectToLogIn(error):void {
+  private redirectToLogIn(error): void {
     LogUtil.e(this.TAG, error)
     if (error.message.includes(ERROR_CODES.MISSING_TOKEN)) {
       this.userProvider.purgeAuth();
@@ -288,6 +285,29 @@ export class HomePage {
 
   historyPage() {
     this.navCtrl.push(PaymentHistoryPage.TAG)
+  }
+
+  private resetDashboard(): boolean {
+    const notices = this.dashboard.getNotices()
+    this.dashboard = new Dashboard()
+    this.dashboard.setNotices(notices)
+    return true
+  }
+
+  private isCurrentUserEqualsToLoggedInUser(): boolean {
+    return this.loggedInProfile.nip == this.currentProfile.nip
+  }
+
+  isAllowToSeePaymentHistory(): boolean {
+    return this.allowToSeePaymentHistory
+  }
+
+  private disabledPaymentHistory(): void {
+    this.allowToSeePaymentHistory = false
+  }
+
+  private enabledPaymentHistory(): void {
+    this.allowToSeePaymentHistory = true
   }
 
 }

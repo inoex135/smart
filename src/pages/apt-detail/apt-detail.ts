@@ -11,6 +11,8 @@ import { ToastHelper } from "../../helpers/toast-helper";
 import { UserProvider } from "../../providers/user/user";
 import { AptHistoryPage } from "../apt-history/apt-history";
 import { LogUtil } from "../../utils/logutil";
+import { FileHelper } from "../../helpers/file-helper";
+import { DocumentViewer } from '@ionic-native/document-viewer';
 
 @IonicPage()
 @Component({
@@ -25,9 +27,7 @@ export class AptDetailPage {
   ACTION = AptAction;
   aptIndikator = APT_INDIKATOR;
   aptDetail: any = {};
-  fileDirectory: any;
   profile: any;
-  aptVerifikasi: any = {};
   constructor(
     private navParams: NavParams,
     private navCtrl: NavController,
@@ -36,15 +36,17 @@ export class AptDetailPage {
     file: File,
     private aptHelper: AptHelper,
     private toast: ToastHelper,
-    private userProvider: UserProvider
+    private userProvider: UserProvider,
+    private fileHelper: FileHelper,
+    private docViewer: DocumentViewer
   ) {
-    this.fileDirectory = file.externalRootDirectory + "Download";
+    
   }
 
   ionViewWillEnter() {
-    this.itemId = this.navParams.get("itemId");
-    this.getDetailApt();
-    this.getProfile();
+    this.itemId = this.navParams.get("itemId")
+    this.getDetailApt()
+    this.getProfile()
   }
 
   ionViewWillLeave() {
@@ -65,10 +67,8 @@ export class AptDetailPage {
     this.aptProvider.getDetailApt(this.itemId)
     .subscribe(
       res => {
-        const response = res.response;
-        this.aptDetail = response.permohonan;
-        this.aptVerifikasi = response.permohonanVerifikasi;
-        this.readNotifikasi();
+        this.aptDetail = res
+        this.readNotifikasi()
         this.loaderHelper.dismissLoader()
       },
       err => {
@@ -91,7 +91,8 @@ export class AptDetailPage {
 
   async downloadPermohonan(fileApt) {
     try {
-      const targetPath = `${this.fileDirectory}/${fileApt.nomor_tiket}.pdf`;
+      const filename = fileApt.nomor_tiket + FileHelper.PDF_MIME.extension
+      const targetPath = `${this.fileHelper.getDownloadDirectory()}/${filename}`;
 
       await this.loaderHelper.show()
 
@@ -102,10 +103,12 @@ export class AptDetailPage {
         await this.aptHelper.requestPermission();
       }
 
-      this.aptProvider.download(fileApt.id, targetPath);
+      await this.aptProvider.download(fileApt.id, targetPath)
 
-      this.toast.present("File telah di download");
+      this.toast.present("File telah di download")
+
       this.loaderHelper.dismissLoader()
+      this.fileHelper.openFileWindow(filename)
 
       // open file after download
       // await this.aptHelper.openFile(targetPath);
@@ -116,7 +119,7 @@ export class AptDetailPage {
   }
 
   openHistory() {
-    var data = {}
+    let data = {}
     data[AptHistoryPage.KEY_DATA] = this.aptDetail
     this.navCtrl.push(AptHistoryPage.TAG, data)
   }

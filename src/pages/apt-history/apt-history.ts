@@ -1,6 +1,10 @@
 import { Component } from "@angular/core";
 import { NavParams, NavController, IonicPage, Item } from "ionic-angular";
 import { LogUtil } from "../../utils/logutil";
+import { Supervisi } from "./models/supervisi-model";
+import { Verification } from "./models/verification-model";
+import { SupervisiContract } from "./models/contracts/supervisi-contract";
+import { VerifikasiContract } from "./models/contracts/verifikasi-contract";
 
 @Component({
   selector: "page-apt-history",
@@ -20,17 +24,13 @@ export class AptHistoryPage {
   currentHistory:string = this.TYPE_SUPERVISION
   currentTextColor:string = 'dark-text'
 
-  items:any = []
+  items:Array<any> = []
 
   apt:any = null
 
   histories:any = {
-    supervisions: [
-
-    ],
-    verifications: [
-
-    ]
+    supervisions: Array<SupervisiContract>(),
+    verifications: Array<VerifikasiContract>()
   }
 
   tabs:any = [
@@ -53,10 +53,12 @@ export class AptHistoryPage {
     LogUtil.d(AptHistoryPage.TAG, this.apt)
     if (this.apt) {
       if (this.apt.supervisi) {
-        this.histories.supervisions = this.apt.supervisi
+        this.histories.supervisions.push(new Supervisi(this.apt.supervisi))
       }
-      if (this.apt.Verifikasi) {
-        this.histories.verifikasi = this.apt.verifikasi
+      if (this.apt.verifikasi && this.apt.verifikasi.length) {
+        this.apt.verifikasi.forEach(item => {
+          this.histories.verifications.push(new Verification(item))
+        })
       }
     }
   }

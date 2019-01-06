@@ -270,3 +270,13 @@ ion-content {
   }
 
 }
+
+
+.detail-arrow p {
+  text-align: right !important;
+  padding-right: 15px;
+  padding-left: 15px;
+  width: 100% !important;
+  color: color($colors, 'new-text-color-dark') !important;
+}
+

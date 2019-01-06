@@ -39,7 +39,7 @@ export class AptNotifikasiPage {
     this.page = this.page + 1;
     setTimeout(() => {
       this.aptProvider.getListNotification(this.page).subscribe(res => {
-        for (var index = 0; index < res.length; index++) {
+        for (let index = 0; index < res.length; index++) {
           this.notifications.push(res[index]);
         }
       });

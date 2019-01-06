@@ -1,23 +1,19 @@
 import { Injectable } from "@angular/core";
 import "rxjs/add/operator/map";
 import { ApiProvider } from "../api/api";
-import { TokenProvider } from "../token/token";
-import { FileTransfer, FileTransferObject } from "@ionic-native/file-transfer";
 import { ENV } from "../../config/environment";
-import { LogUtil } from "../../utils/logutil";
+import { FileHelper } from "../../helpers/file-helper";
 
 @Injectable()
 export class NaskahMasukProvider {
 
   TAG:string = 'NaskahMasukProvider'
 
-  fileTransfer: FileTransferObject;
   constructor(
     public api: ApiProvider,
-    private token: TokenProvider,
-    transfer: FileTransfer
+    private fileHelper: FileHelper
   ) {
-    this.fileTransfer = transfer.create();
+    
   }
 
   getDetailNaskah(naskahId: any) {
@@ -86,27 +82,15 @@ export class NaskahMasukProvider {
   riwayatNaskah(naskahId: number) {
     return this.api.get(`/surat/masuk/riwayat/${naskahId}`);
   }
+  
   downloadFileSurat(fileId: number, fileDir: any) {
     const url = `${ENV.API_URL}/surat/dokumen/download/${fileId}`;
-    LogUtil.d(this.TAG, url)
-    const options = {
-      headers: {
-        Authorization: "smartdjkn2017mobile",
-        token: this.token.latestToken
-      },
-      httpMethod: "GET"
-    };
-    LogUtil.d(this.TAG, options)
-    return this.fileTransfer
-      .download(url, fileDir, false, options)
-      .then(res => {
-        LogUtil.e(this.TAG, res)
-        return res;
+
+    return this.fileHelper
+      .baseDownload({
+        url: url,
+        targetPath: fileDir
       })
-      .catch(err => {
-        LogUtil.e(this.TAG, err)
-        return err;
-      });
   }
 
   updateNotification() {

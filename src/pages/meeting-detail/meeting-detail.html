@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content>
-    <ion-list class="list-custom" *ngIf="isItemExist()">
+    <ion-list class="list-custom">
         <ion-card item *ngFor="let model of getItems()" (click)="detail(model)">
             <ion-row>
                 <ion-col class="detail-col meeting-list-item">
@@ -26,6 +26,9 @@
                             <p ion-text>Ruang</p>
                             <p ion-text>{{model?.place?.room}}</p>
                         </ion-col>
+                    </ion-row>
+                    <ion-row class="detail-arrow">
+                        <p>Selanjutnya <ion-icon name="arrow-forward"></ion-icon></p>
                     </ion-row>
                 </ion-col>
             </ion-row>

@@ -57,6 +57,7 @@ import { CacheProvider } from "../providers/cache/cache";
 import { PaymentProvider } from "../providers/payment/payment";
 import { MeetingProvider } from "../providers/meeting/meeting";
 import { FileHelper } from "../helpers/file-helper";
+import { DocumentViewer } from "@ionic-native/document-viewer";
 
 @NgModule({
   declarations: [MyApp, AptDetailActionPage],
@@ -107,7 +108,8 @@ import { FileHelper } from "../helpers/file-helper";
     CacheProvider,
     PaymentProvider,
     MeetingProvider,
-    FileHelper
+    FileHelper,
+    DocumentViewer
   ]
 })
 export class AppModule {}

@@ -15,19 +15,22 @@ export class MeetingListPage {
 
     static TAG:string = 'MeetingListPage'
 
-    @ViewChild("selectType") select: Select
-    items:Array<any> = []
+    @ViewChild("selectTime") select: Select
+
+    items:any = []
 
     model:any = {
-        keyword: "",
-        page: 1,
+        keyword: '',
+        page: 0,
         size: 10,
         type: 'today'
     }
 
     isInfiniteLoading:boolean = false
 
-    constructor(private navCtrl: NavController, private api: MeetingProvider, private loader: LoaderHelper) {
+    constructor(private navCtrl: NavController, 
+        private api: MeetingProvider, 
+        private loader: LoaderHelper) {
         
     }
 
@@ -36,7 +39,7 @@ export class MeetingListPage {
     }
 
     private fillList(loading:boolean = false) {
-        var load = Promise.resolve(loading)
+        let load = Promise.resolve(loading)
         if (loading) {
             this.loader.show()
         }
@@ -45,7 +48,9 @@ export class MeetingListPage {
             .subscribe(
                 res => {
                     if (res && res.content) {
-                        this.items = res.content
+                        res.content.forEach(element => {
+                            this.items.push(element)
+                        })
                     }
                     if (loading) {
                         this.loader.dismissLoader()
@@ -94,7 +99,7 @@ export class MeetingListPage {
     }
 
     private detail(model: any): void {
-        var data = {}
+        let data = {}
         data[MeetingDetailPage.KEY_DETAIL_ID] = model.id
         this.navCtrl.push(MeetingDetailPage.TAG, data)
     }
@@ -114,13 +119,19 @@ export class MeetingListPage {
     }
 
     private updateList(): void {
-        this.model.page = 1
+        this.model.page = 0
         this.items = []
         this.fillList()
     }
 
+    private isSelectExist() {
+        return this.select != null || this.select !== undefined
+    }
+
     private triggerOpenSelect(): void {
-        this.select.open()
+        if (this.isSelectExist()) {
+            this.select.open()
+        }
     }
 
     private onSelectChange(): void {
