@@ -13,10 +13,8 @@ import { NaskahAction } from "../../constant/naskah-action";
 
 import { NaskahModalDownloadComponent } from "../../components/naskah-modal-download/naskah-modal-download";
 
-import { AptHelper } from "../../helpers/apt-helper";
 import { ToastHelper } from "../../helpers/toast-helper";
 import { UserProvider } from "../../providers/user/user";
-import { TokenProvider } from "../../providers/token/token";
 
 import assign from "lodash/assign";
 import { NaskahNotifikasiProvider } from "../../providers/naskah-notifikasi/naskah-notifikasi";
@@ -55,7 +53,6 @@ export class NaskahMasukDetailPage {
     public navParams: NavParams,
     private naskahProvider: NaskahMasukProvider,
     private loaderHelper: LoaderHelper,
-    private aptHelper: AptHelper,
     private toast: ToastHelper,
     private userProvider: UserProvider,
     private modalController: ModalController,
@@ -165,10 +162,10 @@ export class NaskahMasukDetailPage {
       const targetPath = this.fileHelper.getDownloadDirectory() + "/" + fileData.namaFile;
       LogUtil.d(NaskahMasukDetailPage.TAG, targetPath)
 
-      const checkPermission = await this.aptHelper.checkPermission();
+      const checkPermission = await this.fileHelper.checkPermission();
       // check if apps has permission to write storage
       if (!checkPermission.hasPermission) {
-        await this.aptHelper.requestPermission();
+        await this.fileHelper.requestPermission();
       }
 
       await this.naskahProvider.downloadFileSurat(fileData.id, targetPath);
