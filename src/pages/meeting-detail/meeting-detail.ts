@@ -49,7 +49,6 @@ export class MeetingDetailPage {
                 res => {
                     if (res) {
                         this.items = res
-                        console.log(this.items)
                     }
                     this.loader.dismissLoader()
                 },

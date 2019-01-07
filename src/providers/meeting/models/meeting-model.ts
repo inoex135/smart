@@ -47,8 +47,8 @@ export class Meeting implements MeetingContract{
         model.setStartTime(meeting.start_time)
         model.setFinishTime(meeting.finish_time)
         model.setTotalParticipant(meeting.total_participant)
-        model.confirmToAttend(model.confirm_to_attend)
-        model.allowConfirmation(model.allow_participant_confirmation)
+        model.confirmToAttend(meeting.confirm_to_attend)
+        model.allowConfirmation(meeting.allow_participant_confirmation)
         return model
     }
 
