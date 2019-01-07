@@ -7,6 +7,7 @@ import { ENV } from "../../config/environment";
 import { CacheProvider } from "../cache/cache";
 import { of } from "rxjs/observable/of";
 import { fromPromise } from "rxjs/observable/fromPromise";
+import { Meeting } from "./models/meeting-model";
 
 
 @Injectable()
@@ -49,7 +50,7 @@ export class MeetingProvider {
         })
     }
 
-    public getDetailMeeting(id:any) {
+    public getDetailMeeting(id:any): Observable<Array<Meeting>> {
         return Observable.fromPromise(this.getDetailCache(id, MeetingProvider.CACHE_KEY))
         .mergeMap(([data, profile, key]) => {
             LogUtil.d(MeetingProvider.TAG, profile)
@@ -57,27 +58,24 @@ export class MeetingProvider {
                 return this.executeDetailRequest(id, profile, key)
             }
             LogUtil.d(MeetingProvider.TAG, 'get datail from cache')
-            return of(data.response)
-        })
-    }
-
-    public getDetailAgendaById(agendaId, timeId) {
-        LogUtil.d(MeetingProvider.TAG, 'agendaId: ' + agendaId + ' timeId: ' + timeId)
-        return this.getDetailMeeting(agendaId)
-        .filter(result => {
-            LogUtil.d(MeetingProvider.TAG, result)
-            return result.time_id == timeId
+            let arr = Array<Meeting>()
+            if (data.response.length) {
+                data.response.forEach(item => {
+                    arr.push(Meeting.fromMeeting(item))
+                })
+            }
+            return of(arr)
         })
     }
 
     private executeDetailRequest(id, profile, key) {
         return this.api.get(`/rapat/${id}`)
         .map(result => {
-            var arr = []
+            let arr = Array<Meeting>()
             result.agenda.forEach(element => {
                 if (element.waktu.length > 0) {
                     element.waktu.forEach(time => {
-                        arr.push(this.reconstructModel(element, time, profile))
+                        arr.push(Meeting.create(element, time, profile))
                     })
                 }
             })
@@ -89,7 +87,7 @@ export class MeetingProvider {
     }
 
     private reconstructModel(element, time, profile) {
-        var model:any = {}
+        let model:any = {}
         model['agenda_id'] = element.id
         model['agenda_name'] = element.nama_agenda
         model['time_id'] = time.id
@@ -134,7 +132,7 @@ export class MeetingProvider {
             if (data == null) {
                 return this.api.get(`/agenda-rapat/${model.agenda_id}/waktu/${model.time_id}`)
                 .map(res => {
-                    var agenda = {}
+                    let agenda = {}
                     if (res) {
                         agenda = this.reconstructModel(res.agenda, res, profile)
                         this.cache.put(key, {when: Date.now() + CacheProvider.FIVE_MINUTES, response: agenda})
@@ -173,7 +171,7 @@ export class MeetingProvider {
     }
 
     public confirm(model:any) {
-        var data = new FormData()
+        let data = new FormData()
         data.append('konfirmasi_hadir', (model.confirm_to_attend ? 1 : 0).toString())
         LogUtil.d(MeetingProvider.TAG, data)
         return this.api.postForm(`/agenda-waktu/${model.time_id}/konfirmasi`, data)
