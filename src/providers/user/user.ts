@@ -21,19 +21,9 @@ export class UserProvider {
     public tokenProvider: TokenProvider
   ) {}
 
-  // verify token yang ada di storage
-  // populate() {
-  //   this.tokenProvider.getToken().then(token => {
-  //     // if token available/verify, set user info
-  //     if (token) {
-  //       this.apiProvider
-  //         .get("/user")
-  //         .subscribe(data => this.setAuth(data.user), err => this.purgeAuth);
-  //     } else {
-  //       this.purgeAuth();
-  //     }
-  //   });
-  // }
+  getToken() {
+    return this.tokenProvider
+  }
 
   setAuth(data: any) {
     return this.tokenProvider.setCurrentToken(data.token as string)

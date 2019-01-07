@@ -11,15 +11,24 @@ export class CacheProvider {
     static FIVE_MINUTES = (5 * 60 * 1000)
     private KEY_BANKS:string = 'h2riwn0dpV8IyLV'
 
-    constructor(private storage: Storage) {}
+    constructor(private storage: Storage) {
 
-    get(key:string, recorded:boolean = true):Promise<any> {
+    }
+
+    getNoRecord(key:string): Promise<any> {
+        return this.get(key, false)
+    }
+
+    get(key:string, recorded:boolean = true): Promise<any> {
         return this.storage
             .ready()
             .then(() => this.storage.get(key) as Promise<any>)
             .then(result => {
             if (!recorded) {
-                return result
+                if (result) {
+                    return Promise.resolve(result)
+                }
+                return Promise.resolve(null)
             }  
             let now = Date.now()
             LogUtil.d(CacheProvider.TAG, "now: " + now)
@@ -27,9 +36,12 @@ export class CacheProvider {
                 LogUtil.d(CacheProvider.TAG, "key " + key + " exist")
                 return Promise.resolve(result)
             }
-        
             return Promise.resolve(null)
             })
+    }
+
+    putNoRecord(key:string, data:any): Promise<any> {
+        return this.put(key, data, false)
     }
     
     put(key:string, data:any, recorded:boolean = true):Promise<any> {

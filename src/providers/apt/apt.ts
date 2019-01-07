@@ -16,12 +16,16 @@ export class AptProvider {
   fileDir: string;
 
   constructor(
-    public apiProvider: ApiProvider,
+    private apiProvider: ApiProvider,
     private userProvider: UserProvider,
     private cache: CacheProvider,
     private fileHelper: FileHelper
   ) {
 
+  }
+
+  getUser() {
+    return this.userProvider
   }
 
   // get daftar permohonan apt

@@ -23,7 +23,6 @@ import { NaskahNotifikasiProvider } from "../../providers/naskah-notifikasi/nask
 import { LogUtil } from "../../utils/logutil";
 import { NaskahDetailActionPage } from "../naskah-detail-action/naskah-detail-action";
 import { FileHelper } from "../../helpers/file-helper";
-import { DocumentViewer } from "@ionic-native/document-viewer";
 
 @IonicPage()
 @Component({
@@ -58,15 +57,13 @@ export class NaskahMasukDetailPage {
     private loaderHelper: LoaderHelper,
     private aptHelper: AptHelper,
     private toast: ToastHelper,
-    userProvider: UserProvider,
-    private token: TokenProvider,
+    private userProvider: UserProvider,
     private modalController: ModalController,
     private naskahNotifikasi: NaskahNotifikasiProvider,
-    private fileHelper: FileHelper,
-    private docViewer: DocumentViewer
+    private fileHelper: FileHelper
   ) {
     this.naskahId = this.navParams.get("naskahId");
-    this.token.getProfile().then(res => (this.profile = res), err => true);
+    this.userProvider.getToken().getProfile().then(res => (this.profile = res), err => true);
   }
 
   openPage(actionData: string) {

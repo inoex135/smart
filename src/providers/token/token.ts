@@ -1,5 +1,4 @@
 import { Injectable } from "@angular/core";
-import { Storage } from "@ionic/storage";
 import { CacheProvider } from "../cache/cache";
 import { LogUtil } from "../../utils/logutil";
 import { ERROR_CODES } from "../../constant/error-codes";
@@ -19,16 +18,14 @@ export class TokenProvider {
   private KEY_PL_TH:string = 'GNpyCTlgr7BPWbo'
   private KEY_CURRENT_PROFILE:string = 'Q3fX8IsMeCip0x8'
 
-  constructor(public storage: Storage, private cache: CacheProvider) {}
+  constructor(private cache: CacheProvider) {}
 
   getToken(): Promise<String> {
-    return this.storage
-      .ready()
-      .then(() => this.storage.get(this.KEY_CURRENT_TOKEN) as Promise<string>)
+    return this.cache.get(this.KEY_CURRENT_TOKEN, false)
       .then(token => {
-        this.latestToken = token;
-        return token;
-      });
+        this.latestToken = token as string
+        return token
+      })
   }
 
   getCurrentToken():Promise<string> {
@@ -70,9 +67,7 @@ export class TokenProvider {
   }
 
   getUser(): Promise<Object> {
-    return this.storage
-      .ready()
-      .then(() => this.storage.get(this.KEY_LOGGIN_USER) as Promise<Object>)
+    return this.cache.get(this.KEY_LOGGIN_USER)
       .then(user => {
         this.latestUser = user;
         return user
@@ -85,9 +80,7 @@ export class TokenProvider {
 
   getProfile(): Promise<any> {
     LogUtil.d(TokenProvider.TAG, "get profile from cache")
-    return this.storage
-      .ready()
-      .then(() => this.storage.get(this.KEY_CURRENT_PROFILE) as Promise<any>)
+    return this.cache.getNoRecord(this.KEY_CURRENT_PROFILE)
       .then(profile => {
         this.latestProfile = profile
         return profile
@@ -95,11 +88,7 @@ export class TokenProvider {
   }
 
   getProfilePltPlh() {
-    return this.storage
-      .ready()
-      .then(() => {
-        this.storage.get(this.KEY_PL_TH) as Promise<Object>
-      })
+    return this.cache.getNoRecord(this.KEY_PL_TH)
       .then(res => {
         this.pltPlh = res
         return res
@@ -108,9 +97,7 @@ export class TokenProvider {
 
   saveToken(token: string): Promise<void> {
     this.latestToken = token;
-    return this.storage
-      .ready()
-      .then(() => this.storage.set(this.KEY_CURRENT_TOKEN, token) as Promise<void>);
+    return this.cache.putNoRecord(this.KEY_CURRENT_TOKEN, token)
   }
 
   saveUser(user: any): Promise<any> {
@@ -122,9 +109,7 @@ export class TokenProvider {
   saveProfile(profile: any): Promise<any> {
     LogUtil.d(TokenProvider.TAG, "save profile logged in user")
     this.latestProfile = profile;
-    return this.storage
-      .ready()
-      .then(() => Promise.all([this.storage.get(this.KEY_LOGGIN_USER), this.storage.get(this.KEY_PL_TH)]))
+    return Promise.all([this.cache.getNoRecord(this.KEY_LOGGIN_USER), this.cache.getNoRecord(this.KEY_PL_TH)])
       .then(([user, plt_plh]) => {
         LogUtil.d(TokenProvider.TAG, user)
         if (user && user['user'] && user['user']['name'] === profile.nip) {
@@ -137,7 +122,7 @@ export class TokenProvider {
         }
       })
       .then(() => {
-        return this.storage.set(this.KEY_CURRENT_PROFILE, profile)
+        return this.cache.putNoRecord(this.KEY_CURRENT_PROFILE, profile)
       })
   }
 
@@ -158,22 +143,22 @@ export class TokenProvider {
 
   destroyToken() {
     this.latestToken = null;
-    return this.storage.remove(this.KEY_CURRENT_TOKEN);
+    return this.cache.remove(this.KEY_CURRENT_TOKEN);
   }
 
   destroyProfile() {
     this.latestProfile = null;
-    return this.storage.remove(this.KEY_CURRENT_PROFILE);
+    return this.cache.remove(this.KEY_CURRENT_PROFILE);
   }
 
   destroyUser() {
     this.latestUser = null;
-    return this.storage.remove(this.KEY_LOGGIN_USER);
+    return this.cache.remove(this.KEY_LOGGIN_USER);
   }
 
   destroyPltPlh() {
     this.pltPlh = null;
-    return this.storage.remove(this.KEY_PL_TH);
+    return this.cache.remove(this.KEY_PL_TH);
   }
 
   destroy() {

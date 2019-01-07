@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { NavParams, NavController, IonicPage, Item } from "ionic-angular";
+import { NavParams, NavController, IonicPage } from "ionic-angular";
 import { LogUtil } from "../../utils/logutil";
 import { Supervisi } from "./models/supervisi-model";
 import { Verification } from "./models/verification-model";

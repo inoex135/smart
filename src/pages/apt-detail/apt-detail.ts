@@ -6,7 +6,6 @@ import { AptProvider } from "../../providers/apt/apt";
 import { LoaderHelper } from "../../helpers/loader-helper";
 import { APT_INDIKATOR } from "../../constant/apt-indikator";
 import { ToastHelper } from "../../helpers/toast-helper";
-import { UserProvider } from "../../providers/user/user";
 import { AptHistoryPage } from "../apt-history/apt-history";
 import { LogUtil } from "../../utils/logutil";
 import { FileHelper } from "../../helpers/file-helper";
@@ -31,7 +30,6 @@ export class AptDetailPage {
     private aptProvider: AptProvider,
     private loaderHelper: LoaderHelper,
     private toast: ToastHelper,
-    private userProvider: UserProvider,
     private fileHelper: FileHelper
   ) {
     
@@ -49,7 +47,7 @@ export class AptDetailPage {
   }
 
   getProfile() {
-    this.userProvider.getProfile()
+    this.aptProvider.getUser().getProfile()
     .then(res => {
       this.profile = res;
     });

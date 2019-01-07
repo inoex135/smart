@@ -1,5 +1,7 @@
 import { ENV } from "../config/environment";
+import { Injectable } from "@angular/core";
 
+@Injectable()
 export class LogUtil {
 
     static printDebug = (TAG:string, message:string) => {

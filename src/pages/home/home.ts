@@ -15,7 +15,7 @@ import { MenuHomeConstant } from "../../constant/menu-home";
 import { NotificationProvider } from "../../providers/notification/notification";
 import { ERROR_CODES } from "../../constant/error-codes";
 import { PaymentHistoryPage } from "../payment-history/payment-history";
-import {deserialize} from "serializer.ts/Serializer";
+import { Serializer } from "serializer.ts/Serializer";
 
 @IonicPage()
 @Component({
@@ -80,7 +80,8 @@ export class HomePage {
     public fcm: FCM,
     private homeProvider: HomeProvider,
     private loaderHelper: LoaderHelper,
-    private platform: Platform
+    private platform: Platform,
+    private serializer: Serializer
   ) {}
 
   ionViewWillEnter() {
@@ -195,7 +196,7 @@ export class HomePage {
       res => {
         if (res) {
           LogUtil.d(this.TAG, res)
-          this.dashboard = deserialize<Dashboard>(Dashboard, res.response)
+          this.dashboard = this.serializer.deserialize<Dashboard>(Dashboard, res.response)
         } 
       })
       .catch(error => {
@@ -272,7 +273,7 @@ export class HomePage {
 
   private redirectToLogIn(error): void {
     LogUtil.e(this.TAG, error)
-    if (error.message.includes(ERROR_CODES.MISSING_TOKEN)) {
+    if (error.message && error.message.includes(ERROR_CODES.MISSING_TOKEN)) {
       this.userProvider.purgeAuth();
       this.navCtrl.setRoot("LoginPage");
     }

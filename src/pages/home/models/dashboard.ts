@@ -1,6 +1,5 @@
 import { DashboardContract } from "./dashboard-contract";
 import { Notice } from "./notice";
-import { Type } from "serializer.ts/Decorators";
 
 export class Dashboard implements DashboardContract {
 
@@ -11,7 +10,6 @@ export class Dashboard implements DashboardContract {
     private readonly akumulasi_absen: string
     private readonly jumlah_hari_masuk?: number
     private readonly jam_keluar_hari_ini?: string
-    @Type(() => Notice)
     private pengumuman?: Notice[]
 
     getPresentAccumulation(): string {
