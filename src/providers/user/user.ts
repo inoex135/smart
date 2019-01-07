@@ -43,7 +43,7 @@ export class UserProvider {
   }
 
   setProfile(data: any) {
-    this.tokenProvider.saveProfile(data);
+    return this.tokenProvider.saveProfile(data)
   }
 
   purgeAuth() {
@@ -94,13 +94,21 @@ export class UserProvider {
         return this.apiProvider.get("/personal/profile").toPromise()
         .then(res => {
           if (res) {
-            this.setProfile(res);
+            return this.setProfile(res)
           }
-          return res;
+          return res
         })
       }
       return profile
     })
+  }
+
+  getLoggedInUser() {
+    return this.tokenProvider.getLoggedInUser()
+  }
+
+  setCurrentUserData() {
+    return this.tokenProvider.setCurrentUserDataFirst()
   }
 
   //registrasi fcm token

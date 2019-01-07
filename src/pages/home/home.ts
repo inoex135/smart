@@ -1,25 +1,21 @@
+import { IonicPage, Select, Slides, NavController, Platform } from "ionic-angular";
 import { Component, ViewChild, ElementRef } from "@angular/core";
-import { NavController, Platform, IonicPage, Select, Slides } from "ionic-angular";
-import { UserProvider } from "../../providers/user/user";
-
-import { MenuHomeConstant } from "../../constant/menu-home";
-import { HomeProvider } from "../../providers/home/home";
-
-import { LoaderHelper } from "../../helpers/loader-helper";
-import { FCM } from "@ionic-native/fcm";
-import { TokenProvider } from "../../providers/token/token";
-import { LogUtil } from "../../utils/logutil";
 import { NotificationBell } from "../../components/notification-bell/notification-bell";
-import { NotificationProvider } from "../../providers/notification/notification";
-import { ERROR_CODES } from "../../constant/error-codes";
-import { PaymentHistoryPage } from "../payment-history/payment-history";
+import { Dashboard } from "./models/dashboard";
 import { SuratPage } from "../surat/surat";
 import { AptPage } from "../apt/apt";
 import { PersonalPage } from "../personal/personal";
 import { MeetingListPage } from "../meeting-list/meeting-list";
-import { Dashboard } from "./models/dashboard";
-import { deserialize } from "serializer.ts/Serializer";
-import { DashboardContract } from "./models/dashboard-contract";
+import { UserProvider } from "../../providers/user/user";
+import { FCM } from "@ionic-native/fcm";
+import { HomeProvider } from "../../providers/home/home";
+import { LoaderHelper } from "../../helpers/loader-helper";
+import { LogUtil } from "../../utils/logutil";
+import { MenuHomeConstant } from "../../constant/menu-home";
+import { NotificationProvider } from "../../providers/notification/notification";
+import { ERROR_CODES } from "../../constant/error-codes";
+import { PaymentHistoryPage } from "../payment-history/payment-history";
+import {deserialize} from "serializer.ts/Serializer";
 
 @IonicPage()
 @Component({
@@ -49,7 +45,7 @@ export class HomePage {
 
   allowToSeePaymentHistory: boolean = true
 
-  dashboard: DashboardContract
+  dashboard: Dashboard
 
   buttons:Array<any> = [
     {
@@ -84,7 +80,6 @@ export class HomePage {
     public fcm: FCM,
     private homeProvider: HomeProvider,
     private loaderHelper: LoaderHelper,
-    private token: TokenProvider,
     private platform: Platform
   ) {}
 
@@ -92,7 +87,8 @@ export class HomePage {
     LogUtil.d(this.TAG, "ionViewWillEnter")
     this.listMenu();
     this.initData();
-    this.platform.ready().then(() => {
+    this.platform.ready()
+    .then(() => {
       this.fcmGetToken();
     });
     if (this.bell) {
@@ -100,12 +96,12 @@ export class HomePage {
     }
   }
 
-  listMenu() {
+  private listMenu() {
     this.menus = MenuHomeConstant.getMenus();
     return this.menus;
   }
 
-  setNotificationTotal(title: any, res: any) {
+  private setNotificationTotal(title: any, res: any) {
     if (title === "PERSURATAN") return res.notification_persuratan;
 
     if (title === "PERSONAL") return res.notification_personal;
@@ -119,7 +115,7 @@ export class HomePage {
     }
   }
 
-  logout() {
+  private logout() {
     this.loaderHelper.createLoader();
     this.userProvider.logout().subscribe(
       () => {
@@ -135,7 +131,7 @@ export class HomePage {
     );
   }
 
-  fcmGetToken() {
+  private fcmGetToken() {
     this.fcm.getToken().then(
       token => {
         this.userProvider.saveFcmToken(token).subscribe();
@@ -150,7 +146,7 @@ export class HomePage {
     );
   }
 
-  async initData(force:boolean = false) {
+  private initData(force:boolean = false) {
     // get profile dari localStorage jika sudah ada
     this.userProvider.getProfile(force)
     .then(profile => {
@@ -160,13 +156,14 @@ export class HomePage {
         this.currentProfile.name = profile.nama
         this.currentProfile.nip = profile.nip
       }
+      LogUtil.d(this.TAG, this.currentProfile)
       return Promise.resolve(profile)
     })
     .then(profile => {
-      return Promise.all([this.token.getLoggedInUser(), profile])
+      return Promise.all([this.userProvider.getLoggedInUser(), profile])
     })
     .then(([data, profile]) => {
-      if (data && data.user && profile && data.user.name == profile.nip) {
+      if (data && data.user && profile && profile.nip && data.user.name == profile.nip) {
         this.loggedInProfile = profile
         if (profile.user_pengganti) {
           this.substitutes = []
@@ -210,7 +207,7 @@ export class HomePage {
   }
 
   private getProfilePicture() {
-    this.homeProvider.getPhotoProfile()
+    return this.homeProvider.getPhotoProfile()
     .then(
       res => {
         if (res != null) {
@@ -219,14 +216,12 @@ export class HomePage {
         } else {
           this.showAvatar = true
         }
+        return Promise.resolve(res)
       }
-    ).catch(error => {
-      this.showAvatar = true
-      this.redirectToLogIn(error)
-    })
+    )
   }
 
-  triggerOpenSelect() {
+  private triggerOpenSelect() {
     if (this.select) {
       LogUtil.d(this.TAG, "not null")
       this.select.open()
@@ -236,11 +231,11 @@ export class HomePage {
   }
 
   //  by pass plt/plh
-  byPass(nip: string) {
+  private byPass(nip: string) {
     //cek apakah nip yg di select, sama dengan currentUser
     if (nip == this.loggedInProfile.nip) {
       //jika ada, ubah token kembali dengan user asli/bukan plt -plh nya
-      this.token.setCurrentUserDataFirst()
+      this.userProvider.setCurrentUserData()
       .then(() => {
         this.initData()
         this.enabledPaymentHistory()
@@ -267,11 +262,11 @@ export class HomePage {
     }
   }
 
-  getNotificationType(): string {
+  private getNotificationType(): string {
     return NotificationProvider.TYPE_ALL
   }
 
-  getSubstituteUsers() {
+  private getSubstituteUsers() {
     return this.substitutes
   }
 
@@ -283,7 +278,7 @@ export class HomePage {
     }
   }
 
-  historyPage() {
+  private historyPage() {
     this.navCtrl.push(PaymentHistoryPage.TAG)
   }
 
@@ -298,7 +293,7 @@ export class HomePage {
     return this.loggedInProfile.nip == this.currentProfile.nip
   }
 
-  isAllowToSeePaymentHistory(): boolean {
+  private isAllowToSeePaymentHistory(): boolean {
     return this.allowToSeePaymentHistory
   }
 

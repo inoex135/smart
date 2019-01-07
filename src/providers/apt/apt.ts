@@ -1,11 +1,11 @@
 import { Injectable } from "@angular/core";
 import { ApiProvider } from "../api/api";
 import { ENV } from "../../config/environment";
-import { TokenProvider } from "../token/token";
 import { map } from "rxjs/operators/map";
 import { LogUtil } from "../../utils/logutil";
 import { CacheProvider } from "../cache/cache";
 import { FileHelper } from "../../helpers/file-helper";
+import { UserProvider } from "../user/user";
 
 @Injectable()
 export class AptProvider {
@@ -17,7 +17,7 @@ export class AptProvider {
 
   constructor(
     public apiProvider: ApiProvider,
-    private token: TokenProvider,
+    private userProvider: UserProvider,
     private cache: CacheProvider,
     private fileHelper: FileHelper
   ) {
@@ -32,7 +32,7 @@ export class AptProvider {
   }
 
   getPelayananList() {
-    return this.token.getProfile()
+    return this.userProvider.getProfile()
     .then(profile => {
       let key = this.APT_PELAYANANS + "_" + profile.nip
       return this.cache.get(key)

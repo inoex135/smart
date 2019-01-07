@@ -17,6 +17,7 @@ export class HomeProvider {
   ) {}
 
   getPhotoProfile() {
+    LogUtil.d(this.TAG, 'get profile picture')
     return this.token.getCurrentProfile()
     .then(profile => {
       let key = this.KEY_PHOTO + "_" + profile.nip
@@ -69,6 +70,7 @@ export class HomeProvider {
     LogUtil.d(this.TAG, "get dashboard")
     return this.token.getProfile()
     .then(profile => {
+      LogUtil.d(this.TAG, profile)
       let key = this.KEY_DASHBOARD + profile.nip
       return Promise.all([this.cache.get(key), key])
     }).then(([result, key]) => {

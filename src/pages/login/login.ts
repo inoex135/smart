@@ -64,7 +64,9 @@ export class LoginPage {
     this.userProvider.attemptAuth(user).subscribe(
       data => {
         LogUtil.d(this.TAG, data)
-        this.navCtrl.setRoot("HomePage")
+        setTimeout(() => {
+          this.navCtrl.setRoot("HomePage")
+        }, 1000)
       },
       err => {
         console.log(err)

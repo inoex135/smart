@@ -75,8 +75,8 @@ export class TokenProvider {
       .then(() => this.storage.get(this.KEY_LOGGIN_USER) as Promise<Object>)
       .then(user => {
         this.latestUser = user;
-        return user;
-      });
+        return user
+      })
   }
 
   getLoggedInUser() {
@@ -89,21 +89,21 @@ export class TokenProvider {
       .ready()
       .then(() => this.storage.get(this.KEY_CURRENT_PROFILE) as Promise<any>)
       .then(profile => {
-        this.latestProfile = profile;
-        return profile;
-      });
+        this.latestProfile = profile
+        return profile
+      })
   }
 
   getProfilePltPlh() {
     return this.storage
       .ready()
       .then(() => {
-        this.storage.get(this.KEY_PL_TH) as Promise<Object>;
+        this.storage.get(this.KEY_PL_TH) as Promise<Object>
       })
       .then(res => {
-        this.pltPlh = res;
-        return res;
-      });
+        this.pltPlh = res
+        return res
+      })
   }
 
   saveToken(token: string): Promise<void> {
@@ -136,7 +136,9 @@ export class TokenProvider {
           this.saveTokenPltPlh(plt_plh)
         }
       })
-      .then(() => {this.storage.set(this.KEY_CURRENT_PROFILE, profile)})
+      .then(() => {
+        return this.storage.set(this.KEY_CURRENT_PROFILE, profile)
+      })
   }
 
   setPlthUser(data):Promise<any> {
