@@ -175,6 +175,7 @@ export class NaskahMasukDetailPage {
     } catch (error) {
       this.loaderHelper.dismissLoader()
       LogUtil.e(NaskahMasukDetailPage.TAG, error)
+      this.toast.present(error)
     }
   }
 

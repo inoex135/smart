@@ -124,11 +124,6 @@ export class AptProvider {
 
     const url = `${ENV.API_URL}/apt/permohonan/download/${fileId}`
 
-    // const filename = url.split("/").pop();
-
-    // this.fileDir = this.file.externalRootDirectory + "Download" + 'smart.xlsx';
-    // console.log(filename);
-
     return this.fileHelper.baseDownload({
       url: url,
       targetPath: targetPath

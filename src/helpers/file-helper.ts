@@ -119,11 +119,16 @@ export class FileHelper {
 
   public async baseDownload(params: any = {}):Promise<any> {
     LogUtil.d(FileHelper.TAG, params)
-    var options = {}
-    if (params.options) {
-      options = this.getOptions()
+    const token = await this.token.getCurrentToken()
+    let options = {
+      headers: {
+        Authorization: "smartdjkn2017mobile",
+        token: token
+      },
+      httpMethod: "GET"
     }
-    return this.fileTransfer
+    LogUtil.d(FileHelper.TAG, options)
+    return await this.fileTransfer
     .download(params.url, params.targetPath, false, options)
     .then(res => {
       if (params.callback) {
@@ -132,21 +137,11 @@ export class FileHelper {
       return true
     })
     .catch(error => {
+      LogUtil.e(FileHelper.TAG, error)
       return false
     }) 
   }
 
-  public async getOptions() {
-    const token = this.token.getCurrentToken()
-    const options = {
-      headers: {
-        Authorization: "smartdjkn2017mobile",
-        token: token
-      },
-      httpMethod: "GET"
-    }
-    return options
-  }
 
   public async download(url: string, targetPath) {
 

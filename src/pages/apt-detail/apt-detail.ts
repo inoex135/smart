@@ -102,7 +102,7 @@ export class AptDetailPage {
 
     } catch (error) {
       this.loaderHelper.dismissLoader()
-      this.toast.present(error);
+      this.toast.present(error)
     }
   }
 
