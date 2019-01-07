@@ -7,6 +7,7 @@ import { TokenProvider } from "../providers/token/token";
 import { LogUtil } from "../utils/logutil";
 import { Platform } from "ionic-angular";
 import { Mime } from "./mime";
+import { ToastHelper } from "./toast-helper";
 
 @Injectable()
 export class FileHelper {
@@ -28,7 +29,8 @@ export class FileHelper {
         private storage: File,
         private transfer: FileTransfer,
         private token: TokenProvider,
-        private platform: Platform
+        private platform: Platform,
+        private toast: ToastHelper
     ) {
         this.fileTransfer = transfer.create()
         if (this.platform.is("android") || this.platform.is("ios")) {
@@ -158,13 +160,25 @@ export class FileHelper {
     })
   }
 
-  public openFileWindow(filename) {
+  public openFileWindow(filename, callback: any = undefined) {
     this.isFileExist(filename)
     .then(exists => {
       LogUtil.d(FileHelper.TAG, "file: " + filename + " exists: " + exists )
       if (exists) {
-        window.open(this.getDownloadDirectory() + "/" + filename, '_system', 'location=yes')
+        this.toast.present("File berhasil dibuka.")
+        const path = this.getDownloadDirectory() + "/" + filename
+        if (callback) {
+            callback(path)
+        } else {
+          window.open(path, '_system', 'location=yes')
+        }      
+      } else {
+        this.toast.present("File gagal dibuka!")
       }
+    })
+    .catch(error => {
+      LogUtil.e(FileHelper.TAG, error)
+      this.toast.present("File gagal dibuka!")
     })
   }
 

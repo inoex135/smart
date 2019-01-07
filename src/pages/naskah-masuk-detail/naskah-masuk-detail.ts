@@ -169,13 +169,8 @@ export class NaskahMasukDetailPage {
       }
 
       await this.naskahProvider.downloadFileSurat(fileData.id, targetPath);
-
-      // open file after download
-     // await this.aptHelper.openFile(targetPath, "application/pdf");
-      // alert(openFile.message);
-
+      
       this.loaderHelper.dismissLoader()
-      this.toast.present("File telah di download")
       this.fileHelper.openFileWindow(fileData.namaFile)
     } catch (error) {
       this.loaderHelper.dismissLoader()

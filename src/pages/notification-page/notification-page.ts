@@ -63,11 +63,11 @@ export class NotificationPage {
       value: 0,
       active: false
     },
-    data[NotificationProvider.TYPE_RAPAT] = {
+/*     data[NotificationProvider.TYPE_RAPAT] = {
       name: 'E-Rapat',
       value: 0,
       active: false
-    },
+    }, */
     data[NotificationProvider.TYPE_PERSONAL] = {
       name: 'Personal',
       value: 0,

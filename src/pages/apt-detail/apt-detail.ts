@@ -97,13 +97,9 @@ export class AptDetailPage {
 
       await this.aptProvider.download(fileApt.id, targetPath)
 
-      this.toast.present("File telah di download")
-
       this.loaderHelper.dismissLoader()
       this.fileHelper.openFileWindow(filename)
 
-      // open file after download
-      // await this.aptHelper.openFile(targetPath);
     } catch (error) {
       this.loaderHelper.dismissLoader()
       this.toast.present(error);
