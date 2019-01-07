@@ -6,7 +6,6 @@ import {
   App,
   Select
 } from "ionic-angular";
-import { File } from "@ionic-native/file";
 import { AptProvider } from "../../providers/apt/apt";
 import { LoaderHelper } from "../../helpers/loader-helper";
 import remove from "lodash/remove";
@@ -27,7 +26,6 @@ export class AptPage {
   params: any = {};
   items: any = [];
   pelayanans: any = [];
-  fileDirectory: any;
   loader: any;
   redirectComponent: string = "AptNotifikasiPage";
 
@@ -72,12 +70,10 @@ export class AptPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     private aptProvider: AptProvider,
-    file: File,
     private loaderHelper: LoaderHelper,
     private toastHelper: ToastHelper,
     private app: App
   ) {
-    this.fileDirectory = file.externalRootDirectory + "Download";
   }
 
   ionViewDidLoad() {
@@ -171,26 +167,6 @@ export class AptPage {
       this.page
     );
   }
-
-  // async download() {
-  //   const targetPath = this.fileDirectory + "smart.xlsx";
-
-  //   await this.loaderHelper.createLoader();
-
-  //   const checkPermission = await this.aptHelper.checkPermission();
-
-  //   // check if apps has permission to write storage
-  //   if (!checkPermission.hasPermission) {
-  //     await this.aptHelper.requestPermission();
-  //   }
-
-  //   const download = await this.aptProvider.download(targetPath);
-
-  //   const openFile = await this.aptHelper.openFile(targetPath);
-  //   alert(openFile.message);
-
-  //   this.loader.dismiss();
-  // }
 
   search(keyword: any, layananId: number) {
     LogUtil.d(AptPage.TAG, "keyword: " + keyword + " - service: " + layananId)
