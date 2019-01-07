@@ -70,7 +70,7 @@ export class HomePage {
       title: 'E-Rapat',
       page: MeetingListPage.TAG,
       icon: 'm-erapat.svg',
-      enabled: true
+      enabled: false
     }
   ]
 
