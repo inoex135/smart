@@ -1,4 +1,4 @@
-<div class="new-form">
+<div class="new-form" >
     <!-- disposisi unit or personal component?.unitOrPersonal -->
     <ion-grid *ngIf="currentStep == arraySteps[2]">
 
@@ -32,7 +32,8 @@
             </ion-item>
             
         </ion-col>
-        
+        <div class="spacer"></div>        
+        <div class="spacer"></div>
     </ion-grid>
     
     <!-- disposisi pilih sifat component?.disposisiSifat -->
@@ -43,7 +44,7 @@
                 <ion-item class="custom-ion-item petunjuk" no-lines *ngFor="let petunjuk of datas?.petunjuk; let i = index">
                     <ion-label text-wrap>{{petunjuk?.keterangan}}</ion-label>
                     <ion-checkbox [checked]="petunjuk?.isChecked" color="primary" name="petunjuk[i]" (ionChange)="onChange(petunjuk?.id, $event.checked, i)"></ion-checkbox>
-                </ion-item>
+                </ion-item> 
             </ion-col>
         </ion-row>
     </ion-grid>
@@ -111,7 +112,7 @@
                 </ion-row>
             </div>
             
-            <div class="disposisi-padding-top-form" *ngIf="isEselon4()">
+            <div *ngIf="isEselon4()" class="disposisi-padding-top-form">
                 <ion-row *ngIf="component?.disposisiPersonal" class="row">
                     <div *ngFor="let pelaksana of datas?.pelaksana; let i = index" col-12 class="pelaksana">
                         <ion-item no-lines class="item custom-ion-item">
@@ -127,17 +128,17 @@
             </div>
         </div>  
     </ion-grid>
-    
-    <div class="spacer"></div>
-    <div class="stepper-bottom-navigation">
-        <button *ngIf="hidePrevButton()" class="prev-btn" small left clear ion-button color="default-blue" (tap)="prev()">
-            Sebelumnya
-        </button>
-        <button *ngIf="!isLastStep()" [disabled]="disabledNextButton()" right clear ion-button color="default-blue" (tap)="next()" class="next-btn" small>
-            Selanjutnya
-        </button>
-        <button *ngIf="isLastStep()" [disabled]="disabledNextButton()" right clear ion-button color="default-blue" (tap)="showDialogSave()" class="next-btn" small>
-            <ion-icon name="paper"></ion-icon> Simpan
-        </button>
-    </div>
+</div>
+
+<div class="spacer"></div>
+<div class="stepper-bottom-navigation" *ngIf="!keyboard.isOpen()">
+    <button *ngIf="hidePrevButton()" class="prev-btn" small left clear ion-button color="default-blue" (tap)="prev()">
+        Sebelumnya
+    </button>
+    <button *ngIf="!isLastStep()" [disabled]="disabledNextButton()" right clear ion-button color="default-blue" (tap)="next()" class="next-btn" small>
+        Selanjutnya
+    </button>
+    <button *ngIf="isLastStep()" [disabled]="disabledNextButton()" right clear ion-button color="default-blue" (tap)="showDialogSave()" class="next-btn" small>
+        <ion-icon name="paper"></ion-icon> Simpan
+    </button>
 </div>

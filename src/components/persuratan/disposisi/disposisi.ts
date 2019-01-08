@@ -6,7 +6,7 @@ import { debounceTime, distinctUntilChanged } from "rxjs/operators";
 import { ToastHelper } from "../../../helpers/toast-helper";
 import { MomentHelper } from "../../../helpers/moment-helper";
 import { DatepickerProvider } from "../../../providers/datepicker/datepicker";
-import { NavController, AlertController } from "ionic-angular";
+import { NavController, AlertController, Keyboard } from "ionic-angular";
 
 import findIndex from "lodash/findIndex";
 import orderBy from "lodash/sortBy";
@@ -89,7 +89,7 @@ export class Disposisi {
 
   arraySteps:any = [0, 1, 2]
 
-  profile: any = "";
+  profile: any = {}
 
   //access ion-autocomplete func
   @ViewChild("searchbar") searchbar: AutoCompleteComponent;
@@ -103,15 +103,13 @@ export class Disposisi {
     private navCtrl: NavController,
     private user: TokenProvider,
     private loader: LoaderHelper,
-    private alert: AlertController
+    private alert: AlertController,
+    private keyboard: Keyboard
   ) {
     this.user.getProfile().then(res => {
       LogUtil.d(this.TAG, res)
       this.profile = res
-      if (this.isEselon4()) {
-        this.component.disposisiPersonal = true
-        this.disposisiTarget.personal = true
-      }
+      this.setEselon4Requirements()
     });
     this.init();
   }
@@ -149,11 +147,11 @@ export class Disposisi {
   // langsung terceklist data pelaksana yg sudah di ceklist sebelumnya
   mappingPelaksana(pelaksana: any) {
     const data = pelaksana.map(data => {
-      data.isChecked = false;
-      return data;
-    });
+      data.isChecked = false
+      return data
+    })
 
-    return data;
+    return data
   }
 
   isEselon4():boolean {
@@ -183,6 +181,13 @@ export class Disposisi {
     return this.disposisiTarget.unit || this.disposisiTarget.personal
   }
 
+  setEselon4Requirements() {
+    if (this.isEselon4()) {
+      this.component.disposisiPersonal = true
+      this.disposisiTarget.personal = true
+    }
+  }
+
   // CHECKBOX
   // untuk get dan remove value checkbox unit
   // remove by index dari unit yg di klik
@@ -206,15 +211,13 @@ export class Disposisi {
   }
 
   //checked/select pelaksana
-  selectPelaksana(nip: string, checked: boolean, index: number) {
-    let pelaksanaIndex = findIndex(this.disposisi.personal, nip);
-
+  selectPelaksana(nip: any, checked: boolean, index: number) {
     if (checked) {
-      this.datas.pelaksana[index].isChecked = true;
-      this.disposisi.personal.push(nip);
+      this.datas.pelaksana[index].isChecked = true
+      this.disposisi.personal.push(nip)
     } else {
-      this.datas.pelaksana[index].isChecked = false;
-      this.disposisi.personal.splice(pelaksanaIndex, 1);
+      this.datas.pelaksana[index].isChecked = false
+      this.disposisi.personal.splice(findIndex(this.disposisi.personal, nip), 1)
     }
   }
 
@@ -231,6 +234,7 @@ export class Disposisi {
         err => {}
       );
   }
+  
   onChange(petunjuk: string, checked: boolean, index: number) {
     const indexPetunjuk = this.datas.petunjuk.indexOf(petunjuk);
 
@@ -313,18 +317,19 @@ export class Disposisi {
   }
 
   setDisposisiTarget(status: boolean) {
-    this.disposisiTarget.personal = status;
-    this.disposisiTarget.unit = status;
+    this.disposisiTarget.personal = status
+    this.disposisiTarget.unit = status
   }
 
   private back(to: string | any = "root") {
     if (this.currentStep == this.arraySteps[0]) {
-      this.component.unitOrPersonal = true;
-      this.component.disposisiUnit = false;
-      this.component.disposisiPersonal = false;
+      this.component.unitOrPersonal = true
+      this.component.disposisiUnit = false
+      this.component.disposisiPersonal = false
+      this.setEselon4Requirements()
     } else if (this.currentStep == this.arraySteps[2]) {
       this.component.disposisiPersonal = this.disposisiTarget.personal;
-      this.component.disposisiUnit = this.disposisiTarget.unit;
+      this.component.disposisiUnit = this.disposisiTarget.unit
     }
     this.emitPageChange()
     return this.currentStep
@@ -381,7 +386,7 @@ export class Disposisi {
     }, 200)
   }
     
-  disabledNextButton = () => {
+  disabledNextButton() {
     if (this.currentStep == this.arraySteps[2]) {
       /* if (this.isEselon4()) {
         return !this.isSifatSuratFilled()

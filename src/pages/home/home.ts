@@ -182,7 +182,6 @@ export class HomePage {
     })
     .catch(error => {
       LogUtil.d(this.TAG, "i catch error here on profile")
-      LogUtil.e(this.TAG, error)
       this.redirectToLogIn(error)
     })
   }
@@ -273,7 +272,8 @@ export class HomePage {
 
   private redirectToLogIn(error): void {
     LogUtil.e(this.TAG, error)
-    if (error.message && error.message.includes(ERROR_CODES.MISSING_TOKEN)) {
+    if ((error.message && error.message.includes(ERROR_CODES.MISSING_TOKEN)) 
+    || error.status && error.status === 401) {
       this.userProvider.purgeAuth();
       this.navCtrl.setRoot("LoginPage");
     }

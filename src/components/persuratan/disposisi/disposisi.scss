@@ -1,6 +1,5 @@
 disposisi {
 
-  margin-bottom: 40px;
   height: 100%;
   font-family: Roboto;
   color: color($colors, 'new-text-color-grey') !important;
@@ -25,13 +24,14 @@ disposisi {
   }
 
   .stepper-bottom-navigation {
+    flex: 1;
     background-color: #fff;
     margin-top: 5px;
     padding-right: 7px;
     padding-left: 7px;
     padding-top: 5px;
     padding-bottom: 5px;
-    position: fixed;
+   // position: sticky;
     bottom: 0px;
     width: 100%;
 

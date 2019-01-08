@@ -71,6 +71,12 @@ npm install -g ionic
 * Server production DJKN: https://www.djkn.kemenkeu.go.id/smart.service/api
 * Server development JAVAN: http://api.smart.javan.co.id/api
 
+## Coding Style
+
+* Sebaiknya menggunakan OOP contoh penggunaan class sebagai model/entity, interface.
+* Jika terdapat json object sebaiknya di serialize ke dalam bentuk Class object.
+* Semua behavior logic sebaiknya berada di dalam model, jangan letakan pada controller.
+
 ### Etc
 
 ```

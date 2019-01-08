@@ -79,7 +79,11 @@ export class ApiProvider {
       errMsg = ERROR_CODES.MISSING_TOKEN
     }
 
-    return ErrorObservable.create(errMsg);
+    if (error.status && error.status >= 400) {
+      return ErrorObservable.create(error)
+    }
+
+    return ErrorObservable.create(errMsg)
   }
 
   private handleErrorForm(httpError: HttpErrorResponse) {
