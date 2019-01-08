@@ -14,10 +14,44 @@ export class FileHelper {
 
     static TAG:string = 'FileHelper'
     
-    static PDF_MIME:Mime = {
+    static PDF_MIME: Mime = {
       type: 'application/pdf',
       extension: '.pdf'
     }
+
+    static DOC_MIME: Mime = {
+      type: 'application/msword',
+      extension: '.doc'
+    }
+
+    static DOCX_MIME: Mime = {
+      type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+      extension: '.docx'
+    }
+
+    static SHEET_MIME: Mime = {
+      type: "application/vnd.ms-excel",
+      extension: '.xls'
+    }
+
+    static SHEETX_MIME: Mime = {
+      type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      extension: '.xlsx'
+    }
+
+    static JPG_MIME: Mime = {
+      type: 'image/jpeg',
+      extension: '.jpeg'
+    }
+
+    static MIMES: Array<Mime> = [
+      FileHelper.PDF_MIME, 
+      FileHelper.DOC_MIME, 
+      FileHelper.DOCX_MIME, 
+      FileHelper.SHEET_MIME, 
+      FileHelper.SHEETX_MIME,
+      FileHelper.JPG_MIME
+    ]
 
     mime: string = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
 
@@ -42,10 +76,11 @@ export class FileHelper {
     return this.fileOpener
       .open(directory, mime)
       .then(res => this.respon(res))
-      .catch(err => this.error(err));
+      .catch(err => this.error(err))
   }
 
   checkPermission() {
+    LogUtil.d(FileHelper.TAG, 'check permission')
     return this.androidPermissions
       .checkPermission(
         this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE
@@ -60,15 +95,16 @@ export class FileHelper {
         this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE
       )
       .then(res => this.respon(res))
-      .catch(err => this.error(err));
+      .catch(err => this.error(err))
   }
 
   error(err: any) {
-    return err;
+    LogUtil.e(FileHelper.TAG, err)
+    return err
   }
 
   respon(res: any) {
-    return res;
+    return res
   }
 
   public getBaseFileDirectory(): string {
@@ -165,7 +201,13 @@ export class FileHelper {
         if (callback) {
             callback(path)
         } else {
-          window.open(path, '_system', 'location=yes')
+          let mime = this.processMime(path)
+          LogUtil.d(FileHelper.TAG, mime)
+          if (mime != null) {
+            this.openFile(path, mime.type)
+          } else {
+            this.toast.present("File gagal dibuka, file tidak dikenali!")
+          }
         }      
       } else {
         this.toast.present("File gagal dibuka!")
@@ -175,6 +217,17 @@ export class FileHelper {
       LogUtil.e(FileHelper.TAG, error)
       this.toast.present("File gagal dibuka!")
     })
+  }
+
+  private processMime(filePath: String): Mime {
+    let extension = '.' + filePath.substring(filePath.lastIndexOf('/') + 1).split('.').pop()
+    for (let i in FileHelper.MIMES) {
+      let mime = FileHelper.MIMES[i]
+      if (mime.extension === extension) {
+        return mime
+      }
+    }
+    return null
   }
 
 }
