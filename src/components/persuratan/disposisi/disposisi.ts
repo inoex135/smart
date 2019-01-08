@@ -8,7 +8,6 @@ import { MomentHelper } from "../../../helpers/moment-helper";
 import { DatepickerProvider } from "../../../providers/datepicker/datepicker";
 import { NavController, AlertController, Keyboard } from "ionic-angular";
 
-import findIndex from "lodash/findIndex";
 import orderBy from "lodash/sortBy";
 import compact from "lodash/compact";
 import * as moment from "moment-timezone";
@@ -146,9 +145,9 @@ export class Disposisi {
   // add isChecked untuk flagging ketika kembali ke halaman sebelumnya
   // langsung terceklist data pelaksana yg sudah di ceklist sebelumnya
   mappingPelaksana(pelaksana: any) {
-    const data = pelaksana.map(data => {
-      data.isChecked = false
-      return data
+    const data = pelaksana.map(element => {
+      element['isChecked'] = false
+      return element
     })
 
     return data
@@ -211,14 +210,23 @@ export class Disposisi {
   }
 
   //checked/select pelaksana
-  selectPelaksana(nip: any, checked: boolean, index: number) {
+  selectPelaksana(pelaksana: any, checked: boolean, index: number) {
+    this.datas.pelaksana[index]['isChecked'] = checked
     if (checked) {
-      this.datas.pelaksana[index].isChecked = true
-      this.disposisi.personal.push(nip)
+      this.disposisi.personal.push(pelaksana)
     } else {
-      this.datas.pelaksana[index].isChecked = false
-      this.disposisi.personal.splice(findIndex(this.disposisi.personal, nip), 1)
+      this.disposisi.personal.splice(this.getIndexByModel(pelaksana), 1)
     }
+  }
+
+  getIndexByModel(pelaksana: any): number {
+    return this.disposisi.personal.forEach((element, i) => {
+      if (element.nip == pelaksana.nip) {
+        return i
+      } else {
+        return -1
+      }
+    })
   }
 
   searchPegawai(param: any) {
@@ -284,6 +292,10 @@ export class Disposisi {
   }
 
   next() {
+    if (this.disabledNextButton()) {
+      this.toastHelper.present('Periksa kembali inputan anda!')
+      return
+    }
     if (this.currentStep < 0) {
       this.currentStep = 0
     }
@@ -388,10 +400,6 @@ export class Disposisi {
     
   disabledNextButton() {
     if (this.currentStep == this.arraySteps[2]) {
-      /* if (this.isEselon4()) {
-        return !this.isSifatSuratFilled()
-      }
-      return !this.isDisposisiChecked() || !this.isSifatSuratFilled() */
       return !this.isSifatSuratFilled()
     } else if (this.currentStep == this.arraySteps[0]) {
       if (this.isEselon4()) {
