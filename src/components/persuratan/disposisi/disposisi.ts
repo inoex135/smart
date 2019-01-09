@@ -6,7 +6,7 @@ import { debounceTime, distinctUntilChanged } from "rxjs/operators";
 import { ToastHelper } from "../../../helpers/toast-helper";
 import { MomentHelper } from "../../../helpers/moment-helper";
 import { DatepickerProvider } from "../../../providers/datepicker/datepicker";
-import { NavController, AlertController, Keyboard } from "ionic-angular";
+import { NavController, AlertController } from "ionic-angular";
 
 import orderBy from "lodash/sortBy";
 import compact from "lodash/compact";
@@ -102,8 +102,7 @@ export class Disposisi {
     private navCtrl: NavController,
     private user: TokenProvider,
     private loader: LoaderHelper,
-    private alert: AlertController,
-    private keyboard: Keyboard
+    private alert: AlertController
   ) {
     this.user.getProfile().then(res => {
       LogUtil.d(this.TAG, res)
