@@ -4,9 +4,15 @@ import { Injectable } from "@angular/core";
 @Injectable()
 export class LogUtil {
 
+    private static PACKAGE: string = 'com.smart.djkn'
+
     static printDebug = (TAG:string, message:string) => {
-        console.log("DEBUG - " + TAG + " - " + message)
+        console.log(LogUtil.basicFormat() + " - DEBUG - " + TAG + " - " + message)
         return 1
+    }
+
+    private static basicFormat(): string {
+        return LogUtil.PACKAGE + ' [' + new Date().toISOString() + ']'
     }
 
     static d(TAG:string, object: any) {
@@ -22,7 +28,7 @@ export class LogUtil {
     static e(TAG:string, error) {
         if (ENV.DEV) {
             this.d(TAG, error.message)
-            console.error(TAG + " - message: " + error.message, error)
+            console.error(LogUtil.basicFormat() + ' - ' + TAG + " - message: " + error.message, error)
         }
     }
 

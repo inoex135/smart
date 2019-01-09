@@ -196,7 +196,6 @@ export class FileHelper {
     .then(exists => {
       LogUtil.d(FileHelper.TAG, "file: " + filename + " exists: " + exists )
       if (exists) {
-        this.toast.present("File berhasil dibuka.")
         const path = this.getDownloadDirectory() + "/" + filename
         if (callback) {
             callback(path)
@@ -204,7 +203,14 @@ export class FileHelper {
           let mime = this.processMime(path)
           LogUtil.d(FileHelper.TAG, mime)
           if (mime != null) {
-            this.openFile(path, mime.type)
+            this.fileOpener.open(path, mime.type)
+            .then(() => {
+              this.toast.present("File berhasil dibuka.")
+            })
+            .catch(error => {
+              LogUtil.d(FileHelper.TAG, error)
+              this.toast.present("File gagal dibuka!")
+            })
           } else {
             this.toast.present("File gagal dibuka, file tidak dikenali!")
           }
