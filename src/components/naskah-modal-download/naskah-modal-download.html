@@ -8,7 +8,8 @@
               <p>Daftar File</p>
               <p (click)="dismiss()"><ion-icon name="close"></ion-icon></p>
           </div> -->
-          <p item-center>Daftar File</p>
+          <p item-center *ngIf="files?.length > 0">Daftar File</p>
+          <p item-center *ngIf="files?.length == 0">Tidak Terdapat File Digital</p>
           <button item-end ion-button icon-only clear (tap)="dismiss()"><ion-icon name="close"></ion-icon></button>
       </ion-item>
     </ion-list>
