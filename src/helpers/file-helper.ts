@@ -212,7 +212,7 @@ export class FileHelper {
               this.toast.present("File gagal dibuka!")
             })
           } else {
-            this.toast.present("File gagal dibuka, file tidak dikenali!")
+            this.toast.present("File tidak dikenali!")
           }
         }      
       } else {
@@ -226,7 +226,7 @@ export class FileHelper {
   }
 
   private processMime(filePath: String): Mime {
-    let extension = '.' + filePath.substring(filePath.lastIndexOf('/') + 1).split('.').pop()
+    let extension = filePath.substring(filePath.lastIndexOf('.'))
     for (let i in FileHelper.MIMES) {
       let mime = FileHelper.MIMES[i]
       if (mime.extension === extension) {
