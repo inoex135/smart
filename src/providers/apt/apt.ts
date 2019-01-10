@@ -6,6 +6,7 @@ import { LogUtil } from "../../utils/logutil";
 import { CacheProvider } from "../cache/cache";
 import { FileHelper } from "../../helpers/file-helper";
 import { UserProvider } from "../user/user";
+import { AptListItem } from "./models/apt-list-item";
 
 @Injectable()
 export class AptProvider {
@@ -32,7 +33,18 @@ export class AptProvider {
   getPermohonanList(page: number = 0, size: number = 10) {
     const url = `/apt/permohonan/pending?page=${page}&size=${size}`;
 
-    return this.apiProvider.get(url).pipe(map(res => res.content));
+    return this.apiProvider.get(url)
+    .map(res => this.generateList(res))
+  }
+
+  private generateList(res: any): Array<AptListItem> {
+    let list = Array<AptListItem>()
+    if (res.content) {
+        res.content.forEach(element => {
+            list.push(AptListItem.create(element))
+        })
+    }
+    return list
   }
 
   getPelayananList() {
@@ -139,12 +151,12 @@ export class AptProvider {
   getDekatBatasWaktu(keyword: string, page: number = 0, size: number = 10) {
     return this.apiProvider
       .get(`/apt/permohonan/dekat?page=${page}&size=${size}`)
-      .pipe(map(res => res.content));
+      .map(res => this.generateList(res))
   }
 
   getLewatiBatasWaktu(keyword: string, page: number = 0, size: number = 10) {
     return this.apiProvider
       .get(`/apt/permohonan/lewat?page=${page}&size=${size}`)
-      .pipe(map(res => res.content));
+      .pipe(map(res => this.generateList(res)));
   }
 }

@@ -13,6 +13,8 @@ import { debounceTime, finalize } from "rxjs/operators";
 import { ToastHelper } from "../../helpers/toast-helper";
 import { LogUtil } from "../../utils/logutil";
 import { NotificationProvider } from "../../providers/notification/notification";
+import { AptListItem } from "../../providers/apt/models/apt-list-item";
+import { AptListItemContract } from "../../providers/apt/models/contracts/apt-list-item-contract";
 
 @IonicPage()
 @Component({
@@ -23,21 +25,21 @@ export class AptPage {
 
   static TAG:string = 'AptPage'
 
-  params: any = {};
-  items: any = [];
-  pelayanans: any = [];
-  loader: any;
-  redirectComponent: string = "AptNotifikasiPage";
+  params: any = {}
+  items: Array<AptListItem> = []
+  pelayanans: any = []
+  loader: any
+  redirectComponent: string = "AptNotifikasiPage"
 
   @ViewChild("selectService") select: Select
 
-  isPress: boolean = false;
-  keyword: string = "";
-  jenisPelayanan: any = "";
-  searching: boolean = false;
+  isPress: boolean = false
+  keyword: string = ""
+  jenisPelayanan: any = ""
+  searching: boolean = false
 
-  listAptId: any[] = [];
-  showAgendaButton: boolean = false;
+  listAptId: any[] = []
+  showAgendaButton: boolean = false
 
   isSearchOpened:boolean = false
 
@@ -77,8 +79,8 @@ export class AptPage {
   }
 
   ionViewDidLoad() {
-    this.getPelayananList();
-    this.mappingGetData();
+    this.getPelayananList()
+    this.mappingGetData()
   }
 
   ionViewWillLeave() {
@@ -88,22 +90,22 @@ export class AptPage {
   
   mappingGetData() {
     if (this.type === "dekatBatasWaktu") {
-      return this.getDekatBatasWaktu();
+      return this.getDekatBatasWaktu()
     }
 
     if (this.type === "lewatBatasWaktu") {
-      return this.getLewatiBatasWaktu();
+      return this.getLewatiBatasWaktu()
     }
 
-    return this.getAptList();
+    return this.getAptList()
   }
 
-  detailApt(item: any) {
-    this.app.getRootNav().push("AptDetailPage", { itemId: item.id });
+  detailApt(item: AptListItemContract) {
+    this.app.getRootNav().push("AptDetailPage", { itemId: item.getId() })
   }
 
   isItemPressed() {
-    this.isPress = !this.isPress;
+    this.isPress = !this.isPress
   }
 
   getPelayananList() {
@@ -317,19 +319,6 @@ export class AptPage {
 
   getNotificationType():string {
     return NotificationProvider.TYPE_APT
-  }
-
-  getStatusColor(status:string = ''):string {
-    switch(status) {
-      case 'Permohonan Aktif':
-        return 'new-green-background'
-      case 'Permohonan Aktif Mendekati Batas Waktu':
-        return 'new-orange-background'
-      case 'Permohonan Melebih Batas Waktu':
-        return 'new-red-background'
-      default:
-        return 'white-background'
-    }
   }
 
 }

@@ -1,4 +1,4 @@
-import { PelayananContract } from "./pelayanan-contract";
+import { PelayananContract } from "./contracts/pelayanan-contract";
 
 export class PelayananModel implements PelayananContract {
 
@@ -10,6 +10,12 @@ export class PelayananModel implements PelayananContract {
     
     setName(name: string): void {
         this.nama = name
+    }
+
+    public static create(data: any): PelayananModel {
+        let model = new PelayananModel()
+        model.setName(data.nama)
+        return model
     }
 
 }
