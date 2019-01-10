@@ -24,13 +24,15 @@ export class ToastHelper {
   presentError(error: any): void {
     LogUtil.d(this.TAG, 'catch status code from error.')
     LogUtil.d(this.TAG, error)
-    let message = ''
+    let message = 'Terjadi kesalahan!'
     if (error.status && error.status == 401) {
       message = 'Session anda telah berakhir, harap logout dan login kembali!'
     } else if (error.error.error_code) {
-      message = `${error.error.error_message || ""}`;
-    } else {
-      message = error.message ? error.message : error.toString();
+      message = `${error.error.error_message || ""}`
+    } else if (error.message) {
+      message = error.message
+    } else if (error instanceof String) {
+      message = error.toString()
     }
     this.present(message)
   }

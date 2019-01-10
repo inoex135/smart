@@ -15,6 +15,7 @@ import { TokenProvider } from "../../providers/token/token";
 import { LogUtil } from "../../utils/logutil";
 import { NotificationProvider } from "../../providers/notification/notification";
 import { NotificationBell } from "../../components/notification-bell/notification-bell";
+import { ToastHelper } from "../../helpers/toast-helper";
 
 @IonicPage()
 @Component({
@@ -53,7 +54,8 @@ export class SuratPage {
     public suratProvider: SuratProvider,
     private datepicker: DatepickerProvider,
     private momentHelper: MomentHelper,
-    private tokenProvider: TokenProvider
+    private tokenProvider: TokenProvider,
+    private toast: ToastHelper
   ) {
     this.redirectComponent = "NaskahNotifikasiPage";
   }
@@ -92,6 +94,7 @@ export class SuratPage {
         },
         err => {
           this.loaderHelper.dismissLoader()
+          this.toast.presentError(err)
         }
       )
     })
