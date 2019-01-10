@@ -66,7 +66,7 @@ export class AptDetailPage {
       },
       err => {
         this.loaderHelper.dismissLoader()
-        this.catchStatusCode(err)
+        this.toast.presentError(err)
       }
     )
     })
