@@ -36,7 +36,7 @@ export class NotificationBell {
     }
   }
 
-  updateNotification() {
+  updateNotification(exception: any = undefined) {
     if (!this.isUpdating) {
       this.isUpdating = true
       LogUtil.d(NotificationBell.TAG, "updating notification...")
@@ -48,6 +48,9 @@ export class NotificationBell {
         error => {
           this.isUpdating = false
           LogUtil.d(NotificationBell.TAG, "error")
+          if (exception) {
+              exception(error)
+          }
         }
       )
     } else {

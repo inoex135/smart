@@ -3,6 +3,7 @@ import { Slides, NavParams } from "ionic-angular";
 import { LoaderHelper } from "../../helpers/loader-helper";
 
 import { AptProvider } from "../../providers/apt/apt";
+import { ToastHelper } from "../../helpers/toast-helper";
 @Component({
   selector: "apt-pratinjau",
   templateUrl: "apt-pratinjau.html"
@@ -17,38 +18,40 @@ export class AptPratinjauComponent {
   constructor(
     public navParams: NavParams,
     private aptProvider: AptProvider,
-    private loaderHelper: LoaderHelper
+    private loaderHelper: LoaderHelper,
+    private toast: ToastHelper
   ) {
-    this.action = this.navParams.get("action");
-    this.itemId = this.navParams.get("itemId");
-    this.getDetailAptAction();
+    this.action = this.navParams.get("action")
+    this.itemId = this.navParams.get("itemId")
+    this.getDetailAptAction()
   }
 
   async getDetailAptAction() {
-    await this.loaderHelper.createLoader();
+    await this.loaderHelper.createLoader()
 
     this.aptProvider.getDetailAptAction(this.action, this.itemId).subscribe(
       res => {
-        this.aptDetailAction = res.response;
-        this.slides = res.response.permohonanSyarat;
-        this.loaderHelper.dismiss();
+        this.aptDetailAction = res.response
+        this.slides = res.response.permohonanSyarat
+        this.loaderHelper.dismiss()
       },
       err => {
-        this.loaderHelper.dismiss();
+        this.loaderHelper.dismiss()
+        this.toast.presentError(err)
       }
     );
   }
 
   nextSlide() {
-    this.slider.slideNext();
+    this.slider.slideNext()
   }
 
   previousSlide() {
-    this.slider.slidePrev();
+    this.slider.slidePrev()
   }
 
   onSlideChanged() {
-    this.currentIndex = this.slider.getActiveIndex();
-    console.log("Slide changed! Current index is", this.currentIndex);
+    this.currentIndex = this.slider.getActiveIndex()
+    console.log("Slide changed! Current index is", this.currentIndex)
   }
 }

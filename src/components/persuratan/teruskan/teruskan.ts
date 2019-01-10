@@ -7,9 +7,9 @@ import { NaskahMasukProvider } from "../../../providers/naskah-masuk/naskah-masu
 import {
   NavController,
   NavParams,
-  LoadingController,
-  ToastController
+  LoadingController
 } from "ionic-angular";
+import { ToastHelper } from "../../../helpers/toast-helper";
 
 @Component({
   selector: "teruskan",
@@ -29,7 +29,7 @@ export class Teruskan {
     public navParams: NavParams,
     private masterUnit: MasterUnitProvider,
     public naskahProvider: NaskahMasukProvider,
-    private toast: ToastController
+    private toast: ToastHelper
   ) {
     this.naskah.id = this.navParams.get("naskahId");
   }
@@ -39,16 +39,6 @@ export class Teruskan {
       content: "Please wait..."
     });
     return loading;
-  }
-
-  toaster(message: string) {
-    const toast = this.toast.create({
-      message: message,
-      duration: 3000,
-      position: "bottom"
-    });
-
-    return toast;
   }
 
   teruskan() {
@@ -61,11 +51,11 @@ export class Teruskan {
     // save data naskah untuk diteruskan
     this.naskahProvider.teruskan(this.naskah).subscribe(
       res => {
-        this.toaster(res.message).present();
-        this.isFinally(loading);
+        this.toast.present(res.message)
+        this.isFinally(loading)
       },
       err => {
-        this.toaster(err.message).present();
+        this.toast.presentError(err.message)
         this.isFinally(loading);
       }
     );

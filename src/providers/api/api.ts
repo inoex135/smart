@@ -19,7 +19,9 @@ export class ApiProvider {
 
   static TAG:string = 'ApiProvider'
 
-  constructor(public http: HttpClient, public tokenProvider: TokenProvider) {}
+  constructor(public http: HttpClient, 
+    public tokenProvider: TokenProvider
+  ) {}
 
   private getObservableHeaderForm() {
     return Observable.fromPromise(this.tokenProvider.getCurrentToken())

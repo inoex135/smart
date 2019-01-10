@@ -9,6 +9,7 @@ import { NaskahMasukDetailPage } from "../naskah-masuk-detail/naskah-masuk-detai
 import { MeetingDetailPage } from "../meeting-detail/meeting-detail";
 import { PersonalAgendaDetailPage } from "../personal-agenda-detail/personal-agenda-detail";
 import { MeetingDetailAgendaPage } from "../meeting-agenda/meeting-detail-agenda";
+import { ToastHelper } from "../../helpers/toast-helper";
 
 @Component({
   selector: "notification-page",
@@ -40,7 +41,9 @@ export class NotificationPage {
     private navParams: NavParams, 
     private navCtrl: NavController,
     private provider: NotificationProvider,
-    private loaderHelper: LoaderHelper) {
+    private loaderHelper: LoaderHelper,
+    private toast: ToastHelper
+  ) {
     this.initChips()
     this.data.typeString = this.navParams.get(NotificationPage.KEY_TYPE)
     if (this.data.typeString === '') {
@@ -109,7 +112,8 @@ export class NotificationPage {
         }
       },
       error => {
-        LogUtil.d(NotificationPage.TAG, error)
+        LogUtil.e(NotificationPage.TAG, error)
+        this.toast.presentError(error)
       }
     )
   }
@@ -129,7 +133,8 @@ export class NotificationPage {
           },
           error => {
             this.loaderHelper.dismissLoader()
-            LogUtil.d(NotificationPage.TAG, error)
+            LogUtil.e(NotificationPage.TAG, error)
+            this.toast.presentError(error)
           }
         )
       }
@@ -196,7 +201,8 @@ export class NotificationPage {
         },
         err => {
           this.decreaseCurrentPage()
-          LogUtil.d(NotificationPage.TAG, err)
+          LogUtil.e(NotificationPage.TAG, err)
+          this.toast.presentError(err)
         }
       );
       event.complete()
@@ -261,7 +267,8 @@ export class NotificationPage {
       },
       err => { 
         this.loaderHelper.dismiss()
-        refresher.complete();
+        refresher.complete()
+        this.toast.presentError(err)
        }
     );
   }

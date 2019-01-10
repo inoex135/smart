@@ -62,6 +62,7 @@ export class MeetingDetailAgendaPage {
             }, err => {
                 this.toast.present('Oops.. terjadi kesalahan!')
                 this.loader.dismissLoader()
+                this.toast.presentError(err)
             })
         })
     }
@@ -102,7 +103,7 @@ export class MeetingDetailAgendaPage {
                 }
             }, err => {
                 this.loader.dismissLoader()
-                this.toast.present('Gagal hapus file!')
+                this.toast.presentError(err)
             })
         })
     }
@@ -114,19 +115,19 @@ export class MeetingDetailAgendaPage {
             LogUtil.d(MeetingDetailAgendaPage.TAG, "url: " + url)
             await this.loader.show()
       
-            const checkPermission = await this.fileHelper.checkPermission();
+            const checkPermission = await this.fileHelper.checkPermission()
       
             if (!checkPermission.hasPermission) {
-              await this.fileHelper.requestPermission();
+              await this.fileHelper.requestPermission()
             }
 
             this.fileHelper.download(url, targetPath)
-            this.toast.present("File telah di download");
+            this.toast.present("File telah di download")
             this.loader.dismissLoader()
       
           } catch (error) {
             this.loader.dismissLoader()
-            this.toast.present(error);
+            this.toast.presentError(error)
           }
     }
 
@@ -180,7 +181,7 @@ export class MeetingDetailAgendaPage {
                 }
             }, err => {
                 this.loader.dismissLoader()
-                this.toast.present('Gagal melakukan confirmasi!')
+                this.toast.presentError(err)
             })
         })
     }

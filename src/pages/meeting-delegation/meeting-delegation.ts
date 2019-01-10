@@ -100,7 +100,7 @@ export class MeetingDelegationPage {
                 },
                 err => {
                     this.loader.dismissLoader()
-                    this.toast.present('Terjadi kegagalan!')
+                    this.toast.presentError(err)
                 }
             )
         })

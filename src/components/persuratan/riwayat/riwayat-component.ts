@@ -2,6 +2,7 @@ import { Component } from "@angular/core";
 import { NaskahMasukProvider } from "../../../providers/naskah-masuk/naskah-masuk";
 import { NavParams } from "ionic-angular";
 import { TimelineType } from "../../../constant/TimelineType";
+import { ToastHelper } from "../../../helpers/toast-helper";
 
 @Component({
   selector: "riwayat-component",
@@ -25,7 +26,8 @@ export class RiwayatComponent {
 
   constructor(
     public naskahProvider: NaskahMasukProvider,
-    private navParams: NavParams
+    private navParams: NavParams,
+    private toast: ToastHelper
   ) {
     this.init();
     this.getRiwayatNaskah(this.naskahId);
@@ -40,7 +42,9 @@ export class RiwayatComponent {
       res => {
         this.naskah = res;
       },
-      err => {}
-    );
+      err => {
+        this.toast.presentError(err)
+      }
+    )
   }
 }
