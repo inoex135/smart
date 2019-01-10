@@ -59,7 +59,7 @@
                 <ion-list class="title-list">
                     <ion-item class="item custom-ion-item" *ngFor="let jabatan of datas?.jabatan; let i = index" no-lines>
                         <ion-label text-wrap>{{jabatan?.uraian_jabatan}}</ion-label>
-                        <ion-checkbox [checked]="jabatan?.kode_utuh == disposisi?.unitTujuan[0]?.kode_utuh" (ionChange)="selectUnit(jabatan, $event.checked)"
+                        <ion-checkbox [checked]="jabatan?.isChecked" (ionChange)="selectUnit(jabatan, $event.checked, i)"
                             [value]="jabatan?.kode"></ion-checkbox>
                     </ion-item>
                 </ion-list>
@@ -71,7 +71,7 @@
             <ion-col col-12>
                 <ion-item class="input--form custom-ion-item">
                     <ion-select [(ngModel)]="disposisi.leader">
-                        <ion-option [selected]="unit?.kode_utuh == disposisi?.leader" [value]="unit?.kode_utuh" text-wrap *ngFor="let unit of disposisi?.unitTujuan">
+                        <ion-option [selected]="unit?.kode_utuh == disposisi?.leader" [value]="unit?.kode_utuh" *ngFor="let unit of disposisi?.unitTujuan">
                             {{unit?.uraian_jabatan}}
                         </ion-option>
                     </ion-select>

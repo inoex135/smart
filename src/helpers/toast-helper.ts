@@ -27,7 +27,7 @@ export class ToastHelper {
     let message = 'Terjadi kesalahan!'
     if (error.status && error.status == 401) {
       message = 'Session anda telah berakhir, harap logout dan login kembali!'
-    } else if (error.error.error_code) {
+    } else if (error.error && error.error.error_code) {
       message = `${error.error.error_message || ""}`
     } else if (error.message) {
       message = error.message

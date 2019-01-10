@@ -59,15 +59,15 @@
         <ion-list>
           <ion-item>
             <h2>Presensi</h2>
-            <p>{{dashboard?.getPresentAccumulation()}}</p>
+            <p>{{dashboard?.getPresentAccumulation() || "-"}}</p>
           </ion-item>
           <ion-item>
             <h2>Jam Masuk</h2>
-            <p>{{dashboard?.getTodayCheckIn()}}</p>
+            <p>{{dashboard?.getTodayCheckIn() || "-"}}</p>
           </ion-item>
           <ion-item>
             <h2>Akumulasi Absensi</h2>
-            <p>{{dashboard?.getAbsence()}}</p>
+            <p>{{dashboard?.getAbsence() || "-"}}</p>
           </ion-item>
         </ion-list>
       </ion-card-content>

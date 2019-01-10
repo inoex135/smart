@@ -67,3 +67,13 @@ disposisi {
   }
 
 }
+
+.alert-radio-group {
+  button {
+    .button-inner {
+      .alert-radio-label {
+        white-space: normal;
+      }
+    }
+  }
+}

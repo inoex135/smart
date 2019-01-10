@@ -122,23 +122,23 @@ export class Disposisi {
     Observable.zip(petunjuk, unitDisposisi, sifatSurat, pelaksana)
     .subscribe(
       ([petunjuk, unitDisposisi, sifatSurat, pelaksana]) => {
-        this.datas.jabatan = unitDisposisi;
-        this.datas.petunjuk = this.mappingPetunjuk(petunjuk);
+        this.datas.jabatan = this.mappingPelaksana(unitDisposisi)
+        this.datas.petunjuk = this.mappingPetunjuk(petunjuk)
 
-        this.datas.pelaksana = this.mappingPelaksana(pelaksana.response);
+        this.datas.pelaksana = this.mappingPelaksana(pelaksana.response)
 
         // order by sifat by kode
         const sifat = sifatSurat.map(res => {
-          return { keterangan: res.keterangan, kode: parseInt(res.kode) };
-        });
+          return { keterangan: res.keterangan, kode: parseInt(res.kode) }
+        })
 
-        const mappingSifat = orderBy(sifat, ["keterangan"], ["asc"]);
-        this.datas.sifatSurat = mappingSifat;
+        const mappingSifat = orderBy(sifat, ["keterangan"], ["asc"])
+        this.datas.sifatSurat = mappingSifat
 
         // set default value sifat surat
-        this.disposisi.sifatSurat = this.datas.sifatSurat[0].kode;
+        this.disposisi.sifatSurat = this.datas.sifatSurat[0].kode
       }
-    );
+    )
   }
 
   // add isChecked untuk flagging ketika kembali ke halaman sebelumnya
@@ -190,21 +190,21 @@ export class Disposisi {
   // untuk get dan remove value checkbox unit
   // remove by index dari unit yg di klik
   // dan add by index yang di klik
-  selectUnit(unit: IDisposisiUnit, checked) {
-    let unitIndex = this.disposisi.unitTujuan.indexOf(unit.kode_utuh);
-
+  selectUnit(unit: IDisposisiUnit, checked, index: number) {
+    let unitIndex = this.disposisi.unitTujuan.indexOf(unit.kode_utuh)
+    this.datas.jabatan[index].isChecked = checked
     if (checked) {
       this.disposisi.unitTujuan.push({
         kode_utuh: unit.kode_utuh,
         uraian_jabatan: unit.uraian_jabatan
-      });
+      })
     } else {
-      this.disposisi.unitTujuan.splice(unitIndex, 1);
+      this.disposisi.unitTujuan.splice(unitIndex, 1)
     }
 
     //untuk set default lead jika unit yg di select adalah 1
     if (this.disposisi.unitTujuan.length == 1) {
-      this.disposisi.leader = this.disposisi.unitTujuan[0].kode_utuh;
+      this.disposisi.leader = this.disposisi.unitTujuan[0].kode_utuh
     }
   }
 
@@ -291,7 +291,7 @@ export class Disposisi {
   }
 
   next() {
-    if (this.disabledNextButton()) {
+    if (!this.disabledNextButton()) {
       this.toastHelper.present('Periksa kembali inputan anda!')
       return
     }
@@ -399,18 +399,16 @@ export class Disposisi {
     
   disabledNextButton() {
     if (this.currentStep == this.arraySteps[2]) {
-      return !this.isSifatSuratFilled()
+      return this.isSifatSuratFilled()
     } else if (this.currentStep == this.arraySteps[0]) {
       if (this.isEselon4()) {
-        return this.disposisi.personal.length == 0
+        return this.disposisi.personal.length > 0
       }
-      if (this.component.disposisiUnit && !this.component.disposisiPersonal) {
-        return this.disposisi.unitTujuan.length == 0
-      } 
+      return this.disposisi.unitTujuan.length > 0 || this.disposisi.selaku.length > 0
     } else if (this.currentStep == this.arraySteps[1]) {
-      return this.disposisi.petunjuk.length == 0
+      return this.disposisi.petunjuk.length > 0
     } else {
-      return false
+      return true
     }
   }
 
