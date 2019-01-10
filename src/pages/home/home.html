@@ -62,12 +62,31 @@
             <p>{{dashboard?.getPresentAccumulation()}}</p>
           </ion-item>
           <ion-item>
-            <h2>Jam Masuk</h2>
+            <h2>Akumulasi Absensi</h2>
+            <p>{{dashboard?.getAbsence()}}</p>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card style="margin: 10px;">
+      <ion-card-content>
+        <ion-list>
+          <ion-item>
+            <h2>Jam Masuk Hari Ini</h2>
             <p>{{dashboard?.getTodayCheckIn()}}</p>
           </ion-item>
           <ion-item>
-            <h2>Akumulasi Absensi</h2>
-            <p>{{dashboard?.getAbsence()}}</p>
+            <h2>Jam Keluar Hari Ini</h2>
+            <p>{{dashboard?.getTodayCheckOut()}}</p>
+          </ion-item>
+          <ion-item>
+            <h2>Jam Masuk Kemarin</h2>
+            <p>{{dashboard?.getYesterdayCheckIn()}}</p>
+          </ion-item>
+          <ion-item>
+            <h2>Jam Keluar Kemarin</h2>
+            <p>{{dashboard?.getYesterdayCheckOut()}}</p>
           </ion-item>
         </ion-list>
       </ion-card-content>
