@@ -40,14 +40,15 @@ export class NotificationBell {
     if (!this.isUpdating) {
       this.isUpdating = true
       LogUtil.d(NotificationBell.TAG, "updating notification...")
-      this.provider.getTotalNotication().subscribe(
+      this.provider.getTotalNotication()
+      .subscribe(
         res => {
           this.setTotalNotification(res)
           this.isUpdating = false
         },
         error => {
           this.isUpdating = false
-          LogUtil.d(NotificationBell.TAG, "error")
+          LogUtil.e(NotificationBell.TAG, error)
           if (exception) {
               exception(error)
           }

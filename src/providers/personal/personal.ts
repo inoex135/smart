@@ -14,7 +14,7 @@ export class PersonalProvider {
   constructor(public api: ApiProvider, private tokenProvider: TokenProvider) {}
 
   async getListEvent(date: any = moment()) {
-    const params = await this.getParams(date);
+    const params = await this.getParams(date)
 
     const url = `/personal/calendar?start=${params.startDate}&end=${
       params.endDate
@@ -51,12 +51,12 @@ export class PersonalProvider {
     const startDate = moment().startOf("year");
     const endDate = moment().endOf("year");
 
-    const user: any = await this.tokenProvider.getUser();
+    const profile: any = await this.tokenProvider.getCurrentProfile()
 
     const params = {
       startDate: startDate.format("DD-MM-YYYY"),
       endDate: endDate.format("DD-MM-YYYY"),
-      nip: user.name
+      nip: profile.nip
     };
 
     return params;

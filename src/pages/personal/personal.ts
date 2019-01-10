@@ -43,7 +43,7 @@ export class PersonalPage {
   }
 
   ionViewWillEnter() {
-    this.getListEvent();
+    this.getListEvent()
     if (this.bell) {
       this.bell.updateNotification()
     }
@@ -78,9 +78,10 @@ export class PersonalPage {
         this.loaderHelper.dismissLoader()
       })
       .catch(err => {
+        LogUtil.e(PersonalPage.TAG, err)
         this.loaderHelper.dismissLoader()
         this.toast.presentError(err)
-      });
+      })
     })
   }
 
