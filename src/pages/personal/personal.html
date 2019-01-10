@@ -21,7 +21,7 @@
           <ion-card-content class="detail-event">
             <ion-row>
               <ion-col col-12>
-                  <p ion-text><ion-icon name="ios-clock-outline"></ion-icon> {{event?.start_time | indonesianDate:'HH:mm'}} - {{event?.end_time | indonesianDate:'HH:mm'}}</p>
+                  <p ion-text><ion-icon name="ios-clock-outline"></ion-icon> {{event?.time_start}} - {{event?.time_end}}</p>
                   <p ion-text class="calendar-event-title">{{event?.title}}</p>
                   <p ion-text>{{event?.type}}</p>
               </ion-col>
