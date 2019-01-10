@@ -15,7 +15,7 @@ export class AptListItem implements AptListItemContract {
     private statusString: string
     private tanggal_string: string
     private norma_waktu: number
-
+ 
     private pelayanan: PelayananContract
     private pelayananSub: PelayananSubContract
 

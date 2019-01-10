@@ -31,6 +31,7 @@ export class AptProvider {
 
   // get daftar permohonan apt
   getPermohonanList(page: number = 0, size: number = 10) {
+    LogUtil.d(AptProvider.TAG, 'get permohonan list.')
     const url = `/apt/permohonan/pending?page=${page}&size=${size}`;
 
     return this.apiProvider.get(url)
@@ -38,16 +39,19 @@ export class AptProvider {
   }
 
   private generateList(res: any): Array<AptListItem> {
+    LogUtil.d(AptProvider.TAG, 'reconstruct plain json to AptListItem.')
     let list = Array<AptListItem>()
     if (res.content) {
         res.content.forEach(element => {
             list.push(AptListItem.create(element))
         })
     }
+    LogUtil.d(AptProvider.TAG, 'total generated: ' + list.length)
     return list
   }
 
   getPelayananList() {
+    LogUtil.d(AptProvider.TAG, 'get pelayanan list.')
     return this.userProvider.getProfile()
     .then(profile => {
       let key = this.APT_PELAYANANS + "_" + profile.nip
