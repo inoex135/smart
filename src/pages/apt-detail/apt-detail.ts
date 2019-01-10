@@ -9,6 +9,7 @@ import { ToastHelper } from "../../helpers/toast-helper";
 import { AptHistoryPage } from "../apt-history/apt-history";
 import { LogUtil } from "../../utils/logutil";
 import { FileHelper } from "../../helpers/file-helper";
+import { UserProvider } from "../../providers/user/user";
 
 @IonicPage()
 @Component({
@@ -25,14 +26,14 @@ export class AptDetailPage {
   aptDetail: any = {};
   profile: any;
   constructor(
+    public navCtrl: NavController,
+    public userProvider: UserProvider,
+    public toast: ToastHelper,
     private navParams: NavParams,
-    private navCtrl: NavController,
     private aptProvider: AptProvider,
     private loaderHelper: LoaderHelper,
-    private toast: ToastHelper,
     private fileHelper: FileHelper
   ) {
-    
   }
 
   ionViewWillEnter() {
@@ -47,7 +48,7 @@ export class AptDetailPage {
   }
 
   getProfile() {
-    this.aptProvider.getUser().getProfile()
+    this.userProvider.getProfile()
     .then(res => {
       this.profile = res;
     });
@@ -65,6 +66,7 @@ export class AptDetailPage {
       },
       err => {
         this.loaderHelper.dismissLoader()
+        this.catchStatusCode(err)
       }
     )
     })

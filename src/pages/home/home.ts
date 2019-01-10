@@ -13,16 +13,17 @@ import { LoaderHelper } from "../../helpers/loader-helper";
 import { LogUtil } from "../../utils/logutil";
 import { MenuHomeConstant } from "../../constant/menu-home";
 import { NotificationProvider } from "../../providers/notification/notification";
-import { ERROR_CODES } from "../../constant/error-codes";
 import { PaymentHistoryPage } from "../payment-history/payment-history";
 import { Serializer } from "serializer.ts/Serializer";
+import { BasePage } from "../base-page/base-page";
+import { ToastHelper } from "../../helpers/toast-helper";
 
 @IonicPage()
 @Component({
   selector: "page-home",
   templateUrl: "home.html"
 })
-export class HomePage {
+export class HomePage extends BasePage {
 
   TAG:string = 'HomePage'
 
@@ -77,12 +78,15 @@ export class HomePage {
   constructor(
     public navCtrl: NavController,
     public userProvider: UserProvider,
+    public toast: ToastHelper,
     public fcm: FCM,
     private homeProvider: HomeProvider,
     private loaderHelper: LoaderHelper,
     private platform: Platform,
     private serializer: Serializer
-  ) {}
+  ) {
+    super(navCtrl, userProvider, toast)
+  }
 
   ionViewWillEnter() {
     LogUtil.d(this.TAG, "ionViewWillEnter")
@@ -92,9 +96,7 @@ export class HomePage {
     .then(() => {
       this.fcmGetToken();
     });
-    if (this.bell) {
-        this.bell.updateNotification()
-    }
+    this.updateNotification()
   }
 
   private listMenu() {
@@ -197,13 +199,7 @@ export class HomePage {
           LogUtil.d(this.TAG, res)
           this.dashboard = this.serializer.deserialize<Dashboard>(Dashboard, res.response)
         } 
-      })
-      .catch(error => {
-        LogUtil.d(this.TAG, "error accessing API dashboard")
-        LogUtil.d(this.TAG, error)
-        this.redirectToLogIn(error)
-      }
-    )
+    })
   }
 
   private getProfilePicture() {
@@ -243,22 +239,31 @@ export class HomePage {
         this.redirectToLogIn(error)
       })
     } else {
-      this.loaderHelper.createLoader()
-      this.userProvider.byPass(nip)
-      .subscribe(
-        res => {
-          LogUtil.d(this.TAG, res)
-          this.disabledPaymentHistory()
-          if (res) {
-            this.initData(true)
-            this.bell.updateNotification()
+      this.loaderHelper.show()
+      .then(() => {
+        this.userProvider.byPass(nip)
+        .subscribe(
+          res => {
+            LogUtil.d(this.TAG, res)
+            this.disabledPaymentHistory()
+            if (res) {
+              this.initData(true)
+              this.updateNotification()
+            }
+            this.loaderHelper.dismissLoader()
+          },
+          err => {
+            this.loaderHelper.dismissLoader()
+            this.redirectToLogIn(err)
           }
-          this.loaderHelper.dismiss()
-        },
-        err => {
-          this.loaderHelper.dismiss()
-        }
-      );
+        )
+      })
+    }
+  }
+
+  private updateNotification(): void {
+    if (this.bell) {
+      this.bell.updateNotification(exception => this.redirectToLogIn(exception))
     }
   }
 
@@ -268,15 +273,6 @@ export class HomePage {
 
   private getSubstituteUsers() {
     return this.substitutes
-  }
-
-  private redirectToLogIn(error): void {
-    LogUtil.e(this.TAG, error)
-    if ((error.message && error.message.includes(ERROR_CODES.MISSING_TOKEN)) 
-    || error.status && error.status === 401) {
-      this.userProvider.purgeAuth();
-      this.navCtrl.setRoot("LoginPage");
-    }
   }
 
   private historyPage() {

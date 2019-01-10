@@ -70,6 +70,7 @@ export class AptPage {
 
   constructor(
     public navCtrl: NavController,
+    public toast: ToastHelper,
     public navParams: NavParams,
     private aptProvider: AptProvider,
     private loaderHelper: LoaderHelper,
@@ -130,6 +131,7 @@ export class AptPage {
         err => {
           LogUtil.e(AptPage.TAG, err)
           this.loaderHelper.dismissLoader()
+          this.toastHelper.presentError(err)
         }
       )
     })

@@ -383,7 +383,7 @@ export class Disposisi {
         err => {
           this.loader.dismissLoader()
           this.errorMessages = err
-          this.toastHelper.present("Terjadi Kesalahan")
+          this.toastHelper.presentError(err)
         }
       )
     })
