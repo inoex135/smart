@@ -7,4 +7,4 @@ del .\smart.apk
 echo disabled log developement
 powershell "(Get-Content .\src\config\environment.ts) -replace '(DEV:)\s(true|false)', 'DEV: false' | Out-File -encoding UTF8 .\src\config\environment.ts"
 echo build release
-ionic cordova build android --release --verbose
+call ionic cordova build android --release --verbose

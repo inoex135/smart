@@ -115,8 +115,10 @@ export class ApiProvider {
   get(path: string) {
     return this.getObservableHeader()
     .mergeMap(header => {
+      const url = `${ENV.API_URL}${path}`
+      LogUtil.d(ApiProvider.TAG, url)
       LogUtil.d(ApiProvider.TAG, header)
-      return this.http.get(`${ENV.API_URL}${path}`, { headers: header })
+      return this.http.get(url, { headers: header })
       .pipe(map(this.extractData), catchError(this.handleError))
     })
   }
@@ -124,8 +126,11 @@ export class ApiProvider {
   getBlob(path: string) {
     return this.getObservableHeader()
     .mergeMap(header => {
+      const url = `${ENV.API_URL}${path}`
+      LogUtil.d(ApiProvider.TAG, url)
+      LogUtil.d(ApiProvider.TAG, header)
       return this.http
-      .get(`${ENV.API_URL}${path}`, { 
+      .get(url, { 
         headers: header.set("Content-Type", "application/octet-stream"),
         responseType: "blob"
       })
@@ -136,8 +141,11 @@ export class ApiProvider {
   put(path: string, body: Object = {}) {
     return this.getObservableHeader()
     .mergeMap(header => {
+      const url = `${ENV.API_URL}${path}`
+      LogUtil.d(ApiProvider.TAG, url)
+      LogUtil.d(ApiProvider.TAG, header)
       return this.http
-      .put(`${ENV.API_URL}${path}`, JSON.stringify(body), {
+      .put(url, JSON.stringify(body), {
         headers: header
       })
       .pipe(map(this.extractData), catchError(this.handleError));
@@ -147,8 +155,11 @@ export class ApiProvider {
   post(path: string, body: Object = {}) {
     return this.getObservableHeader()
     .mergeMap(header => {
+      const url = `${ENV.API_URL}${path}`
+      LogUtil.d(ApiProvider.TAG, url)
+      LogUtil.d(ApiProvider.TAG, header)
       return this.http
-      .post(`${ENV.API_URL}${path}`, body, { headers: header })
+      .post(url, body, { headers: header })
       .pipe(map(this.extractData), catchError(this.handleError));
     })
   }
@@ -156,8 +167,11 @@ export class ApiProvider {
   delete(path: string) {
     return this.getObservableHeader()
     .mergeMap(header => {
+      const url = `${ENV.API_URL}${path}`
+      LogUtil.d(ApiProvider.TAG, url)
+      LogUtil.d(ApiProvider.TAG, header)
       return this.http
-      .delete(`${ENV.API_URL}${path}`, { headers: header })
+      .delete(url, { headers: header })
       .pipe(map(this.extractData), catchError(this.handleError));
     })
   }
@@ -166,8 +180,11 @@ export class ApiProvider {
   postForm(path: string, body: Object = {}) {
     return this.getObservableHeaderForm()
     .mergeMap(header => {
+      const url = `${ENV.API_URL}${path}`
+      LogUtil.d(ApiProvider.TAG, url)
+      LogUtil.d(ApiProvider.TAG, header)
       return this.http
-      .post(`${ENV.API_URL}${path}`, body, {
+      .post(url, body, {
         headers: header
       })
       .pipe(map(this.extractData), catchError(this.handleErrorForm))
@@ -175,6 +192,7 @@ export class ApiProvider {
   }
 
   getByUrl(path: string) {
+    LogUtil.d(ApiProvider.TAG, path)
     return this.http.get(path)
       .pipe(map(this.extractData), catchError(this.handleError))
   }
