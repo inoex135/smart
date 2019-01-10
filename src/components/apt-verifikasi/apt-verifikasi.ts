@@ -37,11 +37,12 @@ export class AptVerifikasiComponent {
       res => {
         this.aptDetailAction = res.response;
         this.slides = res.response.permohonanSyarat;
-        this.loaderHelper.dismiss();
+        this.loaderHelper.dismiss()
       },
       err => {
-        this.loaderHelper.dismiss();
-        this.nav.pop();
+        this.loaderHelper.dismiss()
+        this.toastHelper.presentError(err)
+        this.nav.pop()
       }
     );
   }
@@ -63,11 +64,12 @@ export class AptVerifikasiComponent {
     this.aptProvider.verifikasi(this.itemId, status).subscribe(
       res => {
         this.loaderHelper.dismiss();
-        this.toastHelper.present(res.message);
+        this.toastHelper.present(res.message)
         this.nav.pop();
       },
       err => {
-        this.loaderHelper.dismiss();
+        this.loaderHelper.dismiss()
+        this.toastHelper.presentError(err)
       }
     );
   }
