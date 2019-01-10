@@ -6,6 +6,7 @@ import { LoaderHelper } from "../../helpers/loader-helper";
 import { NotificationProvider } from "../../providers/notification/notification";
 import { NotificationBell } from "../../components/notification-bell/notification-bell";
 import { LogUtil } from "../../utils/logutil";
+import { ToastHelper } from "../../helpers/toast-helper";
 
 @Component({
   selector: "page-personal",
@@ -36,7 +37,8 @@ export class PersonalPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     private personalProvider: PersonalProvider,
-    private loaderHelper: LoaderHelper
+    private loaderHelper: LoaderHelper,
+    private toast: ToastHelper
   ) {
   }
 
@@ -77,6 +79,7 @@ export class PersonalPage {
       })
       .catch(err => {
         this.loaderHelper.dismissLoader()
+        this.toast.presentError(err)
       });
     })
   }

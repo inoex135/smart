@@ -106,6 +106,7 @@ export class NaskahMasukDetailPage {
         },
         err => {
           this.loaderHelper.dismissLoader()
+          this.toast.presentError(err)
         }
       )
     })
@@ -139,9 +140,9 @@ export class NaskahMasukDetailPage {
         this.getDetailNaskah();
       },
       err => {
-        this.dismiss();
-        this.toast.present("Terjadi Kesalahan");
-        this.navCtrl.pop();
+        this.dismiss()
+        this.toast.presentError(err)
+        this.navCtrl.pop()
       }
     );
   }
@@ -175,7 +176,7 @@ export class NaskahMasukDetailPage {
     } catch (error) {
       this.loaderHelper.dismissLoader()
       LogUtil.e(NaskahMasukDetailPage.TAG, error)
-      this.toast.present(error)
+      this.toast.presentError(error)
     }
   }
 

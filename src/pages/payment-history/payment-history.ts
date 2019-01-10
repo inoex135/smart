@@ -63,6 +63,7 @@ export class PaymentHistoryPage {
                 this.toast.present('Oops.. Terjadi kesalahan!')
                 this.items = []
                 this.loader.dismissLoader()
+                this.toast.presentError(error)
             }) 
         })
     }
