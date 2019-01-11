@@ -52,7 +52,10 @@ export class Disposisi {
     petunjuk: [],
     unitTujuan: [],
     leader: ""
-  };
+  }
+
+  petunjuk: Array<any> = []
+  selectedPetunjuk: any
 
   disposisiAs: string = "";
   @Input() naskahId: any;
@@ -348,6 +351,14 @@ export class Disposisi {
 
   emitPageChange() {
     this.onPageChanged.emit({step: this.currentStep, isLastPage: this.isLastStep()})
+  }
+
+  petunjukChange() {
+    LogUtil.d(this.TAG, this.selectedPetunjuk)
+    this.disposisi.petunjuk = []
+    this.selectedPetunjuk.forEach(element => {
+      this.disposisi.petunjuk.push(element.id)
+    })
   }
 
   async tanggalSelesaiPicker() {

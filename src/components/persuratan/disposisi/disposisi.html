@@ -41,10 +41,20 @@
         <h4>Petunjuk</h4>
         <ion-row>
             <ion-col col-12>
-                <ion-item class="custom-ion-item petunjuk" no-lines *ngFor="let petunjuk of datas?.petunjuk; let i = index">
+                <ion-item class="input--form custom-ion-item">
+                    <ion-label>Pilih Petunjuk</ion-label>
+                    <ion-select multiple="true" [(ngModel)]="selectedPetunjuk" (ionChange)="petunjukChange()">
+                        <ion-option [value]="unit" *ngFor="let unit of datas?.petunjuk">
+                            {{unit?.keterangan}}
+                        </ion-option>
+                    </ion-select>
+                </ion-item>
+            </ion-col>
+            <ion-col col-12>
+                <ion-item class="as-list bordered-ion-item" no-lines *ngFor="let petunjuk of selectedPetunjuk; let i = index">
                     <ion-label text-wrap>{{petunjuk?.keterangan}}</ion-label>
-                    <ion-checkbox [checked]="petunjuk?.isChecked" color="primary" name="petunjuk[i]" (ionChange)="onChange(petunjuk?.id, $event.checked, i)"></ion-checkbox>
-                </ion-item> 
+<!--                     <ion-checkbox [checked]="petunjuk?.isChecked" color="primary" name="petunjuk[i]" (ionChange)="onChange(petunjuk?.id, $event.checked, i)"></ion-checkbox>
+ -->            </ion-item> 
             </ion-col>
         </ion-row>
     </ion-grid>
