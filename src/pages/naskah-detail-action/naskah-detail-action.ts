@@ -41,11 +41,11 @@ export class NaskahDetailActionPage {
 
 
   homeUpButtonClick() {
-    if (this.isDisposition()) {
-      this.showDialogExit()
-    } else {
+  //  if (this.isDisposition()) {
+  //    this.showDialogExit()
+  //  } else {
       this.navCtrl.pop()
-    }
+  //  }
   }
 
   showDialogExit() {
@@ -73,7 +73,7 @@ export class NaskahDetailActionPage {
         }
       ]
     });
-    alert.present();
+    alert.present()
   }
 
 
@@ -84,13 +84,13 @@ export class NaskahDetailActionPage {
       LogUtil.d(NaskahDetailActionPage.TAG, this.actionData)
       if (this.isDisposition()) {
         if (this.disposisiComponent.prev() == -1) {
-          this.showDialogExit()
+          this.navCtrl.pop()
         }
       } else {
         this.navCtrl.pop()
       }
-      return;
-    });
+      return
+    })
    }
    
    unRegister() {
@@ -99,7 +99,7 @@ export class NaskahDetailActionPage {
 
   ionViewWillLeave() {
     this.actionData = ''
-    this.unRegister();
+    this.unRegister()
   }
 
 

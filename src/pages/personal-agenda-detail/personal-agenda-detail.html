@@ -9,14 +9,14 @@
   <div *ngIf="!fromNotification()">
     <div *ngIf="detailAgenda?.length > 0">
       <div *ngFor="let detail of detailAgenda">
-        <ion-card class="agenda-detail">
+        <ion-card class="agenda-detail from-detail">
           <img src="../../assets/images/cover_agenda.jpg">
           <ion-card-content>
             <h2 ion-text>{{detail?.title}}</h2><br/>
             <p ion-text class="detail-color">
-              <ion-icon color="silver" name="md-calendar"></ion-icon> {{detail?.startDateLabel | indonesianDate: 'dddd, DD MMMM YYYY'}}</p>
+              <ion-icon color="silver" name="md-calendar"></ion-icon> {{detail?.start_time | indonesianDate: 'dddd, DD MMMM YYYY'}}</p>
             <p ion-text class="detail-color">
-              <ion-icon color="silver" name="ios-clock-outline"></ion-icon> {{detail?.timeStart}} - {{detail?.timeEnd}}</p>
+              <ion-icon color="silver" name="ios-clock-outline"></ion-icon> {{detail?.time_start}} - {{detail?.time_end}}</p>
             <!-- <p ion-text>{{detail?.uraian}}</p> -->
             <p ion-text class="detail-color">
               <ion-icon color="silver" name="md-pin"></ion-icon> {{detail?.lokasi}}</p>
@@ -35,10 +35,11 @@
     <empty-state *ngIf="detailAgenda?.length == 0"></empty-state>
   </div>
   <div *ngIf="fromNotification()">
-    <ion-card class="agenda-detail">
+    <ion-card class="agenda-detail form-notif">
       <img src="../../assets/images/cover_agenda.jpg">
       <ion-card-content>
         <h2 ion-text>{{getDetail()?.title}}</h2><br/>
+        <h4>{{getDetail()?.uraian}}</h4><br/>
         <p ion-text class="detail-color">
           <ion-icon color="silver" name="md-calendar"></ion-icon> {{getDetail()?.tanggal_mulai | indonesianDate: 'dddd, DD MMMM YYYY'}}</p>
         <p ion-text class="detail-color">

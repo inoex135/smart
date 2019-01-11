@@ -322,7 +322,7 @@ export class Disposisi {
         this.component.unitOrPersonal = this.disposisiTarget.unit && this.disposisiTarget.personal
       }
       this.emitPageChange()
-    }, 100);
+    }, 100)
 
     // this.setDisposisiTarget(false);
   }
