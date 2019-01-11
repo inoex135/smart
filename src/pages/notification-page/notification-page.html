@@ -24,9 +24,9 @@
       refreshingText="Refreshing...">
     </ion-refresher-content>
   </ion-refresher>
-
+  <!-- [ngClass]="(notif?.is_read) ? 'notificationread' : 'notificationunread'" -->
   <ion-list>
-    <ion-item class="notification-item" *ngFor="let notif of getNotifications()" (click)="onItemClick(notif)">
+    <ion-item class="notification-item" *ngFor="let notif of getNotifications()" (click)="onItemClick(notif)" [ngClass]="(notif?.is_read) ? 'notificationread' : 'notificationunread'">
       <h6 ion-text>{{notif?.nama}}</h6>
       <text-avatar *ngIf="notif?.nama" [text]="notif?.nama" item-left></text-avatar>
       <text-avatar *ngIf="notif?.title" [text]="notif?.title" item-left></text-avatar>
