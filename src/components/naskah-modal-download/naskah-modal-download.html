@@ -14,10 +14,10 @@
       </ion-item>
     </ion-list>
 
-    <ion-list no-lines>
+    <ion-list no-lines class="list-file">
       <ion-item *ngFor="let file of files">
         <p item-start>{{file?.namaFile}}</p>
-        <button item-end ion-button color="default-blue" (tap)="download(file)">Buka File</button>
+        <button item-end ion-button color="default-blue" class="open-file" (tap)="download(file)">Buka File</button>
       </ion-item>
     </ion-list>
   </div>
