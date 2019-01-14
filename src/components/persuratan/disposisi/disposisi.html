@@ -1,6 +1,26 @@
 <div class="new-form" >
     <!-- disposisi unit or personal component?.unitOrPersonal -->
-    <ion-grid *ngIf="currentStep == arraySteps[2]">
+    <ion-grid *ngIf="currentStep == arraySteps[1]">
+
+        <h4>Petunjuk</h4>
+        <ion-row>
+            <ion-col col-12>
+                <ion-item class="input--form custom-ion-item">
+                    <ion-label>Pilih Petunjuk</ion-label>
+                    <ion-select multiple="true" [(ngModel)]="selectedPetunjuk" (ionChange)="petunjukChange()">
+                        <ion-option [value]="unit" *ngFor="let unit of datas?.petunjuk">
+                            {{unit?.keterangan}}
+                        </ion-option>
+                    </ion-select>
+                </ion-item>
+            </ion-col>
+            <ion-col col-12>
+                <ion-item class="as-list bordered-ion-item" no-lines *ngFor="let petunjuk of selectedPetunjuk; let i = index">
+                    <ion-label text-wrap>{{petunjuk?.keterangan}}</ion-label>
+<!--                     <ion-checkbox [checked]="petunjuk?.isChecked" color="primary" name="petunjuk[i]" (ionChange)="onChange(petunjuk?.id, $event.checked, i)"></ion-checkbox>
+ -->            </ion-item> 
+            </ion-col>
+        </ion-row>
 
         <h4>Sifat Disposisi</h4>
         <ion-col col-12>
@@ -32,31 +52,7 @@
             </ion-item>
             
         </ion-col>
-        <div class="spacer"></div>        
         <div class="spacer"></div>
-    </ion-grid>
-    
-    <!-- disposisi pilih sifat component?.disposisiSifat -->
-    <ion-grid *ngIf="currentStep == arraySteps[1]">
-        <h4>Petunjuk</h4>
-        <ion-row>
-            <ion-col col-12>
-                <ion-item class="input--form custom-ion-item">
-                    <ion-label>Pilih Petunjuk</ion-label>
-                    <ion-select multiple="true" [(ngModel)]="selectedPetunjuk" (ionChange)="petunjukChange()">
-                        <ion-option [value]="unit" *ngFor="let unit of datas?.petunjuk">
-                            {{unit?.keterangan}}
-                        </ion-option>
-                    </ion-select>
-                </ion-item>
-            </ion-col>
-            <ion-col col-12>
-                <ion-item class="as-list bordered-ion-item" no-lines *ngFor="let petunjuk of selectedPetunjuk; let i = index">
-                    <ion-label text-wrap>{{petunjuk?.keterangan}}</ion-label>
-<!--                     <ion-checkbox [checked]="petunjuk?.isChecked" color="primary" name="petunjuk[i]" (ionChange)="onChange(petunjuk?.id, $event.checked, i)"></ion-checkbox>
- -->            </ion-item> 
-            </ion-col>
-        </ion-row>
     </ion-grid>
     
     <!-- target disposisi untuk personal atau unit component?.disposisiUnit || component?.disposisiPersonal -->

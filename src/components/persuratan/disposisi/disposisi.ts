@@ -89,7 +89,7 @@ export class Disposisi {
 
   currentStep:number = 0
 
-  arraySteps:any = [0, 1, 2]
+  arraySteps:any = [0, 1]
 
   profile: any = {}
 
@@ -409,15 +409,13 @@ export class Disposisi {
   }
     
   disabledNextButton() {
-    if (this.currentStep == this.arraySteps[2]) {
-      return this.isSifatSuratFilled()
-    } else if (this.currentStep == this.arraySteps[0]) {
+    if (this.currentStep == this.arraySteps[0]) {
       if (this.isEselon4()) {
         return this.disposisi.personal.length > 0
       }
       return this.disposisi.unitTujuan.length > 0 || this.disposisi.selaku.length > 0
     } else if (this.currentStep == this.arraySteps[1]) {
-      return this.disposisi.petunjuk.length > 0
+      return this.disposisi.petunjuk.length > 0 && this.isSifatSuratFilled()
     } else {
       return true
     }
@@ -436,6 +434,10 @@ export class Disposisi {
   }
 
   showDialogSave() {
+    if (!this.disabledNextButton()) {
+      this.toastHelper.present('Periksa kembali inputan anda!')
+      return
+    }
     let alert = this.alert.create({
       title: 'Konfirmasi',
       message: 'Apakah anda yakin untuk menyimpan data disposisi?',
