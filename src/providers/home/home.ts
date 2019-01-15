@@ -16,7 +16,7 @@ export class HomeProvider {
     private token: TokenProvider
   ) {}
 
-  getPhotoProfile() {
+  getPhotoProfile(): Promise<any> {
     LogUtil.d(this.TAG, 'get profile picture')
     return this.token.getCurrentProfile()
     .then(profile => {
@@ -66,7 +66,7 @@ export class HomeProvider {
     return new Blob([ab], { type: "image/jpeg" })
   }
 
-  getDashboard():Promise<any> {
+  getDashboard(): Promise<any> {
     LogUtil.d(this.TAG, "get dashboard")
     return this.token.getProfile()
     .then(profile => {
@@ -77,17 +77,14 @@ export class HomeProvider {
       if (result == null) {
         return this.apiProvider.get("/personal/notification/dashboard")
         .map(item => {
-          var data = {}
-          data['when'] = Date.now() + CacheProvider.ONE_MINUTES
-          data['response'] = item
           if (item) {
-            this.cache.put(key, data)
+            this.cache.put(key, {when: Date.now() + CacheProvider.ONE_MINUTES, response: item})
           }
-          return data
+          return item
         })
         .toPromise()
       }
-      return result
+      return result.response
     })
   }
 

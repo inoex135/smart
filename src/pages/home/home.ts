@@ -17,6 +17,7 @@ import { PaymentHistoryPage } from "../payment-history/payment-history";
 import { Serializer } from "serializer.ts/Serializer";
 import { BasePage } from "../base-page/base-page";
 import { ToastHelper } from "../../helpers/toast-helper";
+import { LoginPage } from "../login/login";
 
 @IonicPage()
 @Component({
@@ -25,7 +26,7 @@ import { ToastHelper } from "../../helpers/toast-helper";
 })
 export class HomePage extends BasePage {
 
-  TAG:string = 'HomePage'
+  static TAG:string = 'HomePage'
 
   @ViewChild("profileImage") image: ElementRef
   @ViewChild("selectUser") select: Select
@@ -89,7 +90,7 @@ export class HomePage extends BasePage {
   }
 
   ionViewWillEnter() {
-    LogUtil.d(this.TAG, "ionViewWillEnter")
+    LogUtil.d(HomePage.TAG, "ionViewWillEnter")
     this.listMenu();
     this.initData();
     this.platform.ready()
@@ -119,17 +120,17 @@ export class HomePage extends BasePage {
   }
 
   private logout() {
-    this.loaderHelper.createLoader();
+    this.loaderHelper.createLoader()
     this.userProvider.logout().subscribe(
       () => {
-        this.userProvider.purgeAuth();
-        this.navCtrl.setRoot("LoginPage");
-        this.loaderHelper.dismiss();
+        this.userProvider.purgeAuth()
+        this.navCtrl.setRoot(LoginPage.TAG)
+        this.loaderHelper.dismiss()
       },
       err => {
-        this.userProvider.purgeAuth();
-        this.loaderHelper.dismiss();
-        this.navCtrl.setRoot("LoginPage");
+        this.userProvider.purgeAuth()
+        this.loaderHelper.dismiss()
+        this.navCtrl.setRoot(LoginPage.TAG)
       }
     );
   }
@@ -153,13 +154,13 @@ export class HomePage extends BasePage {
     // get profile dari localStorage jika sudah ada
     this.userProvider.getProfile(force)
     .then(profile => {
-      LogUtil.d(this.TAG, "return")
-      LogUtil.d(this.TAG, profile)
+      LogUtil.d(HomePage.TAG, "return")
+      LogUtil.d(HomePage.TAG, profile)
       if (this.profile) {
         this.currentProfile.name = profile.nama
         this.currentProfile.nip = profile.nip
       }
-      LogUtil.d(this.TAG, this.currentProfile)
+      LogUtil.d(HomePage.TAG, this.currentProfile)
       return Promise.resolve(profile)
     })
     .then(profile => {
@@ -177,15 +178,17 @@ export class HomePage extends BasePage {
       }
     })
     .then(() => {
-      return this.getProfilePicture()
-    })
-    .then(() => {
-      return this.getDashboard()
+      return Promise.all([this.getDashboard(), this.getProfilePicture()]) 
     })
     .catch(error => {
-      LogUtil.d(this.TAG, "i catch error here on profile")
+      LogUtil.d(HomePage.TAG, "i catch error here on profile")
       this.redirectToLogIn(error)
     })
+  }
+
+  private openNotice(notice: any): void {
+    LogUtil.d(HomePage.TAG, notice)
+    window.open(notice.url, '_system')
   }
   
   private getDashboard(): any {
@@ -196,8 +199,8 @@ export class HomePage extends BasePage {
     .then(
       res => {
         if (res) {
-          LogUtil.d(this.TAG, res)
-          this.dashboard = this.serializer.deserialize<Dashboard>(Dashboard, res.response)
+          LogUtil.d(HomePage.TAG, res)
+          this.dashboard = this.serializer.deserialize<Dashboard>(Dashboard, res)
         } 
     })
   }
@@ -214,15 +217,18 @@ export class HomePage extends BasePage {
         }
         return Promise.resolve(res)
       }
-    )
+    ).catch(error => {
+      LogUtil.e(HomePage.TAG, error)
+      return Promise.resolve(true)
+    })
   }
 
   private triggerOpenSelect() {
     if (this.select) {
-      LogUtil.d(this.TAG, "not null")
+      LogUtil.d(HomePage.TAG, "not null")
       this.select.open()
     } else {
-      LogUtil.d(this.TAG, "probably null")
+      LogUtil.d(HomePage.TAG, "probably null")
     }
   }
 
@@ -244,7 +250,7 @@ export class HomePage extends BasePage {
         this.userProvider.byPass(nip)
         .subscribe(
           res => {
-            LogUtil.d(this.TAG, res)
+            LogUtil.d(HomePage.TAG, res)
             this.disabledPaymentHistory()
             if (res) {
               this.initData(true)
