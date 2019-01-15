@@ -16,4 +16,30 @@ page-modal-filter {
     
     }
 
+    .sifat-naskah {
+        color: white;
+        font-weight: bolder;
+        /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#19567f+0,409de5+100 */
+        background: #19567f; /* Old browsers */
+        background: -moz-linear-gradient(left, #19567f 0%, #409de5 100%); /* FF3.6-15 */
+        background: -webkit-linear-gradient(left, #19567f 0%,#409de5 100%); /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(to right, #19567f 0%,#409de5 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#19567f', endColorstr='#409de5',GradientType=1 ); /* IE6-9 */
+    }
+
+    .tujuan-naskah {
+        color: white;
+        font-weight: bolder;
+        /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#711b87+0,ab3edd+100 */
+        background: #711b87; /* Old browsers */
+        background: -moz-linear-gradient(left, #711b87 0%, #ab3edd 100%); /* FF3.6-15 */
+        background: -webkit-linear-gradient(left, #711b87 0%,#ab3edd 100%); /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(to right, #711b87 0%,#ab3edd 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#711b87', endColorstr='#ab3edd',GradientType=1 ); /* IE6-9 */
+    }
+
+    .second-card {
+        margin-top: 10px;
+    }
+
 }
