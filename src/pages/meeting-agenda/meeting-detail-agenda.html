@@ -73,11 +73,11 @@
       </div>
 
     <div class="new-form">
-        <h2 style="margin-left: 16px">Files</h2>
+        <h2 style="margin-left: 16px">Daftar File</h2>
         <ion-item no-lines class="as-list bordered-ion-item" *ngFor="let file of getFiles(); let i = index;">
             <h2 text-wrap>{{file?.filename}}</h2>
             <button clear (click)="fileOptions(i)" ion-button color="light" item-end>
-                <ion-icon name="more"></ion-icon>
+                <ion-icon name="eye"></ion-icon>
             </button>
         </ion-item>
     </div>

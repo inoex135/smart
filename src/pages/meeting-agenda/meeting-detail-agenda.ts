@@ -121,9 +121,9 @@ export class MeetingDetailAgendaPage {
               await this.fileHelper.requestPermission()
             }
 
-            this.fileHelper.download(url, targetPath)
-            this.toast.present("File telah di download")
+            await this.fileHelper.download(url, targetPath)
             this.loader.dismissLoader()
+            this.fileHelper.openFileWindow(file.filename)
       
           } catch (error) {
             this.loader.dismissLoader()
