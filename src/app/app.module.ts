@@ -12,6 +12,9 @@ import { MyApp } from "./app.component";
 
 import { ComponentsModule } from "../components/components.module";
 
+// InApp Browser
+import { InAppBrowser } from '@ionic-native/in-app-browser';
+
 // 3rd package native
 import { AndroidPermissions } from "@ionic-native/android-permissions";
 import { DatePicker } from "@ionic-native/date-picker";
@@ -105,7 +108,8 @@ import { LogUtil } from "../utils/logutil";
     MasterUnitProvider,
     MeetingProvider,
     FileHelper,
-    Serializer
+    Serializer,
+    InAppBrowser,
   ]
 })
 export class AppModule {}

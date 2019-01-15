@@ -46,7 +46,9 @@
     <ion-card-content style="height: 100px">
       <ion-slides *ngIf="dashboard?.getNotices().length" initialSlide="0" autoplay="5000" loop="true" speed="500" pager="true">
         <ion-slide *ngFor="let slide of dashboard?.getNotices()" (click)="openNotice(slide)">
-          <h3>{{slide?.teks}}</h3>
+          <h3 (click)="openBrowser(slide?.url)">
+              {{slide?.teks}}
+          </h3>
         </ion-slide>
       </ion-slides>
     </ion-card-content>

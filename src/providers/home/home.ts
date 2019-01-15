@@ -3,18 +3,26 @@ import { ApiProvider } from "../api/api";
 import { LogUtil } from "../../utils/logutil";
 import { CacheProvider } from "../cache/cache";
 import { TokenProvider } from "../token/token";
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 @Injectable()
+
 export class HomeProvider {
 
   TAG:string = 'HomeProvider'
   private KEY_PHOTO = 'D4ryu8vEbJ9Tbbp'
   private KEY_DASHBOARD = '3NTsCdMyZVDwkfa_'
 
-  constructor(private apiProvider: ApiProvider, 
+  constructor(
+    private apiProvider: ApiProvider, 
     private cache: CacheProvider,
-    private token: TokenProvider
+    private token: TokenProvider,
+    private iab: InAppBrowser,
   ) {}
+
+  openBrowser(text){
+      this.iab.create(text);
+  }
 
   getPhotoProfile(): Promise<any> {
     LogUtil.d(this.TAG, 'get profile picture')
