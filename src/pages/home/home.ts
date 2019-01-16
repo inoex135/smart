@@ -18,6 +18,7 @@ import { Serializer } from "serializer.ts/Serializer";
 import { BasePage } from "../base-page/base-page";
 import { ToastHelper } from "../../helpers/toast-helper";
 import { LoginPage } from "../login/login";
+import { InAppBrowser } from "@ionic-native/in-app-browser";
 
 @IonicPage()
 @Component({
@@ -84,7 +85,8 @@ export class HomePage extends BasePage {
     private homeProvider: HomeProvider,
     private loaderHelper: LoaderHelper,
     private platform: Platform,
-    private serializer: Serializer
+    private serializer: Serializer,
+    private inAppBrowser: InAppBrowser
   ) {
     super(navCtrl, userProvider, toast)
   }
@@ -306,6 +308,17 @@ export class HomePage extends BasePage {
 
   private enabledPaymentHistory(): void {
     this.allowToSeePaymentHistory = true
+  }
+
+  private openBrowser(notice) {
+    LogUtil.d(HomePage.TAG, 'open link: ' + notice.url)
+    if (this.platform.is('android') || this.platform.is('ios')) {
+      LogUtil.d(HomePage.TAG, "it's mobile so use inAppBrowser")
+      this.inAppBrowser.create(notice.url)
+    } else {
+      LogUtil.d(HomePage.TAG, 'other system or browser')
+      window.open(notice.url, '_system')
+    }
   }
 
 }
