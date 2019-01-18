@@ -131,6 +131,33 @@
                         </ion-item>
                     </div>
                 </ion-row>
+                <ion-row >
+                    <ion-col col-12>
+                        <ng-template #withFlags let-attrs="attrs">
+                            <span>{{attrs?.data?.nip}}, {{attrs?.data?.nama}}</span>
+                        </ng-template>
+        
+                        <ion-auto-complete [dataProvider]="masterPegawai" #searchbar [template]="withFlags"></ion-auto-complete>
+        
+                        <ion-item class="input--form custom-ion-item">
+                            <ion-input type="text" placeholder="Selaku" [(ngModel)]="pelaku"></ion-input>
+                        </ion-item>
+    
+                        <ion-item class="add-personel" no-lines center item-center>
+                            <button clear [disabled]="searchbar?.getSelection() == null" ion-button small color="default-blue" (tap)="addDisposisiPersonalDanPersonal(disposisi?.selaku, pelaku)">
+                                <ion-icon name="add"></ion-icon> Tambah Personil
+                            </button>
+                        </ion-item>
+        
+                        <ion-item no-lines class="as-list bordered-ion-item" *ngFor="let selaku of disposisi?.selaku; let i = index;">
+                            <h2 text-wrap>Nama: {{disposisi?.personal[i]?.nama}}</h2>
+                            <p>Selaku: {{selaku}}</p>
+                            <button clear (click)="removeData(disposisi?.selaku, i)" ion-button color="light" item-end>
+                                <ion-icon name="trash"></ion-icon>
+                            </button>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
             </div>
         </div>  
     </ion-grid>
