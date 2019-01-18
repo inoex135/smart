@@ -52,15 +52,15 @@
                             </ion-item>
         
                             <ion-item class="add-personel" no-lines center item-center>
-                                <button clear [disabled]="searchbar?.getSelection() == null" ion-button small color="default-blue" (tap)="addDisposisiPersonalDanPersonal(disposisi?.selaku, pelaku)">
+                                <button clear [disabled]="searchbar?.getSelection() == null" ion-button small color="default-blue" (tap)="addDisposisiPersonalDanPersonal(pelaku)">
                                     <ion-icon name="add"></ion-icon> Tambah Personil
                                 </button>
                             </ion-item>
             
-                            <ion-item no-lines class="as-list bordered-ion-item" *ngFor="let selaku of disposisi?.selaku; let i = index;">
-                                <h2 text-wrap>Nama: {{disposisi?.personal[i]?.nama}}</h2>
-                                <p>Selaku: {{selaku}}</p>
-                                <button clear (click)="removeData(disposisi?.selaku, i)" ion-button color="light" item-end>
+                            <ion-item no-lines class="as-list bordered-ion-item" *ngFor="let personal of getDisposisiPersonalForSearch(); let i = index;">
+                                <h2 text-wrap>Nama: {{personal?.nama}}</h2>
+                                <p>Selaku: {{personal?.selaku}}</p>
+                                <button clear (click)="removeData(personal)" ion-button color="light" item-end>
                                     <ion-icon name="trash"></ion-icon>
                                 </button>
                             </ion-item>
@@ -73,13 +73,40 @@
                         <div *ngFor="let pelaksana of datas?.pelaksana; let i = index" col-12 class="pelaksana">
                             <ion-item no-lines class="item custom-ion-item">
                                 <ion-label text-wrap>{{pelaksana?.nama}}</ion-label>
-                                <ion-checkbox [checked]="pelaksana?.isChecked" (ionChange)="selectPelaksana(pelaksana, $event.checked, i)" color="primary"
+                                <ion-checkbox [checked]="pelaksana?.isChecked" (ionChange)="selectPelaksana(pelaksana, $event.checked)" color="primary"
                                     [value]="pelaksana?.nip" name="pelaksana[i]"></ion-checkbox>
                             </ion-item>
                             <ion-item class="input--form custom-ion-item">
-                                <ion-input type="text" placeholder="Selaku" [(ngModel)]="disposisi.selaku[i]"></ion-input>
+                                <ion-input type="text" placeholder="Selaku" [(ngModel)]="pelaksana.selaku"></ion-input>
                             </ion-item>
                         </div>
+                    </ion-row>
+                    <ion-row *ngIf="component?.disposisiPersonal" >
+                        <ion-col col-12>
+                            <ng-template #withFlags let-attrs="attrs">
+                                <span>{{attrs?.data?.nip}}, {{attrs?.data?.nama}}</span>
+                            </ng-template>
+            
+                            <ion-auto-complete [dataProvider]="masterPegawai" #searchbar [template]="withFlags"></ion-auto-complete>
+            
+                            <ion-item class="input--form custom-ion-item">
+                                <ion-input type="text" placeholder="Selaku" [(ngModel)]="pelaku"></ion-input>
+                            </ion-item>
+        
+                            <ion-item class="add-personel" no-lines center item-center>
+                                <button clear [disabled]="searchbar?.getSelection() == null" ion-button small color="default-blue" (tap)="addDisposisiPersonalDanPersonal(pelaku)">
+                                    <ion-icon name="add"></ion-icon> Tambah Personil
+                                </button>
+                            </ion-item>
+            
+                            <ion-item no-lines class="as-list bordered-ion-item" *ngFor="let personal of getDisposisiPersonalForSearch(); let i = index;">
+                                <h2 text-wrap>Nama: {{personal?.nama}}</h2>
+                                <p>Selaku: {{personal?.selaku}}</p>
+                                <button clear (click)="removeData(personal)" ion-button color="light" item-end>
+                                    <ion-icon name="trash"></ion-icon>
+                                </button>
+                            </ion-item>
+                        </ion-col>
                     </ion-row>
                 </div>
             </div>  

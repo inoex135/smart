@@ -72,7 +72,10 @@ export class NaskahDisposisiProvider {
 
     const personal = data.personal.map(
       res => {
-        return res.nip;
+        let data = []
+        data.push(res.nip)
+        data.push(res.selaku || "")
+        return data;
       },
       err => {
         return null;
@@ -88,15 +91,13 @@ export class NaskahDisposisiProvider {
 
     formData.append("sumas_id", data.sumasId);
     formData.append("personal", personal);
-    formData.append("selaku", data.selaku);
+ //   formData.append("selaku", data.selaku);
     formData.append("sifat_surat", data.sifatSurat);
     formData.append("petunjuk", data.petunjuk);
     formData.append("tanggal_selesai", data.tanggalSelesai);
     formData.append("tanggal_disposisi", data.tanggalDisposisi);
     formData.append("catatan_disposisi", data.catatan);
-
     formData.append("lead", data.leader);
-
     return this.api.postForm("/surat/disposisi/create", formData);
   }
 }
