@@ -31,19 +31,36 @@ export class Dashboard implements DashboardContract {
     }
 
     getTodayCheckIn(): string {
-        return this.jam_masuk_hari_ini
+        if(this.jam_masuk_hari_ini < '06:00' || this.jam_masuk_hari_ini > '12:00'){
+            return '-'
+        }else{
+            return this.jam_masuk_hari_ini
+        }
     }
 
     getTodayCheckOut(): string {
-        return this.jam_keluar_hari_ini
+        if(this.jam_keluar_hari_ini <= '12:00'){
+            return '-'
+        }else{
+            return this.jam_keluar_hari_ini
+        }
     }
 
     getYesterdayCheckIn(): string {
-        return this.jam_masuk_kemarin
+        if(this.jam_masuk_kemarin < '06:00' || this.jam_masuk_kemarin > '12:00'){
+            return '-'
+        }else{
+            return this.jam_masuk_kemarin
+        }
+        
     }
 
     getYesterdayCheckOut(): string {
-        return this.jam_keluar_kemarin
+        if(this.jam_keluar_kemarin <= '12:00'){
+            return '-'
+        }else{
+            return this.jam_keluar_kemarin
+        }
     }
 
     getNotices(): Notice[] {

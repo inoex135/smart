@@ -89,13 +89,15 @@ export class PersonalPage {
     console.log($event);
   }
 
-  setLabelColorCalendarDetail(eventType?) {
+  setLabelColorCalendarDetail(eventType?, eventTitle?) {
     let className;
 
     if (eventType == "Agenda Personal") {
       className = "calendar-card agenda-personal";
     } else if (eventType == "Agenda Sekretaris") {
       className = "calendar-card agenda-sekretaris";
+    } else if (eventType == "ABSEN" && eventTitle == "Libur") {
+      className = "calendar-card libur";
     } else if (eventType == "ABSEN") {
       className = "calendar-card absen";
     } else {

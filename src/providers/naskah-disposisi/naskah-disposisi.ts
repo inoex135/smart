@@ -46,7 +46,9 @@ export class NaskahDisposisiProvider {
       LogUtil.d(NaskahDisposisiProvider.TAG, data)
       if (data == null) {
         return request.map(res => {
-          this.cache.put(cacheKey, {when: Date.now() + CacheProvider.FIVE_MINUTES, response: res})
+          if (res) {
+            this.cache.put(cacheKey, {when: Date.now() + CacheProvider.FIVE_MINUTES, response: res})
+          }
           return res
         })
       }

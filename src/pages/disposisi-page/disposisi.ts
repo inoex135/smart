@@ -1,29 +1,31 @@
 import { Component, Input, ViewChild, Output, EventEmitter } from "@angular/core";
-import { NaskahDisposisiProvider } from "../../../providers/naskah-disposisi/naskah-disposisi";
-import { Observable } from "rxjs/Observable";
-import { IDisposisiUnit } from "../../../interface/disposisi-unit";
-import { debounceTime, distinctUntilChanged } from "rxjs/operators";
-import { ToastHelper } from "../../../helpers/toast-helper";
-import { MomentHelper } from "../../../helpers/moment-helper";
-import { DatepickerProvider } from "../../../providers/datepicker/datepicker";
-import { NavController, AlertController } from "ionic-angular";
+
+import { NavController, AlertController, IonicPage, NavParams, Platform } from "ionic-angular";
 
 import orderBy from "lodash/sortBy";
 import compact from "lodash/compact";
 import * as moment from "moment-timezone";
-import { LoaderHelper } from "../../../helpers/loader-helper";
 import { AutoCompleteComponent } from "ionic2-auto-complete";
-import { LogUtil } from "../../../utils/logutil";
-import { MasterPegawaiProvider } from "../../../providers/master-pegawai/master-pegawai";
-import { TokenProvider } from "../../../providers/token/token";
+import { NaskahDisposisiProvider } from "../../providers/naskah-disposisi/naskah-disposisi";
+import { ToastHelper } from "../../helpers/toast-helper";
+import { MomentHelper } from "../../helpers/moment-helper";
+import { DatepickerProvider } from "../../providers/datepicker/datepicker";
+import { MasterPegawaiProvider } from "../../providers/master-pegawai/master-pegawai";
+import { TokenProvider } from "../../providers/token/token";
+import { LoaderHelper } from "../../helpers/loader-helper";
+import { LogUtil } from "../../utils/logutil";
+import { Observable } from "rxjs";
+import { IDisposisiUnit } from "../../interface/disposisi-unit";
+import { debounceTime, distinctUntilChanged } from "rxjs/operators";
 
+@IonicPage()
 @Component({
-  selector: "disposisi",
+  selector: "page-disposisi",
   templateUrl: "disposisi.html"
 })
-export class Disposisi {
+export class DisposisiPage {
 
-  TAG:string = 'Disposisi'
+  static TAG:string = 'DisposisiPage'
 
   @Output() 
   onPageChanged = new EventEmitter<Object>()
@@ -58,8 +60,9 @@ export class Disposisi {
   selectedPetunjuk: any
 
   disposisiAs: string = "";
-  @Input() naskahId: any;
+  naskahId: any;
   sumasId: any;
+  private unRegisterBackButtonAction: Function
 
   readonly selectAs: any = {
     unit: "UNIT",
@@ -105,14 +108,21 @@ export class Disposisi {
     private navCtrl: NavController,
     private user: TokenProvider,
     private loader: LoaderHelper,
-    private alert: AlertController
+    private alert: AlertController,
+    private navParams: NavParams,
+    private platform: Platform
   ) {
+    this.registerAction()
+
+      this.naskahId = this.navParams.get('naskahId')
+      LogUtil.d(DisposisiPage.TAG, 'naskahId: ' + this.naskahId)
     this.user.getProfile().then(res => {
-      LogUtil.d(this.TAG, res)
+      LogUtil.d(DisposisiPage.TAG, res)
       this.profile = res
       this.setEselon4Requirements()
     });
-    this.init();
+    this.init()
+
   }
 
   init() {
@@ -266,7 +276,7 @@ export class Disposisi {
   //   }
   // }
   addDisposisiPersonalDanPersonal(selaku: Array<any>, item: any) {
-    LogUtil.d(this.TAG, item)
+    LogUtil.d(DisposisiPage.TAG, item)
     selaku.push(item);
     this.addPersonal();
 
@@ -285,12 +295,12 @@ export class Disposisi {
   }
 
   removeData(data: Array<any>, index: number) {
-    LogUtil.d(this.TAG, data)
+    LogUtil.d(DisposisiPage.TAG, data)
     data.splice(index, 1);
     if (this.disposisi.personal) {
       this.disposisi.personal.splice(index, 1)
     }
-    LogUtil.d(this.TAG, data)
+    LogUtil.d(DisposisiPage.TAG, data)
   }
 
   next() {
@@ -354,7 +364,7 @@ export class Disposisi {
   }
 
   petunjukChange() {
-    LogUtil.d(this.TAG, this.selectedPetunjuk)
+    LogUtil.d(DisposisiPage.TAG, this.selectedPetunjuk)
     this.disposisi.petunjuk = []
     this.selectedPetunjuk.forEach(element => {
       this.disposisi.petunjuk.push(element.id)
@@ -380,11 +390,11 @@ export class Disposisi {
   simpan() {
     this.disposisi.sumasId = this.naskahId;
     //remove array value null, undefined, ""
-    LogUtil.d(this.TAG, this.disposisi)
+    LogUtil.d(DisposisiPage.TAG, this.disposisi)
     this.disposisi.selaku = compact(this.disposisi.selaku);
 
     this.loader.show().then(isPresent => {
-      LogUtil.d(this.TAG, this.disposisi)
+      LogUtil.d(DisposisiPage.TAG, this.disposisi)
       this.disposisiProvider.simpanDisposisi(this.disposisi).subscribe(
         res => {
           this.loader.dismissLoader()
@@ -401,7 +411,7 @@ export class Disposisi {
   }
 
   closePageWithDelay() {
-    LogUtil.d(this.TAG, "close page with delay 200")
+    LogUtil.d(DisposisiPage.TAG, "close page with delay 200")
     setTimeout(() => {
       this.navCtrl.pop()
       this.toastHelper.present(this.message)
@@ -463,5 +473,26 @@ export class Disposisi {
     });
     alert.present();
   }
+
+  
+/* https://forum.ionicframework.com/t/an-android-register-back-button-action-sample/130058 */
+registerAction(): void {
+    this.unRegisterBackButtonAction = this.platform.registerBackButtonAction(() => { 
+      LogUtil.d(DisposisiPage.TAG, "back button clicked")
+      if (this.prev() == -1) {
+        this.navCtrl.pop()
+      }
+      return
+    })
+   }
+   
+   unRegister() {
+     this.unRegisterBackButtonAction && this.unRegisterBackButtonAction()
+   }
+
+  ionViewWillLeave() {
+    this.unRegister()
+  }
+
 
 }
