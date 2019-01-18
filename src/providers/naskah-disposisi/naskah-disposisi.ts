@@ -75,10 +75,10 @@ export class NaskahDisposisiProvider {
         let data = []
         data.push(res.nip)
         data.push(res.selaku || "")
-        return data;
+        return data
       },
       err => {
-        return null;
+        return null
       }
     );
 
@@ -88,9 +88,10 @@ export class NaskahDisposisiProvider {
     if (unitTujuan.length > 0) {
       formData.append("unit", unitTujuan);
     }
-
+    let personalString = JSON.stringify(personal)
+    LogUtil.d(NaskahDisposisiProvider.TAG, personalString)
     formData.append("sumas_id", data.sumasId);
-    formData.append("personal", personal);
+    formData.append("personal", personalString);
  //   formData.append("selaku", data.selaku);
     formData.append("sifat_surat", data.sifatSurat);
     formData.append("petunjuk", data.petunjuk);
