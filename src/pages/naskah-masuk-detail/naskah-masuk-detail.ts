@@ -21,6 +21,7 @@ import { NaskahNotifikasiProvider } from "../../providers/naskah-notifikasi/nask
 import { LogUtil } from "../../utils/logutil";
 import { NaskahDetailActionPage } from "../naskah-detail-action/naskah-detail-action";
 import { FileHelper } from "../../helpers/file-helper";
+import { DisposisiPage } from "../disposisi-page/disposisi";
 
 @IonicPage()
 @Component({
@@ -64,11 +65,19 @@ export class NaskahMasukDetailPage {
   }
 
   openPage(actionData: string) {
-    this.navCtrl.push(NaskahDetailActionPage.TAG, {
-      actionData: actionData,
-      naskahId: this.naskahId,
-      detailNaskah: this.detail
-    });
+    if (actionData.includes('disposisi')) {
+      this.navCtrl.push(DisposisiPage.TAG, {
+        actionData: actionData,
+        naskahId: this.naskahId,
+        detailNaskah: this.detail
+      })
+    } else {
+      this.navCtrl.push(NaskahDetailActionPage.TAG, {
+        actionData: actionData,
+        naskahId: this.naskahId,
+        detailNaskah: this.detail
+      })
+    }
   }
 
   openDisposisiPage() {
