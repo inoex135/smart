@@ -1,0 +1,95 @@
+page-disposisi {
+
+    font-family: Roboto;
+    color: color($colors, 'new-text-color-grey') !important;
+  
+    .petunjuk {
+      .label-md {
+        margin: 0;
+      }
+    }
+  
+    .blue-background {
+      background-color: #d9ecff !important;
+    }
+  
+    .disposisi-kepada{
+      background-color: #FF8A80;
+      color:white;
+    }
+  
+    .disposition-type, .title-list, .hint-list {
+      
+      .item {
+        height: 50px !important;
+      }
+  
+    }
+  
+    .personal-disposition {
+      margin-top: 5px;
+      margin-bottom: 5px;
+    }
+  
+    .disposisi-padding-top-form{
+      margin-top:20px;
+    }
+  
+    .disposisi-btn-simpan{
+      margin-top:20px;
+    }
+  
+    .disabled {
+      color: #848d95 !important;
+    }
+  
+  }
+
+  .alert-checkbox-group {
+      button {
+          .button-inner {
+            .alert-checkbox-label {
+                white-space: normal !important;
+            }
+          }
+      }
+  }
+  
+  .alert-radio-group {
+    button {
+      .button-inner {
+        .alert-radio-label {
+          white-space: normal;
+        }
+      }
+    }
+  }
+
+  .disposisi-flex {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .spacer {
+    height: 50px;
+  }
+  
+  .stepper-bottom-navigation {
+    flex: 1;
+    background-color: #fff;
+    margin-top: 5px;
+    padding-right: 7px;
+    padding-left: 7px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    z-index: 1000;
+
+    button {
+      color: color($colors, 'new-text-color-light') !important
+    }
+
+  }
