@@ -108,8 +108,7 @@ import { LogUtil } from "../utils/logutil";
     MasterUnitProvider,
     MeetingProvider,
     FileHelper,
-    Serializer,
-    InAppBrowser,
+    Serializer
   ]
 })
 export class AppModule {}
