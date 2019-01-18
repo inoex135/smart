@@ -30,7 +30,9 @@ export class DisposisiPage {
   @Output() 
   onPageChanged = new EventEmitter<Object>()
 
-  datas: any = {};
+  datas: any = {
+      pelaksana: []
+  };
   Picker: string = new Date().toISOString();
   unit: Array<any> = [];
   selectedUnit: Array<any> = [];
@@ -159,6 +161,8 @@ export class DisposisiPage {
   mappingPelaksana(pelaksana: any) {
     const data = pelaksana.map(element => {
       element['isChecked'] = false
+      element['selaku'] = ''
+      element['fromSearch'] = false
       return element
     })
 
@@ -222,24 +226,40 @@ export class DisposisiPage {
   }
 
   //checked/select pelaksana
-  selectPelaksana(pelaksana: any, checked: boolean, index: number) {
-    this.datas.pelaksana[index]['isChecked'] = checked
-    if (checked) {
-      this.disposisi.personal.push(pelaksana)
-    } else {
-      this.disposisi.personal.splice(this.getIndexByModel(pelaksana), 1)
+    selectPelaksana(pelaksana: any, checked: boolean) {
+        LogUtil.d(DisposisiPage.TAG, pelaksana)
+        LogUtil.d(DisposisiPage.TAG, 'select pelaksana')
+        let indexPelaksana = this.getIndexPelaksana(pelaksana)
+        LogUtil.d(DisposisiPage.TAG, 'found index at: ' + indexPelaksana)
+        let model = this.datas.pelaksana[indexPelaksana]
+        model.isChecked = checked
+        if (checked) {
+            this.disposisi.personal.push(pelaksana)
+        } else {
+            let index = this.getPersonalIndexByModel(pelaksana)
+            LogUtil.d(DisposisiPage.TAG, 'disposisi index found at: ' + index)
+            model.selaku = ''
+            this.disposisi.personal.splice(index, 1)
+        }
     }
-  }
 
-  getIndexByModel(pelaksana: any): number {
-    return this.disposisi.personal.forEach((element, i) => {
-      if (element.nip == pelaksana.nip) {
-        return i
-      } else {
+    getIndexPelaksana(pelaksana): number {
+        for (let i = 0; i < this.datas.pelaksana.length; i++) {
+            if (this.datas.pelaksana[i].nip === pelaksana.nip) {
+                return i
+            }
+        }
         return -1
-      }
-    })
-  }
+    }
+
+    getPersonalIndexByModel(pelaksana: any): number {
+        for (let i = 0; i < this.disposisi.personal.length; i++) {
+            if (this.disposisi.personal[i].nip == pelaksana.nip) {
+                return i
+            }
+        }
+        return -1
+    }
 
   searchPegawai(param: any) {
     this.disposisiProvider
@@ -275,48 +295,43 @@ export class DisposisiPage {
   //     this.disposisi.lead = unit;
   //   }
   // }
-  addDisposisiPersonalDanPersonal(selaku: Array<any>, item: any) {
+  addDisposisiPersonalDanPersonal(item: any) {
     LogUtil.d(DisposisiPage.TAG, item)
-    selaku.push(item);
-    this.addPersonal();
-
+    let personal = this.searchbar.getSelection()
+    personal['selaku'] = item
+    personal['fromSearch'] = true
+    this.disposisi.personal.push(personal)
     //clear searchbar dan selaku form
-    this.pelaku = "";
-    this.searchbar.clearValue();
-  }
-
-  addPersonal() {
-    const personal = this.searchbar.getSelection();
-    this.disposisi.personal.push(personal);
+    this.pelaku = ""
+    this.searchbar.clearValue()
   }
 
   addData(data: Array<any>, item: any) {
     data.push(item);
   }
 
-  removeData(data: Array<any>, index: number) {
-    LogUtil.d(DisposisiPage.TAG, data)
-    data.splice(index, 1);
-    if (this.disposisi.personal) {
-      this.disposisi.personal.splice(index, 1)
-    }
-    LogUtil.d(DisposisiPage.TAG, data)
+  removeData(personal) {
+    LogUtil.d(DisposisiPage.TAG, personal)
+    let index = this.getPersonalIndexByModel(personal)
+    LogUtil.d(DisposisiPage.TAG, 'found index at: ' + index)
+    this.disposisi.personal.splice(index, 1)
   }
 
-  next() {
-    if (!this.disabledNextButton()) {
-      this.toastHelper.present('Periksa kembali inputan anda!')
-      return
+    next() {
+        LogUtil.d(DisposisiPage.TAG, this.disposisi)   
+        if (!this.disabledNextButton()) {
+            this.toastHelper.present('Periksa kembali inputan anda!')
+            return
+        }
+        if (this.currentStep < 0) {
+            this.currentStep = 0
+        }
+        this.currentStep++
+        if (this.currentStep > this.arraySteps.length) {
+            this.currentStep = this.arraySteps.length - 1
+        }
+        this.nextStep(this.arraySteps[this.currentStep])
     }
-    if (this.currentStep < 0) {
-      this.currentStep = 0
-    }
-    this.currentStep++
-    if (this.currentStep > this.arraySteps.length) {
-      this.currentStep = this.arraySteps.length - 1
-    }
-    this.nextStep(this.arraySteps[this.currentStep])
-  }
 
   prev(): number {
     this.currentStep--
@@ -407,7 +422,7 @@ export class DisposisiPage {
           this.toastHelper.presentError(err)
         }
       )
-    })
+    }) 
   }
 
   closePageWithDelay() {
@@ -492,6 +507,10 @@ registerAction(): void {
 
   ionViewWillLeave() {
     this.unRegister()
+  }
+
+  getDisposisiPersonalForSearch(): Array<any> {
+      return this.disposisi.personal.filter(item => item.fromSearch)
   }
 
 
