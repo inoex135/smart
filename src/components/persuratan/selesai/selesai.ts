@@ -37,19 +37,19 @@ export class Selesai {
   }
 
   selesai(data: SelesaiModel) {
-    this.loaderHelper.createLoader();
+    this.loaderHelper.createLoader()
     this.suratProvider.simpanSelesai(this.detail, data).subscribe(
       res => {
-        this.loaderHelper.dismiss();
-        this.toastHelper.present(res.messages);
-        this.navCtrl.pop();
+        this.loaderHelper.dismiss()
+        this.toastHelper.present(res.messages)
+        this.navCtrl.pop()
       },
       err => {
-        this.loaderHelper.dismiss();
+        this.loaderHelper.dismiss()
         if (err.errors) {
-          this.errors = err.errors;
+          this.errors = err.errors
         } else {
-          this.toastHelper.present(err);
+          this.toastHelper.presentError(err)
         }
       }
     );

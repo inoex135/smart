@@ -5,6 +5,7 @@ import { NotificationProvider } from "../../providers/notification/notification"
 import { MeetingProvider } from "../../providers/meeting/meeting";
 import { LogUtil } from "../../utils/logutil";
 import { LoaderHelper } from "../../helpers/loader-helper";
+import { ToastHelper } from "../../helpers/toast-helper";
 
 @Component({
     selector: "meeting-list-page",
@@ -30,7 +31,9 @@ export class MeetingListPage {
 
     constructor(private navCtrl: NavController, 
         private api: MeetingProvider, 
-        private loader: LoaderHelper) {
+        private loader: LoaderHelper,
+        private toast: ToastHelper
+    ) {
         
     }
 
@@ -61,6 +64,7 @@ export class MeetingListPage {
                         this.loader.dismissLoader()
                     }
                     LogUtil.e(MeetingListPage.TAG, err)
+                    this.toast.presentError(err)
                 }
             )
         })
@@ -88,6 +92,7 @@ export class MeetingListPage {
             err => {
                 this.isInfiniteLoading = false
                 this.model.page--
+                this.toast.presentError(err)
             }
           )
           infiniteScroll.complete()

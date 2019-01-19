@@ -4,6 +4,7 @@ import { MeetingDetailAgendaPage } from "../meeting-agenda/meeting-detail-agenda
 import { MeetingProvider } from "../../providers/meeting/meeting";
 import { LogUtil } from "../../utils/logutil";
 import { LoaderHelper } from "../../helpers/loader-helper";
+import { Meeting } from "../../providers/meeting/models/meeting-model";
 
 @Component({
     selector: "meeting-detail",
@@ -15,7 +16,7 @@ export class MeetingDetailPage {
     static TAG:string = 'MeetingDetailPage'
     static KEY_DETAIL_ID:string = 'detail_id'
 
-    items:any = []
+    items: Array<Meeting> = Array<Meeting>()
 
     model:any = {
         detailId: '',
@@ -69,8 +70,8 @@ export class MeetingDetailPage {
           this.api.getDetailMeeting(this.model).subscribe(
             res => {
                 this.isInfiniteLoading = false
-                if (res && res.content && res.content.length > 0) {
-                    res.content.forEach(element => {
+                if (res && res.length) {
+                    res.forEach(element => {
                         this.items.push(element)
                     })
                 } else {
@@ -94,10 +95,10 @@ export class MeetingDetailPage {
         return this.getItems().length > 0
     }
 
-    private detail(model): void {
+    private detail(model: Meeting): void {
         let data = {}
-        data[MeetingDetailAgendaPage.KEY_AGENDA_ID] = model.agenda_id
-        data[MeetingDetailAgendaPage.KEY_TIME_ID] = model.time_id
+        data[MeetingDetailAgendaPage.KEY_AGENDA_ID] = model.getAgendaId()
+        data[MeetingDetailAgendaPage.KEY_TIME_ID] = model.getTimeId()
         this.navCtrl.push(MeetingDetailAgendaPage.TAG, data)
     }
 

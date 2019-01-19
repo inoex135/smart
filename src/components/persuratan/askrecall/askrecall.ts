@@ -44,7 +44,7 @@ export class Askrecall {
         if (err.errors) {
           this.errors = err.errors;
         } else {
-          this.toastHelper.present(err);
+          this.toastHelper.presentError(err);
         }
       }
     );

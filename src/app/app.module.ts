@@ -12,6 +12,9 @@ import { MyApp } from "./app.component";
 
 import { ComponentsModule } from "../components/components.module";
 
+// InApp Browser
+import { InAppBrowser } from '@ionic-native/in-app-browser';
+
 // 3rd package native
 import { AndroidPermissions } from "@ionic-native/android-permissions";
 import { DatePicker } from "@ionic-native/date-picker";
@@ -31,7 +34,6 @@ import { CalendarModule } from "ion2-calendar";
 import { AptDetailActionPage } from "../pages/apt-detail-action/apt-detail-action";
 
 // helper
-import { AptHelper } from "../helpers/apt-helper";
 import { LoaderHelper } from "../helpers/loader-helper";
 
 // provider
@@ -46,7 +48,6 @@ import { PersonalProvider } from "../providers/personal/personal";
 import { SuratProvider } from "../providers/surat/surat";
 import { TokenProvider } from "../providers/token/token";
 import { UserProvider } from "../providers/user/user";
-import { HomeProvider } from "../providers/home/home";
 import { HttpClientModule } from "@angular/common/http";
 import { NaskahDisposisiProvider } from "../providers/naskah-disposisi/naskah-disposisi";
 import { ToastHelper } from "../helpers/toast-helper";
@@ -54,10 +55,10 @@ import { MomentHelper } from "../helpers/moment-helper";
 import { MasterUnitProvider } from "../providers/master-unit/master-unit";
 import { AutoCompleteModule } from "ionic2-auto-complete";
 import { CacheProvider } from "../providers/cache/cache";
-import { PaymentProvider } from "../providers/payment/payment";
 import { MeetingProvider } from "../providers/meeting/meeting";
 import { FileHelper } from "../helpers/file-helper";
-import { DocumentViewer } from "@ionic-native/document-viewer";
+import { Serializer } from "serializer.ts/Serializer";
+import { LogUtil } from "../utils/logutil";
 
 @NgModule({
   declarations: [MyApp, AptDetailActionPage],
@@ -78,12 +79,15 @@ import { DocumentViewer } from "@ionic-native/document-viewer";
   bootstrap: [IonicApp],
   entryComponents: [MyApp, AptDetailActionPage],
   providers: [
+    LogUtil,
     StatusBar,
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    UserProvider,
+    CacheProvider,
     ApiProvider,
+    UserProvider,
     TokenProvider,
+    LoaderHelper,
     FileTransfer,
     File,
     SuratProvider,
@@ -94,22 +98,17 @@ import { DocumentViewer } from "@ionic-native/document-viewer";
     NaskahMasukProvider,
     NaskahNotifikasiProvider,
     AndroidPermissions,
-    AptHelper,
-    LoaderHelper,
     GrafikSuratProvider,
     PersonalAgendaDetailProvider,
     DatePicker,
     DatepickerProvider,
-    HomeProvider,
     NaskahDisposisiProvider,
     ToastHelper,
     MomentHelper,
     MasterUnitProvider,
-    CacheProvider,
-    PaymentProvider,
     MeetingProvider,
     FileHelper,
-    DocumentViewer
+    Serializer
   ]
 })
 export class AppModule {}

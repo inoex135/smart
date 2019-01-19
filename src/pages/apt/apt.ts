@@ -6,7 +6,6 @@ import {
   App,
   Select
 } from "ionic-angular";
-import { File } from "@ionic-native/file";
 import { AptProvider } from "../../providers/apt/apt";
 import { LoaderHelper } from "../../helpers/loader-helper";
 import remove from "lodash/remove";
@@ -14,6 +13,8 @@ import { debounceTime, finalize } from "rxjs/operators";
 import { ToastHelper } from "../../helpers/toast-helper";
 import { LogUtil } from "../../utils/logutil";
 import { NotificationProvider } from "../../providers/notification/notification";
+import { AptListItem } from "../../providers/apt/models/apt-list-item";
+import { AptListItemContract } from "../../providers/apt/models/contracts/apt-list-item-contract";
 
 @IonicPage()
 @Component({
@@ -24,22 +25,21 @@ export class AptPage {
 
   static TAG:string = 'AptPage'
 
-  params: any = {};
-  items: any = [];
-  pelayanans: any = [];
-  fileDirectory: any;
-  loader: any;
-  redirectComponent: string = "AptNotifikasiPage";
+  params: any = {}
+  items: Array<AptListItem> = []
+  pelayanans: any = []
+  loader: any
+  redirectComponent: string = "AptNotifikasiPage"
 
   @ViewChild("selectService") select: Select
 
-  isPress: boolean = false;
-  keyword: string = "";
-  jenisPelayanan: any = "";
-  searching: boolean = false;
+  isPress: boolean = false
+  keyword: string = ""
+  jenisPelayanan: any = ""
+  searching: boolean = false
 
-  listAptId: any[] = [];
-  showAgendaButton: boolean = false;
+  listAptId: any[] = []
+  showAgendaButton: boolean = false
 
   isSearchOpened:boolean = false
 
@@ -70,19 +70,18 @@ export class AptPage {
 
   constructor(
     public navCtrl: NavController,
+    public toast: ToastHelper,
     public navParams: NavParams,
     private aptProvider: AptProvider,
-    file: File,
     private loaderHelper: LoaderHelper,
     private toastHelper: ToastHelper,
     private app: App
   ) {
-    this.fileDirectory = file.externalRootDirectory + "Download";
   }
 
   ionViewDidLoad() {
-    this.getPelayananList();
-    this.mappingGetData();
+    this.getPelayananList()
+    this.mappingGetData()
   }
 
   ionViewWillLeave() {
@@ -92,22 +91,22 @@ export class AptPage {
   
   mappingGetData() {
     if (this.type === "dekatBatasWaktu") {
-      return this.getDekatBatasWaktu();
+      return this.getDekatBatasWaktu()
     }
 
     if (this.type === "lewatBatasWaktu") {
-      return this.getLewatiBatasWaktu();
+      return this.getLewatiBatasWaktu()
     }
 
-    return this.getAptList();
+    return this.getAptList()
   }
 
-  detailApt(item: any) {
-    this.app.getRootNav().push("AptDetailPage", { itemId: item.id });
+  detailApt(item: AptListItemContract) {
+    this.app.getRootNav().push("AptDetailPage", { itemId: item.getId() })
   }
 
   isItemPressed() {
-    this.isPress = !this.isPress;
+    this.isPress = !this.isPress
   }
 
   getPelayananList() {
@@ -132,6 +131,7 @@ export class AptPage {
         err => {
           LogUtil.e(AptPage.TAG, err)
           this.loaderHelper.dismissLoader()
+          this.toastHelper.presentError(err)
         }
       )
     })
@@ -171,26 +171,6 @@ export class AptPage {
       this.page
     );
   }
-
-  // async download() {
-  //   const targetPath = this.fileDirectory + "smart.xlsx";
-
-  //   await this.loaderHelper.createLoader();
-
-  //   const checkPermission = await this.aptHelper.checkPermission();
-
-  //   // check if apps has permission to write storage
-  //   if (!checkPermission.hasPermission) {
-  //     await this.aptHelper.requestPermission();
-  //   }
-
-  //   const download = await this.aptProvider.download(targetPath);
-
-  //   const openFile = await this.aptHelper.openFile(targetPath);
-  //   alert(openFile.message);
-
-  //   this.loader.dismiss();
-  // }
 
   search(keyword: any, layananId: number) {
     LogUtil.d(AptPage.TAG, "keyword: " + keyword + " - service: " + layananId)
@@ -341,19 +321,6 @@ export class AptPage {
 
   getNotificationType():string {
     return NotificationProvider.TYPE_APT
-  }
-
-  getStatusColor(status:string = ''):string {
-    switch(status) {
-      case 'Permohonan Aktif':
-        return 'new-green-background'
-      case 'Permohonan Aktif Mendekati Batas Waktu':
-        return 'new-orange-background'
-      case 'Permohonan Melebih Batas Waktu':
-        return 'new-red-background'
-      default:
-        return 'white-background'
-    }
   }
 
 }

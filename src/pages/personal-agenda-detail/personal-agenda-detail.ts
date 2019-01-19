@@ -10,6 +10,7 @@ import { PersonalAgendaDetailProvider } from "../../providers/personal-agenda-de
 import { ToastHelper } from "../../helpers/toast-helper";
 import { LoaderHelper } from "../../helpers/loader-helper";
 import { NotificationProvider } from "../../providers/notification/notification";
+import { LogUtil } from "../../utils/logutil";
 
 @IonicPage()
 @Component({
@@ -23,7 +24,7 @@ export class PersonalAgendaDetailPage {
   static KEY_MODEL = 'model'
 
 
-  detailAgenda: any = [];
+  detailAgenda: any = []
   private agendaId: any = undefined
   detail:any = {}
   notificationModel:any = {}
@@ -43,7 +44,7 @@ export class PersonalAgendaDetailPage {
   }
 
   ionViewDidLoad() {
-    if (this.agendaId) {
+    if (this.fromNotification()) {
       this.loader.show()
       .then(() => {
         this.agendaProvider.getDetail(this.agendaId)
@@ -76,7 +77,8 @@ export class PersonalAgendaDetailPage {
   }
 
   getDetailAgenda() {
-    const date = this.navParams.get("date");
+    LogUtil.d(PersonalAgendaDetailPage.TAG, 'get by date')
+    const date = this.navParams.get("date")
 
     this.loader.show()
     .then(() => {
@@ -89,6 +91,7 @@ export class PersonalAgendaDetailPage {
         err => {
           this.navCtrl.pop()
           this.loader.dismissLoader()
+          this.toastHelper.presentError(err)
         }
       )
     })
@@ -138,7 +141,7 @@ export class PersonalAgendaDetailPage {
   }
 
   private fromNotification():boolean {
-    return this.agendaId !== undefined || this.agendaId !== null
+    return this.agendaId != undefined && this.agendaId != null
   }
 
   showToast(message: string) {

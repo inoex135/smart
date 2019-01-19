@@ -1,6 +1,5 @@
 import { DashboardContract } from "./dashboard-contract";
 import { Notice } from "./notice";
-import { Type } from "serializer.ts/Decorators";
 
 export class Dashboard implements DashboardContract {
 
@@ -11,7 +10,8 @@ export class Dashboard implements DashboardContract {
     private readonly akumulasi_absen: string
     private readonly jumlah_hari_masuk?: number
     private readonly jam_keluar_hari_ini?: string
-    @Type(() => Notice)
+    private readonly jam_masuk_kemarin?: string
+    private readonly jam_keluar_kemarin?: string
     private pengumuman?: Notice[]
 
     getPresentAccumulation(): string {
@@ -31,7 +31,36 @@ export class Dashboard implements DashboardContract {
     }
 
     getTodayCheckIn(): string {
-        return this.jam_masuk_hari_ini
+        if(this.jam_masuk_hari_ini < '06:00' || this.jam_masuk_hari_ini > '12:00'){
+            return '-'
+        }else{
+            return this.jam_masuk_hari_ini
+        }
+    }
+
+    getTodayCheckOut(): string {
+        if(this.jam_keluar_hari_ini <= '12:00'){
+            return '-'
+        }else{
+            return this.jam_keluar_hari_ini
+        }
+    }
+
+    getYesterdayCheckIn(): string {
+        if(this.jam_masuk_kemarin < '06:00' || this.jam_masuk_kemarin > '12:00'){
+            return '-'
+        }else{
+            return this.jam_masuk_kemarin
+        }
+        
+    }
+
+    getYesterdayCheckOut(): string {
+        if(this.jam_keluar_kemarin <= '12:00'){
+            return '-'
+        }else{
+            return this.jam_keluar_kemarin
+        }
     }
 
     getNotices(): Notice[] {

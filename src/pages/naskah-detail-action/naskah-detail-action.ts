@@ -1,7 +1,6 @@
-import { Component, ViewChild } from "@angular/core";
+import { Component } from "@angular/core";
 import { NavController, NavParams, IonicPage, AlertController, Platform } from "ionic-angular";
-import { LogUtil } from "../../utils/logutil";
-import { Disposisi } from "../../components/persuratan/disposisi/disposisi";
+
 @IonicPage()
 @Component({
   selector: "page-naskah-detail-action",
@@ -11,13 +10,9 @@ export class NaskahDetailActionPage {
 
   static TAG:string = 'NaskahDetailActionPage'
 
-  private unRegisterBackButtonAction: Function;
-
   actionData:string = '';
   naskahId: any;
   canShowDialogExit:boolean = false
-
-  @ViewChild('disposisiComponent') disposisiComponent: Disposisi
 
   constructor(
     public navCtrl: NavController, 
@@ -30,7 +25,6 @@ export class NaskahDetailActionPage {
 
   ionViewDidLoad() {
     this.actionData = this.navParams.get("actionData");
-    this.registerAction()
   }
 
   saveDisposisi() {}
@@ -41,11 +35,11 @@ export class NaskahDetailActionPage {
 
 
   homeUpButtonClick() {
-    if (this.isDisposition()) {
-      this.showDialogExit()
-    } else {
+  //  if (this.isDisposition()) {
+  //    this.showDialogExit()
+  //  } else {
       this.navCtrl.pop()
-    }
+  //  }
   }
 
   showDialogExit() {
@@ -73,34 +67,7 @@ export class NaskahDetailActionPage {
         }
       ]
     });
-    alert.present();
+    alert.present()
   }
-
-
-/* https://forum.ionicframework.com/t/an-android-register-back-button-action-sample/130058 */
-  registerAction(): void {
-    this.unRegisterBackButtonAction = this.platform.registerBackButtonAction(() => { 
-      LogUtil.d(NaskahDetailActionPage.TAG, "back button clicked")
-      LogUtil.d(NaskahDetailActionPage.TAG, this.actionData)
-      if (this.isDisposition()) {
-        if (this.disposisiComponent.prev() == -1) {
-          this.showDialogExit()
-        }
-      } else {
-        this.navCtrl.pop()
-      }
-      return;
-    });
-   }
-   
-   unRegister() {
-     this.unRegisterBackButtonAction && this.unRegisterBackButtonAction();
-   }
-
-  ionViewWillLeave() {
-    this.actionData = ''
-    this.unRegister();
-  }
-
 
 }

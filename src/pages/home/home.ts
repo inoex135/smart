@@ -1,34 +1,33 @@
+import { IonicPage, Select, Slides, NavController, Platform } from "ionic-angular";
 import { Component, ViewChild, ElementRef } from "@angular/core";
-import { NavController, Platform, IonicPage, Select, Slides } from "ionic-angular";
-import { UserProvider } from "../../providers/user/user";
-
-import { MenuHomeConstant } from "../../constant/menu-home";
-import { HomeProvider } from "../../providers/home/home";
-
-import { LoaderHelper } from "../../helpers/loader-helper";
-import { FCM } from "@ionic-native/fcm";
-import { TokenProvider } from "../../providers/token/token";
-import { LogUtil } from "../../utils/logutil";
 import { NotificationBell } from "../../components/notification-bell/notification-bell";
-import { NotificationProvider } from "../../providers/notification/notification";
-import { ERROR_CODES } from "../../constant/error-codes";
-import { PaymentHistoryPage } from "../payment-history/payment-history";
+import { Dashboard } from "./models/dashboard";
 import { SuratPage } from "../surat/surat";
 import { AptPage } from "../apt/apt";
 import { PersonalPage } from "../personal/personal";
 import { MeetingListPage } from "../meeting-list/meeting-list";
-import { Dashboard } from "./models/dashboard";
-import { deserialize } from "serializer.ts/Serializer";
-import { DashboardContract } from "./models/dashboard-contract";
+import { UserProvider } from "../../providers/user/user";
+import { FCM } from "@ionic-native/fcm";
+import { HomeProvider } from "../../providers/home/home";
+import { LoaderHelper } from "../../helpers/loader-helper";
+import { LogUtil } from "../../utils/logutil";
+import { MenuHomeConstant } from "../../constant/menu-home";
+import { NotificationProvider } from "../../providers/notification/notification";
+import { PaymentHistoryPage } from "../payment-history/payment-history";
+import { Serializer } from "serializer.ts/Serializer";
+import { BasePage } from "../base-page/base-page";
+import { ToastHelper } from "../../helpers/toast-helper";
+import { LoginPage } from "../login/login";
+import { InAppBrowser } from "@ionic-native/in-app-browser";
 
 @IonicPage()
 @Component({
   selector: "page-home",
   templateUrl: "home.html"
 })
-export class HomePage {
+export class HomePage extends BasePage {
 
-  TAG:string = 'HomePage'
+  static TAG:string = 'HomePage'
 
   @ViewChild("profileImage") image: ElementRef
   @ViewChild("selectUser") select: Select
@@ -49,7 +48,7 @@ export class HomePage {
 
   allowToSeePaymentHistory: boolean = true
 
-  dashboard: DashboardContract
+  dashboard: Dashboard
 
   buttons:Array<any> = [
     {
@@ -74,38 +73,41 @@ export class HomePage {
       title: 'E-Rapat',
       page: MeetingListPage.TAG,
       icon: 'm-erapat.svg',
-      enabled: true
+      enabled: false
     }
   ]
 
   constructor(
     public navCtrl: NavController,
     public userProvider: UserProvider,
+    public toast: ToastHelper,
     public fcm: FCM,
     private homeProvider: HomeProvider,
     private loaderHelper: LoaderHelper,
-    private token: TokenProvider,
-    private platform: Platform
-  ) {}
-
-  ionViewWillEnter() {
-    LogUtil.d(this.TAG, "ionViewWillEnter")
-    this.listMenu();
-    this.initData();
-    this.platform.ready().then(() => {
-      this.fcmGetToken();
-    });
-    if (this.bell) {
-        this.bell.updateNotification()
-    }
+    private platform: Platform,
+    private serializer: Serializer,
+    private inAppBrowser: InAppBrowser
+  ) {
+    super(navCtrl, userProvider, toast)
   }
 
-  listMenu() {
+  ionViewWillEnter() {
+    LogUtil.d(HomePage.TAG, "ionViewWillEnter")
+    this.listMenu();
+    this.initData();
+    this.platform.ready()
+    .then(() => {
+      this.fcmGetToken();
+    });
+    this.updateNotification()
+  }
+
+  private listMenu() {
     this.menus = MenuHomeConstant.getMenus();
     return this.menus;
   }
 
-  setNotificationTotal(title: any, res: any) {
+  private setNotificationTotal(title: any, res: any) {
     if (title === "PERSURATAN") return res.notification_persuratan;
 
     if (title === "PERSONAL") return res.notification_personal;
@@ -119,23 +121,23 @@ export class HomePage {
     }
   }
 
-  logout() {
-    this.loaderHelper.createLoader();
+  private logout() {
+    this.loaderHelper.createLoader()
     this.userProvider.logout().subscribe(
       () => {
-        this.userProvider.purgeAuth();
-        this.navCtrl.setRoot("LoginPage");
-        this.loaderHelper.dismiss();
+        this.userProvider.purgeAuth()
+        this.navCtrl.setRoot(LoginPage.TAG)
+        this.loaderHelper.dismiss()
       },
       err => {
-        this.userProvider.purgeAuth();
-        this.loaderHelper.dismiss();
-        this.navCtrl.setRoot("LoginPage");
+        this.userProvider.purgeAuth()
+        this.loaderHelper.dismiss()
+        this.navCtrl.setRoot(LoginPage.TAG)
       }
     );
   }
 
-  fcmGetToken() {
+  private fcmGetToken() {
     this.fcm.getToken().then(
       token => {
         this.userProvider.saveFcmToken(token).subscribe();
@@ -150,23 +152,24 @@ export class HomePage {
     );
   }
 
-  async initData(force:boolean = false) {
+  private initData(force:boolean = false) {
     // get profile dari localStorage jika sudah ada
     this.userProvider.getProfile(force)
     .then(profile => {
-      LogUtil.d(this.TAG, "return")
-      LogUtil.d(this.TAG, profile)
+      LogUtil.d(HomePage.TAG, "return")
+      LogUtil.d(HomePage.TAG, profile)
       if (this.profile) {
         this.currentProfile.name = profile.nama
         this.currentProfile.nip = profile.nip
       }
+      LogUtil.d(HomePage.TAG, this.currentProfile)
       return Promise.resolve(profile)
     })
     .then(profile => {
-      return Promise.all([this.token.getLoggedInUser(), profile])
+      return Promise.all([this.userProvider.getLoggedInUser(), profile])
     })
     .then(([data, profile]) => {
-      if (data && data.user && profile && data.user.name == profile.nip) {
+      if (data && data.user && profile && profile.nip && data.user.name == profile.nip) {
         this.loggedInProfile = profile
         if (profile.user_pengganti) {
           this.substitutes = []
@@ -177,16 +180,17 @@ export class HomePage {
       }
     })
     .then(() => {
-      return this.getProfilePicture()
-    })
-    .then(() => {
-      return this.getDashboard()
+      return Promise.all([this.getDashboard(), this.getProfilePicture()]) 
     })
     .catch(error => {
-      LogUtil.d(this.TAG, "i catch error here on profile")
-      LogUtil.e(this.TAG, error)
+      LogUtil.d(HomePage.TAG, "i catch error here on profile")
       this.redirectToLogIn(error)
     })
+  }
+
+  private openNotice(notice: any): void {
+    LogUtil.d(HomePage.TAG, notice)
+    window.open(notice.url, '_system')
   }
   
   private getDashboard(): any {
@@ -197,20 +201,14 @@ export class HomePage {
     .then(
       res => {
         if (res) {
-          LogUtil.d(this.TAG, res)
-          this.dashboard = deserialize<Dashboard>(Dashboard, res.response)
+          LogUtil.d(HomePage.TAG, res)
+          this.dashboard = this.serializer.deserialize<Dashboard>(Dashboard, res)
         } 
-      })
-      .catch(error => {
-        LogUtil.d(this.TAG, "error accessing API dashboard")
-        LogUtil.d(this.TAG, error)
-        this.redirectToLogIn(error)
-      }
-    )
+    })
   }
 
   private getProfilePicture() {
-    this.homeProvider.getPhotoProfile()
+    return this.homeProvider.getPhotoProfile()
     .then(
       res => {
         if (res != null) {
@@ -219,28 +217,29 @@ export class HomePage {
         } else {
           this.showAvatar = true
         }
+        return Promise.resolve(res)
       }
     ).catch(error => {
-      this.showAvatar = true
-      this.redirectToLogIn(error)
+      LogUtil.e(HomePage.TAG, error)
+      return Promise.resolve(true)
     })
   }
 
-  triggerOpenSelect() {
+  private triggerOpenSelect() {
     if (this.select) {
-      LogUtil.d(this.TAG, "not null")
+      LogUtil.d(HomePage.TAG, "not null")
       this.select.open()
     } else {
-      LogUtil.d(this.TAG, "probably null")
+      LogUtil.d(HomePage.TAG, "probably null")
     }
   }
 
   //  by pass plt/plh
-  byPass(nip: string) {
+  private byPass(nip: string) {
     //cek apakah nip yg di select, sama dengan currentUser
     if (nip == this.loggedInProfile.nip) {
       //jika ada, ubah token kembali dengan user asli/bukan plt -plh nya
-      this.token.setCurrentUserDataFirst()
+      this.userProvider.setCurrentUserData()
       .then(() => {
         this.initData()
         this.enabledPaymentHistory()
@@ -248,42 +247,43 @@ export class HomePage {
         this.redirectToLogIn(error)
       })
     } else {
-      this.loaderHelper.createLoader()
-      this.userProvider.byPass(nip)
-      .subscribe(
-        res => {
-          LogUtil.d(this.TAG, res)
-          this.disabledPaymentHistory()
-          if (res) {
-            this.initData(true)
-            this.bell.updateNotification()
+      this.loaderHelper.show()
+      .then(() => {
+        this.userProvider.byPass(nip)
+        .subscribe(
+          res => {
+            LogUtil.d(HomePage.TAG, res)
+            this.disabledPaymentHistory()
+            if (res) {
+              this.initData(true)
+              this.updateNotification()
+            }
+            this.loaderHelper.dismissLoader()
+          },
+          err => {
+            this.loaderHelper.dismissLoader()
+            this.redirectToLogIn(err)
           }
-          this.loaderHelper.dismiss()
-        },
-        err => {
-          this.loaderHelper.dismiss()
-        }
-      );
+        )
+      })
     }
   }
 
-  getNotificationType(): string {
+  private updateNotification(): void {
+    if (this.bell) {
+      this.bell.updateNotification(exception => this.redirectToLogIn(exception))
+    }
+  }
+
+  private getNotificationType(): string {
     return NotificationProvider.TYPE_ALL
   }
 
-  getSubstituteUsers() {
+  private getSubstituteUsers() {
     return this.substitutes
   }
 
-  private redirectToLogIn(error): void {
-    LogUtil.e(this.TAG, error)
-    if (error.message.includes(ERROR_CODES.MISSING_TOKEN)) {
-      this.userProvider.purgeAuth();
-      this.navCtrl.setRoot("LoginPage");
-    }
-  }
-
-  historyPage() {
+  private historyPage() {
     this.navCtrl.push(PaymentHistoryPage.TAG)
   }
 
@@ -298,7 +298,7 @@ export class HomePage {
     return this.loggedInProfile.nip == this.currentProfile.nip
   }
 
-  isAllowToSeePaymentHistory(): boolean {
+  private isAllowToSeePaymentHistory(): boolean {
     return this.allowToSeePaymentHistory
   }
 
@@ -308,6 +308,17 @@ export class HomePage {
 
   private enabledPaymentHistory(): void {
     this.allowToSeePaymentHistory = true
+  }
+
+  private openBrowser(notice) {
+    LogUtil.d(HomePage.TAG, 'open link: ' + notice.url)
+    if (this.platform.is('android') || this.platform.is('ios')) {
+      LogUtil.d(HomePage.TAG, "it's mobile so use inAppBrowser")
+      this.inAppBrowser.create(notice.url)
+    } else {
+      LogUtil.d(HomePage.TAG, 'other system or browser')
+      window.open(notice.url, '_system')
+    }
   }
 
 }

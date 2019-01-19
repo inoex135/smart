@@ -12,6 +12,7 @@ import { UserProvider } from "../../providers/user/user";
 import { TokenProvider } from "../../providers/token/token";
 import { LoginState } from "../../models/login-state.model";
 import { LogUtil } from "../../utils/logutil";
+import { HomePage } from "../home/home";
 @IonicPage()
 @Component({
   selector: "page-login",
@@ -19,7 +20,7 @@ import { LogUtil } from "../../utils/logutil";
 })
 export class LoginPage {
 
-  TAG:string = 'LoginPage'
+  static TAG:string = 'LoginPage'
 
   user = {} as User;
   error: any = false;
@@ -61,10 +62,13 @@ export class LoginPage {
   login(user: User) {
     this.loginState.isLogin = true;
 
-    this.userProvider.attemptAuth(user).subscribe(
+    this.userProvider.attemptAuth(user)
+    .subscribe(
       data => {
-        LogUtil.d(this.TAG, data)
-        this.navCtrl.setRoot("HomePage")
+        LogUtil.d(LoginPage.TAG, data)
+        setTimeout(() => {
+          this.navCtrl.setRoot(HomePage.TAG)
+        }, 1000)
       },
       err => {
         console.log(err)
@@ -86,16 +90,17 @@ export class LoginPage {
     // as flag show loader spinner dan disable button
 
     if (this.platform.is('android') || this.platform.is('ios')) {
-      LogUtil.d(this.TAG, 'mobile platform using web base')
+      LogUtil.d(LoginPage.TAG, 'mobile platform using web base')
       this.navCtrl.push('LoginSso')
     } else {
       this.loginState.isLogin = true;
       this.loginState.sso = true;
 
       // login http
-      this.userProvider.attemptAuthSso(user).subscribe(
+      this.userProvider.attemptAuthSso(user)
+      .subscribe(
         data => { 
-          LogUtil.d(this.TAG, data)
+          LogUtil.d(LoginPage.TAG, data)
           this.navCtrl.setRoot("HomePage")
         },
         err => {

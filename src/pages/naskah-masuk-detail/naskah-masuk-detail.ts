@@ -13,17 +13,15 @@ import { NaskahAction } from "../../constant/naskah-action";
 
 import { NaskahModalDownloadComponent } from "../../components/naskah-modal-download/naskah-modal-download";
 
-import { AptHelper } from "../../helpers/apt-helper";
 import { ToastHelper } from "../../helpers/toast-helper";
 import { UserProvider } from "../../providers/user/user";
-import { TokenProvider } from "../../providers/token/token";
 
 import assign from "lodash/assign";
 import { NaskahNotifikasiProvider } from "../../providers/naskah-notifikasi/naskah-notifikasi";
 import { LogUtil } from "../../utils/logutil";
 import { NaskahDetailActionPage } from "../naskah-detail-action/naskah-detail-action";
 import { FileHelper } from "../../helpers/file-helper";
-import { DocumentViewer } from "@ionic-native/document-viewer";
+import { DisposisiPage } from "../disposisi-page/disposisi";
 
 @IonicPage()
 @Component({
@@ -56,25 +54,30 @@ export class NaskahMasukDetailPage {
     public navParams: NavParams,
     private naskahProvider: NaskahMasukProvider,
     private loaderHelper: LoaderHelper,
-    private aptHelper: AptHelper,
     private toast: ToastHelper,
-    userProvider: UserProvider,
-    private token: TokenProvider,
+    private userProvider: UserProvider,
     private modalController: ModalController,
     private naskahNotifikasi: NaskahNotifikasiProvider,
-    private fileHelper: FileHelper,
-    private docViewer: DocumentViewer
+    private fileHelper: FileHelper
   ) {
     this.naskahId = this.navParams.get("naskahId");
-    this.token.getProfile().then(res => (this.profile = res), err => true);
+    this.userProvider.getToken().getProfile().then(res => (this.profile = res), err => true);
   }
 
   openPage(actionData: string) {
-    this.navCtrl.push(NaskahDetailActionPage.TAG, {
-      actionData: actionData,
-      naskahId: this.naskahId,
-      detailNaskah: this.detail
-    });
+    if (actionData.includes('disposisi')) {
+      this.navCtrl.push(DisposisiPage.TAG, {
+        actionData: actionData,
+        naskahId: this.naskahId,
+        detailNaskah: this.detail
+      })
+    } else {
+      this.navCtrl.push(NaskahDetailActionPage.TAG, {
+        actionData: actionData,
+        naskahId: this.naskahId,
+        detailNaskah: this.detail
+      })
+    }
   }
 
   openDisposisiPage() {
@@ -112,6 +115,7 @@ export class NaskahMasukDetailPage {
         },
         err => {
           this.loaderHelper.dismissLoader()
+          this.toast.presentError(err)
         }
       )
     })
@@ -145,9 +149,9 @@ export class NaskahMasukDetailPage {
         this.getDetailNaskah();
       },
       err => {
-        this.dismiss();
-        this.toast.present("Terjadi Kesalahan");
-        this.navCtrl.pop();
+        this.dismiss()
+        this.toast.presentError(err)
+        this.navCtrl.pop()
       }
     );
   }
@@ -168,24 +172,20 @@ export class NaskahMasukDetailPage {
       const targetPath = this.fileHelper.getDownloadDirectory() + "/" + fileData.namaFile;
       LogUtil.d(NaskahMasukDetailPage.TAG, targetPath)
 
-      const checkPermission = await this.aptHelper.checkPermission();
+      const checkPermission = await this.fileHelper.checkPermission();
       // check if apps has permission to write storage
       if (!checkPermission.hasPermission) {
-        await this.aptHelper.requestPermission();
+        await this.fileHelper.requestPermission();
       }
 
       await this.naskahProvider.downloadFileSurat(fileData.id, targetPath);
-
-      // open file after download
-     // await this.aptHelper.openFile(targetPath, "application/pdf");
-      // alert(openFile.message);
-
+      
       this.loaderHelper.dismissLoader()
-      this.toast.present("File telah di download")
       this.fileHelper.openFileWindow(fileData.namaFile)
     } catch (error) {
       this.loaderHelper.dismissLoader()
       LogUtil.e(NaskahMasukDetailPage.TAG, error)
+      this.toast.presentError(error)
     }
   }
 

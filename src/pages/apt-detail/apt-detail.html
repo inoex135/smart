@@ -43,7 +43,7 @@
           Tanggal Surat
         </ion-col>
         <ion-col class="content-right">
-          {{aptDetail?.tanggal_surat | indonesianDate:'DD MMMM YYYY'}} 
+          {{aptDetail?.tanggal_surat | customDate:'DD MMMM YYYY'}} 
         </ion-col>
       </ion-row>
       <ion-row>
@@ -72,7 +72,7 @@
       </ion-col>
       <ion-col *ngIf="aptDetail?.status_string != 'Belum diverifikasi'">
         <button ion-button outline ion-text text-center color="default-blue" (tap)="downloadPermohonan(aptDetail)">
-          <ion-icon name="md-download"></ion-icon> Unduh</button>
+          <ion-icon name="md-eye"></ion-icon> Buka File</button>
       </ion-col>
       <ion-col ion-button *ngIf="aptDetail?.status_string == 'Belum diverifikasi'">
         <button ion-text outline text-center (click)="detailAction(ACTION.VERIFIKASI,aptDetail?.id)" color="danger" *ngIf="profile?.jenis_eselon">

@@ -12,19 +12,19 @@
                     <ion-row>
                         <ion-col col-12>
                             <p ion-text>Agenda</p>
-                            <p ion-text>{{model?.agenda_name}}</p>
+                            <p ion-text>{{model?.getAgendaName()}}</p>
                         </ion-col>
                         <ion-col col-12>
                             <p ion-text>Tanggal</p>
-                            <p ion-text>{{model?.date}}</p>
+                            <p ion-text>{{model?.getDate() | customDate:'DD MMMM YYYY'}}</p>
                         </ion-col>
                         <ion-col col-12>
                             <p ion-text>Waktu</p>
-                            <p ion-text>{{model?.start_time}} - {{model?.finish_time}}</p>
+                            <p ion-text>{{model?.getStartTime()}} - {{model?.getFinishTime()}}</p>
                         </ion-col>
                         <ion-col col-12>
                             <p ion-text>Ruang</p>
-                            <p ion-text>{{model?.place?.room}}</p>
+                            <p ion-text>{{model?.getPlace()?.getRoom()}}</p>
                         </ion-col>
                     </ion-row>
                     <ion-row class="detail-arrow">

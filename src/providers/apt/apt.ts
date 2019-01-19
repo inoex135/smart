@@ -1,11 +1,12 @@
 import { Injectable } from "@angular/core";
 import { ApiProvider } from "../api/api";
 import { ENV } from "../../config/environment";
-import { TokenProvider } from "../token/token";
 import { map } from "rxjs/operators/map";
 import { LogUtil } from "../../utils/logutil";
 import { CacheProvider } from "../cache/cache";
 import { FileHelper } from "../../helpers/file-helper";
+import { UserProvider } from "../user/user";
+import { AptListItem } from "./models/apt-list-item";
 
 @Injectable()
 export class AptProvider {
@@ -16,23 +17,42 @@ export class AptProvider {
   fileDir: string;
 
   constructor(
-    public apiProvider: ApiProvider,
-    private token: TokenProvider,
+    private apiProvider: ApiProvider,
+    private userProvider: UserProvider,
     private cache: CacheProvider,
     private fileHelper: FileHelper
   ) {
 
   }
 
+  getUser() {
+    return this.userProvider
+  }
+
   // get daftar permohonan apt
   getPermohonanList(page: number = 0, size: number = 10) {
+    LogUtil.d(AptProvider.TAG, 'get permohonan list.')
     const url = `/apt/permohonan/pending?page=${page}&size=${size}`;
 
-    return this.apiProvider.get(url).pipe(map(res => res.content));
+    return this.apiProvider.get(url)
+    .map(res => this.generateList(res))
+  }
+
+  private generateList(res: any): Array<AptListItem> {
+    LogUtil.d(AptProvider.TAG, 'reconstruct plain json to AptListItem.')
+    let list = Array<AptListItem>()
+    if (res.content) {
+        res.content.forEach(element => {
+            list.push(AptListItem.create(element))
+        })
+    }
+    LogUtil.d(AptProvider.TAG, 'total generated: ' + list.length)
+    return list
   }
 
   getPelayananList() {
-    return this.token.getProfile()
+    LogUtil.d(AptProvider.TAG, 'get pelayanan list.')
+    return this.userProvider.getProfile()
     .then(profile => {
       let key = this.APT_PELAYANANS + "_" + profile.nip
       return this.cache.get(key)
@@ -120,11 +140,6 @@ export class AptProvider {
 
     const url = `${ENV.API_URL}/apt/permohonan/download/${fileId}`
 
-    // const filename = url.split("/").pop();
-
-    // this.fileDir = this.file.externalRootDirectory + "Download" + 'smart.xlsx';
-    // console.log(filename);
-
     return this.fileHelper.baseDownload({
       url: url,
       targetPath: targetPath
@@ -140,12 +155,12 @@ export class AptProvider {
   getDekatBatasWaktu(keyword: string, page: number = 0, size: number = 10) {
     return this.apiProvider
       .get(`/apt/permohonan/dekat?page=${page}&size=${size}`)
-      .pipe(map(res => res.content));
+      .map(res => this.generateList(res))
   }
 
   getLewatiBatasWaktu(keyword: string, page: number = 0, size: number = 10) {
     return this.apiProvider
       .get(`/apt/permohonan/lewat?page=${page}&size=${size}`)
-      .pipe(map(res => res.content));
+      .pipe(map(res => this.generateList(res)));
   }
 }

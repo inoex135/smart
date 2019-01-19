@@ -47,13 +47,15 @@ export class NaskahMasukPage {
 
   constructor(
     public navCtrl: NavController,
+    public toast: ToastHelper,
     public navParams: NavParams,
     private naskahProvider: NaskahMasukProvider,
     private loaderHelper: LoaderHelper,
-    private toast: ToastHelper,
     private modalController: ModalController,
     private modal: ModalController
-  ) {}
+  ) {
+
+  }
 
  /*  ionViewDidLoad() {
     LogUtil.d(this.TAG, "ionViewDidLoad")
@@ -95,7 +97,10 @@ export class NaskahMasukPage {
       .pipe(debounceTime(700), finalize(() => this.hideLoader()))
       .subscribe(
         res => (this.listNaskah = res.response),
-        err => this.handleErrorSearch(params)
+        err => {
+          this.handleErrorSearch(params)
+          this.toast.presentError(err)
+        }
       );
   }
 
@@ -119,7 +124,10 @@ export class NaskahMasukPage {
           this.listNaskah = res.response
           this.loaderHelper.dismissLoader()
         },
-        err => this.loaderHelper.dismissLoader()
+        err => {
+          this.loaderHelper.dismissLoader()
+          this.toast.presentError(err)
+        }
       )
     })
     // show naskah from API
@@ -135,7 +143,11 @@ export class NaskahMasukPage {
           
           this.listNaskah.push(res.response[index]);
         }
-      });
+      },
+      error => {
+        this.toast.presentError(error)
+      }
+    );
       infiniteScroll.complete();
     }, 500);
   }
@@ -177,7 +189,10 @@ export class NaskahMasukPage {
         this.getNaskahMasuk();
         this.isBulkAction = false;
       },
-      err => this.toast.present("Gagal terima naskah")
+      err => { 
+        this.toast.present("Gagal terima naskah")
+        this.toast.presentError(err)
+       }
     );
   }
 
@@ -205,7 +220,8 @@ export class NaskahMasukPage {
         refresher.complete()
       },
       err => { 
-        refresher.complete();
+        refresher.complete()
+        this.toast.presentError(err)
        }
     );
   }

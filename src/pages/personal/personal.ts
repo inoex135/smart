@@ -6,6 +6,7 @@ import { LoaderHelper } from "../../helpers/loader-helper";
 import { NotificationProvider } from "../../providers/notification/notification";
 import { NotificationBell } from "../../components/notification-bell/notification-bell";
 import { LogUtil } from "../../utils/logutil";
+import { ToastHelper } from "../../helpers/toast-helper";
 
 @Component({
   selector: "page-personal",
@@ -36,12 +37,13 @@ export class PersonalPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     private personalProvider: PersonalProvider,
-    private loaderHelper: LoaderHelper
+    private loaderHelper: LoaderHelper,
+    private toast: ToastHelper
   ) {
   }
 
   ionViewWillEnter() {
-    this.getListEvent();
+    this.getListEvent()
     if (this.bell) {
       this.bell.updateNotification()
     }
@@ -76,8 +78,10 @@ export class PersonalPage {
         this.loaderHelper.dismissLoader()
       })
       .catch(err => {
+        LogUtil.e(PersonalPage.TAG, err)
         this.loaderHelper.dismissLoader()
-      });
+        this.toast.presentError(err)
+      })
     })
   }
 
@@ -85,13 +89,15 @@ export class PersonalPage {
     console.log($event);
   }
 
-  setLabelColorCalendarDetail(eventType?) {
+  setLabelColorCalendarDetail(eventType?, eventTitle?) {
     let className;
 
     if (eventType == "Agenda Personal") {
       className = "calendar-card agenda-personal";
     } else if (eventType == "Agenda Sekretaris") {
       className = "calendar-card agenda-sekretaris";
+    } else if (eventType == "ABSEN" && eventTitle == "Libur") {
+      className = "calendar-card libur";
     } else if (eventType == "ABSEN") {
       className = "calendar-card absen";
     } else {

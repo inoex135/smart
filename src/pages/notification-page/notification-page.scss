@@ -40,5 +40,14 @@ notification-page {
       margin-bottom: 0.8rem;
     }
   }
+
+  .notificationunread {
+    background-color: #dbdbdb;
+    font-weight: bolder;
+  }
+
+  .notificationread {
+    background-color: rgb(255, 255, 255);
+  }
   
 }

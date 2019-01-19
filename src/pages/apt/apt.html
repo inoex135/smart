@@ -33,48 +33,48 @@
   </ion-item>
 
   <ion-list class="list-custom" *ngIf="items?.length > 0">
-    <ion-card (press)="isItemPressed(item?.id)" item *ngFor="let item of items;let i = index">
+    <ion-card (press)="isItemPressed(item?.getId())" item *ngFor="let item of items;let i = index">
       <ion-row>
-        <ion-col col-12 class="col-header {{ getStatusColor(item?.status_norma) }}">
-          <p ion-text>Tanggal : {{item?.tanggal_string}}</p>
+        <ion-col col-12 class="col-header {{ item?.getStatusColor() }}">
+          <p ion-text>Tanggal : {{item?.getTanggalString()}}</p>
         </ion-col>
         <ion-col col-1 margin-right *ngIf="isPress" class="checkbox-input">
-          <ion-checkbox *ngIf="item?.statusString == 'Belum diverifikasi'" color="green-light" (ionChange)="selectedApt(item?.id, $event)"></ion-checkbox>
+          <ion-checkbox *ngIf="item?.isVerified()" color="green-light" (ionChange)="selectedApt(item?.getId(), $event)"></ion-checkbox>
         </ion-col>
         <ion-col (tap)="detailApt(item)" class="detail-col">
           <ion-row>
             <ion-col col-12>
               <p ion-text>Pelayanan</p>
               <p ion-text item-start text-wrap text-left>
-                {{item?.pelayanan?.nama}}
+                {{item?.getPelayanan()?.getName()}}
               </p>
             </ion-col>
             <ion-col col-12>
               <p ion-text>Sub Pelayanan</p>
-              <p ion-text> {{item?.pelayananSub?.nama}}</p>
+              <p ion-text> {{item?.getPelayananSub()?.getName()}}</p>
             </ion-col>
             <ion-col col-6>
               <p ion-text>Nama Pemohon</p>
-              <p ion-text text-wrap>{{item?.nama_pemohon}}</p>
+              <p ion-text text-wrap>{{item?.getNamaPemohon()}}</p>
             </ion-col>
             <ion-col col-6>
               <p ion-text>Nomor Tiket</p>
-              <p ion-text>{{item?.nomor_tiket}}</p>
+              <p ion-text>{{item?.getNomorTiket()}}</p>
             </ion-col>
             <ion-col col-6>
               <p ion-text>Nomor Naskah</p>
-              <p ion-text>{{item?.nomor_surat}}</p>
+              <p ion-text>{{item?.getNomorSurat()}}</p>
             </ion-col>
             <ion-col col-6>
               <p ion-text>Norma Waktu</p>
-              <p ion-text>{{item?.norma_waktu}} Hari</p>
+              <p ion-text>{{item?.getNormaWaktu()}} Hari</p>
             </ion-col>
           </ion-row>
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col>
-          <apt-indikator-button [status]="item?.statusString"></apt-indikator-button>
+          <apt-indikator-button [status]="item?.getStatusString()"></apt-indikator-button>
         </ion-col>
       </ion-row>
     </ion-card>

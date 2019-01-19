@@ -9,30 +9,36 @@
   </ion-navbar>
 </ion-header>
   
-<ion-content scroll="false" class="no-scroll" fixed-content>
-  <div [ngSwitch]="actionData">
-    <!--Form teruskan-->
-    <div *ngSwitchCase="'teruskan'">
+
+<div [ngSwitch]="actionData">
+  <!--Form teruskan-->
+  <div *ngSwitchCase="'teruskan'">
+    <ion-content scroll="false" class="no-scroll" fixed-content>
       <teruskan></teruskan>
-    </div>
-
-    <!-- form disposisi -->
-    <div *ngSwitchCase="'disposisi'">
-      <disposisi [naskahId]="naskahId" #disposisiComponent ></disposisi>
-    </div>
-
-    <!-- form selesai -->
-    <div *ngSwitchCase="'selesai'">
-      <selesai [type]="type"></selesai>
-    </div>
-
-    <div *ngSwitchCase="'riwayat'">
-      <riwayat-component></riwayat-component>
-    </div>
-
-     <div *ngSwitchCase="'askrecall'">
-      <askrecall></askrecall>
-    </div>
+    </ion-content>
   </div>
-</ion-content>
 
+  <!-- form disposisi -->
+<!--   <div *ngSwitchCase="'disposisi'">
+      <disposisi [naskahId]="naskahId" #disposisiComponent style=" display: flex;flex-direction: column;height: 100%;"></disposisi>
+  </div> -->
+
+  <!-- form selesai -->
+  <div *ngSwitchCase="'selesai'">
+    <ion-content scroll="false" class="no-scroll" fixed-content>
+      <selesai [type]="type"></selesai>
+    </ion-content>
+  </div>
+
+  <div *ngSwitchCase="'riwayat'">
+    <ion-content scroll="false" class="no-scroll" fixed-content>
+        <riwayat-component></riwayat-component>
+      </ion-content>
+  </div>
+
+   <div *ngSwitchCase="'askrecall'">
+      <ion-content scroll="false" class="no-scroll" fixed-content>
+          <askrecall></askrecall>
+      </ion-content>
+  </div>
+</div>

@@ -13,6 +13,20 @@ naskah-modal-download {
     overflow-y: scroll;
     overflow-x: hidden;
   }
+
+  .overlay-header {
+
+    p {
+      text-align: center;
+      font-size: 1.6rem;
+    }
+
+    button {
+      color: #fff !important;
+    }
+
+  }
+
   .modal_content {
     position: absolute;
     top: 50%;
@@ -41,4 +55,14 @@ naskah-modal-download {
       }
     }
   }
+
+  .list-file {
+    .item-inner {
+      min-width: 90px;
+    }
+    .open-file {
+      min-width: 50px;
+    }
+  }
+
 }

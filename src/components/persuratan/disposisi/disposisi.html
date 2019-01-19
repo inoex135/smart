@@ -1,6 +1,26 @@
-<div class="new-form">
+<div class="new-form" >
     <!-- disposisi unit or personal component?.unitOrPersonal -->
-    <ion-grid *ngIf="currentStep == arraySteps[2]">
+    <ion-grid *ngIf="currentStep == arraySteps[1]">
+
+        <h4>Petunjuk</h4>
+        <ion-row>
+            <ion-col col-12>
+                <ion-item class="input--form custom-ion-item">
+                    <ion-label>Pilih Petunjuk</ion-label>
+                    <ion-select multiple="true" [(ngModel)]="selectedPetunjuk" (ionChange)="petunjukChange()">
+                        <ion-option [value]="unit" *ngFor="let unit of datas?.petunjuk">
+                            {{unit?.keterangan}}
+                        </ion-option>
+                    </ion-select>
+                </ion-item>
+            </ion-col>
+            <ion-col col-12>
+                <ion-item class="as-list bordered-ion-item" no-lines *ngFor="let petunjuk of selectedPetunjuk; let i = index">
+                    <ion-label text-wrap>{{petunjuk?.keterangan}}</ion-label>
+<!--                     <ion-checkbox [checked]="petunjuk?.isChecked" color="primary" name="petunjuk[i]" (ionChange)="onChange(petunjuk?.id, $event.checked, i)"></ion-checkbox>
+ -->            </ion-item> 
+            </ion-col>
+        </ion-row>
 
         <h4>Sifat Disposisi</h4>
         <ion-col col-12>
@@ -32,20 +52,7 @@
             </ion-item>
             
         </ion-col>
-        
-    </ion-grid>
-    
-    <!-- disposisi pilih sifat component?.disposisiSifat -->
-    <ion-grid *ngIf="currentStep == arraySteps[1]">
-        <h4>Petunjuk</h4>
-        <ion-row>
-            <ion-col col-12>
-                <ion-item class="custom-ion-item petunjuk" no-lines *ngFor="let petunjuk of datas?.petunjuk; let i = index">
-                    <ion-label text-wrap>{{petunjuk?.keterangan}}</ion-label>
-                    <ion-checkbox [checked]="petunjuk?.isChecked" color="primary" name="petunjuk[i]" (ionChange)="onChange(petunjuk?.id, $event.checked, i)"></ion-checkbox>
-                </ion-item>
-            </ion-col>
-        </ion-row>
+        <div class="spacer"></div>
     </ion-grid>
     
     <!-- target disposisi untuk personal atau unit component?.disposisiUnit || component?.disposisiPersonal -->
@@ -58,7 +65,7 @@
                 <ion-list class="title-list">
                     <ion-item class="item custom-ion-item" *ngFor="let jabatan of datas?.jabatan; let i = index" no-lines>
                         <ion-label text-wrap>{{jabatan?.uraian_jabatan}}</ion-label>
-                        <ion-checkbox [checked]="jabatan?.kode_utuh == disposisi?.unitTujuan[0]?.kode_utuh" (ionChange)="selectUnit(jabatan, $event.checked)"
+                        <ion-checkbox [checked]="jabatan?.isChecked" (ionChange)="selectUnit(jabatan, $event.checked, i)"
                             [value]="jabatan?.kode"></ion-checkbox>
                     </ion-item>
                 </ion-list>
@@ -70,7 +77,7 @@
             <ion-col col-12>
                 <ion-item class="input--form custom-ion-item">
                     <ion-select [(ngModel)]="disposisi.leader">
-                        <ion-option [selected]="unit?.kode_utuh == disposisi?.leader" [value]="unit?.kode_utuh" text-wrap *ngFor="let unit of disposisi?.unitTujuan">
+                        <ion-option [selected]="unit?.kode_utuh == disposisi?.leader" [value]="unit?.kode_utuh" *ngFor="let unit of disposisi?.unitTujuan">
                             {{unit?.uraian_jabatan}}
                         </ion-option>
                     </ion-select>
@@ -111,7 +118,7 @@
                 </ion-row>
             </div>
             
-            <div class="disposisi-padding-top-form" *ngIf="isEselon4()">
+            <div *ngIf="isEselon4()" class="disposisi-padding-top-form">
                 <ion-row *ngIf="component?.disposisiPersonal" class="row">
                     <div *ngFor="let pelaksana of datas?.pelaksana; let i = index" col-12 class="pelaksana">
                         <ion-item no-lines class="item custom-ion-item">
@@ -124,20 +131,47 @@
                         </ion-item>
                     </div>
                 </ion-row>
+                <ion-row >
+                    <ion-col col-12>
+                        <ng-template #withFlags let-attrs="attrs">
+                            <span>{{attrs?.data?.nip}}, {{attrs?.data?.nama}}</span>
+                        </ng-template>
+        
+                        <ion-auto-complete [dataProvider]="masterPegawai" #searchbar [template]="withFlags"></ion-auto-complete>
+        
+                        <ion-item class="input--form custom-ion-item">
+                            <ion-input type="text" placeholder="Selaku" [(ngModel)]="pelaku"></ion-input>
+                        </ion-item>
+    
+                        <ion-item class="add-personel" no-lines center item-center>
+                            <button clear [disabled]="searchbar?.getSelection() == null" ion-button small color="default-blue" (tap)="addDisposisiPersonalDanPersonal(disposisi?.selaku, pelaku)">
+                                <ion-icon name="add"></ion-icon> Tambah Personil
+                            </button>
+                        </ion-item>
+        
+                        <ion-item no-lines class="as-list bordered-ion-item" *ngFor="let selaku of disposisi?.selaku; let i = index;">
+                            <h2 text-wrap>Nama: {{disposisi?.personal[i]?.nama}}</h2>
+                            <p>Selaku: {{selaku}}</p>
+                            <button clear (click)="removeData(disposisi?.selaku, i)" ion-button color="light" item-end>
+                                <ion-icon name="trash"></ion-icon>
+                            </button>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
             </div>
         </div>  
     </ion-grid>
-    
-    <div class="spacer"></div>
-    <div class="stepper-bottom-navigation">
-        <button *ngIf="hidePrevButton()" class="prev-btn" small left clear ion-button color="default-blue" (tap)="prev()">
-            Sebelumnya
-        </button>
-        <button *ngIf="!isLastStep()" [disabled]="disabledNextButton()" right clear ion-button color="default-blue" (tap)="next()" class="next-btn" small>
-            Selanjutnya
-        </button>
-        <button *ngIf="isLastStep()" [disabled]="disabledNextButton()" right clear ion-button color="default-blue" (tap)="showDialogSave()" class="next-btn" small>
-            <ion-icon name="paper"></ion-icon> Simpan
-        </button>
-    </div>
+</div>
+
+<div class="spacer"></div>
+<div class="stepper-bottom-navigation">
+    <button *ngIf="hidePrevButton()" class="prev-btn" small left clear ion-button color="default-blue" (tap)="prev()">
+        Sebelumnya
+    </button>
+    <button *ngIf="!isLastStep()" right clear ion-button color="default-blue" (tap)="next()" class="next-btn" small>
+        Selanjutnya
+    </button>
+    <button *ngIf="isLastStep()" right clear ion-button color="default-blue" (tap)="showDialogSave()" class="next-btn" small>
+        <ion-icon name="paper"></ion-icon> Simpan
+    </button>
 </div>

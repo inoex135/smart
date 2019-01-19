@@ -90,6 +90,10 @@ export class NaskahMasukProvider {
       .baseDownload({
         url: url,
         targetPath: fileDir
+      }).then(res => {
+        return res
+      }).catch(err => {
+        return err
       })
   }
 

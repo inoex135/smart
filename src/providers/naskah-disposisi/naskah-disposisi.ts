@@ -46,7 +46,9 @@ export class NaskahDisposisiProvider {
       LogUtil.d(NaskahDisposisiProvider.TAG, data)
       if (data == null) {
         return request.map(res => {
-          this.cache.put(cacheKey, {when: Date.now() + CacheProvider.FIVE_MINUTES, response: res})
+          if (res) {
+            this.cache.put(cacheKey, {when: Date.now() + CacheProvider.FIVE_MINUTES, response: res})
+          }
           return res
         })
       }
@@ -70,10 +72,13 @@ export class NaskahDisposisiProvider {
 
     const personal = data.personal.map(
       res => {
-        return res.nip;
+        let data = []
+        data.push(res.nip)
+        data.push(res.selaku || "")
+        return data
       },
       err => {
-        return null;
+        return null
       }
     );
 
@@ -83,18 +88,17 @@ export class NaskahDisposisiProvider {
     if (unitTujuan.length > 0) {
       formData.append("unit", unitTujuan);
     }
-
+    let personalString = JSON.stringify(personal)
+    LogUtil.d(NaskahDisposisiProvider.TAG, personalString)
     formData.append("sumas_id", data.sumasId);
-    formData.append("personal", personal);
-    formData.append("selaku", data.selaku);
+    formData.append("personal", personalString);
+ //   formData.append("selaku", data.selaku);
     formData.append("sifat_surat", data.sifatSurat);
     formData.append("petunjuk", data.petunjuk);
     formData.append("tanggal_selesai", data.tanggalSelesai);
     formData.append("tanggal_disposisi", data.tanggalDisposisi);
     formData.append("catatan_disposisi", data.catatan);
-
     formData.append("lead", data.leader);
-
     return this.api.postForm("/surat/disposisi/create", formData);
   }
 }
