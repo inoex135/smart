@@ -19,34 +19,40 @@
 
 
 <ion-content>
+
     <ion-card>
         <ion-card-header class="tujuan-naskah">
             Pilih Tujuan Naskah
         </ion-card-header>
         <ion-card-content>
-            <ion-select [(ngModel)]="filter.naskahUnit" placeholder="Tujuan Naskah">
+        <ion-item>
+            <ion-select [(ngModel)]="filter.naskahUnit" name="naskahUnit" placeholder="Pilih Tujuan Naskah">
                 <ion-option value="alltype">Semua</ion-option>
                 <ion-option value="unit">Naskah Unit</ion-option>
                 <ion-option value="personal">Naskah Pribadi</ion-option>
                 <ion-option value="permohonan">Naskah Permohonan</ion-option>
             </ion-select>
+        </ion-item>
         </ion-card-content>
     </ion-card>
-            
+
     <ion-card class="second-card">
         <ion-card-header class="sifat-naskah">
             Pilih Sifat Naskah
         </ion-card-header>
         <ion-card-content>
-            <ion-select [(ngModel)]="filter.naskahSifat" placeholder="Sifat Naskah">
+            <ion-item>
+            <ion-select [(ngModel)]="filter.naskahSifat" name="naskahSifat" placeholder="Sifat Naskah">
                 <ion-option value="">Semua</ion-option>
                 <ion-option value="00">Biasa</ion-option>
                 <ion-option value="11">Segera</ion-option>
                 <ion-option value="12">Sangat Segera</ion-option>
                 <ion-option value="23">Kilat</ion-option>
             </ion-select>
+        </ion-item>
         </ion-card-content>
-    </ion-card>
+    </ion-card> 
+    
 </ion-content>
 
 <ion-footer>
